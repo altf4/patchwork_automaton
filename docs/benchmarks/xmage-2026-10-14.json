@@ -1,0 +1,230 @@
+{
+  "config": {
+    "games": 6,
+    "warmup_games": 1,
+    "actions_per_game": 100,
+    "concurrent_games": 1,
+    "one_logical_cpu": 7,
+    "cpu_model": "Intel(R) Core(TM) Ultra 5 335",
+    "python": "3.12.14",
+    "server": "1.4.62-V1",
+    "proxy": "v0.4.7",
+    "deck": "24 Mountain, 36 Lightning Bolt; Freeform Unlimited",
+    "finish": "concede after action limit; await both results; remove table; disconnect"
+  },
+  "measured_seconds": 50.98264849599218,
+  "games_per_minute": 7.061225939023158,
+  "game_seconds": {
+    "mean": 8.496492094825953,
+    "median": 8.524779138009762,
+    "p95": 8.613052949949633,
+    "min": 8.267968575994018,
+    "max": 8.613052949949633
+  },
+  "setup_seconds": {
+    "mean": 3.328561524501614,
+    "median": 3.3277799535135273,
+    "p95": 3.3576371779781766,
+    "min": 3.294807489030063,
+    "max": 3.3576371779781766
+  },
+  "play_seconds": {
+    "mean": 5.086918953990486,
+    "median": 5.109225289983442,
+    "p95": 5.2216240739799105,
+    "min": 4.825066449004225,
+    "max": 5.2216240739799105
+  },
+  "finish_seconds": {
+    "mean": 0.06248756018855298,
+    "median": 0.058385122509207577,
+    "p95": 0.11609731602948159,
+    "min": 0.009358754032291472,
+    "max": 0.11609731602948159
+  },
+  "cleanup_seconds": {
+    "mean": 0.018524056145300467,
+    "median": 0.017529256991110742,
+    "p95": 0.028325560968369246,
+    "min": 0.01109109097160399,
+    "max": 0.028325560968369246
+  },
+  "play_actions_per_second": 19.658264836626493,
+  "play_only_100_action_games_per_minute": 11.794958901975896,
+  "episodes": [
+    {
+      "episode": 0,
+      "actions": 100,
+      "actors": {
+        "player_1": 52,
+        "player_0": 48
+      },
+      "callbacks": {
+        "GAME_TARGET": 12,
+        "GAME_ASK": 2,
+        "GAME_SELECT": 75,
+        "GAME_PLAY_MANA": 11
+      },
+      "setup_seconds": 3.318814038997516,
+      "play_seconds": 5.2216240739799105,
+      "finish_seconds": 0.058638198010157794,
+      "cleanup_seconds": 0.013976638962049037,
+      "total_seconds": 8.613052949949633,
+      "end_reason": "concession",
+      "submit_to_next_decision_seconds": {
+        "mean": 0.05218817233690061,
+        "median": 0.05563933801022358,
+        "p95": 0.08587744599208236,
+        "min": 0.017030004994012415,
+        "max": 0.12282898399280384
+      }
+    },
+    {
+      "episode": 1,
+      "actions": 100,
+      "actors": {
+        "player_1": 46,
+        "player_0": 54
+      },
+      "callbacks": {
+        "GAME_TARGET": 12,
+        "GAME_ASK": 2,
+        "GAME_SELECT": 75,
+        "GAME_PLAY_MANA": 11
+      },
+      "setup_seconds": 3.3576371779781766,
+      "play_seconds": 5.189643163990695,
+      "finish_seconds": 0.009358754032291472,
+      "cleanup_seconds": 0.02063608099706471,
+      "total_seconds": 8.577275176998228,
+      "end_reason": "natural",
+      "submit_to_next_decision_seconds": {
+        "mean": 0.05186946618719958,
+        "median": 0.056601960997795686,
+        "p95": 0.08083484199596569,
+        "min": 0.0179328519734554,
+        "max": 0.12745065503986552
+      }
+    },
+    {
+      "episode": 2,
+      "actions": 100,
+      "actors": {
+        "player_1": 52,
+        "player_0": 48
+      },
+      "callbacks": {
+        "GAME_TARGET": 12,
+        "GAME_ASK": 2,
+        "GAME_SELECT": 75,
+        "GAME_PLAY_MANA": 11
+      },
+      "setup_seconds": 3.334091224009171,
+      "play_seconds": 5.066729457001202,
+      "finish_seconds": 0.05703998502576724,
+      "cleanup_seconds": 0.014422432985156775,
+      "total_seconds": 8.472283099021297,
+      "end_reason": "concession",
+      "submit_to_next_decision_seconds": {
+        "mean": 0.050639472118928094,
+        "median": 0.05647256749216467,
+        "p95": 0.08298770402325317,
+        "min": 0.016946466988883913,
+        "max": 0.11018174898345023
+      }
+    },
+    {
+      "episode": 3,
+      "actions": 100,
+      "actors": {
+        "player_0": 51,
+        "player_1": 49
+      },
+      "callbacks": {
+        "GAME_TARGET": 13,
+        "GAME_ASK": 2,
+        "GAME_SELECT": 73,
+        "GAME_PLAY_MANA": 12
+      },
+      "setup_seconds": 3.3214686830178834,
+      "play_seconds": 5.07257847499568,
+      "finish_seconds": 0.05813204700825736,
+      "cleanup_seconds": 0.01109109097160399,
+      "total_seconds": 8.463270295993425,
+      "end_reason": "concession",
+      "submit_to_next_decision_seconds": {
+        "mean": 0.05069979604973923,
+        "median": 0.05766263252007775,
+        "p95": 0.08005908597260714,
+        "min": 0.01580887899035588,
+        "max": 0.1051137670292519
+      }
+    },
+    {
+      "episode": 4,
+      "actions": 100,
+      "actors": {
+        "player_1": 55,
+        "player_0": 45
+      },
+      "callbacks": {
+        "GAME_TARGET": 11,
+        "GAME_ASK": 2,
+        "GAME_SELECT": 77,
+        "GAME_PLAY_MANA": 10
+      },
+      "setup_seconds": 3.3445505339768715,
+      "play_seconds": 4.825066449004225,
+      "finish_seconds": 0.07565906102536246,
+      "cleanup_seconds": 0.02269253198755905,
+      "total_seconds": 8.267968575994018,
+      "end_reason": "concession",
+      "submit_to_next_decision_seconds": {
+        "mean": 0.04819206956133712,
+        "median": 0.052312080981209874,
+        "p95": 0.07481135200941935,
+        "min": 0.01648075703997165,
+        "max": 0.09662864601705223
+      }
+    },
+    {
+      "episode": 5,
+      "actions": 100,
+      "actors": {
+        "player_1": 48,
+        "player_0": 52
+      },
+      "callbacks": {
+        "GAME_TARGET": 12,
+        "GAME_ASK": 2,
+        "GAME_SELECT": 75,
+        "GAME_PLAY_MANA": 11
+      },
+      "setup_seconds": 3.294807489030063,
+      "play_seconds": 5.145872104971204,
+      "finish_seconds": 0.11609731602948159,
+      "cleanup_seconds": 0.028325560968369246,
+      "total_seconds": 8.585102470999118,
+      "end_reason": "concession",
+      "submit_to_next_decision_seconds": {
+        "mean": 0.051432637989637445,
+        "median": 0.05388128251070157,
+        "p95": 0.08221939101349562,
+        "min": 0.01855680299922824,
+        "max": 0.13241268100682646
+      }
+    }
+  ],
+  "cpu_affinity_restored": {
+    "server": true,
+    "proxy": true
+  },
+  "date": "2026-10-14",
+  "notes": [
+    "100 submitted decisions total across both seats, not 100 per seat.",
+    "One warm-up excluded; server startup excluded. Fresh sessions/table and deck resolution included in every measured game.",
+    "Five measured games ended by concession; one ended naturally on the 100th decision.",
+    "Two earlier harness attempts excluded: result-wait timeout after non-prompted-seat concession; unhandled natural end on action 100. Final run used prompted-seat concession and handles natural end. This is a short corrected-harness sample, not a reliability soak test.",
+    "No policy inference, training/backpropagation, or parallel games. Java internal threads share one logical CPU with Python."
+  ]
+}

@@ -4,11 +4,15 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "patchwork-automaton"
-version = "0.3.0"
-description = "Async, clientless MTGO server interaction library"
+version = "0.4.0"
+description = "Async MTGO and XMage gameplay interaction library"
 requires-python = ">=3.11"
 readme = "README.md"
 license = {file = "LICENSE"}
+
+[project.optional-dependencies]
+xmage = ["websockets>=14,<17"]
+rl = ["gymnasium>=1,<2", "pettingzoo>=1.24,<2"]
 
 [tool.setuptools.packages.find]
 where = ["src"]

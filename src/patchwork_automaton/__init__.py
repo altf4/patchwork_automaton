@@ -13,7 +13,7 @@ from .models import (CardAction, CollectionItem, DecisionID, Deck, DeckList, Gam
                      Observation, GameResult, PlayerResult, SideboardResult, ValidationError, Submission)
 from .protocol import ProtocolError
 
-__version__ = '0.3.0'
+__version__ = '0.4.0'
 
 __all__ = ['GameEnded', 'GameResult', 'PlayerResult', 'AutoYield', 'Commander', 'Dungeon', 'ControlReceipt',
            'PlayerStops', 'Step',

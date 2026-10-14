@@ -1,11 +1,12 @@
 # Patchwork Automaton
 
-An experimental Python 3.11+ async library for talking directly to MTGO's
-backend over TLS. It runs on Linux without Wine or the running MTGO client.
+An experimental Python 3.11+ async gameplay library for MTGO and local XMage.
+The MTGO backend talks directly to its server over TLS. It runs on Linux without Wine or the running MTGO client.
 The server runs the rules; callers choose actions. The package contains no bot
 policy, deck strategy, or local Magic rules engine.
 
-Version 0.3.0 builds on the authenticated connection and Legacy Burn
+Version 0.4.0 adds an opt-in common game API, XMage backend and local self-play
+episode tools. See [XMage setup and usage](docs/xmage.md). The MTGO implementation builds on the authenticated connection and Legacy Burn
 solitaire discovery in [docs/discovery](docs/discovery). The
 [interaction checklist](docs/interaction-coverage.md) maps 135 gameplay patterns to the general API and dedicated controls. Its wire definitions
 are pinned to client **3.4.159.4704**. It is not yet a complete implementation
@@ -17,7 +18,8 @@ of every interaction type.
 python3 -m pip install -e .
 ```
 
-The runtime uses only the Python standard library. The message catalog and
+The MTGO runtime uses only the Python standard library. XMage adds optional
+WebSocket and Java dependencies described in [the setup guide](docs/xmage.md). The message catalog and
 property names ship inside the package; installing a wheel does not require
 the discovery directory. An optional local string table provides labels for
 server-supplied string references. Without it, unresolved strings appear as
