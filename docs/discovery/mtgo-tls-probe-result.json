@@ -1,0 +1,51 @@
+{
+  "host": "mtgologin1.mtgo.com",
+  "port": 7770,
+  "application_bytes_sent": 0,
+  "connected": true,
+  "tls_version": "TLSv1.2",
+  "cipher": [
+    "ECDHE-RSA-AES128-GCM-SHA256",
+    "TLSv1.2",
+    128
+  ],
+  "certificate_subject": [
+    [
+      [
+        "commonName",
+        "*.mtgo.com"
+      ]
+    ]
+  ],
+  "certificate_issuer": [
+    [
+      [
+        "countryName",
+        "US"
+      ]
+    ],
+    [
+      [
+        "organizationName",
+        "Let's Encrypt"
+      ]
+    ],
+    [
+      [
+        "commonName",
+        "YR2"
+      ]
+    ]
+  ],
+  "certificate_names": [
+    [
+      "DNS",
+      "*.mtgo.com"
+    ],
+    [
+      "DNS",
+      "mtgo.com"
+    ]
+  ],
+  "certificate_expires": "Nov 23 13:28:22 2026 GMT"
+}

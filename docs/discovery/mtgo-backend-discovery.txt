@@ -1,0 +1,167 @@
+MTGO backend discovery — 2026-10-14
+
+Scope: determine the minimum connection and message path for a standalone bot.
+Examined client: 3.4.159.4704, deployment directory 3.4.159.4704.20260929090032.
+Method: downloaded public ClickOnce manifests and selected assemblies; inspected
+them with ILSpyCmd 9.1.0.7988 on a workspace-local .NET 8 Linux runtime.
+No official MTGO client was executed. No account credentials were used.
+One TLS handshake was performed; no login or application messages were sent.
+
+1. Live-verified transport
+
+Configured endpoint: mtgologin1.mtgo.com:7770.
+Python's standard socket/ssl libraries established a verified TLS connection.
+Negotiated TLSv1.2 / ECDHE-RSA-AES128-GCM-SHA256.
+Certificate hostname validation succeeded for *.mtgo.com.
+The successful handshake demonstrates Linux transport connectivity, not login,
+session initialization, gameplay compatibility, or permission for automation.
+See mtgo-tls-probe-result.json and mtgo-tls-probe.py.
+
+2. Endpoint and transport evidence from the client
+
+MTGO.exe.config, serverconfig: live FLS address is mtgologin1.mtgo.com.
+LoginScene.dll, Shiny.Login.ServerInfo: default FLS port is 7770.
+Shiny.Login.ServerConfig: NACS defaults to the FLS hostname, port FLS+20 (7790).
+NACS is used for availability/account flows. It was not probed, and whether any
+NACS step is mandatory for this bot's normal login has not been established.
+FlsClient.dll, PendingSslConnection: DNS -> TCP socket -> SslStream -> login.
+The TLS code allows TLS 1.2 and checks certificate errors. Initial authentication
+supplies no client certificate collection. Application-level device/challenge
+requirements remain separate from TLS.
+
+3. Binary framing
+
+Message.dll, WotC.Common.Message.Message and CSMessage:
+  offset 0: signed int32 total frame length, including the header
+  offset 4: uint16 opcode
+  offset 6: uint16 type-check value
+  offset 8: message-specific payload
+Numeric primitives use BitConverter; the observed Windows target is little-endian.
+The type-check value is (TypeDigest[0] << 8) | TypeDigest[1], serialized as uint16.
+It is a schema/type identifier, not the checksum of this individual payload.
+String lengths are int32 counts of UTF-16 code units for wide strings; wide
+contents use UTF-16LE. Narrow strings use ISO-8859-1. These are length-prefixed,
+not NUL-terminated. Limits passed by constructors need to be respected.
+Booleans occupy one byte. GUIDs use .NET Guid.ToByteArray ordering.
+Arrays carry a length/count prefix; element encodings depend on the message.
+TCP reads are not frame boundaries: the socket code assembles partial reads.
+
+4. Login path (statically recovered, NOT live-validated)
+
+Shiny.Login.LoginViewModel.Connect calls ModelService.LogOn with screen name,
+password, device fingerprint, challenge response, and remember-device setting.
+FlsClientSession.ConnectToServer creates FlsUserLoginReqMessage (opcode 1), then
+passes its bytes to the pending TLS connection for sending after TLS setup.
+
+Ordered request fields:
+  LoginNameOrScreenName: wide string, maximum 30
+  Password: narrow string, maximum 32
+  DeviceFingerprint: narrow string, maximum 64
+  ChallengeResponse: narrow string, maximum 6
+  RememberDevice: boolean
+  md5sum: wide string, maximum 32
+  ClientFlags: int32
+  SessionID: wide string
+
+WotC.MtGO.Client.Common.dll, MtGOSession.HashPassword transforms the UTF-8
+password with MD5 and formats uppercase hexadecimal. This describes existing
+client behavior; the digest must be treated as a credential and never logged.
+The md5sum field is supplied a build constant in the examined FlsClientSession;
+its backend meaning and validation have not been established.
+The device fingerprint generation and challenge flow still need tracing.
+
+FlsUserLoginRespMessage (opcode 512) includes UserInfo, eligibility/preferences,
+AuthorizationType, ConnectionID, ServerTime, LoginSentinel, and ResponseCode.
+After success the client stores the sentinel, sends ServerTimeSyncRespMessage,
+requests roles/privileges, and uses returned ClientFlags to configure transport.
+Reconnect is a separate protocol path; do not equate SessionID, ConnectionID,
+LoginSentinel, or a match token.
+
+5. Session maintenance
+
+HeartbeatReqMessage: opcode 528, uint32 SentTime.
+HeartbeatAckMessage: opcode 23, echoes that SentTime.
+The dispatcher responds to heartbeats before normal message dispatch.
+
+When acknowledgement messaging is enabled:
+  AckMessageReqMessage (16): uint32 MessageIdentifier + nested byte array
+  AckMessageRespMessage (17): uint32 MessageIdentifier
+  FafMessageMessage (18): nested byte array without acknowledgement
+The socket layer unwraps these envelopes, tracks acknowledgements, and dispatches
+the enclosed message. Client flags determine whether this mode is enabled.
+Thus a decoder must handle nesting, not simply map every outer opcode to a
+game event. Reconnection also requires acknowledgement state.
+
+6. Gameplay routing (statically confirmed call sites)
+
+WotC.MtGO.Client.Model.Play.dll, InProgressGameConnectingState:
+  ClientSession.Send(GsConnectMessage(match.EventToken, match.EventId, game.Id))
+GsConnectMessage is opcode 1024: GUID MatchToken, int32 MatchID, int32 GameID.
+
+InProgressGameConnectedBaseState.SendGameMessageHandler:
+  ClientSession.Send(GsMessageMessage(game.ServerGuid, match.EventId,
+                                     game.Id, actionMessage.Unload()))
+GsMessageMessage is opcode 1153: GUID MatchToken, int32 MatchID, int32 GameID,
+and a length-prefixed MetaMessage byte array.
+These gameplay commands use the existing ClientSession send path. The examined
+call sites do not open a separate game-server socket; additional routing or
+handoffs elsewhere have not been ruled out.
+
+PrimitiveAction.SetMessage produces PromptActionMessage (4638):
+  uint32 PButtonFlags, uint32 PButtonParameter, uint32 GameStateTimestamp.
+CardActionMessage (4647):
+  int32 CardID, int32 ActionID, uint32 GameStateTimestamp, int32 NTargets,
+  uint32 Flags, uint32[] Targets.
+NewCardActionMessage and other action types also exist. Merely sending a card
+identifier is insufficient; the current timestamp and action semantics matter.
+
+7. State decoding is the next substantial discovery task
+
+GamePlayStatusMessage contains a StateBuf, clocks, priority/player fields,
+sizes, checksums, flags, and a game-state timestamp.
+GamePlayStatusMessageDetailed.Initialize assembles multipart state buffers:
+  flags bit 1: diff rather than full state
+  flags bit 2: head fragment
+  flags bit 4: tail fragment
+For diffs it checks the prior buffer, applies ApplyDiffs2, verifies the resulting
+checksum, and caches the state by PriorityPlayer. The diff algorithm is present
+in this class; it is not an unidentified compression format.
+It then reads length/type-tagged state elements including TurnStepElement,
+InteractStateElement, ThingElement, ManaPoolElement, and PlayerStatusElement.
+The state-element fields and derivation of every available action have not yet
+been mapped. The wire protocol is therefore only partially specified.
+
+8. Message inventory
+
+mtgo-message-catalog.json contains 1,486 statically extracted message definitions
+with opcode, type-check value, declared fields, and source line in the local
+decompiler output. This inventory includes server-to-server/admin messages;
+their presence in an assembly does not mean the client uses or can invoke them.
+It is a discovery index, not a complete codec or tested protocol specification.
+Only the client call paths above were traced in this pass.
+
+9. Recommended next experiment
+
+Finish login response/challenge decoding and trace the smallest normal session
+initialization path. Build an offline encoder/decoder for those messages and
+validate byte layouts against a controlled manual-client session, with secrets
+removed from saved fixtures. Then verify login with a user-supplied account in
+an authorized environment, maintaining TLS verification, heartbeats, and the
+negotiated acknowledgement behavior. Do not start gameplay automation until
+state assembly and prompt timestamps are understood.
+
+No authenticated session or complete game has been demonstrated in this pass.
+
+Provenance
+
+Public deployment manifest:
+https://mtgo.patch.daybreakgames.com/patch/mtg/live/client/MTGO.application
+Pinned application manifest:
+https://mtgo.patch.daybreakgames.com/patch/mtg/live/client/3.4.159.4704.20260929090032/MTGO.exe.manifest
+SDK deployment locator:
+https://github.com/videre-project/MTGOSDK/blob/main/MTGOSDK.Win32/src/Constants.cs
+Tool:
+https://github.com/icsharpcode/ILSpy
+See mtgo-discovery-provenance.json for exact binary URLs, sizes, and SHA-256 hashes.
+Downloaded binaries and decompiler output remain intermediate workspace files;
+this report provides findings rather than redistributing client implementation.

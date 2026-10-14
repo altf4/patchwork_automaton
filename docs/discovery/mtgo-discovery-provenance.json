@@ -1,0 +1,80 @@
+[
+  {
+    "name": "MTGO.exe.config",
+    "url": "https://mtgo.patch.daybreakgames.com/patch/mtg/live/client/3.4.159.4704.20260929090032/MTGO.exe.config",
+    "bytes": 15106,
+    "sha256": "eef45b8cf068d38a0fe64072f0e15103665866d566debbb07b26053c23314b4e"
+  },
+  {
+    "name": "FlsClient.dll",
+    "url": "https://mtgo.patch.daybreakgames.com/patch/mtg/live/client/3.4.159.4704.20260929090032/FlsClient.dll",
+    "bytes": 83456,
+    "sha256": "2d84d6b2d1dc2e74c11e48a350b4a42f747c942ccb3342c60d9fc70fa3b4b043"
+  },
+  {
+    "name": "MTGOMessage.dll",
+    "url": "https://mtgo.patch.daybreakgames.com/patch/mtg/live/client/3.4.159.4704.20260929090032/MTGOMessage.dll",
+    "bytes": 2662400,
+    "sha256": "9a5821870277c5b61cdd2075abfc4ba1da7eb52397cfb0c2729f46bd0d199ba4"
+  },
+  {
+    "name": "MTGOEnumStruct.dll",
+    "url": "https://mtgo.patch.daybreakgames.com/patch/mtg/live/client/3.4.159.4704.20260929090032/MTGOEnumStruct.dll",
+    "bytes": 802304,
+    "sha256": "82010aeab89e435b1b519738c81f9068a528f8985efe53677bd0f8669ecd1326"
+  },
+  {
+    "name": "WotC.Common.dll",
+    "url": "https://mtgo.patch.daybreakgames.com/patch/mtg/live/client/3.4.159.4704.20260929090032/WotC.Common.dll",
+    "bytes": 188928,
+    "sha256": "a78a3ad5ac21445d38dcddc4dc8b89290403da0f9c19f4846bdf17f4f33965c8"
+  },
+  {
+    "name": "WotC.Common.Client.dll",
+    "url": "https://mtgo.patch.daybreakgames.com/patch/mtg/live/client/3.4.159.4704.20260929090032/WotC.Common.Client.dll",
+    "bytes": 12288,
+    "sha256": "618fbe95267b20554181c9aab5e7faa54d508efac1b0fe69b5894f7f0f20d2ae"
+  },
+  {
+    "name": "WotC.MtGO.Client.Model.Session.dll",
+    "url": "https://mtgo.patch.daybreakgames.com/patch/mtg/live/client/3.4.159.4704.20260929090032/WotC.MtGO.Client.Model.Session.dll",
+    "bytes": 23552,
+    "sha256": "b1738dfbd5f55243c75dd50fa21132332ae0cc3f282ed7cbc1dcd470bcedcc26"
+  },
+  {
+    "name": "LoginScene.dll",
+    "url": "https://mtgo.patch.daybreakgames.com/patch/mtg/live/client/3.4.159.4704.20260929090032/LoginScene.dll",
+    "bytes": 166400,
+    "sha256": "2c87ce7f0ac069d04801bc565559c24e048e01be545c33a0837d41e23f282850"
+  },
+  {
+    "name": "Core.dll",
+    "url": "https://mtgo.patch.daybreakgames.com/patch/mtg/live/client/3.4.159.4704.20260929090032/Core.dll",
+    "bytes": 151552,
+    "sha256": "dad59b60cd9448e26b59bccbb3db4273ab7fc6b42cb171edbecfac745ba9eeae"
+  },
+  {
+    "name": "Message.dll",
+    "url": "https://mtgo.patch.daybreakgames.com/patch/mtg/live/client/3.4.159.4704.20260929090032/Message.dll",
+    "bytes": 45056,
+    "sha256": "c8f8a1eabbd0eb4e30f2253dfe384bc8bac6cbe48eb2840dd6526493e094a02d"
+  },
+  {
+    "name": "MTGO.exe",
+    "url": "https://mtgo.patch.daybreakgames.com/patch/mtg/live/client/3.4.159.4704.20260929090032/MTGO.exe",
+    "bytes": 14804088,
+    "sha256": "454781fb8cd484da1eb6700dbc7fc0f0826bce552643ad916be66100cdf11205"
+  },
+  {
+    "name": "WotC.MtGO.Client.Model.Play.dll",
+    "url": "https://mtgo.patch.daybreakgames.com/patch/mtg/live/client/3.4.159.4704.20260929090032/WotC.MtGO.Client.Model.Play.dll",
+    "bytes": 13539840,
+    "sha256": "14bcb3de1b5046c97a52f6a7fe1a367245d40842ec017ba5d1e46135cff9e78c"
+  },
+  {
+    "name": "WotC.MtGO.Client.Common.dll",
+    "url": "https://mtgo.patch.daybreakgames.com/patch/mtg/live/client/3.4.159.4704.20260929090032/WotC.MtGO.Client.Common.dll",
+    "bytes": 20480,
+    "sha256": "d13e863de2f06ea2f6f5b5970a482b7cb1d1d3e907ebe6fa776928744bd710ff"
+  }
+]
