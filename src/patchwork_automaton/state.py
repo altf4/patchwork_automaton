@@ -4,7 +4,7 @@ import struct
 from .protocol import Cursor, ProtocolError, MAX_FRAME
 
 from .properties import PROPERTY_NAMES, freeze
-from .interactions import DamageAssignment, DamageTarget, ManaEntry, Ordering, PromptCode
+from .interactions import AutoYield, Commander, Dungeon, DamageAssignment, DamageTarget, ManaEntry, Ordering, PromptCode
 
 
 def zstring(c, width=0):
@@ -126,6 +126,9 @@ def interaction(data, legacy=False):
                 prompt['selectors'].append(dict(type=kind,bytes=ui.data.hex()))
                 continue
             ui.end()
+    prompt.update(special_player=special_player, special_type=special_type)
+    prompt['arranging_three_piles'] = bool(prompt.get('flags', 0) & PromptCode.THREE_PILES
+        or prompt['text'].endswith('to arrange cards into three piles.'))
     # The official UI decoder stops after its descriptors; current ordinary
     # priority prompts have one unused trailing zero byte.
     if c.pos<len(c.data) and not any(c.data[c.pos:]):
@@ -190,6 +193,9 @@ class State:
         self.mana = ()
         self.damage = ()
         self.ordering = ()
+        self.commanders = ()
+        self.dungeons = ()
+        self.auto_yields = ()
 
     def update(self,payload):
         c = Cursor(payload)
@@ -222,6 +228,7 @@ class State:
         self.raw = data
         c = Cursor(data)
         cards,players,prompt,unknown,mana,damage,ordering = {},[],None,[],[],[],[]
+        commanders,dungeons,auto_yields = [],[],[]
         for _ in range(elements):
             length,kind = struct.unpack('<ii',c.take(8))
             raw = c.take(length-8)
@@ -241,7 +248,14 @@ class State:
                 hand=list(struct.unpack('<16h',obj.take(32)))
                 library=list(struct.unpack('<16h',obj.take(32)))
                 graveyard=list(struct.unpack('<16h',obj.take(32)))
-                players.append(dict(life=life,hand=hand,library=library,graveyard=graveyard))
+                summary = dict(life=life,hand=hand,library=library,graveyard=graveyard)
+                if len(raw)-obj.pos >= 5:
+                    through_turn,no_bluff,auto_stack,through_opponents,active = obj.take(5)
+                    summary.update(yield_through_turn=through_turn, no_bluff=no_bluff,
+                        auto_stack=auto_stack, yield_through_opponents=through_opponents, active_player=active)
+                    if len(raw)-obj.pos >= 16*13:
+                        summary['backgrounds'] = tuple(zstring(obj,13) for _ in range(16))
+                players.append(summary)
                 if obj.pos < len(raw):
                     unknown.append((kind, raw[obj.pos:]))
             elif kind == 4:
@@ -266,12 +280,45 @@ class State:
                 targets = tuple(obj.integer() for _ in range(number))
                 obj.end()
                 ordering.append(Ordering(source, targets))
+            elif kind == 10:
+                obj = Cursor(raw)
+                n, player_count = obj.take(2)
+                dealt = [tuple(struct.unpack('<' + 'I'*n, obj.take(4*n))) for _ in range(player_count)]
+                for i in range(n):
+                    owner, object_id, texture = struct.unpack('<BII', obj.take(9))
+                    if owner >= player_count:
+                        raise ProtocolError('Commander owner is outside player order')
+                    commanders.append(Commander(owner, object_id, texture, tuple(row[i] for row in dealt)))
+                obj.end()
+            elif kind == 11:
+                obj = Cursor(raw)
+                number = obj.integer()
+                if not 0 <= number <= len(raw)//7:
+                    raise ProtocolError('Invalid auto-yield count')
+                for _ in range(number):
+                    auto_yields.append(AutoYield(obj.integer(), obj.take(1)[0], zstring(obj), zstring(obj)))
+                obj.end()
+            elif kind == 12:
+                obj = Cursor(raw)
+                textures = [obj.integer() for _ in range(obj.take(1)[0])]
+                number = struct.unpack('<I', obj.take(4))[0]
+                if number > (len(raw)-obj.pos)//2:
+                    raise ProtocolError('Invalid dungeon completion count')
+                completed = [dict() for _ in textures]
+                for _ in range(number):
+                    index, player = obj.take(2)
+                    if index >= len(textures):
+                        raise ProtocolError('Dungeon index is outside catalog')
+                    completed[index][player] = completed[index].get(player, 0) + 1
+                dungeons = [Dungeon(texture, freeze(counts)) for texture,counts in zip(textures,completed)]
+                obj.end()
             else:
                 unknown.append((kind, raw))
         c.end()
         self.prompt,self.cards,self.players = prompt,cards,players
         self.unknown_elements = tuple(unknown)
         self.mana, self.damage, self.ordering = tuple(mana), tuple(damage), tuple(ordering)
+        self.commanders, self.dungeons, self.auto_yields = tuple(commanders), tuple(dungeons), tuple(auto_yields)
         self.status = dict(game_id=game_id, clocks=clocks, waiting_for_player=waiting,
                            priority_player=priority, timestamp=timestamp, checksum=expected & 0xffffffff)
         return True

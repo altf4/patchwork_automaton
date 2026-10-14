@@ -267,7 +267,7 @@ class ClientTests(unittest.IsolatedAsyncioTestCase):
     async def test_game_over_and_results_invalidate_decision(self):
         client, backend = await self.login()
         game = await client.connect_game((await client.current_matches())[0])
-        await game._receive(backend.token.bytes_le, 4485, b'')
+        await game._receive(backend.token.bytes_le, 4485, struct.pack('<IiBiBI',77,0,1,1,2,100))
         with self.assertRaises(StaleDecision):
             await game.submit(game.observation.decision_id, PromptChoice(13))
 

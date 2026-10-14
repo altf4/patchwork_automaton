@@ -5,8 +5,9 @@ backend over TLS. It runs on Linux without Wine or the running MTGO client.
 The server runs the rules; callers choose actions. The package contains no bot
 policy, deck strategy, or local Magic rules engine.
 
-Version 0.2.0 builds on the authenticated connection and Legacy Burn
-solitaire discovery in [docs/discovery](docs/discovery). Its wire definitions
+Version 0.3.0 builds on the authenticated connection and Legacy Burn
+solitaire discovery in [docs/discovery](docs/discovery). The
+[interaction checklist](docs/interaction-coverage.md) maps 135 gameplay patterns to the general API and dedicated controls. Its wire definitions
 are pinned to client **3.4.159.4704**. It is not yet a complete implementation
 of every interaction type.
 
@@ -122,9 +123,10 @@ first_game, second_game = await asyncio.gather(
 
 The challenger sends the native player-order and host-start messages after
 acceptance. The reader also handles game-ready acknowledgements. This is a
-single-game D1V1 direct challenge with spectators disabled. To finish a test
-explicitly, `await second.concede_match(incoming)` waits for the server's
-concession acknowledgement. Final game results remain `GameMessage` events;
+D1V1 direct challenge with spectators disabled. Pass `best_of=3` for a first-two-wins
+match; sideboarding and next-game APIs are described in
+[interactions.md](docs/interactions.md). To finish a test explicitly, `await second.concede_match(incoming)` waits for the server's
+concession acknowledgement. Final game results are retained on `game.result` and attached to `GameMessage` events;
 the conceding player may receive results without a separate GameOver message.
 
 `collection()` returns the account's owned `CollectionItem` records, including
@@ -158,7 +160,9 @@ interactions are implemented or tested.
 | Unknown state elements, unknown UI selectors, other game messages | Preserved as raw data |
 | Advanced interaction validation | Client-derived synthetic fixtures and saved-state replay; new shapes have not been exercised live |
 | Game-server account/index mapping | Implemented; two-player order exercised live |
-| Sideboarding, typed match results | Not fully modeled |
+| Sideboarding, subsequent games, typed game results | Implemented; offline validation of acceptance/rejection, expiration, and game transitions |
+| Undo, yield toggles, phase stops, game concession | Explicit native controls; no automatic retries |
+| Commander, dungeon, auto-yield state | Typed immutable descriptors |
 | Tournament structures and joining queues/events | Not implemented |
 | Reconnect/resume | Explicit new login and attach; no transparent session resume |
 
@@ -246,7 +250,7 @@ python3 -m pip wheel --no-deps --no-build-isolation .
 Tests use synthetic framed backend responses rather than credentials or live
 accounts. They cover public workflows, envelope negotiation, stale choices,
 disconnects, cancellation/timeouts, queue overflow, codec boundaries, and
-advanced interaction shapes. The 0.2.0 implementation was also checked by
+advanced interaction shapes. The 0.3.0 implementation was also checked by
 replaying 82 previously captured observations without reconnecting accounts.
 No CI has been configured.
 

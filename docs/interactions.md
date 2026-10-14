@@ -1,4 +1,6 @@
-# Interaction API (0.2.0)
+# Interaction API (0.3.0)
+
+See the [135-pattern coverage checklist](interaction-coverage.md) for the inventory.
 
 The server supplies actions and runs the rules. The library decodes its choices
 and sends the caller's selections. All choices go through `game.submit()` with
@@ -208,6 +210,121 @@ Trigger ordering, replacement choices, searches, and arranging library cards
 use whichever of these descriptors/actions the server offers. Do not assume
 all kinds of ordering use a combat-order message: some are sequences of card
 actions or target selections followed by a Done button.
+
+## Locally staged batches
+
+`submit_batch()` validates all choices against one decision before sending the
+first message. Use it when the server offers actions flagged local, or several
+independent damage/ordering sources followed by a confirmation:
+
+```python
+receipts = await game.submit_batch(observation.decision_id, (
+    CardSelection(first_object_id, first_action_id),
+    CardSelection(second_object_id, second_action_id),
+    PromptChoice(done_button_code),
+))
+```
+
+Every choice except the optional final one must be a partial choice. Ordinary
+casts or choices that require a new observation cannot be chained in a batch.
+Repeated partial keys are rejected. Build or edit the caller's selection list
+before submitting it; the library does not optimistically mutate snapshots.
+Three-pile arrangements use the offered per-card action IDs; there is no guessed
+pile-number wire command. `prompt['arranging_three_piles']` exposes the native
+legacy flag/text indicator, and special-player/type fields are preserved.
+
+Validation is atomic; delivery is not. A failed transport write ends the session
+and the library never retries the sequence. A sent receipt proves no acceptance.
+
+Advertised non-game object menu actions require explicit
+`CardSelection(..., allow_non_game=True)`. These are partial choices, allowing an
+object-specific preference action followed by a prompt response where required.
+
+## Game controls and extra state
+
+```python
+from patchwork_automaton import PlayerStops, Step, YieldControl, YieldPreference
+
+await game.undo(expected_revision=observation.revision)
+await game.yield_control(YieldControl.DISABLE_ALL)
+await game.yield_control(YieldControl.AUTO_STACK_TRIGGERS)
+await game.remove_yield(advertised_yield_id)
+await game.update_stops(
+    checksum=deployed_string_checksum,
+    stops=(PlayerStops(0, Step.PRECOMBAT_MAIN | Step.END),),
+    yields=(PlayerStops(1, Step.END),),
+    preferences=YieldPreference.NORMAL_CARD_DRAW,
+)
+```
+
+These are independent example operations, not a recommended sequence. Native
+function-key yield controls are **toggles**, except `DISABLE_ALL`; repeating a
+request can reverse the setting. There is no automatic retry or idempotent-set
+claim. Stop preference `player_id` values are game-server indices, not account
+IDs. Step masks start at upkeep; first-strike and ordinary damage share the
+combat-damage stop. The deployed string-table checksum can be saved with:
+
+```sh
+python3 scripts/extract-strings.py /path/to/WotC.MtGO.Client.Model.Play.dll \
+  .local/strings.json --checksum-output .local/string-checksum.txt
+```
+
+`game.undo()` and `game.concede()` invalidate the current decision immediately;
+wait for a fresh state or result. The server decides whether undo is legal.
+`game.concede()` concedes one game; `client.concede_match(match)` concedes the
+match. Other controls can use `expected_revision=` to reject stale observations.
+`game.detach()` closes only that game route and makes its handle unusable.
+
+Additional immutable observation fields:
+
+- `commanders`: owner index, live object ID, texture, damage to each player.
+- `dungeons`: texture and per-player completion counts.
+- `auto_yields`: object yield ID, player mask, description, effect.
+- PlayerStatus summaries: active-player index and displayed yield preferences.
+- Mana entries: `source_id`, `snow`, and `restriction` convenience properties.
+
+Dynamic ranged creature types replace static types. Unknown enum values remain
+unresolved, so relationship checks fail explicitly. Changeling/wildcard and
+lost-abilities flags are normalized. Face-down objects are nameless and do not
+inherit printed creature types. Room name sets follow unlocked doors on the
+battlefield and the chosen half on the stack; local catalog extraction now
+retains the required nested half definitions. Regenerate older local catalogs
+for Room support. This still does not simulate arbitrary copy/layer effects.
+
+## Sideboarding, subsequent games, and results
+
+```python
+match = await client.challenge(opponent_id, deck, format='CMODERN', best_of=3)
+# Accept/start using the normal workflow, then play the first game.
+
+# When sideboarding is permitted, supply the entire revised deck. DeckItem's
+# sideboard field distinguishes main-deck and sideboard entries.
+result = await client.submit_sideboard(match, revised_complete_deck)
+if result.accepted:
+    next_game = await client.wait_for_game(match, after_game_id=finished_game.id)
+else:
+    print(result.errors, result.expired)
+```
+
+The native match type is `BES` for first two game wins; the default `best_of=1`
+remains `SGM`. Match sync metadata retains `match_type`. The server validates
+format/deck eligibility and controls the sideboarding window. The caller must
+establish that the match continues rather than blindly sideboarding after the
+last game. Tournament and league event decoding/entry remain outside this API.
+
+Sideboarding disconnects any ended game routes for that match before sending
+the full revised deck. Active games, unknown matches, empty decks, and nonpositive
+quantities are rejected locally. Rejections preserve every native validation
+error (card ID, annotation, code, region, card-specific flag). Expiration is
+reported separately. A next-game wait handles either notification order and
+refreshes cached match metadata instead of reusing an old game ID.
+
+`game.ended` exposes the received game-over status. `game.result` retains the
+latest typed `GameResult` (moved-first index, status, per-player result code and
+playing time). Winner indices follow the native code 2. A `GameMessage` for
+`GameResultsMessage` also carries `.result`; raw payload access is retained.
+A pending `wait_for_update()` wakes and raises `GameEnded` with the result if
+the game finishes without a newer observation.
 
 ## Validation and limits
 

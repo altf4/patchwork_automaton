@@ -2,19 +2,23 @@
 from .actions import (CardChoice, CardSelection, DamageChoice, ManaChoice,
                       OrderingChoice, PromptChoice, SelectorChoice)
 from .choice_catalog import ChoiceCatalog
-from .interactions import (DamageAssignment, DamageTarget, GameObject, ManaEntry,
+from .interactions import (AutoYield, Commander, Dungeon, DamageAssignment, DamageTarget, GameObject, ManaEntry,
     ModeOption, ModeSpec, NamedOption, Ordering, PromptCode, SelectionSource, Selector, TargetGroup)
 from .client import Game, MTGOClient
-from .errors import (AuthenticationError, Disconnected, EventOverflow,
+from .controls import ControlReceipt, PlayerStops, Step, YieldControl, YieldPreference
+from .errors import (AuthenticationError, Disconnected, EventOverflow, GameEnded,
                      RequestRejected, StaleDecision, UnsupportedInteraction)
 from .game import DeckItem
 from .models import (CardAction, CollectionItem, DecisionID, Deck, DeckList, GameMessage, Match,
-                     Observation, Submission)
+                     Observation, GameResult, PlayerResult, SideboardResult, ValidationError, Submission)
 from .protocol import ProtocolError
 
-__version__ = '0.2.0'
+__version__ = '0.3.0'
 
-__all__ = ['MTGOClient', 'Game', 'Deck', 'DeckItem', 'DeckList', 'Match', 'CollectionItem',
+__all__ = ['GameEnded', 'GameResult', 'PlayerResult', 'AutoYield', 'Commander', 'Dungeon', 'ControlReceipt',
+           'PlayerStops', 'Step',
+           'YieldControl', 'YieldPreference', 'SideboardResult', 'ValidationError', 'MTGOClient',
+           'Game', 'Deck', 'DeckItem', 'DeckList', 'Match', 'CollectionItem',
            'Observation', 'DecisionID', 'CardAction', 'CardChoice', 'PromptChoice',
            'GameMessage', 'Submission', 'AuthenticationError', 'Disconnected',
            'EventOverflow', 'RequestRejected', 'StaleDecision',

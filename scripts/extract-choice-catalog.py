@@ -50,14 +50,21 @@ def build(assembly, directory):
     for path in sorted(directory.glob('client_*.xml')):
         for element in ET.parse(path).getroot().iter('DigitalObject'):
             props = {}
-            for attr in element:
-                value = resolve(attr)
-                if value is None:
-                    continue
-                try:
-                    props[attr.tag] = int(value)
-                except ValueError:
-                    props[attr.tag] = value
+            def attributes(node):
+                result = {}
+                for attr in node:
+                    if len(attr):
+                        result[attr.tag] = attributes(attr)
+                        continue
+                    value = resolve(attr)
+                    if value is None:
+                        continue
+                    try:
+                        result[attr.tag] = int(value)
+                    except ValueError:
+                        result[attr.tag] = value
+                return result
+            props = attributes(element)
             if props.get('DIGITAL_OBJECT_TYPE_CODE_STRING') != 'CARD' or not props.get('CARDTEXTURE_NUMBER'):
                 continue
             token = props.get('CARDNAME_TOKEN')

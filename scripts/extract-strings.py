@@ -9,6 +9,7 @@ import dnfile
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('assembly', type=Path, help='Installed MTGO GamePlay assembly containing strconst_v3.dat')
 parser.add_argument('output', type=Path)
+parser.add_argument('--checksum-output', type=Path, help='Save deployed checksum for update_stops()')
 args = parser.parse_args()
 pe = dnfile.dnPE(str(args.assembly))
 for resource in pe.net.resources:
@@ -24,7 +25,12 @@ for resource in pe.net.resources:
                     raise ValueError('Invalid string table')
                 strings.append(raw[pos:pos + size - 1].decode('utf-8'))
                 pos += size
+            checksum = raw[pos:pos+32].decode('ascii')
+            if len(checksum) != 32 or any(c not in '0123456789abcdefABCDEF' for c in checksum):
+                raise ValueError('Invalid deployed string-table checksum')
             args.output.write_text(json.dumps(strings))
+            if args.checksum_output:
+                args.checksum_output.write_text(checksum)
             print(f'Extracted {len(strings)} strings')
             raise SystemExit(0)
 raise SystemExit('String table resource not found')

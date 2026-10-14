@@ -1,4 +1,4 @@
-"""Solitaire discovery codecs. Game decisions are not automated yet."""
+"""Deck and ordinary-match wire codecs; no automated decisions."""
 from dataclasses import dataclass
 import struct
 import uuid
@@ -92,11 +92,12 @@ def event_sync(c):
         c.integer(); c.string(); c.integer()
     state = c.integer()
     c.string(); c.take(8); c.take(18); c.blob(2); c.string(); c.string()
-    games, player_format, minimum, maximum = [], None, None, None
+    games, player_format, minimum, maximum, match_type = [], None, None, None, None
     if c.take(1) == b"\1":
         c.integer()  # Host game-server ID
         c.take(16); c.take(8)  # MatchCreateInfo token, ID, parent type
-        c.string(); c.string()
+        match_type = c.string()
+        c.string()
         player_format = c.string()
         # Response MatchCreateInfo uses int32 AllowStartHandicap, whereas the
         # creation request uses a boolean. They are different wire layouts.
@@ -115,14 +116,16 @@ def event_sync(c):
     if c.take(3) != b"\0\0\0":
         raise ProtocolError("Tournament event decoding is not implemented")
     return dict(token=token, event_id=event_id, state=state, structure=structure,
-                player_format=player_format, minimum_players=minimum,
+                player_format=player_format, match_type=match_type, minimum_players=minimum,
                 maximum_players=maximum, players=player_count, player_ids=player_ids, games=games)
 
 
-def challenge_payload(token, cards, opponent_id, game_structure, *, channel=6, match_time=60):
-    """Native direct challenge: D1V1, single game, no spectators."""
+def challenge_payload(token, cards, opponent_id, game_structure, *, channel=6, match_time=60, best_of=1):
+    """Native direct challenge: D1V1, single game or first two wins."""
+    if best_of not in (1, 3):
+        raise ValueError('best_of must be 1 or 3')
     return b''.join([
-        token.bytes_le, string('SGM', True), string(game_structure, True),
+        token.bytes_le, string('BES' if best_of == 3 else 'SGM', True), string(game_structure, True),
         string('D1V1', True), string('', True), b'\0\0',
         struct.pack('<ii?iii', channel, match_time, False, 0, 0, 0),
         string('bgname', True), struct.pack('<ii', 0, len(cards)),

@@ -79,3 +79,62 @@ fixtures are needed for modal spells, repeated modes, restricted mana,
 replacement choices, multi-source combat damage, and unusual name/type/facet
 combinations. Missing metadata/unknown interactions remain explicit; original
 attributes and raw submission remain available for discovery.
+
+
+Patchwork Automaton 0.3.0 gameplay coverage expansion (2026-10-14)
+
+Inventory:
+- docs/interaction-coverage.md maps 135 interaction patterns to generic action
+  paths, dedicated APIs, or authoritative state. The labels do not claim
+  individual real-card/live validation. No card-name handler registry added.
+
+Implemented additional paths:
+- Native global controls: undo, function-key yield toggles, removal of advertised
+  object yields, stop/yield preference arrays, game concession, game detach.
+- CommanderInfo, DungeonInfo, PlayerAutoYieldInfo, full PlayerStatus display
+  fields, special-step metadata, and native GameResultsInfo decoding.
+- Locally staged batches: all choices validated before any write; partial keys
+  and a terminal response supported. Partial delivery fails the session rather
+  than retrying. Undo and concession invalidate the current decision.
+- Best-of-three direct challenge using native BES (first two wins), full-deck
+  sideboard submission, typed validation failures and expiration, fresh next-game
+  waits that handle start/sync ordering, and ended-route disconnection.
+- Room name sets from nested half definitions and door flags, nameless face-down
+  objects, ranged creature type IDs, changeling/wildcard interpretation, and
+  explicit unresolved unknown subtype metadata.
+- Deferred divided effects, descriptor comments/reminders/distribution metadata,
+  source/snow/restriction mana properties, explicit non-game object action opt-in.
+- Terminal results wake pending observation waits with GameEnded instead of
+  leaving callers waiting for a state that will never arrive.
+- String extraction can save the deployed 32-character checksum separately.
+  Card extraction retains nested half definitions. Client assets remain local.
+
+Primary evidence:
+- Client 3.4.159.4704 Model.Play/Core serializers and choice construction.
+- MTGOMessage and native struct serializers for sideboards, game results,
+  yield controls, UpdateYieldStops, and GsCloseMatch.
+- MTGOEnumStruct MatchType establishes SGM/SEL/BES; no match type inferred.
+- MagicPropertyHelper establishes ranged subtype enum conversion; native stop
+  construction uses server-player indices and bit 1 << (GamePhase - Upkeep).
+- Related/hidden texture hints do not replace CARDTEXTURE_NUMBER in the native
+  definition lookup; explicit current server properties remain authoritative.
+
+Offline verification:
+- 117 unittest cases pass with warnings treated as errors on Python 3.12 and
+  Python 3.14, including invalid batches, partial transport failure, stale and
+  spectator controls, malformed arrays, dynamic metadata, sideboard rejection
+  details, expiration, next-game routing, results, and terminal waiting.
+- Built and installed the 0.3.0 wheel into an isolated target. The same 117 tests
+  pass against the installed package, with controls and identifier tables present.
+- Wheel excludes credentials, client definitions/resources, captures, research
+  policies/services, and CI files.
+- Saved direct-match replay still decodes account 1's 73 messages / 42 states and
+  account 2's 64 messages / 40 states. Typed results decode for both accounts.
+- Re-extracted 161,360 strings, identical to the prior local table, and the
+  deployed checksum. Re-extracted 73,725 card definitions with Room half metadata.
+- Read-only /proc TCP inspection found no established backend connection.
+
+No accounts were reconnected, games started, messages submitted to MTGO, CI
+configured, or bot strategy added. Live acceptance of the new advanced paths,
+best-of-three workflow, and exhaustive arbitrary-card compatibility remain
+unverified. Tournament/league entry, drafts, replays, and trading are out of scope.

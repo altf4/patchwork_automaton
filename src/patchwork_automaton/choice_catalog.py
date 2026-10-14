@@ -7,7 +7,11 @@ import json
 from pathlib import Path
 
 from .interactions import NamedOption, SelectionSource
-from .properties import PROPERTY_IDS, freeze, get_property
+from .properties import PROPERTY_IDS, freeze, indexed
+
+
+def type_label(value):
+    return value.removeprefix('CREATURETYPE_').replace('_', ' ').title()
 
 
 class ChoiceCatalog:
@@ -15,7 +19,7 @@ class ChoiceCatalog:
         self.definitions = freeze({int(key): value for key, value in (definitions or {}).items()})
         defaults = json.loads(Path(__file__).with_name('data').joinpath('interaction-enums.json').read_text())
         defaults.update(sources or {})
-        self.sources = {int(key): tuple(NamedOption(int(value), label) for value, label in options)
+        self.sources = {int(key): tuple(NamedOption(int(value), type_label(label) if int(key) == 32768 else label) for value, label in options)
                         for key, options in defaults.items()}
         self.allowed_name_tokens = None if allowed_name_tokens is None else frozenset(allowed_name_tokens)
 
@@ -29,18 +33,61 @@ class ChoiceCatalog:
         return self.definitions.get(texture, {})
 
     def state_properties(self, raw):
-        result = dict(self.properties(raw.get('CARDTEXTURE_NUMBER')))
+        # Match the native definition lookup. MORPHED_CARD_TEXTURE_NUMBER and
+        # OTHER_FACE describe related/hidden faces, not the current definition.
+        texture = raw.get('CARDTEXTURE_NUMBER') or raw.get('EFFECT_TEXTURE_NUMBER')
+        result = dict(self.properties(texture))
         result.update(raw)
+        if 'creature_types' in result:
+            result['creature_types'] = tuple(type_label(t) for t in result['creature_types'])
         types = {'IS_ARTIFACT':'Artifact', 'IS_BATTLE':'Battle', 'IS_CREATURE':'Creature',
                  'IS_ENCHANTMENT':'Enchantment', 'IS_LAND':'Land', 'IS_PLANESWALKER':'Planeswalker',
-                 'INSTANT':'Instant', 'SORCERY':'Sorcery', 'IS_KINDRED':'Kindred'}
+                 'INSTANT':'Instant', 'SORCERY':'Sorcery', 'IS_KINDRED':'Kindred',
+                 'IS_PLANE':'Plane', 'IS_PHENOMENON':'Phenomenon', 'IS_VANGUARD':'Vanguard',
+                 'IS_CONSPIRACY':'Conspiracy'}
         if any(key in raw for key in types):
             result['card_types'] = tuple(label for key, label in types.items() if raw.get(key))
             result['permanent_types'] = tuple(label for label in result['card_types']
                 if label in ('Artifact','Battle','Creature','Enchantment','Land','Planeswalker'))
-        subtypes = [(option, get_property(raw, option.value)) for option in self.options(32768)]
-        if any(value is not None for _, value in subtypes):
-            result['creature_types'] = tuple(option.label for option, value in subtypes if value)
+        ranged = indexed(raw, 605139200)
+        if ranged:
+            labels = {o.value:o.label for o in self.options(32768)}
+            values = ['*' if value == PROPERTY_IDS['GROUPMATCH_WILDCARD'] else labels.get(value) for _,value in ranged]
+            if all(value is not None for value in values):
+                result['creature_types'] = tuple(values)
+            else:
+                result.pop('creature_types', None)
+        # These are server state flags, not a rules simulation from card text.
+        face_down = any(raw.get(key) for key in ('FACE_DOWN','FACE_DOWN_BECAUSE_MORPH',
+            'FACE_DOWN_BECAUSE_TEZZERET','FACE_DOWN_BECAUSE_YEDORA','MANIFEST_FACE_DOWN',
+            'FACE_DOWN_BECAUSE_CLOAK','FACE_DOWN_BECAUSE_DISGUISE','FORETOLD_ORDINAL'))
+        result['face_down'] = face_down
+        result['changeling'] = bool(result.get('CHANGELING') and not raw.get('REMOVE_ALL_TEXT') and not face_down)
+        result['all_creature_types'] = bool(raw.get('GROUPMATCH_WILDCARD') or '*' in result.get('creature_types', ()))
+        if result['changeling'] and 'creature_types' not in result:
+            result['creature_types'] = ()
+        if face_down:
+            result['card_names'] = ()
+            if not ranged:
+                result['creature_types'] = ()
+                result['all_creature_types'] = False
+        elif result.get('IS_ROOM') and raw.get('ZONE') in (1000961, 1001728):
+            # Locked doors have no name on the battlefield; on stack only the
+            # chosen half contributes. Missing half definitions remain explicit.
+            names = []
+            battlefield = raw['ZONE'] == 1000961
+            for side in ('LEFT', 'RIGHT'):
+                if raw.get(side+'_UNLOCKED' if battlefield else 'CHOSE_'+side):
+                    half = result.get(side+'_HALF_ATTRIBUTES_LIST')
+                    if not hasattr(half, 'get'):
+                        break
+                    if 'CARDNAME_STRING' not in half:
+                        break
+                    names.append(half['CARDNAME_STRING'])
+            else:
+                result['card_names'] = tuple(names)
+        elif 'CARDNAME_STRING' in result:
+            result['card_names'] = (result['CARDNAME_STRING'],)
         return result
 
     def options(self, source):

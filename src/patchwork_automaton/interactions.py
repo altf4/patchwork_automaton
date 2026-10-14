@@ -80,6 +80,10 @@ class TargetGroup:
     distribution_minimum: int = 1
     requirements: tuple[str, ...] = ()
     attributes: Mapping = field(default_factory=lambda: freeze({}), repr=False)
+    comments: tuple[str, ...] = ()
+    reminder: str = ''
+    double_amount_after: int = -1
+    start_at_one: bool = False
 
 
 @dataclass(frozen=True)
@@ -128,6 +132,18 @@ class ManaEntry:
     amount: int
     color: int
     attributes: Mapping = field(repr=False)
+
+    @property
+    def source_id(self):
+        return self.attributes.get('MANA_POOL_FROM_SOURCE_ID', -1)
+
+    @property
+    def snow(self):
+        return bool(self.attributes.get('MANA_POOL_SNOW'))
+
+    @property
+    def restriction(self):
+        return self.attributes.get('MANA_RIDER_SHORT_DESCRIPTION_STRING', '')
 
     @property
     def color_flag(self):
@@ -180,7 +196,10 @@ def target_groups(action, card):
             merged.update(info)
             groups.append(TargetGroup(index, related, label, min(minimum, maximum), maximum, targets,
                 bool(container.get('ALTACTION_DONT_CHOOSE_TARGETS_NOW') or info.get('TARGETS_AT_RANDOM')),
-                total, 1, tuple(key for key in REQUIREMENTS if merged.get(key)), freeze(merged)))
+                total, 1, tuple(key for key in REQUIREMENTS if merged.get(key)), freeze(merged),
+                tuple(text for _,text in indexed(info,1142283520)),
+                info.get('TARGET_ADDITIONAL_REMINDER_STRING', ''), container.get('AMOUNT_DOUBLED_IF_GTE',-1),
+                bool(container.get('ACTION_START_DISTRIBUTION_AMOUNTS_AT_ONE'))))
     return tuple(groups)
 
 
@@ -237,3 +256,27 @@ def prompt_selectors(prompt, player_ids=(), catalog=None):
             options, tuple(entry.get('except_values', ())), entry.get('invert', False), required,
             bytes.fromhex(entry.get('bytes', ''))))
     return tuple(result)
+
+
+@dataclass(frozen=True)
+class Commander:
+    owner: int
+    object_id: int
+    texture: int
+    # Damage dealt by this commander to each server player index.
+    damage: tuple[int, ...]
+
+
+@dataclass(frozen=True)
+class Dungeon:
+    texture: int
+    # Server player index -> number of completions.
+    completions: Mapping = field(default_factory=lambda: freeze({}))
+
+
+@dataclass(frozen=True)
+class AutoYield:
+    id: int
+    player_mask: int
+    description: str
+    effect: str

@@ -27,3 +27,10 @@ class UnsupportedInteraction(ValueError):
 
 class EventOverflow(Disconnected):
     """Consumer fell behind; reconnect explicitly rather than lose observations."""
+
+
+class GameEnded(Exception):
+    """No newer observation is forthcoming because the game finished."""
+    def __init__(self, game_id, result=None):
+        self.game_id, self.result = game_id, result
+        super().__init__(f'Game {game_id} ended')

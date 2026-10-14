@@ -5,7 +5,7 @@ import uuid
 
 from .game import DeckItem
 from .properties import freeze
-from .interactions import (DamageAssignment, GameObject, ManaEntry, ModeSpec,
+from .interactions import (AutoYield, Commander, Dungeon, DamageAssignment, GameObject, ManaEntry, ModeSpec,
                            Ordering, Selector, TargetGroup)
 
 
@@ -104,6 +104,9 @@ class Observation:
     mana: tuple[ManaEntry, ...] = ()
     damage: tuple[DamageAssignment, ...] = ()
     ordering: tuple[Ordering, ...] = ()
+    commanders: tuple[Commander, ...] = ()
+    dungeons: tuple[Dungeon, ...] = ()
+    auto_yields: tuple[AutoYield, ...] = ()
 
     @property
     def stack(self):
@@ -129,6 +132,7 @@ class GameMessage:
     opcode: int
     name: str
     payload: bytes = field(repr=False)
+    result: 'GameResult | None' = None
 
 
 @dataclass(frozen=True)
@@ -137,3 +141,38 @@ class Submission:
     # Transport write completed. Neither acknowledgement nor a new state
     # proves that the server accepted the game action.
     status: str = 'sent'
+
+
+@dataclass(frozen=True)
+class ValidationError:
+    catalog_id: int
+    annotation: int
+    code: int
+    region: int
+    card_specific: bool
+
+
+@dataclass(frozen=True)
+class SideboardResult:
+    match_id: int
+    accepted: bool
+    errors: tuple[ValidationError, ...] = ()
+    expired: bool = False
+
+
+@dataclass(frozen=True)
+class PlayerResult:
+    code: int
+    playing_time: int
+
+
+@dataclass(frozen=True)
+class GameResult:
+    game_id: int
+    moved_first: int
+    status: int
+    players: tuple[PlayerResult, ...]
+
+    @property
+    def winner_indices(self):
+        return tuple(i for i,player in enumerate(self.players) if player.code == 2)

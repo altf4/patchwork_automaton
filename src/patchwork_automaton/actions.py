@@ -58,6 +58,7 @@ class CardSelection:
     modes: tuple[int, ...] | None = None
     distributions: tuple[tuple[int, ...], ...] = ()
     retain_priority: bool = False
+    allow_non_game: bool = False
 
 
 @dataclass(frozen=True)
@@ -158,22 +159,39 @@ def _requirement_check(observation, descriptor, selected, earlier, action):
         prior = [target for i, group in enumerate(earlier) if bitmap & (1 << i) for target in group]
         if len({get_property(props(target), code, 0) for target in (*prior, *selected)}) > 1:
             raise ValueError('Target property values must match')
-    for requirement, key in (('TARGETS_MUST_HAVE_DIFFERENT_NAMES','CARDNAME_STRING'),
+    for requirement, key in (('TARGETS_MUST_HAVE_DIFFERENT_NAMES','card_names'),
                               ('ALL_TARGETS_MUST_SHARE_CREATURE_TYPE','creature_types'),
                               ('ACTION_TARGETS_MUST_SHARE_CARD_TYPE','card_types'),
                               ('ACTION_TARGETS_MUST_SHARE_PERMANENT_TYPE','permanent_types')):
         if requirement not in requirements or len(selected) < 2:
             continue
         metadata = [props(target) for target in selected]
+        if key == 'card_names':
+            for item in metadata:
+                if key not in item and 'CARDNAME_STRING' in item:
+                    item[key] = (item['CARDNAME_STRING'],)
         if any(key not in p for p in metadata):
             raise UnsupportedInteraction(f'Load card definitions to validate {requirement}')
-        if key == 'CARDNAME_STRING':
-            if len({p[key] for p in metadata}) != len(metadata):
-                raise ValueError('Targets must have different names')
-        elif key == 'creature_types' and all(p.get('changeling') or p[key] for p in metadata):
-            if not metadata[0].get('changeling') and any(not p.get('changeling')
-                    and not set(metadata[0][key]) & set(p[key]) for p in metadata[1:]):
-                raise ValueError('Targets do not share a creature type')
+        if key == 'card_names':
+            for i,item in enumerate(metadata):
+                names = set(item[key])
+                for earlier_item in metadata[:i]:
+                    prior = set(earlier_item[key])
+                    # Native client compares complete name sets (Rooms can
+                    # have two names) and treats two nameless objects alike.
+                    if (not names and not prior) or names and prior and (names <= prior or prior <= names):
+                        raise ValueError('Targets must have different names')
+        elif key == 'creature_types':
+            first = metadata[0]
+            def universal(item):
+                return item.get('changeling') or item.get('all_creature_types')
+            for item in metadata[1:]:
+                if (not universal(first) and not first[key]
+                        or not universal(item) and not item[key]):
+                    raise ValueError('Targets do not have a creature type')
+                if (not universal(first) and not universal(item)
+                        and not set(first[key]) & set(item[key])):
+                    raise ValueError('Targets do not share a creature type')
         elif any(not set(metadata[0][key]) & set(p[key]) for p in metadata[1:]):
             raise ValueError('Targets do not share the required type')
 
@@ -198,7 +216,7 @@ def encode_card_selection(observation, choice, action):
             raise ValueError('A previous target cannot be chosen again')
         _requirement_check(observation, group, selected, earlier, action)
         distribution = choice.distributions[i] if choice.distributions else ()
-        if group.distributed_total is not None:
+        if group.distributed_total is not None and not (group.deferred and not selected):
             if (len(distribution) != len(selected) or any(n < group.distribution_minimum for n in distribution)
                     or sum(distribution) != group.distributed_total):
                 raise ValueError('Target distribution does not match the advertised total')
@@ -285,7 +303,7 @@ def encode_choice(observation, choice, *, player_index=None):
         return 'PromptActionMessage', struct.pack('<III', color, choice.mana_id, 0), ('mana', color, choice.mana_id)
     if isinstance(choice, (CardChoice, CardSelection)):
         action = next((a for a in observation.actions if a.card_id == choice.card_id and a.action_id == choice.action_id), None)
-        if action is None or action.non_game:
+        if action is None or action.non_game and not getattr(choice, 'allow_non_game', False):
             raise UnsupportedInteraction('Card action is not advertised as a game action')
         if isinstance(choice, CardSelection):
             payload = encode_card_selection(observation, choice, action)
@@ -293,7 +311,7 @@ def encode_choice(observation, choice, *, player_index=None):
             payload = card_payload(choice.card_id, choice.action_id, timestamp, choice.targets,
                 modes=choice.modes, extra_mana=choice.extra_mana, flags=choice.flags,
                 target_count=choice.target_count)
-        return 'NewCardActionMessage', payload, ('card', choice.card_id, choice.action_id) if action.can_perform_locally else None
+        return 'NewCardActionMessage', payload, ('card', choice.card_id, choice.action_id) if action.can_perform_locally or action.non_game else None
     if isinstance(choice, DamageChoice):
         assignment = next((a for a in observation.damage if a.source_id == choice.source_id), None)
         if assignment is None:

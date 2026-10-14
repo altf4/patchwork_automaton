@@ -10,18 +10,19 @@ import uuid
 
 from .actions import (CardChoice, CardSelection, DamageChoice, ManaChoice, OrderingChoice,
                       PromptChoice, SelectorChoice, action_entries, encode_choice)
-from .errors import (AuthenticationError, Disconnected, EventOverflow,
+from .errors import (AuthenticationError, Disconnected, EventOverflow, GameEnded,
                      RequestRejected, StaleDecision, UnsupportedInteraction)
 from .game import (DeckItem, accept_challenge_payload, challenge_payload, count,
                    decks_response, event_sync, solitaire_payload)
 from .models import (CardAction, CollectionItem, DecisionID, Deck, DeckList, GameMessage, Match,
-                     Observation, Submission, freeze)
+                     Observation, GameResult, PlayerResult, SideboardResult, ValidationError, Submission, freeze)
 from .protocol import (Catalog, Cursor, ProtocolError, array, current_time,
                        login_payload, login_response, read_frame)
 from .state import State
 from .interactions import GameObject, mode_spec, prompt_selectors, target_groups
 from .choice_catalog import ChoiceCatalog
 from .properties import indexed
+from .controls import ControlReceipt, YieldControl, stop_payload
 
 
 class MTGOClient:
@@ -51,6 +52,7 @@ class MTGOClient:
         self._events_lock = asyncio.Lock()
         self._collection_lock = asyncio.Lock()
         self._open_lock = asyncio.Lock()
+        self._sideboard_lock = asyncio.Lock()
         self._waiters = []
         self._pending = OrderedDict()
         self._next_ack = secrets.randbits(31) or 1
@@ -365,17 +367,18 @@ class MTGOClient:
             c.end()
             return tuple(deltas)
 
-    async def challenge(self, opponent_id: int, deck: Deck | tuple[DeckItem, ...], *, format=None) -> Match:
-        """Send an ordinary, single-game direct challenge to a logged-in user."""
+    async def challenge(self, opponent_id: int, deck: Deck | tuple[DeckItem, ...], *, format=None, best_of=1) -> Match:
+        """Send an ordinary direct challenge to a logged-in user."""
         self._require_login()
         cards = deck.cards if isinstance(deck, Deck) else tuple(deck)
         format = format or (deck.format if isinstance(deck, Deck) else None)
         if not format:
             raise ValueError('Format identifier is required')
         token = uuid.uuid4()
+        request = challenge_payload(token, cards, opponent_id, format, best_of=best_of)
         self._outgoing_challenges[token] = opponent_id
         opcode, payload = await self._request('FlsMatchChallengeRequestMessage',
-            challenge_payload(token, cards, opponent_id, format),
+            request,
             lambda op, data: op in (960, 125, 107, 944, 945) and data[:16] == token.bytes_le)
         if opcode != 960:
             self._outgoing_challenges.pop(token, None)
@@ -416,18 +419,61 @@ class MTGOClient:
             raise RequestRejected(opcode, reason)
         return await self.wait_for_game(match)
 
-    async def wait_for_game(self, match: Match, *, timeout=None) -> 'Game':
+    async def wait_for_game(self, match: Match, *, after_game_id=None, timeout=None) -> 'Game':
+        """Wait for a game, or the next game after an explicitly supplied ID.
+
+        Match syncs and game-start notifications can arrive in either order.
+        Refresh the match from the session cache while waiting.
+        """
         async def wait():
             while True:
                 self._require_login()
                 started = self._starts.pop(match.token, None)
-                if started:
-                    return await self.connect_game(match, game_id=started[1])
-                if match.games:
-                    return await self.connect_game(match)
+                if started and started[0] != match.id:
+                    raise ProtocolError('Game start match ID mismatch')
+                if started and started[1] != after_game_id:
+                    existing = self._games.get((match.id, started[1]))
+                    if after_game_id is None or existing is None or not existing._ended:
+                        return await self.connect_game(match, game_id=started[1])
+                latest = self._matches.get(match.token, match)
+                candidates = latest.games
+                if after_game_id is not None:
+                    candidates = candidates[candidates.index(after_game_id)+1:] if after_game_id in candidates else ()
+                if candidates:
+                    return await self.connect_game(latest, game_id=candidates[-1])
                 self._matches_changed.clear()
                 await self._matches_changed.wait()
         return await asyncio.wait_for(wait(), self.timeout if timeout is None else timeout)
+
+    async def submit_sideboard(self, match: Match, deck: Deck | tuple[DeckItem, ...]) -> SideboardResult:
+        """Submit the caller's complete revised deck; never retry automatically.
+
+        The server validates sideboarding and decides when to start the next
+        game. This does not join a queue or tournament. Inventory is unchanged.
+        """
+        self._require_login()
+        known = self._matches.get(match.token)
+        if known is None or known.id != match.id or self.user_id not in known.metadata.get('player_ids', ()):
+            raise ValueError('Match is not an ordinary match owned by this session')
+        cards = deck.cards if isinstance(deck, Deck) else tuple(deck)
+        if not cards or any(not isinstance(c, DeckItem) or c.quantity <= 0 for c in cards):
+            raise ValueError('Supply a nonempty complete deck with positive quantities')
+        async with self._sideboard_lock:
+            games = [g for (m,_),g in tuple(self._games.items()) if m == match.id]
+            if any(not game._ended for game in games):
+                raise ValueError('Finish the current game before submitting a sideboard')
+            for game in games:
+                await game.detach()
+            opcode, payload = await self._request('FlsGameSubmitSideboardMessage',
+                match.token.bytes_le + struct.pack('<ii', match.id, len(cards))
+                + b''.join(card.encode() for card in cards),
+                lambda op,data: op in (969,970,971) and data[:20] == match.token.bytes_le + struct.pack('<i',match.id))
+            c = Cursor(payload)
+            c.take(20)
+            errors = tuple(ValidationError(*struct.unpack('<iIii?', c.take(17)))
+                           for _ in range(count(c))) if opcode == 970 else ()
+            c.end()
+            return SideboardResult(match.id, opcode == 969, errors, opcode == 971)
 
     async def concede_match(self, match: Match):
         """Explicitly concede this ordinary match; wait for server confirmation."""
@@ -521,9 +567,14 @@ class Game:
         self._submitted_parts = set()
         self._streaming = False
         self._ended = False
+        self.result = None
         self.player_ids = client._player_orders.get((match_id, game_id), ())
         self.observation = None
         self.revision = 0
+
+    @property
+    def ended(self):
+        return self._ended
 
     @property
     def player_index(self):
@@ -594,16 +645,29 @@ class Game:
                     freeze(self._state.cards), freeze(self._state.players), actions,
                     freeze(self._state.status), self._state.unknown_elements, self._state.raw,
                     prompt_selectors(prompt or {}, self.player_ids, self.client.choice_catalog), freeze(objects),
-                    self._state.mana, self._state.damage, self._state.ordering)
+                    self._state.mana, self._state.damage, self._state.ordering,
+                    self._state.commanders, self._state.dungeons, self._state.auto_yields)
                 self._submitted_parts.clear()
                 self._changed.set()
                 self._emit(self.observation)
             else:
+                result = None
+                if opcode == 4485:
+                    c = Cursor(payload)
+                    game_id,moved_first,status = struct.unpack('<IiB',c.take(9))
+                    number = count(c)
+                    if game_id != self.id or number > 16:
+                        raise ProtocolError('Game result ID or player count mismatch')
+                    result = GameResult(game_id,moved_first,status,
+                        tuple(PlayerResult(*struct.unpack('<BI',c.take(5))) for _ in range(number)))
+                    c.end()
+                    self.result = result
                 if opcode in (4632, 4485):
                     self._ended = True
+                    self._changed.set()
                     self._submitted = self.observation.decision_id if self.observation else None
                 name = self.client.catalog.by_opcode.get(opcode, {}).get('name', f'opcode_{opcode}')
-                self._emit(GameMessage(opcode, name, payload))
+                self._emit(GameMessage(opcode, name, payload, result))
 
     async def events(self):
         """Single-consumer stream of Observation and unmodeled GameMessage."""
@@ -625,6 +689,8 @@ class Game:
                 self._check()
                 if self.revision > after_revision:
                     return self.observation
+                if self._ended:
+                    raise GameEnded(self.id, self.result)
                 self._changed.clear()
                 await self._changed.wait()
         return await asyncio.wait_for(wait(), timeout)
@@ -643,18 +709,7 @@ class Game:
                 raise StaleDecision('Decision is outdated or already submitted')
             if obs.prompt and self.player_index is not None and obs.prompt['player'] not in (self.player_index, 255):
                 raise UnsupportedInteraction('This account is not the prompted player')
-            if isinstance(choice, PromptChoice):
-                prompt = obs.prompt
-                allowed = any(b['enabled'] and b['code'] == choice.code for b in prompt['buttons'])
-                allowed |= any(m['flags'] & choice.code == choice.code and choice.code != 0 for m in prompt['mana'])
-                allowed |= bool(prompt.get('flags', 0) & choice.code == choice.code and choice.code != 0)
-                if not allowed:
-                    raise UnsupportedInteraction('Prompt code is not advertised; use send_raw for unmodeled interactions')
-                name = 'ExtraPromptActionMessage' if choice.extra else 'PromptActionMessage'
-                payload = struct.pack('<III', choice.code, choice.parameter, decision_id.timestamp)
-                part = None
-            else:
-                name, payload, part = encode_choice(obs, choice, player_index=self.player_index)
+            name, payload, part = self._encode_choice(obs, choice, decision_id)
             if part is not None:
                 if part in self._submitted_parts:
                     raise StaleDecision('This part of the decision was already submitted')
@@ -663,6 +718,111 @@ class Game:
                 self._submitted = decision_id
             await self._send(name, payload)
             return Submission(decision_id)
+
+    def _encode_choice(self, obs, choice, decision_id):
+        if isinstance(choice, PromptChoice):
+            prompt = obs.prompt
+            if prompt is None:
+                raise UnsupportedInteraction('No prompt is advertised')
+            allowed = any(b['enabled'] and b['code'] == choice.code for b in prompt['buttons'])
+            allowed |= any(m['flags'] & choice.code == choice.code and choice.code != 0 for m in prompt['mana'])
+            allowed |= bool(prompt.get('flags', 0) & choice.code == choice.code and choice.code != 0)
+            if not allowed:
+                raise UnsupportedInteraction('Prompt code is not advertised; use send_raw for unmodeled interactions')
+            name = 'ExtraPromptActionMessage' if choice.extra else 'PromptActionMessage'
+            return name, struct.pack('<III', choice.code, choice.parameter, decision_id.timestamp), None
+        return encode_choice(obs, choice, player_index=self.player_index)
+
+    async def submit_batch(self, decision_id: DecisionID, choices) -> tuple[Submission, ...]:
+        """Validate a complete locally staged sequence before writing any part.
+
+        All except an optional final choice must be advertised local actions,
+        mana payments, damage assignments, or orderings. No server update may
+        be needed between them. Atomic validation does not mean atomic delivery:
+        a failed/partial transport write ends the session and is never retried.
+        """
+        choices = tuple(choices)
+        if not choices or len(choices) > 512:
+            raise ValueError('Supply between 1 and 512 staged choices')
+        async with self._lock:
+            self._check()
+            obs = self.observation
+            if (self._ended or obs is None or obs.decision_id != decision_id
+                    or decision_id is None or self._submitted == decision_id):
+                raise StaleDecision('Decision is outdated or already submitted')
+            if obs.prompt and self.player_index is not None and obs.prompt['player'] not in (self.player_index,255):
+                raise UnsupportedInteraction('This account is not the prompted player')
+            encoded = [self._encode_choice(obs, choice, decision_id) for choice in choices]
+            parts = set(self._submitted_parts)
+            for i, (_, _, part) in enumerate(encoded):
+                if part is None and i != len(encoded)-1:
+                    raise ValueError('Only the last choice may finish a decision')
+                if part is not None:
+                    if part in parts:
+                        raise StaleDecision('This part of the decision was already submitted')
+                    parts.add(part)
+            for name,payload,part in encoded:
+                if part is None:
+                    self._submitted = decision_id
+                else:
+                    self._submitted_parts.add(part)
+                await self._send(name,payload)
+            return tuple(Submission(decision_id) for _ in encoded)
+
+    async def _control(self, name, payload=b'', *, expected_revision=None, invalidate=False):
+        async with self._lock:
+            self._check()
+            if self._ended:
+                raise StaleDecision('Game is over')
+            if expected_revision is not None and expected_revision != self.revision:
+                raise StaleDecision('Game revision changed')
+            if self.player_index is None:
+                raise UnsupportedInteraction('The account is not in the known player order')
+            if invalidate and self.observation is not None:
+                self._submitted = self.observation.decision_id
+            await self._send(name,payload)
+            return ControlReceipt(name,self.id,self.revision)
+
+    async def undo(self, *, expected_revision=None):
+        """Request undo; the server decides whether the prior action is undoable."""
+        return await self._control('UndoRequestMessage', expected_revision=expected_revision, invalidate=True)
+
+    async def yield_control(self, control: YieldControl, *, expected_revision=None):
+        """Send a native toggle, or DISABLE_ALL. This is not an idempotent setter."""
+        key = YieldControl(control)
+        return await self._control('FunctionKeyClickedMessage',bytes([key]),expected_revision=expected_revision)
+
+    async def remove_yield(self, yield_id: int, *, expected_revision=None):
+        entry = next((y for y in self.observation.auto_yields if y.id == yield_id),None) if self.observation else None
+        if entry is None:
+            raise UnsupportedInteraction('Yield is not advertised in the current observation')
+        return await self._control('RemoveYieldFromObjectMessage',struct.pack('<ii',entry.id,entry.player_mask),
+                                   expected_revision=expected_revision if expected_revision is not None else self.revision)
+
+    async def update_stops(self, *, checksum, stops=(), yields=(), preferences=0, expected_revision=None):
+        stops, yields = tuple(stops),tuple(yields)
+        if any(not 0 <= entry.player_id < len(self.player_ids) for entry in (*stops,*yields)):
+            raise ValueError('Stop preferences reference a player outside this game')
+        return await self._control('UpdateYieldStopsMessage',stop_payload(checksum,stops,yields,preferences),
+                                   expected_revision=expected_revision)
+
+    async def concede(self, *, expected_revision=None):
+        """Concede this game; observe subsequent server results for confirmation."""
+        return await self._control('GameConcedeMessage',b'\0',expected_revision=expected_revision,invalidate=True)
+
+    async def detach(self):
+        """Close this game route while retaining the authenticated account session."""
+        async with self._lock:
+            self._check()
+            match = next((m for m in self.client._matches.values() if m.id == self.match_id),None)
+            if match is None:
+                raise ValueError('Match token is not known')
+            await self.client._send('GsCloseMatchMessage',match.token.bytes_le + struct.pack('<ii',self.match_id,self.id))
+            self.client._games.pop((self.match_id,self.id),None)
+            self._failure = Disconnected('Game route detached')
+            self._changed.set()
+            with suppress(asyncio.QueueFull):
+                self._queue.put_nowait(None)
 
     async def _send(self, name, payload):
         if self._route is None:
