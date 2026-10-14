@@ -1,0 +1,17 @@
+{
+  "deck": "Legacy Burn",
+  "format": "SOLO",
+  "match_id": 290517310,
+  "game_id": 964514508,
+  "finished_turn": 9,
+  "final_life": 0,
+  "choices_submitted_by_bot": 73,
+  "manual_opening_choice": "Keep",
+  "game_state_messages": 77,
+  "server_game_status": 0,
+  "server_match_state": 10,
+  "terminal_prompt": "The game has ended.",
+  "backend_connection_live": true,
+  "policy_enabled": false,
+  "metadata_source": "Installed client card XML and embedded protocol string table; no external card lookup used."
+}

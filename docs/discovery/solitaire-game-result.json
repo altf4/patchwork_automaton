@@ -1,0 +1,27 @@
+{
+  "match_id": 290517310,
+  "game_id": 964514508,
+  "match_state": 8,
+  "maximum_players": 1,
+  "game_count": 1,
+  "game_phase": "receiving_game_state",
+  "game_status": {
+    "game_id": 964514508,
+    "priority_player": 0,
+    "waiting_for_player": -1,
+    "game_state_timestamp": 1,
+    "state_bytes": 2889,
+    "state_elements": 32,
+    "state_size": 2889,
+    "undiffed_size": 2889,
+    "flags": 6,
+    "full_state": true,
+    "head": true,
+    "tail": true
+  },
+  "game_state_messages": 1,
+  "heartbeats_answered": 3,
+  "last_heartbeat_at": 1791998313.3693962,
+  "deck": "Legacy Burn",
+  "basis": "Live standalone solitaire connection; no gameplay choices submitted."
+}

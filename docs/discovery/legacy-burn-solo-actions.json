@@ -1,0 +1,586 @@
+[
+  {
+    "time": 1791999392.3025372,
+    "event": "bot_choice",
+    "label": "Play Mountain",
+    "turn": 1,
+    "timestamp": 2,
+    "action_number": 1
+  },
+  {
+    "time": 1791999393.3056824,
+    "event": "bot_choice",
+    "label": "Combat",
+    "turn": 1,
+    "timestamp": 3,
+    "action_number": 2
+  },
+  {
+    "time": 1791999394.312717,
+    "event": "bot_choice",
+    "label": "Declare Attackers",
+    "turn": 1,
+    "timestamp": 4,
+    "action_number": 3
+  },
+  {
+    "time": 1791999395.315322,
+    "event": "bot_choice",
+    "label": "End Step",
+    "turn": 1,
+    "timestamp": 5,
+    "action_number": 4
+  },
+  {
+    "time": 1791999396.317797,
+    "event": "bot_choice",
+    "label": "Next Turn",
+    "turn": 1,
+    "timestamp": 6,
+    "action_number": 5
+  },
+  {
+    "time": 1791999397.3215072,
+    "event": "bot_choice",
+    "label": "Play Mountain",
+    "turn": 1,
+    "timestamp": 7,
+    "action_number": 6
+  },
+  {
+    "time": 1791999398.3247416,
+    "event": "bot_choice",
+    "label": "Cast Young Pyromancer",
+    "turn": 1,
+    "timestamp": 8,
+    "action_number": 7
+  },
+  {
+    "time": 1791999399.3280518,
+    "event": "bot_choice",
+    "label": "Mountain",
+    "turn": 1,
+    "timestamp": 8,
+    "action_number": 8
+  },
+  {
+    "time": 1791999400.3317304,
+    "event": "bot_choice",
+    "label": "Mountain",
+    "turn": 1,
+    "timestamp": 8,
+    "action_number": 9
+  },
+  {
+    "time": 1791999401.3344452,
+    "event": "bot_choice",
+    "label": "Combat",
+    "turn": 1,
+    "timestamp": 10,
+    "action_number": 10
+  },
+  {
+    "time": 1791999402.3375065,
+    "event": "bot_choice",
+    "label": "Declare Attackers",
+    "turn": 1,
+    "timestamp": 11,
+    "action_number": 11
+  },
+  {
+    "time": 1791999403.3407907,
+    "event": "bot_choice",
+    "label": "End Step",
+    "turn": 1,
+    "timestamp": 12,
+    "action_number": 12
+  },
+  {
+    "time": 1791999404.3437665,
+    "event": "bot_choice",
+    "label": "Next Turn",
+    "turn": 1,
+    "timestamp": 13,
+    "action_number": 13
+  },
+  {
+    "time": 1791999405.3467646,
+    "event": "bot_choice",
+    "label": "Play Mountain",
+    "turn": 2,
+    "timestamp": 14,
+    "action_number": 14
+  },
+  {
+    "time": 1791999406.3497548,
+    "event": "bot_choice",
+    "label": "Cast Flame Rift",
+    "turn": 2,
+    "timestamp": 15,
+    "action_number": 15
+  },
+  {
+    "time": 1791999407.3525443,
+    "event": "bot_choice",
+    "label": "Mountain",
+    "turn": 2,
+    "timestamp": 15,
+    "action_number": 16
+  },
+  {
+    "time": 1791999408.355592,
+    "event": "bot_choice",
+    "label": "Mountain",
+    "turn": 2,
+    "timestamp": 15,
+    "action_number": 17
+  },
+  {
+    "time": 1791999409.3584144,
+    "event": "bot_choice",
+    "label": "No Response",
+    "turn": 2,
+    "timestamp": 16,
+    "action_number": 18
+  },
+  {
+    "time": 1791999410.3614173,
+    "event": "bot_choice",
+    "label": "No Response",
+    "turn": 2,
+    "timestamp": 17,
+    "action_number": 19
+  },
+  {
+    "time": 1791999411.364265,
+    "event": "bot_choice",
+    "label": "Combat",
+    "turn": 2,
+    "timestamp": 18,
+    "action_number": 20
+  },
+  {
+    "time": 1791999412.367205,
+    "event": "bot_choice",
+    "label": "Declare Attackers",
+    "turn": 2,
+    "timestamp": 19,
+    "action_number": 21
+  },
+  {
+    "time": 1791999413.3695323,
+    "event": "bot_choice",
+    "label": "OK",
+    "turn": 2,
+    "timestamp": 20,
+    "action_number": 22
+  },
+  {
+    "time": 1791999414.372502,
+    "event": "bot_choice",
+    "label": "End Step",
+    "turn": 2,
+    "timestamp": 21,
+    "action_number": 23
+  },
+  {
+    "time": 1791999415.3756144,
+    "event": "bot_choice",
+    "label": "Next Turn",
+    "turn": 2,
+    "timestamp": 22,
+    "action_number": 24
+  },
+  {
+    "time": 1791999416.3784704,
+    "event": "bot_choice",
+    "label": "Play Mountain",
+    "turn": 3,
+    "timestamp": 23,
+    "action_number": 25
+  },
+  {
+    "time": 1791999417.3816757,
+    "event": "bot_choice",
+    "label": "Cast Sulfuric Vortex",
+    "turn": 3,
+    "timestamp": 24,
+    "action_number": 26
+  },
+  {
+    "time": 1791999418.3845828,
+    "event": "bot_choice",
+    "label": "Mountain",
+    "turn": 3,
+    "timestamp": 24,
+    "action_number": 27
+  },
+  {
+    "time": 1791999419.3875604,
+    "event": "bot_choice",
+    "label": "Mountain",
+    "turn": 3,
+    "timestamp": 24,
+    "action_number": 28
+  },
+  {
+    "time": 1791999420.3904438,
+    "event": "bot_choice",
+    "label": "Mountain",
+    "turn": 3,
+    "timestamp": 24,
+    "action_number": 29
+  },
+  {
+    "time": 1791999421.3935332,
+    "event": "bot_choice",
+    "label": "Combat",
+    "turn": 3,
+    "timestamp": 26,
+    "action_number": 30
+  },
+  {
+    "time": 1791999422.3956513,
+    "event": "bot_choice",
+    "label": "Declare Attackers",
+    "turn": 3,
+    "timestamp": 27,
+    "action_number": 31
+  },
+  {
+    "time": 1791999423.3986588,
+    "event": "bot_choice",
+    "label": "OK",
+    "turn": 3,
+    "timestamp": 28,
+    "action_number": 32
+  },
+  {
+    "time": 1791999424.401942,
+    "event": "bot_choice",
+    "label": "End Step",
+    "turn": 3,
+    "timestamp": 29,
+    "action_number": 33
+  },
+  {
+    "time": 1791999425.4053624,
+    "event": "bot_choice",
+    "label": "Next Turn",
+    "turn": 3,
+    "timestamp": 30,
+    "action_number": 34
+  },
+  {
+    "time": 1791999426.407475,
+    "event": "bot_choice",
+    "label": "No Response",
+    "turn": 4,
+    "timestamp": 31,
+    "action_number": 35
+  },
+  {
+    "time": 1791999427.4097223,
+    "event": "bot_choice",
+    "label": "Play Mountain",
+    "turn": 4,
+    "timestamp": 32,
+    "action_number": 36
+  },
+  {
+    "time": 1791999428.4127295,
+    "event": "bot_choice",
+    "label": "Combat",
+    "turn": 4,
+    "timestamp": 33,
+    "action_number": 37
+  },
+  {
+    "time": 1791999429.4159665,
+    "event": "bot_choice",
+    "label": "Declare Attackers",
+    "turn": 4,
+    "timestamp": 34,
+    "action_number": 38
+  },
+  {
+    "time": 1791999430.4184992,
+    "event": "bot_choice",
+    "label": "OK",
+    "turn": 4,
+    "timestamp": 35,
+    "action_number": 39
+  },
+  {
+    "time": 1791999431.4207451,
+    "event": "bot_choice",
+    "label": "End Step",
+    "turn": 4,
+    "timestamp": 36,
+    "action_number": 40
+  },
+  {
+    "time": 1791999432.4234958,
+    "event": "bot_choice",
+    "label": "Next Turn",
+    "turn": 4,
+    "timestamp": 37,
+    "action_number": 41
+  },
+  {
+    "time": 1791999433.4264207,
+    "event": "bot_choice",
+    "label": "No Response",
+    "turn": 5,
+    "timestamp": 38,
+    "action_number": 42
+  },
+  {
+    "time": 1791999434.4337986,
+    "event": "bot_choice",
+    "label": "Cast Flame Rift",
+    "turn": 5,
+    "timestamp": 39,
+    "action_number": 43
+  },
+  {
+    "time": 1791999435.4365783,
+    "event": "bot_choice",
+    "label": "Mountain",
+    "turn": 5,
+    "timestamp": 39,
+    "action_number": 44
+  },
+  {
+    "time": 1791999436.438577,
+    "event": "bot_choice",
+    "label": "Mountain",
+    "turn": 5,
+    "timestamp": 39,
+    "action_number": 45
+  },
+  {
+    "time": 1791999437.4416215,
+    "event": "bot_choice",
+    "label": "No Response",
+    "turn": 5,
+    "timestamp": 40,
+    "action_number": 46
+  },
+  {
+    "time": 1791999438.446032,
+    "event": "bot_choice",
+    "label": "No Response",
+    "turn": 5,
+    "timestamp": 41,
+    "action_number": 47
+  },
+  {
+    "time": 1791999439.4531066,
+    "event": "bot_choice",
+    "label": "Combat",
+    "turn": 5,
+    "timestamp": 42,
+    "action_number": 48
+  },
+  {
+    "time": 1791999440.455678,
+    "event": "bot_choice",
+    "label": "Declare Attackers",
+    "turn": 5,
+    "timestamp": 43,
+    "action_number": 49
+  },
+  {
+    "time": 1791999441.4585748,
+    "event": "bot_choice",
+    "label": "OK",
+    "turn": 5,
+    "timestamp": 44,
+    "action_number": 50
+  },
+  {
+    "time": 1791999442.461773,
+    "event": "bot_choice",
+    "label": "End Step",
+    "turn": 5,
+    "timestamp": 45,
+    "action_number": 51
+  },
+  {
+    "time": 1791999443.4645755,
+    "event": "bot_choice",
+    "label": "Next Turn",
+    "turn": 5,
+    "timestamp": 46,
+    "action_number": 52
+  },
+  {
+    "time": 1791999444.4721198,
+    "event": "bot_choice",
+    "label": "No Response",
+    "turn": 6,
+    "timestamp": 47,
+    "action_number": 53
+  },
+  {
+    "time": 1791999445.4751022,
+    "event": "bot_choice",
+    "label": "Play Mountain",
+    "turn": 6,
+    "timestamp": 48,
+    "action_number": 54
+  },
+  {
+    "time": 1791999446.4775016,
+    "event": "bot_choice",
+    "label": "Combat",
+    "turn": 6,
+    "timestamp": 49,
+    "action_number": 55
+  },
+  {
+    "time": 1791999447.479989,
+    "event": "bot_choice",
+    "label": "Declare Attackers",
+    "turn": 6,
+    "timestamp": 50,
+    "action_number": 56
+  },
+  {
+    "time": 1791999448.4826558,
+    "event": "bot_choice",
+    "label": "OK",
+    "turn": 6,
+    "timestamp": 51,
+    "action_number": 57
+  },
+  {
+    "time": 1791999449.48619,
+    "event": "bot_choice",
+    "label": "End Step",
+    "turn": 6,
+    "timestamp": 52,
+    "action_number": 58
+  },
+  {
+    "time": 1791999450.489068,
+    "event": "bot_choice",
+    "label": "Next Turn",
+    "turn": 6,
+    "timestamp": 53,
+    "action_number": 59
+  },
+  {
+    "time": 1791999451.4917033,
+    "event": "bot_choice",
+    "label": "No Response",
+    "turn": 7,
+    "timestamp": 54,
+    "action_number": 60
+  },
+  {
+    "time": 1791999452.4959633,
+    "event": "bot_choice",
+    "label": "Play Mountain",
+    "turn": 7,
+    "timestamp": 55,
+    "action_number": 61
+  },
+  {
+    "time": 1791999453.49868,
+    "event": "bot_choice",
+    "label": "Combat",
+    "turn": 7,
+    "timestamp": 56,
+    "action_number": 62
+  },
+  {
+    "time": 1791999454.5019023,
+    "event": "bot_choice",
+    "label": "Declare Attackers",
+    "turn": 7,
+    "timestamp": 57,
+    "action_number": 63
+  },
+  {
+    "time": 1791999455.5054796,
+    "event": "bot_choice",
+    "label": "OK",
+    "turn": 7,
+    "timestamp": 58,
+    "action_number": 64
+  },
+  {
+    "time": 1791999456.508648,
+    "event": "bot_choice",
+    "label": "End Step",
+    "turn": 7,
+    "timestamp": 59,
+    "action_number": 65
+  },
+  {
+    "time": 1791999457.5113218,
+    "event": "bot_choice",
+    "label": "Next Turn",
+    "turn": 7,
+    "timestamp": 60,
+    "action_number": 66
+  },
+  {
+    "time": 1791999458.5179343,
+    "event": "bot_choice",
+    "label": "No Response",
+    "turn": 8,
+    "timestamp": 61,
+    "action_number": 67
+  },
+  {
+    "time": 1791999459.5206347,
+    "event": "bot_choice",
+    "label": "Combat",
+    "turn": 8,
+    "timestamp": 62,
+    "action_number": 68
+  },
+  {
+    "time": 1791999460.5240545,
+    "event": "bot_choice",
+    "label": "Declare Attackers",
+    "turn": 8,
+    "timestamp": 63,
+    "action_number": 69
+  },
+  {
+    "time": 1791999461.5276685,
+    "event": "bot_choice",
+    "label": "OK",
+    "turn": 8,
+    "timestamp": 64,
+    "action_number": 70
+  },
+  {
+    "time": 1791999462.5307715,
+    "event": "bot_choice",
+    "label": "End Step",
+    "turn": 8,
+    "timestamp": 65,
+    "action_number": 71
+  },
+  {
+    "time": 1791999463.5333333,
+    "event": "bot_choice",
+    "label": "Next Turn",
+    "turn": 8,
+    "timestamp": 66,
+    "action_number": 72
+  },
+  {
+    "time": 1791999464.5355175,
+    "event": "bot_choice",
+    "label": "No Response",
+    "turn": 9,
+    "timestamp": 67,
+    "action_number": 73
+  }
+]

@@ -1,0 +1,31 @@
+Patchwork Automaton 0.1.0 validation (2026-10-14)
+
+Implemented a Python asyncio package with no runtime third-party dependencies.
+The installed package contains connection/game APIs, binary codecs, the
+deployment-specific message catalog, and property names. The previous policy
+and file-driven service were moved to research/ and are not packaged.
+
+Offline validation:
+- 35 unittest cases pass with warnings treated as errors on Python 3.12 and
+  Python 3.14.
+- The final wheel was installed in an isolated target directory; the same
+  35 cases passed using the installed package rather than src/.
+- Wheel import from outside the repository resolved the packaged catalog:
+  1,486 message definitions, including login opcode 1.
+- Wheel inspection found no credentials, research service, or bot policy.
+- Local string extraction produced 161,360 strings and exactly matched the
+  previously extracted local cache. This resource is not redistributed.
+
+Live validation:
+- Stopped the prototype service before opening the replacement connection.
+- The idle example using MTGOClient authenticated against the real backend.
+- Saved-deck query returned seven entries; current-match query returned zero.
+- Heartbeats continued to be answered after the read-only queries.
+- The replacement patchwork-mtgo-session.service remains authenticated and
+  idle; it does not select game actions.
+
+No new game was started during this library implementation. Public solitaire
+and action APIs were exercised through a synthetic framed backend, building
+on the real game/action wire paths recorded in earlier discovery notes.
+Advanced selector semantics and exhaustive card interaction coverage remain
+unverified; see the README coverage table. No CI was added.

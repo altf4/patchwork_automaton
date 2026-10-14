@@ -1,0 +1,72 @@
+Legacy Burn solitaire playthrough — 2026-10-14
+
+Completed the existing solitaire game through its server-reported end.
+Match 290517310, game 964514508. The final prompt was "The game has ended."
+The game ended on turn 9 with our player at zero life. Sulfuric Vortex's upkeep
+damage finished the game after two Flame Rifts also damaged our sole player.
+This demonstrates game execution; it is not a competitive win or a strategy
+benchmark. SOLO has no opposing player to aim burn spells at.
+
+The opening Keep was submitted manually through the protocol sender. The policy
+then issued 73 choices and processed 77 game-state messages in its session.
+The transcript records submitted choices, not a separate acknowledgement for
+each choice. The final state confirms seven Mountains, Young Pyromancer,
+Sulfuric Vortex, and two Elemental tokens on the battlefield, plus two Flame
+Rifts in the graveyard. The backend connection remains authenticated, and the
+play switch is now disabled to avoid starting or acting in another game.
+
+Artifacts:
+- legacy-burn-solo-actions.json: sanitized chronological bot choice log
+- legacy-burn-solo-result.json: terminal state and server completion evidence
+
+Implemented:
+- Full and incremental game-state reconstruction, with checksums and diff bounds.
+- Recursive typed attributes, including large integers and string references.
+- Legacy turn-step prompts and typed interaction-button descriptors.
+- Available per-card actions and live in-game object identifiers.
+- NewCardActionMessage and PromptActionMessage submission through the game route.
+- A small policy for land drops, affordable untargeted spells, mana sources,
+  confirmations, response passes, and turn advancement.
+- Current state observations including life, hand/library/graveyard counts.
+- Duplicate-submission suppression keyed by timestamp AND reconstructed state.
+
+Two useful protocol details:
+1. Payment can change state while keeping the interaction timestamp unchanged.
+   Timestamp-only deduplication would stop the bot after its first mana source.
+2. Ordinary legacy priority prompts can have an unused trailing zero byte.
+   The official decoder ignores it; our parser now accepts that zero padding.
+
+Card metadata stayed local:
+The installed client's CardDataSource XML supplied names, mana costs, card types,
+and text. Its embedded StrConst_v3.dat supplied protocol action strings.
+An attempted Scryfall lookup was rejected by automatic approval review because
+it would send private saved-deck card identifiers to an external service. No
+lookup was sent; the local-data route completed the task.
+Local protocol strings and card metadata are cached in the Git-ignored .local/
+directory; no proprietary asset bundle or credentials are included in Git.
+
+Validation: 17 offline tests pass, covering framing, credentials, envelopes,
+match/solitaire layouts, state checksums/diffs, attribute/string decoding, prompt
+padding, action encoding, and basic policy decisions. Live evidence includes
+resolved permanents, spell graveyard entries, token creation, life changes,
+priority/turn progression, and terminal server messages.
+
+Limitations:
+- The policy avoids direct burn spells requiring targets; in SOLO their available
+  player target is ourselves. It handles untargeted Flame Rift/Vortex normally.
+- It does not implement strategic attacking, blocking, modal spells, complex
+  target requirements, ordering, or all numerical/selection prompts.
+- Unknown prompts pause the policy. Unsupported state decoding pauses decisions
+  while keeping the backend connection alive.
+- Tests and this playthrough demonstrate a limited solitaire path, not complete
+  coverage of MTG gameplay or competitive Legacy Burn strategy.
+- Source and notes are saved locally; this stage has not been committed/pushed.
+
+Reproduction prerequisites:
+The current runtime uses .local/strings.json and .local/card-info.json extracted
+from the installed client. Research extraction helpers currently live in the
+parent workspace work/ directory; general installation/setup tooling remains
+to be packaged. The transport and play process itself runs without Wine or the
+official client. The transient user service is patchwork-mtgo-session.service.
+
+No CI added.

@@ -1,0 +1,57 @@
+Game-action representation — 2026-10-14
+
+Basis: static inspection of client 3.4.159.4704. The research session has received
+game state but has not yet submitted any gameplay decision.
+
+The client models GamePrompt.Options as action objects grouped by ActionType.
+GameAction.Execute forwards its serialized message into the game send path.
+InProgressGameConnectedBaseState wraps that message in GsMessageMessage with
+match token, match ID, and game ID, then sends it through ClientSession.
+
+Current card-action implementation:
+CardAction.SetMessage uses NewCardActionMessage (opcode 4645), not the older
+CardActionMessage (4647) that is also present in the assembly.
+NewCardActionMessage includes in-game CardID, ActionID, selected mode bytes,
+GameStateTimestamp, target count, extra-mana count, flags/padding, and uint targets.
+CardAction updates this message when the player selects modes/targets.
+The CardID is the live game object's ID, not the collection catalog ID.
+
+Prompt/button actions:
+PrimitiveAction.SetMessage uses PromptActionMessage (4638): uint32 PButtonFlags,
+uint32 PButtonParameter, uint32 GameStateTimestamp.
+NumericAction is also a prompt message: assigning ChosenNumber updates its
+parameter. The general choice API therefore should expose typed parameters,
+rather than assuming every action is an argument-free button.
+ExtraPromptActionMessage (4650) has the same three uint32 fields.
+DamageAssignmentMessage (4648) is another specialized message family.
+
+Sources of available choices:
+TurnStepElement includes prompt flags, default action, numeric limits/initial
+value, prompted player, text/button labels, and the interaction timestamp.
+InteractStateElement includes turn/phase, timestamp, prompted/special players,
+prompt text, and nested typed descriptors: prompt buttons, mana buttons, number
+spinner, player buttons, list selector, color choices, card selector, wish selector.
+ThingElement reads a source zone and an attribute collection; these feed game
+object state and action construction. We still need to map these attributes and
+the client code that translates them into GameCard.Actions/GamePrompt.Options.
+
+What remains to play:
+1. Assemble complete state and apply/check incremental differences.
+2. Decode player/card/zone/stack, turn-step, interaction, and action attributes.
+3. Normalize descriptors into decisions and selectable choices with constraints.
+4. Encode selected choices with current object/action IDs and timestamps.
+5. Confirm the resulting state update before deciding again.
+6. Handle mana, targets, modes, combat, damage, ordering, replacements, triggers,
+   and other prompt variants incrementally.
+
+The timestamp is part of the protocol correlation, not a wall-clock timestamp.
+Actions should be tied to the observation that produced them and invalidated
+when the state changes. Backend rejection and stale-state behavior still need
+to be tested; no particular retry behavior has been verified.
+
+Suggested first playable milestone: recognize the opening decision, keep a hand,
+play a legal land, pass priority, and observe progression into the next turn.
+Then extend to a simple spell and its required payment/target choices.
+For a strategy bot, decision-making remains a separate layer from protocol and
+prompt handling. A simulator is useful for look-ahead but is not required merely
+to submit choices to the live MTGO game.

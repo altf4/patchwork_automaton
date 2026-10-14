@@ -1,0 +1,69 @@
+Standalone solitaire game — 2026-10-14
+
+Result: created and connected to an MTGO one-player solitaire game directly
+from the Linux Python client. The official client was used only as a source of
+assemblies for static inspection; it was not launched for this operation.
+
+Deck: the account's saved Legacy Burn deck, 60 main-deck cards and 15 sideboard.
+Format: CLEGACY. Player format: SOLO. Match type: SEL (Single Game Win).
+Parent channel: 6 (Constructed Just For Fun). Clock setting: 60 minutes.
+Watchers and starting handicap disabled. No tournament entry or other player.
+
+Server evidence:
+- Accepted FlsGameCreateAndJoinMessage and returned FlsGameCreatedMessage.
+- Match ID 290517310, game ID 964514508.
+- Match sync reported SOLO, maximum players 1, and server match state 8.
+- GsConnectMessage connected the research client to the game.
+- GsMessageMessage delivered the initial GamePlayStatusMessage.
+- Complete initial state: 2,889 bytes, 32 elements, timestamp 1.
+- State flags 6: full state, head fragment, tail fragment.
+- The account connection remains authenticated and answers heartbeats.
+
+Recovered flow:
+  FlsNetDeckListGetReqMessage (82), empty known-decks list
+  <- FlsNetDeckListGetRespMessage (94), saved decks and DeckItem_t arrays
+  FlsGameCreateAndJoinMessage (929), SOLO + SEL and selected deck
+  <- FlsGameCreatedMessage (960), EventSyncData_t with match information
+  GsConnectMessage (1024), match token, match ID, game ID
+  <- GsMessageMessage (1153), routed inner GamePlayStatusMessage (4652)
+
+The normal client requests FlsPlayerEventCurrentEventListReqMessage (982) after
+login. Its response (983) also lets us recover an existing solitaire game after
+the research process restarts. The local game-target.json retains only the
+match ID; route tokens are reacquired from the server and held in memory.
+
+Implementation findings:
+- Solitaire creation uses SEL, even though some other one-game formats use SGM.
+  Found in PlayLobbyMatchCreateBaseViewModel.GetGameCreationSettings.
+- The channel comes from JustForFun intensity, which maps to game channel 6.
+- The deck list includes other saved groupings as well as playable decks.
+  Deck descriptions contain format metadata, and DeckItem_t carries sideboard.
+- MatchCreateInfo_t in server responses stores AllowStartHandicap as int32,
+  whereas FlsGameCreateAndJoinMessage uses a boolean. Confusing these layouts
+  caused a decoder failure, now fixed and covered by an offline regression test.
+- A host-start request was rejected with FlsGameInvalidStateMessage. The
+  recovered match already had an active game; connecting to that game directly
+  was the correct next step. The code now sends host-start only for server state
+  GsAwaitingHostStart, not unconditionally after creation.
+
+Private runtime artifacts (Git-ignored):
+  .local/decks.json: account deck metadata and card lists
+  .local/game-target.json: selected match ID for reconnecting
+  .local/game-state.latest.bin: latest inner state payload, not an auth packet
+  .local/status.json: session and game metadata, no credentials or route tokens
+
+Service: patchwork-mtgo-session.service (same transient user service as login).
+Tests: 11 offline tests pass, including solitaire framing, deck/sideboard parsing,
+game-state header parsing, and the differing match-request/response field widths.
+No CI added. This work has not been committed or pushed yet.
+
+Limitations:
+The initial state envelope is decoded, but its card/prompt state elements and
+incremental differences are not yet interpreted by this client. No keep/mulligan,
+land play, or other gameplay choice was sent. The service maintains the account
+connection; the game can still end through MTGO inactivity or match-clock rules.
+Only ordinary match events are decoded; tournaments remain outside this scope.
+
+Next milestone: interpret the initial TurnStep/InteractState/Thing elements,
+identify the opening decision, and submit a supported solitaire action with
+the current game-state timestamp.

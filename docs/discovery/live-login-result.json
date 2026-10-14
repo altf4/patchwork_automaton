@@ -1,0 +1,24 @@
+{
+  "host": "mtgologin1.mtgo.com",
+  "port": 7770,
+  "tls_version": "TLSv1.2",
+  "login_response": "Success",
+  "login_response_code": 1,
+  "challenge_type": "NotSet",
+  "acknowledgement_mode": false,
+  "authenticated_at": 1791997366.4149735,
+  "last_heartbeat_at": 1791997368.5974615,
+  "heartbeats_answered": 2,
+  "time_syncs_answered": 1,
+  "received_counts": {
+    "FlsUserLoginRespMessage": 1,
+    "HeartbeatReqMessage": 2,
+    "MiniUserListMessage": 12,
+    "ServerTimeCommLatencyUpdateMessage": 1,
+    "DosUserrolePrivilegesMessage": 1,
+    "FlsUserUpdatedPrivateInfoMessage": 3,
+    "FlsLeagueLoginsUpdatedMessage": 11,
+    "MiniUserIdListDecMessage": 9
+  },
+  "basis": "Live authenticated idle session; no game entered. Counts are a point-in-time snapshot."
+}

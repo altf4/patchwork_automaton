@@ -1,0 +1,75 @@
+Standalone Linux login — 2026-10-14
+
+Result: authenticated successfully against mtgologin1.mtgo.com:7770 with the
+dedicated account supplied in ../.creds. No official client or Wine was needed.
+The server returned UserLoginResponseEnum.Success (1) and challenge type NotSet.
+The live credential exchange was not captured or logged.
+
+Implemented in src/patchwork_automaton/protocol.py and session.py:
+- Verified TLS connection with Python's standard library.
+- Binary login encoder and full login-response decoder (including UserInfo_t).
+- Stable, locally generated 64-character fingerprint for this research client.
+  This is a new device identity, not a reproduction of Windows hardware hashing.
+- Server-time synchronization and role/privilege request after login.
+- Heartbeat replies and optional acknowledgement-envelope handling.
+- Frame bounds, schema checks, fragmented-stream reading, graceful logoff.
+- Operational status with no credentials, profile values, or session tokens.
+
+The returned ClientFlags disabled acknowledgement messaging. This was observed
+on two successful logins (temporary process, then managed service), despite the
+request advertising Support2FA and UseAcknowledgementMessaging. The code honors
+the server's returned flag. The acknowledgement branch is tested offline but
+was not exercised by this live server session.
+
+Observed messages include login response, heartbeats, user-list updates,
+time-latency update, role privileges, league updates, and private-info updates.
+Unhandled profile/lobby payloads are consumed without logging their contents.
+The connection is idle: it does not join a game, trade, or send chat messages.
+
+Runtime management
+
+Running user unit: patchwork-mtgo-session.service.
+This is a transient service, not installed for startup after reboot. Its lifetime
+depends on the user's service manager/session remaining available.
+Network/EOF/timeout failures exit 1 and can restart after 30 seconds; the service
+allows at most three starts per ten-minute window. Each restart performs a new
+login; seamless session resumption and acknowledgement replay are not implemented.
+Authentication rejection, a challenge, or an incompatible protocol stops with
+exit 2 and is not automatically retried. No CI configuration was added.
+
+From the repository root:
+
+Start (safe to call when already running):
+  bash scripts/start-session.sh
+
+Status:
+  systemctl --user status patchwork-mtgo-session.service
+  cat .local/status.json
+
+Operational logs:
+  journalctl --user -u patchwork-mtgo-session.service -f
+
+Stop gracefully:
+  systemctl --user stop patchwork-mtgo-session.service
+
+Alternative stop signal for a directly launched process:
+  touch .local/stop
+The start script removes this stop marker before launching a new session.
+
+Foreground launch:
+  PYTHONPATH=src python3 -m patchwork_automaton.session --credentials ../.creds
+Do not start a second connection while the service is active; stop it first.
+
+Tests:
+  PYTHONPATH=src python3 -m unittest discover -s tests -v
+Seven offline tests passed, covering fragmented/coalesced TCP reads, malicious
+lengths, type checks, UTF-16 unit counts, complete/truncated login responses,
+nested ACK envelopes and heartbeat replies, and credential delimiters.
+
+Private runtime directory .local/ and credential filenames are ignored by Git.
+Credentials remain in the user-supplied file outside the repository. No raw
+login packets, password digests, login sentinels, or MFA codes are saved.
+
+Next work: decode game-state fragments/diffs and prompt elements, then trace
+the minimum game-entry path. Authenticated idle connectivity is now demonstrated;
+playing a game has not yet been implemented.
