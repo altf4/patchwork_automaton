@@ -61,7 +61,9 @@ cards = (DeckItem(catalog_id=123, annotation=0, permission=0,
 game = await client.create_solitaire(cards, format='CFREEFORM')
 ```
 
-No card or format whitelist exists. The server decides deck validity and
+Newly gifted decks can have opaque `CatalogID=...` metadata instead of a saved
+format; pass `format='CLEGACY'` (or the appropriate format) explicitly for
+those entries. No card or format whitelist exists. The server decides deck validity and
 collection eligibility. `DeckList.response_code` retains the original server
 code (the observed complete-list response was 5).
 
@@ -97,8 +99,36 @@ is the unsigned value `0xfffffffe`; its grouping must match the advertised
 interaction. Do not infer target grouping from card text alone.
 
 The prompt includes its player index and the status includes waiting/priority
-indices. Callers must use them to decide whether to respond. Mapping account
-IDs to multiplayer player indices is not yet modeled.
+indices. `game.player_index` maps this account to the game server's player
+order; it is `None` until that order arrives. Callers must use these fields to
+decide whether to respond. Hand-zone IDs include a player index in the low byte.
+
+## Direct matches and gift products
+
+With both accounts logged in using separate client instances:
+
+```python
+challenge = await first.challenge(second.user_id, first_deck, format='CFREEFORM')
+incoming = await second.wait_for_match(challenge.token)
+first_game, second_game = await asyncio.gather(
+    first.wait_for_game(challenge),
+    second.accept_challenge(incoming, second_deck),
+)
+```
+
+The challenger sends the native player-order and host-start messages after
+acceptance. The reader also handles game-ready acknowledgements. This is a
+single-game D1V1 direct challenge with spectators disabled. To finish a test
+explicitly, `await second.concede_match(incoming)` waits for the server's
+concession acknowledgement. Final game results remain `GameMessage` events;
+the conceding player may receive results without a separate GameOver message.
+
+`collection()` returns the account's owned `CollectionItem` records, including
+unopened gifts. `open_product(item)` explicitly consumes an owned sealed
+product and returns collection deltas. Identify the product using catalog
+data before opening it. These inventory mutations are never retried
+automatically. The New Account Starter Kit and its five gifted decks were
+opened successfully through this API during the two-account test.
 
 For unmodeled interactions, `game.send_raw(message_name, payload)` sends a
 catalog-framed game message over the established route. It deliberately
@@ -111,14 +141,17 @@ interactions are implemented or tested.
 | --- | --- |
 | TLS login, heartbeat, time sync, ACK envelopes, graceful logoff | Implemented; login/keepalive exercised live |
 | Saved deck list and ordinary current-match list | Implemented |
+| Own collection and explicit owned-product opening | Implemented; starter kit and five gift decks exercised live |
 | Solitaire creation and game-server attachment | Implemented; original wire path exercised live |
+| Direct challenge, acceptance, host start, ready ACK, concession | Implemented; two-account Legacy Burn game exercised live |
 | Full/fragmented state, per-priority diffs, checksum validation | Implemented |
 | Card attributes, action descriptors, basic player counters | Decoded without card-specific rules |
 | Button choices, legacy prompt parameters, mana flags | Encoded; server-directed selection remains caller's job |
 | Current card-action envelope, targets, modes, extra mana | Encoded; advanced selection semantics not comprehensively validated |
 | Unknown state elements, unknown UI selectors, other game messages | Preserved as raw data |
 | Ordering, divided damage, specialized numeric/selectors, complex costs | Need additional typed codecs and fixtures; raw escape hatch available |
-| Multiplayer account/index mapping, sideboarding, match results | Not fully modeled |
+| Game-server account/index mapping | Implemented; two-player order exercised live |
+| Sideboarding, typed match results | Not fully modeled |
 | Tournament structures and joining queues/events | Not implemented |
 | Reconnect/resume | Explicit new login and attach; no transparent session resume |
 
@@ -182,7 +215,16 @@ discovery step does not require running the client, and the library does not
 redistribute its string-table resource.
 
 `research/` preserves the earlier experimental service and solitaire policy
-as discovery reference. They are excluded from the installed package.
+as discovery reference. It also contains `direct_match.py`, a live two-account
+harness that keeps hands, plays lands, passes priority, discards if necessary,
+and finishes by concession. It runs only when explicitly invoked and is
+excluded from the installed package. Stop the idle service before running it:
+
+```sh
+PYTHONPATH=src:. python3 -m research.direct_match \
+  --first ../.creds --second ../.creds_2 --strings .local/strings.json \
+  --output .local/direct-match
+```
 
 ## Development
 

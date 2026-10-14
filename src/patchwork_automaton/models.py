@@ -7,6 +7,17 @@ import uuid
 from .game import DeckItem
 
 
+@dataclass(frozen=True)
+class CollectionItem:
+    catalog_id: int
+    permission: int
+    quantity: int
+
+    def encode(self):
+        import struct
+        return struct.pack('<iii', self.catalog_id, self.permission, self.quantity)
+
+
 def freeze(value):
     if isinstance(value, Mapping):
         return MappingProxyType({k: freeze(v) for k, v in value.items()})
@@ -26,7 +37,7 @@ class Deck:
     def format(self) -> str:
         parts = self.description.split('?')
         if len(parts) < 2 or parts[0] != '1':
-            raise ValueError('Not a playable saved deck; specify a format and deck items')
+            raise ValueError('Deck metadata has no playable format; verify the entry and specify format explicitly')
         return parts[1]
 
 

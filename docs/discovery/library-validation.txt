@@ -21,11 +21,15 @@ Live validation:
 - The idle example using MTGOClient authenticated against the real backend.
 - Saved-deck query returned seven entries; current-match query returned zero.
 - Heartbeats continued to be answered after the read-only queries.
-- The replacement patchwork-mtgo-session.service remains authenticated and
-  idle; it does not select game actions.
+- The replacement patchwork-mtgo-session.service remained authenticated and
+  idle during this initial validation; it did not select game actions.
 
 No new game was started during this library implementation. Public solitaire
 and action APIs were exercised through a synthetic framed backend, building
 on the real game/action wire paths recorded in earlier discovery notes.
 Advanced selector semantics and exhaustive card interaction coverage remain
 unverified; see the README coverage table. No CI was added.
+
+Subsequent two-account validation and gift-deck opening are recorded in
+direct-match.txt. Both backend connections and the idle service were stopped
+at the user's request after those tests.

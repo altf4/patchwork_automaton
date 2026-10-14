@@ -11,8 +11,9 @@ import uuid
 from .actions import CardChoice, PromptChoice, action_entries, card_payload
 from .errors import (AuthenticationError, Disconnected, EventOverflow,
                      RequestRejected, StaleDecision, UnsupportedInteraction)
-from .game import DeckItem, count, decks_response, event_sync, solitaire_payload
-from .models import (CardAction, DecisionID, Deck, DeckList, GameMessage, Match,
+from .game import (DeckItem, accept_challenge_payload, challenge_payload, count,
+                   decks_response, event_sync, solitaire_payload)
+from .models import (CardAction, CollectionItem, DecisionID, Deck, DeckList, GameMessage, Match,
                      Observation, Submission, freeze)
 from .protocol import (Catalog, Cursor, ProtocolError, array, current_time,
                        login_payload, login_response, read_frame)
@@ -43,12 +44,18 @@ class MTGOClient:
         self._write_lock = asyncio.Lock()
         self._decks_lock = asyncio.Lock()
         self._events_lock = asyncio.Lock()
+        self._collection_lock = asyncio.Lock()
+        self._open_lock = asyncio.Lock()
         self._waiters = []
         self._pending = OrderedDict()
         self._next_ack = secrets.randbits(31) or 1
         self._ack_mode = False
         self._games = {}
         self._starts = {}
+        self._matches = {}
+        self._matches_changed = asyncio.Event()
+        self._player_orders = {}
+        self._outgoing_challenges = {}
         self._failure = None
         self._closed = False
         self._authenticated = False
@@ -198,6 +205,7 @@ class MTGOClient:
             # Failure is checked before consuming queued messages.
             with suppress(asyncio.QueueFull):
                 game._queue.put_nowait(None)
+        self._matches_changed.set()
 
     async def _dispatch(self, opcode, payload):
         if opcode == 512:
@@ -223,6 +231,41 @@ class MTGOClient:
             if len(self._starts) >= 1024:
                 raise ProtocolError('Too many pending game starts')
             self._starts[token] = (match_id, game_id)
+            self._matches_changed.set()
+        elif opcode in (959, 960):
+            c = Cursor(payload[16:] if opcode == 960 else payload)
+            match = Match.from_wire(event_sync(c))
+            c.end()
+            self._matches[match.token] = match
+            self._matches_changed.set()
+        elif opcode == 123:
+            c = Cursor(payload)
+            token, match_id, receiver = uuid.UUID(bytes_le=c.take(16)), c.integer(), c.integer()
+            c.string(); c.end()
+            opponent = self._outgoing_challenges.pop(token, None)
+            if opponent is not None:
+                if receiver != opponent:
+                    raise ProtocolError('Challenge receiver mismatch')
+                # MatchChallengeMadeByCurrentUserState does both operations
+                # immediately after FlsMatchChallengeAcceptedMessage.
+                await self._send('FlsMatchPlayerOrderMessage', token.bytes_le
+                    + struct.pack('<4i', match_id, 2, self.user_id, receiver))
+                await self._send('FlsMatchHostStartMessage', token.bytes_le + struct.pack('<i', match_id))
+        elif opcode == 933:
+            if len(payload) != 20:
+                raise ProtocolError('Invalid game-ready message')
+            token = uuid.UUID(bytes_le=payload[:16])
+            if token in self._matches:
+                await self._send('FlsGameReadyToStartAckMessage', payload)
+        elif opcode == 1155:
+            c = Cursor(payload)
+            c.take(16)
+            key = (c.integer(), c.integer())
+            order = tuple(c.integer() for _ in range(count(c)))
+            c.end()
+            self._player_orders[key] = order
+            if key in self._games:
+                self._games[key].player_ids = order
         elif opcode == 1153:
             c = Cursor(payload)
             route, match_id, game_id, inner = c.take(16), c.integer(), c.integer(), c.blob()
@@ -256,7 +299,136 @@ class MTGOClient:
             c = Cursor(payload)
             matches = tuple(Match.from_wire(event_sync(c)) for _ in range(count(c)))
             c.end()
+            for match in matches:
+                self._matches[match.token] = match
             return matches
+
+    async def collection(self) -> tuple[CollectionItem, ...]:
+        """Read this account's own collection, including unopened products."""
+        self._require_login()
+        async with self._collection_lock:
+            _, payload = await self._request('GetCollectionMessage', struct.pack('<i', self.user_id),
+                lambda op, data: op in (848, 2583) and len(data) >= 4
+                and struct.unpack_from('<i', data)[0] == self.user_id)
+            c = Cursor(payload)
+            c.integer()
+            items = tuple(CollectionItem(*struct.unpack('<iii', c.take(12))) for _ in range(count(c)))
+            c.end()
+            return items
+
+    async def open_product(self, item: CollectionItem) -> tuple[CollectionItem, ...]:
+        """Explicitly consume an owned sealed product; return collection deltas.
+
+        This changes inventory and is never automatically retried. Catalog
+        product identity and the caller's intent must be established first.
+        """
+        self._require_login()
+        if item.quantity <= 0:
+            raise ValueError('Quantity must be positive')
+        async with self._open_lock:
+            owned = await self.collection()
+            if sum(i.quantity for i in owned if (i.catalog_id, i.permission) ==
+                   (item.catalog_id, item.permission)) < item.quantity:
+                raise ValueError('Requested product quantity is not owned')
+            token = uuid.uuid4()
+            opcode, payload = await self._request('DosEscrowOpenpackSetupReqMessage',
+                token.bytes_le + struct.pack('<i', self.user_id),
+                lambda op, data: (op == 182 and data[4:20] == token.bytes_le)
+                or (op in (819, 821) and data[:16] == token.bytes_le))
+            if opcode != 182:
+                reason = struct.unpack_from('<i', payload, 20)[0] if len(payload) >= 24 else None
+                raise RequestRejected(opcode, reason)
+            c = Cursor(payload)
+            escrow_id = c.integer()
+            c.take(16); c.blob(4); c.end()
+            # Native open-pack DepositList sets both participant IDs and
+            # ClearFirst to zero; only Items is populated.
+            deposit = b'\0' * 9 + struct.pack('<i', 1) + item.encode()
+            opcode, payload = await self._request('DosEscrowOpenpackUpdatelistReqMessage',
+                token.bytes_le + struct.pack('<ii', escrow_id, self.user_id) + deposit,
+                lambda op, data: op in (823, 819, 821, 188) and data[:16] == token.bytes_le)
+            if opcode != 823:
+                reason = struct.unpack_from('<i', payload, 20)[0] if len(payload) >= 24 else None
+                raise RequestRejected(opcode, reason)
+            c = Cursor(payload)
+            c.take(16)
+            deltas = []
+            for _ in range(count(c)):
+                catalog_id, permission, quantity, receiver = struct.unpack('<4i', c.take(16))
+                if receiver == self.user_id:
+                    deltas.append(CollectionItem(catalog_id, permission, quantity))
+            c.end()
+            return tuple(deltas)
+
+    async def challenge(self, opponent_id: int, deck: Deck | tuple[DeckItem, ...], *, format=None) -> Match:
+        """Send an ordinary, single-game direct challenge to a logged-in user."""
+        self._require_login()
+        cards = deck.cards if isinstance(deck, Deck) else tuple(deck)
+        format = format or (deck.format if isinstance(deck, Deck) else None)
+        if not format:
+            raise ValueError('Format identifier is required')
+        token = uuid.uuid4()
+        self._outgoing_challenges[token] = opponent_id
+        opcode, payload = await self._request('FlsMatchChallengeRequestMessage',
+            challenge_payload(token, cards, opponent_id, format),
+            lambda op, data: op in (960, 125, 107, 944, 945) and data[:16] == token.bytes_le)
+        if opcode != 960:
+            self._outgoing_challenges.pop(token, None)
+            offset = 20 if opcode == 125 else 16
+            reason = struct.unpack_from('<i', payload, offset)[0] if len(payload) >= offset + 4 else None
+            raise RequestRejected(opcode, reason)
+        return self._matches[token]
+
+    async def start_match(self, match: Match, *, player_ids: tuple[int, ...]) -> 'Game':
+        """Host an accepted ordinary match, including one recovered after login."""
+        self._require_login()
+        await self._send('FlsMatchPlayerOrderMessage', match.token.bytes_le
+            + struct.pack('<ii', match.id, len(player_ids))
+            + b''.join(struct.pack('<i', user_id) for user_id in player_ids))
+        await self._send('FlsMatchHostStartMessage', match.token.bytes_le + struct.pack('<i', match.id))
+        return await self.wait_for_game(match)
+
+    async def wait_for_match(self, token: uuid.UUID, *, timeout=None) -> Match:
+        """Wait for an incoming match sync, including a direct challenge."""
+        async def wait():
+            while True:
+                self._require_login()
+                if token in self._matches:
+                    return self._matches[token]
+                self._matches_changed.clear()
+                await self._matches_changed.wait()
+        return await asyncio.wait_for(wait(), self.timeout if timeout is None else timeout)
+
+    async def accept_challenge(self, match: Match, deck: Deck | tuple[DeckItem, ...]) -> 'Game':
+        self._require_login()
+        cards = deck.cards if isinstance(deck, Deck) else tuple(deck)
+        opcode, payload = await self._request('FlsPlayerEventJoinReqMessage',
+            accept_challenge_payload(match.token, cards),
+            lambda op, data: op in (123, 125, 980, 944, 945) and data[:16] == match.token.bytes_le)
+        if opcode != 123:
+            offset = 20 if opcode == 125 else 16
+            reason = struct.unpack_from('<i', payload, offset)[0] if len(payload) >= offset + 4 else None
+            raise RequestRejected(opcode, reason)
+        return await self.wait_for_game(match)
+
+    async def wait_for_game(self, match: Match, *, timeout=None) -> 'Game':
+        async def wait():
+            while True:
+                self._require_login()
+                started = self._starts.pop(match.token, None)
+                if started:
+                    return await self.connect_game(match, game_id=started[1])
+                if match.games:
+                    return await self.connect_game(match)
+                self._matches_changed.clear()
+                await self._matches_changed.wait()
+        return await asyncio.wait_for(wait(), self.timeout if timeout is None else timeout)
+
+    async def concede_match(self, match: Match):
+        """Explicitly concede this ordinary match; wait for server confirmation."""
+        self._require_login()
+        await self._request('FlsMatchConcedeMessage', match.token.bytes_le + struct.pack('<i', match.id),
+            lambda op, data: op == 108 and data[:16] == match.token.bytes_le)
 
     async def create_solitaire(self, deck: Deck | tuple[DeckItem, ...], *, format=None) -> 'Game':
         self._require_login()
@@ -343,8 +515,17 @@ class Game:
         self._submitted = None
         self._streaming = False
         self._ended = False
+        self.player_ids = client._player_orders.get((match_id, game_id), ())
         self.observation = None
         self.revision = 0
+
+    @property
+    def player_index(self):
+        """This account's index in the game server's player order, if known."""
+        try:
+            return self.player_ids.index(self.client.user_id)
+        except ValueError:
+            return None
 
     def _check(self):
         self.client._check()
@@ -378,7 +559,7 @@ class Game:
                 self._changed.set()
                 self._emit(self.observation)
             else:
-                if opcode == 4632:
+                if opcode in (4632, 4485):
                     self._ended = True
                     self._submitted = self.observation.decision_id if self.observation else None
                 name = self.client.catalog.by_opcode.get(opcode, {}).get('name', f'opcode_{opcode}')

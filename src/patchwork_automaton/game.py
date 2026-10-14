@@ -83,8 +83,10 @@ def event_sync(c):
     c.integer(); c.take(16); c.integer()
     structure = c.string()
     player_count = count(c)
+    player_ids = []
     for _ in range(player_count):
-        c.take(8); c.string(); c.take(5)
+        player_ids.append(c.integer())
+        c.integer(); c.string(); c.take(5)
     c.integer()
     for _ in range(count(c)):
         c.integer(); c.string(); c.integer()
@@ -114,4 +116,24 @@ def event_sync(c):
         raise ProtocolError("Tournament event decoding is not implemented")
     return dict(token=token, event_id=event_id, state=state, structure=structure,
                 player_format=player_format, minimum_players=minimum,
-                maximum_players=maximum, players=player_count, games=games)
+                maximum_players=maximum, players=player_count, player_ids=player_ids, games=games)
+
+
+def challenge_payload(token, cards, opponent_id, game_structure, *, channel=6, match_time=60):
+    """Native direct challenge: D1V1, single game, no spectators."""
+    return b''.join([
+        token.bytes_le, string('SGM', True), string(game_structure, True),
+        string('D1V1', True), string('', True), b'\0\0',
+        struct.pack('<ii?iii', channel, match_time, False, 0, 0, 0),
+        string('bgname', True), struct.pack('<ii', 0, len(cards)),
+        b''.join(card.encode() for card in cards), struct.pack('<i', opponent_id),
+        string('', True), struct.pack('<i', 0),
+    ])
+
+
+def accept_challenge_payload(token, cards):
+    # The official MatchChallengeReceivedState uses EntryFeeID=1 as part of
+    # challenge acceptance; this is not a tournament/queue entry request.
+    return (token.bytes_le + struct.pack('<iii', 0, 0, 0) + string('bgname', True)
+            + string('', True) + struct.pack('<ii', 0, len(cards))
+            + b''.join(card.encode() for card in cards) + struct.pack('<ii', 0, 1))

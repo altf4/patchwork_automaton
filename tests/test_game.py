@@ -2,7 +2,8 @@ import struct
 import unittest
 import uuid
 
-from patchwork_automaton.game import DeckItem, decks_response, solitaire_payload, game_status, event_sync
+from patchwork_automaton.game import (DeckItem, decks_response, solitaire_payload,
+    game_status, event_sync, challenge_payload, accept_challenge_payload)
 from patchwork_automaton.protocol import Cursor, ProtocolError, string
 
 
@@ -68,3 +69,28 @@ class GameTests(unittest.TestCase):
         self.assertEqual(event['maximum_players'], 1)
         self.assertEqual(event['players'], 1)
         self.assertEqual(event['games'], [{'game_id': 77, 'game_state': 9}])
+
+    def test_direct_challenge_and_acceptance_wire_layouts(self):
+        token = uuid.uuid4()
+        cards = (DeckItem(123, 0, 0, 60, False),)
+        c = Cursor(challenge_payload(token, cards, 42, 'CFREEFORM'))
+        self.assertEqual(c.take(16), token.bytes_le)
+        self.assertEqual((c.string(), c.string(), c.string()), ('SGM', 'CFREEFORM', 'D1V1'))
+        self.assertEqual(c.string(), '')
+        self.assertEqual(c.take(2), b'\0\0')
+        self.assertEqual(struct.unpack('<ii?iii', c.take(21)), (6, 60, False, 0, 0, 0))
+        self.assertEqual(c.string(), 'bgname')
+        self.assertEqual((c.integer(), c.integer()), (0, 1))
+        self.assertEqual(c.take(17), cards[0].encode())
+        self.assertEqual(c.integer(), 42)
+        self.assertEqual(c.string(), '')
+        self.assertEqual(c.integer(), 0)
+        c.end()
+        c = Cursor(accept_challenge_payload(token, cards))
+        self.assertEqual(c.take(16), token.bytes_le)
+        self.assertEqual(c.take(12), b'\0' * 12)
+        self.assertEqual((c.string(), c.string()), ('bgname', ''))
+        self.assertEqual((c.integer(), c.integer()), (0, 1))
+        self.assertEqual(c.take(17), cards[0].encode())
+        self.assertEqual((c.integer(), c.integer()), (0, 1))
+        c.end()

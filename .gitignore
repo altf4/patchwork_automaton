@@ -1,5 +1,6 @@
 .creds
 .creds.*
+.creds_*
 .local/
 __pycache__/
 *.py[cod]

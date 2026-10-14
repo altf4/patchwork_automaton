@@ -1,0 +1,78 @@
+Two-account direct match and gift-deck validation (2026-10-14)
+
+Accepted the second account's gifts with the user's explicit authorization.
+GetCollectionMessage (300) reads its own collection; the response is
+DosCollectionListMessage (2583), with CollectionItem_t entries of three int32
+fields: CatalogID, PermissionTypeCode, Quantity. An attempted internal
+DosCollectionListReqMessage was unanswered; use the native client-facing
+GetCollectionMessage instead.
+
+Product opening mirrors Model.Trade's native PackOpen states:
+  DosEscrowOpenpackSetupReqMessage (2422): token, own login ID
+  <- FlsEscrowVerifyMessage (182): escrow ID, token, participants
+  DosEscrowOpenpackUpdatelistReqMessage (2423): token, escrow ID, login ID,
+     DepositList_t (zero participant IDs/ClearFirst, counted CollectionItems)
+  <- FlsEscrowProcessingMessage (191)
+  <- FlsEscrowCompleteMessage (823): token, counted EscrowedItem_t deltas
+
+Opened catalog 8, Magic Online New Account Starter Kit, then its five owned
+gift products (permission 131):
+  125468: Braids, Arisen Nightmare
+  125469: Pioneer Humans
+  125470: Modern Infect
+  125471: Pauper Delver
+  125472: Legacy Burn
+Their identities were checked in the installed client's catalog XML. The
+starter kit and gift decks were consumed once, with server completion
+responses, and all five resulting decks appeared in the saved-deck list.
+Gift deck metadata is initially an opaque CatalogID/DeckName/GroupName string,
+not the ordinary question-mark-delimited saved format. Supply format explicitly
+until normalized; don't discard those deck entries as binders.
+
+Direct challenge sequence:
+  Host sends FlsMatchChallengeRequestMessage (118), SGM/CFREEFORM/D1V1,
+     own Legacy Burn deck, receiver's authenticated login ID, watchers false.
+  Both receive FlsGameCreatedMessage (960) with pending match sync.
+  Receiver sends FlsPlayerEventJoinReqMessage (946) with its deck.
+     Native MatchChallengeReceivedState uses entryfeeid=1 for this path.
+  Both receive FlsMatchChallengeAcceptedMessage (123).
+  Host must send FlsMatchPlayerOrderMessage (990), then
+     FlsMatchHostStartMessage (111); acceptance alone does not start the game.
+  Handle FlsGameReadyToStartMessage (933) with ACK (950), when supplied.
+  Both receive FlsMatchGameStartedMessage (2463).
+  Each sends GsConnectMessage (1024) and receives GsPlayerOrderMessage (1155)
+     plus routed state messages (1153/4652).
+
+Final controlled match:
+  Match ID 290520151; game ID 964526282.
+  Two 60-card Legacy Burn main decks.
+  Game-server player indices: account1=0, account2=1.
+  Account1: 19 actions, 2 lands played, 42 complete observations.
+  Account2: 21 actions, 3 lands played, 40 complete observations.
+  Both reached turn 3. Account2 conceded via FlsMatchConcedeMessage (972).
+  FlsMatchConcededMessage (108) confirmed the concession.
+  Both accounts received GameResultsMessage (4485); account1 also received
+     GameOverMessage (4632). Do not require GameOver on the conceding client.
+  Both test connections logged off, and account1's idle service was restored.
+  At the user's subsequent request, the idle service was also stopped.
+  Verified no remaining MTGO port-7770 sockets or test-session processes.
+
+The harness uses rudimentary choices: play first, keep, play lands, pass
+priority/combat, discard when necessary, then concede to bound the test.
+This validates interaction and lifecycle, not strategy or natural-win logic.
+Hand-zone IDs are per player: 1000448 + player index. Assuming the solitaire
+zone ID for player1 prevented its land plays in the initial attempt; fixed.
+
+Primary evidence: native PlayerEventManager.SendChallengeRequest,
+MatchChallengeReceivedState.JoinEventHandler,
+MatchChallengeMadeByCurrentUserState.MatchChallengeAcceptedHandler,
+Trade PackOpen states, StarterKitContentsViewModel, live protocol responses.
+Public onboarding context:
+https://www.mtgo.com/news/new-player-experience-changes
+
+Private wire captures and gift inventory deltas remain under .local/ and are
+not committed. No passwords, login payloads, sentinels, or MFA codes are logged.
+No CI added.
+
+Repository verification after these changes: 39 offline tests pass with
+warnings treated as errors. Both account connections remain closed.

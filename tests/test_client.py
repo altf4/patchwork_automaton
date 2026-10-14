@@ -5,7 +5,7 @@ import struct
 import unittest
 import uuid
 
-from patchwork_automaton import (AuthenticationError, CardChoice, DeckItem,
+from patchwork_automaton import (AuthenticationError, CardChoice, CollectionItem, DeckItem,
     Disconnected, EventOverflow, Match, MTGOClient, Observation, PromptChoice,
     RequestRejected, StaleDecision, UnsupportedInteraction)
 from patchwork_automaton.actions import REVERSE, card_payload
@@ -264,10 +264,10 @@ class ClientTests(unittest.IsolatedAsyncioTestCase):
             await game.wait_for_update(2, timeout=1)
         self.assertEqual(game.revision, 1)
 
-    async def test_game_over_invalidates_decision(self):
+    async def test_game_over_and_results_invalidate_decision(self):
         client, backend = await self.login()
         game = await client.connect_game((await client.current_matches())[0])
-        await game._receive(backend.token.bytes_le, 4632, b'')
+        await game._receive(backend.token.bytes_le, 4485, b'')
         with self.assertRaises(StaleDecision):
             await game.submit(game.observation.decision_id, PromptChoice(13))
 
@@ -282,3 +282,65 @@ class ClientTests(unittest.IsolatedAsyncioTestCase):
             await game.submit(game.observation.decision_id, PromptChoice(13))
         self.assertFalse(client.connected)
         self.assertEqual(sum(op == 1153 for op, _ in backend.frames), before + 1)
+
+    async def test_direct_challenge_acceptance_player_order_and_concession(self):
+        class ChallengeBackend(Backend):
+            def write(self, frame):
+                op, payload = self.catalog.parse(frame)
+                super().write(frame)
+                if op == 118:
+                    self.token = uuid.UUID(bytes_le=payload[:16])
+                    self.feed('FlsGameCreatedMessage', self.token.bytes_le + match_packet(self.token))
+                    self.feed('FlsEventSyncMessage', match_packet(self.token))
+                elif op == 946:
+                    self.feed('FlsMatchChallengeAcceptedMessage', self.token.bytes_le + struct.pack('<ii', 11, 123) + string('synthetic', True))
+                    self.feed('FlsMatchGameStartedMessage', self.token.bytes_le + struct.pack('<ii', 11, 77))
+                elif op == 1024:
+                    self.feed('GsPlayerOrderMessage', self.token.bytes_le + struct.pack('<5i', 11, 77, 2, 123, 42))
+                elif op == 972:
+                    self.feed('FlsMatchConcededMessage', self.token.bytes_le + struct.pack('<i', 11))
+        client, backend = await self.login(ChallengeBackend())
+        cards = (DeckItem(1, 0, 0, 60, False),)
+        match = await client.challenge(123, cards, format='CFREEFORM')
+        self.assertEqual((await client.wait_for_match(match.token)).id, 11)
+        game = await client.accept_challenge(match, cards)
+        for _ in range(20):
+            if game.player_index is not None:
+                break
+            await asyncio.sleep(0)
+        self.assertEqual(game.player_index, 1)
+        self.assertEqual(game.player_ids, (123, 42))
+        await client.concede_match(match)
+        self.assertTrue(client.connected)
+        self.assertIn((990, backend.token.bytes_le + struct.pack('<4i', 11, 2, 42, 123)), backend.frames)
+        self.assertIn((111, backend.token.bytes_le + struct.pack('<i', 11)), backend.frames)
+
+    async def test_ready_ack_for_a_recovered_match(self):
+        client, backend = await self.login()
+        match = (await client.current_matches())[0]
+        payload = match.token.bytes_le + struct.pack('<i', match.id)
+        await client._dispatch(933, payload)
+        self.assertIn((950, payload), backend.frames)
+
+    async def test_owned_product_opening_returns_collection_deltas(self):
+        class ProductBackend(Backend):
+            def write(self, frame):
+                op, payload = self.catalog.parse(frame)
+                super().write(frame)
+                if op == 300:
+                    self.feed('DosCollectionListMessage', struct.pack('<5i', 42, 1, 8, 129, 1))
+                elif op == 2422:
+                    self.token = uuid.UUID(bytes_le=payload[:16])
+                    self.feed('FlsEscrowVerifyMessage', struct.pack('<i', 10) + self.token.bytes_le + struct.pack('<ii', 1, 42))
+                elif op == 2423:
+                    c = Cursor(payload)
+                    self.assert_update = (c.take(16), c.integer(), c.integer(), c.take(9), c.integer(), c.take(12))
+                    c.end()
+                    self.feed('FlsEscrowCompleteMessage', self.token.bytes_le + struct.pack('<i8i',
+                        2, 8, 129, -1, 42, 123, 642, 4, 42))
+        client, backend = await self.login(ProductBackend())
+        result = await client.open_product(CollectionItem(8, 129, 1))
+        self.assertEqual(result, (CollectionItem(8, 129, -1), CollectionItem(123, 642, 4)))
+        self.assertEqual(backend.assert_update[1:], (10, 42, b'\0' * 9, 1, struct.pack('<iii', 8, 129, 1)))
+        with self.assertRaises(ValueError):
+            await client.open_product(CollectionItem(99, 129, 1))
