@@ -2,13 +2,14 @@
 import asyncio
 from collections import OrderedDict
 from contextlib import suppress
-from dataclasses import asdict
+from dataclasses import asdict, replace
 import secrets
 import ssl
 import struct
 import uuid
 
-from .actions import CardChoice, PromptChoice, action_entries, card_payload
+from .actions import (CardChoice, CardSelection, DamageChoice, ManaChoice, OrderingChoice,
+                      PromptChoice, SelectorChoice, action_entries, encode_choice)
 from .errors import (AuthenticationError, Disconnected, EventOverflow,
                      RequestRejected, StaleDecision, UnsupportedInteraction)
 from .game import (DeckItem, accept_challenge_payload, challenge_payload, count,
@@ -18,6 +19,9 @@ from .models import (CardAction, CollectionItem, DecisionID, Deck, DeckList, Gam
 from .protocol import (Catalog, Cursor, ProtocolError, array, current_time,
                        login_payload, login_response, read_frame)
 from .state import State
+from .interactions import GameObject, mode_spec, prompt_selectors, target_groups
+from .choice_catalog import ChoiceCatalog
+from .properties import indexed
 
 
 class MTGOClient:
@@ -29,12 +33,13 @@ class MTGOClient:
 
     def __init__(self, *, host='mtgologin1.mtgo.com', port=7770,
                  timeout=30.0, queue_size=256, strings=(), catalog=None,
-                 connector=None, device_id=None):
+                 connector=None, device_id=None, choice_catalog=None):
         if queue_size < 1 or timeout <= 0:
             raise ValueError('Queue size and timeout must be positive')
         self.host, self.port, self.timeout = host, port, timeout
         self.queue_size, self.strings = queue_size, tuple(strings)
         self.catalog = catalog or Catalog()
+        self.choice_catalog = choice_catalog or ChoiceCatalog()
         self._connector = connector or asyncio.open_connection
         self.device_id = device_id or secrets.token_hex(32).upper()
         self.session_id = uuid.uuid4()
@@ -265,7 +270,7 @@ class MTGOClient:
             c.end()
             self._player_orders[key] = order
             if key in self._games:
-                self._games[key].player_ids = order
+                await self._games[key]._set_player_order(order)
         elif opcode == 1153:
             c = Cursor(payload)
             route, match_id, game_id, inner = c.take(16), c.integer(), c.integer(), c.blob()
@@ -513,6 +518,7 @@ class Game:
         self._changed = asyncio.Event()
         self._failure = None
         self._submitted = None
+        self._submitted_parts = set()
         self._streaming = False
         self._ended = False
         self.player_ids = client._player_orders.get((match_id, game_id), ())
@@ -538,6 +544,19 @@ class Game:
         except asyncio.QueueFull:
             raise EventOverflow('Game consumer fell behind') from None
 
+    async def _set_player_order(self, order):
+        async with self._lock:
+            self.player_ids = order
+            if self.observation is not None:
+                self.revision += 1
+                old = self.observation
+                decision = replace(old.decision_id, revision=self.revision) if old.decision_id else None
+                self.observation = replace(old, revision=self.revision, decision_id=decision,
+                    selectors=prompt_selectors(old.prompt or {}, order, self.client.choice_catalog))
+                self._submitted_parts.clear()
+                self._changed.set()
+                self._emit(self.observation)
+
     async def _receive(self, route, opcode, payload):
         async with self._lock:
             self._route = route
@@ -548,14 +567,35 @@ class Game:
                     raise ProtocolError('Game state ID mismatch')
                 self.revision += 1
                 prompt = self._state.prompt
-                decision = (DecisionID(self.client.session_id, self.id, self.revision, prompt['timestamp'])
-                            if prompt is not None and not self._ended else None)
+                decision = (DecisionID(self.client.session_id, self.id, self.revision,
+                            prompt['timestamp'] if prompt else self._state.status['timestamp'])
+                            if (prompt is not None or self._state.damage or self._state.ordering) and not self._ended else None)
+                objects = {}
+                for card in self._state.cards.values():
+                    props = self.client.choice_catalog.state_properties(card['properties'])
+                    controller = props.get('CONTROLLER')
+                    if controller is None and card['id'] < len(self.player_ids):
+                        controller = card['id']
+                    objects[card['id']] = GameObject(card['id'], props.get('ZONE'), controller, props.get('OWNER'),
+                        props.get('CARDTEXTURE_NUMBER'), freeze(props.get('COUNTERS_LIST', {})), freeze(props),
+                        tuple(value for _, value in indexed(props, 605240576)))
                 actions = tuple(CardAction(card['id'], code,
-                    props.get('ACTION_NAME_OVERRIDE_STRING') or props.get('ACTION_NAME_STRING') or '', freeze(props))
+                    props.get('ACTION_NAME_OVERRIDE_STRING') or card['properties'].get('ACTION_NAME_STRING')
+                    or props.get('ACTION_NAME_STRING') or '', freeze(props),
+                    target_groups(props, card['properties']), mode_spec(props, card['properties']),
+                    card['properties'].get('ACTION_CAST_OPTIONS_STRING') or props.get('ACTION_CAST_OPTIONS_STRING', ''),
+                    bool((card['properties'].get('ACTION_FLAGS') or props.get('ACTION_FLAGS', 0)) & 32),
+                    bool(props.get('ACTION_STACK_THIS')), props.get('ATTACK_VICTIM_ID'),
+                    bool(props.get('ACTION_IS_NON_GAME_ACTION')),
+                    bool(card['properties'].get('ALTACTION_DONT_RECALCULATE') or props.get('ALTACTION_DONT_RECALCULATE')),
+                    bool(card['properties'].get('ALTACTION_TAP_LOCALLY') or props.get('ALTACTION_TAP_LOCALLY')))
                     for card in self._state.cards.values() for code, props in action_entries(card['properties']))
                 self.observation = Observation(decision, self.revision, freeze(prompt),
                     freeze(self._state.cards), freeze(self._state.players), actions,
-                    freeze(self._state.status), self._state.unknown_elements, self._state.raw)
+                    freeze(self._state.status), self._state.unknown_elements, self._state.raw,
+                    prompt_selectors(prompt or {}, self.player_ids, self.client.choice_catalog), freeze(objects),
+                    self._state.mana, self._state.damage, self._state.ordering)
+                self._submitted_parts.clear()
                 self._changed.set()
                 self._emit(self.observation)
             else:
@@ -589,7 +629,7 @@ class Game:
                 await self._changed.wait()
         return await asyncio.wait_for(wait(), timeout)
 
-    async def submit(self, decision_id: DecisionID, choice: PromptChoice | CardChoice) -> Submission:
+    async def submit(self, decision_id: DecisionID, choice) -> Submission:
         """Validate freshness and advertised IDs, then send once.
 
         Targets/modes are caller-selected wire values. This library does not
@@ -601,6 +641,8 @@ class Game:
             if (self._ended or obs is None or obs.decision_id is None
                     or obs.decision_id != decision_id or self._submitted == decision_id):
                 raise StaleDecision('Decision is outdated or already submitted')
+            if obs.prompt and self.player_index is not None and obs.prompt['player'] not in (self.player_index, 255):
+                raise UnsupportedInteraction('This account is not the prompted player')
             if isinstance(choice, PromptChoice):
                 prompt = obs.prompt
                 allowed = any(b['enabled'] and b['code'] == choice.code for b in prompt['buttons'])
@@ -608,16 +650,17 @@ class Game:
                 allowed |= bool(prompt.get('flags', 0) & choice.code == choice.code and choice.code != 0)
                 if not allowed:
                     raise UnsupportedInteraction('Prompt code is not advertised; use send_raw for unmodeled interactions')
-                name, payload = 'PromptActionMessage', struct.pack('<III', choice.code, choice.parameter, decision_id.timestamp)
-            elif isinstance(choice, CardChoice):
-                if not any(a.card_id == choice.card_id and a.action_id == choice.action_id for a in obs.actions):
-                    raise UnsupportedInteraction('Card action is not advertised')
-                name = 'NewCardActionMessage'
-                payload = card_payload(choice.card_id, choice.action_id, decision_id.timestamp,
-                    choice.targets, modes=choice.modes, extra_mana=choice.extra_mana, flags=choice.flags)
+                name = 'ExtraPromptActionMessage' if choice.extra else 'PromptActionMessage'
+                payload = struct.pack('<III', choice.code, choice.parameter, decision_id.timestamp)
+                part = None
             else:
-                raise TypeError('Expected PromptChoice or CardChoice')
-            self._submitted = decision_id
+                name, payload, part = encode_choice(obs, choice, player_index=self.player_index)
+            if part is not None:
+                if part in self._submitted_parts:
+                    raise StaleDecision('This part of the decision was already submitted')
+                self._submitted_parts.add(part)
+            else:
+                self._submitted = decision_id
             await self._send(name, payload)
             return Submission(decision_id)
 

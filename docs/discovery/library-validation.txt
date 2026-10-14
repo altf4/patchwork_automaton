@@ -33,3 +33,49 @@ unverified; see the README coverage table. No CI was added.
 Subsequent two-account validation and gift-deck opening are recorded in
 direct-match.txt. Both backend connections and the idle service were stopped
 at the user's request after those tests.
+
+
+Patchwork Automaton 0.2.0 interaction expansion (2026-10-14)
+
+Added typed descriptors and caller-selected submissions for target groups,
+modal choices (including repetitions/fixed combinations), divided effects,
+numeric/player/color/card/name/type/pile selectors, mana-pool payments,
+combat damage, and ordering. Exposed counters, stack order, and card facets.
+Costs, attacks, blocks, searches, and replacement choices use the actions and
+selectors advertised by the server; the package does not add a strategy or
+implement the Magic rules engine.
+
+Primary evidence:
+- Native choice construction and serializers in WotC.MtGO.Client.Model.Play,
+  Model.Core, and duel/play scene code from client 3.4.159.4704.
+- All eight UIInteracts descriptor kinds, legacy UIInteract flags,
+  NewCardActionMessage, PromptActionMessage, DamageAssignmentMessage,
+  TargetSet, modal mapping construction, and mana-pool action construction.
+- Numeric name/type enum identifiers in Mtgo.Shared.Parser.Attributes and the
+  native counter-type dictionary. Only identifier mappings ship in the wheel.
+- Local CardDataSource extraction produced 73,725 card definitions and 32,904
+  unique name choices. Full client assets, definitions, and account captures
+  stay in ignored .local/; an optional extraction tool is provided.
+
+Validation:
+- 82 unittest cases pass with warnings treated as errors on Python 3.12 and
+  Python 3.14. Fixtures are synthetic framed server responses with fictional
+  card IDs; tests exercise encoding and invalid/stale selection rejection.
+- Built version 0.2.0 wheel and installed it into an isolated target directory;
+  all 82 cases passed against that installed package.
+- Wheel contains the interaction enum mapping and no credentials, local client
+  assets, private captures, or research bot implementation.
+- Replayed the previous direct-match captures through the expanded model:
+  account 1: 73 routed messages / 42 observations;
+  account 2: 64 routed messages / 40 observations.
+  Both replays reached the recorded game-over messages.
+- No live authentication or action submission occurred during this expansion.
+  A final read-only /proc TCP check found no established port-7770 connection.
+- No CI added.
+
+This is offline protocol/descriptor coverage, not live acceptance certification
+for the newly added advanced choices or every Modern card. Follow-up live
+fixtures are needed for modal spells, repeated modes, restricted mana,
+replacement choices, multi-source combat damage, and unusual name/type/facet
+combinations. Missing metadata/unknown interactions remain explicit; original
+attributes and raw submission remain available for discovery.

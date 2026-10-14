@@ -1,10 +1,12 @@
 """Immutable observations. Raw attributes preserve unmodeled card mechanics."""
 from dataclasses import dataclass, field
 from collections.abc import Mapping
-from types import MappingProxyType
 import uuid
 
 from .game import DeckItem
+from .properties import freeze
+from .interactions import (DamageAssignment, GameObject, ManaEntry, ModeSpec,
+                           Ordering, Selector, TargetGroup)
 
 
 @dataclass(frozen=True)
@@ -16,14 +18,6 @@ class CollectionItem:
     def encode(self):
         import struct
         return struct.pack('<iii', self.catalog_id, self.permission, self.quantity)
-
-
-def freeze(value):
-    if isinstance(value, Mapping):
-        return MappingProxyType({k: freeze(v) for k, v in value.items()})
-    if isinstance(value, (list, tuple)):
-        return tuple(freeze(v) for v in value)
-    return value
 
 
 @dataclass(frozen=True)
@@ -75,6 +69,23 @@ class CardAction:
     action_id: int
     label: str
     attributes: Mapping = field(repr=False)
+    target_groups: tuple[TargetGroup, ...] = ()
+    modes: ModeSpec | None = None
+    cast_options: str = ''
+    is_mana_ability: bool = False
+    is_cast: bool = False
+    attack_victim_id: int | None = None
+    non_game: bool = False
+    can_perform_locally: bool = False
+    tap_locally: bool = False
+
+    def legal_targets(self, observation, group_index, *, modes=None, chosen=()):
+        from .actions import legal_targets_for
+        return legal_targets_for(observation, self, group_index, modes=modes, chosen=chosen)
+
+    def target_groups_for(self, modes=None):
+        from .actions import selected_groups
+        return selected_groups(self, modes)[1]
 
 
 @dataclass(frozen=True)
@@ -88,6 +99,29 @@ class Observation:
     status: Mapping
     unknown_elements: tuple
     raw_state: bytes = field(repr=False)
+    selectors: tuple[Selector, ...] = ()
+    objects: Mapping = field(default_factory=lambda: freeze({}))
+    mana: tuple[ManaEntry, ...] = ()
+    damage: tuple[DamageAssignment, ...] = ()
+    ordering: tuple[Ordering, ...] = ()
+
+    @property
+    def stack(self):
+        return tuple(sorted((obj for obj in self.objects.values() if obj.zone == 1001728),
+                     key=lambda obj: obj.properties.get('ORDERED_ZONE_INDEX', 0)))
+
+    def actions_for(self, object_id):
+        """Include advertised actions on split/adventure/room child objects."""
+        pending, ids = [object_id], set()
+        while pending:
+            current = pending.pop()
+            if current in ids:
+                continue
+            ids.add(current)
+            obj = self.objects.get(current)
+            if obj is not None:
+                pending.extend(obj.facets)
+        return tuple(action for action in self.actions if action.card_id in ids)
 
 
 @dataclass(frozen=True)

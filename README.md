@@ -5,7 +5,7 @@ backend over TLS. It runs on Linux without Wine or the running MTGO client.
 The server runs the rules; callers choose actions. The package contains no bot
 policy, deck strategy, or local Magic rules engine.
 
-This first release builds on the authenticated connection and Legacy Burn
+Version 0.2.0 builds on the authenticated connection and Legacy Burn
 solitaire discovery in [docs/discovery](docs/discovery). Its wire definitions
 are pinned to client **3.4.159.4704**. It is not yet a complete implementation
 of every interaction type.
@@ -68,6 +68,10 @@ collection eligibility. `DeckList.response_code` retains the original server
 code (the observed complete-list response was 5).
 
 ## Submit a caller-selected action
+
+For structured targets, modes, selectors, mana, combat, and counters, see
+[the interaction API](docs/interactions.md). The APIs below remain available
+for callers that already know the wire values.
 
 ```python
 from patchwork_automaton import CardChoice, PromptChoice
@@ -145,21 +149,27 @@ interactions are implemented or tested.
 | Solitaire creation and game-server attachment | Implemented; original wire path exercised live |
 | Direct challenge, acceptance, host start, ready ACK, concession | Implemented; two-account Legacy Burn game exercised live |
 | Full/fragmented state, per-priority diffs, checksum validation | Implemented |
-| Card attributes, action descriptors, basic player counters | Decoded without card-specific rules |
-| Button choices, legacy prompt parameters, mana flags | Encoded; server-directed selection remains caller's job |
-| Current card-action envelope, targets, modes, extra mana | Encoded; advanced selection semantics not comprehensively validated |
+| Card attributes, counter maps, stack objects, split-card facets | Decoded and exposed as immutable objects |
+| All eight current UI descriptors | Decoded; typed selector responses with bounds/options checks |
+| Target groups and relationship constraints | Structured selections, conditional candidate filtering, deferred targets, distributions |
+| Modal actions | Available modes, repetitions, weights, fixed combinations, mode-dependent target groups |
+| Mana and costs | Source-specific mana payment; generic numeric/card selections for costs and alternatives |
+| Combat | Advertised attacker/blocker actions, per-creature ordering and damage assignments, final confirmation |
 | Unknown state elements, unknown UI selectors, other game messages | Preserved as raw data |
-| Ordering, divided damage, specialized numeric/selectors, complex costs | Need additional typed codecs and fixtures; raw escape hatch available |
+| Advanced interaction validation | Client-derived synthetic fixtures and saved-state replay; new shapes have not been exercised live |
 | Game-server account/index mapping | Implemented; two-player order exercised live |
 | Sideboarding, typed match results | Not fully modeled |
 | Tournament structures and joining queues/events | Not implemented |
 | Reconnect/resume | Explicit new login and attach; no transparent session resume |
 
 Arbitrary card IDs and decks can travel through the library. **Playing every
-card's complete interaction sequence is not yet guaranteed.** Adding a card
-normally means supporting a shared interaction shape, rather than implementing
-that card's rules. Unknown attribute encodings or incompatible schemas raise
-`ProtocolError` and end the connection instead of guessing.
+Modern card's complete interaction sequence is not yet guaranteed.** The
+shared choice types from the examined client are implemented, but exhaustive
+card coverage requires live acceptance tests and edge-case fixtures. Local
+card-name/type definitions are optional and needed for some selector menus
+and relationship checks. The library implements no local rules or cost solver.
+Unknown attribute encodings or incompatible schemas raise `ProtocolError`
+instead of guessing.
 
 ## Connection and event lifecycle
 
@@ -235,7 +245,9 @@ python3 -m pip wheel --no-deps --no-build-isolation .
 
 Tests use synthetic framed backend responses rather than credentials or live
 accounts. They cover public workflows, envelope negotiation, stale choices,
-disconnects, cancellation/timeouts, queue overflow, and codec boundaries.
+disconnects, cancellation/timeouts, queue overflow, codec boundaries, and
+advanced interaction shapes. The 0.2.0 implementation was also checked by
+replaying 82 previously captured observations without reconnecting accounts.
 No CI has been configured.
 
 Source provenance and protocol evidence are in `docs/discovery/`. The

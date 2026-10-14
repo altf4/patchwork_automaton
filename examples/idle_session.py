@@ -8,6 +8,7 @@ import signal
 import time
 
 from patchwork_automaton import AuthenticationError, MTGOClient, ProtocolError
+from patchwork_automaton import __version__
 
 
 def credentials(path):
@@ -48,7 +49,7 @@ async def run(args):
         matches = await client.current_matches()
         while client.connected and not stop.is_set():
             status = dict(pid=os.getpid(), connected=True, phase='authenticated',
-                          library_version='0.1.0', updated_at=time.time(),
+                          library_version=__version__, updated_at=time.time(),
                           decks_received=len(decks.decks), current_matches=len(matches),
                           heartbeats_answered=client.heartbeats_answered)
             if args.run_dir:
