@@ -1,0 +1,3107 @@
+{
+  "date": "2026-10-15",
+  "synthetic": true,
+  "metric": "Mean probability of the correct action on held-out one-decision tasks; not full-game win rate",
+  "gate": {
+    "minimum_branch_success_probability": 0.9,
+    "minimum_branch_greedy_accuracy": 0.95
+  },
+  "comparison": "Same seeds, initial policy metrics, model architecture, learning rate, example budget and evaluation. PPO adds rollout reuse, clipping, advantage normalization and KL stopping.",
+  "real_game_rewards": "Unchanged: terminal win/loss/draw only",
+  "source_reports": [
+    ".local/training/scenarios-v4-ppo/report.json",
+    ".local/training/scenarios-v4-confirmation/report.json"
+  ],
+  "summary": {
+    "ppo_passed": 0,
+    "actor_critic_passed": 1,
+    "seeds": 3,
+    "ppo_optimizer_steps": 15856,
+    "actor_critic_optimizer_steps": 4500,
+    "training_examples_per_algorithm": 216000,
+    "ppo_seconds": 1351.4874685810646,
+    "initial_metrics_identical": true
+  },
+  "ppo": {
+    "synthetic": true,
+    "objective": "one-decision terminal task success; not full-game wins",
+    "config": {
+      "directory": ".local/training/scenarios-v4-ppo",
+      "seeds": [
+        41,
+        42,
+        43
+      ],
+      "tasks": [
+        "mana",
+        "bolt_target",
+        "charm_mode"
+      ],
+      "updates": 1500,
+      "batch": 48,
+      "test_cases": 200,
+      "learning_rate": 0.001,
+      "candidate_interactions": true,
+      "player_readout": true,
+      "require_pass": true,
+      "algorithm": "ppo",
+      "ppo_epochs": 4,
+      "ppo_clip": 0.2,
+      "target_kl": 0.02,
+      "supervised_control": false
+    },
+    "runs": [
+      {
+        "seed": 41,
+        "initial": {
+          "need_white": {
+            "count": 102,
+            "greedy": 0.0,
+            "success_probability": 0.33232767646219213,
+            "random_probability": 0.333333333333333
+          },
+          "need_red": {
+            "count": 98,
+            "greedy": 0.0,
+            "success_probability": 0.3294163011774725,
+            "random_probability": 0.33333333333333287
+          },
+          "opponent_lethal": {
+            "count": 200,
+            "greedy": 1.0,
+            "success_probability": 0.3411893631517887,
+            "random_probability": 0.333333333333334
+          },
+          "direct_damage": {
+            "count": 87,
+            "greedy": 0.0,
+            "success_probability": 0.24742351095566803,
+            "random_probability": 0.25
+          },
+          "double_strike": {
+            "count": 113,
+            "greedy": 0.0,
+            "success_probability": 0.24857420678687306,
+            "random_probability": 0.25
+          }
+        },
+        "final": {
+          "need_white": {
+            "count": 102,
+            "greedy": 1.0,
+            "success_probability": 0.8144863469927919,
+            "random_probability": 0.333333333333333
+          },
+          "need_red": {
+            "count": 98,
+            "greedy": 1.0,
+            "success_probability": 0.9828273720887243,
+            "random_probability": 0.33333333333333287
+          },
+          "opponent_lethal": {
+            "count": 200,
+            "greedy": 1.0,
+            "success_probability": 0.9999066698551178,
+            "random_probability": 0.333333333333334
+          },
+          "direct_damage": {
+            "count": 87,
+            "greedy": 1.0,
+            "success_probability": 0.9976595345584826,
+            "random_probability": 0.25
+          },
+          "double_strike": {
+            "count": 113,
+            "greedy": 1.0,
+            "success_probability": 0.6949296287730732,
+            "random_probability": 0.25
+          }
+        },
+        "final_iid": {
+          "need_white": {
+            "count": 100,
+            "greedy": 1.0,
+            "success_probability": 0.9125158935785294,
+            "random_probability": 0.3333333333333329
+          },
+          "need_red": {
+            "count": 100,
+            "greedy": 1.0,
+            "success_probability": 0.9858307999372482,
+            "random_probability": 0.3333333333333329
+          },
+          "opponent_lethal": {
+            "count": 200,
+            "greedy": 1.0,
+            "success_probability": 0.9999111080169678,
+            "random_probability": 0.333333333333334
+          },
+          "double_strike": {
+            "count": 102,
+            "greedy": 1.0,
+            "success_probability": 0.6937391863149756,
+            "random_probability": 0.25
+          },
+          "direct_damage": {
+            "count": 98,
+            "greedy": 1.0,
+            "success_probability": 0.9973954807738868,
+            "random_probability": 0.25
+          }
+        },
+        "history": [
+          {
+            "update": 1,
+            "reward": -0.375,
+            "loss": 0.3902871310710907,
+            "gradient_norm": 0.6413842439651489,
+            "ppo": {
+              "loss": 0.3902871310710907,
+              "policy_loss": -0.08329728990793228,
+              "value_loss": 0.970598042011261,
+              "entropy": 1.1714621782302856,
+              "approx_kl": 0.027272582054138184,
+              "clip_fraction": 0.3541666567325592,
+              "gradient_norm": 0.6413842439651489,
+              "epochs": 3,
+              "steps": 3,
+              "early_stop": true
+            },
+            "monitor": {
+              "need_red": {
+                "count": 16,
+                "greedy": 1.0,
+                "success_probability": 0.3875611387193203,
+                "random_probability": 0.33333333333333326
+              },
+              "need_white": {
+                "count": 24,
+                "greedy": 0.0,
+                "success_probability": 0.3859054893255234,
+                "random_probability": 0.3333333333333332
+              },
+              "opponent_lethal": {
+                "count": 40,
+                "greedy": 1.0,
+                "success_probability": 0.38033729791641235,
+                "random_probability": 0.3333333333333335
+              },
+              "double_strike": {
+                "count": 21,
+                "greedy": 0.0,
+                "success_probability": 0.2804144805385953,
+                "random_probability": 0.25
+              },
+              "direct_damage": {
+                "count": 19,
+                "greedy": 1.0,
+                "success_probability": 0.28403221619756597,
+                "random_probability": 0.25
+              }
+            }
+          },
+          {
+            "update": 100,
+            "reward": 0.5833333134651184,
+            "loss": 0.35236555337905884,
+            "gradient_norm": 0.9919084906578064,
+            "ppo": {
+              "loss": 0.35236555337905884,
+              "policy_loss": 0.003479997394606471,
+              "value_loss": 0.7060763239860535,
+              "entropy": 0.41525956988334656,
+              "approx_kl": 0.021395036950707436,
+              "clip_fraction": 0.3333333432674408,
+              "gradient_norm": 0.9919084906578064,
+              "epochs": 4,
+              "steps": 4,
+              "early_stop": true
+            },
+            "monitor": {
+              "need_red": {
+                "count": 16,
+                "greedy": 0.0,
+                "success_probability": 0.44231153652071953,
+                "random_probability": 0.33333333333333326
+              },
+              "need_white": {
+                "count": 24,
+                "greedy": 1.0,
+                "success_probability": 0.5567750185728073,
+                "random_probability": 0.3333333333333332
+              },
+              "opponent_lethal": {
+                "count": 40,
+                "greedy": 1.0,
+                "success_probability": 0.999961206316948,
+                "random_probability": 0.3333333333333335
+              },
+              "double_strike": {
+                "count": 21,
+                "greedy": 1.0,
+                "success_probability": 0.7676459806306022,
+                "random_probability": 0.25
+              },
+              "direct_damage": {
+                "count": 19,
+                "greedy": 0.0,
+                "success_probability": 0.2307166355220895,
+                "random_probability": 0.25
+              }
+            }
+          },
+          {
+            "update": 200,
+            "reward": 0.5416666865348816,
+            "loss": 0.34818583726882935,
+            "gradient_norm": 0.3257386386394501,
+            "ppo": {
+              "loss": 0.34818583726882935,
+              "policy_loss": -0.002987007377669215,
+              "value_loss": 0.7117087244987488,
+              "entropy": 0.46815383434295654,
+              "approx_kl": 0.0004791377577930689,
+              "clip_fraction": 0.0,
+              "gradient_norm": 0.3257386386394501,
+              "epochs": 4,
+              "steps": 4,
+              "early_stop": false
+            },
+            "monitor": {
+              "need_red": {
+                "count": 16,
+                "greedy": 0.0,
+                "success_probability": 0.47984544932842255,
+                "random_probability": 0.33333333333333326
+              },
+              "need_white": {
+                "count": 24,
+                "greedy": 1.0,
+                "success_probability": 0.519288976987203,
+                "random_probability": 0.3333333333333332
+              },
+              "opponent_lethal": {
+                "count": 40,
+                "greedy": 1.0,
+                "success_probability": 0.9999376386404037,
+                "random_probability": 0.3333333333333335
+              },
+              "double_strike": {
+                "count": 21,
+                "greedy": 0.0,
+                "success_probability": 0.44437484656061443,
+                "random_probability": 0.25
+              },
+              "direct_damage": {
+                "count": 19,
+                "greedy": 1.0,
+                "success_probability": 0.5524469645399797,
+                "random_probability": 0.25
+              }
+            }
+          },
+          {
+            "update": 300,
+            "reward": 0.2916666567325592,
+            "loss": 0.33595842123031616,
+            "gradient_norm": 0.12053786963224411,
+            "ppo": {
+              "loss": 0.33595842123031616,
+              "policy_loss": -0.00021024297166150063,
+              "value_loss": 0.6819157600402832,
+              "entropy": 0.4789206087589264,
+              "approx_kl": 6.344983489725564e-07,
+              "clip_fraction": 0.0,
+              "gradient_norm": 0.12053786963224411,
+              "epochs": 4,
+              "steps": 4,
+              "early_stop": false
+            },
+            "monitor": {
+              "need_red": {
+                "count": 16,
+                "greedy": 0.4375,
+                "success_probability": 0.49950291588902473,
+                "random_probability": 0.33333333333333326
+              },
+              "need_white": {
+                "count": 24,
+                "greedy": 0.5,
+                "success_probability": 0.4992012071112792,
+                "random_probability": 0.3333333333333332
+              },
+              "opponent_lethal": {
+                "count": 40,
+                "greedy": 1.0,
+                "success_probability": 0.9999999403953552,
+                "random_probability": 0.3333333333333335
+              },
+              "double_strike": {
+                "count": 21,
+                "greedy": 1.0,
+                "success_probability": 0.49870153126262484,
+                "random_probability": 0.25
+              },
+              "direct_damage": {
+                "count": 19,
+                "greedy": 0.0,
+                "success_probability": 0.4939698780837812,
+                "random_probability": 0.25
+              }
+            }
+          },
+          {
+            "update": 400,
+            "reward": 0.375,
+            "loss": 0.32321619987487793,
+            "gradient_norm": 0.13859964907169342,
+            "ppo": {
+              "loss": 0.32321619987487793,
+              "policy_loss": -0.005321184638887644,
+              "value_loss": 0.6663491725921631,
+              "entropy": 0.4637211859226227,
+              "approx_kl": 0.0009728400618769228,
+              "clip_fraction": 0.0,
+              "gradient_norm": 0.13859964907169342,
+              "epochs": 4,
+              "steps": 4,
+              "early_stop": false
+            },
+            "monitor": {
+              "need_red": {
+                "count": 16,
+                "greedy": 0.0,
+                "success_probability": 0.4980194326490164,
+                "random_probability": 0.33333333333333326
+              },
+              "need_white": {
+                "count": 24,
+                "greedy": 1.0,
+                "success_probability": 0.502061165869236,
+                "random_probability": 0.3333333333333332
+              },
+              "opponent_lethal": {
+                "count": 40,
+                "greedy": 1.0,
+                "success_probability": 0.9999999403953552,
+                "random_probability": 0.3333333333333335
+              },
+              "double_strike": {
+                "count": 21,
+                "greedy": 1.0,
+                "success_probability": 0.5177714200246901,
+                "random_probability": 0.25
+              },
+              "direct_damage": {
+                "count": 19,
+                "greedy": 0.0,
+                "success_probability": 0.4819490925261849,
+                "random_probability": 0.25
+              }
+            }
+          },
+          {
+            "update": 500,
+            "reward": 0.25,
+            "loss": 0.31780678033828735,
+            "gradient_norm": 0.2166806161403656,
+            "ppo": {
+              "loss": 0.31780678033828735,
+              "policy_loss": -0.008850435726344585,
+              "value_loss": 0.66362065076828,
+              "entropy": 0.5153127312660217,
+              "approx_kl": 0.0014426031848415732,
+              "clip_fraction": 0.0,
+              "gradient_norm": 0.2166806161403656,
+              "epochs": 4,
+              "steps": 4,
+              "early_stop": false
+            },
+            "monitor": {
+              "need_red": {
+                "count": 16,
+                "greedy": 0.5625,
+                "success_probability": 0.4882788863033056,
+                "random_probability": 0.33333333333333326
+              },
+              "need_white": {
+                "count": 24,
+                "greedy": 0.5,
+                "success_probability": 0.5132927186787128,
+                "random_probability": 0.3333333333333332
+              },
+              "opponent_lethal": {
+                "count": 40,
+                "greedy": 1.0,
+                "success_probability": 0.9999999403953552,
+                "random_probability": 0.3333333333333335
+              },
+              "double_strike": {
+                "count": 21,
+                "greedy": 1.0,
+                "success_probability": 0.49543038720176336,
+                "random_probability": 0.25
+              },
+              "direct_damage": {
+                "count": 19,
+                "greedy": 0.0,
+                "success_probability": 0.47173952585772466,
+                "random_probability": 0.25
+              }
+            }
+          },
+          {
+            "update": 600,
+            "reward": 0.5,
+            "loss": 0.29762938618659973,
+            "gradient_norm": 1.4655276536941528,
+            "ppo": {
+              "loss": 0.29762938618659973,
+              "policy_loss": -0.014090999029576778,
+              "value_loss": 0.6314130425453186,
+              "entropy": 0.398616224527359,
+              "approx_kl": 0.0033146117348223925,
+              "clip_fraction": 0.0,
+              "gradient_norm": 1.4655276536941528,
+              "epochs": 4,
+              "steps": 4,
+              "early_stop": false
+            },
+            "monitor": {
+              "need_red": {
+                "count": 16,
+                "greedy": 1.0,
+                "success_probability": 0.9823340438306332,
+                "random_probability": 0.33333333333333326
+              },
+              "need_white": {
+                "count": 24,
+                "greedy": 0.0,
+                "success_probability": 0.489907156676054,
+                "random_probability": 0.3333333333333332
+              },
+              "opponent_lethal": {
+                "count": 40,
+                "greedy": 1.0,
+                "success_probability": 0.9999999403953552,
+                "random_probability": 0.3333333333333335
+              },
+              "double_strike": {
+                "count": 21,
+                "greedy": 1.0,
+                "success_probability": 0.5080328697250003,
+                "random_probability": 0.25
+              },
+              "direct_damage": {
+                "count": 19,
+                "greedy": 0.0,
+                "success_probability": 0.47698659332175003,
+                "random_probability": 0.25
+              }
+            }
+          },
+          {
+            "update": 700,
+            "reward": 0.2916666567325592,
+            "loss": 0.3554549515247345,
+            "gradient_norm": 3.6589126586914062,
+            "ppo": {
+              "loss": 0.3554549515247345,
+              "policy_loss": 0.0025096535682678223,
+              "value_loss": 0.713919460773468,
+              "entropy": 0.40144339203834534,
+              "approx_kl": 0.019374264404177666,
+              "clip_fraction": 0.3333333432674408,
+              "gradient_norm": 3.6589126586914062,
+              "epochs": 4,
+              "steps": 4,
+              "early_stop": false
+            },
+            "monitor": {
+              "need_red": {
+                "count": 16,
+                "greedy": 1.0,
+                "success_probability": 0.9838133566081524,
+                "random_probability": 0.33333333333333326
+              },
+              "need_white": {
+                "count": 24,
+                "greedy": 0.0,
+                "success_probability": 0.49766283358136815,
+                "random_probability": 0.3333333333333332
+              },
+              "opponent_lethal": {
+                "count": 40,
+                "greedy": 1.0,
+                "success_probability": 0.993929372727871,
+                "random_probability": 0.3333333333333335
+              },
+              "double_strike": {
+                "count": 21,
+                "greedy": 0.0,
+                "success_probability": 0.4365785136109307,
+                "random_probability": 0.25
+              },
+              "direct_damage": {
+                "count": 19,
+                "greedy": 1.0,
+                "success_probability": 0.5964239239692688,
+                "random_probability": 0.25
+              }
+            }
+          },
+          {
+            "update": 800,
+            "reward": 0.75,
+            "loss": 0.26383543014526367,
+            "gradient_norm": 6.308408260345459,
+            "ppo": {
+              "loss": 0.26383543014526367,
+              "policy_loss": 0.055354297161102295,
+              "value_loss": 0.42287805676460266,
+              "entropy": 0.2957881987094879,
+              "approx_kl": 0.0428941547870636,
+              "clip_fraction": 0.3333333432674408,
+              "gradient_norm": 6.308408260345459,
+              "epochs": 1,
+              "steps": 1,
+              "early_stop": true
+            },
+            "monitor": {
+              "need_red": {
+                "count": 16,
+                "greedy": 1.0,
+                "success_probability": 0.9711378365755081,
+                "random_probability": 0.33333333333333326
+              },
+              "need_white": {
+                "count": 24,
+                "greedy": 1.0,
+                "success_probability": 0.8023155381282171,
+                "random_probability": 0.3333333333333332
+              },
+              "opponent_lethal": {
+                "count": 40,
+                "greedy": 1.0,
+                "success_probability": 0.9999998509883881,
+                "random_probability": 0.3333333333333335
+              },
+              "double_strike": {
+                "count": 21,
+                "greedy": 1.0,
+                "success_probability": 0.7509145027115232,
+                "random_probability": 0.25
+              },
+              "direct_damage": {
+                "count": 19,
+                "greedy": 0.0,
+                "success_probability": 0.3372320924934588,
+                "random_probability": 0.25
+              }
+            }
+          },
+          {
+            "update": 900,
+            "reward": 0.5833333134651184,
+            "loss": 0.3861944079399109,
+            "gradient_norm": 0.09520810097455978,
+            "ppo": {
+              "loss": 0.3861944079399109,
+              "policy_loss": -0.02050711214542389,
+              "value_loss": 0.819549560546875,
+              "entropy": 0.3073289394378662,
+              "approx_kl": 0.005440900102257729,
+              "clip_fraction": 0.1041666641831398,
+              "gradient_norm": 0.09520810097455978,
+              "epochs": 4,
+              "steps": 4,
+              "early_stop": false
+            },
+            "monitor": {
+              "need_red": {
+                "count": 16,
+                "greedy": 1.0,
+                "success_probability": 0.9862476550042629,
+                "random_probability": 0.33333333333333326
+              },
+              "need_white": {
+                "count": 24,
+                "greedy": 1.0,
+                "success_probability": 0.935925212999185,
+                "random_probability": 0.3333333333333332
+              },
+              "opponent_lethal": {
+                "count": 40,
+                "greedy": 1.0,
+                "success_probability": 0.5002789810299874,
+                "random_probability": 0.3333333333333335
+              },
+              "double_strike": {
+                "count": 21,
+                "greedy": 1.0,
+                "success_probability": 0.937865572316306,
+                "random_probability": 0.25
+              },
+              "direct_damage": {
+                "count": 19,
+                "greedy": 1.0,
+                "success_probability": 0.9954536368972376,
+                "random_probability": 0.25
+              }
+            }
+          },
+          {
+            "update": 1000,
+            "reward": 0.375,
+            "loss": 0.488319456577301,
+            "gradient_norm": 11.109464645385742,
+            "ppo": {
+              "loss": 0.488319456577301,
+              "policy_loss": 0.06531741470098495,
+              "value_loss": 0.8553223609924316,
+              "entropy": 0.4659156799316406,
+              "approx_kl": 0.027623964473605156,
+              "clip_fraction": 0.2916666567325592,
+              "gradient_norm": 11.109464645385742,
+              "epochs": 2,
+              "steps": 2,
+              "early_stop": true
+            },
+            "monitor": {
+              "need_red": {
+                "count": 16,
+                "greedy": 1.0,
+                "success_probability": 0.9863304533064365,
+                "random_probability": 0.33333333333333326
+              },
+              "need_white": {
+                "count": 24,
+                "greedy": 1.0,
+                "success_probability": 0.9021786351998647,
+                "random_probability": 0.3333333333333332
+              },
+              "opponent_lethal": {
+                "count": 40,
+                "greedy": 1.0,
+                "success_probability": 0.5000023961067199,
+                "random_probability": 0.3333333333333335
+              },
+              "double_strike": {
+                "count": 21,
+                "greedy": 0.0,
+                "success_probability": 0.25067993430864244,
+                "random_probability": 0.25
+              },
+              "direct_damage": {
+                "count": 19,
+                "greedy": 1.0,
+                "success_probability": 0.8107499292022303,
+                "random_probability": 0.25
+              }
+            }
+          },
+          {
+            "update": 1100,
+            "reward": 0.625,
+            "loss": 0.2565903067588806,
+            "gradient_norm": 1.52048659324646,
+            "ppo": {
+              "loss": 0.2565903067588806,
+              "policy_loss": -0.01249056588858366,
+              "value_loss": 0.546066164970398,
+              "entropy": 0.39522090554237366,
+              "approx_kl": 0.0003704609116539359,
+              "clip_fraction": 0.0,
+              "gradient_norm": 1.52048659324646,
+              "epochs": 4,
+              "steps": 4,
+              "early_stop": false
+            },
+            "monitor": {
+              "need_red": {
+                "count": 16,
+                "greedy": 1.0,
+                "success_probability": 0.9950800985097885,
+                "random_probability": 0.33333333333333326
+              },
+              "need_white": {
+                "count": 24,
+                "greedy": 1.0,
+                "success_probability": 0.9864707415302595,
+                "random_probability": 0.3333333333333332
+              },
+              "opponent_lethal": {
+                "count": 40,
+                "greedy": 1.0,
+                "success_probability": 0.5000020682811737,
+                "random_probability": 0.3333333333333335
+              },
+              "double_strike": {
+                "count": 21,
+                "greedy": 1.0,
+                "success_probability": 0.7715388167472113,
+                "random_probability": 0.25
+              },
+              "direct_damage": {
+                "count": 19,
+                "greedy": 1.0,
+                "success_probability": 0.899996911224566,
+                "random_probability": 0.25
+              }
+            }
+          },
+          {
+            "update": 1200,
+            "reward": 0.4583333432674408,
+            "loss": 0.26326432824134827,
+            "gradient_norm": 31.493560791015625,
+            "ppo": {
+              "loss": 0.26326432824134827,
+              "policy_loss": -0.03222665190696716,
+              "value_loss": 0.597869873046875,
+              "entropy": 0.3443950116634369,
+              "approx_kl": 0.08421284705400467,
+              "clip_fraction": 0.2083333283662796,
+              "gradient_norm": 31.493560791015625,
+              "epochs": 1,
+              "steps": 1,
+              "early_stop": true
+            },
+            "monitor": {
+              "need_red": {
+                "count": 16,
+                "greedy": 1.0,
+                "success_probability": 0.9973870068788528,
+                "random_probability": 0.33333333333333326
+              },
+              "need_white": {
+                "count": 24,
+                "greedy": 1.0,
+                "success_probability": 0.991205928226312,
+                "random_probability": 0.3333333333333332
+              },
+              "opponent_lethal": {
+                "count": 40,
+                "greedy": 1.0,
+                "success_probability": 0.5000091940164566,
+                "random_probability": 0.3333333333333335
+              },
+              "double_strike": {
+                "count": 21,
+                "greedy": 1.0,
+                "success_probability": 0.7575359628314063,
+                "random_probability": 0.25
+              },
+              "direct_damage": {
+                "count": 19,
+                "greedy": 1.0,
+                "success_probability": 0.958763671548743,
+                "random_probability": 0.25
+              }
+            }
+          },
+          {
+            "update": 1300,
+            "reward": 0.9166666865348816,
+            "loss": 0.05250418558716774,
+            "gradient_norm": 18.387001037597656,
+            "ppo": {
+              "loss": 0.05250418558716774,
+              "policy_loss": -0.028251538053154945,
+              "value_loss": 0.165181502699852,
+              "entropy": 0.1835029572248459,
+              "approx_kl": 0.026149863377213478,
+              "clip_fraction": 0.3125,
+              "gradient_norm": 18.387001037597656,
+              "epochs": 1,
+              "steps": 1,
+              "early_stop": true
+            },
+            "monitor": {
+              "need_red": {
+                "count": 16,
+                "greedy": 1.0,
+                "success_probability": 0.997103851288557,
+                "random_probability": 0.33333333333333326
+              },
+              "need_white": {
+                "count": 24,
+                "greedy": 1.0,
+                "success_probability": 0.9904867485165596,
+                "random_probability": 0.3333333333333332
+              },
+              "opponent_lethal": {
+                "count": 40,
+                "greedy": 1.0,
+                "success_probability": 0.999741667509079,
+                "random_probability": 0.3333333333333335
+              },
+              "double_strike": {
+                "count": 21,
+                "greedy": 1.0,
+                "success_probability": 0.6906921721640087,
+                "random_probability": 0.25
+              },
+              "direct_damage": {
+                "count": 19,
+                "greedy": 1.0,
+                "success_probability": 0.9897405724776419,
+                "random_probability": 0.25
+              }
+            }
+          },
+          {
+            "update": 1400,
+            "reward": 0.9166666865348816,
+            "loss": 0.05149039253592491,
+            "gradient_norm": 1.3774828910827637,
+            "ppo": {
+              "loss": 0.05149039253592491,
+              "policy_loss": -0.04134153202176094,
+              "value_loss": 0.18656706809997559,
+              "entropy": 0.045160774141550064,
+              "approx_kl": 0.022372817620635033,
+              "clip_fraction": 0.0416666679084301,
+              "gradient_norm": 1.3774828910827637,
+              "epochs": 2,
+              "steps": 2,
+              "early_stop": true
+            },
+            "monitor": {
+              "need_red": {
+                "count": 16,
+                "greedy": 1.0,
+                "success_probability": 0.9989028014242649,
+                "random_probability": 0.33333333333333326
+              },
+              "need_white": {
+                "count": 24,
+                "greedy": 1.0,
+                "success_probability": 0.9587707966566086,
+                "random_probability": 0.3333333333333332
+              },
+              "opponent_lethal": {
+                "count": 40,
+                "greedy": 1.0,
+                "success_probability": 0.9999996602535248,
+                "random_probability": 0.3333333333333335
+              },
+              "double_strike": {
+                "count": 21,
+                "greedy": 1.0,
+                "success_probability": 0.994926875545865,
+                "random_probability": 0.25
+              },
+              "direct_damage": {
+                "count": 19,
+                "greedy": 1.0,
+                "success_probability": 0.9967444382215801,
+                "random_probability": 0.25
+              }
+            }
+          },
+          {
+            "update": 1500,
+            "reward": 1.0,
+            "loss": -0.07283396273851395,
+            "gradient_norm": 4.373686790466309,
+            "ppo": {
+              "loss": -0.07283396273851395,
+              "policy_loss": -0.07129276543855667,
+              "value_loss": 0.0006482426542788744,
+              "entropy": 0.18653196096420288,
+              "approx_kl": 0.0070825074799358845,
+              "clip_fraction": 0.1875,
+              "gradient_norm": 4.373686790466309,
+              "epochs": 4,
+              "steps": 4,
+              "early_stop": false
+            },
+            "monitor": {
+              "need_red": {
+                "count": 16,
+                "greedy": 1.0,
+                "success_probability": 0.985820010304451,
+                "random_probability": 0.33333333333333326
+              },
+              "need_white": {
+                "count": 24,
+                "greedy": 1.0,
+                "success_probability": 0.9124086499214172,
+                "random_probability": 0.3333333333333332
+              },
+              "opponent_lethal": {
+                "count": 40,
+                "greedy": 1.0,
+                "success_probability": 0.9999112248420715,
+                "random_probability": 0.3333333333333335
+              },
+              "double_strike": {
+                "count": 21,
+                "greedy": 1.0,
+                "success_probability": 0.693637870606922,
+                "random_probability": 0.25
+              },
+              "direct_damage": {
+                "count": 19,
+                "greedy": 1.0,
+                "success_probability": 0.9973963059877095,
+                "random_probability": 0.25
+              }
+            }
+          }
+        ],
+        "optimization_steps": 4889,
+        "kl_stopped_rollouts": 584,
+        "training_examples": 72000,
+        "parameters": 1431490,
+        "seconds": 424.2937983040465,
+        "passed": false
+      },
+      {
+        "seed": 42,
+        "initial": {
+          "need_white": {
+            "count": 98,
+            "greedy": 1.0,
+            "success_probability": 0.34237322028802364,
+            "random_probability": 0.33333333333333287
+          },
+          "need_red": {
+            "count": 102,
+            "greedy": 0.0,
+            "success_probability": 0.337048832692352,
+            "random_probability": 0.333333333333333
+          },
+          "opponent_lethal": {
+            "count": 200,
+            "greedy": 0.0,
+            "success_probability": 0.33636356979608534,
+            "random_probability": 0.333333333333334
+          },
+          "direct_damage": {
+            "count": 102,
+            "greedy": 0.0,
+            "success_probability": 0.25301972323772953,
+            "random_probability": 0.25
+          },
+          "double_strike": {
+            "count": 98,
+            "greedy": 0.0,
+            "success_probability": 0.2517495149252366,
+            "random_probability": 0.25
+          }
+        },
+        "final": {
+          "need_white": {
+            "count": 98,
+            "greedy": 0.5306122448979592,
+            "success_probability": 0.4999999701976776,
+            "random_probability": 0.33333333333333287
+          },
+          "need_red": {
+            "count": 102,
+            "greedy": 0.5098039215686274,
+            "success_probability": 0.4999999701976776,
+            "random_probability": 0.333333333333333
+          },
+          "opponent_lethal": {
+            "count": 200,
+            "greedy": 1.0,
+            "success_probability": 0.5000004503130913,
+            "random_probability": 0.333333333333334
+          },
+          "direct_damage": {
+            "count": 102,
+            "greedy": 1.0,
+            "success_probability": 0.7272739462992724,
+            "random_probability": 0.25
+          },
+          "double_strike": {
+            "count": 98,
+            "greedy": 0.0,
+            "success_probability": 0.27252520407949177,
+            "random_probability": 0.25
+          }
+        },
+        "final_iid": {
+          "need_white": {
+            "count": 103,
+            "greedy": 0.46601941747572817,
+            "success_probability": 0.4999999701976776,
+            "random_probability": 0.33333333333333304
+          },
+          "need_red": {
+            "count": 97,
+            "greedy": 0.5360824742268041,
+            "success_probability": 0.4999999701976776,
+            "random_probability": 0.33333333333333287
+          },
+          "opponent_lethal": {
+            "count": 200,
+            "greedy": 1.0,
+            "success_probability": 0.5000004211068153,
+            "random_probability": 0.333333333333334
+          },
+          "double_strike": {
+            "count": 87,
+            "greedy": 0.0,
+            "success_probability": 0.2725240481995988,
+            "random_probability": 0.25
+          },
+          "direct_damage": {
+            "count": 113,
+            "greedy": 1.0,
+            "success_probability": 0.7272716665689924,
+            "random_probability": 0.25
+          }
+        },
+        "history": [
+          {
+            "update": 1,
+            "reward": -0.375,
+            "loss": 0.34930023550987244,
+            "gradient_norm": 0.8999040722846985,
+            "ppo": {
+              "loss": 0.34930023550987244,
+              "policy_loss": -0.07295168191194534,
+              "value_loss": 0.8677602410316467,
+              "entropy": 1.1628221273422241,
+              "approx_kl": 0.028750181198120117,
+              "clip_fraction": 0.2916666567325592,
+              "gradient_norm": 0.8999040722846985,
+              "epochs": 4,
+              "steps": 4,
+              "early_stop": true
+            },
+            "monitor": {
+              "need_red": {
+                "count": 25,
+                "greedy": 0.0,
+                "success_probability": 0.396121940612793,
+                "random_probability": 0.3333333333333332
+              },
+              "need_white": {
+                "count": 15,
+                "greedy": 1.0,
+                "success_probability": 0.3972277263800303,
+                "random_probability": 0.33333333333333326
+              },
+              "opponent_lethal": {
+                "count": 40,
+                "greedy": 1.0,
+                "success_probability": 0.38444403260946275,
+                "random_probability": 0.3333333333333335
+              },
+              "direct_damage": {
+                "count": 18,
+                "greedy": 0.0,
+                "success_probability": 0.2871178554164039,
+                "random_probability": 0.25
+              },
+              "double_strike": {
+                "count": 22,
+                "greedy": 1.0,
+                "success_probability": 0.28741232644427905,
+                "random_probability": 0.25
+              }
+            }
+          },
+          {
+            "update": 100,
+            "reward": 0.6666666865348816,
+            "loss": 0.25632497668266296,
+            "gradient_norm": 4.067139148712158,
+            "ppo": {
+              "loss": 0.25632497668266296,
+              "policy_loss": -0.0222834050655365,
+              "value_loss": 0.5628182888031006,
+              "entropy": 0.28007519245147705,
+              "approx_kl": 0.022045694291591644,
+              "clip_fraction": 0.0416666679084301,
+              "gradient_norm": 4.067139148712158,
+              "epochs": 1,
+              "steps": 1,
+              "early_stop": true
+            },
+            "monitor": {
+              "need_red": {
+                "count": 25,
+                "greedy": 1.0,
+                "success_probability": 0.501448860168457,
+                "random_probability": 0.3333333333333332
+              },
+              "need_white": {
+                "count": 15,
+                "greedy": 0.0,
+                "success_probability": 0.49865214427312216,
+                "random_probability": 0.33333333333333326
+              },
+              "opponent_lethal": {
+                "count": 40,
+                "greedy": 1.0,
+                "success_probability": 0.9999280244112014,
+                "random_probability": 0.3333333333333335
+              },
+              "direct_damage": {
+                "count": 18,
+                "greedy": 1.0,
+                "success_probability": 0.9687537848949432,
+                "random_probability": 0.25
+              },
+              "double_strike": {
+                "count": 22,
+                "greedy": 1.0,
+                "success_probability": 0.9734580245884982,
+                "random_probability": 0.25
+              }
+            }
+          },
+          {
+            "update": 200,
+            "reward": 0.4166666567325592,
+            "loss": 0.4602559804916382,
+            "gradient_norm": 4.003616809844971,
+            "ppo": {
+              "loss": 0.4602559804916382,
+              "policy_loss": -0.04207548126578331,
+              "value_loss": 1.011718988418579,
+              "entropy": 0.35280266404151917,
+              "approx_kl": 0.10479804128408432,
+              "clip_fraction": 0.2291666716337204,
+              "gradient_norm": 4.003616809844971,
+              "epochs": 1,
+              "steps": 1,
+              "early_stop": true
+            },
+            "monitor": {
+              "need_red": {
+                "count": 25,
+                "greedy": 0.0,
+                "success_probability": 0.49949015498161314,
+                "random_probability": 0.3333333333333332
+              },
+              "need_white": {
+                "count": 15,
+                "greedy": 1.0,
+                "success_probability": 0.5004590153694153,
+                "random_probability": 0.33333333333333326
+              },
+              "opponent_lethal": {
+                "count": 40,
+                "greedy": 1.0,
+                "success_probability": 0.999341008067131,
+                "random_probability": 0.3333333333333335
+              },
+              "direct_damage": {
+                "count": 18,
+                "greedy": 1.0,
+                "success_probability": 0.9603206217288971,
+                "random_probability": 0.25
+              },
+              "double_strike": {
+                "count": 22,
+                "greedy": 0.0,
+                "success_probability": 0.4167797118425369,
+                "random_probability": 0.25
+              }
+            }
+          },
+          {
+            "update": 300,
+            "reward": 0.75,
+            "loss": 0.13874749839305878,
+            "gradient_norm": 0.5868167877197266,
+            "ppo": {
+              "loss": 0.13874749839305878,
+              "policy_loss": -0.02026219852268696,
+              "value_loss": 0.32338473200798035,
+              "entropy": 0.2682671546936035,
+              "approx_kl": 0.0007536414195783436,
+              "clip_fraction": 0.0,
+              "gradient_norm": 0.5868167877197266,
+              "epochs": 4,
+              "steps": 4,
+              "early_stop": false
+            },
+            "monitor": {
+              "need_red": {
+                "count": 25,
+                "greedy": 0.0,
+                "success_probability": 0.4462753665447235,
+                "random_probability": 0.3333333333333332
+              },
+              "need_white": {
+                "count": 15,
+                "greedy": 1.0,
+                "success_probability": 0.5544959982236226,
+                "random_probability": 0.33333333333333326
+              },
+              "opponent_lethal": {
+                "count": 40,
+                "greedy": 1.0,
+                "success_probability": 0.9999998211860657,
+                "random_probability": 0.3333333333333335
+              },
+              "direct_damage": {
+                "count": 18,
+                "greedy": 1.0,
+                "success_probability": 0.9706595506933,
+                "random_probability": 0.25
+              },
+              "double_strike": {
+                "count": 22,
+                "greedy": 1.0,
+                "success_probability": 0.9891885302283547,
+                "random_probability": 0.25
+              }
+            }
+          },
+          {
+            "update": 400,
+            "reward": 0.5833333134651184,
+            "loss": 0.14863401651382446,
+            "gradient_norm": 0.19585998356342316,
+            "ppo": {
+              "loss": 0.14863401651382446,
+              "policy_loss": -0.011019401252269745,
+              "value_loss": 0.3240298926830292,
+              "entropy": 0.23615433275699615,
+              "approx_kl": 0.0007870933623053133,
+              "clip_fraction": 0.0,
+              "gradient_norm": 0.19585998356342316,
+              "epochs": 4,
+              "steps": 4,
+              "early_stop": false
+            },
+            "monitor": {
+              "need_red": {
+                "count": 25,
+                "greedy": 0.4,
+                "success_probability": 0.439813175201416,
+                "random_probability": 0.3333333333333332
+              },
+              "need_white": {
+                "count": 15,
+                "greedy": 0.4666666666666667,
+                "success_probability": 0.545370997985204,
+                "random_probability": 0.33333333333333326
+              },
+              "opponent_lethal": {
+                "count": 40,
+                "greedy": 1.0,
+                "success_probability": 0.9999996095895767,
+                "random_probability": 0.3333333333333335
+              },
+              "direct_damage": {
+                "count": 18,
+                "greedy": 1.0,
+                "success_probability": 0.9954642123646207,
+                "random_probability": 0.25
+              },
+              "double_strike": {
+                "count": 22,
+                "greedy": 1.0,
+                "success_probability": 0.9983494092117656,
+                "random_probability": 0.25
+              }
+            }
+          },
+          {
+            "update": 500,
+            "reward": 0.6666666865348816,
+            "loss": 0.15885592997074127,
+            "gradient_norm": 0.13084536790847778,
+            "ppo": {
+              "loss": 0.15885592997074127,
+              "policy_loss": -0.0056087723933160305,
+              "value_loss": 0.33352360129356384,
+              "entropy": 0.22971034049987793,
+              "approx_kl": 0.006190912798047066,
+              "clip_fraction": 0.1875,
+              "gradient_norm": 0.13084536790847778,
+              "epochs": 4,
+              "steps": 4,
+              "early_stop": false
+            },
+            "monitor": {
+              "need_red": {
+                "count": 25,
+                "greedy": 0.0,
+                "success_probability": 0.4186908841133118,
+                "random_probability": 0.3333333333333332
+              },
+              "need_white": {
+                "count": 15,
+                "greedy": 1.0,
+                "success_probability": 0.562431271870931,
+                "random_probability": 0.33333333333333326
+              },
+              "opponent_lethal": {
+                "count": 40,
+                "greedy": 1.0,
+                "success_probability": 0.9999652653932571,
+                "random_probability": 0.3333333333333335
+              },
+              "direct_damage": {
+                "count": 18,
+                "greedy": 1.0,
+                "success_probability": 0.9973618686199188,
+                "random_probability": 0.25
+              },
+              "double_strike": {
+                "count": 22,
+                "greedy": 1.0,
+                "success_probability": 0.9989124048839916,
+                "random_probability": 0.25
+              }
+            }
+          },
+          {
+            "update": 600,
+            "reward": 0.75,
+            "loss": 0.16326628625392914,
+            "gradient_norm": 0.0828942134976387,
+            "ppo": {
+              "loss": 0.16326628625392914,
+              "policy_loss": -8.623053872724995e-05,
+              "value_loss": 0.33150625228881836,
+              "entropy": 0.24006076157093048,
+              "approx_kl": 1.0547912552283378e-06,
+              "clip_fraction": 0.0,
+              "gradient_norm": 0.0828942134976387,
+              "epochs": 4,
+              "steps": 4,
+              "early_stop": false
+            },
+            "monitor": {
+              "need_red": {
+                "count": 25,
+                "greedy": 0.4,
+                "success_probability": 0.49991607427597046,
+                "random_probability": 0.3333333333333332
+              },
+              "need_white": {
+                "count": 15,
+                "greedy": 0.4666666666666667,
+                "success_probability": 0.5000416556994121,
+                "random_probability": 0.33333333333333326
+              },
+              "opponent_lethal": {
+                "count": 40,
+                "greedy": 1.0,
+                "success_probability": 0.9999999403953552,
+                "random_probability": 0.3333333333333335
+              },
+              "direct_damage": {
+                "count": 18,
+                "greedy": 1.0,
+                "success_probability": 0.9949560628996955,
+                "random_probability": 0.25
+              },
+              "double_strike": {
+                "count": 22,
+                "greedy": 1.0,
+                "success_probability": 0.996560429984873,
+                "random_probability": 0.25
+              }
+            }
+          },
+          {
+            "update": 700,
+            "reward": 0.7083333134651184,
+            "loss": 0.16754625737667084,
+            "gradient_norm": 0.07082752883434296,
+            "ppo": {
+              "loss": 0.16754625737667084,
+              "policy_loss": -2.2649765014648438e-06,
+              "value_loss": 0.339784175157547,
+              "entropy": 0.2343563586473465,
+              "approx_kl": 5.548113080067196e-10,
+              "clip_fraction": 0.0,
+              "gradient_norm": 0.07082752883434296,
+              "epochs": 4,
+              "steps": 4,
+              "early_stop": false
+            },
+            "monitor": {
+              "need_red": {
+                "count": 25,
+                "greedy": 0.4,
+                "success_probability": 0.4999814939498901,
+                "random_probability": 0.3333333333333332
+              },
+              "need_white": {
+                "count": 15,
+                "greedy": 0.4666666666666667,
+                "success_probability": 0.5000117063522339,
+                "random_probability": 0.33333333333333326
+              },
+              "opponent_lethal": {
+                "count": 40,
+                "greedy": 1.0,
+                "success_probability": 0.9988409399986267,
+                "random_probability": 0.3333333333333335
+              },
+              "direct_damage": {
+                "count": 18,
+                "greedy": 1.0,
+                "success_probability": 0.9999713169203864,
+                "random_probability": 0.25
+              },
+              "double_strike": {
+                "count": 22,
+                "greedy": 1.0,
+                "success_probability": 0.9997692541642622,
+                "random_probability": 0.25
+              }
+            }
+          },
+          {
+            "update": 800,
+            "reward": 0.5833333134651184,
+            "loss": 0.1646413803100586,
+            "gradient_norm": 0.08647973835468292,
+            "ppo": {
+              "loss": 0.1646413803100586,
+              "policy_loss": 8.804102435533423e-06,
+              "value_loss": 0.33401358127593994,
+              "entropy": 0.23742158710956573,
+              "approx_kl": 6.77968969853282e-09,
+              "clip_fraction": 0.0,
+              "gradient_norm": 0.08647973835468292,
+              "epochs": 4,
+              "steps": 4,
+              "early_stop": false
+            },
+            "monitor": {
+              "need_red": {
+                "count": 25,
+                "greedy": 0.4,
+                "success_probability": 0.4999709701538086,
+                "random_probability": 0.3333333333333332
+              },
+              "need_white": {
+                "count": 15,
+                "greedy": 0.4666666666666667,
+                "success_probability": 0.5000182350476583,
+                "random_probability": 0.33333333333333326
+              },
+              "opponent_lethal": {
+                "count": 40,
+                "greedy": 1.0,
+                "success_probability": 0.9999999403953552,
+                "random_probability": 0.3333333333333335
+              },
+              "direct_damage": {
+                "count": 18,
+                "greedy": 1.0,
+                "success_probability": 0.9988561703099145,
+                "random_probability": 0.25
+              },
+              "double_strike": {
+                "count": 22,
+                "greedy": 1.0,
+                "success_probability": 0.995868677442724,
+                "random_probability": 0.25
+              }
+            }
+          },
+          {
+            "update": 900,
+            "reward": 0.5833333134651184,
+            "loss": 0.16573484241962433,
+            "gradient_norm": 0.09069214016199112,
+            "ppo": {
+              "loss": 0.16573484241962433,
+              "policy_loss": 5.672375209542224e-06,
+              "value_loss": 0.3361445367336273,
+              "entropy": 0.2343107908964157,
+              "approx_kl": 5.814649317592568e-10,
+              "clip_fraction": 0.0,
+              "gradient_norm": 0.09069214016199112,
+              "epochs": 4,
+              "steps": 4,
+              "early_stop": false
+            },
+            "monitor": {
+              "need_red": {
+                "count": 25,
+                "greedy": 0.4,
+                "success_probability": 0.49994129180908203,
+                "random_probability": 0.3333333333333332
+              },
+              "need_white": {
+                "count": 15,
+                "greedy": 0.4666666666666667,
+                "success_probability": 0.5000292976697286,
+                "random_probability": 0.33333333333333326
+              },
+              "opponent_lethal": {
+                "count": 40,
+                "greedy": 1.0,
+                "success_probability": 0.9999999403953552,
+                "random_probability": 0.3333333333333335
+              },
+              "direct_damage": {
+                "count": 18,
+                "greedy": 1.0,
+                "success_probability": 0.9975308842129178,
+                "random_probability": 0.25
+              },
+              "double_strike": {
+                "count": 22,
+                "greedy": 1.0,
+                "success_probability": 0.9999896396290172,
+                "random_probability": 0.25
+              }
+            }
+          },
+          {
+            "update": 1000,
+            "reward": 0.75,
+            "loss": 0.16558031737804413,
+            "gradient_norm": 0.09982165694236755,
+            "ppo": {
+              "loss": 0.16558031737804413,
+              "policy_loss": -3.808736801147461e-05,
+              "value_loss": 0.3362525403499603,
+              "entropy": 0.25078585743904114,
+              "approx_kl": 1.237869611259157e-07,
+              "clip_fraction": 0.0,
+              "gradient_norm": 0.09982165694236755,
+              "epochs": 4,
+              "steps": 4,
+              "early_stop": false
+            },
+            "monitor": {
+              "need_red": {
+                "count": 25,
+                "greedy": 0.4,
+                "success_probability": 0.49998280525207517,
+                "random_probability": 0.3333333333333332
+              },
+              "need_white": {
+                "count": 15,
+                "greedy": 0.4666666666666667,
+                "success_probability": 0.5000110824902853,
+                "random_probability": 0.33333333333333326
+              },
+              "opponent_lethal": {
+                "count": 40,
+                "greedy": 1.0,
+                "success_probability": 0.9999999403953552,
+                "random_probability": 0.3333333333333335
+              },
+              "direct_damage": {
+                "count": 18,
+                "greedy": 1.0,
+                "success_probability": 0.9849854608376821,
+                "random_probability": 0.25
+              },
+              "double_strike": {
+                "count": 22,
+                "greedy": 1.0,
+                "success_probability": 0.999970176003196,
+                "random_probability": 0.25
+              }
+            }
+          },
+          {
+            "update": 1100,
+            "reward": 0.5,
+            "loss": 0.161558136343956,
+            "gradient_norm": 0.1649906486272812,
+            "ppo": {
+              "loss": 0.161558136343956,
+              "policy_loss": -0.00010465085506439209,
+              "value_loss": 0.32809147238731384,
+              "entropy": 0.2382948398590088,
+              "approx_kl": 3.548639995187841e-07,
+              "clip_fraction": 0.0,
+              "gradient_norm": 0.1649906486272812,
+              "epochs": 4,
+              "steps": 4,
+              "early_stop": false
+            },
+            "monitor": {
+              "need_red": {
+                "count": 25,
+                "greedy": 0.4,
+                "success_probability": 0.49998136997222903,
+                "random_probability": 0.3333333333333332
+              },
+              "need_white": {
+                "count": 15,
+                "greedy": 0.4666666666666667,
+                "success_probability": 0.5000103116035461,
+                "random_probability": 0.33333333333333326
+              },
+              "opponent_lethal": {
+                "count": 40,
+                "greedy": 1.0,
+                "success_probability": 0.9999999403953552,
+                "random_probability": 0.3333333333333335
+              },
+              "direct_damage": {
+                "count": 18,
+                "greedy": 1.0,
+                "success_probability": 0.9971035454008315,
+                "random_probability": 0.25
+              },
+              "double_strike": {
+                "count": 22,
+                "greedy": 1.0,
+                "success_probability": 0.9967283037575808,
+                "random_probability": 0.25
+              }
+            }
+          },
+          {
+            "update": 1200,
+            "reward": 0.5416666865348816,
+            "loss": 0.2201363742351532,
+            "gradient_norm": 0.15015581250190735,
+            "ppo": {
+              "loss": 0.2201363742351532,
+              "policy_loss": -0.02614772878587246,
+              "value_loss": 0.49784934520721436,
+              "entropy": 0.26405763626098633,
+              "approx_kl": 0.02495691180229187,
+              "clip_fraction": 0.0416666679084301,
+              "gradient_norm": 0.15015581250190735,
+              "epochs": 4,
+              "steps": 4,
+              "early_stop": true
+            },
+            "monitor": {
+              "need_red": {
+                "count": 25,
+                "greedy": 0.4,
+                "success_probability": 0.4999926352500916,
+                "random_probability": 0.3333333333333332
+              },
+              "need_white": {
+                "count": 15,
+                "greedy": 0.4666666666666667,
+                "success_probability": 0.500003472963969,
+                "random_probability": 0.33333333333333326
+              },
+              "opponent_lethal": {
+                "count": 40,
+                "greedy": 1.0,
+                "success_probability": 0.9999999403953552,
+                "random_probability": 0.3333333333333335
+              },
+              "direct_damage": {
+                "count": 18,
+                "greedy": 1.0,
+                "success_probability": 0.9420017633173201,
+                "random_probability": 0.25
+              },
+              "double_strike": {
+                "count": 22,
+                "greedy": 1.0,
+                "success_probability": 0.9996180913665078,
+                "random_probability": 0.25
+              }
+            }
+          },
+          {
+            "update": 1300,
+            "reward": -0.0416666679084301,
+            "loss": 0.6932004690170288,
+            "gradient_norm": 0.4833964705467224,
+            "ppo": {
+              "loss": 0.6932004690170288,
+              "policy_loss": -0.007992858998477459,
+              "value_loss": 1.415911316871643,
+              "entropy": 0.6762332320213318,
+              "approx_kl": 0.02225017547607422,
+              "clip_fraction": 0.3333333432674408,
+              "gradient_norm": 0.4833964705467224,
+              "epochs": 2,
+              "steps": 2,
+              "early_stop": true
+            },
+            "monitor": {
+              "need_red": {
+                "count": 25,
+                "greedy": 0.4,
+                "success_probability": 0.4984661769866943,
+                "random_probability": 0.3333333333333332
+              },
+              "need_white": {
+                "count": 15,
+                "greedy": 0.4666666666666667,
+                "success_probability": 0.5007027566432953,
+                "random_probability": 0.33333333333333326
+              },
+              "opponent_lethal": {
+                "count": 40,
+                "greedy": 0.025,
+                "success_probability": 0.49999839067459106,
+                "random_probability": 0.3333333333333335
+              },
+              "direct_damage": {
+                "count": 18,
+                "greedy": 0.0,
+                "success_probability": 0.34189193612999386,
+                "random_probability": 0.25
+              },
+              "double_strike": {
+                "count": 22,
+                "greedy": 1.0,
+                "success_probability": 0.6585809209130027,
+                "random_probability": 0.25
+              }
+            }
+          },
+          {
+            "update": 1400,
+            "reward": 0.0416666679084301,
+            "loss": 0.47663652896881104,
+            "gradient_norm": 0.8247525691986084,
+            "ppo": {
+              "loss": 0.47663652896881104,
+              "policy_loss": -0.015396569855511189,
+              "value_loss": 0.9979918599128723,
+              "entropy": 0.6962850689888,
+              "approx_kl": 0.0053351037204265594,
+              "clip_fraction": 0.1041666641831398,
+              "gradient_norm": 0.8247525691986084,
+              "epochs": 4,
+              "steps": 4,
+              "early_stop": false
+            },
+            "monitor": {
+              "need_red": {
+                "count": 25,
+                "greedy": 0.0,
+                "success_probability": 0.49695654392242433,
+                "random_probability": 0.3333333333333332
+              },
+              "need_white": {
+                "count": 15,
+                "greedy": 1.0,
+                "success_probability": 0.5023916761080424,
+                "random_probability": 0.33333333333333326
+              },
+              "opponent_lethal": {
+                "count": 40,
+                "greedy": 0.825,
+                "success_probability": 0.5000000603497028,
+                "random_probability": 0.3333333333333335
+              },
+              "direct_damage": {
+                "count": 18,
+                "greedy": 1.0,
+                "success_probability": 0.5328977008660635,
+                "random_probability": 0.25
+              },
+              "double_strike": {
+                "count": 22,
+                "greedy": 0.0,
+                "success_probability": 0.46746946193955163,
+                "random_probability": 0.25
+              }
+            }
+          },
+          {
+            "update": 1500,
+            "reward": 0.0416666679084301,
+            "loss": 0.49504390358924866,
+            "gradient_norm": 0.0860711932182312,
+            "ppo": {
+              "loss": 0.49504390358924866,
+              "policy_loss": 3.1948089599609375e-05,
+              "value_loss": 1.0031839609146118,
+              "entropy": 0.6580017805099487,
+              "approx_kl": 1.3235455753601855e-07,
+              "clip_fraction": 0.0,
+              "gradient_norm": 0.0860711932182312,
+              "epochs": 4,
+              "steps": 4,
+              "early_stop": false
+            },
+            "monitor": {
+              "need_red": {
+                "count": 25,
+                "greedy": 0.52,
+                "success_probability": 0.4999999701976776,
+                "random_probability": 0.3333333333333332
+              },
+              "need_white": {
+                "count": 15,
+                "greedy": 0.5333333333333333,
+                "success_probability": 0.4999999701976776,
+                "random_probability": 0.33333333333333326
+              },
+              "opponent_lethal": {
+                "count": 40,
+                "greedy": 1.0,
+                "success_probability": 0.5000004023313522,
+                "random_probability": 0.3333333333333335
+              },
+              "direct_damage": {
+                "count": 18,
+                "greedy": 1.0,
+                "success_probability": 0.7272718085183038,
+                "random_probability": 0.25
+              },
+              "double_strike": {
+                "count": 22,
+                "greedy": 0.0,
+                "success_probability": 0.2725239341909235,
+                "random_probability": 0.25
+              }
+            }
+          }
+        ],
+        "optimization_steps": 5484,
+        "kl_stopped_rollouts": 246,
+        "training_examples": 72000,
+        "parameters": 1431490,
+        "seconds": 461.8009404040058,
+        "passed": false
+      },
+      {
+        "seed": 43,
+        "initial": {
+          "need_white": {
+            "count": 100,
+            "greedy": 0.0,
+            "success_probability": 0.335716270506382,
+            "random_probability": 0.3333333333333329
+          },
+          "need_red": {
+            "count": 100,
+            "greedy": 1.0,
+            "success_probability": 0.336905634701252,
+            "random_probability": 0.3333333333333329
+          },
+          "opponent_lethal": {
+            "count": 200,
+            "greedy": 0.0,
+            "success_probability": 0.33493650078773496,
+            "random_probability": 0.333333333333334
+          },
+          "double_strike": {
+            "count": 106,
+            "greedy": 0.0,
+            "success_probability": 0.2524528753645015,
+            "random_probability": 0.25
+          },
+          "direct_damage": {
+            "count": 94,
+            "greedy": 0.0,
+            "success_probability": 0.2545016033852354,
+            "random_probability": 0.25
+          }
+        },
+        "final": {
+          "need_white": {
+            "count": 100,
+            "greedy": 1.0,
+            "success_probability": 0.9834440755844116,
+            "random_probability": 0.3333333333333329
+          },
+          "need_red": {
+            "count": 100,
+            "greedy": 1.0,
+            "success_probability": 0.9908912914991379,
+            "random_probability": 0.3333333333333329
+          },
+          "opponent_lethal": {
+            "count": 200,
+            "greedy": 1.0,
+            "success_probability": 0.5000475841760635,
+            "random_probability": 0.333333333333334
+          },
+          "double_strike": {
+            "count": 106,
+            "greedy": 1.0,
+            "success_probability": 0.9970980230367409,
+            "random_probability": 0.25
+          },
+          "direct_damage": {
+            "count": 94,
+            "greedy": 0.0,
+            "success_probability": 0.00289455442094898,
+            "random_probability": 0.25
+          }
+        },
+        "final_iid": {
+          "need_red": {
+            "count": 93,
+            "greedy": 1.0,
+            "success_probability": 0.9968516192128581,
+            "random_probability": 0.33333333333333287
+          },
+          "need_white": {
+            "count": 107,
+            "greedy": 1.0,
+            "success_probability": 0.9965748530682003,
+            "random_probability": 0.3333333333333331
+          },
+          "opponent_lethal": {
+            "count": 200,
+            "greedy": 1.0,
+            "success_probability": 0.5000463292002678,
+            "random_probability": 0.333333333333334
+          },
+          "direct_damage": {
+            "count": 96,
+            "greedy": 0.0,
+            "success_probability": 0.0028938847560008676,
+            "random_probability": 0.25
+          },
+          "double_strike": {
+            "count": 104,
+            "greedy": 1.0,
+            "success_probability": 0.9970993846654892,
+            "random_probability": 0.25
+          }
+        },
+        "history": [
+          {
+            "update": 1,
+            "reward": -0.375,
+            "loss": 0.3683786392211914,
+            "gradient_norm": 1.9813542366027832,
+            "ppo": {
+              "loss": 0.3683786392211914,
+              "policy_loss": -0.057343173772096634,
+              "value_loss": 0.8747759461402893,
+              "entropy": 1.166614294052124,
+              "approx_kl": 0.024016128852963448,
+              "clip_fraction": 0.2291666716337204,
+              "gradient_norm": 1.9813542366027832,
+              "epochs": 4,
+              "steps": 4,
+              "early_stop": true
+            },
+            "monitor": {
+              "need_red": {
+                "count": 21,
+                "greedy": 0.42857142857142855,
+                "success_probability": 0.38989444573720294,
+                "random_probability": 0.3333333333333332
+              },
+              "need_white": {
+                "count": 19,
+                "greedy": 0.47368421052631576,
+                "success_probability": 0.3899071028358058,
+                "random_probability": 0.3333333333333332
+              },
+              "opponent_lethal": {
+                "count": 40,
+                "greedy": 1.0,
+                "success_probability": 0.3778834342956543,
+                "random_probability": 0.3333333333333335
+              },
+              "direct_damage": {
+                "count": 24,
+                "greedy": 1.0,
+                "success_probability": 0.29153909782568616,
+                "random_probability": 0.25
+              },
+              "double_strike": {
+                "count": 16,
+                "greedy": 0.0,
+                "success_probability": 0.2850691135972738,
+                "random_probability": 0.25
+              }
+            }
+          },
+          {
+            "update": 100,
+            "reward": 0.4166666567325592,
+            "loss": 0.23128092288970947,
+            "gradient_norm": 0.6824590563774109,
+            "ppo": {
+              "loss": 0.23128092288970947,
+              "policy_loss": -0.019011342898011208,
+              "value_loss": 0.5074077248573303,
+              "entropy": 0.34115874767303467,
+              "approx_kl": 0.00463846093043685,
+              "clip_fraction": 0.0416666679084301,
+              "gradient_norm": 0.6824590563774109,
+              "epochs": 4,
+              "steps": 4,
+              "early_stop": false
+            },
+            "monitor": {
+              "need_red": {
+                "count": 21,
+                "greedy": 0.0,
+                "success_probability": 0.4953317784127735,
+                "random_probability": 0.3333333333333332
+              },
+              "need_white": {
+                "count": 19,
+                "greedy": 1.0,
+                "success_probability": 0.5045602102028696,
+                "random_probability": 0.3333333333333332
+              },
+              "opponent_lethal": {
+                "count": 40,
+                "greedy": 1.0,
+                "success_probability": 0.9999976754188538,
+                "random_probability": 0.3333333333333335
+              },
+              "direct_damage": {
+                "count": 24,
+                "greedy": 1.0,
+                "success_probability": 0.8122649217645327,
+                "random_probability": 0.25
+              },
+              "double_strike": {
+                "count": 16,
+                "greedy": 1.0,
+                "success_probability": 0.9455557465553284,
+                "random_probability": 0.25
+              }
+            }
+          },
+          {
+            "update": 200,
+            "reward": 0.7083333134651184,
+            "loss": 0.16177025437355042,
+            "gradient_norm": 0.10176155716180801,
+            "ppo": {
+              "loss": 0.16177025437355042,
+              "policy_loss": -0.002320836065337062,
+              "value_loss": 0.3344923257827759,
+              "entropy": 0.3155073821544647,
+              "approx_kl": 0.0009438356501050293,
+              "clip_fraction": 0.0,
+              "gradient_norm": 0.10176155716180801,
+              "epochs": 4,
+              "steps": 4,
+              "early_stop": false
+            },
+            "monitor": {
+              "need_red": {
+                "count": 21,
+                "greedy": 0.0,
+                "success_probability": 0.498621757541384,
+                "random_probability": 0.3333333333333332
+              },
+              "need_white": {
+                "count": 19,
+                "greedy": 1.0,
+                "success_probability": 0.49932706199194254,
+                "random_probability": 0.3333333333333332
+              },
+              "opponent_lethal": {
+                "count": 40,
+                "greedy": 1.0,
+                "success_probability": 0.9999999403953552,
+                "random_probability": 0.3333333333333335
+              },
+              "direct_damage": {
+                "count": 24,
+                "greedy": 1.0,
+                "success_probability": 0.991967481871446,
+                "random_probability": 0.25
+              },
+              "double_strike": {
+                "count": 16,
+                "greedy": 1.0,
+                "success_probability": 0.8484960682690144,
+                "random_probability": 0.25
+              }
+            }
+          },
+          {
+            "update": 300,
+            "reward": 0.6666666865348816,
+            "loss": 0.21173568069934845,
+            "gradient_norm": 0.3929612636566162,
+            "ppo": {
+              "loss": 0.21173568069934845,
+              "policy_loss": -0.03765099123120308,
+              "value_loss": 0.5042153596878052,
+              "entropy": 0.27210089564323425,
+              "approx_kl": 0.019781462848186493,
+              "clip_fraction": 0.0625,
+              "gradient_norm": 0.3929612636566162,
+              "epochs": 4,
+              "steps": 4,
+              "early_stop": false
+            },
+            "monitor": {
+              "need_red": {
+                "count": 21,
+                "greedy": 1.0,
+                "success_probability": 0.5793160540716988,
+                "random_probability": 0.3333333333333332
+              },
+              "need_white": {
+                "count": 19,
+                "greedy": 0.0,
+                "success_probability": 0.42199586253417165,
+                "random_probability": 0.3333333333333332
+              },
+              "opponent_lethal": {
+                "count": 40,
+                "greedy": 1.0,
+                "success_probability": 0.9999999403953552,
+                "random_probability": 0.3333333333333335
+              },
+              "direct_damage": {
+                "count": 24,
+                "greedy": 1.0,
+                "success_probability": 0.991861047844092,
+                "random_probability": 0.25
+              },
+              "double_strike": {
+                "count": 16,
+                "greedy": 1.0,
+                "success_probability": 0.9541073255240917,
+                "random_probability": 0.25
+              }
+            }
+          },
+          {
+            "update": 400,
+            "reward": 0.5833333134651184,
+            "loss": 0.2502579689025879,
+            "gradient_norm": 0.19354212284088135,
+            "ppo": {
+              "loss": 0.2502579689025879,
+              "policy_loss": -0.00034667798900045455,
+              "value_loss": 0.5060492157936096,
+              "entropy": 0.24199406802654266,
+              "approx_kl": 1.949346142282593e-06,
+              "clip_fraction": 0.0,
+              "gradient_norm": 0.19354212284088135,
+              "epochs": 4,
+              "steps": 4,
+              "early_stop": false
+            },
+            "monitor": {
+              "need_red": {
+                "count": 21,
+                "greedy": 1.0,
+                "success_probability": 0.5010188534146264,
+                "random_probability": 0.3333333333333332
+              },
+              "need_white": {
+                "count": 19,
+                "greedy": 0.0,
+                "success_probability": 0.49923557827347204,
+                "random_probability": 0.3333333333333332
+              },
+              "opponent_lethal": {
+                "count": 40,
+                "greedy": 1.0,
+                "success_probability": 0.9999932169914245,
+                "random_probability": 0.3333333333333335
+              },
+              "direct_damage": {
+                "count": 24,
+                "greedy": 1.0,
+                "success_probability": 0.9992100819945335,
+                "random_probability": 0.25
+              },
+              "double_strike": {
+                "count": 16,
+                "greedy": 1.0,
+                "success_probability": 0.9926967173814774,
+                "random_probability": 0.25
+              }
+            }
+          },
+          {
+            "update": 500,
+            "reward": 0.625,
+            "loss": 0.1363690346479416,
+            "gradient_norm": 1.3182400465011597,
+            "ppo": {
+              "loss": 0.1363690346479416,
+              "policy_loss": -0.02854699082672596,
+              "value_loss": 0.3345204293727875,
+              "entropy": 0.23441939055919647,
+              "approx_kl": 0.0024857157841324806,
+              "clip_fraction": 0.0,
+              "gradient_norm": 1.3182400465011597,
+              "epochs": 4,
+              "steps": 4,
+              "early_stop": false
+            },
+            "monitor": {
+              "need_red": {
+                "count": 21,
+                "greedy": 0.0,
+                "success_probability": 0.345650729678926,
+                "random_probability": 0.3333333333333332
+              },
+              "need_white": {
+                "count": 19,
+                "greedy": 1.0,
+                "success_probability": 0.6574091691719858,
+                "random_probability": 0.3333333333333332
+              },
+              "opponent_lethal": {
+                "count": 40,
+                "greedy": 1.0,
+                "success_probability": 0.999999463558197,
+                "random_probability": 0.3333333333333335
+              },
+              "direct_damage": {
+                "count": 24,
+                "greedy": 1.0,
+                "success_probability": 0.9998571773370107,
+                "random_probability": 0.25
+              },
+              "double_strike": {
+                "count": 16,
+                "greedy": 1.0,
+                "success_probability": 0.9687496908009052,
+                "random_probability": 0.25
+              }
+            }
+          },
+          {
+            "update": 600,
+            "reward": 0.5416666865348816,
+            "loss": 0.17330455780029297,
+            "gradient_norm": 0.26928839087486267,
+            "ppo": {
+              "loss": 0.17330455780029297,
+              "policy_loss": -1.30385160446167e-05,
+              "value_loss": 0.3513038456439972,
+              "entropy": 0.23343198001384735,
+              "approx_kl": 1.497218904411568e-09,
+              "clip_fraction": 0.0,
+              "gradient_norm": 0.26928839087486267,
+              "epochs": 4,
+              "steps": 4,
+              "early_stop": false
+            },
+            "monitor": {
+              "need_red": {
+                "count": 21,
+                "greedy": 0.0,
+                "success_probability": 0.4997468917142777,
+                "random_probability": 0.3333333333333332
+              },
+              "need_white": {
+                "count": 19,
+                "greedy": 1.0,
+                "success_probability": 0.5002961535202829,
+                "random_probability": 0.3333333333333332
+              },
+              "opponent_lethal": {
+                "count": 40,
+                "greedy": 1.0,
+                "success_probability": 0.9999922901391983,
+                "random_probability": 0.3333333333333335
+              },
+              "direct_damage": {
+                "count": 24,
+                "greedy": 1.0,
+                "success_probability": 0.9994192471106847,
+                "random_probability": 0.25
+              },
+              "double_strike": {
+                "count": 16,
+                "greedy": 1.0,
+                "success_probability": 0.9987903162837029,
+                "random_probability": 0.25
+              }
+            }
+          },
+          {
+            "update": 700,
+            "reward": 0.7916666865348816,
+            "loss": 0.17337828874588013,
+            "gradient_norm": 0.23710690438747406,
+            "ppo": {
+              "loss": 0.17337828874588013,
+              "policy_loss": -5.424022674560547e-06,
+              "value_loss": 0.3514324128627777,
+              "entropy": 0.233249232172966,
+              "approx_kl": 6.410998953931824e-10,
+              "clip_fraction": 0.0,
+              "gradient_norm": 0.23710690438747406,
+              "epochs": 4,
+              "steps": 4,
+              "early_stop": false
+            },
+            "monitor": {
+              "need_red": {
+                "count": 21,
+                "greedy": 0.0,
+                "success_probability": 0.49997955560684204,
+                "random_probability": 0.3333333333333332
+              },
+              "need_white": {
+                "count": 19,
+                "greedy": 1.0,
+                "success_probability": 0.5000137969067222,
+                "random_probability": 0.3333333333333332
+              },
+              "opponent_lethal": {
+                "count": 40,
+                "greedy": 1.0,
+                "success_probability": 0.9999977797269821,
+                "random_probability": 0.3333333333333335
+              },
+              "direct_damage": {
+                "count": 24,
+                "greedy": 1.0,
+                "success_probability": 0.9995551158984503,
+                "random_probability": 0.25
+              },
+              "double_strike": {
+                "count": 16,
+                "greedy": 1.0,
+                "success_probability": 0.9986943677067757,
+                "random_probability": 0.25
+              }
+            }
+          },
+          {
+            "update": 800,
+            "reward": 0.7083333134651184,
+            "loss": 0.16378271579742432,
+            "gradient_norm": 0.054756682366132736,
+            "ppo": {
+              "loss": 0.16378271579742432,
+              "policy_loss": -3.178914482759865e-07,
+              "value_loss": 0.3322148025035858,
+              "entropy": 0.2324371486902237,
+              "approx_kl": 4.381680294204132e-13,
+              "clip_fraction": 0.0,
+              "gradient_norm": 0.054756682366132736,
+              "epochs": 4,
+              "steps": 4,
+              "early_stop": false
+            },
+            "monitor": {
+              "need_red": {
+                "count": 21,
+                "greedy": 0.0,
+                "success_probability": 0.499988093262627,
+                "random_probability": 0.3333333333333332
+              },
+              "need_white": {
+                "count": 19,
+                "greedy": 1.0,
+                "success_probability": 0.5000057863561731,
+                "random_probability": 0.3333333333333332
+              },
+              "opponent_lethal": {
+                "count": 40,
+                "greedy": 1.0,
+                "success_probability": 0.9999998211860657,
+                "random_probability": 0.3333333333333335
+              },
+              "direct_damage": {
+                "count": 24,
+                "greedy": 1.0,
+                "success_probability": 0.999998152256012,
+                "random_probability": 0.25
+              },
+              "double_strike": {
+                "count": 16,
+                "greedy": 1.0,
+                "success_probability": 0.998669944703579,
+                "random_probability": 0.25
+              }
+            }
+          },
+          {
+            "update": 900,
+            "reward": 0.625,
+            "loss": 0.1692916750907898,
+            "gradient_norm": 0.11160583049058914,
+            "ppo": {
+              "loss": 0.1692916750907898,
+              "policy_loss": 2.669791456355597e-06,
+              "value_loss": 0.3432491719722748,
+              "entropy": 0.23355835676193237,
+              "approx_kl": 8.032357001752644e-10,
+              "clip_fraction": 0.0,
+              "gradient_norm": 0.11160583049058914,
+              "epochs": 4,
+              "steps": 4,
+              "early_stop": false
+            },
+            "monitor": {
+              "need_red": {
+                "count": 21,
+                "greedy": 0.0,
+                "success_probability": 0.499950267019726,
+                "random_probability": 0.3333333333333332
+              },
+              "need_white": {
+                "count": 19,
+                "greedy": 1.0,
+                "success_probability": 0.5000619982418261,
+                "random_probability": 0.3333333333333332
+              },
+              "opponent_lethal": {
+                "count": 40,
+                "greedy": 1.0,
+                "success_probability": 0.9999997824430465,
+                "random_probability": 0.3333333333333335
+              },
+              "direct_damage": {
+                "count": 24,
+                "greedy": 1.0,
+                "success_probability": 0.9999986837307612,
+                "random_probability": 0.25
+              },
+              "double_strike": {
+                "count": 16,
+                "greedy": 1.0,
+                "success_probability": 0.9983391053974628,
+                "random_probability": 0.25
+              }
+            }
+          },
+          {
+            "update": 1000,
+            "reward": 0.875,
+            "loss": 0.17180897295475006,
+            "gradient_norm": 2.416989803314209,
+            "ppo": {
+              "loss": 0.17180897295475006,
+              "policy_loss": 0.0018013566732406616,
+              "value_loss": 0.3444341719150543,
+              "entropy": 0.22094731032848358,
+              "approx_kl": 0.013926297426223755,
+              "clip_fraction": 0.3333333432674408,
+              "gradient_norm": 2.416989803314209,
+              "epochs": 4,
+              "steps": 4,
+              "early_stop": false
+            },
+            "monitor": {
+              "need_red": {
+                "count": 21,
+                "greedy": 1.0,
+                "success_probability": 0.6989963962918236,
+                "random_probability": 0.3333333333333332
+              },
+              "need_white": {
+                "count": 19,
+                "greedy": 0.0,
+                "success_probability": 0.3098520024826652,
+                "random_probability": 0.3333333333333332
+              },
+              "opponent_lethal": {
+                "count": 40,
+                "greedy": 1.0,
+                "success_probability": 0.9999995440244674,
+                "random_probability": 0.3333333333333335
+              },
+              "direct_damage": {
+                "count": 24,
+                "greedy": 1.0,
+                "success_probability": 0.9999777923027674,
+                "random_probability": 0.25
+              },
+              "double_strike": {
+                "count": 16,
+                "greedy": 1.0,
+                "success_probability": 0.9920953921973705,
+                "random_probability": 0.25
+              }
+            }
+          },
+          {
+            "update": 1100,
+            "reward": 0.5833333134651184,
+            "loss": 0.14686553180217743,
+            "gradient_norm": 1.6076300144195557,
+            "ppo": {
+              "loss": 0.14686553180217743,
+              "policy_loss": -0.014607814140617847,
+              "value_loss": 0.32708561420440674,
+              "entropy": 0.2069464474916458,
+              "approx_kl": 0.0016524577513337135,
+              "clip_fraction": 0.0416666679084301,
+              "gradient_norm": 1.6076300144195557,
+              "epochs": 4,
+              "steps": 4,
+              "early_stop": false
+            },
+            "monitor": {
+              "need_red": {
+                "count": 21,
+                "greedy": 1.0,
+                "success_probability": 0.7298504341216314,
+                "random_probability": 0.3333333333333332
+              },
+              "need_white": {
+                "count": 19,
+                "greedy": 0.0,
+                "success_probability": 0.3219998039697346,
+                "random_probability": 0.3333333333333332
+              },
+              "opponent_lethal": {
+                "count": 40,
+                "greedy": 1.0,
+                "success_probability": 0.9999997407197952,
+                "random_probability": 0.3333333333333335
+              },
+              "direct_damage": {
+                "count": 24,
+                "greedy": 1.0,
+                "success_probability": 0.9999705851078033,
+                "random_probability": 0.25
+              },
+              "double_strike": {
+                "count": 16,
+                "greedy": 1.0,
+                "success_probability": 0.9932177402079105,
+                "random_probability": 0.25
+              }
+            }
+          },
+          {
+            "update": 1200,
+            "reward": 1.0,
+            "loss": 0.00497124157845974,
+            "gradient_norm": 0.561664342880249,
+            "ppo": {
+              "loss": 0.00497124157845974,
+              "policy_loss": -0.0010610459139570594,
+              "value_loss": 0.01374655682593584,
+              "entropy": 0.08409909158945084,
+              "approx_kl": 3.0863007850712165e-05,
+              "clip_fraction": 0.0,
+              "gradient_norm": 0.561664342880249,
+              "epochs": 4,
+              "steps": 4,
+              "early_stop": false
+            },
+            "monitor": {
+              "need_red": {
+                "count": 21,
+                "greedy": 1.0,
+                "success_probability": 0.9009271916889009,
+                "random_probability": 0.3333333333333332
+              },
+              "need_white": {
+                "count": 19,
+                "greedy": 1.0,
+                "success_probability": 0.9501918177855643,
+                "random_probability": 0.3333333333333332
+              },
+              "opponent_lethal": {
+                "count": 40,
+                "greedy": 1.0,
+                "success_probability": 0.9999999403953552,
+                "random_probability": 0.3333333333333335
+              },
+              "direct_damage": {
+                "count": 24,
+                "greedy": 1.0,
+                "success_probability": 0.9998780687650045,
+                "random_probability": 0.25
+              },
+              "double_strike": {
+                "count": 16,
+                "greedy": 1.0,
+                "success_probability": 0.9967630170285702,
+                "random_probability": 0.25
+              }
+            }
+          },
+          {
+            "update": 1300,
+            "reward": 0.1666666716337204,
+            "loss": 0.4826505184173584,
+            "gradient_norm": 2.200862407684326,
+            "ppo": {
+              "loss": 0.4826505184173584,
+              "policy_loss": -0.013610164634883404,
+              "value_loss": 1.0047284364700317,
+              "entropy": 0.6103553771972656,
+              "approx_kl": 0.002040897263213992,
+              "clip_fraction": 0.0416666679084301,
+              "gradient_norm": 2.200862407684326,
+              "epochs": 4,
+              "steps": 4,
+              "early_stop": false
+            },
+            "monitor": {
+              "need_red": {
+                "count": 21,
+                "greedy": 0.0,
+                "success_probability": 0.15751069003627413,
+                "random_probability": 0.3333333333333332
+              },
+              "need_white": {
+                "count": 19,
+                "greedy": 1.0,
+                "success_probability": 0.8470651162298102,
+                "random_probability": 0.3333333333333332
+              },
+              "opponent_lethal": {
+                "count": 40,
+                "greedy": 1.0,
+                "success_probability": 0.5014893978834152,
+                "random_probability": 0.3333333333333335
+              },
+              "direct_damage": {
+                "count": 24,
+                "greedy": 0.0,
+                "success_probability": 0.4526384398341179,
+                "random_probability": 0.25
+              },
+              "double_strike": {
+                "count": 16,
+                "greedy": 1.0,
+                "success_probability": 0.5443699844181538,
+                "random_probability": 0.25
+              }
+            }
+          },
+          {
+            "update": 1400,
+            "reward": 0.2083333283662796,
+            "loss": 0.3364323377609253,
+            "gradient_norm": 0.3969123363494873,
+            "ppo": {
+              "loss": 0.3364323377609253,
+              "policy_loss": 0.00029844045639038086,
+              "value_loss": 0.6774799227714539,
+              "entropy": 0.2606072723865509,
+              "approx_kl": 7.598254796903348e-06,
+              "clip_fraction": 0.0,
+              "gradient_norm": 0.3969123363494873,
+              "epochs": 4,
+              "steps": 4,
+              "early_stop": false
+            },
+            "monitor": {
+              "need_red": {
+                "count": 21,
+                "greedy": 1.0,
+                "success_probability": 0.9747277129264105,
+                "random_probability": 0.3333333333333332
+              },
+              "need_white": {
+                "count": 19,
+                "greedy": 1.0,
+                "success_probability": 0.9969600846892909,
+                "random_probability": 0.3333333333333332
+              },
+              "opponent_lethal": {
+                "count": 40,
+                "greedy": 1.0,
+                "success_probability": 0.5000100418925285,
+                "random_probability": 0.3333333333333335
+              },
+              "direct_damage": {
+                "count": 24,
+                "greedy": 0.0,
+                "success_probability": 0.004804909462109208,
+                "random_probability": 0.25
+              },
+              "double_strike": {
+                "count": 16,
+                "greedy": 1.0,
+                "success_probability": 0.9951465204358101,
+                "random_probability": 0.25
+              }
+            }
+          },
+          {
+            "update": 1500,
+            "reward": 0.25,
+            "loss": 0.3563533425331116,
+            "gradient_norm": 0.7550644278526306,
+            "ppo": {
+              "loss": 0.3563533425331116,
+              "policy_loss": -5.200505256652832e-06,
+              "value_loss": 0.7176144123077393,
+              "entropy": 0.2448670119047165,
+              "approx_kl": 4.7253601032082315e-09,
+              "clip_fraction": 0.0,
+              "gradient_norm": 0.7550644278526306,
+              "epochs": 4,
+              "steps": 4,
+              "early_stop": false
+            },
+            "monitor": {
+              "need_red": {
+                "count": 21,
+                "greedy": 1.0,
+                "success_probability": 0.9968639668964204,
+                "random_probability": 0.3333333333333332
+              },
+              "need_white": {
+                "count": 19,
+                "greedy": 1.0,
+                "success_probability": 0.9965664869860599,
+                "random_probability": 0.3333333333333332
+              },
+              "opponent_lethal": {
+                "count": 40,
+                "greedy": 1.0,
+                "success_probability": 0.5000463545322418,
+                "random_probability": 0.3333333333333335
+              },
+              "direct_damage": {
+                "count": 24,
+                "greedy": 0.0,
+                "success_probability": 0.0028946905901345112,
+                "random_probability": 0.25
+              },
+              "double_strike": {
+                "count": 16,
+                "greedy": 1.0,
+                "success_probability": 0.9970992729067802,
+                "random_probability": 0.25
+              }
+            }
+          }
+        ],
+        "optimization_steps": 5483,
+        "kl_stopped_rollouts": 273,
+        "training_examples": 72000,
+        "parameters": 1431490,
+        "seconds": 465.3927298730123,
+        "passed": false
+      }
+    ]
+  },
+  "actor_critic": {
+    "synthetic": true,
+    "objective": "one-decision terminal task success; not full-game wins",
+    "config": {
+      "directory": ".local/training/scenarios-v4-confirmation",
+      "seeds": [
+        41,
+        42,
+        43
+      ],
+      "updates": 1500,
+      "batch": 48,
+      "test_cases": 200,
+      "learning_rate": 0.001,
+      "candidate_interactions": true,
+      "player_readout": true,
+      "require_pass": true
+    },
+    "runs": [
+      {
+        "seed": 41,
+        "initial": {
+          "need_white": {
+            "count": 102,
+            "greedy": 0.0,
+            "success_probability": 0.33232767646219213,
+            "random_probability": 0.333333333333333
+          },
+          "need_red": {
+            "count": 98,
+            "greedy": 0.0,
+            "success_probability": 0.3294163011774725,
+            "random_probability": 0.33333333333333287
+          },
+          "opponent_lethal": {
+            "count": 200,
+            "greedy": 1.0,
+            "success_probability": 0.3411893631517887,
+            "random_probability": 0.333333333333334
+          },
+          "direct_damage": {
+            "count": 87,
+            "greedy": 0.0,
+            "success_probability": 0.24742351095566803,
+            "random_probability": 0.25
+          },
+          "double_strike": {
+            "count": 113,
+            "greedy": 0.0,
+            "success_probability": 0.24857420678687306,
+            "random_probability": 0.25
+          }
+        },
+        "final": {
+          "need_white": {
+            "count": 102,
+            "greedy": 1.0,
+            "success_probability": 0.9840509570112416,
+            "random_probability": 0.333333333333333
+          },
+          "need_red": {
+            "count": 98,
+            "greedy": 1.0,
+            "success_probability": 0.9817283694841423,
+            "random_probability": 0.33333333333333287
+          },
+          "opponent_lethal": {
+            "count": 200,
+            "greedy": 1.0,
+            "success_probability": 0.9999999403953552,
+            "random_probability": 0.333333333333334
+          },
+          "direct_damage": {
+            "count": 87,
+            "greedy": 1.0,
+            "success_probability": 0.6270741840888714,
+            "random_probability": 0.25
+          },
+          "double_strike": {
+            "count": 113,
+            "greedy": 0.0,
+            "success_probability": 0.37622798491368253,
+            "random_probability": 0.25
+          }
+        },
+        "final_iid": {
+          "need_white": {
+            "count": 100,
+            "greedy": 1.0,
+            "success_probability": 0.9931017935276032,
+            "random_probability": 0.3333333333333329
+          },
+          "need_red": {
+            "count": 100,
+            "greedy": 1.0,
+            "success_probability": 0.9979351472854614,
+            "random_probability": 0.3333333333333329
+          },
+          "opponent_lethal": {
+            "count": 200,
+            "greedy": 1.0,
+            "success_probability": 0.9999999403953552,
+            "random_probability": 0.333333333333334
+          },
+          "double_strike": {
+            "count": 102,
+            "greedy": 0.0,
+            "success_probability": 0.375127245982488,
+            "random_probability": 0.25
+          },
+          "direct_damage": {
+            "count": 98,
+            "greedy": 1.0,
+            "success_probability": 0.626495323619064,
+            "random_probability": 0.25
+          }
+        },
+        "seconds": 247.03211442101747,
+        "passed": false,
+        "training_examples": 72000,
+        "optimization_steps": 1500
+      },
+      {
+        "seed": 42,
+        "initial": {
+          "need_white": {
+            "count": 98,
+            "greedy": 1.0,
+            "success_probability": 0.34237322028802364,
+            "random_probability": 0.33333333333333287
+          },
+          "need_red": {
+            "count": 102,
+            "greedy": 0.0,
+            "success_probability": 0.337048832692352,
+            "random_probability": 0.333333333333333
+          },
+          "opponent_lethal": {
+            "count": 200,
+            "greedy": 0.0,
+            "success_probability": 0.33636356979608534,
+            "random_probability": 0.333333333333334
+          },
+          "direct_damage": {
+            "count": 102,
+            "greedy": 0.0,
+            "success_probability": 0.25301972323772953,
+            "random_probability": 0.25
+          },
+          "double_strike": {
+            "count": 98,
+            "greedy": 0.0,
+            "success_probability": 0.2517495149252366,
+            "random_probability": 0.25
+          }
+        },
+        "final": {
+          "need_white": {
+            "count": 98,
+            "greedy": 1.0,
+            "success_probability": 0.8900089422050788,
+            "random_probability": 0.33333333333333287
+          },
+          "need_red": {
+            "count": 102,
+            "greedy": 1.0,
+            "success_probability": 0.9181415345154557,
+            "random_probability": 0.333333333333333
+          },
+          "opponent_lethal": {
+            "count": 200,
+            "greedy": 1.0,
+            "success_probability": 0.9999995827674866,
+            "random_probability": 0.333333333333334
+          },
+          "direct_damage": {
+            "count": 102,
+            "greedy": 1.0,
+            "success_probability": 0.9999759138799181,
+            "random_probability": 0.25
+          },
+          "double_strike": {
+            "count": 98,
+            "greedy": 1.0,
+            "success_probability": 0.9999946136863864,
+            "random_probability": 0.25
+          }
+        },
+        "final_iid": {
+          "need_white": {
+            "count": 103,
+            "greedy": 1.0,
+            "success_probability": 0.9937992159602711,
+            "random_probability": 0.33333333333333304
+          },
+          "need_red": {
+            "count": 97,
+            "greedy": 1.0,
+            "success_probability": 0.9366686393305198,
+            "random_probability": 0.33333333333333287
+          },
+          "opponent_lethal": {
+            "count": 200,
+            "greedy": 1.0,
+            "success_probability": 0.9999995827674866,
+            "random_probability": 0.333333333333334
+          },
+          "double_strike": {
+            "count": 87,
+            "greedy": 1.0,
+            "success_probability": 0.9999946020115381,
+            "random_probability": 0.25
+          },
+          "direct_damage": {
+            "count": 113,
+            "greedy": 1.0,
+            "success_probability": 0.9999757366897786,
+            "random_probability": 0.25
+          }
+        },
+        "seconds": 250.10672631597845,
+        "passed": false,
+        "training_examples": 72000,
+        "optimization_steps": 1500
+      },
+      {
+        "seed": 43,
+        "initial": {
+          "need_white": {
+            "count": 100,
+            "greedy": 0.0,
+            "success_probability": 0.335716270506382,
+            "random_probability": 0.3333333333333329
+          },
+          "need_red": {
+            "count": 100,
+            "greedy": 1.0,
+            "success_probability": 0.336905634701252,
+            "random_probability": 0.3333333333333329
+          },
+          "opponent_lethal": {
+            "count": 200,
+            "greedy": 0.0,
+            "success_probability": 0.33493650078773496,
+            "random_probability": 0.333333333333334
+          },
+          "double_strike": {
+            "count": 106,
+            "greedy": 0.0,
+            "success_probability": 0.2524528753645015,
+            "random_probability": 0.25
+          },
+          "direct_damage": {
+            "count": 94,
+            "greedy": 0.0,
+            "success_probability": 0.2545016033852354,
+            "random_probability": 0.25
+          }
+        },
+        "final": {
+          "need_white": {
+            "count": 100,
+            "greedy": 1.0,
+            "success_probability": 0.9296221172809601,
+            "random_probability": 0.3333333333333329
+          },
+          "need_red": {
+            "count": 100,
+            "greedy": 1.0,
+            "success_probability": 0.9283451116085053,
+            "random_probability": 0.3333333333333329
+          },
+          "opponent_lethal": {
+            "count": 200,
+            "greedy": 1.0,
+            "success_probability": 0.9999999403953552,
+            "random_probability": 0.333333333333334
+          },
+          "double_strike": {
+            "count": 106,
+            "greedy": 1.0,
+            "success_probability": 0.9804000888230666,
+            "random_probability": 0.25
+          },
+          "direct_damage": {
+            "count": 94,
+            "greedy": 1.0,
+            "success_probability": 0.9921525158780686,
+            "random_probability": 0.25
+          }
+        },
+        "final_iid": {
+          "need_red": {
+            "count": 93,
+            "greedy": 1.0,
+            "success_probability": 0.9916146365545129,
+            "random_probability": 0.33333333333333287
+          },
+          "need_white": {
+            "count": 107,
+            "greedy": 1.0,
+            "success_probability": 0.9977696755222071,
+            "random_probability": 0.3333333333333331
+          },
+          "opponent_lethal": {
+            "count": 200,
+            "greedy": 1.0,
+            "success_probability": 0.9999999403953552,
+            "random_probability": 0.333333333333334
+          },
+          "direct_damage": {
+            "count": 96,
+            "greedy": 1.0,
+            "success_probability": 0.9923428650945425,
+            "random_probability": 0.25
+          },
+          "double_strike": {
+            "count": 104,
+            "greedy": 1.0,
+            "success_probability": 0.9865647806571081,
+            "random_probability": 0.25
+          }
+        },
+        "seconds": 265.60902235796675,
+        "passed": true,
+        "training_examples": 72000,
+        "optimization_steps": 1500
+      }
+    ]
+  }
+}

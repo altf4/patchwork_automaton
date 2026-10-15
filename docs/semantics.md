@@ -98,17 +98,19 @@ death triggers, last-known controllers, replacement events and split-card
 zone/face behavior. Conditional effect tags prevent presenting Molten Rain's
 extra damage or Searing Blood's delayed damage as unconditional effects.
 
-The neural feature version is now 3. Card embeddings have 29 entries including
+The neural feature version is now 4. Card embeddings have 29 entries including
 unknown ID 0, and semantic rows have 199 columns. Original card IDs 1–4 remain
-stable, but vocabulary and tensor shapes changed. Version-2 checkpoints are
+stable, but vocabulary and tensor shapes changed. Version-2 and version-3 checkpoints are
 preserved on disk and rejected by the default loader; start a fresh model or
 implement an explicit weight migration before using them with these features.
 
 ## Next integration work
 
-Bind offered actions to individual annotated abilities/modes using verified
-backend identifiers or reviewed mappings. Never equate an opaque UUID, option
-position or matching display label with a verified ability identity. Unresolved
+The Burn adapter now binds reviewed ability-picker rules to individual annotated
+abilities/modes, scoped by visible source identity and native links or click
+context. Candidate features include the specific ability ID and typed semantic
+summary. Broader rule variants and multi-trigger ambiguities still need mappings.
+Never equate an opaque UUID or option position with a verified identity. Unresolved
 bindings retain unknown semantics; the backend options still determine what can
 be submitted. Dynamic cost and target constraints remain authoritative inputs.
 

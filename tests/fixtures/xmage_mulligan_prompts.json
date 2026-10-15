@@ -1,0 +1,294 @@
+{
+  "source": "Local XMage 1.4.62; two redraws followed by keep; setup only",
+  "prompts": [
+    {
+      "method": "GAME_ASK",
+      "data": {
+        "message": "Mulligan <font color=#ffff00>down to 6 cards</font>?",
+        "flag": false,
+        "targets": null,
+        "min": 0,
+        "max": 0,
+        "options": {
+          "UI.right.btn.text": "Keep",
+          "UI.left.btn.text": "Mulligan",
+          "queryType": "ASK"
+        },
+        "choice": null,
+        "messages": null
+      },
+      "hand": [
+        {
+          "id": "d0e19195-0239-4ac3-8f3b-9ca2623c0bfc",
+          "name": "Bloodstained Mire"
+        },
+        {
+          "id": "733f9507-7d2a-4524-bc65-915e4da1772c",
+          "name": "Elegant Parlor"
+        },
+        {
+          "id": "756cefcb-9f42-44de-ad3f-6e5f1b217ecb",
+          "name": "Sacred Foundry"
+        },
+        {
+          "id": "e9ebd61f-8d3b-4fe2-af05-2618d4957f55",
+          "name": "Boltwave"
+        },
+        {
+          "id": "203a652f-5fec-4370-95ce-b35b912b39d8",
+          "name": "Lightning Bolt"
+        },
+        {
+          "id": "860e96f1-7cd7-4881-9063-adf580729d19",
+          "name": "Eidolon of the Great Revel"
+        },
+        {
+          "id": "703dd804-a684-4c82-9f50-c115ce31419e",
+          "name": "Monastery Swiftspear"
+        }
+      ]
+    },
+    {
+      "method": "GAME_TARGET",
+      "data": {
+        "message": "Select a card (1 more) to put on the bottom of your library",
+        "flag": true,
+        "targets": [
+          "b8a9a1ce-ed8b-48f7-9232-0318408909e8",
+          "7f072c3c-c5b5-431e-ad1a-9097494d2600",
+          "e9ebd61f-8d3b-4fe2-af05-2618d4957f55",
+          "45b1ea24-e64c-48a4-b361-b9f7b1197be0",
+          "b95d96c3-fdeb-407b-93b2-e50bcdeccd3c",
+          "1c6795d3-da70-4119-a7f2-411fb9d28bd8",
+          "53e772aa-4f72-4b5c-8969-cb9c0bcb9462"
+        ],
+        "min": 0,
+        "max": 0,
+        "options": {
+          "chosenTargets": [],
+          "targetZone": "HAND",
+          "queryType": "PICK_TARGET"
+        },
+        "choice": null,
+        "messages": null
+      },
+      "hand": [
+        {
+          "id": "b8a9a1ce-ed8b-48f7-9232-0318408909e8",
+          "name": "Barbarian Ring"
+        },
+        {
+          "id": "7f072c3c-c5b5-431e-ad1a-9097494d2600",
+          "name": "Skewer the Critics"
+        },
+        {
+          "id": "53e772aa-4f72-4b5c-8969-cb9c0bcb9462",
+          "name": "Boros Charm"
+        },
+        {
+          "id": "b95d96c3-fdeb-407b-93b2-e50bcdeccd3c",
+          "name": "Searing Blaze"
+        },
+        {
+          "id": "e9ebd61f-8d3b-4fe2-af05-2618d4957f55",
+          "name": "Boltwave"
+        },
+        {
+          "id": "45b1ea24-e64c-48a4-b361-b9f7b1197be0",
+          "name": "Boltwave"
+        },
+        {
+          "id": "1c6795d3-da70-4119-a7f2-411fb9d28bd8",
+          "name": "Monastery Swiftspear"
+        }
+      ]
+    },
+    {
+      "method": "GAME_ASK",
+      "data": {
+        "message": "Mulligan <font color=#ffff00>down to 5 cards</font>?",
+        "flag": false,
+        "targets": null,
+        "min": 0,
+        "max": 0,
+        "options": {
+          "UI.right.btn.text": "Keep",
+          "UI.left.btn.text": "Mulligan",
+          "queryType": "ASK"
+        },
+        "choice": null,
+        "messages": null
+      },
+      "hand": [
+        {
+          "id": "7f072c3c-c5b5-431e-ad1a-9097494d2600",
+          "name": "Skewer the Critics"
+        },
+        {
+          "id": "53e772aa-4f72-4b5c-8969-cb9c0bcb9462",
+          "name": "Boros Charm"
+        },
+        {
+          "id": "b95d96c3-fdeb-407b-93b2-e50bcdeccd3c",
+          "name": "Searing Blaze"
+        },
+        {
+          "id": "e9ebd61f-8d3b-4fe2-af05-2618d4957f55",
+          "name": "Boltwave"
+        },
+        {
+          "id": "45b1ea24-e64c-48a4-b361-b9f7b1197be0",
+          "name": "Boltwave"
+        },
+        {
+          "id": "1c6795d3-da70-4119-a7f2-411fb9d28bd8",
+          "name": "Monastery Swiftspear"
+        }
+      ]
+    },
+    {
+      "method": "GAME_TARGET",
+      "data": {
+        "message": "Select a card (2 more) to put on the bottom of your library",
+        "flag": true,
+        "targets": [
+          "7f9c69ce-2170-45e8-9788-4d5ca403914c",
+          "936fb5d6-3711-4ee2-87a4-3b5a418f73fc",
+          "fd51cc0f-56bc-44db-93b2-c2265b29033c",
+          "1c6795d3-da70-4119-a7f2-411fb9d28bd8",
+          "1690a65a-1049-4c04-80d1-27622179fa11",
+          "979bc9c9-9b2f-41e6-818c-995f9f35d3a0",
+          "e98b2d83-49df-427d-abac-8f09d3e18000"
+        ],
+        "min": 0,
+        "max": 0,
+        "options": {
+          "chosenTargets": [],
+          "targetZone": "HAND",
+          "queryType": "PICK_TARGET"
+        },
+        "choice": null,
+        "messages": null
+      },
+      "hand": [
+        {
+          "id": "7f9c69ce-2170-45e8-9788-4d5ca403914c",
+          "name": "Arid Mesa"
+        },
+        {
+          "id": "1690a65a-1049-4c04-80d1-27622179fa11",
+          "name": "Arid Mesa"
+        },
+        {
+          "id": "936fb5d6-3711-4ee2-87a4-3b5a418f73fc",
+          "name": "Bloodstained Mire"
+        },
+        {
+          "id": "979bc9c9-9b2f-41e6-818c-995f9f35d3a0",
+          "name": "Sunbaked Canyon"
+        },
+        {
+          "id": "e98b2d83-49df-427d-abac-8f09d3e18000",
+          "name": "Sunbaked Canyon"
+        },
+        {
+          "id": "fd51cc0f-56bc-44db-93b2-c2265b29033c",
+          "name": "Skullcrack"
+        },
+        {
+          "id": "1c6795d3-da70-4119-a7f2-411fb9d28bd8",
+          "name": "Monastery Swiftspear"
+        }
+      ]
+    },
+    {
+      "method": "GAME_TARGET",
+      "data": {
+        "message": "Select a card (1 more) to put on the bottom of your library",
+        "flag": true,
+        "targets": [
+          "fd51cc0f-56bc-44db-93b2-c2265b29033c",
+          "7f9c69ce-2170-45e8-9788-4d5ca403914c",
+          "1c6795d3-da70-4119-a7f2-411fb9d28bd8",
+          "979bc9c9-9b2f-41e6-818c-995f9f35d3a0",
+          "e98b2d83-49df-427d-abac-8f09d3e18000",
+          "936fb5d6-3711-4ee2-87a4-3b5a418f73fc"
+        ],
+        "min": 0,
+        "max": 0,
+        "options": {
+          "chosenTargets": [],
+          "targetZone": "HAND",
+          "queryType": "PICK_TARGET"
+        },
+        "choice": null,
+        "messages": null
+      },
+      "hand": [
+        {
+          "id": "7f9c69ce-2170-45e8-9788-4d5ca403914c",
+          "name": "Arid Mesa"
+        },
+        {
+          "id": "936fb5d6-3711-4ee2-87a4-3b5a418f73fc",
+          "name": "Bloodstained Mire"
+        },
+        {
+          "id": "979bc9c9-9b2f-41e6-818c-995f9f35d3a0",
+          "name": "Sunbaked Canyon"
+        },
+        {
+          "id": "e98b2d83-49df-427d-abac-8f09d3e18000",
+          "name": "Sunbaked Canyon"
+        },
+        {
+          "id": "fd51cc0f-56bc-44db-93b2-c2265b29033c",
+          "name": "Skullcrack"
+        },
+        {
+          "id": "1c6795d3-da70-4119-a7f2-411fb9d28bd8",
+          "name": "Monastery Swiftspear"
+        }
+      ]
+    },
+    {
+      "method": "GAME_ASK",
+      "data": {
+        "message": "Mulligan <font color=#ffff00>down to 4 cards</font>?",
+        "flag": false,
+        "targets": null,
+        "min": 0,
+        "max": 0,
+        "options": {
+          "UI.right.btn.text": "Keep",
+          "UI.left.btn.text": "Mulligan",
+          "queryType": "ASK"
+        },
+        "choice": null,
+        "messages": null
+      },
+      "hand": [
+        {
+          "id": "936fb5d6-3711-4ee2-87a4-3b5a418f73fc",
+          "name": "Bloodstained Mire"
+        },
+        {
+          "id": "979bc9c9-9b2f-41e6-818c-995f9f35d3a0",
+          "name": "Sunbaked Canyon"
+        },
+        {
+          "id": "e98b2d83-49df-427d-abac-8f09d3e18000",
+          "name": "Sunbaked Canyon"
+        },
+        {
+          "id": "fd51cc0f-56bc-44db-93b2-c2265b29033c",
+          "name": "Skullcrack"
+        },
+        {
+          "id": "1c6795d3-da70-4119-a7f2-411fb9d28bd8",
+          "name": "Monastery Swiftspear"
+        }
+      ]
+    }
+  ]
+}

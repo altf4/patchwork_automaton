@@ -1,0 +1,845 @@
+{
+  "date": "2026-10-15",
+  "kind": "synthetic multi-decision Burn curriculum; not full XMage games",
+  "five_tasks": [
+    "openings",
+    "lands_and_casting",
+    "mana_colors",
+    "lethal",
+    "creatures_and_attacking"
+  ],
+  "objective": "Supervised synthetic teacher imitation followed by terminal-task-success-only PPO; no intermediate RL rewards",
+  "opening_teacher": "Keep anything at <=4; otherwise keep 2/3 lands, or 1 land with <=2 nonland spells of printed MV exactly 2",
+  "bottom_teacher": "Preserve two lands where possible; remove excess lands, then highest printed MV spell; equivalent cards accepted",
+  "checkpoint": {
+    "path": ".local/training/five-skills-corrected-415/policy.keras",
+    "sha256": "1f013615a5859c2b411a715a4e031051f7796cdb466b0151bc685e6a1e5db9bf",
+    "parameters": 1476766
+  },
+  "warm_start": {
+    "path": ".local/training/five-skills-input-414.keras",
+    "sha256": "11eb838519e1648396d2d28ca33522edee9d26f6f2dd61bc3c39640cbafd11f7",
+    "note": "Inherits earlier synthetic imitation training, including experiments before the card-fact correction; this is not a fresh-model sample-efficiency claim"
+  },
+  "run": {
+    "config": {
+      "directory": ".local/training/five-skills-corrected-415",
+      "load": ".local/training/five-skills-input-414.keras",
+      "tasks": [
+        "openings",
+        "lands_and_casting",
+        "mana_colors",
+        "lethal",
+        "creatures_and_attacking"
+      ],
+      "seed": 415,
+      "workers": 8,
+      "warmup_rounds": 40,
+      "ppo_rounds": 2,
+      "round_episodes": 80,
+      "train_batch": 128,
+      "supervised_epochs": 2,
+      "balance_prompts": true,
+      "calibrate_context": true,
+      "eval_cases": 100,
+      "evaluate_every": 20,
+      "learning_rate": 0.0001,
+      "ppo_learning_rate": 3e-05,
+      "pass_rate": 0.9,
+      "require_pass": true
+    },
+    "seconds": 650.762590962986,
+    "supervised_optimizer_steps": 240,
+    "supervised_puzzles": 3200,
+    "ppo_puzzles": 160,
+    "ppo_updates": [
+      {
+        "loss": 0.8130900046042105,
+        "policy_loss": -0.005016218909818537,
+        "value_loss": 1.6392788587027038,
+        "entropy": 0.153320583732286,
+        "approx_kl": 0.0003683886455455142,
+        "clip_fraction": 0.0034843204276902334,
+        "samples": 302,
+        "optimizer_steps": 6,
+        "accepted_steps": 6,
+        "rejected_epochs": 6,
+        "early_stop": false,
+        "gradient_norm": 4.7734808921813965,
+        "exact_kl": 0.0004198189805628276,
+        "max_state_kl": 0.03792930394411087,
+        "largest_accepted_kl": 0.0004198189805628276,
+        "largest_accepted_state_kl": 0.03792930394411087,
+        "reward_std": 0.3211749841849574,
+        "advantage_std": 0.44153669476509094,
+        "recurrent_updates": "detached behavior states",
+        "terminal_rewards_only": true
+      },
+      {
+        "loss": 0.8193938572898628,
+        "policy_loss": -0.002262629736826694,
+        "value_loss": 1.6462780146763243,
+        "entropy": 0.1482520311472625,
+        "approx_kl": 0.0001420898124016785,
+        "clip_fraction": 0.0036496348325571006,
+        "samples": 290,
+        "optimizer_steps": 12,
+        "accepted_steps": 6,
+        "rejected_epochs": 6,
+        "early_stop": false,
+        "gradient_norm": 7.402008056640625,
+        "exact_kl": 0.0004490653709697415,
+        "max_state_kl": 0.048177897930145264,
+        "largest_accepted_kl": 0.0004490653709697415,
+        "largest_accepted_state_kl": 0.048177897930145264,
+        "reward_std": 0.3275680575734598,
+        "advantage_std": 0.4451843500137329,
+        "recurrent_updates": "detached behavior states",
+        "terminal_rewards_only": true
+      }
+    ],
+    "evaluations": {
+      "initial": {
+        "greedy": {
+          "openings": {
+            "episodes": 100,
+            "wins": 58,
+            "timeouts": 0,
+            "decisions": 121,
+            "success_rate": 0.58
+          },
+          "mana_colors": {
+            "episodes": 100,
+            "wins": 100,
+            "timeouts": 0,
+            "decisions": 200,
+            "success_rate": 1.0
+          },
+          "lethal": {
+            "episodes": 100,
+            "wins": 100,
+            "timeouts": 0,
+            "decisions": 403,
+            "success_rate": 1.0
+          },
+          "lands_and_casting": {
+            "episodes": 100,
+            "wins": 100,
+            "timeouts": 0,
+            "decisions": 399,
+            "success_rate": 1.0
+          },
+          "creatures_and_attacking": {
+            "episodes": 100,
+            "wins": 100,
+            "timeouts": 0,
+            "decisions": 755,
+            "success_rate": 1.0
+          }
+        },
+        "sampled": {
+          "openings": {
+            "episodes": 100,
+            "wins": 56,
+            "timeouts": 0,
+            "decisions": 129,
+            "success_rate": 0.56
+          },
+          "mana_colors": {
+            "episodes": 100,
+            "wins": 97,
+            "timeouts": 0,
+            "decisions": 203,
+            "success_rate": 0.97
+          },
+          "lethal": {
+            "episodes": 100,
+            "wins": 100,
+            "timeouts": 0,
+            "decisions": 418,
+            "success_rate": 1.0
+          },
+          "lands_and_casting": {
+            "episodes": 100,
+            "wins": 100,
+            "timeouts": 0,
+            "decisions": 399,
+            "success_rate": 1.0
+          },
+          "creatures_and_attacking": {
+            "episodes": 100,
+            "wins": 99,
+            "timeouts": 0,
+            "decisions": 753,
+            "success_rate": 0.99
+          }
+        }
+      },
+      "warmup-20": {
+        "greedy": {
+          "openings": {
+            "episodes": 32,
+            "wins": 28,
+            "timeouts": 0,
+            "decisions": 65,
+            "success_rate": 0.875
+          },
+          "mana_colors": {
+            "episodes": 32,
+            "wins": 32,
+            "timeouts": 0,
+            "decisions": 64,
+            "success_rate": 1.0
+          },
+          "lethal": {
+            "episodes": 32,
+            "wins": 32,
+            "timeouts": 0,
+            "decisions": 144,
+            "success_rate": 1.0
+          },
+          "lands_and_casting": {
+            "episodes": 32,
+            "wins": 32,
+            "timeouts": 0,
+            "decisions": 128,
+            "success_rate": 1.0
+          },
+          "creatures_and_attacking": {
+            "episodes": 32,
+            "wins": 32,
+            "timeouts": 0,
+            "decisions": 240,
+            "success_rate": 1.0
+          }
+        },
+        "sampled": {
+          "openings": {
+            "episodes": 32,
+            "wins": 24,
+            "timeouts": 0,
+            "decisions": 56,
+            "success_rate": 0.75
+          },
+          "mana_colors": {
+            "episodes": 32,
+            "wins": 31,
+            "timeouts": 0,
+            "decisions": 65,
+            "success_rate": 0.96875
+          },
+          "lethal": {
+            "episodes": 32,
+            "wins": 32,
+            "timeouts": 0,
+            "decisions": 141,
+            "success_rate": 1.0
+          },
+          "lands_and_casting": {
+            "episodes": 32,
+            "wins": 32,
+            "timeouts": 0,
+            "decisions": 128,
+            "success_rate": 1.0
+          },
+          "creatures_and_attacking": {
+            "episodes": 32,
+            "wins": 32,
+            "timeouts": 0,
+            "decisions": 240,
+            "success_rate": 1.0
+          }
+        }
+      },
+      "warmup-40": {
+        "greedy": {
+          "openings": {
+            "episodes": 32,
+            "wins": 29,
+            "timeouts": 0,
+            "decisions": 59,
+            "success_rate": 0.90625
+          },
+          "mana_colors": {
+            "episodes": 32,
+            "wins": 32,
+            "timeouts": 0,
+            "decisions": 64,
+            "success_rate": 1.0
+          },
+          "lethal": {
+            "episodes": 32,
+            "wins": 32,
+            "timeouts": 0,
+            "decisions": 139,
+            "success_rate": 1.0
+          },
+          "lands_and_casting": {
+            "episodes": 32,
+            "wins": 32,
+            "timeouts": 0,
+            "decisions": 128,
+            "success_rate": 1.0
+          },
+          "creatures_and_attacking": {
+            "episodes": 32,
+            "wins": 32,
+            "timeouts": 0,
+            "decisions": 240,
+            "success_rate": 1.0
+          }
+        },
+        "sampled": {
+          "openings": {
+            "episodes": 32,
+            "wins": 26,
+            "timeouts": 0,
+            "decisions": 53,
+            "success_rate": 0.8125
+          },
+          "mana_colors": {
+            "episodes": 32,
+            "wins": 32,
+            "timeouts": 0,
+            "decisions": 64,
+            "success_rate": 1.0
+          },
+          "lethal": {
+            "episodes": 32,
+            "wins": 32,
+            "timeouts": 0,
+            "decisions": 141,
+            "success_rate": 1.0
+          },
+          "lands_and_casting": {
+            "episodes": 32,
+            "wins": 32,
+            "timeouts": 0,
+            "decisions": 128,
+            "success_rate": 1.0
+          },
+          "creatures_and_attacking": {
+            "episodes": 32,
+            "wins": 32,
+            "timeouts": 0,
+            "decisions": 240,
+            "success_rate": 1.0
+          }
+        }
+      },
+      "warmup": {
+        "greedy": {
+          "openings": {
+            "episodes": 100,
+            "wins": 80,
+            "timeouts": 0,
+            "decisions": 186,
+            "success_rate": 0.8
+          },
+          "mana_colors": {
+            "episodes": 100,
+            "wins": 100,
+            "timeouts": 0,
+            "decisions": 200,
+            "success_rate": 1.0
+          },
+          "lethal": {
+            "episodes": 100,
+            "wins": 100,
+            "timeouts": 0,
+            "decisions": 411,
+            "success_rate": 1.0
+          },
+          "lands_and_casting": {
+            "episodes": 100,
+            "wins": 100,
+            "timeouts": 0,
+            "decisions": 399,
+            "success_rate": 1.0
+          },
+          "creatures_and_attacking": {
+            "episodes": 100,
+            "wins": 100,
+            "timeouts": 0,
+            "decisions": 755,
+            "success_rate": 1.0
+          }
+        },
+        "sampled": {
+          "openings": {
+            "episodes": 100,
+            "wins": 74,
+            "timeouts": 0,
+            "decisions": 165,
+            "success_rate": 0.74
+          },
+          "mana_colors": {
+            "episodes": 100,
+            "wins": 100,
+            "timeouts": 0,
+            "decisions": 200,
+            "success_rate": 1.0
+          },
+          "lethal": {
+            "episodes": 100,
+            "wins": 100,
+            "timeouts": 0,
+            "decisions": 420,
+            "success_rate": 1.0
+          },
+          "lands_and_casting": {
+            "episodes": 100,
+            "wins": 100,
+            "timeouts": 0,
+            "decisions": 399,
+            "success_rate": 1.0
+          },
+          "creatures_and_attacking": {
+            "episodes": 100,
+            "wins": 100,
+            "timeouts": 0,
+            "decisions": 755,
+            "success_rate": 1.0
+          }
+        }
+      },
+      "final": {
+        "greedy": {
+          "openings": {
+            "episodes": 100,
+            "wins": 79,
+            "timeouts": 0,
+            "decisions": 181,
+            "success_rate": 0.79
+          },
+          "mana_colors": {
+            "episodes": 100,
+            "wins": 100,
+            "timeouts": 0,
+            "decisions": 200,
+            "success_rate": 1.0
+          },
+          "lethal": {
+            "episodes": 100,
+            "wins": 100,
+            "timeouts": 0,
+            "decisions": 407,
+            "success_rate": 1.0
+          },
+          "lands_and_casting": {
+            "episodes": 100,
+            "wins": 100,
+            "timeouts": 0,
+            "decisions": 399,
+            "success_rate": 1.0
+          },
+          "creatures_and_attacking": {
+            "episodes": 100,
+            "wins": 100,
+            "timeouts": 0,
+            "decisions": 755,
+            "success_rate": 1.0
+          }
+        },
+        "sampled": {
+          "openings": {
+            "episodes": 100,
+            "wins": 75,
+            "timeouts": 0,
+            "decisions": 168,
+            "success_rate": 0.75
+          },
+          "mana_colors": {
+            "episodes": 100,
+            "wins": 100,
+            "timeouts": 0,
+            "decisions": 200,
+            "success_rate": 1.0
+          },
+          "lethal": {
+            "episodes": 100,
+            "wins": 100,
+            "timeouts": 0,
+            "decisions": 420,
+            "success_rate": 1.0
+          },
+          "lands_and_casting": {
+            "episodes": 100,
+            "wins": 100,
+            "timeouts": 0,
+            "decisions": 399,
+            "success_rate": 1.0
+          },
+          "creatures_and_attacking": {
+            "episodes": 100,
+            "wins": 100,
+            "timeouts": 0,
+            "decisions": 755,
+            "success_rate": 1.0
+          }
+        }
+      },
+      "final-iid": {
+        "greedy": {
+          "openings": {
+            "episodes": 100,
+            "wins": 84,
+            "timeouts": 0,
+            "decisions": 182,
+            "success_rate": 0.84
+          },
+          "lands_and_casting": {
+            "episodes": 100,
+            "wins": 100,
+            "timeouts": 0,
+            "decisions": 370,
+            "success_rate": 1.0
+          },
+          "mana_colors": {
+            "episodes": 100,
+            "wins": 100,
+            "timeouts": 0,
+            "decisions": 200,
+            "success_rate": 1.0
+          },
+          "lethal": {
+            "episodes": 100,
+            "wins": 100,
+            "timeouts": 0,
+            "decisions": 381,
+            "success_rate": 1.0
+          },
+          "creatures_and_attacking": {
+            "episodes": 100,
+            "wins": 100,
+            "timeouts": 0,
+            "decisions": 692,
+            "success_rate": 1.0
+          }
+        },
+        "sampled": {
+          "lands_and_casting": {
+            "episodes": 100,
+            "wins": 100,
+            "timeouts": 0,
+            "decisions": 370,
+            "success_rate": 1.0
+          },
+          "openings": {
+            "episodes": 100,
+            "wins": 77,
+            "timeouts": 0,
+            "decisions": 166,
+            "success_rate": 0.77
+          },
+          "mana_colors": {
+            "episodes": 100,
+            "wins": 100,
+            "timeouts": 0,
+            "decisions": 200,
+            "success_rate": 1.0
+          },
+          "lethal": {
+            "episodes": 100,
+            "wins": 100,
+            "timeouts": 0,
+            "decisions": 389,
+            "success_rate": 1.0
+          },
+          "creatures_and_attacking": {
+            "episodes": 100,
+            "wins": 99,
+            "timeouts": 0,
+            "decisions": 689,
+            "success_rate": 0.99
+          }
+        }
+      }
+    },
+    "passed": false,
+    "inference": {
+      "calls": 7925,
+      "requests": 30445,
+      "mean_batch": 3.8416403785488957,
+      "batch_histogram": {
+        "7": 712,
+        "1": 1015,
+        "6": 985,
+        "3": 1327,
+        "2": 1131,
+        "5": 1245,
+        "4": 1503,
+        "8": 7
+      },
+      "inference_seconds": 383.03853781108046,
+      "mean_queue_ms": 30.3691959960622,
+      "graph_traces": 1
+    },
+    "source_sha256": {
+      "curriculum": "2a0b5944a063e8f5b02c9a5b41e1070a70f7f7c796f3db9b08a476bf3f367da7",
+      "episodes": "37ba759ef7d05da433c63f41387d3266a7dc27fde5204b0e5c531e8a045cf192",
+      "scenarios": "6b36460767475498b7130c52a2fbbeab98d36310a843c747200f6bff4da480c2",
+      "native_layout": "e5cb94f329a4621a92fa9e6e2210c3694e2fbd6e4977e3790656bb206ef1dc91",
+      "features": "0fd2cdb7824ee788475440a7c1680f88f7aa645fb5f069964db5bace62a6bc0c",
+      "model": "e93fc79623ef47b25e3809d0e3f11f9bc55446148cbd1644659c0dcdf32e2694",
+      "policy": "fe226a1e8b6ed50184c948eebd750fa2d9d3c56d569a9abab7ffd60a0ad556b1",
+      "history": "76bb00cf3589898e8cde5ef0ae8fd306b0a7d48198102b81275b7a713342fc26",
+      "batching": "72ff3bccd624c9358dfb85ee57a113e8fbec083418d6bd3077a55d40fce0a9c0",
+      "streaming_ppo": "53aa21dc93c5d783653335dddc339b8f0cf8f47a4f6b5b22b401fe7f993f5fbc",
+      "calibration": "49c9eec1b963053c16b9910f39c3dd85c20f704154a1a0e5109de8cc83925441",
+      "backends.xmage_choices": "855d7565c91465500474cf0de19586c5f871819b14f0bb9cb729c99ac4687aa5",
+      "backends.xmage_prompts": "5c73ffb4b8377ab83eb2004e74c9d76ab1b9c649e8449e4284909370382bf46c",
+      "backends.burn_actions": "b44f41f14884c8e5d5fc7d63f2c42f65aee0dcfc9baf40155d5c50fb340a784d",
+      "baselines.burn_mulligan": "d64569a79b5db18fdea68bf2107059f539040f660dfb41d123b247cbea3905ba",
+      "burn_semantics": "0a183bdb53917160097b3a642a6288d5966407e07b9bc56e7da989a338aa1265",
+      "native_layout_data": "7047d6cde94ad1a0cef78a6c0bb5d1cbcd1b7125fce1127b9fb6a1293c82c7e7",
+      "runner": "2344735f6556ff0da3ec6443b01647e08f8bb8af16d2e59115fd83c57e19ac34"
+    }
+  },
+  "independent_comparison": {
+    "untrained": {
+      "greedy": {
+        "summary": {
+          "mana_colors": {
+            "cases": 100,
+            "wins": 0,
+            "timeouts": 0,
+            "first_failure_purpose": {
+              "mana_payment": 100
+            }
+          },
+          "openings": {
+            "cases": 100,
+            "wins": 0,
+            "timeouts": 0,
+            "first_failure_purpose": {
+              "mulligan": 62,
+              "bottom_hand": 38
+            }
+          },
+          "lethal": {
+            "cases": 100,
+            "wins": 53,
+            "timeouts": 0,
+            "first_failure_purpose": {
+              "priority": 37,
+              "mana_payment": 10
+            }
+          },
+          "lands_and_casting": {
+            "cases": 100,
+            "wins": 0,
+            "timeouts": 0,
+            "first_failure_purpose": {
+              "mana_payment": 21,
+              "ability": 40,
+              "priority": 39
+            }
+          },
+          "creatures_and_attacking": {
+            "cases": 100,
+            "wins": 0,
+            "timeouts": 0,
+            "first_failure_purpose": {
+              "priority": 100
+            }
+          }
+        },
+        "seed": 180001,
+        "optimizer_steps": 0,
+        "path": ".local/training/five-skills-corrected-415/independent-untrained-greedy.json"
+      },
+      "sampled": {
+        "summary": {
+          "creatures_and_attacking": {
+            "cases": 100,
+            "wins": 0,
+            "timeouts": 0,
+            "first_failure_purpose": {
+              "priority": 75,
+              "shock_land": 13,
+              "ability": 3,
+              "attackers": 3,
+              "mana_payment": 6
+            }
+          },
+          "openings": {
+            "cases": 100,
+            "wins": 30,
+            "timeouts": 0,
+            "first_failure_purpose": {
+              "mulligan": 49,
+              "bottom_hand": 21
+            }
+          },
+          "mana_colors": {
+            "cases": 100,
+            "wins": 12,
+            "timeouts": 0,
+            "first_failure_purpose": {
+              "mana_payment": 50,
+              "ability": 38
+            }
+          },
+          "lethal": {
+            "cases": 100,
+            "wins": 16,
+            "timeouts": 0,
+            "first_failure_purpose": {
+              "priority": 32,
+              "target": 34,
+              "mana_payment": 18
+            }
+          },
+          "lands_and_casting": {
+            "cases": 100,
+            "wins": 10,
+            "timeouts": 0,
+            "first_failure_purpose": {
+              "mana_payment": 11,
+              "ability": 13,
+              "priority": 58,
+              "target": 5,
+              "shock_land": 3
+            }
+          }
+        },
+        "seed": 180001,
+        "optimizer_steps": 0,
+        "path": ".local/training/five-skills-corrected-415/independent-untrained-sampled.json"
+      }
+    },
+    "trained": {
+      "greedy": {
+        "summary": {
+          "openings": {
+            "cases": 100,
+            "wins": 86,
+            "timeouts": 0,
+            "first_failure_purpose": {
+              "mulligan": 14
+            }
+          },
+          "mana_colors": {
+            "cases": 100,
+            "wins": 100,
+            "timeouts": 0,
+            "first_failure_purpose": {}
+          },
+          "lands_and_casting": {
+            "cases": 100,
+            "wins": 100,
+            "timeouts": 0,
+            "first_failure_purpose": {}
+          },
+          "lethal": {
+            "cases": 100,
+            "wins": 100,
+            "timeouts": 0,
+            "first_failure_purpose": {}
+          },
+          "creatures_and_attacking": {
+            "cases": 100,
+            "wins": 100,
+            "timeouts": 0,
+            "first_failure_purpose": {}
+          }
+        },
+        "seed": 180001,
+        "optimizer_steps": 0,
+        "path": ".local/training/five-skills-corrected-415/independent-trained-greedy.json"
+      },
+      "sampled": {
+        "summary": {
+          "openings": {
+            "cases": 100,
+            "wins": 76,
+            "timeouts": 0,
+            "first_failure_purpose": {
+              "mulligan": 23,
+              "bottom_hand": 1
+            }
+          },
+          "lethal": {
+            "cases": 100,
+            "wins": 100,
+            "timeouts": 0,
+            "first_failure_purpose": {}
+          },
+          "mana_colors": {
+            "cases": 100,
+            "wins": 99,
+            "timeouts": 0,
+            "first_failure_purpose": {
+              "ability": 1
+            }
+          },
+          "lands_and_casting": {
+            "cases": 100,
+            "wins": 100,
+            "timeouts": 0,
+            "first_failure_purpose": {}
+          },
+          "creatures_and_attacking": {
+            "cases": 100,
+            "wins": 100,
+            "timeouts": 0,
+            "first_failure_purpose": {}
+          }
+        },
+        "seed": 180001,
+        "optimizer_steps": 0,
+        "path": ".local/training/five-skills-corrected-415/independent-trained-sampled.json"
+      }
+    }
+  },
+  "validation": {
+    "unit_tests": 254,
+    "unit_test_log": ".local/mulligan/tests-five-skills-final-254.log",
+    "save_reload_prediction_check": true,
+    "teacher_card_type_and_mana_value_check": true,
+    "calibration_preserves_initial_logits_value_memory": true
+  },
+  "discarded_experiments": [
+    {
+      "directory": ".local/training/five-skills-411",
+      "reason": "Historical prototype data misclassified fetch lands after redraws and some creature types/mana values; excluded from final validation"
+    },
+    {
+      "directory": ".local/training/five-skills-balanced-412",
+      "reason": "Historical prototype data misclassified fetch lands after redraws and some creature types/mana values; excluded from final validation"
+    },
+    {
+      "directory": ".local/training/five-skills-calibrated-413",
+      "reason": "Historical prototype data misclassified fetch lands after redraws and some creature types/mana values; excluded from final validation"
+    },
+    {
+      "directory": ".local/training/five-skills-corrected-414",
+      "reason": "Stopped for the remaining creature-fact correction"
+    }
+  ],
+  "limitations": [
+    "Controlled puzzles with scripted passes; no opposing blockers in the introductory attack task",
+    "Guide reveal and Eidolon damage triggers omitted from the introductory creature sequence",
+    "Detached recurrent states during optimization; no BPTT",
+    "No full-game win-rate claim against the deterministic Burn baseline",
+    "32-decision bound is a synthetic puzzle constraint; full-game safety cutoffs must not be relabeled as server losses"
+  ],
+  "source_snapshots": {
+    "runner": ".local/training/five-skills-corrected-415/train_curriculum.snapshot.py",
+    "calibration": ".local/training/five-skills-corrected-415/calibration.snapshot.py",
+    "note": "A later calibration fix builds fresh unbuilt models before cloning; the tested warm-start run used an already-built model"
+  },
+  "native_opening_replay": {
+    "actual": {
+      "cases": 6,
+      "greedy": 5,
+      "probability": 0.768466959396998
+    },
+    "counterfactual_native_template": {
+      "cases": 200,
+      "greedy": 174,
+      "probability": 0.7984927567653358
+    }
+  }
+}

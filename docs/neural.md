@@ -27,6 +27,11 @@ On the current workspace, uv itself is available at `.local/uv/uv` and the
 isolated `.venv` has been synced. `uv.lock` records the tested dependency
 resolution. Runtime files and checkpoints stay under ignored `.local/`.
 
+A curated [Modern Burn research checkpoint](../models/modern-burn-synthetic-605/README.md)
+is versioned with its manifest and training report so the latest evaluated
+weights are available from a fresh checkout. Its full-game limitations are
+documented alongside it.
+
 Reload the same weights:
 
 ```sh
@@ -96,7 +101,7 @@ Multiple modes, alternative costs and arbitrary ability-picker UUIDs remain
 unresolved rather than being assumed to have the
 same meaning across games or backends.
 
-Feature version 3 uses 29 card-embedding entries, including unknown ID 0.
+Feature version 6 retains 29 card-embedding entries, including unknown ID 0.
 See [semantic coverage and checkpoint compatibility](semantics.md). The earlier
 version-2 checkpoints and benchmark results below predate these annotations.
 
@@ -114,6 +119,48 @@ silently replace a model choice. A callback that cannot be represented stops
 the run with an explicit error.
 
 ## History, checkpoints and validation
+
+Feature version 4 added per-candidate annotated ability IDs and numeric summaries
+of the selected ability's costs, effects, conditions and mode. The XMage adapter
+binds reviewed Burn ability-picker rules to these IDs; labels are not network
+inputs. Red/white mana, Boros Charm's three modes, Canyon's draw activation and
+fetch activations are distinct. A UUID-shaped Cancel choice remains a UUID
+response but has an explicit cancel role. Ordinary single-ability casts and
+unambiguous trigger-order choices also retain ability identity, including cards
+whose rule coverage is partial.
+
+Binding prefers native ability-to-source links, then the preceding object click.
+Card identity follows a cast when XMage changes its UUID on the stack. The finite
+reviewed rule table strips only numbered UI prefixes; it does not interpret
+arbitrary rules text. Unknown wording, hidden sources and ambiguous identities
+remain unknown. Server options and response types are unchanged; this does not
+remove strategically unusual but legal targets or add a policy heuristic.
+
+Version 6 includes numeric prompt-purpose tags for mulligan and hand-bottom choices,
+the next mulligan hand size, and the remaining number of cards to bottom. These
+come from finite protocol bindings verified against actual XMage prompts. Neither
+prompt prose nor option labels enter the network. Reviewed Burn mana clicks also
+exclude known non-mana objects and tapped sources whose mana abilities require
+tapping. Unknown cards retain server-validated clickable behavior.
+
+Version 6 also includes factual own-hand card-type and mana-value histograms,
+remaining mana debt, and typed target-zone/required information. The optional
+`fact_readout` model path gives the scorer direct numeric context and referenced
+entity features. These are facts, not suggested actions or desirability scores.
+Version-5 checkpoints also require an explicit migration or fresh training.
+
+Explicit pool-spend candidates are available on `GAME_PLAY_MANA`. Each own-pool
+color binds to `sendPlayerManaType` and references the acting player's numeric
+pool features. Its existing semantic cost columns describe mana consumption
+with a typed color and unknown quantity; unlocking a color need not spend just
+one unit. This adds candidates without changing v6 widths or existing rows.
+Pool availability does not certify that a color pays the remaining cost or
+satisfies restrictions; XMage validates the response.
+
+Version-3 models (including the 1,000-game experiment) and version-4 synthetic
+models remain preserved but are incompatible with the expanded tensors. Use a fresh model; no automatic
+weight migration is performed. The manifest fingerprints the rule table as well
+as the ability vocabulary and tensor schema.
 
 The runner attaches `policy.observe` as the XMage client's synchronous
 `on_observation` listener. This records structured changes in each seat's own

@@ -1,13 +1,48 @@
 """Keras 3 entity-attention / recurrent actor-critic with candidate scoring."""
 import keras
 from keras import layers, ops
+import numpy as np
+
+
+@keras.saving.register_keras_serializable(package='patchwork')
+class FeatureStandardization(layers.Layer):
+    """Frozen per-feature training statistics, with bounded amplification."""
+    def build(self, input_shape):
+        shape=(int(input_shape[-1]),)
+        self.mean=self.add_weight(name='mean',shape=shape,initializer='zeros',trainable=False)
+        self.inverse_std=self.add_weight(name='inverse_std',shape=shape,initializer='ones',trainable=False)
+        super().build(input_shape)
+
+    def adapt(self, values):
+        values=np.asarray(values,np.float32)
+        if values.ndim!=2 or len(values)==0 or not np.isfinite(values).all():
+            raise ValueError('Expected finite training feature rows')
+        if not self.built:
+            self.build(values.shape)
+        mean=values.mean(axis=0);std=values.std(axis=0)
+        self.mean.assign(mean)
+        # Constant features stay at unit scale, including unseen ability IDs.
+        self.inverse_std.assign(np.where(std>1e-6,1/np.maximum(std,.1),1.))
+
+    def call(self, values):
+        return (values-self.mean)*self.inverse_std
 
 
 @keras.saving.register_keras_serializable(package='patchwork')
 class PolicyNetwork(keras.Model):
-    def __init__(self, card_count, width=128, memory_size=256, blocks=3, **kwargs):
+    def __init__(self, card_count, width=128, memory_size=256, blocks=3, candidate_interactions=False, player_readout=False, stable_heads=False, standardize_inputs=False, isolate_value=False, fact_readout=False, **kwargs):
         super().__init__(**kwargs)
         self.card_count, self.width, self.memory_size, self.blocks = card_count, width, memory_size, blocks
+        self.candidate_interactions = candidate_interactions
+        self.player_readout = player_readout
+        self.stable_heads = stable_heads
+        self.standardize_inputs = standardize_inputs
+        self.isolate_value = isolate_value
+        self.fact_readout = fact_readout
+        if standardize_inputs:
+            self.entity_standardization = FeatureStandardization()
+            self.candidate_standardization = FeatureStandardization()
+            if fact_readout: self.context_standardization = FeatureStandardization()
         if width % 4: raise ValueError('Attention width must be divisible by four')
         self.card_embedding = layers.Embedding(card_count, 64)
         self.semantic_projection = layers.Dense(64, activation='relu')
@@ -24,11 +59,17 @@ class PolicyNetwork(keras.Model):
         self.memory = layers.GRU(memory_size, return_state=True, use_cudnn=False)
         self.candidate_projection = layers.Dense(width, activation='relu')
         self.query_projection = layers.Dense(width, activation='relu')
-        self.score_hidden = layers.Dense(width, activation='tanh')
+        self.score_hidden = layers.Dense(width, activation='gelu' if stable_heads else 'tanh')
+        if stable_heads:
+            # Fixed-scale normalization prevents products and the scoring head
+            # from saturating as candidate/query projection magnitudes grow.
+            self.candidate_norm = layers.LayerNormalization(center=False, scale=False)
+            self.query_norm = layers.LayerNormalization(center=False, scale=False)
+            self.score_norm = layers.LayerNormalization(center=False, scale=False)
         # Small random logits keep an untrained policy close to uniform without
         # replacing its decisions with an external random-action controller.
         self.score = layers.Dense(1, kernel_initializer=keras.initializers.RandomNormal(stddev=.01))
-        self.value_head = layers.Dense(1, activation='tanh')
+        self.value_head = layers.Dense(1, activation=None if stable_heads else 'tanh')
 
     def build(self, input_shape):
         # Explicitly create child weights before checkpoint restoration. Letting
@@ -42,6 +83,10 @@ class PolicyNetwork(keras.Model):
         super().build(input_shape)
 
     def call(self, inputs, training=False):
+        entity_features = self.entity_standardization(inputs['entities']) if self.standardize_inputs else inputs['entities']
+        candidate_features = self.candidate_standardization(inputs['candidates']) if self.standardize_inputs else inputs['candidates']
+        context_features = (self.context_standardization(inputs['context'])
+                            if self.standardize_inputs and self.fact_readout else inputs['context'])
         shape = ops.shape(inputs['semantics'])
         semantic = self.semantic_projection(inputs['semantics'])
         semantic = ops.reshape(semantic, (-1, shape[2], 64))
@@ -49,7 +94,7 @@ class PolicyNetwork(keras.Model):
         semantic = self.semantic_gru(semantic, mask=semantic_mask, training=training)
         semantic = ops.reshape(semantic, (shape[0], shape[1], 64))
         entity = self.entity_projection(ops.concatenate([
-            self.card_embedding(inputs['card_ids']), inputs['entities'], semantic], axis=-1))
+            self.card_embedding(inputs['card_ids']), entity_features, semantic], axis=-1))
         valid = ops.cast(inputs['entity_mask'], entity.dtype)
         entity = entity * valid[:, :, None]
         messages = []
@@ -66,16 +111,43 @@ class PolicyNetwork(keras.Model):
             self.card_embedding(inputs['history_cards']), inputs['history']], axis=-1))
         remembered = self.history_memory(history, mask=inputs['history_mask'],
                                          initial_state=inputs['memory_in'], training=training)
-        context = self.context_projection(ops.concatenate([pooled, inputs['context'], inputs['selection']], axis=-1))
+        # An entirely masked Keras GRU returns zero output, even with a nonzero
+        # initial state. Empty observation deltas must preserve decision memory.
+        remembered = ops.where(ops.any(inputs['history_mask'],axis=1,keepdims=True),
+                               remembered,inputs['memory_in'])
+        context = self.context_projection(ops.concatenate([pooled, context_features, inputs['selection']], axis=-1))
         _, updated = self.memory(context[:, None, :], initial_state=remembered, training=training)
         state = inputs['advance_memory'] * updated + (1. - inputs['advance_memory']) * inputs['memory_in']
         references = ops.matmul(inputs['candidate_refs'], entity)
-        candidates = self.candidate_projection(ops.concatenate([references, inputs['candidates']], axis=-1))
-        query = self.query_projection(ops.concatenate([state, context, inputs['selection']], axis=-1))
-        logits = ops.squeeze(self.score(self.score_hidden(candidates + query[:, None, :])), axis=-1)
+        candidate_inputs = [references, candidate_features]
+        if self.fact_readout:
+            candidate_inputs += [ops.matmul(inputs['candidate_refs'],entity_features)]
+        candidates = self.candidate_projection(ops.concatenate(candidate_inputs, axis=-1))
+        query_inputs = [state, context, inputs['selection']]
+        if self.player_readout:
+            # Encoder orders players self, opponent. Preserve their numeric
+            # state directly rather than only through the pooled object set.
+            query_inputs += [entity_features[:, 0], entity_features[:, 1]]
+        if self.fact_readout: query_inputs += [context_features]
+        query = self.query_projection(ops.concatenate(query_inputs, axis=-1))
+        if self.stable_heads:
+            candidates = self.candidate_norm(candidates)
+            query = self.query_norm(query)
+        query = ops.broadcast_to(query[:, None, :], ops.shape(candidates))
+        # Optional diagnostic alternative: expose state/action products directly,
+        # instead of relying on tanh to extract interactions from an additive mix.
+        scoring = ops.concatenate([candidates, query, candidates * query], axis=-1) if self.candidate_interactions else candidates + query
+        hidden = self.score_hidden(scoring)
+        if self.stable_heads:
+            hidden = self.score_norm(hidden)
+        logits = ops.squeeze(self.score(hidden), axis=-1)
         logits = ops.where(inputs['candidate_mask'], logits, ops.full_like(logits, -1.e9))
-        return {'logits': logits, 'value': self.value_head(state), 'memory_out': state}
+        value_input = ops.stop_gradient(state) if self.isolate_value else state
+        return {'logits': logits, 'value': self.value_head(value_input), 'memory_out': state}
 
     def get_config(self):
         return {**super().get_config(), 'card_count': self.card_count, 'width': self.width,
-                'memory_size': self.memory_size, 'blocks': self.blocks}
+                'memory_size': self.memory_size, 'blocks': self.blocks,
+                'candidate_interactions': self.candidate_interactions,
+                'player_readout': self.player_readout, 'stable_heads': self.stable_heads, 'standardize_inputs': self.standardize_inputs, 'isolate_value': self.isolate_value,
+                'fact_readout': self.fact_readout}

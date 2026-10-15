@@ -3,11 +3,12 @@
 Backend strings are used only for exact enum/identity lookups, never tokenized.
 Unrecognized semantics stay unknown. Live UUIDs are only lookup references.
 """
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from collections.abc import Mapping
 import hashlib
 import json
 import math
+from numbers import Real
 
 import numpy as np
 
@@ -16,8 +17,10 @@ from ..semantics import (INITIAL_CARDS, UNKNOWN_CARD, Keyword, Coverage, Ability
     EffectKind, CostKind, QuantityKind, Recipient, ObjectFilter, Color, Duration,
     Zone, Trigger, Condition, RuleTag, encode_card, lookup_visible)
 from ..burn_semantics import CARD_REGISTRY
+from ..backends.xmage_prompts import (PURPOSES, PROMPT_RULE_VERSION, prompt_metadata,
+                                    MANA_COLORS, TARGET_ZONES, prompt_source)
 
-FEATURE_VERSION = 3
+FEATURE_VERSION = 6
 PHASES = ('unknown', 'untap', 'upkeep', 'draw', 'precombat_main', 'begin_combat',
           'declare_attackers', 'declare_blockers', 'first_combat_damage',
           'combat_damage', 'end_combat', 'postcombat_main', 'end_turn', 'cleanup')
@@ -29,7 +32,8 @@ ZONES = ('unknown', 'player', 'hand', 'battlefield', 'graveyard', 'exile', 'stac
 TYPES = ('LAND', 'CREATURE', 'INSTANT', 'SORCERY', 'ARTIFACT', 'ENCHANTMENT', 'PLANESWALKER', 'BATTLE')
 COLORS = ('white', 'blue', 'black', 'red', 'green', 'colorless')
 OPTION_KINDS = ('unknown', 'boolean', 'uuid', 'string', 'integer', 'distribution', 'digit')
-ROLES = ('unknown', 'yes', 'no', 'play_land', 'cast', 'mana', 'target', 'ability', 'special', 'digit')
+ROLES = ('unknown', 'yes', 'no', 'play_land', 'cast', 'mana', 'target', 'ability', 'special', 'digit', 'cancel')
+ABILITY_IDS = (0, *sorted({a.id for card in CARD_REGISTRY.values() for a in card.abilities}))
 FLAGS = ('tapped', 'summoningSickness', 'canAttack', 'canBlock', 'attacking', 'blocking',
          'faceDown', 'isToken', 'isAbility')
 STATS = ('power', 'toughness', 'damage', 'manaValue', 'loyalty', 'defense')
@@ -105,8 +109,30 @@ SEMANTIC_WIDTH = len(semantic_rows(INITIAL_CARDS['Mountain'])[0])
 ENTITY_WIDTH = (len(ZONES) + 3 + 2 + 6 + len(Keyword) + 2 * len(Keyword)
                 + 2 * len(STATS) + 2 * len(FLAGS) + len(TYPES) + 1
                 + 2 * len(COLORS) + 2 * len(COUNTERS) + 2 * (3 + len(COLORS)))
-CANDIDATE_WIDTH = len(OPTION_KINDS) + len(ROLES) + 3 + 2 + 2 * 3 + 4 + len(AbilityKind)
-CONTEXT_WIDTH = len(PHASES) + len(DECISIONS) + 3 + 3 + 2 * 4 + 3
+CANDIDATE_WIDTH = (len(OPTION_KINDS) + len(ROLES) + 3 + 2 + 2 * 3 + 4 + len(AbilityKind)
+                   + len(ABILITY_IDS) + SEMANTIC_WIDTH)
+ABILITY_ID_SLICE = slice(CANDIDATE_WIDTH - SEMANTIC_WIDTH - len(ABILITY_IDS),
+                         CANDIDATE_WIDTH - SEMANTIC_WIDTH)
+HAND_MANA_BUCKETS = tuple(range(9))  # 8 includes all values >= 8.
+CONTEXT_WIDTH = (len(PHASES) + len(DECISIONS) + 3 + 3 + 2 * 4 + len(PURPOSES) + 4
+                 + 2 * len(MANA_COLORS) + 2 + len(TARGET_ZONES) + 2
+                 + 2 * (len(TYPES) + len(HAND_MANA_BUCKETS)) + 3)
+
+
+def hand_summary(obs):
+    """Observable counts, never a hand-quality label or policy threshold."""
+    hand = [o for o in obs.objects.values() if o.zone=='hand' and o.controller==obs.actor]
+    player = next(p for p in obs.players if p.id==obs.actor)
+    complete = len(hand)==player.hand_count and not any(not o.name or any(o.properties.get(k)
+        for k in ('hideInfo','faceDown','face_down')) for o in hand)
+    typed = complete and all(isinstance(o.properties.get('cardTypes'),(list,tuple,set,frozenset)) for o in hand)
+    mana = [o.properties.get('manaValue') for o in hand]
+    known_mana = complete and all(isinstance(v,Real) and not isinstance(v,bool)
+                                  and math.isfinite(v) and v>=0 and float(v).is_integer() for v in mana)
+    result = sum((numeric(sum(t in o.properties['cardTypes'] for o in hand) if typed else None) for t in TYPES), [])
+    result += sum((numeric(sum(min(v,8)==bucket for v in mana) if known_mana else None)
+                   for bucket in HAND_MANA_BUCKETS), [])
+    return result
 
 
 @dataclass
@@ -124,11 +150,16 @@ class Encoder:
 
     def manifest(self):
         from .history import EVENTS, HISTORY_WIDTH
+        from ..backends.burn_actions import RULES
         cards = {name: encode_card(card) for name, card in sorted(self.registry.items())}
         payload = dict(version=FEATURE_VERSION, cards=cards, phases=PHASES, decisions=DECISIONS,
                        zones=ZONES, types=TYPES, colors=COLORS, flags=FLAGS, stats=STATS,
                        counters=COUNTERS, option_kinds=OPTION_KINDS, roles=ROLES,
-                       events=EVENTS, semantic_enums={enum.__name__: {v.name: int(v) for v in enum}
+                       events=EVENTS, ability_ids=ABILITY_IDS,
+                       prompt_purposes=PURPOSES, prompt_rule_version=PROMPT_RULE_VERSION,
+                       prompt_mana_colors=MANA_COLORS,target_zones=TARGET_ZONES,hand_mana_buckets=HAND_MANA_BUCKETS,
+                       action_rules=[(name, rule, identity) for (name, rule), identity in sorted(RULES.items())],
+                       semantic_enums={enum.__name__: {v.name: int(v) for v in enum}
                            for enum in (RuleTag, EffectKind, QuantityKind, Recipient, Condition,
                                         AbilityKind, CostKind, Color, ObjectFilter, Trigger,
                                         Duration, Zone, Coverage, Keyword)},
@@ -209,13 +240,25 @@ class Encoder:
         context += onehot(side(obs.active_player), range(3)) + onehot(side(obs.priority_player), range(3))
         context += numeric(obs.turn) + numeric(decision.native.get('min')) + numeric(decision.native.get('max'))
         context += numeric(len((decision.native.get('options') or {}).get('chosenTargets') or ()))
+        metadata = prompt_metadata(decision.kind, decision.native)
+        context += onehot(metadata['purpose'], PURPOSES)
+        context += numeric(metadata.get('next_hand_size')) + numeric(metadata.get('bottom_remaining'))
+        context += sum((numeric(metadata.get('mana_cost',{}).get(c)) for c in MANA_COLORS), [])
+        context += numeric(metadata.get('life_payment'))
+        target_zone = (decision.native.get('options') or {}).get('targetZone')
+        context += onehot(target_zone if target_zone in TARGET_ZONES else 'unknown',TARGET_ZONES)
+        context += flags(decision.native,('flag',)) if decision.kind=='GAME_TARGET' else [0.,0.]
+        context += hand_summary(obs)
         context += [1., 0., 0.]  # action, integer digit, distribution digit
         assert len(context) == CONTEXT_WIDTH
         candidates = []
         references = np.zeros((len(decision.options), count), np.float32)
         playable = (obs.native.get('canPlayObjects') or {}).get('objects') or {}
         for i, option in enumerate(decision.options):
-            object_id = (option.constraints.get('source') or option.id.removeprefix('object:')) if option.kind == 'uuid' else None
+            if option.constraints.get('action_kind')=='spend_mana':object_id=option.constraints.get('source')
+            elif option.kind=='uuid':object_id=option.constraints.get('source') or option.id.removeprefix('object:')
+            elif option.kind=='boolean':object_id=prompt_source(decision.native)
+            else:object_id=None
             if object_id in by_id: references[i, by_id[object_id]] = 1
             role, coverage, ability = self._binding(obs, option, object_id, playable)
             candidates.append(candidate_row(option.kind, role, option.constraints, coverage=coverage, ability=ability))
@@ -232,7 +275,37 @@ class Encoder:
         return EncodedDecision(arrays, decision.options, decision.token, handles)
 
     def _binding(self, obs, option, object_id, playable):
+        if option.constraints.get('action_kind')=='spend_mana':
+            from ..semantics import Ability,Cost,Quantity
+            color=Color.__members__.get(option.constraints.get('mana_color'))
+            if (color not in (Color.WHITE,Color.BLUE,Color.BLACK,Color.RED,Color.GREEN,Color.COLORLESS)
+                    or object_id!=obs.actor.value or obs.decision.kind!='GAME_PLAY_MANA'):
+                return 'unknown',Coverage.UNKNOWN,None
+            # Existing numeric columns describe consumption rather than mana
+            # production. This protocol action is not a registered card ability;
+            # its ID encodes as unknown. The quantity unlocked is not asserted.
+            descriptor=Ability(9000+int(color),AbilityKind.UNKNOWN,
+                costs=(Cost(CostKind.MANA,Quantity(),color),),coverage=Coverage.PARTIAL)
+            return 'mana',Coverage.PARTIAL,descriptor
+        if option.constraints.get('action_kind') == 'cancel':
+            return 'cancel', Coverage.COMPLETE, None
+        if 'semantic_ability' in option.constraints:
+            # Metadata is emitted by the finite protocol decoder. Revalidate
+            # against visible source identities and this encoder's registry.
+            for handle, obj in obs.objects.items():
+                if option.constraints.get('source') and handle.value != option.constraints['source']: continue
+                card = lookup_visible(obj, self.registry)
+                if not card.id or card.id != option.constraints.get('semantic_card'): continue
+                ability = next((a for a in card.abilities if a.id == option.constraints['semantic_ability']), None)
+                if ability:
+                    role = 'mana' if ability.kind == AbilityKind.MANA else 'cast' if ability.kind == AbilityKind.SPELL else 'ability'
+                    return role, ability.coverage, ability
+            return 'unknown', Coverage.UNKNOWN, None
         if option.constraints.get('selection_kind') == 'trigger_order':
+            obj = next((o for h,o in obs.objects.items() if h.value == object_id), None)
+            card = lookup_visible(obj, self.registry) if obj else UNKNOWN_CARD
+            triggers = [a for a in card.abilities if a.kind == AbilityKind.TRIGGERED]
+            if len(triggers) == 1: return 'ability', triggers[0].coverage, triggers[0]
             return 'ability', Coverage.UNKNOWN, None
         if option.id in ('yes', 'no', 'special'):
             return option.id, Coverage.COMPLETE, None
@@ -242,18 +315,24 @@ class Encoder:
         categories = [k for k in ('basicPlayAbilities', 'basicCastAbilities', 'basicManaAbilities', 'other') if stats.get(k)]
         if obs.decision.kind in ('GAME_PLAY_MANA', 'GAME_PLAY_XMANA'):
             categories = [k for k in categories if k == 'basicManaAbilities']
+            if not categories:
+                obj = next((o for h,o in obs.objects.items() if h.value==object_id),None)
+                card = lookup_visible(obj,self.registry) if obj else UNKNOWN_CARD
+                mana = [a for a in card.abilities if a.kind==AbilityKind.MANA]
+                if len(mana)==1:return 'mana',mana[0].coverage,mana[0]
+                if mana:return 'mana',Coverage.PARTIAL,None
         if len(categories) != 1:
             return ('ability' if obs.decision.kind == 'GAME_CHOOSE_ABILITY' else 'unknown'), Coverage.UNKNOWN, None
         category = categories[0]
-        role = {'basicPlayAbilities': 'play_land', 'basicCastAbilities': 'cast', 'basicManaAbilities': 'mana'}.get(category, 'unknown')
+        role = {'basicPlayAbilities': 'play_land', 'basicCastAbilities': 'cast', 'basicManaAbilities': 'mana', 'other': 'ability'}.get(category, 'unknown')
         if role == 'play_land': return role, Coverage.COMPLETE, None
         obj = next((o for h, o in obs.objects.items() if h.value == object_id), None)
         card = lookup_visible(obj, self.registry) if obj else UNKNOWN_CARD
-        kind = AbilityKind.MANA if role == 'mana' else AbilityKind.SPELL
+        kind = AbilityKind.MANA if role == 'mana' else AbilityKind.ACTIVATED if role == 'ability' else AbilityKind.SPELL
         abilities = [a for a in card.abilities if a.kind == kind]
-        # Single-ability bindings are verified only for the annotated initial pool.
-        if len(abilities) == 1 and len(stats[category]) == 1 and card.coverage == Coverage.COMPLETE:
-            return role, Coverage.COMPLETE, abilities[0]
+        # Identity can be known even when some of the card's rules are partial.
+        if len(abilities) == 1 and len(stats[category]) == 1:
+            return role, abilities[0].coverage, abilities[0]
         return role, Coverage.UNKNOWN, None
 
 
@@ -265,6 +344,12 @@ def candidate_row(kind, role, constraints=None, *, coverage=Coverage.UNKNOWN, ab
     row += [float(constraints.get('legality') == 'advertised'), float('legality' in constraints)]
     row += numeric(constraints.get('minimum')) + numeric(constraints.get('maximum')) + numeric(number)
     row += numeric(position) + numeric(prefix) + onehot(ability.kind if ability else AbilityKind.UNKNOWN, tuple(AbilityKind))
+    row += onehot(ability.id if ability and ability.id in ABILITY_IDS else 0, ABILITY_IDS)
+    # Fixed-width summary of this selected ability's typed costs/effects. The
+    # identity retains distinctions between ordered records; full ordered card
+    # semantics are also available through the source entity reference.
+    records = semantic_rows(replace(UNKNOWN_CARD, abilities=(ability,))) if ability else []
+    row += np.sum(records, axis=0).tolist() if records else [0.] * SEMANTIC_WIDTH
     assert len(row) == CANDIDATE_WIDTH
     return row
 

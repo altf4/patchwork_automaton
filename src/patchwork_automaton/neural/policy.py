@@ -77,11 +77,14 @@ class NeuralPolicy:
         """Fast synchronous listener for every actor-visible XMage update."""
         self.history.observe(observation)
 
+    def _forward(self, batch):
+        return self.model(batch, training=False)
+
     def _select(self, arrays, state, *, advance, stage, records):
         batch = collate([arrays])
         batch['memory_in'] = state[None, :]
         batch['advance_memory'] = np.asarray([[float(advance)]], np.float32)
-        output = self.model(batch, training=False)
+        output = self._forward(batch)
         logits = np.asarray(output['logits'])[0].astype(np.float64) / self.temperature
         allowed = arrays['candidate_mask']
         if not np.isfinite(logits[allowed]).all(): raise ValueError('Model emitted nonfinite scores')

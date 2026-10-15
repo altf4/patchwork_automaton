@@ -31,6 +31,7 @@ class Sample:
     advance: bool
     action: int
     value: float
+    log_probs: np.ndarray | None = None
 
 
 class RolloutPolicy(NeuralPolicy):

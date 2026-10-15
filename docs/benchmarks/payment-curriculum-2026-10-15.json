@@ -1,0 +1,2117 @@
+{
+  "date": "2026-10-15",
+  "objective": "Repair manual pool payment; learn finite Burn payment, cancellation recovery, and two-target continuations",
+  "checkpoint": ".local/training/payment-balanced-605/policy.keras",
+  "checkpoint_sha256": "4fbb4b2e140ab9c25d85302ab4ed332d49276bca5f075cf488e9d33603205082",
+  "config": {
+    "directory": ".local/training/payment-balanced-605",
+    "load": ".local/training/payment-curriculum-603/policy.keras",
+    "tasks": [
+      "openings",
+      "lands_and_casting",
+      "mana_colors",
+      "lethal",
+      "creatures_and_attacking",
+      "spend_pool",
+      "tap_then_spend",
+      "cancel_retry",
+      "blaze_targets"
+    ],
+    "seed": 605,
+    "workers": 8,
+    "warmup_rounds": 40,
+    "ppo_rounds": 0,
+    "round_episodes": 90,
+    "train_batch": 128,
+    "supervised_epochs": 2,
+    "balance_prompts": false,
+    "balance_actions": true,
+    "calibrate_context": false,
+    "eval_cases": 20,
+    "evaluate_every": 20,
+    "learning_rate": 0.0003,
+    "ppo_learning_rate": 3e-05,
+    "pass_rate": 0.9,
+    "require_pass": false
+  },
+  "source_sha256": {
+    "curriculum": "0b04a9667acd622c09717f4efb5b49e842558c2abc84f14919c199eaa7f9f853",
+    "episodes": "c519dc6dd780d02ea23a8f2fe73dab522a6b612bebada15610874918b65ab62b",
+    "payment_scenarios": "011be640915449167ce429d80cb1bd8586a37d527454cf0161b95f2c86e9c243",
+    "scenarios": "6b36460767475498b7130c52a2fbbeab98d36310a843c747200f6bff4da480c2",
+    "native_layout": "e5cb94f329a4621a92fa9e6e2210c3694e2fbd6e4977e3790656bb206ef1dc91",
+    "features": "81ab55e14acb56fb599a1bcb305e073f2ec8a7d383aa86999d84eed267f88939",
+    "model": "e93fc79623ef47b25e3809d0e3f11f9bc55446148cbd1644659c0dcdf32e2694",
+    "policy": "fe226a1e8b6ed50184c948eebd750fa2d9d3c56d569a9abab7ffd60a0ad556b1",
+    "history": "76bb00cf3589898e8cde5ef0ae8fd306b0a7d48198102b81275b7a713342fc26",
+    "batching": "72ff3bccd624c9358dfb85ee57a113e8fbec083418d6bd3077a55d40fce0a9c0",
+    "streaming_ppo": "53aa21dc93c5d783653335dddc339b8f0cf8f47a4f6b5b22b401fe7f993f5fbc",
+    "calibration": "a867ec3615f74c2cb812171d3bd5b2bce5c25e733196b924cac137eeddbbb802",
+    "backends.xmage_choices": "c77c1109e7f4a09904deb6d11f738476acc3df9dfb17f31054109eca3623f964",
+    "backends.xmage_prompts": "5c73ffb4b8377ab83eb2004e74c9d76ab1b9c649e8449e4284909370382bf46c",
+    "backends.burn_actions": "b44f41f14884c8e5d5fc7d63f2c42f65aee0dcfc9baf40155d5c50fb340a784d",
+    "baselines.burn_mulligan": "d64569a79b5db18fdea68bf2107059f539040f660dfb41d123b247cbea3905ba",
+    "baselines.modern_burn": "a3716e04c28dc0fe459f04574d93524bea64854fd96e154c63739cacd648cd57",
+    "burn_semantics": "0a183bdb53917160097b3a642a6288d5966407e07b9bc56e7da989a338aa1265",
+    "native_layout_data": "7047d6cde94ad1a0cef78a6c0bb5d1cbcd1b7125fce1127b9fb6a1293c82c7e7",
+    "runner": "7b01a1770e9295d09d276de589dae88be7e1732800f6a439ffe0ff5c86b1b86c"
+  },
+  "parameters": 1476766,
+  "seconds": 448.9745950170327,
+  "added_supervised_episodes": 8100,
+  "training_stages": [
+    {
+      "directory": ".local/training/payment-curriculum-603",
+      "config": {
+        "directory": ".local/training/payment-curriculum-603",
+        "load": ".local/training/five-skills-corrected-415/policy.keras",
+        "tasks": [
+          "openings",
+          "lands_and_casting",
+          "mana_colors",
+          "lethal",
+          "creatures_and_attacking",
+          "spend_pool",
+          "tap_then_spend",
+          "cancel_retry",
+          "blaze_targets"
+        ],
+        "seed": 603,
+        "workers": 8,
+        "warmup_rounds": 50,
+        "ppo_rounds": 0,
+        "round_episodes": 90,
+        "train_batch": 128,
+        "supervised_epochs": 2,
+        "balance_prompts": true,
+        "calibrate_context": false,
+        "eval_cases": 40,
+        "evaluate_every": 25,
+        "learning_rate": 0.0001,
+        "ppo_learning_rate": 3e-05,
+        "pass_rate": 0.9,
+        "require_pass": false
+      },
+      "source_sha256": {
+        "curriculum": "0b04a9667acd622c09717f4efb5b49e842558c2abc84f14919c199eaa7f9f853",
+        "episodes": "c519dc6dd780d02ea23a8f2fe73dab522a6b612bebada15610874918b65ab62b",
+        "payment_scenarios": "9f07a347ae40cec5274d2f931b58218c2458467472bed035a1f1b3f5383cb50c",
+        "scenarios": "6b36460767475498b7130c52a2fbbeab98d36310a843c747200f6bff4da480c2",
+        "native_layout": "e5cb94f329a4621a92fa9e6e2210c3694e2fbd6e4977e3790656bb206ef1dc91",
+        "features": "81ab55e14acb56fb599a1bcb305e073f2ec8a7d383aa86999d84eed267f88939",
+        "model": "e93fc79623ef47b25e3809d0e3f11f9bc55446148cbd1644659c0dcdf32e2694",
+        "policy": "fe226a1e8b6ed50184c948eebd750fa2d9d3c56d569a9abab7ffd60a0ad556b1",
+        "history": "76bb00cf3589898e8cde5ef0ae8fd306b0a7d48198102b81275b7a713342fc26",
+        "batching": "72ff3bccd624c9358dfb85ee57a113e8fbec083418d6bd3077a55d40fce0a9c0",
+        "streaming_ppo": "53aa21dc93c5d783653335dddc339b8f0cf8f47a4f6b5b22b401fe7f993f5fbc",
+        "calibration": "a867ec3615f74c2cb812171d3bd5b2bce5c25e733196b924cac137eeddbbb802",
+        "backends.xmage_choices": "c77c1109e7f4a09904deb6d11f738476acc3df9dfb17f31054109eca3623f964",
+        "backends.xmage_prompts": "5c73ffb4b8377ab83eb2004e74c9d76ab1b9c649e8449e4284909370382bf46c",
+        "backends.burn_actions": "b44f41f14884c8e5d5fc7d63f2c42f65aee0dcfc9baf40155d5c50fb340a784d",
+        "baselines.burn_mulligan": "d64569a79b5db18fdea68bf2107059f539040f660dfb41d123b247cbea3905ba",
+        "baselines.modern_burn": "a3716e04c28dc0fe459f04574d93524bea64854fd96e154c63739cacd648cd57",
+        "burn_semantics": "0a183bdb53917160097b3a642a6288d5966407e07b9bc56e7da989a338aa1265",
+        "native_layout_data": "7047d6cde94ad1a0cef78a6c0bb5d1cbcd1b7125fce1127b9fb6a1293c82c7e7",
+        "runner": "d6083afdbe23dbc6fa90bbcd3db40bad5a8bd3b2938a53512a693d7dfd8d4123"
+      },
+      "evaluations": {
+        "initial": {
+          "greedy": {
+            "cancel_retry": {
+              "episodes": 40,
+              "wins": 25,
+              "timeouts": 8,
+              "decisions": 288,
+              "success_rate": 0.625
+            },
+            "mana_colors": {
+              "episodes": 40,
+              "wins": 40,
+              "timeouts": 0,
+              "decisions": 80,
+              "success_rate": 1.0
+            },
+            "openings": {
+              "episodes": 40,
+              "wins": 33,
+              "timeouts": 0,
+              "decisions": 83,
+              "success_rate": 0.825
+            },
+            "tap_then_spend": {
+              "episodes": 40,
+              "wins": 40,
+              "timeouts": 0,
+              "decisions": 120,
+              "success_rate": 1.0
+            },
+            "lands_and_casting": {
+              "episodes": 40,
+              "wins": 40,
+              "timeouts": 0,
+              "decisions": 149,
+              "success_rate": 1.0
+            },
+            "blaze_targets": {
+              "episodes": 40,
+              "wins": 21,
+              "timeouts": 0,
+              "decisions": 160,
+              "success_rate": 0.525
+            },
+            "lethal": {
+              "episodes": 40,
+              "wins": 40,
+              "timeouts": 0,
+              "decisions": 157,
+              "success_rate": 1.0
+            },
+            "creatures_and_attacking": {
+              "episodes": 40,
+              "wins": 40,
+              "timeouts": 0,
+              "decisions": 308,
+              "success_rate": 1.0
+            },
+            "spend_pool": {
+              "episodes": 40,
+              "wins": 32,
+              "timeouts": 8,
+              "decisions": 288,
+              "success_rate": 0.8
+            }
+          },
+          "sampled": {
+            "cancel_retry": {
+              "episodes": 40,
+              "wins": 23,
+              "timeouts": 11,
+              "decisions": 383,
+              "success_rate": 0.575
+            },
+            "mana_colors": {
+              "episodes": 40,
+              "wins": 40,
+              "timeouts": 0,
+              "decisions": 80,
+              "success_rate": 1.0
+            },
+            "tap_then_spend": {
+              "episodes": 40,
+              "wins": 40,
+              "timeouts": 0,
+              "decisions": 120,
+              "success_rate": 1.0
+            },
+            "openings": {
+              "episodes": 40,
+              "wins": 30,
+              "timeouts": 0,
+              "decisions": 81,
+              "success_rate": 0.75
+            },
+            "lands_and_casting": {
+              "episodes": 40,
+              "wins": 40,
+              "timeouts": 0,
+              "decisions": 149,
+              "success_rate": 1.0
+            },
+            "lethal": {
+              "episodes": 40,
+              "wins": 40,
+              "timeouts": 0,
+              "decisions": 162,
+              "success_rate": 1.0
+            },
+            "blaze_targets": {
+              "episodes": 40,
+              "wins": 22,
+              "timeouts": 0,
+              "decisions": 163,
+              "success_rate": 0.55
+            },
+            "spend_pool": {
+              "episodes": 40,
+              "wins": 34,
+              "timeouts": 0,
+              "decisions": 63,
+              "success_rate": 0.85
+            },
+            "creatures_and_attacking": {
+              "episodes": 40,
+              "wins": 40,
+              "timeouts": 0,
+              "decisions": 308,
+              "success_rate": 1.0
+            }
+          }
+        },
+        "warmup-25": {
+          "greedy": {
+            "spend_pool": {
+              "episodes": 32,
+              "wins": 32,
+              "timeouts": 0,
+              "decisions": 32,
+              "success_rate": 1.0
+            },
+            "cancel_retry": {
+              "episodes": 32,
+              "wins": 27,
+              "timeouts": 0,
+              "decisions": 38,
+              "success_rate": 0.84375
+            },
+            "openings": {
+              "episodes": 32,
+              "wins": 24,
+              "timeouts": 0,
+              "decisions": 68,
+              "success_rate": 0.75
+            },
+            "mana_colors": {
+              "episodes": 32,
+              "wins": 32,
+              "timeouts": 0,
+              "decisions": 64,
+              "success_rate": 1.0
+            },
+            "tap_then_spend": {
+              "episodes": 32,
+              "wins": 32,
+              "timeouts": 0,
+              "decisions": 96,
+              "success_rate": 1.0
+            },
+            "lands_and_casting": {
+              "episodes": 32,
+              "wins": 32,
+              "timeouts": 0,
+              "decisions": 118,
+              "success_rate": 1.0
+            },
+            "blaze_targets": {
+              "episodes": 32,
+              "wins": 32,
+              "timeouts": 0,
+              "decisions": 128,
+              "success_rate": 1.0
+            },
+            "lethal": {
+              "episodes": 32,
+              "wins": 32,
+              "timeouts": 0,
+              "decisions": 123,
+              "success_rate": 1.0
+            },
+            "creatures_and_attacking": {
+              "episodes": 32,
+              "wins": 32,
+              "timeouts": 0,
+              "decisions": 247,
+              "success_rate": 1.0
+            }
+          },
+          "sampled": {
+            "spend_pool": {
+              "episodes": 32,
+              "wins": 32,
+              "timeouts": 0,
+              "decisions": 32,
+              "success_rate": 1.0
+            },
+            "mana_colors": {
+              "episodes": 32,
+              "wins": 32,
+              "timeouts": 0,
+              "decisions": 64,
+              "success_rate": 1.0
+            },
+            "tap_then_spend": {
+              "episodes": 32,
+              "wins": 32,
+              "timeouts": 0,
+              "decisions": 96,
+              "success_rate": 1.0
+            },
+            "openings": {
+              "episodes": 32,
+              "wins": 23,
+              "timeouts": 0,
+              "decisions": 69,
+              "success_rate": 0.71875
+            },
+            "lethal": {
+              "episodes": 32,
+              "wins": 32,
+              "timeouts": 0,
+              "decisions": 128,
+              "success_rate": 1.0
+            },
+            "blaze_targets": {
+              "episodes": 32,
+              "wins": 32,
+              "timeouts": 0,
+              "decisions": 128,
+              "success_rate": 1.0
+            },
+            "lands_and_casting": {
+              "episodes": 32,
+              "wins": 31,
+              "timeouts": 0,
+              "decisions": 118,
+              "success_rate": 0.96875
+            },
+            "cancel_retry": {
+              "episodes": 32,
+              "wins": 24,
+              "timeouts": 4,
+              "decisions": 190,
+              "success_rate": 0.75
+            },
+            "creatures_and_attacking": {
+              "episodes": 32,
+              "wins": 32,
+              "timeouts": 0,
+              "decisions": 247,
+              "success_rate": 1.0
+            }
+          }
+        },
+        "warmup-50": {
+          "greedy": {
+            "cancel_retry": {
+              "episodes": 32,
+              "wins": 27,
+              "timeouts": 0,
+              "decisions": 38,
+              "success_rate": 0.84375
+            },
+            "spend_pool": {
+              "episodes": 32,
+              "wins": 32,
+              "timeouts": 0,
+              "decisions": 32,
+              "success_rate": 1.0
+            },
+            "mana_colors": {
+              "episodes": 32,
+              "wins": 32,
+              "timeouts": 0,
+              "decisions": 64,
+              "success_rate": 1.0
+            },
+            "openings": {
+              "episodes": 32,
+              "wins": 23,
+              "timeouts": 0,
+              "decisions": 73,
+              "success_rate": 0.71875
+            },
+            "tap_then_spend": {
+              "episodes": 32,
+              "wins": 32,
+              "timeouts": 0,
+              "decisions": 96,
+              "success_rate": 1.0
+            },
+            "lands_and_casting": {
+              "episodes": 32,
+              "wins": 32,
+              "timeouts": 0,
+              "decisions": 118,
+              "success_rate": 1.0
+            },
+            "blaze_targets": {
+              "episodes": 32,
+              "wins": 32,
+              "timeouts": 0,
+              "decisions": 128,
+              "success_rate": 1.0
+            },
+            "lethal": {
+              "episodes": 32,
+              "wins": 32,
+              "timeouts": 0,
+              "decisions": 123,
+              "success_rate": 1.0
+            },
+            "creatures_and_attacking": {
+              "episodes": 32,
+              "wins": 32,
+              "timeouts": 0,
+              "decisions": 247,
+              "success_rate": 1.0
+            }
+          },
+          "sampled": {
+            "spend_pool": {
+              "episodes": 32,
+              "wins": 32,
+              "timeouts": 0,
+              "decisions": 32,
+              "success_rate": 1.0
+            },
+            "openings": {
+              "episodes": 32,
+              "wins": 18,
+              "timeouts": 0,
+              "decisions": 64,
+              "success_rate": 0.5625
+            },
+            "mana_colors": {
+              "episodes": 32,
+              "wins": 32,
+              "timeouts": 0,
+              "decisions": 64,
+              "success_rate": 1.0
+            },
+            "tap_then_spend": {
+              "episodes": 32,
+              "wins": 32,
+              "timeouts": 0,
+              "decisions": 96,
+              "success_rate": 1.0
+            },
+            "lands_and_casting": {
+              "episodes": 32,
+              "wins": 32,
+              "timeouts": 0,
+              "decisions": 118,
+              "success_rate": 1.0
+            },
+            "blaze_targets": {
+              "episodes": 32,
+              "wins": 32,
+              "timeouts": 0,
+              "decisions": 128,
+              "success_rate": 1.0
+            },
+            "lethal": {
+              "episodes": 32,
+              "wins": 32,
+              "timeouts": 0,
+              "decisions": 128,
+              "success_rate": 1.0
+            },
+            "cancel_retry": {
+              "episodes": 32,
+              "wins": 23,
+              "timeouts": 5,
+              "decisions": 218,
+              "success_rate": 0.71875
+            },
+            "creatures_and_attacking": {
+              "episodes": 32,
+              "wins": 31,
+              "timeouts": 0,
+              "decisions": 241,
+              "success_rate": 0.96875
+            }
+          }
+        },
+        "warmup": {
+          "greedy": {
+            "cancel_retry": {
+              "episodes": 40,
+              "wins": 33,
+              "timeouts": 0,
+              "decisions": 48,
+              "success_rate": 0.825
+            },
+            "spend_pool": {
+              "episodes": 40,
+              "wins": 40,
+              "timeouts": 0,
+              "decisions": 40,
+              "success_rate": 1.0
+            },
+            "mana_colors": {
+              "episodes": 40,
+              "wins": 40,
+              "timeouts": 0,
+              "decisions": 80,
+              "success_rate": 1.0
+            },
+            "openings": {
+              "episodes": 40,
+              "wins": 31,
+              "timeouts": 0,
+              "decisions": 84,
+              "success_rate": 0.775
+            },
+            "tap_then_spend": {
+              "episodes": 40,
+              "wins": 40,
+              "timeouts": 0,
+              "decisions": 120,
+              "success_rate": 1.0
+            },
+            "lands_and_casting": {
+              "episodes": 40,
+              "wins": 40,
+              "timeouts": 0,
+              "decisions": 149,
+              "success_rate": 1.0
+            },
+            "lethal": {
+              "episodes": 40,
+              "wins": 40,
+              "timeouts": 0,
+              "decisions": 155,
+              "success_rate": 1.0
+            },
+            "blaze_targets": {
+              "episodes": 40,
+              "wins": 40,
+              "timeouts": 0,
+              "decisions": 160,
+              "success_rate": 1.0
+            },
+            "creatures_and_attacking": {
+              "episodes": 40,
+              "wins": 40,
+              "timeouts": 0,
+              "decisions": 308,
+              "success_rate": 1.0
+            }
+          },
+          "sampled": {
+            "spend_pool": {
+              "episodes": 40,
+              "wins": 40,
+              "timeouts": 0,
+              "decisions": 40,
+              "success_rate": 1.0
+            },
+            "openings": {
+              "episodes": 40,
+              "wins": 25,
+              "timeouts": 0,
+              "decisions": 72,
+              "success_rate": 0.625
+            },
+            "mana_colors": {
+              "episodes": 40,
+              "wins": 40,
+              "timeouts": 0,
+              "decisions": 80,
+              "success_rate": 1.0
+            },
+            "tap_then_spend": {
+              "episodes": 40,
+              "wins": 40,
+              "timeouts": 0,
+              "decisions": 120,
+              "success_rate": 1.0
+            },
+            "lethal": {
+              "episodes": 40,
+              "wins": 40,
+              "timeouts": 0,
+              "decisions": 161,
+              "success_rate": 1.0
+            },
+            "lands_and_casting": {
+              "episodes": 40,
+              "wins": 40,
+              "timeouts": 0,
+              "decisions": 149,
+              "success_rate": 1.0
+            },
+            "blaze_targets": {
+              "episodes": 40,
+              "wins": 40,
+              "timeouts": 0,
+              "decisions": 160,
+              "success_rate": 1.0
+            },
+            "cancel_retry": {
+              "episodes": 40,
+              "wins": 27,
+              "timeouts": 7,
+              "decisions": 292,
+              "success_rate": 0.675
+            },
+            "creatures_and_attacking": {
+              "episodes": 40,
+              "wins": 39,
+              "timeouts": 0,
+              "decisions": 302,
+              "success_rate": 0.975
+            }
+          }
+        },
+        "final": {
+          "greedy": {
+            "spend_pool": {
+              "episodes": 40,
+              "wins": 40,
+              "timeouts": 0,
+              "decisions": 40,
+              "success_rate": 1.0
+            },
+            "cancel_retry": {
+              "episodes": 40,
+              "wins": 33,
+              "timeouts": 0,
+              "decisions": 48,
+              "success_rate": 0.825
+            },
+            "openings": {
+              "episodes": 40,
+              "wins": 31,
+              "timeouts": 0,
+              "decisions": 84,
+              "success_rate": 0.775
+            },
+            "mana_colors": {
+              "episodes": 40,
+              "wins": 40,
+              "timeouts": 0,
+              "decisions": 80,
+              "success_rate": 1.0
+            },
+            "tap_then_spend": {
+              "episodes": 40,
+              "wins": 40,
+              "timeouts": 0,
+              "decisions": 120,
+              "success_rate": 1.0
+            },
+            "lands_and_casting": {
+              "episodes": 40,
+              "wins": 40,
+              "timeouts": 0,
+              "decisions": 149,
+              "success_rate": 1.0
+            },
+            "lethal": {
+              "episodes": 40,
+              "wins": 40,
+              "timeouts": 0,
+              "decisions": 155,
+              "success_rate": 1.0
+            },
+            "blaze_targets": {
+              "episodes": 40,
+              "wins": 40,
+              "timeouts": 0,
+              "decisions": 160,
+              "success_rate": 1.0
+            },
+            "creatures_and_attacking": {
+              "episodes": 40,
+              "wins": 40,
+              "timeouts": 0,
+              "decisions": 308,
+              "success_rate": 1.0
+            }
+          },
+          "sampled": {
+            "spend_pool": {
+              "episodes": 40,
+              "wins": 40,
+              "timeouts": 0,
+              "decisions": 40,
+              "success_rate": 1.0
+            },
+            "mana_colors": {
+              "episodes": 40,
+              "wins": 40,
+              "timeouts": 0,
+              "decisions": 80,
+              "success_rate": 1.0
+            },
+            "openings": {
+              "episodes": 40,
+              "wins": 25,
+              "timeouts": 0,
+              "decisions": 72,
+              "success_rate": 0.625
+            },
+            "tap_then_spend": {
+              "episodes": 40,
+              "wins": 40,
+              "timeouts": 0,
+              "decisions": 120,
+              "success_rate": 1.0
+            },
+            "lands_and_casting": {
+              "episodes": 40,
+              "wins": 40,
+              "timeouts": 0,
+              "decisions": 149,
+              "success_rate": 1.0
+            },
+            "lethal": {
+              "episodes": 40,
+              "wins": 40,
+              "timeouts": 0,
+              "decisions": 161,
+              "success_rate": 1.0
+            },
+            "blaze_targets": {
+              "episodes": 40,
+              "wins": 40,
+              "timeouts": 0,
+              "decisions": 160,
+              "success_rate": 1.0
+            },
+            "cancel_retry": {
+              "episodes": 40,
+              "wins": 27,
+              "timeouts": 7,
+              "decisions": 292,
+              "success_rate": 0.675
+            },
+            "creatures_and_attacking": {
+              "episodes": 40,
+              "wins": 39,
+              "timeouts": 0,
+              "decisions": 302,
+              "success_rate": 0.975
+            }
+          }
+        },
+        "final-iid": {
+          "greedy": {
+            "openings": {
+              "episodes": 40,
+              "wins": 28,
+              "timeouts": 0,
+              "decisions": 96,
+              "success_rate": 0.7
+            },
+            "spend_pool": {
+              "episodes": 40,
+              "wins": 40,
+              "timeouts": 0,
+              "decisions": 40,
+              "success_rate": 1.0
+            },
+            "mana_colors": {
+              "episodes": 40,
+              "wins": 40,
+              "timeouts": 0,
+              "decisions": 80,
+              "success_rate": 1.0
+            },
+            "tap_then_spend": {
+              "episodes": 40,
+              "wins": 40,
+              "timeouts": 0,
+              "decisions": 111,
+              "success_rate": 1.0
+            },
+            "cancel_retry": {
+              "episodes": 40,
+              "wins": 34,
+              "timeouts": 0,
+              "decisions": 54,
+              "success_rate": 0.85
+            },
+            "blaze_targets": {
+              "episodes": 40,
+              "wins": 40,
+              "timeouts": 0,
+              "decisions": 160,
+              "success_rate": 1.0
+            },
+            "lands_and_casting": {
+              "episodes": 40,
+              "wins": 40,
+              "timeouts": 0,
+              "decisions": 148,
+              "success_rate": 1.0
+            },
+            "lethal": {
+              "episodes": 40,
+              "wins": 40,
+              "timeouts": 0,
+              "decisions": 158,
+              "success_rate": 1.0
+            },
+            "creatures_and_attacking": {
+              "episodes": 40,
+              "wins": 40,
+              "timeouts": 0,
+              "decisions": 278,
+              "success_rate": 1.0
+            }
+          },
+          "sampled": {
+            "openings": {
+              "episodes": 40,
+              "wins": 20,
+              "timeouts": 0,
+              "decisions": 73,
+              "success_rate": 0.5
+            },
+            "spend_pool": {
+              "episodes": 40,
+              "wins": 40,
+              "timeouts": 0,
+              "decisions": 40,
+              "success_rate": 1.0
+            },
+            "mana_colors": {
+              "episodes": 40,
+              "wins": 40,
+              "timeouts": 0,
+              "decisions": 80,
+              "success_rate": 1.0
+            },
+            "tap_then_spend": {
+              "episodes": 40,
+              "wins": 39,
+              "timeouts": 1,
+              "decisions": 140,
+              "success_rate": 0.975
+            },
+            "cancel_retry": {
+              "episodes": 40,
+              "wins": 35,
+              "timeouts": 4,
+              "decisions": 262,
+              "success_rate": 0.875
+            },
+            "lands_and_casting": {
+              "episodes": 40,
+              "wins": 40,
+              "timeouts": 0,
+              "decisions": 148,
+              "success_rate": 1.0
+            },
+            "blaze_targets": {
+              "episodes": 40,
+              "wins": 40,
+              "timeouts": 0,
+              "decisions": 160,
+              "success_rate": 1.0
+            },
+            "lethal": {
+              "episodes": 40,
+              "wins": 40,
+              "timeouts": 0,
+              "decisions": 163,
+              "success_rate": 1.0
+            },
+            "creatures_and_attacking": {
+              "episodes": 40,
+              "wins": 40,
+              "timeouts": 0,
+              "decisions": 278,
+              "success_rate": 1.0
+            }
+          }
+        }
+      },
+      "checkpoint_sha256": "29b4164b358fd12b5b69f04c6821f985240f51c0c3e1e36e2c3bfc256d9561b5"
+    },
+    {
+      "directory": ".local/training/payment-balanced-605",
+      "config": {
+        "directory": ".local/training/payment-balanced-605",
+        "load": ".local/training/payment-curriculum-603/policy.keras",
+        "tasks": [
+          "openings",
+          "lands_and_casting",
+          "mana_colors",
+          "lethal",
+          "creatures_and_attacking",
+          "spend_pool",
+          "tap_then_spend",
+          "cancel_retry",
+          "blaze_targets"
+        ],
+        "seed": 605,
+        "workers": 8,
+        "warmup_rounds": 40,
+        "ppo_rounds": 0,
+        "round_episodes": 90,
+        "train_batch": 128,
+        "supervised_epochs": 2,
+        "balance_prompts": false,
+        "balance_actions": true,
+        "calibrate_context": false,
+        "eval_cases": 20,
+        "evaluate_every": 20,
+        "learning_rate": 0.0003,
+        "ppo_learning_rate": 3e-05,
+        "pass_rate": 0.9,
+        "require_pass": false
+      }
+    }
+  ],
+  "supervised_optimizer_steps": 238,
+  "total_added_supervised_optimizer_steps": 538,
+  "ppo_episodes": 0,
+  "source_verification": {
+    "curriculum": true,
+    "episodes": true,
+    "payment_scenarios": true,
+    "scenarios": true,
+    "native_layout": true,
+    "features": true,
+    "model": true,
+    "policy": true,
+    "history": true,
+    "batching": true,
+    "streaming_ppo": true,
+    "calibration": true,
+    "backends.xmage_choices": true,
+    "backends.xmage_prompts": true,
+    "backends.burn_actions": true,
+    "baselines.burn_mulligan": true,
+    "baselines.modern_burn": true,
+    "burn_semantics": true,
+    "native_layout_data": true,
+    "runner": true
+  },
+  "reward_contract": "No intermediate rewards. This run is supervised warm-start imitation of terminal synthetic task solutions, not reward-only RL. Real-game rewards remain server W/L/D.",
+  "initial_and_final": {
+    "initial": {
+      "greedy": {
+        "openings": {
+          "episodes": 20,
+          "wins": 16,
+          "timeouts": 0,
+          "decisions": 36,
+          "success_rate": 0.8
+        },
+        "spend_pool": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 20,
+          "success_rate": 1.0
+        },
+        "cancel_retry": {
+          "episodes": 20,
+          "wins": 16,
+          "timeouts": 0,
+          "decisions": 28,
+          "success_rate": 0.8
+        },
+        "mana_colors": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 40,
+          "success_rate": 1.0
+        },
+        "tap_then_spend": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 60,
+          "success_rate": 1.0
+        },
+        "blaze_targets": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 69,
+          "success_rate": 1.0
+        },
+        "lethal": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 73,
+          "success_rate": 1.0
+        },
+        "lands_and_casting": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 88,
+          "success_rate": 1.0
+        },
+        "creatures_and_attacking": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 150,
+          "success_rate": 1.0
+        }
+      },
+      "sampled": {
+        "openings": {
+          "episodes": 20,
+          "wins": 15,
+          "timeouts": 0,
+          "decisions": 35,
+          "success_rate": 0.75
+        },
+        "cancel_retry": {
+          "episodes": 20,
+          "wins": 16,
+          "timeouts": 2,
+          "decisions": 143,
+          "success_rate": 0.8
+        },
+        "spend_pool": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 20,
+          "success_rate": 1.0
+        },
+        "mana_colors": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 40,
+          "success_rate": 1.0
+        },
+        "tap_then_spend": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 60,
+          "success_rate": 1.0
+        },
+        "blaze_targets": {
+          "episodes": 20,
+          "wins": 19,
+          "timeouts": 0,
+          "decisions": 69,
+          "success_rate": 0.95
+        },
+        "lands_and_casting": {
+          "episodes": 20,
+          "wins": 19,
+          "timeouts": 0,
+          "decisions": 84,
+          "success_rate": 0.95
+        },
+        "lethal": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 77,
+          "success_rate": 1.0
+        },
+        "creatures_and_attacking": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 150,
+          "success_rate": 1.0
+        }
+      }
+    },
+    "warmup-20": {
+      "greedy": {
+        "openings": {
+          "episodes": 20,
+          "wins": 16,
+          "timeouts": 0,
+          "decisions": 32,
+          "success_rate": 0.8
+        },
+        "spend_pool": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 20,
+          "success_rate": 1.0
+        },
+        "mana_colors": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 40,
+          "success_rate": 1.0
+        },
+        "cancel_retry": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 48,
+          "success_rate": 1.0
+        },
+        "tap_then_spend": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 60,
+          "success_rate": 1.0
+        },
+        "blaze_targets": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 69,
+          "success_rate": 1.0
+        },
+        "lethal": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 73,
+          "success_rate": 1.0
+        },
+        "lands_and_casting": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 88,
+          "success_rate": 1.0
+        },
+        "creatures_and_attacking": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 150,
+          "success_rate": 1.0
+        }
+      },
+      "sampled": {
+        "spend_pool": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 34,
+          "success_rate": 1.0
+        },
+        "openings": {
+          "episodes": 20,
+          "wins": 15,
+          "timeouts": 0,
+          "decisions": 34,
+          "success_rate": 0.75
+        },
+        "cancel_retry": {
+          "episodes": 20,
+          "wins": 19,
+          "timeouts": 0,
+          "decisions": 43,
+          "success_rate": 0.95
+        },
+        "mana_colors": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 40,
+          "success_rate": 1.0
+        },
+        "tap_then_spend": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 60,
+          "success_rate": 1.0
+        },
+        "blaze_targets": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 69,
+          "success_rate": 1.0
+        },
+        "lands_and_casting": {
+          "episodes": 20,
+          "wins": 19,
+          "timeouts": 0,
+          "decisions": 88,
+          "success_rate": 0.95
+        },
+        "lethal": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 75,
+          "success_rate": 1.0
+        },
+        "creatures_and_attacking": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 152,
+          "success_rate": 1.0
+        }
+      }
+    },
+    "warmup-40": {
+      "greedy": {
+        "openings": {
+          "episodes": 20,
+          "wins": 16,
+          "timeouts": 0,
+          "decisions": 35,
+          "success_rate": 0.8
+        },
+        "spend_pool": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 20,
+          "success_rate": 1.0
+        },
+        "cancel_retry": {
+          "episodes": 20,
+          "wins": 16,
+          "timeouts": 0,
+          "decisions": 28,
+          "success_rate": 0.8
+        },
+        "mana_colors": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 40,
+          "success_rate": 1.0
+        },
+        "tap_then_spend": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 60,
+          "success_rate": 1.0
+        },
+        "blaze_targets": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 69,
+          "success_rate": 1.0
+        },
+        "lands_and_casting": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 88,
+          "success_rate": 1.0
+        },
+        "lethal": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 73,
+          "success_rate": 1.0
+        },
+        "creatures_and_attacking": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 150,
+          "success_rate": 1.0
+        }
+      },
+      "sampled": {
+        "openings": {
+          "episodes": 20,
+          "wins": 16,
+          "timeouts": 0,
+          "decisions": 36,
+          "success_rate": 0.8
+        },
+        "spend_pool": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 20,
+          "success_rate": 1.0
+        },
+        "cancel_retry": {
+          "episodes": 20,
+          "wins": 17,
+          "timeouts": 0,
+          "decisions": 33,
+          "success_rate": 0.85
+        },
+        "mana_colors": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 40,
+          "success_rate": 1.0
+        },
+        "tap_then_spend": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 60,
+          "success_rate": 1.0
+        },
+        "blaze_targets": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 69,
+          "success_rate": 1.0
+        },
+        "lethal": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 76,
+          "success_rate": 1.0
+        },
+        "lands_and_casting": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 88,
+          "success_rate": 1.0
+        },
+        "creatures_and_attacking": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 150,
+          "success_rate": 1.0
+        }
+      }
+    },
+    "warmup": {
+      "greedy": {
+        "cancel_retry": {
+          "episodes": 20,
+          "wins": 16,
+          "timeouts": 0,
+          "decisions": 28,
+          "success_rate": 0.8
+        },
+        "spend_pool": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 20,
+          "success_rate": 1.0
+        },
+        "openings": {
+          "episodes": 20,
+          "wins": 16,
+          "timeouts": 0,
+          "decisions": 35,
+          "success_rate": 0.8
+        },
+        "mana_colors": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 40,
+          "success_rate": 1.0
+        },
+        "tap_then_spend": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 60,
+          "success_rate": 1.0
+        },
+        "blaze_targets": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 69,
+          "success_rate": 1.0
+        },
+        "lands_and_casting": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 88,
+          "success_rate": 1.0
+        },
+        "lethal": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 73,
+          "success_rate": 1.0
+        },
+        "creatures_and_attacking": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 150,
+          "success_rate": 1.0
+        }
+      },
+      "sampled": {
+        "openings": {
+          "episodes": 20,
+          "wins": 16,
+          "timeouts": 0,
+          "decisions": 36,
+          "success_rate": 0.8
+        },
+        "cancel_retry": {
+          "episodes": 20,
+          "wins": 17,
+          "timeouts": 0,
+          "decisions": 33,
+          "success_rate": 0.85
+        },
+        "spend_pool": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 20,
+          "success_rate": 1.0
+        },
+        "mana_colors": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 40,
+          "success_rate": 1.0
+        },
+        "tap_then_spend": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 60,
+          "success_rate": 1.0
+        },
+        "blaze_targets": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 69,
+          "success_rate": 1.0
+        },
+        "lands_and_casting": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 88,
+          "success_rate": 1.0
+        },
+        "lethal": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 76,
+          "success_rate": 1.0
+        },
+        "creatures_and_attacking": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 150,
+          "success_rate": 1.0
+        }
+      }
+    },
+    "final": {
+      "greedy": {
+        "openings": {
+          "episodes": 20,
+          "wins": 16,
+          "timeouts": 0,
+          "decisions": 35,
+          "success_rate": 0.8
+        },
+        "spend_pool": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 20,
+          "success_rate": 1.0
+        },
+        "cancel_retry": {
+          "episodes": 20,
+          "wins": 16,
+          "timeouts": 0,
+          "decisions": 28,
+          "success_rate": 0.8
+        },
+        "mana_colors": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 40,
+          "success_rate": 1.0
+        },
+        "tap_then_spend": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 60,
+          "success_rate": 1.0
+        },
+        "blaze_targets": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 69,
+          "success_rate": 1.0
+        },
+        "lethal": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 73,
+          "success_rate": 1.0
+        },
+        "lands_and_casting": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 88,
+          "success_rate": 1.0
+        },
+        "creatures_and_attacking": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 150,
+          "success_rate": 1.0
+        }
+      },
+      "sampled": {
+        "cancel_retry": {
+          "episodes": 20,
+          "wins": 17,
+          "timeouts": 0,
+          "decisions": 33,
+          "success_rate": 0.85
+        },
+        "openings": {
+          "episodes": 20,
+          "wins": 16,
+          "timeouts": 0,
+          "decisions": 36,
+          "success_rate": 0.8
+        },
+        "spend_pool": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 20,
+          "success_rate": 1.0
+        },
+        "mana_colors": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 40,
+          "success_rate": 1.0
+        },
+        "tap_then_spend": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 60,
+          "success_rate": 1.0
+        },
+        "blaze_targets": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 69,
+          "success_rate": 1.0
+        },
+        "lands_and_casting": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 88,
+          "success_rate": 1.0
+        },
+        "lethal": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 76,
+          "success_rate": 1.0
+        },
+        "creatures_and_attacking": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 150,
+          "success_rate": 1.0
+        }
+      }
+    },
+    "final-iid": {
+      "greedy": {
+        "openings": {
+          "episodes": 20,
+          "wins": 18,
+          "timeouts": 0,
+          "decisions": 48,
+          "success_rate": 0.9
+        },
+        "cancel_retry": {
+          "episodes": 20,
+          "wins": 16,
+          "timeouts": 0,
+          "decisions": 26,
+          "success_rate": 0.8
+        },
+        "spend_pool": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 20,
+          "success_rate": 1.0
+        },
+        "mana_colors": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 40,
+          "success_rate": 1.0
+        },
+        "blaze_targets": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 62,
+          "success_rate": 1.0
+        },
+        "tap_then_spend": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 56,
+          "success_rate": 1.0
+        },
+        "lethal": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 88,
+          "success_rate": 1.0
+        },
+        "creatures_and_attacking": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 137,
+          "success_rate": 1.0
+        },
+        "lands_and_casting": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 71,
+          "success_rate": 1.0
+        }
+      },
+      "sampled": {
+        "spend_pool": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 20,
+          "success_rate": 1.0
+        },
+        "openings": {
+          "episodes": 20,
+          "wins": 18,
+          "timeouts": 0,
+          "decisions": 48,
+          "success_rate": 0.9
+        },
+        "mana_colors": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 40,
+          "success_rate": 1.0
+        },
+        "blaze_targets": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 62,
+          "success_rate": 1.0
+        },
+        "tap_then_spend": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 56,
+          "success_rate": 1.0
+        },
+        "cancel_retry": {
+          "episodes": 20,
+          "wins": 16,
+          "timeouts": 1,
+          "decisions": 65,
+          "success_rate": 0.8
+        },
+        "lethal": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 90,
+          "success_rate": 1.0
+        },
+        "lands_and_casting": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 71,
+          "success_rate": 1.0
+        },
+        "creatures_and_attacking": {
+          "episodes": 20,
+          "wins": 20,
+          "timeouts": 0,
+          "decisions": 137,
+          "success_rate": 1.0
+        }
+      }
+    }
+  },
+  "all_family_gate_passed": false,
+  "independent": {
+    "seed": 270001,
+    "cases_per_task": 100,
+    "before_sampled": {
+      "spend_pool": {
+        "cases": 100,
+        "wins": 85,
+        "timeouts": 1,
+        "first_failure_purpose": {
+          "mana_payment": 15
+        }
+      },
+      "cancel_retry": {
+        "cases": 100,
+        "wins": 56,
+        "timeouts": 34,
+        "first_failure_purpose": {
+          "priority": 29,
+          "mana_payment": 15
+        }
+      },
+      "blaze_targets": {
+        "cases": 100,
+        "wins": 58,
+        "timeouts": 0,
+        "first_failure_purpose": {
+          "target": 40,
+          "mana_payment": 2
+        }
+      },
+      "tap_then_spend": {
+        "cases": 100,
+        "wins": 99,
+        "timeouts": 0,
+        "first_failure_purpose": {
+          "mana_payment": 1
+        }
+      }
+    },
+    "after_sampled": {
+      "spend_pool": {
+        "cases": 100,
+        "wins": 100,
+        "timeouts": 0,
+        "first_failure_purpose": {}
+      },
+      "cancel_retry": {
+        "cases": 100,
+        "wins": 94,
+        "timeouts": 0,
+        "first_failure_purpose": {
+          "priority": 6
+        }
+      },
+      "tap_then_spend": {
+        "cases": 100,
+        "wins": 100,
+        "timeouts": 0,
+        "first_failure_purpose": {}
+      },
+      "blaze_targets": {
+        "cases": 100,
+        "wins": 100,
+        "timeouts": 0,
+        "first_failure_purpose": {}
+      }
+    },
+    "after_greedy": {
+      "spend_pool": {
+        "cases": 100,
+        "wins": 100,
+        "timeouts": 0,
+        "first_failure_purpose": {}
+      },
+      "cancel_retry": {
+        "cases": 100,
+        "wins": 86,
+        "timeouts": 0,
+        "first_failure_purpose": {
+          "priority": 14
+        }
+      },
+      "tap_then_spend": {
+        "cases": 100,
+        "wins": 100,
+        "timeouts": 0,
+        "first_failure_purpose": {}
+      },
+      "blaze_targets": {
+        "cases": 100,
+        "wins": 100,
+        "timeouts": 0,
+        "first_failure_purpose": {}
+      }
+    },
+    "optimizer_steps": 0
+  },
+  "captured_prompt_probe": {
+    "before": {
+      "checkpoint": ".local/training/five-skills-corrected-415/policy.keras",
+      "optimizer_steps": 0,
+      "limitation": "Fresh per-case history and reconstructed prompt metadata; not a full replay or outcome evaluation",
+      "cases": [
+        {
+          "source": ".local/xmage/five-skills-baseline-20-501/traces/eval-g0000.jsonl.gz",
+          "step": 1874,
+          "kind": "GAME_PLAY_MANA",
+          "greedy": "mana:RED",
+          "choices": [
+            {
+              "id": "mana:RED",
+              "label": "Spend red mana from pool",
+              "probability": 0.868996798992157
+            },
+            {
+              "id": "no",
+              "label": "Done / Cancel",
+              "probability": 0.13100320100784302
+            }
+          ]
+        },
+        {
+          "source": ".local/xmage/five-skills-baseline-20-501/traces/eval-g0004.jsonl.gz",
+          "step": 1371,
+          "kind": "GAME_TARGET",
+          "greedy": "no",
+          "choices": [
+            {
+              "id": "object:060e8f58-c702-48aa-87ea-e0ca2b97ec8f",
+              "label": "Monastery Swiftspear",
+              "probability": 0.326347678899765
+            },
+            {
+              "id": "object:e2f77de1-8798-4423-b96a-d64c6a63878b",
+              "label": "Monastery Swiftspear",
+              "probability": 0.326347678899765
+            },
+            {
+              "id": "no",
+              "label": "Done / Cancel",
+              "probability": 0.34730467200279236
+            }
+          ]
+        }
+      ]
+    },
+    "after": {
+      "checkpoint": ".local/training/payment-balanced-605/policy.keras",
+      "optimizer_steps": 0,
+      "limitation": "Fresh per-case history and reconstructed prompt metadata; not a full replay or outcome evaluation",
+      "cases": [
+        {
+          "source": ".local/xmage/five-skills-baseline-20-501/traces/eval-g0000.jsonl.gz",
+          "step": 1874,
+          "kind": "GAME_PLAY_MANA",
+          "greedy": "mana:RED",
+          "choices": [
+            {
+              "id": "mana:RED",
+              "label": "Spend red mana from pool",
+              "probability": 0.9900550842285156
+            },
+            {
+              "id": "no",
+              "label": "Done / Cancel",
+              "probability": 0.009944923222064972
+            }
+          ]
+        },
+        {
+          "source": ".local/xmage/five-skills-baseline-20-501/traces/eval-g0004.jsonl.gz",
+          "step": 1371,
+          "kind": "GAME_TARGET",
+          "greedy": "object:e2f77de1-8798-4423-b96a-d64c6a63878b",
+          "choices": [
+            {
+              "id": "object:060e8f58-c702-48aa-87ea-e0ca2b97ec8f",
+              "label": "Monastery Swiftspear",
+              "probability": 0.482900470495224
+            },
+            {
+              "id": "object:e2f77de1-8798-4423-b96a-d64c6a63878b",
+              "label": "Monastery Swiftspear",
+              "probability": 0.4829009175300598
+            },
+            {
+              "id": "no",
+              "label": "Done / Cancel",
+              "probability": 0.03419863060116768
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "live_protocol_validation": {
+    "manual_mana": true,
+    "manual_games": [
+      {
+        "episode": 0,
+        "baseline_seat": "player_0",
+        "decisions": 106,
+        "seconds": 5.399,
+        "truncated": false,
+        "reason": null,
+        "callbacks": {
+          "GAME_TARGET": 3,
+          "GAME_ASK": 3,
+          "GAME_SELECT": 84,
+          "GAME_PLAY_MANA": 16
+        },
+        "actor_decisions": {
+          "player_0": 60,
+          "player_1": 46
+        },
+        "outcomes": {
+          "player_0": {
+            "won": true,
+            "draw": null
+          },
+          "player_1": {
+            "won": false,
+            "draw": null
+          }
+        }
+      },
+      {
+        "episode": 1,
+        "baseline_seat": "player_1",
+        "decisions": 143,
+        "seconds": 7.175,
+        "truncated": false,
+        "reason": null,
+        "callbacks": {
+          "GAME_TARGET": 6,
+          "GAME_ASK": 2,
+          "GAME_SELECT": 111,
+          "GAME_PLAY_MANA": 22,
+          "GAME_CHOOSE_ABILITY": 2
+        },
+        "actor_decisions": {
+          "player_1": 71,
+          "player_0": 72
+        },
+        "outcomes": {
+          "player_1": {
+            "won": true,
+            "draw": null
+          },
+          "player_0": {
+            "won": false,
+            "draw": null
+          }
+        }
+      }
+    ],
+    "explicit_pool_responses": 19,
+    "normal_games": [
+      {
+        "episode": 0,
+        "baseline_seat": "player_0",
+        "decisions": 145,
+        "seconds": 7.079,
+        "truncated": false,
+        "reason": null,
+        "callbacks": {
+          "GAME_TARGET": 5,
+          "GAME_ASK": 4,
+          "GAME_SELECT": 125,
+          "GAME_CHOOSE_ABILITY": 2,
+          "GAME_PLAY_MANA": 9
+        },
+        "actor_decisions": {
+          "player_0": 77,
+          "player_1": 68
+        },
+        "outcomes": {
+          "player_1": {
+            "won": false,
+            "draw": null
+          },
+          "player_0": {
+            "won": true,
+            "draw": null
+          }
+        }
+      },
+      {
+        "episode": 1,
+        "baseline_seat": "player_1",
+        "decisions": 116,
+        "seconds": 5.704,
+        "truncated": false,
+        "reason": null,
+        "callbacks": {
+          "GAME_TARGET": 5,
+          "GAME_ASK": 2,
+          "GAME_SELECT": 100,
+          "GAME_PLAY_MANA": 9
+        },
+        "actor_decisions": {
+          "player_0": 57,
+          "player_1": 59
+        },
+        "outcomes": {
+          "player_1": {
+            "won": true,
+            "draw": null
+          },
+          "player_0": {
+            "won": false,
+            "draw": null
+          }
+        }
+      }
+    ],
+    "optimizer_steps": 0
+  },
+  "prior_interrupted_evaluation": {
+    "directory": ".local/xmage/five-skills-baseline-20-501",
+    "completed_games": 3,
+    "wins": 0,
+    "losses": 3,
+    "reason": "Stopped comparison after identifying missing spend-pool action; remaining/incomplete games are not losses"
+  },
+  "validation": "263 repository tests passed; independent evaluation has no optimizer or teacher fallback.",
+  "discarded_runs": [
+    {
+      "directory": ".local/training/payment-smoke-601",
+      "reason": "Eight-episode runner smoke test only, not validation"
+    },
+    {
+      "directory": ".local/training/payment-curriculum-602",
+      "reason": "Interrupted after detecting insufficient sources for a partly paid Charm with two additional floating mana; corrected before final run"
+    },
+    {
+      "directory": ".local/training/payment-balanced-604",
+      "reason": "Stopped early to broaden Blaze to ordinary nonlethal positions; its weights were not inherited"
+    }
+  ],
+  "limitations": [
+    "Scripted opponent responses and combat; not a general rules simulator.",
+    "Cancel-retry success includes passing with a visibly unpayable spell, not a full-game win.",
+    "Blaze scenarios fix landfall false and script a lethal prowess attack; no new landfall feature was added.",
+    "Nonlethal Blaze goals require completing the cast, not a full-game win.",
+    "Native menu layout does not establish full-game distribution transfer.",
+    "Captured prompt probes reconstruct metadata and use fresh per-case history; they do not reproduce the original recurrent state or establish an optimal target."
+  ]
+}

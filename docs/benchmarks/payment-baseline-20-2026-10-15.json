@@ -1,0 +1,544 @@
+{
+  "config": {
+    "load": ".local/training/payment-balanced-605/policy.keras",
+    "directory": ".local/xmage/payment-baseline-20-607",
+    "games": 20,
+    "workers": 4,
+    "seed": 607,
+    "limit": 3000,
+    "timeout": 60,
+    "game_timeout": 240.0,
+    "record_inputs": true
+  },
+  "checkpoint_sha256": "4fbb4b2e140ab9c25d85302ab4ed332d49276bca5f075cf488e9d33603205082",
+  "optimizer_steps": 0,
+  "summary": {
+    "attempted": 20,
+    "wins": 4,
+    "losses": 16,
+    "draws": 0,
+    "truncated": 0,
+    "errors": 0,
+    "completed": 20,
+    "win_rate": 0.2
+  },
+  "games": [
+    {
+      "name": "eval-g0000",
+      "index": 0,
+      "seed": 2120849349,
+      "model_version": 0,
+      "decisions": 106,
+      "seconds": 18.547,
+      "rewards": {
+        "player_1": 1.0,
+        "player_0": -1.0
+      },
+      "baseline_seat": "player_0",
+      "replay_inputs": [
+        {
+          "path": ".local/xmage/payment-baseline-20-607/replay_inputs/eval-g0000/player_0.pkl.gz",
+          "samples": 0
+        },
+        {
+          "path": ".local/xmage/payment-baseline-20-607/replay_inputs/eval-g0000/player_1.pkl.gz",
+          "samples": 55
+        }
+      ],
+      "trajectories": []
+    },
+    {
+      "name": "eval-g0001",
+      "index": 1,
+      "seed": 1384627393,
+      "model_version": 0,
+      "decisions": 141,
+      "seconds": 23.24,
+      "rewards": {
+        "player_0": -1.0,
+        "player_1": 1.0
+      },
+      "baseline_seat": "player_1",
+      "replay_inputs": [
+        {
+          "path": ".local/xmage/payment-baseline-20-607/replay_inputs/eval-g0001/player_0.pkl.gz",
+          "samples": 63
+        },
+        {
+          "path": ".local/xmage/payment-baseline-20-607/replay_inputs/eval-g0001/player_1.pkl.gz",
+          "samples": 0
+        }
+      ],
+      "trajectories": []
+    },
+    {
+      "name": "eval-g0002",
+      "index": 2,
+      "seed": 1532761057,
+      "model_version": 0,
+      "decisions": 139,
+      "seconds": 22.395,
+      "rewards": {
+        "player_1": -1.0,
+        "player_0": 1.0
+      },
+      "baseline_seat": "player_0",
+      "replay_inputs": [
+        {
+          "path": ".local/xmage/payment-baseline-20-607/replay_inputs/eval-g0002/player_0.pkl.gz",
+          "samples": 0
+        },
+        {
+          "path": ".local/xmage/payment-baseline-20-607/replay_inputs/eval-g0002/player_1.pkl.gz",
+          "samples": 72
+        }
+      ],
+      "trajectories": []
+    },
+    {
+      "name": "eval-g0003",
+      "index": 3,
+      "seed": 1376502236,
+      "model_version": 0,
+      "decisions": 134,
+      "seconds": 21.867,
+      "rewards": {
+        "player_1": 1.0,
+        "player_0": -1.0
+      },
+      "baseline_seat": "player_1",
+      "replay_inputs": [
+        {
+          "path": ".local/xmage/payment-baseline-20-607/replay_inputs/eval-g0003/player_0.pkl.gz",
+          "samples": 61
+        },
+        {
+          "path": ".local/xmage/payment-baseline-20-607/replay_inputs/eval-g0003/player_1.pkl.gz",
+          "samples": 0
+        }
+      ],
+      "trajectories": []
+    },
+    {
+      "name": "eval-g0004",
+      "index": 4,
+      "seed": 979700135,
+      "model_version": 0,
+      "decisions": 111,
+      "seconds": 14.243,
+      "rewards": {
+        "player_0": 1.0,
+        "player_1": -1.0
+      },
+      "baseline_seat": "player_0",
+      "replay_inputs": [
+        {
+          "path": ".local/xmage/payment-baseline-20-607/replay_inputs/eval-g0004/player_0.pkl.gz",
+          "samples": 0
+        },
+        {
+          "path": ".local/xmage/payment-baseline-20-607/replay_inputs/eval-g0004/player_1.pkl.gz",
+          "samples": 58
+        }
+      ],
+      "trajectories": []
+    },
+    {
+      "name": "eval-g0005",
+      "index": 5,
+      "seed": 2122707754,
+      "model_version": 0,
+      "decisions": 112,
+      "seconds": 20.107,
+      "rewards": {
+        "player_1": 1.0,
+        "player_0": -1.0
+      },
+      "baseline_seat": "player_1",
+      "replay_inputs": [
+        {
+          "path": ".local/xmage/payment-baseline-20-607/replay_inputs/eval-g0005/player_0.pkl.gz",
+          "samples": 52
+        },
+        {
+          "path": ".local/xmage/payment-baseline-20-607/replay_inputs/eval-g0005/player_1.pkl.gz",
+          "samples": 0
+        }
+      ],
+      "trajectories": []
+    },
+    {
+      "name": "eval-g0006",
+      "index": 6,
+      "seed": 1970561043,
+      "model_version": 0,
+      "decisions": 144,
+      "seconds": 23.924,
+      "rewards": {
+        "player_0": 1.0,
+        "player_1": -1.0
+      },
+      "baseline_seat": "player_0",
+      "replay_inputs": [
+        {
+          "path": ".local/xmage/payment-baseline-20-607/replay_inputs/eval-g0006/player_0.pkl.gz",
+          "samples": 0
+        },
+        {
+          "path": ".local/xmage/payment-baseline-20-607/replay_inputs/eval-g0006/player_1.pkl.gz",
+          "samples": 77
+        }
+      ],
+      "trajectories": []
+    },
+    {
+      "name": "eval-g0007",
+      "index": 7,
+      "seed": 24550309,
+      "model_version": 0,
+      "decisions": 190,
+      "seconds": 30.235,
+      "rewards": {
+        "player_0": 1.0,
+        "player_1": -1.0
+      },
+      "baseline_seat": "player_1",
+      "replay_inputs": [
+        {
+          "path": ".local/xmage/payment-baseline-20-607/replay_inputs/eval-g0007/player_0.pkl.gz",
+          "samples": 119
+        },
+        {
+          "path": ".local/xmage/payment-baseline-20-607/replay_inputs/eval-g0007/player_1.pkl.gz",
+          "samples": 0
+        }
+      ],
+      "trajectories": []
+    },
+    {
+      "name": "eval-g0008",
+      "index": 8,
+      "seed": 1480293844,
+      "model_version": 0,
+      "decisions": 162,
+      "seconds": 26.248,
+      "rewards": {
+        "player_0": 1.0,
+        "player_1": -1.0
+      },
+      "baseline_seat": "player_0",
+      "replay_inputs": [
+        {
+          "path": ".local/xmage/payment-baseline-20-607/replay_inputs/eval-g0008/player_0.pkl.gz",
+          "samples": 0
+        },
+        {
+          "path": ".local/xmage/payment-baseline-20-607/replay_inputs/eval-g0008/player_1.pkl.gz",
+          "samples": 95
+        }
+      ],
+      "trajectories": []
+    },
+    {
+      "name": "eval-g0009",
+      "index": 9,
+      "seed": 578337629,
+      "model_version": 0,
+      "decisions": 160,
+      "seconds": 23.645,
+      "rewards": {
+        "player_1": 1.0,
+        "player_0": -1.0
+      },
+      "baseline_seat": "player_1",
+      "replay_inputs": [
+        {
+          "path": ".local/xmage/payment-baseline-20-607/replay_inputs/eval-g0009/player_0.pkl.gz",
+          "samples": 88
+        },
+        {
+          "path": ".local/xmage/payment-baseline-20-607/replay_inputs/eval-g0009/player_1.pkl.gz",
+          "samples": 0
+        }
+      ],
+      "trajectories": []
+    },
+    {
+      "name": "eval-g0010",
+      "index": 10,
+      "seed": 2827125,
+      "model_version": 0,
+      "decisions": 107,
+      "seconds": 17.008,
+      "rewards": {
+        "player_0": 1.0,
+        "player_1": -1.0
+      },
+      "baseline_seat": "player_0",
+      "replay_inputs": [
+        {
+          "path": ".local/xmage/payment-baseline-20-607/replay_inputs/eval-g0010/player_0.pkl.gz",
+          "samples": 0
+        },
+        {
+          "path": ".local/xmage/payment-baseline-20-607/replay_inputs/eval-g0010/player_1.pkl.gz",
+          "samples": 49
+        }
+      ],
+      "trajectories": []
+    },
+    {
+      "name": "eval-g0011",
+      "index": 11,
+      "seed": 739355048,
+      "model_version": 0,
+      "decisions": 165,
+      "seconds": 23.21,
+      "rewards": {
+        "player_1": 1.0,
+        "player_0": -1.0
+      },
+      "baseline_seat": "player_1",
+      "replay_inputs": [
+        {
+          "path": ".local/xmage/payment-baseline-20-607/replay_inputs/eval-g0011/player_0.pkl.gz",
+          "samples": 77
+        },
+        {
+          "path": ".local/xmage/payment-baseline-20-607/replay_inputs/eval-g0011/player_1.pkl.gz",
+          "samples": 0
+        }
+      ],
+      "trajectories": []
+    },
+    {
+      "name": "eval-g0012",
+      "index": 12,
+      "seed": 373745314,
+      "model_version": 0,
+      "decisions": 116,
+      "seconds": 18.291,
+      "rewards": {
+        "player_1": 1.0,
+        "player_0": -1.0
+      },
+      "baseline_seat": "player_0",
+      "replay_inputs": [
+        {
+          "path": ".local/xmage/payment-baseline-20-607/replay_inputs/eval-g0012/player_0.pkl.gz",
+          "samples": 0
+        },
+        {
+          "path": ".local/xmage/payment-baseline-20-607/replay_inputs/eval-g0012/player_1.pkl.gz",
+          "samples": 61
+        }
+      ],
+      "trajectories": []
+    },
+    {
+      "name": "eval-g0013",
+      "index": 13,
+      "seed": 1127354830,
+      "model_version": 0,
+      "decisions": 109,
+      "seconds": 19.013,
+      "rewards": {
+        "player_0": -1.0,
+        "player_1": 1.0
+      },
+      "baseline_seat": "player_1",
+      "replay_inputs": [
+        {
+          "path": ".local/xmage/payment-baseline-20-607/replay_inputs/eval-g0013/player_0.pkl.gz",
+          "samples": 55
+        },
+        {
+          "path": ".local/xmage/payment-baseline-20-607/replay_inputs/eval-g0013/player_1.pkl.gz",
+          "samples": 0
+        }
+      ],
+      "trajectories": []
+    },
+    {
+      "name": "eval-g0014",
+      "index": 14,
+      "seed": 25487436,
+      "model_version": 0,
+      "decisions": 122,
+      "seconds": 18.933,
+      "rewards": {
+        "player_1": 1.0,
+        "player_0": -1.0
+      },
+      "baseline_seat": "player_0",
+      "replay_inputs": [
+        {
+          "path": ".local/xmage/payment-baseline-20-607/replay_inputs/eval-g0014/player_0.pkl.gz",
+          "samples": 0
+        },
+        {
+          "path": ".local/xmage/payment-baseline-20-607/replay_inputs/eval-g0014/player_1.pkl.gz",
+          "samples": 67
+        }
+      ],
+      "trajectories": []
+    },
+    {
+      "name": "eval-g0015",
+      "index": 15,
+      "seed": 20413573,
+      "model_version": 0,
+      "decisions": 125,
+      "seconds": 19.497,
+      "rewards": {
+        "player_1": 1.0,
+        "player_0": -1.0
+      },
+      "baseline_seat": "player_1",
+      "replay_inputs": [
+        {
+          "path": ".local/xmage/payment-baseline-20-607/replay_inputs/eval-g0015/player_0.pkl.gz",
+          "samples": 63
+        },
+        {
+          "path": ".local/xmage/payment-baseline-20-607/replay_inputs/eval-g0015/player_1.pkl.gz",
+          "samples": 0
+        }
+      ],
+      "trajectories": []
+    },
+    {
+      "name": "eval-g0016",
+      "index": 16,
+      "seed": 1950449758,
+      "model_version": 0,
+      "decisions": 160,
+      "seconds": 23.751,
+      "rewards": {
+        "player_0": 1.0,
+        "player_1": -1.0
+      },
+      "baseline_seat": "player_0",
+      "replay_inputs": [
+        {
+          "path": ".local/xmage/payment-baseline-20-607/replay_inputs/eval-g0016/player_0.pkl.gz",
+          "samples": 0
+        },
+        {
+          "path": ".local/xmage/payment-baseline-20-607/replay_inputs/eval-g0016/player_1.pkl.gz",
+          "samples": 83
+        }
+      ],
+      "trajectories": []
+    },
+    {
+      "name": "eval-g0017",
+      "index": 17,
+      "seed": 102547314,
+      "model_version": 0,
+      "decisions": 102,
+      "seconds": 19.801,
+      "rewards": {
+        "player_1": 1.0,
+        "player_0": -1.0
+      },
+      "baseline_seat": "player_1",
+      "replay_inputs": [
+        {
+          "path": ".local/xmage/payment-baseline-20-607/replay_inputs/eval-g0017/player_0.pkl.gz",
+          "samples": 54
+        },
+        {
+          "path": ".local/xmage/payment-baseline-20-607/replay_inputs/eval-g0017/player_1.pkl.gz",
+          "samples": 0
+        }
+      ],
+      "trajectories": []
+    },
+    {
+      "name": "eval-g0018",
+      "index": 18,
+      "seed": 752152777,
+      "model_version": 0,
+      "decisions": 193,
+      "seconds": 26.392,
+      "rewards": {
+        "player_0": 1.0,
+        "player_1": -1.0
+      },
+      "baseline_seat": "player_0",
+      "replay_inputs": [
+        {
+          "path": ".local/xmage/payment-baseline-20-607/replay_inputs/eval-g0018/player_0.pkl.gz",
+          "samples": 0
+        },
+        {
+          "path": ".local/xmage/payment-baseline-20-607/replay_inputs/eval-g0018/player_1.pkl.gz",
+          "samples": 123
+        }
+      ],
+      "trajectories": []
+    },
+    {
+      "name": "eval-g0019",
+      "index": 19,
+      "seed": 1665508351,
+      "model_version": 0,
+      "decisions": 140,
+      "seconds": 15.971,
+      "rewards": {
+        "player_0": -1.0,
+        "player_1": 1.0
+      },
+      "baseline_seat": "player_1",
+      "replay_inputs": [
+        {
+          "path": ".local/xmage/payment-baseline-20-607/replay_inputs/eval-g0019/player_0.pkl.gz",
+          "samples": 71
+        },
+        {
+          "path": ".local/xmage/payment-baseline-20-607/replay_inputs/eval-g0019/player_1.pkl.gz",
+          "samples": 0
+        }
+      ],
+      "trajectories": []
+    }
+  ],
+  "seconds": 112.29,
+  "inference": {
+    "calls": 1070,
+    "requests": 1443,
+    "mean_batch": 1.3485981308411215,
+    "batch_histogram": {
+      "2": 292,
+      "1": 738,
+      "3": 39,
+      "4": 1
+    },
+    "inference_seconds": 29.23480376659427,
+    "mean_queue_ms": 16.38423390389625,
+    "graph_traces": 1
+  },
+  "date": "2026-10-15",
+  "checkpoint_verified_unchanged": true,
+  "source_sha256": {
+    "evaluation_runner": "d83b52c12ee047fd06b54785e79e64be28ebdee5e6b69eb841bc6819ec54401f",
+    "game_runner": "a140b3d321a975af734ca48a534e0a1c259d8a168342be57ac651354cb7897b9",
+    "baseline": "a3716e04c28dc0fe459f04574d93524bea64854fd96e154c63739cacd648cd57",
+    "decoder": "c77c1109e7f4a09904deb6d11f738476acc3df9dfb17f31054109eca3623f964",
+    "encoder": "81ab55e14acb56fb599a1bcb305e073f2ec8a7d383aa86999d84eed267f88939"
+  },
+  "baseline_seat_counts": {
+    "player_0": 10,
+    "player_1": 10
+  },
+  "decisions": {
+    "minimum": 102,
+    "median": 136.5,
+    "maximum": 193
+  },
+  "evaluation_only": true,
+  "seed_scope": "Seed controls policy sampling; stock XMage shuffles are not seeded.",
+  "traces": ".local/xmage/payment-baseline-20-607/traces",
+  "limitations": "Twenty games provide a small sample of full-game strength against this deliberately weak baseline."
+}

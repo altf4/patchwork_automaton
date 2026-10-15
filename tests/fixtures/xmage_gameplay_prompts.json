@@ -1,0 +1,145 @@
+{
+  "source": "Local XMage 1.4.62, scripted opening, no neural policy",
+  "prompts": [
+    {
+      "method": "GAME_TARGET",
+      "data": {
+        "message": "Select a starting player",
+        "flag": true,
+        "targets": [
+          "9634f31b-e742-41a2-97a0-f97402ca4c30",
+          "7249231a-1c91-49f3-bb63-71bad8e1822b"
+        ],
+        "min": 0,
+        "max": 0,
+        "options": {
+          "chosenTargets": [],
+          "targetZone": null,
+          "queryType": "PICK_TARGET"
+        },
+        "choice": null,
+        "messages": null
+      }
+    },
+    {
+      "method": "GAME_ASK",
+      "data": {
+        "message": "Mulligan <font color=#ffff00>down to 6 cards</font>?",
+        "flag": false,
+        "targets": null,
+        "min": 0,
+        "max": 0,
+        "options": {
+          "UI.right.btn.text": "Keep",
+          "UI.left.btn.text": "Mulligan",
+          "queryType": "ASK"
+        },
+        "choice": null,
+        "messages": null
+      }
+    },
+    {
+      "method": "GAME_SELECT",
+      "data": {
+        "message": "Play spells and abilities",
+        "flag": false,
+        "targets": null,
+        "min": 0,
+        "max": 0,
+        "options": {
+          "queryType": "SELECT"
+        },
+        "choice": null,
+        "messages": null
+      }
+    },
+    {
+      "method": "GAME_CHOOSE_ABILITY",
+      "data": {
+        "choices": {
+          "2bbbf1cf-7f65-4f94-8653-08430d971c2e": "1. {T}, Pay 1 life, Sacrifice Arid Mesa: Search your library for a Mountain or Plains card, put it onto the battlefield, then shuffle."
+        },
+        "message": "Choose spell or ability to play<br><font color='#B0C4DE' object_id='95183315-6ede-4fc6-9c3a-ef3731285487'>Arid Mesa</font> [951]"
+      }
+    },
+    {
+      "method": "GAME_TARGET",
+      "data": {
+        "message": "Select a Mountain or Plains card",
+        "flag": false,
+        "targets": null,
+        "min": 0,
+        "max": 0,
+        "options": {
+          "chosenTargets": [],
+          "possibleTargets": [
+            "93c36dd8-b5da-4427-a7b4-3e4f0e221fe7",
+            "2235d617-1002-49bd-ad6b-bf57b480ff22",
+            "b80ff38c-9712-4090-8038-8990d8850578",
+            "d53f77f9-ce89-4deb-9cf4-ba7d5262c5b9",
+            "3a1f8d37-2cdb-4945-a125-cd321d627495"
+          ],
+          "targetZone": "LIBRARY",
+          "secondMessage": "<font color='#B0C4DE' object_id='95183315-6ede-4fc6-9c3a-ef3731285487'>Arid Mesa</font> [951]",
+          "queryType": "PICK_TARGET"
+        },
+        "choice": null,
+        "messages": null
+      }
+    },
+    {
+      "method": "GAME_ASK",
+      "data": {
+        "message": "pay 2 life? (otherwise Sacred Foundry becomes tapped)",
+        "flag": false,
+        "targets": null,
+        "min": 0,
+        "max": 0,
+        "options": {
+          "UI.right.btn.text": "No",
+          "autoAnswerMessage": "pay 2 life? (otherwise Sacred Foundry becomes tapped)",
+          "originalId": "de7e98b9-ff55-4da6-8fbc-0ff428cd60ef",
+          "UI.left.btn.text": "Yes",
+          "secondMessage": "<font color='#B0C4DE' object_id='2235d617-1002-49bd-ad6b-bf57b480ff22'>Sacred Foundry</font> [223]",
+          "queryType": "ASK"
+        },
+        "choice": null,
+        "messages": null
+      }
+    },
+    {
+      "method": "GAME_PLAY_MANA",
+      "data": {
+        "message": "Pay {R}<div style='font-size:11pt'><font color='#FF6347' object_id='f6834e02-6d49-4885-a7d9-1b07c2729453'>Monastery Swiftspear</font> [f68]</div>",
+        "flag": false,
+        "targets": null,
+        "min": 0,
+        "max": 0,
+        "options": {
+          "queryType": "PLAY_MANA"
+        },
+        "choice": null,
+        "messages": null
+      }
+    },
+    {
+      "method": "GAME_SELECT",
+      "data": {
+        "message": "Select attackers",
+        "flag": false,
+        "targets": null,
+        "min": 0,
+        "max": 0,
+        "options": {
+          "possibleAttackers": [
+            "f6834e02-6d49-4885-a7d9-1b07c2729453"
+          ],
+          "specialButton": "All attack",
+          "queryType": "SELECT"
+        },
+        "choice": null,
+        "messages": null
+      }
+    }
+  ]
+}

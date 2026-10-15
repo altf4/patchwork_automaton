@@ -111,7 +111,7 @@ class BurnTensorTests(unittest.TestCase):
         encoded=Encoder().encode(obs)
         self.assertEqual(Encoder().card_count,29)
         self.assertTrue(np.all(encoded.arrays['card_ids'][2:]>0))
-        self.assertEqual(FEATURE_VERSION,3)
+        self.assertEqual(FEATURE_VERSION,6)
         a=CARDS['Searing Blaze'].abilities[0]
         plain=replace(CARDS['Searing Blaze'],abilities=(replace(a,effects=(a.effects[0],replace(a.effects[1],tags=()))),))
         self.assertFalse(np.array_equal(semantic_rows(CARDS['Searing Blaze']),semantic_rows(plain)))

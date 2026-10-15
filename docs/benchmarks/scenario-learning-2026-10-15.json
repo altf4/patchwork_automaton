@@ -1,0 +1,821 @@
+{
+  "date": "2026-10-15",
+  "feature_version": 4,
+  "synthetic": true,
+  "metric": "Mean probability assigned to successful actions, not sampled full-game win rate",
+  "gate": {
+    "minimum_branch_success_probability": 0.9,
+    "minimum_branch_greedy_accuracy": 0.95
+  },
+  "real_game_rewards": "Unchanged: terminal win/loss/draw only",
+  "experiments": {
+    "baseline-long": {
+      "source": ".local/training/scenarios-v4-baseline-long/report.json",
+      "synthetic": true,
+      "objective": "one-decision terminal task success; not full-game wins",
+      "config": {
+        "directory": ".local/training/scenarios-v4-baseline-long",
+        "seeds": [
+          41
+        ],
+        "updates": 1500,
+        "batch": 48,
+        "test_cases": 200,
+        "learning_rate": 0.001,
+        "candidate_interactions": false,
+        "player_readout": false,
+        "require_pass": false
+      },
+      "runs": [
+        {
+          "seed": 41,
+          "initial": {
+            "need_white": {
+              "count": 102,
+              "greedy": 0.0,
+              "success_probability": 0.32879355608248245,
+              "random_probability": 0.333333333333333
+            },
+            "need_red": {
+              "count": 98,
+              "greedy": 0.0,
+              "success_probability": 0.32684361721788135,
+              "random_probability": 0.33333333333333287
+            },
+            "opponent_lethal": {
+              "count": 200,
+              "greedy": 0.415,
+              "success_probability": 0.34312631487846373,
+              "random_probability": 0.333333333333334
+            },
+            "direct_damage": {
+              "count": 87,
+              "greedy": 0.0,
+              "success_probability": 0.24365594709056548,
+              "random_probability": 0.25
+            },
+            "double_strike": {
+              "count": 113,
+              "greedy": 0.0,
+              "success_probability": 0.24559748199133746,
+              "random_probability": 0.25
+            }
+          },
+          "final": {
+            "need_white": {
+              "count": 102,
+              "greedy": 0.0,
+              "success_probability": 0.47019095046847476,
+              "random_probability": 0.333333333333333
+            },
+            "need_red": {
+              "count": 98,
+              "greedy": 1.0,
+              "success_probability": 0.5298065026195682,
+              "random_probability": 0.33333333333333287
+            },
+            "opponent_lethal": {
+              "count": 200,
+              "greedy": 1.0,
+              "success_probability": 0.9999999403953552,
+              "random_probability": 0.333333333333334
+            },
+            "direct_damage": {
+              "count": 87,
+              "greedy": 1.0,
+              "success_probability": 0.9983869112771133,
+              "random_probability": 0.25
+            },
+            "double_strike": {
+              "count": 113,
+              "greedy": 0.0,
+              "success_probability": 0.0015678297413051524,
+              "random_probability": 0.25
+            }
+          },
+          "final_iid": {
+            "need_white": {
+              "count": 100,
+              "greedy": 0.0,
+              "success_probability": 0.44073238253593444,
+              "random_probability": 0.3333333333333329
+            },
+            "need_red": {
+              "count": 100,
+              "greedy": 1.0,
+              "success_probability": 0.5576454651355743,
+              "random_probability": 0.3333333333333329
+            },
+            "opponent_lethal": {
+              "count": 200,
+              "greedy": 1.0,
+              "success_probability": 0.9999999403953552,
+              "random_probability": 0.333333333333334
+            },
+            "double_strike": {
+              "count": 102,
+              "greedy": 0.0,
+              "success_probability": 0.0015678224199469767,
+              "random_probability": 0.25
+            },
+            "direct_damage": {
+              "count": 98,
+              "greedy": 1.0,
+              "success_probability": 0.9983869194984436,
+              "random_probability": 0.25
+            }
+          },
+          "seconds": 245.15030117501738,
+          "passed": false,
+          "training_examples": 72000
+        }
+      ]
+    },
+    "confirmation": {
+      "source": ".local/training/scenarios-v4-confirmation/report.json",
+      "synthetic": true,
+      "objective": "one-decision terminal task success; not full-game wins",
+      "config": {
+        "directory": ".local/training/scenarios-v4-confirmation",
+        "seeds": [
+          41,
+          42,
+          43
+        ],
+        "updates": 1500,
+        "batch": 48,
+        "test_cases": 200,
+        "learning_rate": 0.001,
+        "candidate_interactions": true,
+        "player_readout": true,
+        "require_pass": true
+      },
+      "runs": [
+        {
+          "seed": 41,
+          "initial": {
+            "need_white": {
+              "count": 102,
+              "greedy": 0.0,
+              "success_probability": 0.33232767646219213,
+              "random_probability": 0.333333333333333
+            },
+            "need_red": {
+              "count": 98,
+              "greedy": 0.0,
+              "success_probability": 0.3294163011774725,
+              "random_probability": 0.33333333333333287
+            },
+            "opponent_lethal": {
+              "count": 200,
+              "greedy": 1.0,
+              "success_probability": 0.3411893631517887,
+              "random_probability": 0.333333333333334
+            },
+            "direct_damage": {
+              "count": 87,
+              "greedy": 0.0,
+              "success_probability": 0.24742351095566803,
+              "random_probability": 0.25
+            },
+            "double_strike": {
+              "count": 113,
+              "greedy": 0.0,
+              "success_probability": 0.24857420678687306,
+              "random_probability": 0.25
+            }
+          },
+          "final": {
+            "need_white": {
+              "count": 102,
+              "greedy": 1.0,
+              "success_probability": 0.9840509570112416,
+              "random_probability": 0.333333333333333
+            },
+            "need_red": {
+              "count": 98,
+              "greedy": 1.0,
+              "success_probability": 0.9817283694841423,
+              "random_probability": 0.33333333333333287
+            },
+            "opponent_lethal": {
+              "count": 200,
+              "greedy": 1.0,
+              "success_probability": 0.9999999403953552,
+              "random_probability": 0.333333333333334
+            },
+            "direct_damage": {
+              "count": 87,
+              "greedy": 1.0,
+              "success_probability": 0.6270741840888714,
+              "random_probability": 0.25
+            },
+            "double_strike": {
+              "count": 113,
+              "greedy": 0.0,
+              "success_probability": 0.37622798491368253,
+              "random_probability": 0.25
+            }
+          },
+          "final_iid": {
+            "need_white": {
+              "count": 100,
+              "greedy": 1.0,
+              "success_probability": 0.9931017935276032,
+              "random_probability": 0.3333333333333329
+            },
+            "need_red": {
+              "count": 100,
+              "greedy": 1.0,
+              "success_probability": 0.9979351472854614,
+              "random_probability": 0.3333333333333329
+            },
+            "opponent_lethal": {
+              "count": 200,
+              "greedy": 1.0,
+              "success_probability": 0.9999999403953552,
+              "random_probability": 0.333333333333334
+            },
+            "double_strike": {
+              "count": 102,
+              "greedy": 0.0,
+              "success_probability": 0.375127245982488,
+              "random_probability": 0.25
+            },
+            "direct_damage": {
+              "count": 98,
+              "greedy": 1.0,
+              "success_probability": 0.626495323619064,
+              "random_probability": 0.25
+            }
+          },
+          "seconds": 247.03211442101747,
+          "passed": false,
+          "training_examples": 72000
+        },
+        {
+          "seed": 42,
+          "initial": {
+            "need_white": {
+              "count": 98,
+              "greedy": 1.0,
+              "success_probability": 0.34237322028802364,
+              "random_probability": 0.33333333333333287
+            },
+            "need_red": {
+              "count": 102,
+              "greedy": 0.0,
+              "success_probability": 0.337048832692352,
+              "random_probability": 0.333333333333333
+            },
+            "opponent_lethal": {
+              "count": 200,
+              "greedy": 0.0,
+              "success_probability": 0.33636356979608534,
+              "random_probability": 0.333333333333334
+            },
+            "direct_damage": {
+              "count": 102,
+              "greedy": 0.0,
+              "success_probability": 0.25301972323772953,
+              "random_probability": 0.25
+            },
+            "double_strike": {
+              "count": 98,
+              "greedy": 0.0,
+              "success_probability": 0.2517495149252366,
+              "random_probability": 0.25
+            }
+          },
+          "final": {
+            "need_white": {
+              "count": 98,
+              "greedy": 1.0,
+              "success_probability": 0.8900089422050788,
+              "random_probability": 0.33333333333333287
+            },
+            "need_red": {
+              "count": 102,
+              "greedy": 1.0,
+              "success_probability": 0.9181415345154557,
+              "random_probability": 0.333333333333333
+            },
+            "opponent_lethal": {
+              "count": 200,
+              "greedy": 1.0,
+              "success_probability": 0.9999995827674866,
+              "random_probability": 0.333333333333334
+            },
+            "direct_damage": {
+              "count": 102,
+              "greedy": 1.0,
+              "success_probability": 0.9999759138799181,
+              "random_probability": 0.25
+            },
+            "double_strike": {
+              "count": 98,
+              "greedy": 1.0,
+              "success_probability": 0.9999946136863864,
+              "random_probability": 0.25
+            }
+          },
+          "final_iid": {
+            "need_white": {
+              "count": 103,
+              "greedy": 1.0,
+              "success_probability": 0.9937992159602711,
+              "random_probability": 0.33333333333333304
+            },
+            "need_red": {
+              "count": 97,
+              "greedy": 1.0,
+              "success_probability": 0.9366686393305198,
+              "random_probability": 0.33333333333333287
+            },
+            "opponent_lethal": {
+              "count": 200,
+              "greedy": 1.0,
+              "success_probability": 0.9999995827674866,
+              "random_probability": 0.333333333333334
+            },
+            "double_strike": {
+              "count": 87,
+              "greedy": 1.0,
+              "success_probability": 0.9999946020115381,
+              "random_probability": 0.25
+            },
+            "direct_damage": {
+              "count": 113,
+              "greedy": 1.0,
+              "success_probability": 0.9999757366897786,
+              "random_probability": 0.25
+            }
+          },
+          "seconds": 250.10672631597845,
+          "passed": false,
+          "training_examples": 72000
+        },
+        {
+          "seed": 43,
+          "initial": {
+            "need_white": {
+              "count": 100,
+              "greedy": 0.0,
+              "success_probability": 0.335716270506382,
+              "random_probability": 0.3333333333333329
+            },
+            "need_red": {
+              "count": 100,
+              "greedy": 1.0,
+              "success_probability": 0.336905634701252,
+              "random_probability": 0.3333333333333329
+            },
+            "opponent_lethal": {
+              "count": 200,
+              "greedy": 0.0,
+              "success_probability": 0.33493650078773496,
+              "random_probability": 0.333333333333334
+            },
+            "double_strike": {
+              "count": 106,
+              "greedy": 0.0,
+              "success_probability": 0.2524528753645015,
+              "random_probability": 0.25
+            },
+            "direct_damage": {
+              "count": 94,
+              "greedy": 0.0,
+              "success_probability": 0.2545016033852354,
+              "random_probability": 0.25
+            }
+          },
+          "final": {
+            "need_white": {
+              "count": 100,
+              "greedy": 1.0,
+              "success_probability": 0.9296221172809601,
+              "random_probability": 0.3333333333333329
+            },
+            "need_red": {
+              "count": 100,
+              "greedy": 1.0,
+              "success_probability": 0.9283451116085053,
+              "random_probability": 0.3333333333333329
+            },
+            "opponent_lethal": {
+              "count": 200,
+              "greedy": 1.0,
+              "success_probability": 0.9999999403953552,
+              "random_probability": 0.333333333333334
+            },
+            "double_strike": {
+              "count": 106,
+              "greedy": 1.0,
+              "success_probability": 0.9804000888230666,
+              "random_probability": 0.25
+            },
+            "direct_damage": {
+              "count": 94,
+              "greedy": 1.0,
+              "success_probability": 0.9921525158780686,
+              "random_probability": 0.25
+            }
+          },
+          "final_iid": {
+            "need_red": {
+              "count": 93,
+              "greedy": 1.0,
+              "success_probability": 0.9916146365545129,
+              "random_probability": 0.33333333333333287
+            },
+            "need_white": {
+              "count": 107,
+              "greedy": 1.0,
+              "success_probability": 0.9977696755222071,
+              "random_probability": 0.3333333333333331
+            },
+            "opponent_lethal": {
+              "count": 200,
+              "greedy": 1.0,
+              "success_probability": 0.9999999403953552,
+              "random_probability": 0.333333333333334
+            },
+            "direct_damage": {
+              "count": 96,
+              "greedy": 1.0,
+              "success_probability": 0.9923428650945425,
+              "random_probability": 0.25
+            },
+            "double_strike": {
+              "count": 104,
+              "greedy": 1.0,
+              "success_probability": 0.9865647806571081,
+              "random_probability": 0.25
+            }
+          },
+          "seconds": 265.60902235796675,
+          "passed": true,
+          "training_examples": 72000
+        }
+      ]
+    },
+    "mana": {
+      "source": ".local/training/scenarios-v4-mana/report.json",
+      "synthetic": true,
+      "objective": "one-decision terminal task success; not full-game wins",
+      "config": {
+        "directory": ".local/training/scenarios-v4-mana",
+        "seeds": [
+          41
+        ],
+        "tasks": [
+          "mana"
+        ],
+        "updates": 600,
+        "batch": 48,
+        "test_cases": 200,
+        "learning_rate": 0.001,
+        "candidate_interactions": true,
+        "player_readout": true,
+        "require_pass": false,
+        "supervised_control": false
+      },
+      "runs": [
+        {
+          "seed": 41,
+          "initial": {
+            "need_white": {
+              "count": 102,
+              "greedy": 0.0,
+              "success_probability": 0.33232767646219213,
+              "random_probability": 0.333333333333333
+            },
+            "need_red": {
+              "count": 98,
+              "greedy": 0.0,
+              "success_probability": 0.32941630087336715,
+              "random_probability": 0.33333333333333287
+            }
+          },
+          "final": {
+            "need_white": {
+              "count": 102,
+              "greedy": 1.0,
+              "success_probability": 0.7334776608382955,
+              "random_probability": 0.333333333333333
+            },
+            "need_red": {
+              "count": 98,
+              "greedy": 1.0,
+              "success_probability": 0.7996078224814668,
+              "random_probability": 0.33333333333333287
+            }
+          },
+          "final_iid": {
+            "need_white": {
+              "count": 100,
+              "greedy": 1.0,
+              "success_probability": 0.8772224056720733,
+              "random_probability": 0.3333333333333329
+            },
+            "need_red": {
+              "count": 100,
+              "greedy": 1.0,
+              "success_probability": 0.9671086192131042,
+              "random_probability": 0.3333333333333329
+            }
+          },
+          "training_examples": 28800,
+          "parameters": 1431490,
+          "seconds": 121.5592081110226,
+          "passed": false
+        }
+      ]
+    },
+    "charm": {
+      "source": ".local/training/scenarios-v4-charm/report.json",
+      "synthetic": true,
+      "objective": "one-decision terminal task success; not full-game wins",
+      "config": {
+        "directory": ".local/training/scenarios-v4-charm",
+        "seeds": [
+          41
+        ],
+        "tasks": [
+          "charm_mode"
+        ],
+        "updates": 600,
+        "batch": 48,
+        "test_cases": 200,
+        "learning_rate": 0.001,
+        "candidate_interactions": true,
+        "player_readout": true,
+        "require_pass": false,
+        "supervised_control": false
+      },
+      "runs": [
+        {
+          "seed": 41,
+          "initial": {
+            "double_strike": {
+              "count": 100,
+              "greedy": 0.0,
+              "success_probability": 0.2485720731317997,
+              "random_probability": 0.25
+            },
+            "direct_damage": {
+              "count": 100,
+              "greedy": 0.0,
+              "success_probability": 0.24742572382092476,
+              "random_probability": 0.25
+            }
+          },
+          "final": {
+            "double_strike": {
+              "count": 100,
+              "greedy": 1.0,
+              "success_probability": 0.9975198173522949,
+              "random_probability": 0.25
+            },
+            "direct_damage": {
+              "count": 100,
+              "greedy": 1.0,
+              "success_probability": 0.9999937522411346,
+              "random_probability": 0.25
+            }
+          },
+          "final_iid": {
+            "double_strike": {
+              "count": 95,
+              "greedy": 1.0,
+              "success_probability": 0.997519318053597,
+              "random_probability": 0.25
+            },
+            "direct_damage": {
+              "count": 105,
+              "greedy": 1.0,
+              "success_probability": 0.9999937619481768,
+              "random_probability": 0.25
+            }
+          },
+          "training_examples": 28800,
+          "parameters": 1431490,
+          "seconds": 125.14362654899014,
+          "passed": true
+        }
+      ]
+    },
+    "supervised-control": {
+      "source": ".local/training/scenarios-v4-supervised-control/report.json",
+      "synthetic": true,
+      "objective": "supervised capacity control",
+      "config": {
+        "directory": ".local/training/scenarios-v4-supervised-control",
+        "seeds": [
+          41
+        ],
+        "updates": 600,
+        "batch": 48,
+        "test_cases": 200,
+        "learning_rate": 0.001,
+        "candidate_interactions": true,
+        "player_readout": true,
+        "require_pass": false,
+        "supervised_control": true
+      },
+      "runs": [
+        {
+          "seed": 41,
+          "initial": {
+            "need_white": {
+              "count": 102,
+              "greedy": 0.0,
+              "success_probability": 0.33232767646219213,
+              "random_probability": 0.333333333333333
+            },
+            "need_red": {
+              "count": 98,
+              "greedy": 0.0,
+              "success_probability": 0.3294163011774725,
+              "random_probability": 0.33333333333333287
+            },
+            "opponent_lethal": {
+              "count": 200,
+              "greedy": 1.0,
+              "success_probability": 0.3411893631517887,
+              "random_probability": 0.333333333333334
+            },
+            "direct_damage": {
+              "count": 87,
+              "greedy": 0.0,
+              "success_probability": 0.24742351095566803,
+              "random_probability": 0.25
+            },
+            "double_strike": {
+              "count": 113,
+              "greedy": 0.0,
+              "success_probability": 0.24857420678687306,
+              "random_probability": 0.25
+            }
+          },
+          "final": {
+            "need_white": {
+              "count": 102,
+              "greedy": 1.0,
+              "success_probability": 0.5067929777444578,
+              "random_probability": 0.333333333333333
+            },
+            "need_red": {
+              "count": 98,
+              "greedy": 0.0,
+              "success_probability": 0.4921416317930027,
+              "random_probability": 0.33333333333333287
+            },
+            "opponent_lethal": {
+              "count": 200,
+              "greedy": 1.0,
+              "success_probability": 0.9999423694610595,
+              "random_probability": 0.333333333333334
+            },
+            "direct_damage": {
+              "count": 87,
+              "greedy": 1.0,
+              "success_probability": 0.9977932860111368,
+              "random_probability": 0.25
+            },
+            "double_strike": {
+              "count": 113,
+              "greedy": 0.0,
+              "success_probability": 0.49917929494275454,
+              "random_probability": 0.25
+            }
+          },
+          "final_iid": {
+            "need_white": {
+              "count": 100,
+              "greedy": 1.0,
+              "success_probability": 0.5085988450050354,
+              "random_probability": 0.3333333333333329
+            },
+            "need_red": {
+              "count": 100,
+              "greedy": 0.0,
+              "success_probability": 0.4971815460920334,
+              "random_probability": 0.3333333333333329
+            },
+            "opponent_lethal": {
+              "count": 200,
+              "greedy": 1.0,
+              "success_probability": 0.9999422180652618,
+              "random_probability": 0.333333333333334
+            },
+            "double_strike": {
+              "count": 102,
+              "greedy": 0.0,
+              "success_probability": 0.4991762696527967,
+              "random_probability": 0.25
+            },
+            "direct_damage": {
+              "count": 98,
+              "greedy": 1.0,
+              "success_probability": 0.9979535250031218,
+              "random_probability": 0.25
+            }
+          },
+          "seconds": 103.17845760699129,
+          "passed": false,
+          "training_examples": 28800
+        }
+      ]
+    },
+    "readout-pilot": {
+      "source": ".local/training/scenarios-v4-readout-pilot/report.json",
+      "synthetic": true,
+      "objective": "one-decision terminal task success; not full-game wins",
+      "config": {
+        "directory": ".local/training/scenarios-v4-readout-pilot",
+        "seeds": [
+          41
+        ],
+        "updates": 600,
+        "batch": 48,
+        "test_cases": 200,
+        "learning_rate": 0.001,
+        "candidate_interactions": true,
+        "player_readout": true
+      },
+      "runs": [
+        {
+          "seed": 41,
+          "initial": {
+            "need_white": {
+              "count": 102,
+              "greedy": 0.0,
+              "success_probability": 0.33232767646219213,
+              "random_probability": 0.333333333333333
+            },
+            "need_red": {
+              "count": 98,
+              "greedy": 0.0,
+              "success_probability": 0.3294163011774725,
+              "random_probability": 0.33333333333333287
+            },
+            "opponent_lethal": {
+              "count": 200,
+              "greedy": 1.0,
+              "success_probability": 0.3411893631517887,
+              "random_probability": 0.333333333333334
+            },
+            "direct_damage": {
+              "count": 87,
+              "greedy": 0.0,
+              "success_probability": 0.24742351095566803,
+              "random_probability": 0.25
+            },
+            "double_strike": {
+              "count": 113,
+              "greedy": 0.0,
+              "success_probability": 0.24857420678687306,
+              "random_probability": 0.25
+            }
+          },
+          "final": {
+            "need_white": {
+              "count": 102,
+              "greedy": 0.0,
+              "success_probability": 0.4492199771544513,
+              "random_probability": 0.333333333333333
+            },
+            "need_red": {
+              "count": 98,
+              "greedy": 1.0,
+              "success_probability": 0.5573647265531578,
+              "random_probability": 0.33333333333333287
+            },
+            "opponent_lethal": {
+              "count": 200,
+              "greedy": 1.0,
+              "success_probability": 0.9999695074558258,
+              "random_probability": 0.333333333333334
+            },
+            "direct_damage": {
+              "count": 87,
+              "greedy": 1.0,
+              "success_probability": 0.9995541045035439,
+              "random_probability": 0.25
+            },
+            "double_strike": {
+              "count": 113,
+              "greedy": 1.0,
+              "success_probability": 0.9920525144686742,
+              "random_probability": 0.25
+            }
+          },
+          "seconds": 100.00246672198409,
+          "passed": false,
+          "training_examples": 28800
+        }
+      ]
+    }
+  }
+}

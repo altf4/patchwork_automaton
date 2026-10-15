@@ -135,6 +135,39 @@ class CallbackTests(unittest.TestCase):
 
 
 class ClientTests(unittest.IsolatedAsyncioTestCase):
+    async def test_clicked_source_binds_next_picker_without_guessing_between_lands(self):
+        _,_,game=await self.setup_client()
+        native=view()
+        native['myHand'][CARD]['name']='Sacred Foundry'
+        native['myHand'][TABLE]={'id':TABLE,'name':'Inspiring Vantage'}
+        game._receive(event('GAME_SELECT',gameView=native,targets=[CARD]))
+        obs=await game.snapshot()
+        await game.submit(obs.decision.token,Response('object:'+CARD))
+        game._receive(event('GAME_CHOOSE_ABILITY',message_id=2,gameView=native,
+                            choices={OTHER:'1. {T}: Add {R}.'}))
+        selected=(await game.snapshot()).decision.options[0]
+        self.assertEqual(selected.constraints['source'],CARD)
+        self.assertEqual(selected.constraints['semantic_card'],16)
+        # Context is consumed; a later unrelated picker must not reuse it.
+        game._receive(event('GAME_CHOOSE_ABILITY',message_id=3,gameView=native,
+                            choices={OTHER:'1. {T}: Add {R}.'}))
+        self.assertNotIn('semantic_ability',(await game.snapshot()).decision.options[0].constraints)
+
+    async def test_snapshot_cache_tracks_views_and_decisions(self):
+        client,_,game=await self.setup_client()
+        game._receive(event())
+        first=await game.snapshot()
+        self.assertIs(first,await game.snapshot())
+        game._receive(event('GAME_UPDATE',message_id=2))
+        second=await game.snapshot()
+        self.assertIsNot(first,second)
+        game._receive(event('GAME_GET_AMOUNT',message_id=3,gameView=None,min=1,max=4))
+        third=await game.snapshot()
+        self.assertIsNot(second,third)
+        self.assertEqual(third.decision.kind,'GAME_GET_AMOUNT')
+        await client.close()
+        with self.assertRaises(Disconnected):await game.snapshot()
+
     async def setup_client(self):
         socket=Socket()
         async def connector(*args,**kwargs):return socket

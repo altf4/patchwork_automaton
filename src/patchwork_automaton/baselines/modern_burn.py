@@ -185,6 +185,14 @@ class BurnBaseline:
             cost = decision.message.split('<', 1)[0]
             colors = tuple(c for c in ('W', 'R', 'B', 'U', 'G') if '{' + c + '}' in cost)
             self._payment[key] = colors
+            from ..backends.xmage_prompts import prompt_metadata
+            debt = prompt_metadata(kind, decision.native).get('mana_cost') or {}
+            pool = [o for o in options if o.constraints.get('action_kind') == 'spend_mana'
+                    and (debt.get(str(o.constraints.get('mana_color', '')).lower(), 0) > 0
+                         or debt.get('generic', 0) > 0)]
+            if pool:
+                return response(min(pool, key=lambda o: (
+                    not debt.get(o.constraints['mana_color'].lower(), 0), o.id)))
             sources = [o for o in offered if name(o) in PRODUCES
                        and not objects.get(object_id(o), (None, {}))[1].get('tapped', True)]
             if sources:

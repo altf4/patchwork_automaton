@@ -343,6 +343,10 @@ class XMageGame:
         self._seen=deque(maxlen=256)
         self._changed=asyncio.Event()
         self._lock=asyncio.Lock()
+        self._snapshot_key=None
+        self._snapshot_cache=None
+        self._choice_source=None
+        self._payment_context=None
 
     def _receive(self,event):
         method=event['method'];data=event.get('data') or {};message_id=event.get('messageId')
@@ -380,26 +384,40 @@ class XMageGame:
 
     def _offer(self,method,data):
         from .xmage_choices import choices
+        from .xmage_prompts import prompt_metadata
+        if method=='GAME_PLAY_MANA':
+            self._payment_context=prompt_metadata(method,data).get('mana_cost')
+        elif method=='GAME_CHOOSE_ABILITY' and self._choice_source and self._payment_context is not None:
+            data=dict(data,_unpaid_mana=dict(self._payment_context))
+        else:
+            self._payment_context=None
         self.generation+=1
-        options,self._bindings=choices(method,data,self._view)
+        options,self._bindings=choices(method,data,self._view,source=self._choice_source)
+        self._choice_source=None
         actor=Handle('xmage','player',str(self.player_id or 'pending'))
         token=DecisionToken('xmage',self.client.session_id,self.handle,actor,self.generation)
         self._decision=Decision(token,method,data.get('message') or '',tuple(options),freeze(data))
 
     async def snapshot(self):
         self.client._check()
+        key=(id(self._view),self.revision,self.player_id,id(self._decision),self.terminal,id(self.outcome))
+        if key==self._snapshot_key:
+            return self._snapshot_cache
         from .xmage_choices import object_views
+        from .xmage_combat import combat_objects
         actor=Handle('xmage','player',str(self.player_id or 'pending'))
         players=tuple(PlayerView(Handle('xmage','player',p['playerId']),p.get('name',''),p.get('life'),
             p.get('handCount'),p.get('libraryCount'),freeze({c.get('name',str(i)):c.get('count') for i,c in enumerate(p.get('counters',()))}),freeze(p))
             for p in self._view.get('players',()))
         active=self._view.get('activePlayerId')
         priority=next((p.get('playerId') for p in self._view.get('players',()) if p.get('hasPriority')),None)
-        return Observation('xmage',self.handle,actor,self.revision,players,
-            freeze(object_views(self._view)),self._decision,self.terminal,self.outcome,freeze(self._view),
+        observation=Observation('xmage',self.handle,actor,self.revision,players,
+            freeze(combat_objects(object_views(self._view),self._view.get('combat'))),self._decision,self.terminal,self.outcome,freeze(self._view),
             turn=self._view.get('turn'),phase=(self._view.get('step') or '').lower() or None,
             active_player=Handle('xmage','player',active) if active else None,
             priority_player=Handle('xmage','player',priority) if priority else None)
+        self._snapshot_key,self._snapshot_cache=key,observation
+        return observation
 
     async def wait_for_decision(self,*,timeout=None):
         async def wait():
@@ -421,6 +439,16 @@ class XMageGame:
                 raise UnsupportedInteraction('Option is not offered in this decision')
             from .xmage_choices import encode_response
             command,args=encode_response(self._bindings[response.option],response.value)
+            # The next ability picker belongs to the object just clicked. Store
+            # before awaiting the request: callbacks may arrive before its reply.
+            selected=next(o for o in decision.options if o.id==response.option)
+            self._choice_source=None
+            if selected.kind=='uuid' and decision.kind in ('GAME_SELECT','GAME_PLAY_MANA','GAME_PLAY_XMANA','GAME_CHOOSE_ABILITY'):
+                from .xmage_choices import object_views
+                from ..semantics import lookup_visible
+                source=selected.constraints.get('source') or selected.id.removeprefix('object:')
+                obj=object_views(self._view).get(Handle('xmage','object',source))
+                self._choice_source={'id':source,'card':lookup_visible(obj).id if obj else None}
             self._decision=None
             try:
                 return await self.client.request(command,gameId=self.id,**args)

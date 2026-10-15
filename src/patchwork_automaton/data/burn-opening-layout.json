@@ -1,0 +1,489 @@
+{
+  "source": "Local XMage 1.4.62 captured opening; only model-visible numeric/property fields retained",
+  "turn": 1,
+  "sideboard": [
+    {
+      "parentId": null,
+      "controllerId": null,
+      "name": "Deflecting Palm",
+      "power": "0",
+      "toughness": "0",
+      "cardTypes": [
+        "INSTANT"
+      ],
+      "color": {
+        "white": true,
+        "blue": false,
+        "black": false,
+        "red": true,
+        "green": false
+      },
+      "manaValue": 2,
+      "isAbility": false,
+      "isToken": false,
+      "faceDown": false,
+      "targets": null,
+      "counters": null,
+      "hideInfo": false,
+      "canAttack": false,
+      "canBlock": false,
+      "id": "37e3edb1-b4dc-4bb5-961f-42d9cdf28045"
+    },
+    {
+      "parentId": null,
+      "controllerId": null,
+      "name": "Deflecting Palm",
+      "power": "0",
+      "toughness": "0",
+      "cardTypes": [
+        "INSTANT"
+      ],
+      "color": {
+        "white": true,
+        "blue": false,
+        "black": false,
+        "red": true,
+        "green": false
+      },
+      "manaValue": 2,
+      "isAbility": false,
+      "isToken": false,
+      "faceDown": false,
+      "targets": null,
+      "counters": null,
+      "hideInfo": false,
+      "canAttack": false,
+      "canBlock": false,
+      "id": "9bd870c4-9dda-42f9-8e40-5fe36b168bdd"
+    },
+    {
+      "parentId": null,
+      "controllerId": null,
+      "name": "Lightning Helix",
+      "power": "0",
+      "toughness": "0",
+      "cardTypes": [
+        "INSTANT"
+      ],
+      "color": {
+        "white": true,
+        "blue": false,
+        "black": false,
+        "red": true,
+        "green": false
+      },
+      "manaValue": 2,
+      "isAbility": false,
+      "isToken": false,
+      "faceDown": false,
+      "targets": null,
+      "counters": null,
+      "hideInfo": false,
+      "canAttack": false,
+      "canBlock": false,
+      "id": "dd8a92d1-3692-4038-becf-13be0ed01bf4"
+    },
+    {
+      "parentId": null,
+      "controllerId": null,
+      "name": "Lightning Helix",
+      "power": "0",
+      "toughness": "0",
+      "cardTypes": [
+        "INSTANT"
+      ],
+      "color": {
+        "white": true,
+        "blue": false,
+        "black": false,
+        "red": true,
+        "green": false
+      },
+      "manaValue": 2,
+      "isAbility": false,
+      "isToken": false,
+      "faceDown": false,
+      "targets": null,
+      "counters": null,
+      "hideInfo": false,
+      "canAttack": false,
+      "canBlock": false,
+      "id": "d4e35c5a-d63a-4019-a14b-f6ac92d0fe80"
+    },
+    {
+      "parentId": null,
+      "controllerId": null,
+      "name": "Molten Rain",
+      "power": "0",
+      "toughness": "0",
+      "cardTypes": [
+        "SORCERY"
+      ],
+      "color": {
+        "white": false,
+        "blue": false,
+        "black": false,
+        "red": true,
+        "green": false
+      },
+      "manaValue": 3,
+      "isAbility": false,
+      "isToken": false,
+      "faceDown": false,
+      "targets": null,
+      "counters": null,
+      "hideInfo": false,
+      "canAttack": false,
+      "canBlock": false,
+      "id": "f4e1f33b-ed5c-4028-81b6-280c902278f2"
+    },
+    {
+      "parentId": null,
+      "controllerId": null,
+      "name": "Rest in Peace",
+      "power": "0",
+      "toughness": "0",
+      "cardTypes": [
+        "ENCHANTMENT"
+      ],
+      "color": {
+        "white": true,
+        "blue": false,
+        "black": false,
+        "red": false,
+        "green": false
+      },
+      "manaValue": 2,
+      "isAbility": false,
+      "isToken": false,
+      "faceDown": false,
+      "targets": null,
+      "counters": null,
+      "hideInfo": false,
+      "canAttack": false,
+      "canBlock": false,
+      "id": "dbe840a0-1323-4c8c-9178-7dd7e55ac608"
+    },
+    {
+      "parentId": null,
+      "controllerId": null,
+      "name": "Rest in Peace",
+      "power": "0",
+      "toughness": "0",
+      "cardTypes": [
+        "ENCHANTMENT"
+      ],
+      "color": {
+        "white": true,
+        "blue": false,
+        "black": false,
+        "red": false,
+        "green": false
+      },
+      "manaValue": 2,
+      "isAbility": false,
+      "isToken": false,
+      "faceDown": false,
+      "targets": null,
+      "counters": null,
+      "hideInfo": false,
+      "canAttack": false,
+      "canBlock": false,
+      "id": "8d80df85-d42d-47a0-a86c-aef674131b40"
+    },
+    {
+      "parentId": null,
+      "controllerId": null,
+      "name": "Roiling Vortex",
+      "power": "0",
+      "toughness": "0",
+      "cardTypes": [
+        "ENCHANTMENT"
+      ],
+      "color": {
+        "white": false,
+        "blue": false,
+        "black": false,
+        "red": true,
+        "green": false
+      },
+      "manaValue": 2,
+      "isAbility": false,
+      "isToken": false,
+      "faceDown": false,
+      "targets": null,
+      "counters": null,
+      "hideInfo": false,
+      "canAttack": false,
+      "canBlock": false,
+      "id": "1a04d71c-6e04-42a7-860d-d5d6fbeb7ee5"
+    },
+    {
+      "parentId": null,
+      "controllerId": null,
+      "name": "Roiling Vortex",
+      "power": "0",
+      "toughness": "0",
+      "cardTypes": [
+        "ENCHANTMENT"
+      ],
+      "color": {
+        "white": false,
+        "blue": false,
+        "black": false,
+        "red": true,
+        "green": false
+      },
+      "manaValue": 2,
+      "isAbility": false,
+      "isToken": false,
+      "faceDown": false,
+      "targets": null,
+      "counters": null,
+      "hideInfo": false,
+      "canAttack": false,
+      "canBlock": false,
+      "id": "af9b6286-2c32-4521-ac19-1f630bf0581f"
+    },
+    {
+      "parentId": null,
+      "controllerId": null,
+      "name": "Roiling Vortex",
+      "power": "0",
+      "toughness": "0",
+      "cardTypes": [
+        "ENCHANTMENT"
+      ],
+      "color": {
+        "white": false,
+        "blue": false,
+        "black": false,
+        "red": true,
+        "green": false
+      },
+      "manaValue": 2,
+      "isAbility": false,
+      "isToken": false,
+      "faceDown": false,
+      "targets": null,
+      "counters": null,
+      "hideInfo": false,
+      "canAttack": false,
+      "canBlock": false,
+      "id": "933c7c31-ab07-4e08-bae3-5912ea8432a3"
+    },
+    {
+      "parentId": null,
+      "controllerId": null,
+      "name": "Searing Blood",
+      "power": "0",
+      "toughness": "0",
+      "cardTypes": [
+        "INSTANT"
+      ],
+      "color": {
+        "white": false,
+        "blue": false,
+        "black": false,
+        "red": true,
+        "green": false
+      },
+      "manaValue": 2,
+      "isAbility": false,
+      "isToken": false,
+      "faceDown": false,
+      "targets": null,
+      "counters": null,
+      "hideInfo": false,
+      "canAttack": false,
+      "canBlock": false,
+      "id": "2fa301b6-e61e-43ed-a189-68a5d42c914e"
+    },
+    {
+      "parentId": null,
+      "controllerId": null,
+      "name": "Searing Blood",
+      "power": "0",
+      "toughness": "0",
+      "cardTypes": [
+        "INSTANT"
+      ],
+      "color": {
+        "white": false,
+        "blue": false,
+        "black": false,
+        "red": true,
+        "green": false
+      },
+      "manaValue": 2,
+      "isAbility": false,
+      "isToken": false,
+      "faceDown": false,
+      "targets": null,
+      "counters": null,
+      "hideInfo": false,
+      "canAttack": false,
+      "canBlock": false,
+      "id": "40fe9764-ce88-4a64-8d3d-555fec05a960"
+    },
+    {
+      "parentId": null,
+      "controllerId": null,
+      "name": "Smash to Smithereens",
+      "power": "0",
+      "toughness": "0",
+      "cardTypes": [
+        "INSTANT"
+      ],
+      "color": {
+        "white": false,
+        "blue": false,
+        "black": false,
+        "red": true,
+        "green": false
+      },
+      "manaValue": 2,
+      "isAbility": false,
+      "isToken": false,
+      "faceDown": false,
+      "targets": null,
+      "counters": null,
+      "hideInfo": false,
+      "canAttack": false,
+      "canBlock": false,
+      "id": "47879fd3-31f9-4b4b-a5e3-07111e0efdef"
+    },
+    {
+      "parentId": null,
+      "controllerId": null,
+      "name": "Smash to Smithereens",
+      "power": "0",
+      "toughness": "0",
+      "cardTypes": [
+        "INSTANT"
+      ],
+      "color": {
+        "white": false,
+        "blue": false,
+        "black": false,
+        "red": true,
+        "green": false
+      },
+      "manaValue": 2,
+      "isAbility": false,
+      "isToken": false,
+      "faceDown": false,
+      "targets": null,
+      "counters": null,
+      "hideInfo": false,
+      "canAttack": false,
+      "canBlock": false,
+      "id": "7a690955-c006-487a-be20-7a491ed218c3"
+    },
+    {
+      "parentId": null,
+      "controllerId": null,
+      "name": "Wear // Tear",
+      "power": "0",
+      "toughness": "0",
+      "cardTypes": [
+        "INSTANT",
+        "INSTANT"
+      ],
+      "color": {
+        "white": true,
+        "blue": false,
+        "black": false,
+        "red": true,
+        "green": false
+      },
+      "manaValue": 3,
+      "isAbility": false,
+      "isToken": false,
+      "faceDown": false,
+      "targets": null,
+      "counters": null,
+      "hideInfo": false,
+      "canAttack": false,
+      "canBlock": false,
+      "id": "8ec59493-be9b-4344-b7fd-1a7b2de94fdc"
+    }
+  ],
+  "helpers": [
+    {
+      "parentId": null,
+      "controllerId": null,
+      "name": "Radiation",
+      "power": "",
+      "toughness": "",
+      "cardTypes": [],
+      "color": {
+        "white": false,
+        "blue": false,
+        "black": false,
+        "red": false,
+        "green": false
+      },
+      "manaValue": 0,
+      "isAbility": false,
+      "isToken": false,
+      "faceDown": false,
+      "targets": null,
+      "counters": null,
+      "hideInfo": false,
+      "canAttack": false,
+      "canBlock": false,
+      "id": "8b03d6b9-8699-44d8-815c-879fdcb55b55"
+    },
+    {
+      "parentId": null,
+      "controllerId": null,
+      "name": "Helper Emblem",
+      "power": "",
+      "toughness": "",
+      "cardTypes": [],
+      "color": {
+        "white": false,
+        "blue": false,
+        "black": false,
+        "red": false,
+        "green": false
+      },
+      "manaValue": 0,
+      "isAbility": false,
+      "isToken": false,
+      "faceDown": false,
+      "targets": null,
+      "counters": null,
+      "hideInfo": false,
+      "canAttack": false,
+      "canBlock": false,
+      "id": "9bc7919c-7c52-4885-8320-08775aa2463f"
+    },
+    {
+      "parentId": null,
+      "controllerId": null,
+      "name": "Helper Emblem",
+      "power": "",
+      "toughness": "",
+      "cardTypes": [],
+      "color": {
+        "white": false,
+        "blue": false,
+        "black": false,
+        "red": false,
+        "green": false
+      },
+      "manaValue": 0,
+      "isAbility": false,
+      "isToken": false,
+      "faceDown": false,
+      "targets": null,
+      "counters": null,
+      "hideInfo": false,
+      "canAttack": false,
+      "canBlock": false,
+      "id": "046362a8-a30e-436e-8ed4-20be58015ed7"
+    }
+  ]
+}

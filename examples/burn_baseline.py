@@ -36,6 +36,12 @@ async def run(args):
             if neural: neural.reset()
             baseline_seat = 'player_' + str(episode % 2)
             runner = await factory.reset()
+            if getattr(args, 'manual_mana', False):
+                # Protocol smoke-test mode: force the same explicit pool clicks
+                # that can occur after a canceled cast in normal games.
+                for game in runner.games.values():
+                    await game.client.request('sendPlayerAction', gameId=game.id,
+                        action='MANA_AUTO_PAYMENT_OFF')
             start = time.monotonic()
             counts, decisions = Counter(), Counter()
             while True:
@@ -84,6 +90,7 @@ async def run(args):
         wins = sum(e['outcomes'].get(e['baseline_seat'], {}).get('won') is True for e in results
                    if e['outcomes'].get(e['baseline_seat']))
         output = dict(source=DECK_METADATA['source'], opponent=args.opponent, seed=args.seed,
+                      manual_mana=getattr(args, 'manual_mana', False),
                       skip_land_every=args.skip_land_every, episodes=results, failures=failures,
                       baseline_wins=wins, completed=len(results), optimizer_steps=0,
                       checkpoint=str(args.load) if getattr(args, 'load', None) else None)
@@ -110,6 +117,7 @@ if __name__ == '__main__':
     parser.add_argument('--trace', type=Path)
     parser.add_argument('--output', type=Path)
     parser.add_argument('--load', type=Path, help='Evaluate a saved neural checkpoint')
+    parser.add_argument('--manual-mana', action='store_true', help='Disable server auto-payment to exercise pool clicks')
     args = parser.parse_args()
     if args.episodes < 1: parser.error('Episodes must be positive')
     asyncio.run(run(args))

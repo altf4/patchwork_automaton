@@ -43,7 +43,7 @@ def object_views(view):
     return objects
 
 
-def choices(method,data,view):
+def choices(method,data,view,*,source=None):
     options=[];bindings={};offered=set()
     def add(key,kind,label,command,args=None,**constraints):
         if key in bindings:
@@ -54,6 +54,9 @@ def choices(method,data,view):
         add('yes' if value else 'no','boolean',label,'sendPlayerBoolean',{'value':value})
     def select(value,label=None,legality='advertised',**constraints):
         value=str(uuid.UUID(str(value)))
+        if method=='GAME_PLAY_MANA' and value in by_id:
+            from .burn_actions import mana_click_available
+            if not mana_click_available(by_id[value]): return
         add('object:'+value,'uuid',label or value,'sendPlayerUUID',{'value':value},legality=legality,**constraints)
         offered.add(value)
     native=data.get('options') or {}
@@ -76,8 +79,9 @@ def choices(method,data,view):
         if native.get('canCancel'):
             boolean(False,'Cancel')
     elif method=='GAME_CHOOSE_ABILITY':
+        from .burn_actions import bind_ability
         for key,text in (data.get('choices') or {}).items():
-            select(key,text)
+            select(key,text,**bind_ability(key,text,view,objects,source))
         boolean(False,'Cancel')
     elif method=='GAME_CHOOSE_CHOICE':
         choice=data.get('choice') or {}
@@ -87,6 +91,21 @@ def choices(method,data,view):
         if not choice.get('required',True):
             boolean(False,'Cancel')
     elif method in ('GAME_SELECT','GAME_TARGET','GAME_PLAY_MANA','GAME_PLAY_XMANA'):
+        if method=='GAME_PLAY_MANA':
+            # Spending already-produced mana is a distinct server response,
+            # not another permanent click and not a boolean confirmation.
+            me=view.get('myPlayerId')
+            player=next((p for p in view.get('players',()) if p.get('playerId')==me),{})
+            pool=player.get('manaPool') or {}
+            if not isinstance(pool,Mapping):pool={}
+            try:uuid.UUID(str(me))
+            except (ValueError,TypeError):pool={}
+            for color in ('WHITE','BLUE','BLACK','RED','GREEN','COLORLESS'):
+                amount=pool.get(color.lower())
+                if type(amount) is int and amount>0:
+                    add('mana:'+color,'string','Spend '+color.lower()+' mana from pool','sendPlayerManaType',
+                        {'playerId':me,'manaType':color},action_kind='spend_mana',source=me,mana_color=color,
+                        legality='pool available; server validates restrictions')
         if method=='GAME_TARGET' and native.get('queryType')=='PICK_ABILITY':
             # HumanPlayer.chooseTriggeredAbility expects the trigger instance ID,
             # not its source card ID. These choices live in cardsView1 rather
@@ -102,6 +121,7 @@ def choices(method,data,view):
             for value in native.get(key) or ():
                 if isinstance(value,str):select(value,label(value))
         if method!='GAME_TARGET':
+            from .burn_actions import mana_click_available
             playable=(view.get('canPlayObjects') or {}).get('objects') or {}
             for value,stats in playable.items():
                 if method=='GAME_PLAY_MANA' and not stats.get('basicManaAbilities'):
@@ -111,7 +131,8 @@ def choices(method,data,view):
                 # Native UI accepts object clicks then asks for an ability. Do
                 # not label these inferred clicks as a fully legal action mask.
                 for handle,obj in objects.items():
-                    if obj.zone=='battlefield' and obj.controller and obj.controller.value==view.get('myPlayerId'):
+                    if (obj.zone=='battlefield' and obj.controller and obj.controller.value==view.get('myPlayerId')
+                            and mana_click_available(obj)):
                         select(handle.value,obj.name,legality='clickable; server validates mana ability')
         if method in ('GAME_SELECT','GAME_PLAY_MANA','GAME_PLAY_XMANA') or not data.get('flag',True) or native.get('UI.right.btn.text'):
             boolean(False,native.get('UI.right.btn.text') or ('Pass' if method=='GAME_SELECT' else 'Done / Cancel'))
