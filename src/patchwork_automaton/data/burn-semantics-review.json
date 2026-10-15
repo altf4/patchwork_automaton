@@ -1,0 +1,240 @@
+{
+  "reviewed_date": "2026-10-14",
+  "source": "Scryfall Oracle card database, cards/collection and cards/named endpoints",
+  "cards": [
+    {
+      "name": "Arid Mesa",
+      "semantic_id": 5,
+      "oracle_id": "c5acf2a5-40f4-433d-a74d-1cb56c521464",
+      "source_url": "https://scryfall.com/card/mh2/244/arid-mesa",
+      "oracle_text_sha256": "3c15853a167e3b13a6c4a05ecec1960b644d226bd92fdda94a24dfd18af65a87",
+      "coverage": "PARTIAL",
+      "notes": "Search subtype restrictions, origin and result are tagged; optional search/failure and shuffle execution are not a rules model."
+    },
+    {
+      "name": "Barbarian Ring",
+      "semantic_id": 6,
+      "oracle_id": "eeb9377b-72c1-4214-9a66-0f55577c17d1",
+      "source_url": "https://scryfall.com/card/mh3/299/barbarian-ring",
+      "oracle_text_sha256": "4e28c98a7de17c8fcd068c09acac42b6ac49cb0118dad2c83449e1611494bbb3",
+      "coverage": "COMPLETE",
+      "notes": "Base mechanics covered by numerical fields and reviewed tags; live state and legality come from XMage."
+    },
+    {
+      "name": "Bloodstained Mire",
+      "semantic_id": 7,
+      "oracle_id": "fc0707c7-d504-4ccf-a0d2-3eb6e26e7a57",
+      "source_url": "https://scryfall.com/card/mh3/216/bloodstained-mire",
+      "oracle_text_sha256": "e07ddc5d1f6d637989a9b0a9063b5a57adadc932724cd8346c27d7af10039369",
+      "coverage": "PARTIAL",
+      "notes": "Search subtype restrictions, origin and result are tagged; optional search/failure and shuffle execution are not a rules model."
+    },
+    {
+      "name": "Boltwave",
+      "semantic_id": 8,
+      "oracle_id": "bb8cccc8-e56f-42fa-a0d7-fc889b5e1c7b",
+      "source_url": "https://scryfall.com/card/fdn/79/boltwave",
+      "oracle_text_sha256": "be953e7e16fa9fc3dc800a37e3ecfb4ab2dc83a4c64e212024d1b2c2707b8f6c",
+      "coverage": "COMPLETE",
+      "notes": "Base mechanics covered by numerical fields and reviewed tags; live state and legality come from XMage."
+    },
+    {
+      "name": "Boros Charm",
+      "semantic_id": 9,
+      "oracle_id": "2679d0dd-ba30-4a1c-b6a0-b3ac6c790496",
+      "source_url": "https://scryfall.com/card/fdn/721/boros-charm",
+      "oracle_text_sha256": "b6175be5d1c01998d57979b0aca1fd9836d5428512e2f63e5a812b7f9d552aa0",
+      "coverage": "COMPLETE",
+      "notes": "Base mechanics covered by numerical fields and reviewed tags; live state and legality come from XMage."
+    },
+    {
+      "name": "Eidolon of the Great Revel",
+      "semantic_id": 10,
+      "oracle_id": "2fd7018e-1c36-4d7f-8f72-22f2f7f60c60",
+      "source_url": "https://scryfall.com/card/a25/128/eidolon-of-the-great-revel",
+      "oracle_text_sha256": "0a463f978537b05b826f962c99d983892fca40c28cf7507dfaec042aaec16abf",
+      "coverage": "COMPLETE",
+      "notes": "Base mechanics covered by numerical fields and reviewed tags; live state and legality come from XMage."
+    },
+    {
+      "name": "Elegant Parlor",
+      "semantic_id": 11,
+      "oracle_id": "9ea747cf-5d04-4aa7-bdc3-8145860cd1ba",
+      "source_url": "https://scryfall.com/card/mkm/260/elegant-parlor",
+      "oracle_text_sha256": "246e4a784c6ff5254d3fa59b6797d8a3dbf65c9f8f0b05d792e1a4697cc3396e",
+      "coverage": "COMPLETE",
+      "notes": "Base mechanics covered by numerical fields and reviewed tags; live state and legality come from XMage."
+    },
+    {
+      "name": "Goblin Guide",
+      "semantic_id": 12,
+      "oracle_id": "51d9564b-44fc-4de1-9119-09d7b4089378",
+      "source_url": "https://scryfall.com/card/2xm/127/goblin-guide",
+      "oracle_text_sha256": "079983ff8972518222f32094a0af00738ef42923a7499a21059fc94c5d37e084",
+      "coverage": "PARTIAL",
+      "notes": "Conditional reveal-to-hand link is tagged; revealed-card identity and defending-player context are not runtime-bound."
+    },
+    {
+      "name": "Inspiring Vantage",
+      "semantic_id": 13,
+      "oracle_id": "3f17c60e-923a-4392-9da8-87d9ded009b7",
+      "source_url": "https://scryfall.com/card/otj/269/inspiring-vantage",
+      "oracle_text_sha256": "f1bbc56bdf8f7c00fc58c820b4d734edb3d0accd092dc3f2d806528998eafea4",
+      "coverage": "COMPLETE",
+      "notes": "Base mechanics covered by numerical fields and reviewed tags; live state and legality come from XMage."
+    },
+    {
+      "name": "Lava Spike",
+      "semantic_id": 14,
+      "oracle_id": "2837888c-bfa8-4955-9334-0605ad409f7e",
+      "source_url": "https://scryfall.com/card/uma/136/lava-spike",
+      "oracle_text_sha256": "bdcedd2233ac5327b573283b29142e746e7ccbf0ca49db8ef13f1158beefab6f",
+      "coverage": "COMPLETE",
+      "notes": "Base mechanics covered by numerical fields and reviewed tags; live state and legality come from XMage."
+    },
+    {
+      "name": "Lightning Bolt",
+      "semantic_id": 2,
+      "oracle_id": "4457ed35-7c10-48c8-9776-456485fdf070",
+      "source_url": "https://scryfall.com/card/msc/806/lightning-bolt",
+      "oracle_text_sha256": "1c8ec5180252d4d2258eec2c0312b6f3c86b101696246288422c2d46aaa5ff8b",
+      "coverage": "COMPLETE",
+      "notes": "Base mechanics covered by numerical fields and reviewed tags; live state and legality come from XMage."
+    },
+    {
+      "name": "Monastery Swiftspear",
+      "semantic_id": 15,
+      "oracle_id": "dafd2713-d1bc-474b-b390-d2ff20b5375e",
+      "source_url": "https://scryfall.com/card/bro/144/monastery-swiftspear",
+      "oracle_text_sha256": "24c6fe54607364423e3c142b8904d63b24ae5ead80654b683b5defad6e996476",
+      "coverage": "COMPLETE",
+      "notes": "Base mechanics covered by numerical fields and reviewed tags; live state and legality come from XMage."
+    },
+    {
+      "name": "Mountain",
+      "semantic_id": 1,
+      "oracle_id": "a3fb7228-e76b-4e96-a40e-20b5fed75685",
+      "source_url": "https://scryfall.com/card/mdd/298/mountain",
+      "oracle_text_sha256": "91e8319d188a3c46e5c83ea1023ab6a453d5b028c8b00254c1168bdc23578e3c",
+      "coverage": "COMPLETE",
+      "notes": "Base mechanics covered by numerical fields and reviewed tags; live state and legality come from XMage."
+    },
+    {
+      "name": "Sacred Foundry",
+      "semantic_id": 16,
+      "oracle_id": "45181cb8-2090-4471-ba90-e5a8f04d525f",
+      "source_url": "https://scryfall.com/card/trk/295/sacred-foundry",
+      "oracle_text_sha256": "5193db93f3e7a0cb61e3e1c71d9ce282ae21733b5243649a1dd9531a72a8e2b9",
+      "coverage": "PARTIAL",
+      "notes": "Optional entry payment is a rule tag, not a mandatory activated cost or an executable replacement choice."
+    },
+    {
+      "name": "Searing Blaze",
+      "semantic_id": 17,
+      "oracle_id": "74b08a70-b0bb-4340-98a0-b1d5b7c9d2cc",
+      "source_url": "https://scryfall.com/card/ddi/67/searing-blaze",
+      "oracle_text_sha256": "65211f891a745c5c56bf0743b94375827cf462a8cec7170114e82fd9003d405c",
+      "coverage": "PARTIAL",
+      "notes": "Damage is 1 or 3 through LANDFALL_DAMAGE; target-controller linkage is tagged, not runtime-bound. Self-targets remain legal."
+    },
+    {
+      "name": "Skewer the Critics",
+      "semantic_id": 18,
+      "oracle_id": "c43b616e-ef87-4c12-810b-a1a3260168fa",
+      "source_url": "https://scryfall.com/card/rvr/124/skewer-the-critics",
+      "oracle_text_sha256": "119c2ff8feddc683163a0f716709d1c81e53b36d7a6edaa70c1c095f0956a94e",
+      "coverage": "COMPLETE",
+      "notes": "Base mechanics covered by numerical fields and reviewed tags; live state and legality come from XMage."
+    },
+    {
+      "name": "Skullcrack",
+      "semantic_id": 19,
+      "oracle_id": "a6fc0b0c-9ba2-47f2-ab92-26fd20d0f86d",
+      "source_url": "https://scryfall.com/card/rvr/125/skullcrack",
+      "oracle_text_sha256": "8a7e6efb3ca06f76348e3d37892b783fc97798d7208b7cadba359a48bcbd7bb4",
+      "coverage": "COMPLETE",
+      "notes": "Base mechanics covered by numerical fields and reviewed tags; live state and legality come from XMage."
+    },
+    {
+      "name": "Sunbaked Canyon",
+      "semantic_id": 20,
+      "oracle_id": "f97fd068-b83a-4621-bf8c-cc96e880ce90",
+      "source_url": "https://scryfall.com/card/mh1/247/sunbaked-canyon",
+      "oracle_text_sha256": "8b51a4288ebe83aac343bd4addc008f8bc20a50f42a6258a24dfd969255235ff",
+      "coverage": "COMPLETE",
+      "notes": "Base mechanics covered by numerical fields and reviewed tags; live state and legality come from XMage."
+    },
+    {
+      "name": "Deflecting Palm",
+      "semantic_id": 21,
+      "oracle_id": "dc5dffc8-fac5-4956-bac4-1ad2cc16f6be",
+      "source_url": "https://scryfall.com/card/mkc/205/deflecting-palm",
+      "oracle_text_sha256": "fbf16ac0f4f8f459e199d113f049b3ff8eb98d5e5d67de35ab6915beb95371ea",
+      "coverage": "PARTIAL",
+      "notes": "Next-event prevention, chosen source and dependent damage are tagged, not runtime-bound."
+    },
+    {
+      "name": "Lightning Helix",
+      "semantic_id": 22,
+      "oracle_id": "800c258a-cfc4-4a54-a667-065ea8dea69e",
+      "source_url": "https://scryfall.com/card/mkm/218/lightning-helix",
+      "oracle_text_sha256": "47dd3b2148b209d3259999b82e16ed9ecc67ea0e39b5cc6dea61087e8b602a4c",
+      "coverage": "COMPLETE",
+      "notes": "Base mechanics covered by numerical fields and reviewed tags; live state and legality come from XMage."
+    },
+    {
+      "name": "Molten Rain",
+      "semantic_id": 23,
+      "oracle_id": "e9774695-b2f1-4014-8504-04b2339be568",
+      "source_url": "https://scryfall.com/card/mm3/103/molten-rain",
+      "oracle_text_sha256": "ca6bb2bb300242234ab8594b84d3dd27db46fe4220b6e90e4abf279b62b2bbc3",
+      "coverage": "PARTIAL",
+      "notes": "Conditional nonbasic damage and target controller use tags; last-known target context is not runtime-bound."
+    },
+    {
+      "name": "Rest in Peace",
+      "semantic_id": 24,
+      "oracle_id": "087f9ad7-e74f-40e2-8102-1ed2925d0418",
+      "source_url": "https://scryfall.com/card/big/4/rest-in-peace",
+      "oracle_text_sha256": "03eecb272f98ea819e9bc6fa1b5902d6ed2e93c8c12720e1f41a73c048390b48",
+      "coverage": "PARTIAL",
+      "notes": "Graveyard replacement scope is tagged; replacement-event execution is not modeled."
+    },
+    {
+      "name": "Roiling Vortex",
+      "semantic_id": 25,
+      "oracle_id": "34f83b7a-45a7-40a8-abcb-31d7aae4cea1",
+      "source_url": "https://scryfall.com/card/znr/156/roiling-vortex",
+      "oracle_text_sha256": "79b1e5cab157c260b0a5c79e3cb1c6c76852aa6df7976b1cc86f31ae87afc64c",
+      "coverage": "COMPLETE",
+      "notes": "Base mechanics covered by numerical fields and reviewed tags; live state and legality come from XMage."
+    },
+    {
+      "name": "Searing Blood",
+      "semantic_id": 26,
+      "oracle_id": "902b82fd-bb18-4833-b427-af8c9751f870",
+      "source_url": "https://scryfall.com/card/bng/111/searing-blood",
+      "oracle_text_sha256": "5542ccd6a374ef15f08eb41830dd11fd792d1c99b8e2aa40d4d9bcbdee7f7283",
+      "coverage": "PARTIAL",
+      "notes": "Delayed death trigger is tagged; tracked creature identity and later controller are not runtime-bound."
+    },
+    {
+      "name": "Smash to Smithereens",
+      "semantic_id": 27,
+      "oracle_id": "e0583f29-c344-4b56-b0dc-bef1089a95c7",
+      "source_url": "https://scryfall.com/card/ori/163/smash-to-smithereens",
+      "oracle_text_sha256": "f70a633c2f46de39bfaf05c2e5ab14a9eb3b3a2752b43ab72bd74f5063a39f26",
+      "coverage": "PARTIAL",
+      "notes": "The previous target controller is tagged; last-known controller context is not runtime-bound."
+    },
+    {
+      "name": "Wear // Tear",
+      "semantic_id": 28,
+      "oracle_id": "9842734c-1eac-4509-a731-4c22017ae586",
+      "source_url": "https://scryfall.com/card/moc/343/wear-tear",
+      "oracle_text_sha256": "2520f9dc5a619a8609778d56cc123400de30c35b561d196c5810087798d93cd4",
+      "coverage": "PARTIAL",
+      "notes": "Half costs and fuse are separate records; split-card face/zone legality remains backend-owned."
+    }
+  ]
+}

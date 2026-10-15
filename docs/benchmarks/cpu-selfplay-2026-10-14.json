@@ -1,0 +1,906 @@
+{
+  "date": "2026-10-14",
+  "summary": {
+    "training_games": 12,
+    "optimizer_steps": 12,
+    "training_decisions": 5168,
+    "training_samples": 5170,
+    "trained_vs_baseline": {
+      "wins": 2,
+      "losses": 18,
+      "draws": 0,
+      "games": 20,
+      "win_rate": 0.1
+    },
+    "untrained_vs_baseline": {
+      "wins": 4,
+      "losses": 96,
+      "draws": 0,
+      "games": 100,
+      "win_rate": 0.04
+    },
+    "failures": 0,
+    "truncations": 0,
+    "interpretation": "Observed win rate increased from 4% to 10%, but the small unpaired evaluation does not establish improvement."
+  },
+  "training": {
+    "seed": 41,
+    "device": "CPU",
+    "reward": {
+      "win": 1,
+      "loss": -1,
+      "draw": 0
+    },
+    "gamma": 1,
+    "recurrent_gradient_steps": 1,
+    "episodes": [
+      {
+        "episode": 0,
+        "decisions": 468,
+        "truncated": false,
+        "reason": null,
+        "seconds": 55.1,
+        "rewards": {
+          "player_0": 1.0,
+          "player_1": -1.0
+        },
+        "update": {
+          "loss": 2.068927535261864,
+          "policy_loss": 1.3080544996465375,
+          "value_loss": 1.5446048926593914,
+          "entropy": 1.1429398640608177,
+          "samples": 468,
+          "gradient_norm": 6.786787509918213,
+          "optimizer_steps": 1
+        }
+      },
+      {
+        "episode": 1,
+        "decisions": 647,
+        "truncated": false,
+        "reason": null,
+        "seconds": 81.302,
+        "rewards": {
+          "player_0": 1.0,
+          "player_1": -1.0
+        },
+        "update": {
+          "loss": 0.7450116105389186,
+          "policy_loss": 0.33978031812900744,
+          "value_loss": 0.8313515383456551,
+          "entropy": 1.0444475311031665,
+          "samples": 647,
+          "gradient_norm": 1.0406264066696167,
+          "optimizer_steps": 2
+        }
+      },
+      {
+        "episode": 2,
+        "decisions": 549,
+        "truncated": false,
+        "reason": null,
+        "seconds": 72.641,
+        "rewards": {
+          "player_0": 1.0,
+          "player_1": -1.0
+        },
+        "update": {
+          "loss": -0.02014951779759863,
+          "policy_loss": -0.6823233578537331,
+          "value_loss": 1.3476745708826894,
+          "entropy": 1.1663442744800523,
+          "samples": 549,
+          "gradient_norm": 2.566180467605591,
+          "optimizer_steps": 3
+        }
+      },
+      {
+        "episode": 3,
+        "decisions": 430,
+        "truncated": false,
+        "reason": null,
+        "seconds": 55.878,
+        "rewards": {
+          "player_0": 1.0,
+          "player_1": -1.0
+        },
+        "update": {
+          "loss": -0.41643171566430215,
+          "policy_loss": -1.4036790936492212,
+          "value_loss": 1.9965616240057835,
+          "entropy": 1.1033437080161514,
+          "samples": 430,
+          "gradient_norm": 4.662118434906006,
+          "optimizer_steps": 4
+        }
+      },
+      {
+        "episode": 4,
+        "decisions": 437,
+        "truncated": false,
+        "reason": null,
+        "seconds": 55.523,
+        "rewards": {
+          "player_1": -1.0,
+          "player_0": 1.0
+        },
+        "update": {
+          "loss": -0.08225669283888715,
+          "policy_loss": -0.7645200984019709,
+          "value_loss": 1.386863284171037,
+          "entropy": 1.1168233175299533,
+          "samples": 437,
+          "gradient_norm": 3.2618765830993652,
+          "optimizer_steps": 5
+        }
+      },
+      {
+        "episode": 5,
+        "decisions": 386,
+        "truncated": false,
+        "reason": null,
+        "seconds": 48.404,
+        "rewards": {
+          "player_1": 1.0,
+          "player_0": -1.0
+        },
+        "update": {
+          "loss": 0.3361593155199999,
+          "policy_loss": -0.20104177072258195,
+          "value_loss": 1.0903937785736635,
+          "entropy": 0.7995805672413326,
+          "samples": 386,
+          "gradient_norm": 1.8120933771133423,
+          "optimizer_steps": 6
+        }
+      },
+      {
+        "episode": 6,
+        "decisions": 319,
+        "truncated": false,
+        "reason": null,
+        "seconds": 40.589,
+        "rewards": {
+          "player_0": 1.0,
+          "player_1": -1.0
+        },
+        "update": {
+          "loss": 0.22710598113021147,
+          "policy_loss": -0.2842497081965861,
+          "value_loss": 1.0413856850148742,
+          "entropy": 0.9337158449764907,
+          "samples": 319,
+          "gradient_norm": 0.9246861338615417,
+          "optimizer_steps": 7
+        }
+      },
+      {
+        "episode": 7,
+        "decisions": 434,
+        "truncated": false,
+        "reason": null,
+        "seconds": 57.522,
+        "rewards": {
+          "player_0": -1.0,
+          "player_1": 1.0
+        },
+        "update": {
+          "loss": 0.27603902341583364,
+          "policy_loss": -0.18880862354682892,
+          "value_loss": 0.9486928656353929,
+          "entropy": 0.9498783822433191,
+          "samples": 434,
+          "gradient_norm": 0.3633766770362854,
+          "optimizer_steps": 8
+        }
+      },
+      {
+        "episode": 8,
+        "decisions": 349,
+        "truncated": false,
+        "reason": null,
+        "seconds": 38.673,
+        "rewards": {
+          "player_0": 1.0,
+          "player_1": -1.0
+        },
+        "update": {
+          "loss": 0.5208409585720487,
+          "policy_loss": 0.0354649192282668,
+          "value_loss": 0.9894052188854163,
+          "entropy": 0.9326577213910383,
+          "samples": 349,
+          "gradient_norm": 0.6071327328681946,
+          "optimizer_steps": 9
+        }
+      },
+      {
+        "episode": 9,
+        "decisions": 243,
+        "truncated": false,
+        "reason": null,
+        "seconds": 29.761,
+        "rewards": {
+          "player_0": -1.0,
+          "player_1": 1.0
+        },
+        "update": {
+          "loss": 0.7960539384143343,
+          "policy_loss": 0.2300898763868544,
+          "value_loss": 1.1476798204728116,
+          "entropy": 0.7875851544823667,
+          "samples": 243,
+          "gradient_norm": 1.9565227031707764,
+          "optimizer_steps": 10
+        }
+      },
+      {
+        "episode": 10,
+        "decisions": 510,
+        "truncated": false,
+        "reason": null,
+        "seconds": 65.816,
+        "rewards": {
+          "player_0": 1.0,
+          "player_1": -1.0
+        },
+        "update": {
+          "loss": 1.2305218131514266,
+          "policy_loss": 0.6012797118164599,
+          "value_loss": 1.2799166245386004,
+          "entropy": 1.0716208089143038,
+          "samples": 512,
+          "gradient_norm": 2.5309345722198486,
+          "optimizer_steps": 11
+        }
+      },
+      {
+        "episode": 11,
+        "decisions": 396,
+        "truncated": false,
+        "reason": null,
+        "seconds": 48.409,
+        "rewards": {
+          "player_1": 1.0,
+          "player_0": -1.0
+        },
+        "update": {
+          "loss": 1.4076451374725858,
+          "policy_loss": 0.7440073195129934,
+          "value_loss": 1.346067421063028,
+          "entropy": 0.9395903047889168,
+          "samples": 396,
+          "gradient_norm": 3.449657678604126,
+          "optimizer_steps": 12
+        }
+      }
+    ],
+    "learning_rate": 0.0003,
+    "batch_size": 16,
+    "optimizer_steps": 12,
+    "evaluation": {
+      "source": "https://www.mtggoldfish.com/deck/7983760",
+      "opponent": "neural",
+      "seed": 41,
+      "skip_land_every": 4,
+      "failures": [],
+      "baseline_wins": 18,
+      "completed": 20,
+      "optimizer_steps": 0,
+      "checkpoint": ".local/training/cpu-first/trained.keras"
+    }
+  },
+  "evaluation": {
+    "source": "https://www.mtggoldfish.com/deck/7983760",
+    "opponent": "neural",
+    "seed": 41,
+    "skip_land_every": 4,
+    "episodes": [
+      {
+        "episode": 0,
+        "baseline_seat": "player_0",
+        "decisions": 150,
+        "seconds": 15.197,
+        "truncated": false,
+        "reason": null,
+        "callbacks": {
+          "GAME_TARGET": 6,
+          "GAME_ASK": 6,
+          "GAME_SELECT": 122,
+          "GAME_PLAY_MANA": 13,
+          "GAME_CHOOSE_ABILITY": 3
+        },
+        "actor_decisions": {
+          "player_1": 77,
+          "player_0": 73
+        },
+        "outcomes": {
+          "player_0": {
+            "won": true,
+            "draw": null
+          },
+          "player_1": {
+            "won": false,
+            "draw": null
+          }
+        }
+      },
+      {
+        "episode": 1,
+        "baseline_seat": "player_1",
+        "decisions": 207,
+        "seconds": 20.955,
+        "truncated": false,
+        "reason": null,
+        "callbacks": {
+          "GAME_TARGET": 13,
+          "GAME_ASK": 13,
+          "GAME_SELECT": 159,
+          "GAME_PLAY_MANA": 16,
+          "GAME_CHOOSE_ABILITY": 6
+        },
+        "actor_decisions": {
+          "player_0": 121,
+          "player_1": 86
+        },
+        "outcomes": {
+          "player_1": {
+            "won": true,
+            "draw": null
+          },
+          "player_0": {
+            "won": false,
+            "draw": null
+          }
+        }
+      },
+      {
+        "episode": 2,
+        "baseline_seat": "player_0",
+        "decisions": 255,
+        "seconds": 27.239,
+        "truncated": false,
+        "reason": null,
+        "callbacks": {
+          "GAME_TARGET": 20,
+          "GAME_ASK": 16,
+          "GAME_SELECT": 145,
+          "GAME_PLAY_MANA": 73,
+          "GAME_CHOOSE_ABILITY": 1
+        },
+        "actor_decisions": {
+          "player_0": 66,
+          "player_1": 189
+        },
+        "outcomes": {
+          "player_0": {
+            "won": true,
+            "draw": null
+          },
+          "player_1": {
+            "won": false,
+            "draw": null
+          }
+        }
+      },
+      {
+        "episode": 3,
+        "baseline_seat": "player_1",
+        "decisions": 178,
+        "seconds": 17.774,
+        "truncated": false,
+        "reason": null,
+        "callbacks": {
+          "GAME_TARGET": 18,
+          "GAME_ASK": 11,
+          "GAME_SELECT": 109,
+          "GAME_PLAY_MANA": 32,
+          "GAME_CHOOSE_ABILITY": 8
+        },
+        "actor_decisions": {
+          "player_0": 129,
+          "player_1": 49
+        },
+        "outcomes": {
+          "player_1": {
+            "won": true,
+            "draw": null
+          },
+          "player_0": {
+            "won": false,
+            "draw": null
+          }
+        }
+      },
+      {
+        "episode": 4,
+        "baseline_seat": "player_0",
+        "decisions": 319,
+        "seconds": 37.856,
+        "truncated": false,
+        "reason": null,
+        "callbacks": {
+          "GAME_TARGET": 29,
+          "GAME_ASK": 11,
+          "GAME_SELECT": 165,
+          "GAME_PLAY_MANA": 112,
+          "GAME_CHOOSE_ABILITY": 2
+        },
+        "actor_decisions": {
+          "player_0": 74,
+          "player_1": 245
+        },
+        "outcomes": {
+          "player_0": {
+            "won": false,
+            "draw": null
+          },
+          "player_1": {
+            "won": true,
+            "draw": null
+          }
+        }
+      },
+      {
+        "episode": 5,
+        "baseline_seat": "player_1",
+        "decisions": 182,
+        "seconds": 21.41,
+        "truncated": false,
+        "reason": null,
+        "callbacks": {
+          "GAME_TARGET": 16,
+          "GAME_ASK": 6,
+          "GAME_SELECT": 123,
+          "GAME_CHOOSE_ABILITY": 6,
+          "GAME_PLAY_MANA": 31
+        },
+        "actor_decisions": {
+          "player_0": 112,
+          "player_1": 70
+        },
+        "outcomes": {
+          "player_1": {
+            "won": true,
+            "draw": null
+          },
+          "player_0": {
+            "won": false,
+            "draw": null
+          }
+        }
+      },
+      {
+        "episode": 6,
+        "baseline_seat": "player_0",
+        "decisions": 121,
+        "seconds": 12.227,
+        "truncated": false,
+        "reason": null,
+        "callbacks": {
+          "GAME_TARGET": 6,
+          "GAME_ASK": 3,
+          "GAME_SELECT": 96,
+          "GAME_PLAY_MANA": 13,
+          "GAME_CHOOSE_ABILITY": 3
+        },
+        "actor_decisions": {
+          "player_0": 60,
+          "player_1": 61
+        },
+        "outcomes": {
+          "player_1": {
+            "won": false,
+            "draw": null
+          },
+          "player_0": {
+            "won": true,
+            "draw": null
+          }
+        }
+      },
+      {
+        "episode": 7,
+        "baseline_seat": "player_1",
+        "decisions": 252,
+        "seconds": 26.045,
+        "truncated": false,
+        "reason": null,
+        "callbacks": {
+          "GAME_TARGET": 18,
+          "GAME_ASK": 13,
+          "GAME_SELECT": 137,
+          "GAME_PLAY_MANA": 64,
+          "GAME_CHOOSE_ABILITY": 20
+        },
+        "actor_decisions": {
+          "player_0": 183,
+          "player_1": 69
+        },
+        "outcomes": {
+          "player_1": {
+            "won": true,
+            "draw": null
+          },
+          "player_0": {
+            "won": false,
+            "draw": null
+          }
+        }
+      },
+      {
+        "episode": 8,
+        "baseline_seat": "player_0",
+        "decisions": 116,
+        "seconds": 12.437,
+        "truncated": false,
+        "reason": null,
+        "callbacks": {
+          "GAME_TARGET": 11,
+          "GAME_ASK": 7,
+          "GAME_SELECT": 84,
+          "GAME_PLAY_MANA": 11,
+          "GAME_CHOOSE_ABILITY": 3
+        },
+        "actor_decisions": {
+          "player_0": 51,
+          "player_1": 65
+        },
+        "outcomes": {
+          "player_0": {
+            "won": true,
+            "draw": null
+          },
+          "player_1": {
+            "won": false,
+            "draw": null
+          }
+        }
+      },
+      {
+        "episode": 9,
+        "baseline_seat": "player_1",
+        "decisions": 145,
+        "seconds": 16.368,
+        "truncated": false,
+        "reason": null,
+        "callbacks": {
+          "GAME_TARGET": 12,
+          "GAME_ASK": 4,
+          "GAME_SELECT": 97,
+          "GAME_PLAY_MANA": 29,
+          "GAME_CHOOSE_ABILITY": 3
+        },
+        "actor_decisions": {
+          "player_1": 56,
+          "player_0": 89
+        },
+        "outcomes": {
+          "player_1": {
+            "won": true,
+            "draw": null
+          },
+          "player_0": {
+            "won": false,
+            "draw": null
+          }
+        }
+      },
+      {
+        "episode": 10,
+        "baseline_seat": "player_0",
+        "decisions": 164,
+        "seconds": 16.673,
+        "truncated": false,
+        "reason": null,
+        "callbacks": {
+          "GAME_TARGET": 10,
+          "GAME_ASK": 9,
+          "GAME_SELECT": 106,
+          "GAME_CHOOSE_ABILITY": 9,
+          "GAME_PLAY_MANA": 30
+        },
+        "actor_decisions": {
+          "player_1": 105,
+          "player_0": 59
+        },
+        "outcomes": {
+          "player_0": {
+            "won": true,
+            "draw": null
+          },
+          "player_1": {
+            "won": false,
+            "draw": null
+          }
+        }
+      },
+      {
+        "episode": 11,
+        "baseline_seat": "player_1",
+        "decisions": 161,
+        "seconds": 17.261,
+        "truncated": false,
+        "reason": null,
+        "callbacks": {
+          "GAME_TARGET": 8,
+          "GAME_ASK": 6,
+          "GAME_SELECT": 116,
+          "GAME_PLAY_MANA": 30,
+          "GAME_CHOOSE_ABILITY": 1
+        },
+        "actor_decisions": {
+          "player_1": 70,
+          "player_0": 91
+        },
+        "outcomes": {
+          "player_1": {
+            "won": true,
+            "draw": null
+          },
+          "player_0": {
+            "won": false,
+            "draw": null
+          }
+        }
+      },
+      {
+        "episode": 12,
+        "baseline_seat": "player_0",
+        "decisions": 129,
+        "seconds": 14.16,
+        "truncated": false,
+        "reason": null,
+        "callbacks": {
+          "GAME_TARGET": 6,
+          "GAME_ASK": 6,
+          "GAME_SELECT": 96,
+          "GAME_PLAY_MANA": 12,
+          "GAME_CHOOSE_ABILITY": 9
+        },
+        "actor_decisions": {
+          "player_1": 72,
+          "player_0": 57
+        },
+        "outcomes": {
+          "player_0": {
+            "won": true,
+            "draw": null
+          },
+          "player_1": {
+            "won": false,
+            "draw": null
+          }
+        }
+      },
+      {
+        "episode": 13,
+        "baseline_seat": "player_1",
+        "decisions": 181,
+        "seconds": 19.763,
+        "truncated": false,
+        "reason": null,
+        "callbacks": {
+          "GAME_TARGET": 9,
+          "GAME_ASK": 11,
+          "GAME_SELECT": 103,
+          "GAME_PLAY_MANA": 41,
+          "GAME_CHOOSE_ABILITY": 17
+        },
+        "actor_decisions": {
+          "player_0": 132,
+          "player_1": 49
+        },
+        "outcomes": {
+          "player_1": {
+            "won": true,
+            "draw": null
+          },
+          "player_0": {
+            "won": false,
+            "draw": null
+          }
+        }
+      },
+      {
+        "episode": 14,
+        "baseline_seat": "player_0",
+        "decisions": 142,
+        "seconds": 13.458,
+        "truncated": false,
+        "reason": null,
+        "callbacks": {
+          "GAME_TARGET": 14,
+          "GAME_ASK": 9,
+          "GAME_SELECT": 108,
+          "GAME_PLAY_MANA": 8,
+          "GAME_CHOOSE_ABILITY": 3
+        },
+        "actor_decisions": {
+          "player_1": 76,
+          "player_0": 66
+        },
+        "outcomes": {
+          "player_1": {
+            "won": true,
+            "draw": null
+          },
+          "player_0": {
+            "won": false,
+            "draw": null
+          }
+        }
+      },
+      {
+        "episode": 15,
+        "baseline_seat": "player_1",
+        "decisions": 181,
+        "seconds": 19.955,
+        "truncated": false,
+        "reason": null,
+        "callbacks": {
+          "GAME_TARGET": 16,
+          "GAME_ASK": 7,
+          "GAME_SELECT": 140,
+          "GAME_PLAY_MANA": 15,
+          "GAME_CHOOSE_ABILITY": 3
+        },
+        "actor_decisions": {
+          "player_1": 80,
+          "player_0": 101
+        },
+        "outcomes": {
+          "player_1": {
+            "won": true,
+            "draw": null
+          },
+          "player_0": {
+            "won": false,
+            "draw": null
+          }
+        }
+      },
+      {
+        "episode": 16,
+        "baseline_seat": "player_0",
+        "decisions": 145,
+        "seconds": 13.352,
+        "truncated": false,
+        "reason": null,
+        "callbacks": {
+          "GAME_TARGET": 13,
+          "GAME_ASK": 6,
+          "GAME_SELECT": 106,
+          "GAME_PLAY_MANA": 13,
+          "GAME_CHOOSE_ABILITY": 7
+        },
+        "actor_decisions": {
+          "player_0": 72,
+          "player_1": 73
+        },
+        "outcomes": {
+          "player_1": {
+            "won": false,
+            "draw": null
+          },
+          "player_0": {
+            "won": true,
+            "draw": null
+          }
+        }
+      },
+      {
+        "episode": 17,
+        "baseline_seat": "player_1",
+        "decisions": 183,
+        "seconds": 19.196,
+        "truncated": false,
+        "reason": null,
+        "callbacks": {
+          "GAME_TARGET": 14,
+          "GAME_ASK": 5,
+          "GAME_SELECT": 140,
+          "GAME_PLAY_MANA": 21,
+          "GAME_CHOOSE_ABILITY": 3
+        },
+        "actor_decisions": {
+          "player_0": 101,
+          "player_1": 82
+        },
+        "outcomes": {
+          "player_1": {
+            "won": true,
+            "draw": null
+          },
+          "player_0": {
+            "won": false,
+            "draw": null
+          }
+        }
+      },
+      {
+        "episode": 18,
+        "baseline_seat": "player_0",
+        "decisions": 184,
+        "seconds": 18.666,
+        "truncated": false,
+        "reason": null,
+        "callbacks": {
+          "GAME_TARGET": 7,
+          "GAME_ASK": 5,
+          "GAME_SELECT": 134,
+          "GAME_PLAY_MANA": 34,
+          "GAME_CHOOSE_ABILITY": 4
+        },
+        "actor_decisions": {
+          "player_0": 80,
+          "player_1": 104
+        },
+        "outcomes": {
+          "player_0": {
+            "won": true,
+            "draw": null
+          },
+          "player_1": {
+            "won": false,
+            "draw": null
+          }
+        }
+      },
+      {
+        "episode": 19,
+        "baseline_seat": "player_1",
+        "decisions": 157,
+        "seconds": 16.441,
+        "truncated": false,
+        "reason": null,
+        "callbacks": {
+          "GAME_TARGET": 10,
+          "GAME_ASK": 3,
+          "GAME_SELECT": 127,
+          "GAME_PLAY_MANA": 14,
+          "GAME_CHOOSE_ABILITY": 3
+        },
+        "actor_decisions": {
+          "player_0": 78,
+          "player_1": 79
+        },
+        "outcomes": {
+          "player_1": {
+            "won": true,
+            "draw": null
+          },
+          "player_0": {
+            "won": false,
+            "draw": null
+          }
+        }
+      }
+    ],
+    "failures": [],
+    "baseline_wins": 18,
+    "completed": 20,
+    "optimizer_steps": 0,
+    "checkpoint": ".local/training/cpu-first/trained.keras"
+  },
+  "verification": {
+    "parameters": 1257346,
+    "changed_parameters": 1128904,
+    "weight_delta_l2": 1.0820952290808548,
+    "all_weights_finite": true,
+    "checkpoints_load_successfully": true
+  },
+  "objective": {
+    "type": "terminal Monte Carlo actor-critic",
+    "gamma": 1,
+    "value_weight": 0.5,
+    "entropy_weight": 0.01,
+    "gradient_clip_norm": 1.0,
+    "recurrent_gradient_steps": 1
+  },
+  "checkpoint_sha256": {
+    "initial.keras": "7c8a43b21e2ca93976430cd538e235fa2404ae5d1403277aa45befd37550b0a3",
+    "trained.keras": "af2477107de0ab62a947fe8ad5967793860dd4a3df9afe91f62bf95a313b3452"
+  },
+  "command": "uv run --no-sync python -m examples.train_selfplay --games 12 --evaluation-games 20 --seed 41 --directory .local/training/cpu-first"
+}

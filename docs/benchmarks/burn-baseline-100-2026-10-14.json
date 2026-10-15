@@ -1,0 +1,2952 @@
+{
+  "source": "https://www.mtggoldfish.com/deck/7983760",
+  "opponent": "neural",
+  "seed": 41,
+  "skip_land_every": 4,
+  "episodes": [
+    {
+      "episode": 0,
+      "baseline_seat": "player_0",
+      "decisions": 126,
+      "seconds": 13.712,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 14,
+        "GAME_ASK": 7,
+        "GAME_SELECT": 85,
+        "GAME_PLAY_MANA": 14,
+        "GAME_CHOOSE_ABILITY": 6
+      },
+      "actor_decisions": {
+        "player_0": 55,
+        "player_1": 71
+      },
+      "outcomes": {
+        "player_0": {
+          "won": true,
+          "draw": null
+        },
+        "player_1": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 1,
+      "baseline_seat": "player_1",
+      "decisions": 118,
+      "seconds": 12.47,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 10,
+        "GAME_ASK": 4,
+        "GAME_SELECT": 89,
+        "GAME_PLAY_MANA": 7,
+        "GAME_CHOOSE_ABILITY": 8
+      },
+      "actor_decisions": {
+        "player_1": 57,
+        "player_0": 61
+      },
+      "outcomes": {
+        "player_1": {
+          "won": true,
+          "draw": null
+        },
+        "player_0": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 2,
+      "baseline_seat": "player_0",
+      "decisions": 298,
+      "seconds": 32.43,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 23,
+        "GAME_ASK": 12,
+        "GAME_SELECT": 167,
+        "GAME_PLAY_MANA": 92,
+        "GAME_CHOOSE_ABILITY": 4
+      },
+      "actor_decisions": {
+        "player_1": 220,
+        "player_0": 78
+      },
+      "outcomes": {
+        "player_0": {
+          "won": true,
+          "draw": null
+        },
+        "player_1": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 3,
+      "baseline_seat": "player_1",
+      "decisions": 99,
+      "seconds": 10.02,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 10,
+        "GAME_ASK": 4,
+        "GAME_SELECT": 73,
+        "GAME_PLAY_MANA": 12
+      },
+      "actor_decisions": {
+        "player_1": 62,
+        "player_0": 37
+      },
+      "outcomes": {
+        "player_1": {
+          "won": true,
+          "draw": null
+        },
+        "player_0": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 4,
+      "baseline_seat": "player_0",
+      "decisions": 196,
+      "seconds": 22.691,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 17,
+        "GAME_ASK": 9,
+        "GAME_SELECT": 110,
+        "GAME_PLAY_MANA": 43,
+        "GAME_CHOOSE_ABILITY": 17
+      },
+      "actor_decisions": {
+        "player_0": 60,
+        "player_1": 136
+      },
+      "outcomes": {
+        "player_0": {
+          "won": true,
+          "draw": null
+        },
+        "player_1": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 5,
+      "baseline_seat": "player_1",
+      "decisions": 160,
+      "seconds": 17.876,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 8,
+        "GAME_ASK": 3,
+        "GAME_SELECT": 127,
+        "GAME_CHOOSE_ABILITY": 7,
+        "GAME_PLAY_MANA": 15
+      },
+      "actor_decisions": {
+        "player_1": 68,
+        "player_0": 92
+      },
+      "outcomes": {
+        "player_1": {
+          "won": true,
+          "draw": null
+        },
+        "player_0": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 6,
+      "baseline_seat": "player_0",
+      "decisions": 125,
+      "seconds": 12.626,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 12,
+        "GAME_ASK": 9,
+        "GAME_SELECT": 91,
+        "GAME_PLAY_MANA": 8,
+        "GAME_CHOOSE_ABILITY": 5
+      },
+      "actor_decisions": {
+        "player_1": 61,
+        "player_0": 64
+      },
+      "outcomes": {
+        "player_1": {
+          "won": false,
+          "draw": null
+        },
+        "player_0": {
+          "won": true,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 7,
+      "baseline_seat": "player_1",
+      "decisions": 98,
+      "seconds": 9.358,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 6,
+        "GAME_ASK": 4,
+        "GAME_SELECT": 79,
+        "GAME_PLAY_MANA": 7,
+        "GAME_CHOOSE_ABILITY": 2
+      },
+      "actor_decisions": {
+        "player_1": 60,
+        "player_0": 38
+      },
+      "outcomes": {
+        "player_1": {
+          "won": true,
+          "draw": null
+        },
+        "player_0": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 8,
+      "baseline_seat": "player_0",
+      "decisions": 127,
+      "seconds": 12.708,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 12,
+        "GAME_ASK": 9,
+        "GAME_SELECT": 93,
+        "GAME_PLAY_MANA": 11,
+        "GAME_CHOOSE_ABILITY": 2
+      },
+      "actor_decisions": {
+        "player_0": 58,
+        "player_1": 69
+      },
+      "outcomes": {
+        "player_1": {
+          "won": false,
+          "draw": null
+        },
+        "player_0": {
+          "won": true,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 9,
+      "baseline_seat": "player_1",
+      "decisions": 206,
+      "seconds": 22.158,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 19,
+        "GAME_ASK": 13,
+        "GAME_SELECT": 151,
+        "GAME_CHOOSE_ABILITY": 5,
+        "GAME_PLAY_MANA": 18
+      },
+      "actor_decisions": {
+        "player_0": 120,
+        "player_1": 86
+      },
+      "outcomes": {
+        "player_1": {
+          "won": true,
+          "draw": null
+        },
+        "player_0": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 10,
+      "baseline_seat": "player_0",
+      "decisions": 119,
+      "seconds": 10.92,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 11,
+        "GAME_ASK": 7,
+        "GAME_SELECT": 91,
+        "GAME_PLAY_MANA": 7,
+        "GAME_CHOOSE_ABILITY": 3
+      },
+      "actor_decisions": {
+        "player_0": 65,
+        "player_1": 54
+      },
+      "outcomes": {
+        "player_0": {
+          "won": true,
+          "draw": null
+        },
+        "player_1": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 11,
+      "baseline_seat": "player_1",
+      "decisions": 151,
+      "seconds": 15.091,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 10,
+        "GAME_ASK": 6,
+        "GAME_SELECT": 121,
+        "GAME_PLAY_MANA": 11,
+        "GAME_CHOOSE_ABILITY": 3
+      },
+      "actor_decisions": {
+        "player_0": 71,
+        "player_1": 80
+      },
+      "outcomes": {
+        "player_0": {
+          "won": true,
+          "draw": null
+        },
+        "player_1": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 12,
+      "baseline_seat": "player_0",
+      "decisions": 230,
+      "seconds": 23.577,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 11,
+        "GAME_ASK": 8,
+        "GAME_SELECT": 176,
+        "GAME_PLAY_MANA": 21,
+        "GAME_CHOOSE_ABILITY": 14
+      },
+      "actor_decisions": {
+        "player_0": 83,
+        "player_1": 147
+      },
+      "outcomes": {
+        "player_0": {
+          "won": true,
+          "draw": null
+        },
+        "player_1": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 13,
+      "baseline_seat": "player_1",
+      "decisions": 209,
+      "seconds": 19.324,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 22,
+        "GAME_ASK": 17,
+        "GAME_SELECT": 121,
+        "GAME_PLAY_MANA": 40,
+        "GAME_CHOOSE_ABILITY": 9
+      },
+      "actor_decisions": {
+        "player_0": 145,
+        "player_1": 64
+      },
+      "outcomes": {
+        "player_1": {
+          "won": true,
+          "draw": null
+        },
+        "player_0": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 14,
+      "baseline_seat": "player_0",
+      "decisions": 105,
+      "seconds": 11.282,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 7,
+        "GAME_ASK": 3,
+        "GAME_SELECT": 83,
+        "GAME_PLAY_MANA": 11,
+        "GAME_CHOOSE_ABILITY": 1
+      },
+      "actor_decisions": {
+        "player_1": 50,
+        "player_0": 55
+      },
+      "outcomes": {
+        "player_0": {
+          "won": true,
+          "draw": null
+        },
+        "player_1": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 15,
+      "baseline_seat": "player_1",
+      "decisions": 259,
+      "seconds": 30.691,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 27,
+        "GAME_ASK": 16,
+        "GAME_SELECT": 170,
+        "GAME_PLAY_MANA": 35,
+        "GAME_CHOOSE_ABILITY": 11
+      },
+      "actor_decisions": {
+        "player_1": 75,
+        "player_0": 184
+      },
+      "outcomes": {
+        "player_1": {
+          "won": true,
+          "draw": null
+        },
+        "player_0": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 16,
+      "baseline_seat": "player_0",
+      "decisions": 183,
+      "seconds": 19.042,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 18,
+        "GAME_ASK": 8,
+        "GAME_SELECT": 132,
+        "GAME_PLAY_MANA": 19,
+        "GAME_CHOOSE_ABILITY": 6
+      },
+      "actor_decisions": {
+        "player_1": 119,
+        "player_0": 64
+      },
+      "outcomes": {
+        "player_0": {
+          "won": true,
+          "draw": null
+        },
+        "player_1": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 17,
+      "baseline_seat": "player_1",
+      "decisions": 138,
+      "seconds": 12.944,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 10,
+        "GAME_ASK": 7,
+        "GAME_SELECT": 107,
+        "GAME_PLAY_MANA": 11,
+        "GAME_CHOOSE_ABILITY": 3
+      },
+      "actor_decisions": {
+        "player_1": 68,
+        "player_0": 70
+      },
+      "outcomes": {
+        "player_1": {
+          "won": true,
+          "draw": null
+        },
+        "player_0": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 18,
+      "baseline_seat": "player_0",
+      "decisions": 104,
+      "seconds": 11.46,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 6,
+        "GAME_ASK": 4,
+        "GAME_SELECT": 86,
+        "GAME_PLAY_MANA": 7,
+        "GAME_CHOOSE_ABILITY": 1
+      },
+      "actor_decisions": {
+        "player_0": 51,
+        "player_1": 53
+      },
+      "outcomes": {
+        "player_0": {
+          "won": true,
+          "draw": null
+        },
+        "player_1": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 19,
+      "baseline_seat": "player_1",
+      "decisions": 136,
+      "seconds": 13.94,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 10,
+        "GAME_ASK": 6,
+        "GAME_SELECT": 111,
+        "GAME_PLAY_MANA": 9
+      },
+      "actor_decisions": {
+        "player_0": 73,
+        "player_1": 63
+      },
+      "outcomes": {
+        "player_0": {
+          "won": false,
+          "draw": null
+        },
+        "player_1": {
+          "won": true,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 20,
+      "baseline_seat": "player_0",
+      "decisions": 289,
+      "seconds": 32.697,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 26,
+        "GAME_ASK": 16,
+        "GAME_SELECT": 175,
+        "GAME_PLAY_MANA": 47,
+        "GAME_CHOOSE_ABILITY": 25
+      },
+      "actor_decisions": {
+        "player_1": 198,
+        "player_0": 91
+      },
+      "outcomes": {
+        "player_0": {
+          "won": true,
+          "draw": null
+        },
+        "player_1": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 21,
+      "baseline_seat": "player_1",
+      "decisions": 119,
+      "seconds": 12.061,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 7,
+        "GAME_ASK": 10,
+        "GAME_SELECT": 87,
+        "GAME_PLAY_MANA": 9,
+        "GAME_CHOOSE_ABILITY": 6
+      },
+      "actor_decisions": {
+        "player_0": 69,
+        "player_1": 50
+      },
+      "outcomes": {
+        "player_1": {
+          "won": true,
+          "draw": null
+        },
+        "player_0": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 22,
+      "baseline_seat": "player_0",
+      "decisions": 151,
+      "seconds": 15.992,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 14,
+        "GAME_ASK": 8,
+        "GAME_SELECT": 95,
+        "GAME_PLAY_MANA": 17,
+        "GAME_CHOOSE_ABILITY": 17
+      },
+      "actor_decisions": {
+        "player_0": 62,
+        "player_1": 89
+      },
+      "outcomes": {
+        "player_0": {
+          "won": true,
+          "draw": null
+        },
+        "player_1": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 23,
+      "baseline_seat": "player_1",
+      "decisions": 180,
+      "seconds": 19.035,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 17,
+        "GAME_ASK": 12,
+        "GAME_SELECT": 109,
+        "GAME_PLAY_MANA": 27,
+        "GAME_CHOOSE_ABILITY": 15
+      },
+      "actor_decisions": {
+        "player_1": 70,
+        "player_0": 110
+      },
+      "outcomes": {
+        "player_1": {
+          "won": true,
+          "draw": null
+        },
+        "player_0": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 24,
+      "baseline_seat": "player_0",
+      "decisions": 115,
+      "seconds": 11.731,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 7,
+        "GAME_ASK": 3,
+        "GAME_SELECT": 91,
+        "GAME_PLAY_MANA": 12,
+        "GAME_CHOOSE_ABILITY": 2
+      },
+      "actor_decisions": {
+        "player_0": 60,
+        "player_1": 55
+      },
+      "outcomes": {
+        "player_0": {
+          "won": true,
+          "draw": null
+        },
+        "player_1": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 25,
+      "baseline_seat": "player_1",
+      "decisions": 105,
+      "seconds": 11.465,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 7,
+        "GAME_ASK": 5,
+        "GAME_SELECT": 82,
+        "GAME_PLAY_MANA": 10,
+        "GAME_CHOOSE_ABILITY": 1
+      },
+      "actor_decisions": {
+        "player_0": 47,
+        "player_1": 58
+      },
+      "outcomes": {
+        "player_1": {
+          "won": false,
+          "draw": null
+        },
+        "player_0": {
+          "won": true,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 26,
+      "baseline_seat": "player_0",
+      "decisions": 165,
+      "seconds": 17.03,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 5,
+        "GAME_ASK": 8,
+        "GAME_SELECT": 123,
+        "GAME_PLAY_MANA": 28,
+        "GAME_CHOOSE_ABILITY": 1
+      },
+      "actor_decisions": {
+        "player_0": 66,
+        "player_1": 99
+      },
+      "outcomes": {
+        "player_0": {
+          "won": true,
+          "draw": null
+        },
+        "player_1": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 27,
+      "baseline_seat": "player_1",
+      "decisions": 131,
+      "seconds": 14.084,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 10,
+        "GAME_ASK": 7,
+        "GAME_SELECT": 97,
+        "GAME_PLAY_MANA": 16,
+        "GAME_CHOOSE_ABILITY": 1
+      },
+      "actor_decisions": {
+        "player_0": 76,
+        "player_1": 55
+      },
+      "outcomes": {
+        "player_1": {
+          "won": true,
+          "draw": null
+        },
+        "player_0": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 28,
+      "baseline_seat": "player_0",
+      "decisions": 106,
+      "seconds": 10.934,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 5,
+        "GAME_ASK": 6,
+        "GAME_SELECT": 83,
+        "GAME_PLAY_MANA": 8,
+        "GAME_CHOOSE_ABILITY": 4
+      },
+      "actor_decisions": {
+        "player_0": 59,
+        "player_1": 47
+      },
+      "outcomes": {
+        "player_0": {
+          "won": true,
+          "draw": null
+        },
+        "player_1": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 29,
+      "baseline_seat": "player_1",
+      "decisions": 129,
+      "seconds": 12.256,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 9,
+        "GAME_ASK": 5,
+        "GAME_SELECT": 102,
+        "GAME_PLAY_MANA": 12,
+        "GAME_CHOOSE_ABILITY": 1
+      },
+      "actor_decisions": {
+        "player_1": 71,
+        "player_0": 58
+      },
+      "outcomes": {
+        "player_1": {
+          "won": true,
+          "draw": null
+        },
+        "player_0": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 30,
+      "baseline_seat": "player_0",
+      "decisions": 100,
+      "seconds": 10.527,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 8,
+        "GAME_ASK": 5,
+        "GAME_SELECT": 77,
+        "GAME_PLAY_MANA": 7,
+        "GAME_CHOOSE_ABILITY": 3
+      },
+      "actor_decisions": {
+        "player_0": 60,
+        "player_1": 40
+      },
+      "outcomes": {
+        "player_0": {
+          "won": true,
+          "draw": null
+        },
+        "player_1": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 31,
+      "baseline_seat": "player_1",
+      "decisions": 142,
+      "seconds": 14.803,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 7,
+        "GAME_ASK": 10,
+        "GAME_SELECT": 113,
+        "GAME_PLAY_MANA": 8,
+        "GAME_CHOOSE_ABILITY": 4
+      },
+      "actor_decisions": {
+        "player_1": 72,
+        "player_0": 70
+      },
+      "outcomes": {
+        "player_1": {
+          "won": true,
+          "draw": null
+        },
+        "player_0": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 32,
+      "baseline_seat": "player_0",
+      "decisions": 113,
+      "seconds": 11.146,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 7,
+        "GAME_ASK": 10,
+        "GAME_SELECT": 87,
+        "GAME_PLAY_MANA": 6,
+        "GAME_CHOOSE_ABILITY": 3
+      },
+      "actor_decisions": {
+        "player_0": 59,
+        "player_1": 54
+      },
+      "outcomes": {
+        "player_0": {
+          "won": true,
+          "draw": null
+        },
+        "player_1": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 33,
+      "baseline_seat": "player_1",
+      "decisions": 124,
+      "seconds": 13.018,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 13,
+        "GAME_ASK": 4,
+        "GAME_SELECT": 93,
+        "GAME_PLAY_MANA": 10,
+        "GAME_CHOOSE_ABILITY": 4
+      },
+      "actor_decisions": {
+        "player_0": 68,
+        "player_1": 56
+      },
+      "outcomes": {
+        "player_1": {
+          "won": true,
+          "draw": null
+        },
+        "player_0": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 34,
+      "baseline_seat": "player_0",
+      "decisions": 162,
+      "seconds": 17.182,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 11,
+        "GAME_ASK": 7,
+        "GAME_SELECT": 126,
+        "GAME_PLAY_MANA": 14,
+        "GAME_CHOOSE_ABILITY": 4
+      },
+      "actor_decisions": {
+        "player_0": 72,
+        "player_1": 90
+      },
+      "outcomes": {
+        "player_0": {
+          "won": true,
+          "draw": null
+        },
+        "player_1": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 35,
+      "baseline_seat": "player_1",
+      "decisions": 356,
+      "seconds": 41.105,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 57,
+        "GAME_ASK": 17,
+        "GAME_SELECT": 190,
+        "GAME_PLAY_MANA": 84,
+        "GAME_CHOOSE_ABILITY": 8
+      },
+      "actor_decisions": {
+        "player_1": 76,
+        "player_0": 280
+      },
+      "outcomes": {
+        "player_0": {
+          "won": false,
+          "draw": null
+        },
+        "player_1": {
+          "won": true,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 36,
+      "baseline_seat": "player_0",
+      "decisions": 199,
+      "seconds": 21.734,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 21,
+        "GAME_ASK": 9,
+        "GAME_SELECT": 120,
+        "GAME_CHOOSE_ABILITY": 14,
+        "GAME_PLAY_MANA": 35
+      },
+      "actor_decisions": {
+        "player_1": 134,
+        "player_0": 65
+      },
+      "outcomes": {
+        "player_0": {
+          "won": true,
+          "draw": null
+        },
+        "player_1": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 37,
+      "baseline_seat": "player_1",
+      "decisions": 229,
+      "seconds": 24.486,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 31,
+        "GAME_ASK": 14,
+        "GAME_SELECT": 151,
+        "GAME_PLAY_MANA": 33
+      },
+      "actor_decisions": {
+        "player_1": 84,
+        "player_0": 145
+      },
+      "outcomes": {
+        "player_1": {
+          "won": true,
+          "draw": null
+        },
+        "player_0": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 38,
+      "baseline_seat": "player_0",
+      "decisions": 181,
+      "seconds": 19.117,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 11,
+        "GAME_ASK": 7,
+        "GAME_SELECT": 132,
+        "GAME_PLAY_MANA": 28,
+        "GAME_CHOOSE_ABILITY": 3
+      },
+      "actor_decisions": {
+        "player_0": 66,
+        "player_1": 115
+      },
+      "outcomes": {
+        "player_1": {
+          "won": false,
+          "draw": null
+        },
+        "player_0": {
+          "won": true,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 39,
+      "baseline_seat": "player_1",
+      "decisions": 123,
+      "seconds": 13.68,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 10,
+        "GAME_ASK": 7,
+        "GAME_SELECT": 84,
+        "GAME_PLAY_MANA": 20,
+        "GAME_CHOOSE_ABILITY": 2
+      },
+      "actor_decisions": {
+        "player_1": 61,
+        "player_0": 62
+      },
+      "outcomes": {
+        "player_1": {
+          "won": true,
+          "draw": null
+        },
+        "player_0": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 40,
+      "baseline_seat": "player_0",
+      "decisions": 164,
+      "seconds": 17.362,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 9,
+        "GAME_ASK": 12,
+        "GAME_SELECT": 116,
+        "GAME_PLAY_MANA": 18,
+        "GAME_CHOOSE_ABILITY": 9
+      },
+      "actor_decisions": {
+        "player_0": 71,
+        "player_1": 93
+      },
+      "outcomes": {
+        "player_0": {
+          "won": false,
+          "draw": null
+        },
+        "player_1": {
+          "won": true,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 41,
+      "baseline_seat": "player_1",
+      "decisions": 104,
+      "seconds": 10.691,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 7,
+        "GAME_ASK": 5,
+        "GAME_SELECT": 82,
+        "GAME_PLAY_MANA": 7,
+        "GAME_CHOOSE_ABILITY": 3
+      },
+      "actor_decisions": {
+        "player_0": 46,
+        "player_1": 58
+      },
+      "outcomes": {
+        "player_1": {
+          "won": true,
+          "draw": null
+        },
+        "player_0": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 42,
+      "baseline_seat": "player_0",
+      "decisions": 175,
+      "seconds": 19.208,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 7,
+        "GAME_ASK": 6,
+        "GAME_SELECT": 124,
+        "GAME_PLAY_MANA": 38
+      },
+      "actor_decisions": {
+        "player_1": 103,
+        "player_0": 72
+      },
+      "outcomes": {
+        "player_0": {
+          "won": true,
+          "draw": null
+        },
+        "player_1": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 43,
+      "baseline_seat": "player_1",
+      "decisions": 137,
+      "seconds": 14.849,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 14,
+        "GAME_ASK": 5,
+        "GAME_SELECT": 95,
+        "GAME_CHOOSE_ABILITY": 6,
+        "GAME_PLAY_MANA": 17
+      },
+      "actor_decisions": {
+        "player_0": 86,
+        "player_1": 51
+      },
+      "outcomes": {
+        "player_1": {
+          "won": true,
+          "draw": null
+        },
+        "player_0": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 44,
+      "baseline_seat": "player_0",
+      "decisions": 161,
+      "seconds": 16.265,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 14,
+        "GAME_ASK": 10,
+        "GAME_SELECT": 118,
+        "GAME_PLAY_MANA": 18,
+        "GAME_CHOOSE_ABILITY": 1
+      },
+      "actor_decisions": {
+        "player_0": 69,
+        "player_1": 92
+      },
+      "outcomes": {
+        "player_0": {
+          "won": true,
+          "draw": null
+        },
+        "player_1": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 45,
+      "baseline_seat": "player_1",
+      "decisions": 354,
+      "seconds": 37.271,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 46,
+        "GAME_ASK": 17,
+        "GAME_SELECT": 197,
+        "GAME_PLAY_MANA": 87,
+        "GAME_CHOOSE_ABILITY": 7
+      },
+      "actor_decisions": {
+        "player_0": 259,
+        "player_1": 95
+      },
+      "outcomes": {
+        "player_0": {
+          "won": false,
+          "draw": null
+        },
+        "player_1": {
+          "won": true,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 46,
+      "baseline_seat": "player_0",
+      "decisions": 224,
+      "seconds": 22.048,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 4,
+        "GAME_ASK": 13,
+        "GAME_SELECT": 149,
+        "GAME_CHOOSE_ABILITY": 4,
+        "GAME_PLAY_MANA": 54
+      },
+      "actor_decisions": {
+        "player_0": 70,
+        "player_1": 154
+      },
+      "outcomes": {
+        "player_0": {
+          "won": true,
+          "draw": null
+        },
+        "player_1": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 47,
+      "baseline_seat": "player_1",
+      "decisions": 146,
+      "seconds": 13.43,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 9,
+        "GAME_ASK": 5,
+        "GAME_SELECT": 109,
+        "GAME_PLAY_MANA": 13,
+        "GAME_CHOOSE_ABILITY": 10
+      },
+      "actor_decisions": {
+        "player_1": 70,
+        "player_0": 76
+      },
+      "outcomes": {
+        "player_1": {
+          "won": true,
+          "draw": null
+        },
+        "player_0": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 48,
+      "baseline_seat": "player_0",
+      "decisions": 121,
+      "seconds": 12.822,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 11,
+        "GAME_ASK": 5,
+        "GAME_SELECT": 92,
+        "GAME_PLAY_MANA": 13
+      },
+      "actor_decisions": {
+        "player_0": 57,
+        "player_1": 64
+      },
+      "outcomes": {
+        "player_0": {
+          "won": true,
+          "draw": null
+        },
+        "player_1": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 49,
+      "baseline_seat": "player_1",
+      "decisions": 134,
+      "seconds": 14.102,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 13,
+        "GAME_ASK": 7,
+        "GAME_SELECT": 103,
+        "GAME_PLAY_MANA": 8,
+        "GAME_CHOOSE_ABILITY": 3
+      },
+      "actor_decisions": {
+        "player_0": 68,
+        "player_1": 66
+      },
+      "outcomes": {
+        "player_1": {
+          "won": true,
+          "draw": null
+        },
+        "player_0": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 50,
+      "baseline_seat": "player_0",
+      "decisions": 163,
+      "seconds": 18.626,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 16,
+        "GAME_ASK": 7,
+        "GAME_SELECT": 92,
+        "GAME_PLAY_MANA": 42,
+        "GAME_CHOOSE_ABILITY": 6
+      },
+      "actor_decisions": {
+        "player_1": 114,
+        "player_0": 49
+      },
+      "outcomes": {
+        "player_0": {
+          "won": true,
+          "draw": null
+        },
+        "player_1": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 51,
+      "baseline_seat": "player_1",
+      "decisions": 156,
+      "seconds": 16.25,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 11,
+        "GAME_ASK": 6,
+        "GAME_SELECT": 112,
+        "GAME_PLAY_MANA": 19,
+        "GAME_CHOOSE_ABILITY": 8
+      },
+      "actor_decisions": {
+        "player_1": 67,
+        "player_0": 89
+      },
+      "outcomes": {
+        "player_1": {
+          "won": true,
+          "draw": null
+        },
+        "player_0": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 52,
+      "baseline_seat": "player_0",
+      "decisions": 136,
+      "seconds": 13.659,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 9,
+        "GAME_ASK": 10,
+        "GAME_SELECT": 84,
+        "GAME_PLAY_MANA": 25,
+        "GAME_CHOOSE_ABILITY": 8
+      },
+      "actor_decisions": {
+        "player_0": 62,
+        "player_1": 74
+      },
+      "outcomes": {
+        "player_1": {
+          "won": false,
+          "draw": null
+        },
+        "player_0": {
+          "won": true,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 53,
+      "baseline_seat": "player_1",
+      "decisions": 131,
+      "seconds": 12.322,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 13,
+        "GAME_ASK": 11,
+        "GAME_SELECT": 91,
+        "GAME_PLAY_MANA": 12,
+        "GAME_CHOOSE_ABILITY": 4
+      },
+      "actor_decisions": {
+        "player_1": 60,
+        "player_0": 71
+      },
+      "outcomes": {
+        "player_1": {
+          "won": true,
+          "draw": null
+        },
+        "player_0": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 54,
+      "baseline_seat": "player_0",
+      "decisions": 88,
+      "seconds": 8.47,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 6,
+        "GAME_ASK": 2,
+        "GAME_SELECT": 74,
+        "GAME_PLAY_MANA": 6
+      },
+      "actor_decisions": {
+        "player_1": 34,
+        "player_0": 54
+      },
+      "outcomes": {
+        "player_0": {
+          "won": true,
+          "draw": null
+        },
+        "player_1": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 55,
+      "baseline_seat": "player_1",
+      "decisions": 185,
+      "seconds": 19.35,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 17,
+        "GAME_ASK": 6,
+        "GAME_SELECT": 125,
+        "GAME_CHOOSE_ABILITY": 12,
+        "GAME_PLAY_MANA": 25
+      },
+      "actor_decisions": {
+        "player_0": 114,
+        "player_1": 71
+      },
+      "outcomes": {
+        "player_1": {
+          "won": true,
+          "draw": null
+        },
+        "player_0": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 56,
+      "baseline_seat": "player_0",
+      "decisions": 110,
+      "seconds": 10.421,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 5,
+        "GAME_ASK": 9,
+        "GAME_SELECT": 85,
+        "GAME_PLAY_MANA": 9,
+        "GAME_CHOOSE_ABILITY": 2
+      },
+      "actor_decisions": {
+        "player_0": 58,
+        "player_1": 52
+      },
+      "outcomes": {
+        "player_0": {
+          "won": true,
+          "draw": null
+        },
+        "player_1": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 57,
+      "baseline_seat": "player_1",
+      "decisions": 185,
+      "seconds": 17.059,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 15,
+        "GAME_ASK": 10,
+        "GAME_SELECT": 123,
+        "GAME_PLAY_MANA": 29,
+        "GAME_CHOOSE_ABILITY": 8
+      },
+      "actor_decisions": {
+        "player_0": 122,
+        "player_1": 63
+      },
+      "outcomes": {
+        "player_1": {
+          "won": true,
+          "draw": null
+        },
+        "player_0": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 58,
+      "baseline_seat": "player_0",
+      "decisions": 145,
+      "seconds": 14.144,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 15,
+        "GAME_ASK": 7,
+        "GAME_SELECT": 111,
+        "GAME_CHOOSE_ABILITY": 3,
+        "GAME_PLAY_MANA": 9
+      },
+      "actor_decisions": {
+        "player_0": 75,
+        "player_1": 70
+      },
+      "outcomes": {
+        "player_0": {
+          "won": true,
+          "draw": null
+        },
+        "player_1": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 59,
+      "baseline_seat": "player_1",
+      "decisions": 169,
+      "seconds": 18.196,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 14,
+        "GAME_ASK": 10,
+        "GAME_SELECT": 118,
+        "GAME_CHOOSE_ABILITY": 11,
+        "GAME_PLAY_MANA": 16
+      },
+      "actor_decisions": {
+        "player_1": 61,
+        "player_0": 108
+      },
+      "outcomes": {
+        "player_1": {
+          "won": true,
+          "draw": null
+        },
+        "player_0": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 60,
+      "baseline_seat": "player_0",
+      "decisions": 169,
+      "seconds": 16.973,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 7,
+        "GAME_ASK": 8,
+        "GAME_SELECT": 114,
+        "GAME_PLAY_MANA": 28,
+        "GAME_CHOOSE_ABILITY": 12
+      },
+      "actor_decisions": {
+        "player_1": 100,
+        "player_0": 69
+      },
+      "outcomes": {
+        "player_1": {
+          "won": false,
+          "draw": null
+        },
+        "player_0": {
+          "won": true,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 61,
+      "baseline_seat": "player_1",
+      "decisions": 148,
+      "seconds": 16.416,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 13,
+        "GAME_ASK": 5,
+        "GAME_SELECT": 107,
+        "GAME_PLAY_MANA": 17,
+        "GAME_CHOOSE_ABILITY": 6
+      },
+      "actor_decisions": {
+        "player_0": 82,
+        "player_1": 66
+      },
+      "outcomes": {
+        "player_0": {
+          "won": false,
+          "draw": null
+        },
+        "player_1": {
+          "won": true,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 62,
+      "baseline_seat": "player_0",
+      "decisions": 160,
+      "seconds": 15.992,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 10,
+        "GAME_ASK": 4,
+        "GAME_SELECT": 127,
+        "GAME_PLAY_MANA": 13,
+        "GAME_CHOOSE_ABILITY": 6
+      },
+      "actor_decisions": {
+        "player_0": 85,
+        "player_1": 75
+      },
+      "outcomes": {
+        "player_1": {
+          "won": false,
+          "draw": null
+        },
+        "player_0": {
+          "won": true,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 63,
+      "baseline_seat": "player_1",
+      "decisions": 124,
+      "seconds": 13.692,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 9,
+        "GAME_ASK": 4,
+        "GAME_SELECT": 98,
+        "GAME_PLAY_MANA": 10,
+        "GAME_CHOOSE_ABILITY": 3
+      },
+      "actor_decisions": {
+        "player_1": 57,
+        "player_0": 67
+      },
+      "outcomes": {
+        "player_1": {
+          "won": true,
+          "draw": null
+        },
+        "player_0": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 64,
+      "baseline_seat": "player_0",
+      "decisions": 139,
+      "seconds": 15.607,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 11,
+        "GAME_ASK": 11,
+        "GAME_SELECT": 98,
+        "GAME_PLAY_MANA": 14,
+        "GAME_CHOOSE_ABILITY": 5
+      },
+      "actor_decisions": {
+        "player_1": 82,
+        "player_0": 57
+      },
+      "outcomes": {
+        "player_0": {
+          "won": true,
+          "draw": null
+        },
+        "player_1": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 65,
+      "baseline_seat": "player_1",
+      "decisions": 136,
+      "seconds": 14.498,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 6,
+        "GAME_ASK": 6,
+        "GAME_SELECT": 94,
+        "GAME_PLAY_MANA": 26,
+        "GAME_CHOOSE_ABILITY": 4
+      },
+      "actor_decisions": {
+        "player_0": 84,
+        "player_1": 52
+      },
+      "outcomes": {
+        "player_1": {
+          "won": true,
+          "draw": null
+        },
+        "player_0": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 66,
+      "baseline_seat": "player_0",
+      "decisions": 98,
+      "seconds": 9.523,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 7,
+        "GAME_ASK": 3,
+        "GAME_SELECT": 80,
+        "GAME_PLAY_MANA": 7,
+        "GAME_CHOOSE_ABILITY": 1
+      },
+      "actor_decisions": {
+        "player_0": 57,
+        "player_1": 41
+      },
+      "outcomes": {
+        "player_0": {
+          "won": true,
+          "draw": null
+        },
+        "player_1": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 67,
+      "baseline_seat": "player_1",
+      "decisions": 237,
+      "seconds": 25.7,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 29,
+        "GAME_ASK": 11,
+        "GAME_SELECT": 161,
+        "GAME_PLAY_MANA": 24,
+        "GAME_CHOOSE_ABILITY": 12
+      },
+      "actor_decisions": {
+        "player_0": 155,
+        "player_1": 82
+      },
+      "outcomes": {
+        "player_1": {
+          "won": true,
+          "draw": null
+        },
+        "player_0": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 68,
+      "baseline_seat": "player_0",
+      "decisions": 122,
+      "seconds": 13.264,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 6,
+        "GAME_ASK": 7,
+        "GAME_SELECT": 95,
+        "GAME_PLAY_MANA": 9,
+        "GAME_CHOOSE_ABILITY": 5
+      },
+      "actor_decisions": {
+        "player_0": 59,
+        "player_1": 63
+      },
+      "outcomes": {
+        "player_0": {
+          "won": true,
+          "draw": null
+        },
+        "player_1": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 69,
+      "baseline_seat": "player_1",
+      "decisions": 155,
+      "seconds": 16.896,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 11,
+        "GAME_ASK": 7,
+        "GAME_SELECT": 109,
+        "GAME_PLAY_MANA": 23,
+        "GAME_CHOOSE_ABILITY": 5
+      },
+      "actor_decisions": {
+        "player_0": 96,
+        "player_1": 59
+      },
+      "outcomes": {
+        "player_1": {
+          "won": true,
+          "draw": null
+        },
+        "player_0": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 70,
+      "baseline_seat": "player_0",
+      "decisions": 190,
+      "seconds": 20.877,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 19,
+        "GAME_ASK": 11,
+        "GAME_SELECT": 110,
+        "GAME_PLAY_MANA": 49,
+        "GAME_CHOOSE_ABILITY": 1
+      },
+      "actor_decisions": {
+        "player_0": 65,
+        "player_1": 125
+      },
+      "outcomes": {
+        "player_0": {
+          "won": true,
+          "draw": null
+        },
+        "player_1": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 71,
+      "baseline_seat": "player_1",
+      "decisions": 121,
+      "seconds": 11.711,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 8,
+        "GAME_ASK": 3,
+        "GAME_SELECT": 99,
+        "GAME_PLAY_MANA": 9,
+        "GAME_CHOOSE_ABILITY": 2
+      },
+      "actor_decisions": {
+        "player_1": 74,
+        "player_0": 47
+      },
+      "outcomes": {
+        "player_0": {
+          "won": false,
+          "draw": null
+        },
+        "player_1": {
+          "won": true,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 72,
+      "baseline_seat": "player_0",
+      "decisions": 128,
+      "seconds": 13.337,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 14,
+        "GAME_ASK": 10,
+        "GAME_SELECT": 89,
+        "GAME_PLAY_MANA": 13,
+        "GAME_CHOOSE_ABILITY": 2
+      },
+      "actor_decisions": {
+        "player_1": 69,
+        "player_0": 59
+      },
+      "outcomes": {
+        "player_0": {
+          "won": true,
+          "draw": null
+        },
+        "player_1": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 73,
+      "baseline_seat": "player_1",
+      "decisions": 245,
+      "seconds": 25.649,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 28,
+        "GAME_ASK": 15,
+        "GAME_SELECT": 114,
+        "GAME_PLAY_MANA": 77,
+        "GAME_CHOOSE_ABILITY": 11
+      },
+      "actor_decisions": {
+        "player_1": 48,
+        "player_0": 197
+      },
+      "outcomes": {
+        "player_1": {
+          "won": true,
+          "draw": null
+        },
+        "player_0": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 74,
+      "baseline_seat": "player_0",
+      "decisions": 139,
+      "seconds": 14.065,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 11,
+        "GAME_ASK": 4,
+        "GAME_SELECT": 109,
+        "GAME_PLAY_MANA": 9,
+        "GAME_CHOOSE_ABILITY": 6
+      },
+      "actor_decisions": {
+        "player_1": 62,
+        "player_0": 77
+      },
+      "outcomes": {
+        "player_0": {
+          "won": true,
+          "draw": null
+        },
+        "player_1": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 75,
+      "baseline_seat": "player_1",
+      "decisions": 234,
+      "seconds": 27.101,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 28,
+        "GAME_ASK": 9,
+        "GAME_SELECT": 136,
+        "GAME_PLAY_MANA": 58,
+        "GAME_CHOOSE_ABILITY": 3
+      },
+      "actor_decisions": {
+        "player_0": 162,
+        "player_1": 72
+      },
+      "outcomes": {
+        "player_1": {
+          "won": false,
+          "draw": null
+        },
+        "player_0": {
+          "won": true,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 76,
+      "baseline_seat": "player_0",
+      "decisions": 291,
+      "seconds": 33.549,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 23,
+        "GAME_ASK": 15,
+        "GAME_SELECT": 147,
+        "GAME_PLAY_MANA": 94,
+        "GAME_CHOOSE_ABILITY": 12
+      },
+      "actor_decisions": {
+        "player_0": 71,
+        "player_1": 220
+      },
+      "outcomes": {
+        "player_0": {
+          "won": true,
+          "draw": null
+        },
+        "player_1": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 77,
+      "baseline_seat": "player_1",
+      "decisions": 171,
+      "seconds": 17.835,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 9,
+        "GAME_ASK": 12,
+        "GAME_SELECT": 132,
+        "GAME_PLAY_MANA": 12,
+        "GAME_CHOOSE_ABILITY": 6
+      },
+      "actor_decisions": {
+        "player_1": 73,
+        "player_0": 98
+      },
+      "outcomes": {
+        "player_1": {
+          "won": true,
+          "draw": null
+        },
+        "player_0": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 78,
+      "baseline_seat": "player_0",
+      "decisions": 181,
+      "seconds": 19.54,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 8,
+        "GAME_ASK": 9,
+        "GAME_SELECT": 116,
+        "GAME_CHOOSE_ABILITY": 11,
+        "GAME_PLAY_MANA": 37
+      },
+      "actor_decisions": {
+        "player_1": 114,
+        "player_0": 67
+      },
+      "outcomes": {
+        "player_0": {
+          "won": true,
+          "draw": null
+        },
+        "player_1": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 79,
+      "baseline_seat": "player_1",
+      "decisions": 300,
+      "seconds": 31.424,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 29,
+        "GAME_ASK": 20,
+        "GAME_SELECT": 158,
+        "GAME_PLAY_MANA": 85,
+        "GAME_CHOOSE_ABILITY": 8
+      },
+      "actor_decisions": {
+        "player_0": 228,
+        "player_1": 72
+      },
+      "outcomes": {
+        "player_1": {
+          "won": true,
+          "draw": null
+        },
+        "player_0": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 80,
+      "baseline_seat": "player_0",
+      "decisions": 130,
+      "seconds": 14.239,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 4,
+        "GAME_ASK": 9,
+        "GAME_SELECT": 94,
+        "GAME_PLAY_MANA": 13,
+        "GAME_CHOOSE_ABILITY": 10
+      },
+      "actor_decisions": {
+        "player_0": 55,
+        "player_1": 75
+      },
+      "outcomes": {
+        "player_1": {
+          "won": false,
+          "draw": null
+        },
+        "player_0": {
+          "won": true,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 81,
+      "baseline_seat": "player_1",
+      "decisions": 160,
+      "seconds": 15.788,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 16,
+        "GAME_ASK": 7,
+        "GAME_SELECT": 110,
+        "GAME_PLAY_MANA": 19,
+        "GAME_CHOOSE_ABILITY": 8
+      },
+      "actor_decisions": {
+        "player_1": 62,
+        "player_0": 98
+      },
+      "outcomes": {
+        "player_1": {
+          "won": true,
+          "draw": null
+        },
+        "player_0": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 82,
+      "baseline_seat": "player_0",
+      "decisions": 226,
+      "seconds": 25.579,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 20,
+        "GAME_ASK": 15,
+        "GAME_SELECT": 141,
+        "GAME_CHOOSE_ABILITY": 12,
+        "GAME_PLAY_MANA": 38
+      },
+      "actor_decisions": {
+        "player_1": 148,
+        "player_0": 78
+      },
+      "outcomes": {
+        "player_1": {
+          "won": false,
+          "draw": null
+        },
+        "player_0": {
+          "won": true,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 83,
+      "baseline_seat": "player_1",
+      "decisions": 140,
+      "seconds": 14.054,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 12,
+        "GAME_ASK": 5,
+        "GAME_SELECT": 112,
+        "GAME_CHOOSE_ABILITY": 4,
+        "GAME_PLAY_MANA": 7
+      },
+      "actor_decisions": {
+        "player_1": 85,
+        "player_0": 55
+      },
+      "outcomes": {
+        "player_1": {
+          "won": true,
+          "draw": null
+        },
+        "player_0": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 84,
+      "baseline_seat": "player_0",
+      "decisions": 231,
+      "seconds": 24.374,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 11,
+        "GAME_ASK": 12,
+        "GAME_SELECT": 142,
+        "GAME_CHOOSE_ABILITY": 7,
+        "GAME_PLAY_MANA": 59
+      },
+      "actor_decisions": {
+        "player_0": 80,
+        "player_1": 151
+      },
+      "outcomes": {
+        "player_1": {
+          "won": false,
+          "draw": null
+        },
+        "player_0": {
+          "won": true,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 85,
+      "baseline_seat": "player_1",
+      "decisions": 202,
+      "seconds": 20.272,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 15,
+        "GAME_ASK": 10,
+        "GAME_SELECT": 153,
+        "GAME_PLAY_MANA": 17,
+        "GAME_CHOOSE_ABILITY": 7
+      },
+      "actor_decisions": {
+        "player_0": 124,
+        "player_1": 78
+      },
+      "outcomes": {
+        "player_1": {
+          "won": true,
+          "draw": null
+        },
+        "player_0": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 86,
+      "baseline_seat": "player_0",
+      "decisions": 137,
+      "seconds": 13.548,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 12,
+        "GAME_ASK": 5,
+        "GAME_SELECT": 110,
+        "GAME_PLAY_MANA": 7,
+        "GAME_CHOOSE_ABILITY": 3
+      },
+      "actor_decisions": {
+        "player_0": 76,
+        "player_1": 61
+      },
+      "outcomes": {
+        "player_0": {
+          "won": true,
+          "draw": null
+        },
+        "player_1": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 87,
+      "baseline_seat": "player_1",
+      "decisions": 202,
+      "seconds": 22.062,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 24,
+        "GAME_ASK": 16,
+        "GAME_SELECT": 109,
+        "GAME_PLAY_MANA": 44,
+        "GAME_CHOOSE_ABILITY": 9
+      },
+      "actor_decisions": {
+        "player_1": 51,
+        "player_0": 151
+      },
+      "outcomes": {
+        "player_1": {
+          "won": true,
+          "draw": null
+        },
+        "player_0": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 88,
+      "baseline_seat": "player_0",
+      "decisions": 92,
+      "seconds": 10.203,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 9,
+        "GAME_ASK": 5,
+        "GAME_SELECT": 62,
+        "GAME_PLAY_MANA": 11,
+        "GAME_CHOOSE_ABILITY": 5
+      },
+      "actor_decisions": {
+        "player_0": 45,
+        "player_1": 47
+      },
+      "outcomes": {
+        "player_0": {
+          "won": true,
+          "draw": null
+        },
+        "player_1": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 89,
+      "baseline_seat": "player_1",
+      "decisions": 229,
+      "seconds": 24.931,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 17,
+        "GAME_ASK": 8,
+        "GAME_SELECT": 134,
+        "GAME_PLAY_MANA": 68,
+        "GAME_CHOOSE_ABILITY": 2
+      },
+      "actor_decisions": {
+        "player_0": 168,
+        "player_1": 61
+      },
+      "outcomes": {
+        "player_1": {
+          "won": true,
+          "draw": null
+        },
+        "player_0": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 90,
+      "baseline_seat": "player_0",
+      "decisions": 191,
+      "seconds": 21.532,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 8,
+        "GAME_ASK": 8,
+        "GAME_SELECT": 129,
+        "GAME_PLAY_MANA": 37,
+        "GAME_CHOOSE_ABILITY": 9
+      },
+      "actor_decisions": {
+        "player_0": 71,
+        "player_1": 120
+      },
+      "outcomes": {
+        "player_0": {
+          "won": true,
+          "draw": null
+        },
+        "player_1": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 91,
+      "baseline_seat": "player_1",
+      "decisions": 114,
+      "seconds": 11.012,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 7,
+        "GAME_ASK": 7,
+        "GAME_SELECT": 89,
+        "GAME_PLAY_MANA": 7,
+        "GAME_CHOOSE_ABILITY": 4
+      },
+      "actor_decisions": {
+        "player_1": 61,
+        "player_0": 53
+      },
+      "outcomes": {
+        "player_0": {
+          "won": false,
+          "draw": null
+        },
+        "player_1": {
+          "won": true,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 92,
+      "baseline_seat": "player_0",
+      "decisions": 141,
+      "seconds": 15.639,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 9,
+        "GAME_ASK": 8,
+        "GAME_SELECT": 104,
+        "GAME_PLAY_MANA": 13,
+        "GAME_CHOOSE_ABILITY": 7
+      },
+      "actor_decisions": {
+        "player_0": 65,
+        "player_1": 76
+      },
+      "outcomes": {
+        "player_0": {
+          "won": true,
+          "draw": null
+        },
+        "player_1": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 93,
+      "baseline_seat": "player_1",
+      "decisions": 163,
+      "seconds": 16.91,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 10,
+        "GAME_ASK": 7,
+        "GAME_SELECT": 119,
+        "GAME_PLAY_MANA": 23,
+        "GAME_CHOOSE_ABILITY": 4
+      },
+      "actor_decisions": {
+        "player_0": 97,
+        "player_1": 66
+      },
+      "outcomes": {
+        "player_0": {
+          "won": false,
+          "draw": null
+        },
+        "player_1": {
+          "won": true,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 94,
+      "baseline_seat": "player_0",
+      "decisions": 124,
+      "seconds": 12.868,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 6,
+        "GAME_ASK": 3,
+        "GAME_SELECT": 101,
+        "GAME_PLAY_MANA": 8,
+        "GAME_CHOOSE_ABILITY": 6
+      },
+      "actor_decisions": {
+        "player_0": 71,
+        "player_1": 53
+      },
+      "outcomes": {
+        "player_0": {
+          "won": true,
+          "draw": null
+        },
+        "player_1": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 95,
+      "baseline_seat": "player_1",
+      "decisions": 146,
+      "seconds": 15.113,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 16,
+        "GAME_ASK": 11,
+        "GAME_SELECT": 100,
+        "GAME_PLAY_MANA": 12,
+        "GAME_CHOOSE_ABILITY": 7
+      },
+      "actor_decisions": {
+        "player_0": 81,
+        "player_1": 65
+      },
+      "outcomes": {
+        "player_0": {
+          "won": false,
+          "draw": null
+        },
+        "player_1": {
+          "won": true,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 96,
+      "baseline_seat": "player_0",
+      "decisions": 223,
+      "seconds": 24.219,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 20,
+        "GAME_ASK": 8,
+        "GAME_SELECT": 150,
+        "GAME_PLAY_MANA": 38,
+        "GAME_CHOOSE_ABILITY": 7
+      },
+      "actor_decisions": {
+        "player_0": 84,
+        "player_1": 139
+      },
+      "outcomes": {
+        "player_1": {
+          "won": false,
+          "draw": null
+        },
+        "player_0": {
+          "won": true,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 97,
+      "baseline_seat": "player_1",
+      "decisions": 145,
+      "seconds": 14.815,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 6,
+        "GAME_ASK": 9,
+        "GAME_SELECT": 110,
+        "GAME_PLAY_MANA": 11,
+        "GAME_CHOOSE_ABILITY": 9
+      },
+      "actor_decisions": {
+        "player_0": 76,
+        "player_1": 69
+      },
+      "outcomes": {
+        "player_1": {
+          "won": true,
+          "draw": null
+        },
+        "player_0": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 98,
+      "baseline_seat": "player_0",
+      "decisions": 158,
+      "seconds": 16.412,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 12,
+        "GAME_ASK": 10,
+        "GAME_SELECT": 112,
+        "GAME_CHOOSE_ABILITY": 6,
+        "GAME_PLAY_MANA": 18
+      },
+      "actor_decisions": {
+        "player_0": 65,
+        "player_1": 93
+      },
+      "outcomes": {
+        "player_0": {
+          "won": true,
+          "draw": null
+        },
+        "player_1": {
+          "won": false,
+          "draw": null
+        }
+      }
+    },
+    {
+      "episode": 99,
+      "baseline_seat": "player_1",
+      "decisions": 146,
+      "seconds": 15.026,
+      "truncated": false,
+      "reason": null,
+      "callbacks": {
+        "GAME_TARGET": 10,
+        "GAME_ASK": 6,
+        "GAME_SELECT": 102,
+        "GAME_PLAY_MANA": 25,
+        "GAME_CHOOSE_ABILITY": 3
+      },
+      "actor_decisions": {
+        "player_1": 67,
+        "player_0": 79
+      },
+      "outcomes": {
+        "player_1": {
+          "won": true,
+          "draw": null
+        },
+        "player_0": {
+          "won": false,
+          "draw": null
+        }
+      }
+    }
+  ],
+  "failures": [],
+  "baseline_wins": 96,
+  "completed": 100,
+  "optimizer_steps": 0,
+  "summary": {
+    "baseline_wins": 96,
+    "neural_wins": 4,
+    "draws": 0,
+    "failures": 0,
+    "truncations": 0,
+    "seats": {
+      "player_0": {
+        "games": 50,
+        "wins": 49
+      },
+      "player_1": {
+        "games": 50,
+        "wins": 47
+      }
+    },
+    "decisions": 16382,
+    "gameplay_seconds": 1727.193,
+    "baseline_loss_episodes": [
+      11,
+      25,
+      40,
+      75
+    ]
+  },
+  "configuration": {
+    "date": "2026-10-14",
+    "device": "CPU",
+    "games_run_sequentially": true,
+    "same_deck_both_seats": true,
+    "mainboard_cards": 60,
+    "model_seed": 41,
+    "xmage_shuffle_seed": null,
+    "semantic_registry": "Initial small card pool; most Burn identities unannotated",
+    "command": "uv run --no-sync python -m examples.burn_baseline --opponent neural --episodes 100 --seed 41 --trace .local/xmage/burn-baseline-100.jsonl --output .local/xmage/burn-baseline-100.json",
+    "raw_result_sha256": "2eea257bfd7b3af11f2ee88cce062f2a39bc1a87706e8fca43b49d25f8e64f14"
+  },
+  "diagnostic_timing": {
+    "separate_game_not_in_100": true,
+    "seconds": 11.784,
+    "next_decision_wait_seconds": 7.451768115279265,
+    "neural_act_seconds": 4.152967773959972,
+    "model_selection_seconds_included_in_neural_act": 4.061812947329599,
+    "submit_seconds": 0.12607757927617058,
+    "note": "Single game including model initialization, concurrent with main evaluation. Wait includes server processing and delivery; not a network-only measurement."
+  }
+}

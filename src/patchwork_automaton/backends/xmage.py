@@ -51,7 +51,7 @@ class XMageClient:
     capabilities = Capabilities('xmage',frozenset(('tables','sideboarding','concede','private_views','sequential_choices')))
 
     def __init__(self, *, proxy_url='ws://127.0.0.1:8787', host='127.0.0.1', port=17171,
-                 timeout=30, connector=None, max_games=256):
+                 timeout=30, connector=None, max_games=256, on_observation=None):
         if timeout<=0 or max_games<1:
             raise ValueError('Timeout and maximum games must be positive')
         self.proxy_url,self.host,self.port,self.timeout = proxy_url,host,port,timeout
@@ -68,6 +68,8 @@ class XMageClient:
         self._logged_in = False
         self._counter = 0
         self._max_games = max_games
+        # Optional fast synchronous listener, called with this seat's view only.
+        self._on_observation = on_observation
         self.session_id = str(uuid.uuid4())
         self.server_info = None
         self.sideboards = {}
@@ -210,7 +212,10 @@ class XMageClient:
             elif method in PROMPTS or isinstance(method,str) and (method.startswith('GAME_') or method=='END_GAME_INFO'):
                 game_id=item.get('objectId')
                 if game_id:
-                    self.game(game_id)._receive(item)
+                    game = self.game(game_id)
+                    game._receive(item)
+                    if self._on_observation is not None and game.player_id is not None:
+                        self._on_observation(await game.snapshot())
             else:
                 self.diagnostics.append(freeze(item))
         elif kind=='error':

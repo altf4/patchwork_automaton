@@ -13,6 +13,7 @@ license = {file = "LICENSE"}
 [project.optional-dependencies]
 xmage = ["websockets>=14,<17"]
 rl = ["gymnasium>=1,<2", "pettingzoo>=1.24,<2"]
+neural = ["numpy>=1.26,<3", "keras>=3.10,<4", "tensorflow-cpu>=2.20,<2.22"]
 
 [tool.setuptools.packages.find]
 where = ["src"]

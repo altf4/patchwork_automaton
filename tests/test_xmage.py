@@ -85,6 +85,23 @@ class CallbackTests(unittest.TestCase):
         options,bindings=choices('GAME_CHOOSE_ABILITY',{'choices':{CARD:'Activate ability'}},view())
         self.assertEqual(encode_response(bindings[options[0].id],None)[0],'sendPlayerUUID')
 
+    def test_trigger_order_uses_offered_ability_ids_not_source_card_ids(self):
+        ability='00000000-0000-0000-0000-000000000099'
+        data={'targets':None,'flag':True,'options':{'queryType':'PICK_ABILITY'},
+              'cardsView1':{ability:{'sourceName':'Eidolon of the Great Revel',
+                                    'sourceCard':{'id':CARD}}}}
+        options,bindings=choices('GAME_TARGET',data,view())
+        self.assertEqual(len(options),1)
+        self.assertEqual(options[0].constraints['source'],CARD)
+        self.assertEqual(options[0].constraints['selection_kind'],'trigger_order')
+        self.assertEqual(encode_response(bindings[options[0].id],None),
+                         ('sendPlayerUUID',{'value':ability}))
+
+    def test_script_target_preferences_do_not_remove_self_targets_from_backend(self):
+        options,bindings=choices('GAME_TARGET',{'targets':[ME,CARD],'flag':True},view())
+        self.assertEqual({o.id for o in options},{'object:'+ME,'object:'+CARD})
+        self.assertEqual(encode_response(bindings['object:'+ME],None)[1]['value'],ME)
+
     def test_key_and_string_choices_use_values_not_labels(self):
         _,bindings=choices('GAME_CHOOSE_CHOICE',{'choice':{'keyChoices':{'k':'Pretty label'},'required':True}},view())
         self.assertEqual(encode_response(bindings['choice:0'],None),('sendPlayerString',{'value':'k'}))
@@ -195,6 +212,18 @@ class ClientTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual((await game.snapshot()).decision.token,token)
         await client.respond_user_request(2,1)
         self.assertFalse(client.user_requests)
+
+    async def test_observer_receives_intermediate_private_views(self):
+        client, _, game = await self.setup_client()
+        snapshots = []
+        client._on_observation = snapshots.append
+        await client._dispatch(event('GAME_UPDATE', message_id=1))
+        await client._dispatch(event('GAME_ASK', message_id=2))
+        self.assertEqual(len(snapshots), 2)
+        self.assertEqual(snapshots[0].actor, Handle('xmage', 'player', ME))
+        self.assertIsNone(snapshots[0].decision)
+        self.assertEqual(snapshots[1].decision.kind, 'GAME_ASK')
+        self.assertNotIn(Handle('xmage', 'object', OTHER), snapshots[0].objects)
 
     async def test_correlated_wrong_action_result_is_protocol_failure(self):
         client,socket,_=await self.setup_client();socket.wrong=True

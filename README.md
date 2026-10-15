@@ -14,6 +14,16 @@ of every interaction type.
 
 ## Install
 
+An opt-in [numerical semantic schema](docs/semantics.md) supplies keyword flags
+and parameterized card abilities for structured neural-network features.
+The [Keras policy example](docs/neural.md) runs an untrained numerical model in
+local XMage games, including targets, payments and combat. Use uv with the
+`neural` and `xmage` extras for this optional component.
+The [CPU self-play trainer](docs/training.md) learns from terminal win/loss/draw
+rewards and evaluates saved checkpoints against a fixed scripted opponent.
+An explicit [weak Modern Burn baseline](docs/burn-baseline.md) uses a pinned
+60-card tournament list and deterministic, deliberately exploitable decisions.
+
 ```sh
 python3 -m pip install -e .
 ```

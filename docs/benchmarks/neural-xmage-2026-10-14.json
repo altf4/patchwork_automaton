@@ -1,0 +1,172 @@
+{
+  "date": "2026-10-14",
+  "backend": "XMage 1.4.62-V1 via Nexus v0.4.7",
+  "python": "3.12.14",
+  "packages": {
+    "tensorflow-cpu": "2.21.0",
+    "keras": "3.15.1",
+    "numpy": "2.5.4",
+    "websockets": "16.1.1"
+  },
+  "feature_version": 2,
+  "feature_fingerprint": "359be8e67175769dfa2e4d18391b6bd998c680e9681c32890929f2416ad342eb",
+  "checkpoint_sha256": "7cc7a0f6465de1b08c6d66c8ad5909657ee6ea587b76282d4c6349c41aac6d41",
+  "validation": {
+    "offline_tests_passed": 164,
+    "offline_tests_skipped": 0,
+    "wheel_build": "passed",
+    "checkpoint_output_equivalence": "passed",
+    "live_episodes": 3,
+    "live_decisions": 1478
+  },
+  "runs": [
+    {
+      "seed": 29,
+      "deck": "combat",
+      "initialization": "random",
+      "optimizer_steps": 0,
+      "model_parameters": 1257346,
+      "episodes": [
+        {
+          "episode": 0,
+          "decisions": 459,
+          "seconds": 36.366,
+          "truncated": false,
+          "reason": null,
+          "callbacks": {
+            "GAME_TARGET": 10,
+            "GAME_ASK": 33,
+            "GAME_SELECT": 247,
+            "GAME_PLAY_MANA": 169
+          },
+          "selections": {
+            "uuid": 239,
+            "boolean": 216,
+            "string": 4
+          },
+          "mean_entropy": 1.1310674683400292,
+          "final_life": {
+            "player_0": {
+              "opponent": -1,
+              "self": 16
+            },
+            "player_1": {
+              "self": -1,
+              "opponent": 16
+            }
+          },
+          "outcomes": {
+            "player_0": {
+              "won": true,
+              "draw": null
+            },
+            "player_1": {
+              "won": false,
+              "draw": null
+            }
+          }
+        },
+        {
+          "episode": 1,
+          "decisions": 622,
+          "seconds": 50.634,
+          "truncated": false,
+          "reason": null,
+          "callbacks": {
+            "GAME_TARGET": 44,
+            "GAME_ASK": 35,
+            "GAME_SELECT": 336,
+            "GAME_PLAY_MANA": 207
+          },
+          "selections": {
+            "uuid": 332,
+            "boolean": 284,
+            "string": 6
+          },
+          "mean_entropy": 1.139214588483421,
+          "final_life": {
+            "player_0": {
+              "opponent": -1,
+              "self": 12
+            },
+            "player_1": {
+              "self": -1,
+              "opponent": 12
+            }
+          },
+          "outcomes": {
+            "player_0": {
+              "won": true,
+              "draw": null
+            },
+            "player_1": {
+              "won": false,
+              "draw": null
+            }
+          }
+        }
+      ],
+      "combat_creature_selections": {
+        "declare_attackers": 21,
+        "declare_blockers": 1
+      },
+      "forced_concessions": 0
+    },
+    {
+      "seed": 31,
+      "deck": "burn",
+      "initialization": "loaded",
+      "optimizer_steps": 0,
+      "model_parameters": 1257346,
+      "episodes": [
+        {
+          "episode": 0,
+          "decisions": 397,
+          "seconds": 29.758,
+          "truncated": false,
+          "reason": null,
+          "callbacks": {
+            "GAME_TARGET": 63,
+            "GAME_ASK": 30,
+            "GAME_SELECT": 230,
+            "GAME_PLAY_MANA": 74
+          },
+          "selections": {
+            "uuid": 188,
+            "boolean": 209
+          },
+          "mean_entropy": 0.9719572794609248,
+          "final_life": {
+            "player_0": {
+              "opponent": 11,
+              "self": -1
+            },
+            "player_1": {
+              "self": 11,
+              "opponent": -1
+            }
+          },
+          "outcomes": {
+            "player_0": {
+              "won": false,
+              "draw": null
+            },
+            "player_1": {
+              "won": true,
+              "draw": null
+            }
+          }
+        }
+      ],
+      "combat_creature_selections": {},
+      "forced_concessions": 0
+    }
+  ],
+  "limitations": [
+    "Small four-card annotated pool and Freeform Unlimited decks.",
+    "Initial weights; zero optimizer updates. This validates execution, not playing strength.",
+    "Only XMage policy bindings implemented; MTGO neural action assembly remains future work.",
+    "Server shuffles are unseeded. Recorded durations are smoke-test elapsed time, not controlled throughput benchmarks.",
+    "Some advertised mana fallback clicks require server validation; successful transport does not certify every click as legal."
+  ]
+}

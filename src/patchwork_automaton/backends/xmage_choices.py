@@ -52,9 +52,9 @@ def choices(method,data,view):
         bindings[key]=(command,dict(args or {}),dict(constraints))
     def boolean(value,label):
         add('yes' if value else 'no','boolean',label,'sendPlayerBoolean',{'value':value})
-    def select(value,label=None,legality='advertised'):
+    def select(value,label=None,legality='advertised',**constraints):
         value=str(uuid.UUID(str(value)))
-        add('object:'+value,'uuid',label or value,'sendPlayerUUID',{'value':value},legality=legality)
+        add('object:'+value,'uuid',label or value,'sendPlayerUUID',{'value':value},legality=legality,**constraints)
         offered.add(value)
     native=data.get('options') or {}
     objects=object_views(view)
@@ -87,6 +87,15 @@ def choices(method,data,view):
         if not choice.get('required',True):
             boolean(False,'Cancel')
     elif method in ('GAME_SELECT','GAME_TARGET','GAME_PLAY_MANA','GAME_PLAY_XMANA'):
+        if method=='GAME_TARGET' and native.get('queryType')=='PICK_ABILITY':
+            # HumanPlayer.chooseTriggeredAbility expects the trigger instance ID,
+            # not its source card ID. These choices live in cardsView1 rather
+            # than data.targets, which is null for simultaneous trigger order.
+            for value,ability in (data.get('cardsView1') or {}).items():
+                if isinstance(ability,Mapping):
+                    source=(ability.get('sourceCard') or {}).get('id')
+                    select(value,ability.get('sourceName') or 'Triggered ability',
+                           selection_kind='trigger_order',source=source)
         for value in data.get('targets') or ():
             select(value,label(value))
         for key in ('possibleTargets','possibleAttackers','possibleBlockers'):
