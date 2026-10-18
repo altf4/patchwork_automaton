@@ -33,14 +33,14 @@ uv sync --python 3.12 --extra neural
 uv run --no-sync python scripts/rustmage-local.py
 uv run --no-sync python -m examples.train_rustmage \
   --output .local/red-ppo --rounds 32 --games-per-round 32 \
-  --eval-games 40 --eval-horizon 25 --workers 4
+  --eval-games 40 --eval-horizon 25
 ```
 
-That collects 1,024 self-play games, with 32 games per update round, using four
-independent native match workers and one shared batched TensorFlow inference
+That collects 1,024 self-play games, with 32 games per update round, using 24
+independent native match processes and one shared batched TensorFlow inference
 service. Updates occur only after all workers finish their collection round.
-CPU execution is the default; two TensorFlow intra-operation threads and one
-inter-operation thread are used unless explicitly configured in the environment.
+CPU execution is the default; one TensorFlow intra-operation thread and four
+inter-operation threads are used unless explicitly configured in the environment.
 `--rounds` is the total target round number, including previously completed rounds.
 
 For an exact 1,000-game run with a held-out evaluation every 100 games and a
@@ -48,11 +48,26 @@ learning-curve graph, use 40 update rounds of 25 games:
 
 ```sh
 uv sync --extra neural --extra plots
+TF_NUM_INTRAOP_THREADS=1 TF_NUM_INTEROP_THREADS=4 \
 uv run --no-sync python -m examples.train_rustmage \
   --output .local/red-curve --rounds 40 --games-per-round 25 \
-  --eval-every-games 100 --eval-games 40 --eval-horizon 25 --workers 8 \
-  --architecture separate --collector processes --plot
+  --eval-every-games 100 --eval-games 40 --eval-horizon 25 --workers 24 \
+  --architecture separate --collector processes --inference-wait-ms 0 --plot
 ```
+
+These CPU concurrency settings were measured on the eight-core development
+laptop; see [the parallelism experiment](#cpu-parallelism-experiment-october-18-2026).
+They are now the defaults for new RustMage training runs: 24 processes, one
+inference service, TF intra/inter limits of 1/4 and zero batching delay. Counts
+and environment variables remain overridable for other machines. Zero delay
+serves all currently queued requests immediately, still up to the worker count
+per batch. Each invocation records its TensorFlow thread environment.
+
+For older runs, pass the original worker/collector settings and
+`--inference-wait-ms 2` when resuming. A checkpoint that predates the batching
+option is interpreted as having the original 2 ms delay; configuration checks
+reject a different value. Set `TF_NUM_INTRAOP_THREADS=2` and
+`TF_NUM_INTEROP_THREADS=1` to reproduce the earlier runtime settings as well.
 
 This starts from fresh random weights and evaluates at 0, 100, ..., 1,000
 self-play games. Every point uses the same held-out seeds, seats, starting
@@ -84,7 +99,7 @@ uv run --no-sync python -m examples.plot_rustmage_training .local/red-curve/repo
 ```sh
 uv run --no-sync python -m examples.train_rustmage \
   --output .local/red-ppo --rounds 64 --games-per-round 32 \
-  --eval-games 40 --eval-horizon 25 --workers 4 --resume
+  --eval-games 40 --eval-horizon 25 --resume
 ```
 
 Resume preserves both networks' weights, Adam states, optimizer iteration counts and the PPO
@@ -251,6 +266,126 @@ The earlier roughly 20× RustMage/XMage result measured scripted-policy games.
 Neural training also pays for observation encoding, batched network inference,
 trajectory storage and gradient updates. Its throughput must be measured
 separately; multiplying the old neural games/minute by 20 is not justified.
+
+## CPU parallelism experiment: October 18, 2026
+
+The [complete parallelism report](benchmarks/foundations-red-cpu-parallelism-2026-10-18.json)
+records 27 timed trials on the eight-core Intel Core Ultra 5 335, with TensorFlow
+2.21 CPU execution and oneDNN disabled, as in the training run. Trials ran
+sequentially. The model, deck, terminal rewards, training batch size, optimizer
+settings and evaluation rules were unchanged. Collection used the frozen final
+checkpoint; updates replayed round 40's 8,993 decisions from the saved round-39
+model, both Adam states and shuffle RNG. Benchmark updates changed weights only
+in memory and in separate diagnostic output files.
+
+The initial sweep used 48 fixed self-play seeds per collection trial. Final
+confirmation used the actual **25-game collection-round size**, with two trials
+per configuration, in forward and reverse order. Every worker completed warm-up
+before confirmation timing began. Startup and warm-up are excluded; collection
+includes trajectory writing, and update timings include rollout reads, packing,
+loss/KL scans and optimizer work.
+
+| Phase / configuration | Mean wall time | Observed range | Mean active CPU cores |
+| --- | ---: | ---: | ---: |
+| 25 games: 8 workers, TF intra 2 / inter 1, 2 ms wait | 16.89 s | 16.65–17.13 s | 2.20 / 8 |
+| 25 games: 24 workers, TF intra 1 / inter 4, 2 ms wait | 9.61 s | 9.57–9.65 s | 3.52 / 8 |
+| 25 games: 24 workers, TF intra 1 / inter 4, zero wait | **8.28 s** | 8.09–8.47 s | **4.21 / 8** |
+| Same PPO update: TF intra 2 / inter 1 | 55.44 s | 54.06–56.82 s | 1.46 / 8 |
+| Same PPO update: TF intra 1 / inter 4 | **31.49 s** | 31.48–31.51 s | **2.12 / 8** |
+
+This is **2.04× collection throughput** (88.81 → 181.15 games/minute) and
+**1.76× update throughput**, measured separately. Their combined timings suggest
+about 1.8× throughput for comparable collection/update workloads, excluding
+evaluation and startup. This is an estimate from separate phase benchmarks, not
+a newly measured 1,000-game run. Game lengths and tensor shapes evolve during
+training, so these numbers should not be treated as a fixed whole-run speedup.
+
+`TF_NUM_INTRAOP_THREADS` limits threads inside one operation;
+`TF_NUM_INTEROP_THREADS` allows independent operations to run concurrently.
+The old inter-operation limit of one restricted that concurrency. Many of this
+small network's operations do too little work to benefit from splitting each
+across many threads: one intra-operation thread and four inter-operation threads
+was a good setting for both collection and updates on this machine.
+
+Selected screening results demonstrate why CPU utilization alone is insufficient:
+
+| Update thread limits (intra / inter) | Seconds | Mean active CPU cores |
+| --- | ---: | ---: |
+| 1 / 1 | 43.76 | 1.00 |
+| 4 / 1 | 53.27 | 1.73 |
+| 8 / 1 | 47.59 | 2.03 |
+| 2 / 4 | 33.63 | 2.58 |
+| 1 / 4 | 31.49 (two-trial mean) | 2.12 |
+| 1 / 8 | 31.70 | 2.40 |
+| 2 / 8 | 31.03 | 2.79 |
+
+Eight inter-operation threads consumed more CPU with little extra speed over
+four. Multiple inference services also had diminishing returns: at 24 game
+workers and TF 1/4, one, two and four services respectively completed the same
+48 games at **200.46, 203.36 and 175.80 games/minute**. One service remains the
+recommended configuration. The multiple-service option exists only in the
+benchmark; production still uses one inference service.
+
+The fixed 2 ms batching delay was another source of idle time. In confirmation
+trials, removing it increased the inference service's busy fraction from about
+55% to 85%, while retaining batching of requests already queued. Short 25-game
+rounds also leave some workers idle as the last games finish. A worker's
+inference-wait fraction is a fraction of that worker's game time, not a fraction
+of whole-machine wall time; worker waits overlap.
+
+The update breakdown was:
+
+| Update work | Previous settings | TF 1/4 |
+| --- | ---: | ---: |
+| Loss and KL measurements | 21.24 s | 10.54 s |
+| Critic gradient steps | 17.20 s | 10.16 s |
+| Actor gradient steps | 13.38 s | 7.34 s |
+| Loading, packing and other work | 3.52 s | 3.33 s |
+| Optimizer snapshots | 0.11 s | 0.12 s |
+
+The update phase still averages only about two cores. Its batches and many
+tensor operations depend on preceding results; game workers are idle throughout
+this phase. Increasing the game-worker count cannot fill that gap. A further
+parallelism investigation could run independent actor and critic work
+concurrently, with frozen advantages and explicit synchronization, but that
+requires changes to the update scheduler and has not been implemented here.
+Larger training minibatches would also change the learning experiment, so this
+sweep held them at 32.
+
+All **678 timed collection games** ended naturally and matched the reference
+game summaries. All **300 confirmation trajectories** matched their numerical
+observation features and action sequences exactly. Those hashes exclude
+recurrent memory and behavior probabilities. All ten update trials used identical
+rollout hashes, 564 accepted actor steps, 564 critic steps and zero rejected
+epochs. Changing intra-operation thread counts changed some floating-point
+results: TF 1/4's updated weights differed from TF 2/1 by relative L2 **0.0000227**
+(maximum absolute difference **0.00129**); reported losses and KL remained very
+close. TF 2/4 reproduced TF 2/1's updated weights exactly in this replay. Original
+checkpoints were unchanged, and each inference service traced its graph once.
+
+The process-collector integration test passed under TF 1/4. A separate two-game
+training smoke run completed with zero-wait inference; its evaluation preserved
+turn-limit failures in the report. The completed run also resumed successfully.
+No new trained model was promoted and no competency or reward definition changed.
+
+Reproduce a collection or update trial using the new benchmark:
+
+```sh
+uv run --no-sync python -m examples.benchmark_rustmage_parallelism collect \
+  --checkpoint .local/red-separate-1000-2026-10-18/checkpoints/round-0040/policy.keras \
+  --output .local/cpu-collection --games 25 --workers 24 --max-batch 24 \
+  --intra 1 --inter 4 --wait-ms 0
+uv run --no-sync python -m examples.benchmark_rustmage_parallelism update \
+  --checkpoint .local/red-separate-1000-2026-10-18/checkpoints/round-0039/policy.keras \
+  --rollout-report .local/red-separate-1000-2026-10-18/report.json \
+  --round 40 --output .local/cpu-update --intra 1 --inter 4
+```
+
+Each setting must run in a new process because TensorFlow initializes its thread
+pools once. Model and gradient graphs were warmed; the recorded update timings
+include the first snapshot trace, which cost less than 0.14 seconds. CPU-core
+figures count the benchmark's process CPU time, including game workers, divided
+by its wall time. They exclude unrelated laptop applications.
 
 ## Independent actor/critic: 1,000 games, October 18, 2026
 

@@ -7,6 +7,7 @@ Only already-redacted numerical observations cross the inference boundary.
 import asyncio
 from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor
 import multiprocessing as mp
+import os
 from threading import Event
 import time
 from types import SimpleNamespace
@@ -15,11 +16,16 @@ from types import SimpleNamespace
 class _RemoteInference:
     def __init__(self, connection):
         self.connection = connection
+        self.wait_seconds = 0.
+        self.requests = 0
 
     def predict(self, batch, *, version, identity, unbatched=False):
+        started = time.perf_counter()
         self.connection.send((batch, version, identity, unbatched))
         if not self.connection.poll(120): raise TimeoutError('Process inference timed out')
         ok, result = self.connection.recv()
+        self.wait_seconds += time.perf_counter() - started
+        self.requests += 1
         if not ok: raise RuntimeError(result)
         return result
 
@@ -38,9 +44,14 @@ def _initialize_worker(connections, counter, metadata):
 
 def _run_game(options):
     from .rustmage_experiment import play_game
+    _worker_batcher.wait_seconds = 0.
+    _worker_batcher.requests = 0
     started = time.process_time()
     result = play_game(model=_worker_model, batcher=_worker_batcher, **options)
     result['worker_cpu_seconds'] = time.process_time() - started
+    result['worker_inference_seconds'] = _worker_batcher.wait_seconds
+    result['worker_inference_requests'] = _worker_batcher.requests
+    result['worker_pid'] = os.getpid()
     return result
 
 

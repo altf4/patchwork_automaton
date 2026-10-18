@@ -29,6 +29,11 @@ class ProcessCollectionTests(unittest.TestCase):
                     actual=await collector.run_games(**options)
                     for a,b in zip(expected,actual):
                         self.assertNotEqual(b['status'],'error',b)
+                        self.assertGreater(b['worker_pid'], 0)
+                        self.assertGreaterEqual(b['worker_inference_seconds'], 0.)
+                        self.assertLessEqual(b['worker_inference_seconds'], b['seconds'])
+                        if mode == 'baseline': self.assertEqual(b['worker_inference_requests'], 0)
+                        else: self.assertGreater(b['worker_inference_requests'], 0)
                         for key in ('seed','index','seat','starting_player','status','actions','decisions','final_life'):
                             self.assertEqual(a[key],b[key],key)
                 rows=await collector.run_games(games=2,seed_base=45,mode='goldfish',version=99,max_decisions=150)

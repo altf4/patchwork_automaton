@@ -14,8 +14,8 @@ import time
 # Set before importing Keras/TensorFlow. Worker games share one inference service.
 os.environ.setdefault('KERAS_BACKEND', 'tensorflow')
 os.environ.setdefault('CUDA_VISIBLE_DEVICES', '-1')
-os.environ.setdefault('TF_NUM_INTRAOP_THREADS', '2')
-os.environ.setdefault('TF_NUM_INTEROP_THREADS', '1')
+os.environ.setdefault('TF_NUM_INTRAOP_THREADS', '1')
+os.environ.setdefault('TF_NUM_INTEROP_THREADS', '4')
 os.environ.setdefault('TF_ENABLE_ONEDNN_OPTS', '0')
 os.environ.setdefault('TF_CPP_MIN_LOG_LEVEL', '2')
 
@@ -40,8 +40,10 @@ def parser():
         help='Evaluate at this self-play interval; must be a multiple of games-per-round (0: endpoints only)')
     p.add_argument('--eval-horizon', type=int, default=20)
     p.add_argument('--train-horizon', type=int, default=60)
-    p.add_argument('--workers', type=int, default=4)
-    p.add_argument('--collector', choices=('threads','processes'), default='threads')
+    p.add_argument('--workers', type=int, default=24)
+    p.add_argument('--inference-wait-ms', type=float, default=0,
+        help='Maximum batching delay; 0 immediately serves currently queued requests')
+    p.add_argument('--collector', choices=('threads','processes'), default='processes')
     p.add_argument('--architecture', choices=('shared','separate'), default='separate')
     p.add_argument('--train-batch', type=int, default=32)
     p.add_argument('--learning-rate', type=float, default=.0003)
@@ -58,6 +60,8 @@ async def run(args):
         raise ValueError('Counts and horizons must be positive')
     if args.eval_every_games < 0 or args.eval_every_games % args.games_per_round:
         raise ValueError('Evaluation interval must be a nonnegative multiple of games-per-round')
+    if not 0 <= args.inference_wait_ms < float('inf'):
+        raise ValueError('Inference wait must be finite and nonnegative')
     output = args.output
     config = {k:v for k,v in vars(args).items() if k not in ('output','resume','rounds','plot')}
     config.update(algorithm='ppo', target_kl=.02, max_state_kl=.1,
@@ -69,6 +73,7 @@ async def run(args):
         saved_config.setdefault('eval_every_games', 0)
         saved_config.setdefault('collector', 'threads')
         saved_config.setdefault('architecture', 'shared')
+        saved_config.setdefault('inference_wait_ms', 2)
         if saved_config != config: raise ValueError('Resume requires the same experiment configuration')
         if args.rounds < state['round']: raise ValueError('Target round precedes the saved checkpoint')
         first_round = state['round']+1
@@ -113,6 +118,8 @@ async def run(args):
         save_checkpoint(output/'checkpoints',model,trainer,dict(round=0,config=config),policy_type=RustMagePolicy)
         atomic_json(report_path,report)
     invocation=dict(first_round=first_round,requested_last_round=args.rounds,
+        runtime={key: os.environ.get(key) for key in ('TF_NUM_INTRAOP_THREADS',
+            'TF_NUM_INTEROP_THREADS', 'TF_ENABLE_ONEDNN_OPTS', 'CUDA_VISIBLE_DEVICES')},
         started_utc=datetime.now(timezone.utc).isoformat(),
         source_sha256={str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in (
             Path(__file__),Path('src/patchwork_automaton/rl/rustmage_experiment.py'))})
@@ -121,7 +128,7 @@ async def run(args):
                   training_games_target=args.rounds*args.games_per_round)
     report.pop('after', None); report.pop('comparison', None)
     atomic_json(report_path,report)
-    batcher = await InferenceBatcher(model,max_batch=args.workers,wait_ms=2).start()
+    batcher = await InferenceBatcher(model,max_batch=args.workers,wait_ms=args.inference_wait_ms).start()
     collector = None
     if args.collector == 'processes':
         from patchwork_automaton.rl.rustmage_processes import ProcessGameCollector
