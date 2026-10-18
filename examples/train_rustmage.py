@@ -1,4 +1,4 @@
-"""CPU mono-red mirror PPO, with independent before/after turns-to-kill evaluation.
+"""CPU mono-red mirror PPO, with periodic held-out turns-to-kill evaluation.
 
 uv run --no-sync python -m examples.train_rustmage --output .local/red-ppo
 """
@@ -24,7 +24,7 @@ import keras
 
 from patchwork_automaton.neural.batching import InferenceBatcher, example_batch
 from patchwork_automaton.neural.experiment import atomic_json, save_checkpoint, load_checkpoint, make_trainer
-from patchwork_automaton.neural.model import PolicyNetwork
+from patchwork_automaton.neural.model import PolicyNetwork, SeparateActorCritic
 from patchwork_automaton.neural.rustmage_features import RustMageEncoder
 from patchwork_automaton.neural.rustmage_policy import RustMagePolicy
 from patchwork_automaton.rl.rustmage_experiment import run_games, goldfish_summary, paired_improvement
@@ -36,14 +36,19 @@ def parser():
     p.add_argument('--rounds', type=int, default=8)
     p.add_argument('--games-per-round', type=int, default=32)
     p.add_argument('--eval-games', type=int, default=40)
+    p.add_argument('--eval-every-games', type=int, default=0,
+        help='Evaluate at this self-play interval; must be a multiple of games-per-round (0: endpoints only)')
     p.add_argument('--eval-horizon', type=int, default=20)
     p.add_argument('--train-horizon', type=int, default=60)
     p.add_argument('--workers', type=int, default=4)
+    p.add_argument('--collector', choices=('threads','processes'), default='threads')
+    p.add_argument('--architecture', choices=('shared','separate'), default='separate')
     p.add_argument('--train-batch', type=int, default=32)
     p.add_argument('--learning-rate', type=float, default=.0003)
     p.add_argument('--ppo-epochs', type=int, default=2)
     p.add_argument('--seed', type=int, default=721)
     p.add_argument('--resume', action='store_true')
+    p.add_argument('--plot', action='store_true', help='Save a learning-curve PNG/SVG (requires the plots extra)')
     return p
 
 
@@ -51,24 +56,41 @@ async def run(args):
     if min(args.rounds,args.games_per_round,args.eval_games,args.eval_horizon,
            args.train_horizon,args.workers,args.train_batch) < 1:
         raise ValueError('Counts and horizons must be positive')
+    if args.eval_every_games < 0 or args.eval_every_games % args.games_per_round:
+        raise ValueError('Evaluation interval must be a nonnegative multiple of games-per-round')
     output = args.output
-    config = {k:v for k,v in vars(args).items() if k not in ('output','resume','rounds')}
+    config = {k:v for k,v in vars(args).items() if k not in ('output','resume','rounds','plot')}
     config.update(algorithm='ppo', target_kl=.02, max_state_kl=.1,
                   advantage_scale_floor=1., ppo_clip=.2)
     report_path = output/'report.json'
     if args.resume:
         model,trainer,state = load_checkpoint(output/'checkpoints')
-        if state['config'] != config: raise ValueError('Resume requires the same experiment configuration')
+        saved_config = dict(state['config'])
+        saved_config.setdefault('eval_every_games', 0)
+        saved_config.setdefault('collector', 'threads')
+        saved_config.setdefault('architecture', 'shared')
+        if saved_config != config: raise ValueError('Resume requires the same experiment configuration')
+        if args.rounds < state['round']: raise ValueError('Target round precedes the saved checkpoint')
         first_round = state['round']+1
         report = json.loads(report_path.read_text())
         report['rounds'] = [r for r in report['rounds'] if r['round'] < first_round]
+        # Recover a completed update if interruption occurred after the atomic
+        # checkpoint but before publishing its round in report.json.
+        if state.get('round_result') and not any(r['round']==state['round'] for r in report['rounds']):
+            report['rounds'].append(state['round_result'])
+        if [r['round'] for r in report['rounds']] != list(range(1, first_round)):
+            raise ValueError('Report is missing completed rounds')
+        report['evaluations'] = [e for e in report.get('evaluations', []) if e['round'] < first_round]
     else:
         output.mkdir(parents=True,exist_ok=False)
         keras.utils.set_random_seed(args.seed)
         encoder = RustMageEncoder()
-        model = PolicyNetwork(encoder.card_count, width=32, memory_size=32, blocks=1,
-            candidate_interactions=True, player_readout=True, stable_heads=True,
-            isolate_value=True, fact_readout=True, feature_spec=encoder.feature_spec)
+        if args.architecture == 'separate':
+            model = SeparateActorCritic(encoder.card_count, encoder.feature_spec)
+        else:
+            model = PolicyNetwork(encoder.card_count, width=32, memory_size=32, blocks=1,
+                candidate_interactions=True, player_readout=True, stable_heads=True,
+                isolate_value=True, fact_readout=True, feature_spec=encoder.feature_spec)
         model(example_batch(model.memory_size,model.feature_spec),training=False)
         trainer = make_trainer(model,config)
         trainer.compile()
@@ -77,12 +99,17 @@ async def run(args):
             training='mono-red versus mono-red PPO; undiscounted terminal +1/-1/0 only; no imitation',
             evaluation='sampled policy, temperature 1; do-nothing 60-Mountain opponent; fixed held-out seeds',
             concession='Voluntary Concede is excluded from both training and evaluation; no other strategy masking',
-            cutoffs='Excluded from PPO; retained as failed evaluation attempts', rounds=[])
+            cutoffs='Excluded from PPO; retained as failed evaluation attempts', rounds=[], evaluations=[],
+            initialization='fresh random weights', initial_training_games=0)
+        report['architecture'] = model.get_config()
+        if args.architecture == 'separate':
+            report['parameter_counts'] = dict(actor=model.actor.count_params(), critic=model.critic.count_params())
         library=Path('.local/rustmage/target/release/librustmage.so')
         if library.is_file(): report['library_sha256']=hashlib.sha256(library.read_bytes()).hexdigest()
         report['source_sha256']={str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in [
             Path(__file__), *Path('src/patchwork_automaton/neural').glob('*.py'),
-            Path('src/patchwork_automaton/rl/rustmage_experiment.py')]}
+            *Path('src/patchwork_automaton/rl').glob('rustmage*.py'),
+            Path('src/patchwork_automaton/baselines/foundations.py')]}
         save_checkpoint(output/'checkpoints',model,trainer,dict(round=0,config=config),policy_type=RustMagePolicy)
         atomic_json(report_path,report)
     invocation=dict(first_round=first_round,requested_last_round=args.rounds,
@@ -90,8 +117,18 @@ async def run(args):
         source_sha256={str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in (
             Path(__file__),Path('src/patchwork_automaton/rl/rustmage_experiment.py'))})
     report.setdefault('invocations',[]).append(invocation)
+    report.update(status='running', training_games_completed=(first_round-1)*args.games_per_round,
+                  training_games_target=args.rounds*args.games_per_round)
+    report.pop('after', None); report.pop('comparison', None)
     atomic_json(report_path,report)
     batcher = await InferenceBatcher(model,max_batch=args.workers,wait_ms=2).start()
+    collector = None
+    if args.collector == 'processes':
+        from patchwork_automaton.rl.rustmage_processes import ProcessGameCollector
+        collector = ProcessGameCollector(model, batcher, workers=args.workers)
+    async def collect(**options):
+        if collector: return await collector.run_games(**options)
+        return await run_games(workers=args.workers, model=model, batcher=batcher, **options)
     started=time.monotonic()
     def progress(label):
         count=0
@@ -103,24 +140,44 @@ async def run(args):
                 **({'error':row['error']} if row['status']=='error' else {}))),flush=True)
         return completed
     async def evaluate(label,mode):
-        rows=await run_games(games=args.eval_games,workers=args.workers,
-            seed_base=args.seed+10_000_000,mode=mode,model=model,batcher=batcher,
+        rows=await collect(games=args.eval_games,
+            seed_base=args.seed+10_000_000,mode=mode,
             version=batcher.version,max_own_turns=args.eval_horizon,progress=progress(label))
         result=dict(summary=goldfish_summary(rows,args.eval_horizon),games=rows)
         print(json.dumps(dict(stage=label,summary=result['summary'])),flush=True)
         return result
+    def record_evaluation(round_id, result):
+        checkpoint=output/'checkpoints'/f'round-{round_id:04d}'/'policy.keras'
+        point=dict(round=round_id,training_games=round_id*args.games_per_round,
+            checkpoint=str(checkpoint),checkpoint_sha256=hashlib.sha256(checkpoint.read_bytes()).hexdigest(),
+            **result)
+        point['comparison_to_initial']=paired_improvement(report['before']['games'],result['games'],args.eval_horizon)
+        report.setdefault('evaluations',[]).append(point)
+        atomic_json(report_path,report)
+        return point
+    async def evaluate_checkpoint(round_id):
+        existing=next((e for e in report.get('evaluations',[]) if e['round']==round_id),None)
+        if existing is not None:return existing
+        result=await evaluate(f'eval-{round_id*args.games_per_round:04d}','goldfish')
+        return record_evaluation(round_id,result)
     try:
         if 'baseline' not in report:
             report['baseline']=await evaluate('baseline','baseline');atomic_json(report_path,report)
         if 'before' not in report:
             report['before']=await evaluate('before','goldfish');atomic_json(report_path,report)
+        if not any(e['round']==0 for e in report.get('evaluations',[])):
+            record_evaluation(0,report['before'])
+        # A resumed boundary evaluation must finish before collecting more data.
+        completed=first_round-1
+        if completed and args.eval_every_games and completed*args.games_per_round % args.eval_every_games == 0:
+            await evaluate_checkpoint(completed)
         for round_id in range(first_round,args.rounds+1):
             batcher.set_version(round_id)
             collection_started=time.monotonic()
-            rows=await run_games(games=args.games_per_round,workers=args.workers,
+            rows=await collect(games=args.games_per_round,
                 seed_base=args.seed+round_id*args.games_per_round,
-                index_base=(round_id-1)*args.games_per_round,mode='selfplay',model=model,
-                batcher=batcher,version=round_id,output=output/'rollouts',
+                index_base=(round_id-1)*args.games_per_round,mode='selfplay',
+                version=round_id,output=output/'rollouts',
                 max_own_turns=args.train_horizon,progress=progress(f'train-{round_id}'))
             trajectories=[t for r in rows for t in r['trajectories']]
             stats=dict(round=round_id,collection_seconds=time.monotonic()-collection_started,
@@ -131,13 +188,17 @@ async def run(args):
             update_started=time.monotonic()
             stats['update']=await asyncio.to_thread(trainer.update_files,trajectories)
             stats['update_seconds']=time.monotonic()-update_started
-            checkpoint=save_checkpoint(output/'checkpoints',model,trainer,
-                dict(round=round_id,config=config),policy_type=RustMagePolicy)
-            stats['checkpoint']=str(checkpoint)
+            stats['checkpoint']=str(output/'checkpoints'/f'round-{round_id:04d}')
+            save_checkpoint(output/'checkpoints',model,trainer,
+                dict(round=round_id,config=config,round_result=stats),policy_type=RustMagePolicy)
             report['rounds'].append(stats);report['batching']=batcher.stats()
+            report['training_games_completed']=round_id*args.games_per_round
             atomic_json(report_path,report)
             print(json.dumps(dict(stage='update',round=round_id,metrics=stats['update'])),flush=True)
-        report['after']=await evaluate('after','goldfish')
+            if args.eval_every_games and round_id*args.games_per_round % args.eval_every_games == 0:
+                await evaluate_checkpoint(round_id)
+        final=await evaluate_checkpoint(args.rounds)
+        report['after']={key:final[key] for key in ('summary','games')}
         report['comparison']=paired_improvement(report['before']['games'],report['after']['games'],args.eval_horizon)
         report['seconds_this_invocation']=time.monotonic()-started
         invocation.update(finished_utc=datetime.now(timezone.utc).isoformat(),
@@ -151,9 +212,14 @@ async def run(args):
                 update_seconds=updates,collection_games_per_minute=60*games/collection,
                 collection_and_updates_games_per_minute=60*games/(collection+updates))
         report['batching']=batcher.stats()
+        report['status']='complete'
         atomic_json(report_path,report)
+        if args.plot:
+            from .plot_rustmage_training import plot_report
+            plot_report(report_path)
         print(json.dumps(dict(stage='result',comparison=report['comparison'],report=str(report_path))),flush=True)
     finally:
+        if collector: await collector.close()
         await batcher.close()
 
 

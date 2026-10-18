@@ -1,0 +1,238 @@
+{
+  "training_outcomes": {
+    "loss": 517,
+    "win": 483
+  },
+  "training_choices": 360262,
+  "baseline": {
+    "games": 40,
+    "win": 40,
+    "loss": 0,
+    "draw": 0,
+    "cutoff": 0,
+    "error": 0,
+    "win_rate": 1.0,
+    "failed_attempts": 0,
+    "failure_rate": 0.0,
+    "mean_own_turns_to_win": 6.45,
+    "median_own_turns_to_win": 6.0,
+    "p90_own_turns_to_win": 8,
+    "fastest_win": 4,
+    "slowest_win": 12,
+    "wins_by_own_turn": {
+      "4": 0.025,
+      "5": 0.2,
+      "6": 0.7,
+      "10": 0.95
+    },
+    "win_turn_histogram": {
+      "4": 1,
+      "5": 7,
+      "6": 20,
+      "7": 6,
+      "8": 2,
+      "9": 2,
+      "11": 1,
+      "12": 1
+    },
+    "turn_horizon": 25,
+    "capped_turns_mean": 6.45,
+    "capped_turns_failure_value": 26
+  },
+  "before": {
+    "games": 40,
+    "win": 30,
+    "loss": 0,
+    "draw": 0,
+    "cutoff": 10,
+    "error": 0,
+    "win_rate": 0.75,
+    "failed_attempts": 10,
+    "failure_rate": 0.25,
+    "mean_own_turns_to_win": 17,
+    "median_own_turns_to_win": 17.0,
+    "p90_own_turns_to_win": 23,
+    "fastest_win": 9,
+    "slowest_win": 25,
+    "wins_by_own_turn": {
+      "4": 0.0,
+      "5": 0.0,
+      "6": 0.0,
+      "10": 0.1
+    },
+    "win_turn_histogram": {
+      "9": 1,
+      "10": 3,
+      "12": 2,
+      "13": 2,
+      "14": 4,
+      "15": 2,
+      "17": 2,
+      "18": 1,
+      "19": 2,
+      "20": 3,
+      "22": 3,
+      "23": 2,
+      "24": 2,
+      "25": 1
+    },
+    "turn_horizon": 25,
+    "capped_turns_mean": 19.25,
+    "capped_turns_failure_value": 26
+  },
+  "after": {
+    "games": 40,
+    "win": 40,
+    "loss": 0,
+    "draw": 0,
+    "cutoff": 0,
+    "error": 0,
+    "win_rate": 1.0,
+    "failed_attempts": 0,
+    "failure_rate": 0.0,
+    "mean_own_turns_to_win": 12.625,
+    "median_own_turns_to_win": 11.5,
+    "p90_own_turns_to_win": 19,
+    "fastest_win": 5,
+    "slowest_win": 25,
+    "wins_by_own_turn": {
+      "4": 0.0,
+      "5": 0.025,
+      "6": 0.1,
+      "10": 0.3
+    },
+    "win_turn_histogram": {
+      "5": 1,
+      "6": 3,
+      "7": 2,
+      "8": 3,
+      "9": 2,
+      "10": 1,
+      "11": 8,
+      "12": 3,
+      "13": 3,
+      "14": 3,
+      "15": 3,
+      "19": 4,
+      "21": 2,
+      "23": 1,
+      "25": 1
+    },
+    "turn_horizon": 25,
+    "capped_turns_mean": 12.625,
+    "capped_turns_failure_value": 26
+  },
+  "curve": [
+    {
+      "games": 0,
+      "wins": 30,
+      "mean": 17,
+      "score": 19.25
+    },
+    {
+      "games": 100,
+      "wins": 35,
+      "mean": 17.314285714285713,
+      "score": 18.4
+    },
+    {
+      "games": 200,
+      "wins": 38,
+      "mean": 16.13157894736842,
+      "score": 16.625
+    },
+    {
+      "games": 300,
+      "wins": 34,
+      "mean": 14.941176470588236,
+      "score": 16.6
+    },
+    {
+      "games": 400,
+      "wins": 40,
+      "mean": 15.25,
+      "score": 15.25
+    },
+    {
+      "games": 500,
+      "wins": 37,
+      "mean": 14.675675675675675,
+      "score": 15.525
+    },
+    {
+      "games": 600,
+      "wins": 38,
+      "mean": 13.736842105263158,
+      "score": 14.35
+    },
+    {
+      "games": 700,
+      "wins": 39,
+      "mean": 14.615384615384615,
+      "score": 14.9
+    },
+    {
+      "games": 800,
+      "wins": 39,
+      "mean": 15.025641025641026,
+      "score": 15.3
+    },
+    {
+      "games": 900,
+      "wins": 40,
+      "mean": 12.65,
+      "score": 12.65
+    },
+    {
+      "games": 1000,
+      "wins": 40,
+      "mean": 12.625,
+      "score": 12.625
+    }
+  ],
+  "comparison": {
+    "capped_turn_reduction": 6.625,
+    "bootstrap_95_interval": [
+      5.05,
+      8.325
+    ],
+    "improved_attempts": 36,
+    "worsened_attempts": 3,
+    "tied_attempts": 1
+  },
+  "parameters": {
+    "actor": 125729,
+    "critic": 241985
+  },
+  "throughput": {
+    "timed_selfplay_games": 1000,
+    "collection_seconds": 843.6814116389432,
+    "update_seconds": 2265.5730264519952,
+    "collection_games_per_minute": 71.11689219683464,
+    "collection_and_updates_games_per_minute": 19.297230636692312
+  },
+  "seconds": 3255.523312157995,
+  "critic_first": 1.0257120135116577,
+  "critic_final": 1.00218464359086,
+  "critic_last5_mean": 1.005630276367383,
+  "critic_last5_fresh_mse": 1.0073677171801922,
+  "critic_improved_rounds": 19,
+  "batching": {
+    "calls": 124614,
+    "requests": 425579,
+    "mean_batch": 3.4151780698797887,
+    "batch_histogram": {
+      "1": 18633,
+      "4": 29274,
+      "3": 26347,
+      "2": 18147,
+      "5": 21157,
+      "6": 8873,
+      "7": 1972,
+      "8": 211
+    },
+    "inference_seconds": 656.8405480548681,
+    "mean_queue_ms": 5.507713582531688,
+    "graph_traces": 1
+  }
+}

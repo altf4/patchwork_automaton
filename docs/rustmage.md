@@ -106,31 +106,41 @@ itself are not implemented by this adapter.
 
 ## Foundations workload
 
-Both decks have exactly 60 mainboard cards, no sideboard, 24 basics and four each
-of nine spells. Every printing is explicitly `FDN`, including Foundations
+Both decks have exactly 60 mainboard cards and no sideboard. Mono-red has 22
+lands, 19 creatures and 19 instants; mono-white has 24 lands and 36 creatures.
+Every printing is explicitly `FDN`, including Foundations
 starter-product reprints. Printing membership, complete implementation status,
 Oracle IDs and source-definition hashes are recorded in
 [`foundations-aggro.json`](../src/patchwork_automaton/data/foundations-aggro.json).
 
-| Mono-red: 24 Mountain, 4 each below | Mono-white: 24 Plains, 4 each below |
+| Mono-red (quantity and card) | Mono-white: 24 Plains, 4 each below |
 | --- | --- |
-| Fanatical Firebrand | Savannah Lions |
-| Ghitu Lavarunner | Healer's Hawk |
-| Swab Goblin | Bishop's Soldier |
-| Firebrand Archer | Leonin Skyhunter |
-| Viashino Pyromancer | Helpful Hunter |
-| Goblin Smuggler | Dazzling Angel |
-| Raging Redcap | Inspiring Paladin |
-| Firespitter Whelp | Prideful Parent |
-| Burst Lightning | Inspiring Overseer |
+| 22 Mountain | Savannah Lions |
+| 4 Fanatical Firebrand | Healer's Hawk |
+| 4 Ghitu Lavarunner | Bishop's Soldier |
+| 4 Firebrand Archer | Leonin Skyhunter |
+| 4 Viashino Pyromancer | Helpful Hunter |
+| 3 Firespitter Whelp | Dazzling Angel |
+| 4 Burst Lightning | Inspiring Paladin |
+| 4 Kindled Fury | Prideful Parent |
+| 4 Sure Strike | Inspiring Overseer |
+| 4 Scorching Dragonfire | — |
+| 3 Fiery Annihilation | — |
+
+Saved performance reports predate this red-deck change: they used 24 Mountains
+and four each of Fanatical Firebrand, Ghitu Lavarunner, Swab Goblin, Firebrand
+Archer, Viashino Pyromancer, Goblin Smuggler, Raging Redcap, Firespitter Whelp
+and Burst Lightning. Their embedded deck manifests describe those measurements.
 
 `FoundationsAggro` uses the same strategy on both engines: keep all hands, play
 lands, cast affordable spells cheapest-first then alphabetically in its own main
-phase with an empty stack, target the opposing player, attack all and never
-block. It declines kicker/optional payments and does not activate abilities.
+phase with an empty stack, aim face damage at the opposing player, attack all
+and never block. It casts buffs on friendly creatures before combat and creature
+removal only when an enemy creature is present. It declines kicker/optional
+payments and does not activate abilities.
 Mandatory targets, trigger ordering, payments and cleanup discards are answered.
 This provides casting, haste, flying, lifelink, draw/entry/cast triggers, token
-creation and first/double-strike combat workloads. It is intentionally simple,
+creation and first-strike combat workloads. It is intentionally simple,
 not a competitive deck benchmark or an exhaustive card-rules validation suite.
 
 ## Performance comparison

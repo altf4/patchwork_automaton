@@ -119,6 +119,12 @@ class StreamingPPOTrainer(PPOTrainer):
 
         steps = rejected = 0; norm = 0.; stopped = False; largest = np.zeros(2)
         metrics, exact = measure()
+        value_loss_before = float(metrics[2])
+        def critic_batches():
+            for inputs, _, rewards, *_ in batches(self.rng.permutation(len(trajectories))):
+                yield inputs, rewards
+        critic_stats = self.fit_critic(critic_batches)
+        if self.separate_value: metrics, exact = measure()
         for epoch in range(self.epochs):
             saved = self.snapshot(); rate = self.learning_rate
             order = self.rng.permutation(len(trajectories)); accepted = False
@@ -143,4 +149,5 @@ class StreamingPPOTrainer(PPOTrainer):
             cache=dict(budget_bytes=self.cache_bytes, retained_bytes=records_cache.bytes+packed_cache.bytes,
                 trajectories=len(records_cache.entries), trajectory_hits=records_cache.hits,
                 batches=len(packed_cache.entries), batch_hits=packed_cache.hits),
-            recurrent_updates='detached behavior states',terminal_rewards_only=True)
+            recurrent_updates='detached behavior states',terminal_rewards_only=True,
+            value_loss_before=value_loss_before, **critic_stats)

@@ -2,7 +2,7 @@
 
 Names are exact identity lookups, never language-model input. Native live IDs
 bind references only. Large/arbitrary domains fail explicitly: this encoder is
-for these ten cards, not a claim of support for RustMage's whole catalogue.
+for this deck, not a claim of support for RustMage's whole catalogue.
 """
 from dataclasses import dataclass
 import hashlib
@@ -43,27 +43,32 @@ ACTION_FIELDS = {
 }
 ACTIONS = tuple(ACTION_FIELDS)
 # Reviewed, deliberately partial semantic labels. Dynamic P/T and keywords come
-# from the engine, including Lavarunner's graveyard condition and Smuggler buffs.
+# from the engine, including Lavarunner's graveyard condition and temporary buffs.
 TAGS = ('red_mana', 'tap_cost', 'sacrifice_source', 'damage_any', 'damage_opponent',
         'entry_trigger', 'noncreature_cast_trigger', 'dragon_cast_trigger',
         'two_instants_sorceries_graveyard', 'grant_haste', 'grant_power',
-        'grant_unblockable', 'other_creature_power_le_two', 'until_end_turn', 'kicker')
+        'until_end_turn', 'kicker', 'grant_first_strike', 'damage_creature',
+        'damage_planeswalker', 'exile_if_dies_this_turn', 'exile_attached_equipment')
 LABELS = {
     'Mountain': ('red_mana', 'tap_cost'),
     'Fanatical Firebrand': ('tap_cost', 'sacrifice_source', 'damage_any'),
     'Ghitu Lavarunner': ('two_instants_sorceries_graveyard', 'grant_haste', 'grant_power'),
-    'Swab Goblin': (),
     'Firebrand Archer': ('noncreature_cast_trigger', 'damage_opponent'),
     'Viashino Pyromancer': ('entry_trigger', 'damage_opponent'),
-    'Goblin Smuggler': ('tap_cost', 'grant_unblockable', 'other_creature_power_le_two', 'until_end_turn'),
-    'Raging Redcap': (),
     'Firespitter Whelp': ('noncreature_cast_trigger', 'dragon_cast_trigger', 'damage_opponent'),
     'Burst Lightning': ('damage_any', 'kicker'),
+    'Kindled Fury': ('grant_power', 'grant_first_strike', 'until_end_turn'),
+    'Sure Strike': ('grant_power', 'grant_first_strike', 'until_end_turn'),
+    'Scorching Dragonfire': ('damage_creature', 'damage_planeswalker', 'exile_if_dies_this_turn'),
+    'Fiery Annihilation': ('damage_creature', 'exile_if_dies_this_turn', 'exile_attached_equipment'),
 }
 DAMAGE = {'Fanatical Firebrand': 1, 'Firebrand Archer': 1, 'Viashino Pyromancer': 2,
-          'Firespitter Whelp': 1, 'Burst Lightning': 2}
+          'Firespitter Whelp': 1, 'Burst Lightning': 2, 'Scorching Dragonfire': 3,
+          'Fiery Annihilation': 5}
+POWER_BONUS = {'Ghitu Lavarunner': 1, 'Kindled Fury': 1, 'Sure Strike': 3}
 SEMANTICS = {name: [1.] + [float(tag in LABELS[name]) for tag in TAGS]
              + numeric(DAMAGE.get(name, 0)) + numeric(4 if name == 'Burst Lightning' else 0)
+             + numeric(POWER_BONUS.get(name, 0))
              for name in CARDS}
 SEMANTIC_WIDTH = len(SEMANTICS['Mountain'])
 COUNTERS = ('plus_one', 'minus_one', 'stun', 'loyalty', 'lore')
@@ -158,7 +163,7 @@ class RustMageEncoder:
         self.allow_concede = allow_concede
 
     def manifest(self):
-        result = dict(backend='rustmage', feature_version=1, observation_schema=OBSERVATION_SCHEMA,
+        result = dict(backend='rustmage', feature_version=2, observation_schema=OBSERVATION_SCHEMA,
             rustmage_revision=RUSTMAGE_REVISION, deck=DATA['decks']['red'], cards=CARDS,
             facts={n: FACTS[n] for n in CARDS}, semantic_tags=TAGS, semantic_labels=LABELS,
             semantics=SEMANTICS, actions=ACTION_FIELDS, decisions=DECISIONS, steps=STEPS,

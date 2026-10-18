@@ -1,11 +1,20 @@
 # Foundations mono-red CPU PPO
 
-This experiment uses the existing 60-card **Foundations Red Aggro** list: 24
-Mountains and four each of Fanatical Firebrand, Ghitu Lavarunner, Swab Goblin,
-Firebrand Archer, Viashino Pyromancer, Goblin Smuggler, Raging Redcap, Firespitter
-Whelp and Burst Lightning. Training games are mono-red mirrors under normal
+This experiment uses the 60-card **Foundations Red Aggro** list: **22 lands,
+19 creatures and 19 instants**. It contains 22 Mountains; four each of Fanatical
+Firebrand, Ghitu Lavarunner, Firebrand Archer and Viashino Pyromancer plus three
+Firespitter Whelps; and four each of Burst Lightning, Kindled Fury, Sure Strike
+and Scorching Dragonfire plus three Fiery Annihilations. Training games are mono-red mirrors under normal
 RustMage rules. Both seats use the same frozen behavior checkpoint within a
 collection round and sample their own actions independently.
+
+The original shared-encoder experiments below used the previous **24-land,
+32-creature, 4-instant** list. Their graphs and checkpoints remain historical
+results for that deck. The independent actor/critic experiment uses the current
+22/19/19 list. The new card vocabulary and semantic schema change the checkpoint
+fingerprint: start a fresh run in a new output directory. Existing checkpoints
+are rejected rather than interpreting their card IDs as the new cards. To
+reproduce the old reports, use their recorded source revision and deck manifest.
 
 There is **no imitation warm-up and no intermediate reward**. A verified natural
 win gives +1, a loss −1, and a draw 0. Every recorded decision in a seat's game
@@ -34,13 +43,51 @@ CPU execution is the default; two TensorFlow intra-operation threads and one
 inter-operation thread are used unless explicitly configured in the environment.
 `--rounds` is the total target round number, including previously completed rounds.
 
+For an exact 1,000-game run with a held-out evaluation every 100 games and a
+learning-curve graph, use 40 update rounds of 25 games:
+
+```sh
+uv sync --extra neural --extra plots
+uv run --no-sync python -m examples.train_rustmage \
+  --output .local/red-curve --rounds 40 --games-per-round 25 \
+  --eval-every-games 100 --eval-games 40 --eval-horizon 25 --workers 8 \
+  --architecture separate --collector processes --plot
+```
+
+This starts from fresh random weights and evaluates at 0, 100, ..., 1,000
+self-play games. Every point uses the same held-out seeds, seats, starting
+players and action-sampling seeds. Evaluation data never enters PPO. Each
+25-game update is checkpointed; the reports associate each evaluation with its
+checkpoint hash. `learning-curve.png`, `.svg` and `.csv` show wins-only mean kill
+turn, bootstrap intervals over evaluation games, and completion counts. A
+failure-adjusted score appears when any attempts fail. These intervals describe
+one training run's evaluation sample, not variability across training runs.
+
+`learning-curve-losses.png` and `.svg` contain total PPO loss, policy loss,
+value loss and policy entropy after each accepted update. The accompanying
+`.csv` also records KL divergence, gradient norms and rejected epochs. These
+losses are measured on each round's own frozen self-play data, so they need not
+decrease monotonically as the policy and its opponents change. Use the held-out
+kill-turn curve to judge improvement at this metric.
+
+Use the same command with `--resume` after interruption. A missing evaluation at
+the latest checkpoint boundary is completed before collecting more training
+games. An update saved just before report publication is recovered from its
+checkpoint metadata. The evaluation interval must be a multiple of the number
+of games per update. Omitting the interval preserves endpoint-only evaluation.
+Plots can also be regenerated from the saved report without running games:
+
+```sh
+uv run --no-sync python -m examples.plot_rustmage_training .local/red-curve/report.json
+```
+
 ```sh
 uv run --no-sync python -m examples.train_rustmage \
   --output .local/red-ppo --rounds 64 --games-per-round 32 \
   --eval-games 40 --eval-horizon 25 --workers 4 --resume
 ```
 
-Resume preserves weights, Adam state, optimizer iteration count and the PPO
+Resume preserves both networks' weights, Adam states, optimizer iteration counts and the PPO
 shuffle generator. Game and action-sampling seeds derive from the round and game
 index. The remaining experiment configuration must match. Checkpoints are
 written atomically at round boundaries; the incomplete current round is rerun
@@ -55,20 +102,70 @@ optimizer checkpoints live in `checkpoints/round-NNNN/`.
 
 ## Numerical model and action space
 
-The experiment reuses the Keras 3 entity-attention/recurrent actor-critic with a
-smaller CPU configuration: width 32, memory 32, one attention block and **125,026
-parameters**. It has an action-scoring head and a scalar value head. This is not
-a language model. Freeform prompts, card rules text and display labels never
-enter its tensors.
+The default `--architecture separate` uses two independent Keras 3 networks.
+The actor retains width 32, memory 32, one attention block and legal-action
+scoring. The critic has its own card embeddings, semantic encoder, one attention
+block at width 64, memory 64 and a 64/64/1 nonlinear value head with a linear
+output. It receives both pooled entity features (mean and scaled sum) and direct
+player/context facts. No learned weights or recurrent memory are shared. The
+96-element stored memory concatenates actor and critic state solely for batching
+and serialization; each network reads only its own slice.
+
+The critic learns mean squared error against terminal returns with its own Adam
+optimizer, learning rate and gradient clipping. It takes the configured number
+of PPO epochs on each rollout, independently of actor KL acceptance. Actor
+backtracking restores only actor weights and optimizer state. Behavior values,
+probabilities and advantages remain frozen throughout the update. The reported
+combined loss retains the old weighted formula for plotting; the two optimizers
+minimize their own objectives. Checkpoints include both optimizer states.
+
+`--architecture shared` retains the earlier detached linear critic for controlled
+comparisons on the current deck. The exact parameter counts are in each report
+(125,026 for the old deck and original architecture). These are numerical models;
+freeform prompts, card rules text and display labels never enter their tensors.
+
+`--collector processes` runs persistent spawned game workers with a single parent
+inference service. Workers send private numerical arrays over dedicated pipes;
+the parent batches requests and owns the model weights. Workers do not execute
+neural models. The same game/action seeds and trajectory format are used with
+`--collector threads`. Checkpoint updates occur only after all jobs finish, and
+inference rejects stale model versions. Spawn avoids forking TensorFlow's live
+runtime. Benchmark warmed collection, including trajectory writing, with:
+
+```sh
+uv run --no-sync python -m examples.benchmark_rustmage_collectors \
+  --output .local/collector-benchmark --games 16
+```
+
+The [matched collection benchmark](benchmarks/foundations-red-separate-collectors-2026-10-18.json)
+used the new deck and frozen independent networks (125,729 actor parameters and
+241,985 critic parameters). Eight warm-up games preceded each 16-game trial;
+startup/warm-up are excluded and trajectory writing is included.
+
+| Collector | Completed games/minute | Mean CPU cores used | Mean inference batch |
+| --- | ---: | ---: | ---: |
+| 4 threads | 23.21 | 1.17 | 1.75 |
+| 4 processes | 36.87 | 1.72 | 1.92 |
+| 8 processes | 48.01 | 2.13 | 2.93 |
+
+Eight processes delivered **2.07×** the four-thread collection throughput in
+this short, fixed-order trial. All 48 games ended naturally, with matching
+outcomes, decisions, action counts, turn counts and final life for all 16 paired
+seeds; model weights did not change. This is game-summary equivalence, not a
+claim of bitwise tensor equivalence. CPU utilization remains below eight full
+cores because workers still wait on central inference. These rates exclude PPO
+updates and do not establish the full-training speedup.
 
 The new RustMage feature schema includes:
 
 - Seat-private visible objects with exact card IDs, zone, relative controller,
   current power/toughness, damage, tap/summoning state, type/color/keyword bits,
   counters and mana value; player life, counts and mana pools.
-- Reviewed partial semantic labels for these ten cards, including red mana,
+- Reviewed partial semantic labels for these eleven cards, including red mana,
   damage, tap/sacrifice costs, cast/entry triggers, graveyard conditions,
-  unblockability and kicker. Effective keywords come from the rules engine.
+  temporary power/first-strike buffs, damage target types, exile replacements
+  and kicker. Damage and power-bonus amounts are numeric features. Effective
+  keywords come from the rules engine.
 - Turn, phase, active player, typed pending decision, announcing spell identity,
   pending payment, hand/land counts and actor-private numerical observation
   history. The policy observes its own view after each engine action, including
@@ -95,9 +192,9 @@ or claim support for arbitrary X spells or the entire catalogue. Unknown cards,
 decisions and action fields fail visibly. Mono-white neural training is outside
 this experiment. Burn/XMage checkpoints cannot be loaded as RustMage policies.
 
-The training coordinator projects each private native view to the fields actually
-consumed by this encoder before constructing immutable Python objects. This avoids
-copying unrelated mechanics on every action. Integration tests compare every
+The training coordinator borrows each worker-owned private native view through
+shallow internal records, avoiding recursive immutable copies on every action.
+The public adapter retains its immutable snapshot contract. Integration tests compare every
 model tensor, decision and private-history delta with the full adapter through a
 complete game. The repeat detector still hashes the full private native state,
 and every selected action still passes RustMage's actor/revision/legality checks.
@@ -155,7 +252,155 @@ Neural training also pays for observation encoding, batched network inference,
 trajectory storage and gradient updates. Its throughput must be measured
 separately; multiplying the old neural games/minute by 20 is not justified.
 
-## Measured run: October 18, 2026
+## Independent actor/critic: 1,000 games, October 18, 2026
+
+The [complete report](benchmarks/foundations-red-separate-learning-curve-2026-10-18.json)
+records a fresh model with **125,729 actor parameters and 241,985 critic
+parameters**, trained on the current 22-land, 19-creature, 19-instant deck.
+The experiment retained 40 rounds of 25 self-play games, two update epochs,
+batch size 32, learning rate 0.0003 and seed 721. Collection used eight spawned
+processes and centralized batched inference. All **1,000 training games ended
+naturally**, yielding 360,262 decisions, with no errors, draws or cutoffs.
+Rewards remained terminal +1/−1/0 only.
+
+The same 40 held-out seeds, seats and starting-player assignments were evaluated
+at game zero and every 100 games. All evaluation games used a completely passive
+opponent, sampled actions and a horizon of 25 own turns. A failed attempt scores
+26 for the evaluation-only failure-adjusted metric; this never enters training.
+
+| Self-play games | Successful kills | Mean own turns among wins | Failure-adjusted score |
+| ---: | ---: | ---: | ---: |
+| 0 | 30/40 | 17.000 | 19.250 |
+| 100 | 35/40 | 17.314 | 18.400 |
+| 200 | 38/40 | 16.132 | 16.625 |
+| 300 | 34/40 | 14.941 | 16.600 |
+| 400 | 40/40 | 15.250 | 15.250 |
+| 500 | 37/40 | 14.676 | 15.525 |
+| 600 | 38/40 | 13.737 | 14.350 |
+| 700 | 39/40 | 14.615 | 14.900 |
+| 800 | 39/40 | 15.026 | 15.300 |
+| 900 | 40/40 | 12.650 | 12.650 |
+| 1,000 | 40/40 | 12.625 | 12.625 |
+
+![Independent actor/critic learning curve](benchmarks/foundations-red-separate-learning-curve-2026-10-18.png)
+
+At the fixed endpoint, the failure-adjusted score improved by **6.625 turns
+(34.4%)**, with a paired 95% bootstrap interval of **5.050–8.325 turns**.
+Of the 40 paired attempts, 36 improved, three worsened and one tied. The initial
+ten failures were timeouts, so the wins-only means describe different subsets
+and should be read alongside completion rates. Across all checkpoints, 410 of
+440 evaluation attempts won and 30 timed out. The scripted baseline won 40/40
+at **6.45 turns**, still substantially faster than the learned policy.
+
+![Independent actor/critic losses](benchmarks/foundations-red-separate-learning-curve-2026-10-18-losses.png)
+
+The policy improved at this execution metric, but the critic did not become a
+useful outcome predictor. Its final post-update MSE was **1.0022**; always
+predicting zero would give exactly 1 on these ±1 targets. An
+[audit of recorded behavior predictions](benchmarks/foundations-red-separate-learning-curve-2026-10-18-critic-audit.json)
+on the final 125 games found MSE **1.0074** and explained variance **−0.00053**.
+Within each of those five rounds, predictions were nearly constant, with
+standard deviations of only 0.0012–0.0029. Those predictions were recorded
+before learning from each batch, using five successive behavior checkpoints;
+they are not a fixed final-model validation set. Synthetic tests establish that
+critic gradients can fit a simple diagnostic and leave the actor unchanged;
+that capability did not translate into useful value learning in this run.
+
+One candidate for the next investigation is critic batch composition: streaming
+batches are grouped by trajectory, so many consecutive minibatches carry one
+terminal label. Mixing decisions across games could reduce that correlation.
+This is a hypothesis, not an established explanation. The deck also changed
+between experiments, so these results do not isolate the effect of separating
+the networks. A same-deck comparison is needed for that conclusion.
+
+The entire experiment took **54.3 minutes**, including evaluations and baseline
+games. Self-play collection took **843.68 seconds (14.1 minutes)**, and updates
+took **2,265.57 seconds (37.8 minutes)**, about 70% of total runtime. Throughput
+was **71.12 collection games/minute**, or **19.30 games/minute including
+updates**, excluding evaluation and checkpoint overhead. The inference service
+averaged 3.42 requests per batch and traced its graph once. The matched frozen
+model benchmark above establishes the collection speedup; the full-run rate
+also reflects changing game lengths and cannot serve as a collector comparison.
+
+The final local checkpoint is
+`.local/red-separate-1000-2026-10-18/checkpoints/round-0040/policy.keras`, SHA-256
+`9a512b850b71140350c7ad9ca3a7910165382e95b0dc6de482fb529f6016439b`.
+Both networks and both optimizer states are saved. Validation passed **307
+tests**, including independent gradients, actor rollback preserving the critic,
+checkpoint/optimizer/RNG restoration, and process-collector equivalence. A small
+end-to-end resumed run passed before the main experiment. The final
+[run audit](benchmarks/foundations-red-separate-learning-curve-2026-10-18-audit.json)
+verified all training outcomes, terminal returns, fixed evaluation seeds,
+passive-opponent actions, checkpoint/source/library hashes and accepted KL
+limits. Both final figures were rendered and inspected.
+
+Figures are also available as [learning-curve SVG](benchmarks/foundations-red-separate-learning-curve-2026-10-18.svg)
+and [loss SVG](benchmarks/foundations-red-separate-learning-curve-2026-10-18-losses.svg),
+with [evaluation CSV](benchmarks/foundations-red-separate-learning-curve-2026-10-18.csv)
+and [training diagnostics CSV](benchmarks/foundations-red-separate-learning-curve-2026-10-18-losses.csv).
+
+## Original shared-encoder 1,000-game run: October 18, 2026
+
+The [learning-curve report](benchmarks/foundations-red-learning-curve-2026-10-18.json)
+records a **fresh model**, 40 PPO rounds of 25 mono-red mirror games, and
+266,967 recorded decisions. All 1,000 games ended naturally, with no errors,
+draws or compute cutoffs. Rewards remained terminal +1/−1/0 only. The same
+40 held-out goldfish seeds were evaluated at every 100-game boundary,
+including game zero; all **440 evaluation attempts were wins**.
+
+| Self-play games | Mean own turns to win |
+| ---: | ---: |
+| 0 | 15.025 |
+| 100 | 13.050 |
+| 200 | 11.900 |
+| 300 | 11.100 |
+| 400 | 9.400 |
+| 500 | 9.350 |
+| 600 | 8.775 |
+| 700 | 8.250 |
+| 800 | 8.300 |
+| 900 | 8.050 |
+| 1,000 | 7.775 |
+
+![Held-out kill-turn learning curve](benchmarks/foundations-red-learning-curve-2026-10-18.png)
+
+The fixed 1,000-game endpoint used **48.3% fewer turns** than the fresh policy,
+improving on all 40 paired attempts. The mean reduction was **7.25 turns**,
+with a paired 95% bootstrap interval of **6.325–8.275 turns**. Median kill turn
+fell from 14 to 7; kills by turn 10 increased from 0/40 to 37/40. The scripted
+baseline still kills faster, at 6.075 turns. This is evidence of better basic
+execution in one training run, not a measured competitive win rate. The
+endpoint was fixed in advance rather than selected from the intermediate
+evaluations.
+
+![PPO losses and entropy](benchmarks/foundations-red-learning-curve-2026-10-18-losses.png)
+
+The loss figure reports total PPO loss, policy loss, critic MSE and policy
+entropy after every update. Critic MSE remained around 1 overall, without a
+clear sustained improvement; the kill-turn improvement does not establish a
+strong value predictor. These are measurements on changing self-play data,
+not a fixed validation set. Three oversized epoch attempts were rolled back
+and retried; every round accepted an update within both KL limits.
+
+The figures are also available as [learning-curve SVG](benchmarks/foundations-red-learning-curve-2026-10-18.svg)
+and [loss SVG](benchmarks/foundations-red-learning-curve-2026-10-18-losses.svg),
+with [evaluation CSV](benchmarks/foundations-red-learning-curve-2026-10-18.csv)
+and [training diagnostics CSV](benchmarks/foundations-red-learning-curve-2026-10-18-losses.csv).
+
+The timed experiment took **31.6 minutes**, including the 440 neural evaluation
+games and 40 scripted baseline games. Self-play collection took 1,098.67 seconds
+and PPO updates 590.95 seconds: **54.61 collection games/minute**, or **35.51
+games/minute including updates**, excluding evaluation and checkpoint overhead.
+
+The final local checkpoint is
+`.local/red-curve-1000-2026-10-18/checkpoints/round-0040/policy.keras`, SHA-256
+`c9aa7483d00602ccbccac7e6b8ea34e430c6663b04853bcdbdb7ab959399c6a3`.
+Validation covered a small end-to-end run, recovery after removing the latest
+round/evaluation from its report, two summary tests, and a final audit of all
+training outcomes, evaluation seeds, source hashes, checkpoint hashes and
+accepted-update limits. Both final figures were rendered and inspected.
+
+## Earlier 1,024-game run: October 18, 2026
 
 The [complete experiment report](benchmarks/foundations-red-ppo-2026-10-18.json)
 records **1,024 natural terminal self-play games**, 32 PPO rounds and 306,223

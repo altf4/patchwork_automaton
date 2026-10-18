@@ -1,0 +1,71 @@
+{
+  "scope": "Recorded behavior predictions on the final 125 self-play games, before learning from each batch; five successive behavior checkpoints, not a fixed final-model validation set.",
+  "rounds": [
+    {
+      "round": 36,
+      "samples": 7424,
+      "prediction_mean": 0.09846404276222215,
+      "prediction_std": 0.001432661907213772,
+      "prediction_min": 0.08633071184158325,
+      "prediction_max": 0.10015114396810532,
+      "fresh_mse": 1.0013566433347556,
+      "zero_baseline_mse": 1.0,
+      "explained_variance": 0.00011570531381166482,
+      "equal_game_weighted_mse": 0.9916225219213815
+    },
+    {
+      "round": 37,
+      "samples": 7669,
+      "prediction_mean": 0.10173263401570291,
+      "prediction_std": 0.002908016360697866,
+      "prediction_min": 0.08428134769201279,
+      "prediction_max": 0.1041753962635994,
+      "fresh_mse": 1.0021272879547058,
+      "zero_baseline_mse": 1.0,
+      "explained_variance": 7.738675081836455e-05,
+      "equal_game_weighted_mse": 1.0019305515057713
+    },
+    {
+      "round": 38,
+      "samples": 7026,
+      "prediction_mean": 0.10107508979879856,
+      "prediction_std": 0.0013017671724903893,
+      "prediction_min": 0.09557512402534485,
+      "prediction_max": 0.10467124730348587,
+      "fresh_mse": 1.0148798018518703,
+      "zero_baseline_mse": 1.0,
+      "explained_variance": 0.00017011994157989374,
+      "equal_game_weighted_mse": 1.0083942483295136
+    },
+    {
+      "round": 39,
+      "samples": 8255,
+      "prediction_mean": 0.08323825342791648,
+      "prediction_std": 0.0029051345498615736,
+      "prediction_min": 0.07821735739707947,
+      "prediction_max": 0.09238117933273315,
+      "fresh_mse": 1.0019744043274221,
+      "zero_baseline_mse": 1.0,
+      "explained_variance": 5.372923746205238e-05,
+      "equal_game_weighted_mse": 0.9978972612550869
+    },
+    {
+      "round": 40,
+      "samples": 8993,
+      "prediction_mean": 0.142742714603658,
+      "prediction_std": 0.001240047959476362,
+      "prediction_min": 0.13410498201847076,
+      "prediction_max": 0.14402885735034943,
+      "fresh_mse": 1.0158806653987071,
+      "zero_baseline_mse": 1.0,
+      "explained_variance": 1.8735321196450272e-05,
+      "equal_game_weighted_mse": 1.0069355757276652
+    }
+  ],
+  "aggregate": {
+    "samples": 39367,
+    "mse": 1.0073677168924875,
+    "zero_baseline_mse": 1.0,
+    "explained_variance": -0.0005346207286855975
+  }
+}

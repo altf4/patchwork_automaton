@@ -135,20 +135,27 @@ class RustNeuralTests(unittest.TestCase):
 
     def test_full_native_game_encodes_payments_targets_and_triggers(self):
         async def run():
-            with RustMageMatch(foundations_deck('red'),seed=45) as match:
-                kinds=set();encoder=RustMageEncoder();policy=FoundationsAggro()
+            # This shuffle exercises all five instants and simultaneous triggers.
+            with RustMageMatch(foundations_deck('red'),seed=48) as match:
+                kinds=set();targeted=set();encoder=RustMageEncoder();policy=FoundationsAggro()
                 for _ in range(2000):
                     raw=match._raw('P0')
-                    if raw['outcome']:return kinds
+                    if raw['outcome']:return kinds,targeted
                     game=match.games['player_'+raw['actor'][-1]]
                     obs=await game.snapshot();encoded=encoder.encode(obs)
                     chosen=policy.choose(obs)
                     self.assertIn(chosen,encoded.responses)
+                    action=encoded.actions[encoded.responses.index(chosen)]
+                    if action['kind']=='ChooseTarget':
+                        pending=raw.get('announcing') or raw.get('resolving') or {}
+                        targeted.add(pending.get('source_card'))
                     kinds.add(obs.decision.kind)
                     await game.submit(obs.decision.token,chosen)
                 self.fail('Game did not finish')
-        kinds=asyncio.run(run())
+        kinds,targeted=asyncio.run(run())
         self.assertTrue({'priority','pay_costs','targets','order_triggers'}<=kinds)
+        self.assertTrue({'Burst Lightning','Kindled Fury','Sure Strike',
+                         'Scorching Dragonfire','Fiery Annihilation'}<=targeted)
 
     def test_compact_views_preserve_every_tensor_and_private_history(self):
         async def run():

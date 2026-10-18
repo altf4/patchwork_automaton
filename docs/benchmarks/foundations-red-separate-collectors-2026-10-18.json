@@ -1,0 +1,4226 @@
+{
+  "games": 16,
+  "encoder": {
+    "backend": "rustmage",
+    "feature_version": 2,
+    "observation_schema": 131,
+    "rustmage_revision": "78d717856af36274018634b54a3fc8cbacf4c829",
+    "deck": {
+      "name": "Foundations Red Aggro",
+      "cards": [
+        {
+          "name": "Mountain",
+          "quantity": 22,
+          "set_code": "FDN",
+          "collector_number": "278"
+        },
+        {
+          "name": "Fanatical Firebrand",
+          "quantity": 4,
+          "set_code": "FDN",
+          "collector_number": "195"
+        },
+        {
+          "name": "Ghitu Lavarunner",
+          "quantity": 4,
+          "set_code": "FDN",
+          "collector_number": "623"
+        },
+        {
+          "name": "Firebrand Archer",
+          "quantity": 4,
+          "set_code": "FDN",
+          "collector_number": "196"
+        },
+        {
+          "name": "Viashino Pyromancer",
+          "quantity": 4,
+          "set_code": "FDN",
+          "collector_number": "634"
+        },
+        {
+          "name": "Firespitter Whelp",
+          "quantity": 3,
+          "set_code": "FDN",
+          "collector_number": "197"
+        },
+        {
+          "name": "Burst Lightning",
+          "quantity": 4,
+          "set_code": "FDN",
+          "collector_number": "192"
+        },
+        {
+          "name": "Kindled Fury",
+          "quantity": 4,
+          "set_code": "FDN",
+          "collector_number": "542"
+        },
+        {
+          "name": "Sure Strike",
+          "quantity": 4,
+          "set_code": "FDN",
+          "collector_number": "209"
+        },
+        {
+          "name": "Scorching Dragonfire",
+          "quantity": 4,
+          "set_code": "FDN",
+          "collector_number": "545"
+        },
+        {
+          "name": "Fiery Annihilation",
+          "quantity": 3,
+          "set_code": "FDN",
+          "collector_number": "86"
+        }
+      ]
+    },
+    "cards": [
+      "Mountain",
+      "Fanatical Firebrand",
+      "Ghitu Lavarunner",
+      "Firebrand Archer",
+      "Viashino Pyromancer",
+      "Firespitter Whelp",
+      "Burst Lightning",
+      "Kindled Fury",
+      "Sure Strike",
+      "Scorching Dragonfire",
+      "Fiery Annihilation"
+    ],
+    "facts": {
+      "Mountain": {
+        "mana_cost": "",
+        "type_line": "Basic Land \u2014 Mountain",
+        "oracle_id": "a3fb7228-e76b-4e96-a40e-20b5fed75685",
+        "mana_value": 0,
+        "definition_path": "src/card_definitions/fra/mountain.json",
+        "definition_sha256": "9a1fa2974d16b42b2a40ae93993e34d7be3ebd405e8f86daa870cab93ef2a81e"
+      },
+      "Fanatical Firebrand": {
+        "mana_cost": "{R}",
+        "type_line": "Creature \u2014 Goblin Pirate",
+        "oracle_id": "d36e11f1-6ab3-4273-8114-a8fbbe21c1c3",
+        "mana_value": 1,
+        "definition_path": "src/card_definitions/fdn/fanatical_firebrand.json",
+        "definition_sha256": "57faece9712bb58ae952ad2e6f90c877e33256c5f2c39a0087dab649f0209dbb"
+      },
+      "Ghitu Lavarunner": {
+        "mana_cost": "{R}",
+        "type_line": "Creature \u2014 Human Wizard",
+        "oracle_id": "8e3f4987-6f31-4bc5-8bcd-6adb0440ee7c",
+        "mana_value": 1,
+        "definition_path": "src/card_definitions/fdn/ghitu_lavarunner.json",
+        "definition_sha256": "c0c273f6eae583c7cdc2eeecca6ea1a555fabdd26db6c8cebb4e40287a5a436a"
+      },
+      "Firebrand Archer": {
+        "mana_cost": "{1}{R}",
+        "type_line": "Creature \u2014 Human Archer",
+        "oracle_id": "2e9289d6-dbc6-456d-88cf-d1f534e731d6",
+        "mana_value": 2,
+        "definition_path": "src/card_definitions/fdn/firebrand_archer.json",
+        "definition_sha256": "fd5687e31cc11563dff7feb82bfea2481bc97b38aca372954d61391dab912445"
+      },
+      "Viashino Pyromancer": {
+        "mana_cost": "{1}{R}",
+        "type_line": "Creature \u2014 Lizard Wizard",
+        "oracle_id": "5e78e6e0-60f0-4c3c-b8dd-bd673f5152b8",
+        "mana_value": 2,
+        "definition_path": "src/card_definitions/fdn/viashino_pyromancer.json",
+        "definition_sha256": "daf1143c96d74425f3ce08ef215d33fb44ff267b2db8237604e1be71602fbaa1"
+      },
+      "Firespitter Whelp": {
+        "mana_cost": "{2}{R}",
+        "type_line": "Creature \u2014 Dragon",
+        "oracle_id": "1cad92ce-55c8-4b78-8d8c-56645ef8e6ee",
+        "mana_value": 3,
+        "definition_path": "src/card_definitions/fdn/firespitter_whelp.json",
+        "definition_sha256": "fd92d45c4511f2644718f349db80dc577683bbfda1e2ac22783624c4408591eb"
+      },
+      "Burst Lightning": {
+        "mana_cost": "{R}",
+        "type_line": "Instant",
+        "oracle_id": "ac2086fe-98ee-4280-9c7c-c5c2d6548a8b",
+        "mana_value": 1,
+        "definition_path": "src/card_definitions/fdn/burst_lightning.json",
+        "definition_sha256": "a9dd3d95917f36a0d7cb7fe7c27536a2dccec322c9f41d66a2bce4c0a19eb11f"
+      },
+      "Kindled Fury": {
+        "mana_cost": "{R}",
+        "type_line": "Instant",
+        "oracle_id": "ebeee06e-3345-4f02-896f-cb0b2cfa5548",
+        "mana_value": 1,
+        "definition_path": "src/card_definitions/fdn/kindled_fury.json",
+        "definition_sha256": "35e41219924ee336b0210a23633aa68d23aff323cd070a63d6c997d4e33c9bfd"
+      },
+      "Sure Strike": {
+        "mana_cost": "{1}{R}",
+        "type_line": "Instant",
+        "oracle_id": "fb694e7e-f66e-4958-b6ed-aa74bc9ac43e",
+        "mana_value": 2,
+        "definition_path": "src/card_definitions/fdn/sure_strike.json",
+        "definition_sha256": "02474fb9ad5ddf26bf8832a679f5dcbe8f690f201e8ec7d78a6bc9c8e9cbc20e"
+      },
+      "Scorching Dragonfire": {
+        "mana_cost": "{1}{R}",
+        "type_line": "Instant",
+        "oracle_id": "d14f313c-fea6-49c4-8197-5b74ee584a6b",
+        "mana_value": 2,
+        "definition_path": "src/card_definitions/fdn/scorching_dragonfire.json",
+        "definition_sha256": "c5be249d7fa983245773ea21cd1ee1c2b4d56a5845d6438d877368ffeac545eb"
+      },
+      "Fiery Annihilation": {
+        "mana_cost": "{2}{R}",
+        "type_line": "Instant",
+        "oracle_id": "d44f3724-17b7-48f0-885d-75292669f971",
+        "mana_value": 3,
+        "definition_path": "src/card_definitions/fdn/fiery_annihilation.json",
+        "definition_sha256": "2cbb67a8d3f0e17d4a3375b7d8649a84f8ff39782fb33e45c5a82be51592a4c5"
+      }
+    },
+    "semantic_tags": [
+      "red_mana",
+      "tap_cost",
+      "sacrifice_source",
+      "damage_any",
+      "damage_opponent",
+      "entry_trigger",
+      "noncreature_cast_trigger",
+      "dragon_cast_trigger",
+      "two_instants_sorceries_graveyard",
+      "grant_haste",
+      "grant_power",
+      "until_end_turn",
+      "kicker",
+      "grant_first_strike",
+      "damage_creature",
+      "damage_planeswalker",
+      "exile_if_dies_this_turn",
+      "exile_attached_equipment"
+    ],
+    "semantic_labels": {
+      "Mountain": [
+        "red_mana",
+        "tap_cost"
+      ],
+      "Fanatical Firebrand": [
+        "tap_cost",
+        "sacrifice_source",
+        "damage_any"
+      ],
+      "Ghitu Lavarunner": [
+        "two_instants_sorceries_graveyard",
+        "grant_haste",
+        "grant_power"
+      ],
+      "Firebrand Archer": [
+        "noncreature_cast_trigger",
+        "damage_opponent"
+      ],
+      "Viashino Pyromancer": [
+        "entry_trigger",
+        "damage_opponent"
+      ],
+      "Firespitter Whelp": [
+        "noncreature_cast_trigger",
+        "dragon_cast_trigger",
+        "damage_opponent"
+      ],
+      "Burst Lightning": [
+        "damage_any",
+        "kicker"
+      ],
+      "Kindled Fury": [
+        "grant_power",
+        "grant_first_strike",
+        "until_end_turn"
+      ],
+      "Sure Strike": [
+        "grant_power",
+        "grant_first_strike",
+        "until_end_turn"
+      ],
+      "Scorching Dragonfire": [
+        "damage_creature",
+        "damage_planeswalker",
+        "exile_if_dies_this_turn"
+      ],
+      "Fiery Annihilation": [
+        "damage_creature",
+        "exile_if_dies_this_turn",
+        "exile_attached_equipment"
+      ]
+    },
+    "semantics": {
+      "Mountain": [
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0
+      ],
+      "Fanatical Firebrand": [
+        1.0,
+        0.0,
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.13862943611198905,
+        1.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0
+      ],
+      "Ghitu Lavarunner": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0,
+        0.13862943611198905,
+        1.0
+      ],
+      "Firebrand Archer": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.13862943611198905,
+        1.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0
+      ],
+      "Viashino Pyromancer": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.21972245773362192,
+        1.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0
+      ],
+      "Firespitter Whelp": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.13862943611198905,
+        1.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0
+      ],
+      "Burst Lightning": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.21972245773362192,
+        1.0,
+        0.32188758248682003,
+        1.0,
+        0.0,
+        1.0
+      ],
+      "Kindled Fury": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0,
+        0.13862943611198905,
+        1.0
+      ],
+      "Sure Strike": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        1.0,
+        0.0,
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0,
+        0.2772588722239781,
+        1.0
+      ],
+      "Scorching Dragonfire": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        1.0,
+        1.0,
+        0.0,
+        0.2772588722239781,
+        1.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0
+      ],
+      "Fiery Annihilation": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0,
+        1.0,
+        0.358351893845611,
+        1.0,
+        0.0,
+        1.0,
+        0.0,
+        1.0
+      ]
+    },
+    "actions": {
+      "Concede": [],
+      "Keep": [],
+      "Mulligan": [],
+      "Bottom": [
+        "card"
+      ],
+      "FinishOpeningHand": [],
+      "Pass": [],
+      "PlayLand": [
+        "card"
+      ],
+      "TapMana": [
+        "card"
+      ],
+      "AnnounceCast": [
+        "card"
+      ],
+      "AnnounceActivate": [
+        "card",
+        "ability",
+        "counter_payment"
+      ],
+      "PayCosts": [
+        "payment"
+      ],
+      "Cast": [
+        "card",
+        "target",
+        "payment"
+      ],
+      "BeginCast": [
+        "card",
+        "payment"
+      ],
+      "Activate": [
+        "card",
+        "ability",
+        "target",
+        "payment",
+        "counter_payment"
+      ],
+      "BeginActivate": [
+        "card",
+        "ability",
+        "payment",
+        "counter_payment"
+      ],
+      "ChooseKicker": [
+        "pay"
+      ],
+      "ChooseTarget": [
+        "target"
+      ],
+      "FinishTargets": [],
+      "Attack": [
+        "card"
+      ],
+      "FinishAttackers": [],
+      "Block": [
+        "blocker",
+        "attacker"
+      ],
+      "FinishBlockers": [],
+      "AssignDamage": [
+        "target",
+        "amount"
+      ],
+      "Discard": [
+        "card"
+      ],
+      "PutTrigger": [
+        "id"
+      ],
+      "ChooseOptional": [
+        "accept"
+      ],
+      "ChooseManaLotSpend": [
+        "amount"
+      ]
+    },
+    "decisions": [
+      "mulligan",
+      "bottom",
+      "opening_hand",
+      "priority",
+      "pay_costs",
+      "kicker",
+      "targets",
+      "attackers",
+      "blockers",
+      "damage",
+      "discard",
+      "order_triggers",
+      "optional_effect",
+      "mana_lot_spend"
+    ],
+    "steps": [
+      "Pregame",
+      "Upkeep",
+      "Draw",
+      "Main1",
+      "BeginCombat",
+      "Attackers",
+      "Blockers",
+      "FirstStrikeDamage",
+      "CombatDamage",
+      "EndCombat",
+      "Main2",
+      "End",
+      "Cleanup"
+    ],
+    "zones": [
+      "player",
+      "hand",
+      "battlefield",
+      "graveyard",
+      "exile",
+      "stack",
+      "command",
+      "library"
+    ],
+    "counters": [
+      "plus_one",
+      "minus_one",
+      "stun",
+      "loyalty",
+      "lore"
+    ],
+    "flags": [
+      "tapped",
+      "summoning_sick",
+      "attacking",
+      "damaged_this_turn",
+      "dealt_damage_this_turn",
+      "modified"
+    ],
+    "player_stats": [
+      "life",
+      "hand_count",
+      "library_count",
+      "poison_counters",
+      "spells_cast_this_turn",
+      "cards_drawn_this_turn",
+      "life_lost_this_turn",
+      "extra_land_plays_remaining"
+    ],
+    "feature_spec": {
+      "entities": 105,
+      "semantics": 25,
+      "context": 87,
+      "candidates": 408,
+      "history": 40
+    },
+    "allow_concede": false,
+    "scope": "Foundations mono-red mirrors and passive 60-Mountain opponent",
+    "fingerprint": "843e206bf52448b6807200d117adaaf9a3ad42aaac896b63af73fee931de5357"
+  },
+  "weights_sha256": "15997885875f66d7f213d567d1ac416f9cb1788ae3d9fcde65643309547130fe",
+  "runs": [
+    {
+      "collector": "threads",
+      "workers": 4,
+      "seconds": 41.35315279799397,
+      "completed": 16,
+      "games_per_minute": 23.21467494121922,
+      "mean_cpu_cores": 1.1665551065634867,
+      "mean_inference_batch": 1.747336017049491,
+      "games": [
+        {
+          "seed": 71000000,
+          "index": 0,
+          "mode": "selfplay",
+          "seat": 0,
+          "starting_player": "P0",
+          "max_own_turns": 60,
+          "decisions": 1599,
+          "neural_choices": 615,
+          "status": "win",
+          "own_turns_to_win": 28,
+          "trajectories": [
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/threads-4/game-00000-p0.pkl.gz",
+              "samples": 337,
+              "reward": 1.0
+            },
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/threads-4/game-00000-p1.pkl.gz",
+              "samples": 278,
+              "reward": -1.0
+            }
+          ],
+          "actions": {
+            "p0:Mulligan": 1,
+            "p1:Mulligan": 2,
+            "p0:Bottom": 1,
+            "p1:Bottom": 3,
+            "p0:Keep": 1,
+            "p1:Keep": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:Pass": 505,
+            "p1:Pass": 505,
+            "p0:PlayLand": 10,
+            "p0:AnnounceCast": 17,
+            "p0:TapMana": 206,
+            "p0:PayCosts": 18,
+            "p0:FinishAttackers": 27,
+            "p1:PlayLand": 11,
+            "p1:AnnounceCast": 17,
+            "p1:TapMana": 167,
+            "p1:PayCosts": 17,
+            "p1:FinishAttackers": 27,
+            "p0:Activate": 2,
+            "p1:Activate": 3,
+            "p1:Attack": 4,
+            "p0:FinishBlockers": 4,
+            "p0:Attack": 6,
+            "p1:FinishBlockers": 6,
+            "p0:ChooseTarget": 12,
+            "p1:ChooseTarget": 12,
+            "p1:Cast": 2,
+            "p1:ChooseKicker": 2,
+            "p0:Cast": 3,
+            "p0:ChooseKicker": 4,
+            "p0:AnnounceActivate": 1
+          },
+          "winner": 0,
+          "terminal_rewards": [
+            1.0,
+            -1.0
+          ],
+          "own_turns_observed": [
+            28,
+            27
+          ],
+          "final_life": [
+            2,
+            0
+          ],
+          "seconds": 12.152452422989882
+        },
+        {
+          "seed": 71000001,
+          "index": 1,
+          "mode": "selfplay",
+          "seat": 1,
+          "starting_player": "P0",
+          "max_own_turns": 60,
+          "decisions": 1073,
+          "neural_choices": 363,
+          "status": "win",
+          "own_turns_to_win": 19,
+          "trajectories": [
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/threads-4/game-00001-p0.pkl.gz",
+              "samples": 122,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/threads-4/game-00001-p1.pkl.gz",
+              "samples": 241,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p0:Keep": 1,
+            "p1:Mulligan": 1,
+            "p1:Bottom": 1,
+            "p1:Keep": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:Pass": 363,
+            "p1:Pass": 363,
+            "p0:PlayLand": 5,
+            "p0:AnnounceCast": 13,
+            "p0:ChooseKicker": 2,
+            "p0:ChooseTarget": 11,
+            "p0:TapMana": 50,
+            "p0:PayCosts": 13,
+            "p0:FinishAttackers": 20,
+            "p1:PlayLand": 12,
+            "p1:TapMana": 140,
+            "p1:FinishAttackers": 19,
+            "p0:Discard": 3,
+            "p1:AnnounceCast": 12,
+            "p1:PayCosts": 13,
+            "p1:Attack": 4,
+            "p0:FinishBlockers": 4,
+            "p1:ChooseTarget": 6,
+            "p0:Cast": 3,
+            "p0:Activate": 3,
+            "p1:ChooseKicker": 1,
+            "p1:AnnounceActivate": 1,
+            "p0:Block": 1,
+            "p0:Attack": 2,
+            "p1:FinishBlockers": 2,
+            "p1:Activate": 1
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            20,
+            19
+          ],
+          "final_life": [
+            0,
+            13
+          ],
+          "seconds": 6.965121127999737
+        },
+        {
+          "seed": 71000002,
+          "index": 2,
+          "mode": "selfplay",
+          "seat": 0,
+          "starting_player": "P1",
+          "max_own_turns": 60,
+          "decisions": 1047,
+          "neural_choices": 388,
+          "status": "loss",
+          "own_turns_to_win": null,
+          "trajectories": [
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/threads-4/game-00002-p0.pkl.gz",
+              "samples": 215,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/threads-4/game-00002-p1.pkl.gz",
+              "samples": 173,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p1:Keep": 1,
+            "p0:Mulligan": 1,
+            "p0:Bottom": 1,
+            "p0:Keep": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:Pass": 342,
+            "p0:Pass": 340,
+            "p1:FinishAttackers": 19,
+            "p0:FinishAttackers": 18,
+            "p0:PlayLand": 11,
+            "p0:TapMana": 130,
+            "p0:Cast": 2,
+            "p0:Activate": 2,
+            "p1:PlayLand": 8,
+            "p1:AnnounceCast": 14,
+            "p1:ChooseKicker": 1,
+            "p1:ChooseTarget": 6,
+            "p1:TapMana": 93,
+            "p1:PayCosts": 14,
+            "p1:Activate": 2,
+            "p0:AnnounceCast": 11,
+            "p0:PayCosts": 11,
+            "p1:Cast": 1,
+            "p0:ChooseTarget": 7,
+            "p1:Attack": 3,
+            "p0:FinishBlockers": 3,
+            "p0:ChooseKicker": 2,
+            "p0:PutTrigger": 1
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            19,
+            19
+          ],
+          "final_life": [
+            0,
+            18
+          ],
+          "seconds": 7.304335583001375
+        },
+        {
+          "seed": 71000003,
+          "index": 3,
+          "mode": "selfplay",
+          "seat": 1,
+          "starting_player": "P1",
+          "max_own_turns": 60,
+          "decisions": 791,
+          "neural_choices": 303,
+          "status": "loss",
+          "own_turns_to_win": null,
+          "trajectories": [
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/threads-4/game-00003-p0.pkl.gz",
+              "samples": 143,
+              "reward": 1.0
+            },
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/threads-4/game-00003-p1.pkl.gz",
+              "samples": 160,
+              "reward": -1.0
+            }
+          ],
+          "actions": {
+            "p1:Keep": 1,
+            "p0:Keep": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:Pass": 261,
+            "p0:Pass": 261,
+            "p1:PlayLand": 10,
+            "p1:FinishAttackers": 14,
+            "p1:TapMana": 85,
+            "p0:PlayLand": 8,
+            "p0:TapMana": 64,
+            "p0:Cast": 1,
+            "p0:Activate": 1,
+            "p0:FinishAttackers": 14,
+            "p1:AnnounceCast": 9,
+            "p1:PayCosts": 10,
+            "p1:AnnounceActivate": 1,
+            "p1:ChooseTarget": 7,
+            "p0:AnnounceCast": 8,
+            "p0:ChooseKicker": 2,
+            "p0:ChooseTarget": 4,
+            "p0:PayCosts": 8,
+            "p1:Attack": 2,
+            "p0:FinishBlockers": 2,
+            "p0:Attack": 7,
+            "p1:Block": 2,
+            "p1:FinishBlockers": 4,
+            "p1:ChooseKicker": 2
+          },
+          "winner": 0,
+          "terminal_rewards": [
+            1.0,
+            -1.0
+          ],
+          "own_turns_observed": [
+            14,
+            14
+          ],
+          "final_life": [
+            6,
+            0
+          ],
+          "seconds": 5.430477981004515
+        },
+        {
+          "seed": 71000004,
+          "index": 4,
+          "mode": "selfplay",
+          "seat": 0,
+          "starting_player": "P0",
+          "max_own_turns": 60,
+          "decisions": 725,
+          "neural_choices": 248,
+          "status": "win",
+          "own_turns_to_win": 13,
+          "trajectories": [
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/threads-4/game-00004-p0.pkl.gz",
+              "samples": 111,
+              "reward": 1.0
+            },
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/threads-4/game-00004-p1.pkl.gz",
+              "samples": 137,
+              "reward": -1.0
+            }
+          ],
+          "actions": {
+            "p0:Keep": 1,
+            "p1:Keep": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:Pass": 240,
+            "p1:Pass": 240,
+            "p0:PlayLand": 6,
+            "p0:AnnounceCast": 8,
+            "p0:TapMana": 53,
+            "p0:PayCosts": 8,
+            "p0:FinishAttackers": 13,
+            "p1:PlayLand": 10,
+            "p1:TapMana": 72,
+            "p1:FinishAttackers": 12,
+            "p0:ChooseKicker": 2,
+            "p0:ChooseTarget": 5,
+            "p0:Attack": 9,
+            "p1:FinishBlockers": 7,
+            "p1:AnnounceCast": 9,
+            "p1:ChooseKicker": 3,
+            "p1:ChooseTarget": 5,
+            "p1:PayCosts": 9,
+            "p0:Cast": 4,
+            "p1:Activate": 1,
+            "p0:Activate": 1,
+            "p1:Attack": 2,
+            "p0:FinishBlockers": 2
+          },
+          "winner": 0,
+          "terminal_rewards": [
+            1.0,
+            -1.0
+          ],
+          "own_turns_observed": [
+            13,
+            12
+          ],
+          "final_life": [
+            10,
+            0
+          ],
+          "seconds": 5.11867483399692
+        },
+        {
+          "seed": 71000005,
+          "index": 5,
+          "mode": "selfplay",
+          "seat": 1,
+          "starting_player": "P0",
+          "max_own_turns": 60,
+          "decisions": 1570,
+          "neural_choices": 523,
+          "status": "loss",
+          "own_turns_to_win": null,
+          "trajectories": [
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/threads-4/game-00005-p0.pkl.gz",
+              "samples": 247,
+              "reward": 1.0
+            },
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/threads-4/game-00005-p1.pkl.gz",
+              "samples": 276,
+              "reward": -1.0
+            }
+          ],
+          "actions": {
+            "p0:Mulligan": 4,
+            "p1:Mulligan": 1,
+            "p0:Bottom": 10,
+            "p1:Bottom": 1,
+            "p1:Keep": 1,
+            "p0:Keep": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:Pass": 536,
+            "p1:Pass": 537,
+            "p0:PlayLand": 8,
+            "p0:TapMana": 116,
+            "p0:FinishAttackers": 30,
+            "p1:PlayLand": 9,
+            "p1:AnnounceCast": 21,
+            "p1:TapMana": 152,
+            "p1:PayCosts": 21,
+            "p1:FinishAttackers": 29,
+            "p0:AnnounceCast": 15,
+            "p0:ChooseKicker": 4,
+            "p0:ChooseTarget": 10,
+            "p0:PayCosts": 15,
+            "p1:Attack": 2,
+            "p0:FinishBlockers": 2,
+            "p1:Activate": 4,
+            "p1:Cast": 3,
+            "p1:ChooseTarget": 11,
+            "p0:Activate": 3,
+            "p1:ChooseKicker": 2,
+            "p0:Attack": 6,
+            "p1:FinishBlockers": 5,
+            "p0:Cast": 4,
+            "p1:Block": 3,
+            "p0:AssignDamage": 1,
+            "p1:PutTrigger": 1
+          },
+          "winner": 0,
+          "terminal_rewards": [
+            1.0,
+            -1.0
+          ],
+          "own_turns_observed": [
+            30,
+            29
+          ],
+          "final_life": [
+            7,
+            -1
+          ],
+          "seconds": 11.336363370006438
+        },
+        {
+          "seed": 71000006,
+          "index": 6,
+          "mode": "selfplay",
+          "seat": 0,
+          "starting_player": "P1",
+          "max_own_turns": 60,
+          "decisions": 903,
+          "neural_choices": 313,
+          "status": "win",
+          "own_turns_to_win": 16,
+          "trajectories": [
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/threads-4/game-00006-p0.pkl.gz",
+              "samples": 180,
+              "reward": 1.0
+            },
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/threads-4/game-00006-p1.pkl.gz",
+              "samples": 133,
+              "reward": -1.0
+            }
+          ],
+          "actions": {
+            "p1:Mulligan": 2,
+            "p0:Keep": 1,
+            "p1:Bottom": 3,
+            "p1:Keep": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:Pass": 301,
+            "p0:Pass": 301,
+            "p1:PlayLand": 7,
+            "p1:FinishAttackers": 16,
+            "p1:AnnounceCast": 10,
+            "p1:TapMana": 75,
+            "p1:PayCosts": 10,
+            "p0:PlayLand": 10,
+            "p0:TapMana": 93,
+            "p0:AnnounceCast": 10,
+            "p0:PayCosts": 10,
+            "p0:FinishAttackers": 16,
+            "p1:Attack": 2,
+            "p0:FinishBlockers": 2,
+            "p0:Cast": 3,
+            "p0:Activate": 2,
+            "p1:ChooseTarget": 8,
+            "p0:ChooseTarget": 3,
+            "p1:ChooseKicker": 4,
+            "p0:Attack": 3,
+            "p1:FinishBlockers": 3,
+            "p0:PutTrigger": 2,
+            "p0:ChooseKicker": 1,
+            "p0:Block": 1,
+            "p1:Cast": 1
+          },
+          "winner": 0,
+          "terminal_rewards": [
+            1.0,
+            -1.0
+          ],
+          "own_turns_observed": [
+            16,
+            17
+          ],
+          "final_life": [
+            13,
+            0
+          ],
+          "seconds": 6.217360533992178
+        },
+        {
+          "seed": 71000007,
+          "index": 7,
+          "mode": "selfplay",
+          "seat": 1,
+          "starting_player": "P1",
+          "max_own_turns": 60,
+          "decisions": 1126,
+          "neural_choices": 340,
+          "status": "loss",
+          "own_turns_to_win": null,
+          "trajectories": [
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/threads-4/game-00007-p0.pkl.gz",
+              "samples": 161,
+              "reward": 1.0
+            },
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/threads-4/game-00007-p1.pkl.gz",
+              "samples": 179,
+              "reward": -1.0
+            }
+          ],
+          "actions": {
+            "p1:Mulligan": 4,
+            "p0:Keep": 1,
+            "p1:Bottom": 10,
+            "p1:Keep": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:Pass": 390,
+            "p0:Pass": 390,
+            "p1:PlayLand": 7,
+            "p1:FinishAttackers": 21,
+            "p1:TapMana": 81,
+            "p0:PlayLand": 8,
+            "p0:TapMana": 78,
+            "p0:Cast": 2,
+            "p0:FinishAttackers": 21,
+            "p0:AnnounceCast": 16,
+            "p0:ChooseTarget": 11,
+            "p0:PayCosts": 17,
+            "p1:AnnounceCast": 13,
+            "p1:PayCosts": 13,
+            "p1:ChooseTarget": 7,
+            "p0:ChooseKicker": 3,
+            "p1:Activate": 1,
+            "p0:Discard": 1,
+            "p1:Cast": 2,
+            "p0:Attack": 8,
+            "p1:FinishBlockers": 6,
+            "p0:AnnounceActivate": 1,
+            "p0:Activate": 1,
+            "p1:Attack": 5,
+            "p0:FinishBlockers": 2,
+            "p1:Block": 3
+          },
+          "winner": 0,
+          "terminal_rewards": [
+            1.0,
+            -1.0
+          ],
+          "own_turns_observed": [
+            21,
+            21
+          ],
+          "final_life": [
+            6,
+            -1
+          ],
+          "seconds": 7.217537929987884
+        },
+        {
+          "seed": 71000008,
+          "index": 8,
+          "mode": "selfplay",
+          "seat": 0,
+          "starting_player": "P0",
+          "max_own_turns": 60,
+          "decisions": 1429,
+          "neural_choices": 599,
+          "status": "win",
+          "own_turns_to_win": 24,
+          "trajectories": [
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/threads-4/game-00008-p0.pkl.gz",
+              "samples": 310,
+              "reward": 1.0
+            },
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/threads-4/game-00008-p1.pkl.gz",
+              "samples": 289,
+              "reward": -1.0
+            }
+          ],
+          "actions": {
+            "p0:Mulligan": 1,
+            "p1:Keep": 1,
+            "p0:Bottom": 1,
+            "p0:Keep": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:Pass": 445,
+            "p1:Pass": 445,
+            "p0:PlayLand": 12,
+            "p0:AnnounceCast": 13,
+            "p0:TapMana": 179,
+            "p0:PayCosts": 14,
+            "p0:FinishAttackers": 24,
+            "p1:PlayLand": 12,
+            "p1:TapMana": 169,
+            "p1:FinishAttackers": 23,
+            "p0:Attack": 11,
+            "p1:FinishBlockers": 10,
+            "p0:ChooseTarget": 8,
+            "p1:AnnounceCast": 14,
+            "p1:ChooseTarget": 12,
+            "p1:PayCosts": 14,
+            "p1:ChooseKicker": 1,
+            "p1:Cast": 4,
+            "p0:Cast": 3,
+            "p1:Attack": 2,
+            "p0:FinishBlockers": 2,
+            "p0:Activate": 2,
+            "p1:Block": 1,
+            "p0:Block": 1,
+            "p0:AnnounceActivate": 1,
+            "p1:Activate": 1
+          },
+          "winner": 0,
+          "terminal_rewards": [
+            1.0,
+            -1.0
+          ],
+          "own_turns_observed": [
+            24,
+            23
+          ],
+          "final_life": [
+            5,
+            -1
+          ],
+          "seconds": 12.845765532998485
+        },
+        {
+          "seed": 71000009,
+          "index": 9,
+          "mode": "selfplay",
+          "seat": 1,
+          "starting_player": "P0",
+          "max_own_turns": 60,
+          "decisions": 1338,
+          "neural_choices": 457,
+          "status": "win",
+          "own_turns_to_win": 25,
+          "trajectories": [
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/threads-4/game-00009-p0.pkl.gz",
+              "samples": 220,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/threads-4/game-00009-p1.pkl.gz",
+              "samples": 237,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p0:Mulligan": 1,
+            "p1:Mulligan": 1,
+            "p0:Bottom": 1,
+            "p1:Bottom": 1,
+            "p0:Keep": 1,
+            "p1:Keep": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:Pass": 452,
+            "p1:Pass": 453,
+            "p0:PlayLand": 9,
+            "p0:FinishAttackers": 25,
+            "p0:TapMana": 124,
+            "p1:FinishAttackers": 24,
+            "p1:Discard": 1,
+            "p1:PlayLand": 10,
+            "p1:AnnounceCast": 17,
+            "p1:TapMana": 115,
+            "p1:PayCosts": 18,
+            "p1:AnnounceActivate": 1,
+            "p1:ChooseTarget": 14,
+            "p1:ChooseKicker": 3,
+            "p0:AnnounceCast": 16,
+            "p0:ChooseTarget": 11,
+            "p0:PayCosts": 17,
+            "p0:Cast": 4,
+            "p1:Activate": 1,
+            "p0:ChooseKicker": 1,
+            "p0:Attack": 3,
+            "p1:FinishBlockers": 3,
+            "p0:AnnounceActivate": 1,
+            "p1:Cast": 3,
+            "p1:PutTrigger": 1,
+            "p1:Block": 2,
+            "p0:Activate": 1
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            25,
+            25
+          ],
+          "final_life": [
+            0,
+            13
+          ],
+          "seconds": 10.282426428995677
+        },
+        {
+          "seed": 71000010,
+          "index": 10,
+          "mode": "selfplay",
+          "seat": 0,
+          "starting_player": "P1",
+          "max_own_turns": 60,
+          "decisions": 1484,
+          "neural_choices": 595,
+          "status": "win",
+          "own_turns_to_win": 26,
+          "trajectories": [
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/threads-4/game-00010-p0.pkl.gz",
+              "samples": 308,
+              "reward": 1.0
+            },
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/threads-4/game-00010-p1.pkl.gz",
+              "samples": 287,
+              "reward": -1.0
+            }
+          ],
+          "actions": {
+            "p1:Mulligan": 5,
+            "p0:Mulligan": 1,
+            "p1:Bottom": 15,
+            "p0:Bottom": 1,
+            "p0:Keep": 1,
+            "p1:Keep": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:Pass": 475,
+            "p0:Pass": 475,
+            "p1:FinishAttackers": 26,
+            "p0:FinishAttackers": 26,
+            "p1:PlayLand": 10,
+            "p1:TapMana": 146,
+            "p1:AnnounceCast": 11,
+            "p1:PayCosts": 11,
+            "p1:Activate": 3,
+            "p0:PlayLand": 11,
+            "p0:AnnounceCast": 17,
+            "p0:ChooseKicker": 4,
+            "p0:ChooseTarget": 12,
+            "p0:TapMana": 181,
+            "p0:PayCosts": 17,
+            "p1:ChooseKicker": 2,
+            "p1:ChooseTarget": 6,
+            "p0:Activate": 1,
+            "p0:Discard": 1,
+            "p1:Cast": 5,
+            "p0:Attack": 6,
+            "p1:FinishBlockers": 4,
+            "p1:Attack": 1,
+            "p0:FinishBlockers": 1,
+            "p0:Cast": 3,
+            "p0:PutTrigger": 1,
+            "p1:Block": 2
+          },
+          "winner": 0,
+          "terminal_rewards": [
+            1.0,
+            -1.0
+          ],
+          "own_turns_observed": [
+            26,
+            26
+          ],
+          "final_life": [
+            6,
+            -1
+          ],
+          "seconds": 12.328732206005952
+        },
+        {
+          "seed": 71000011,
+          "index": 11,
+          "mode": "selfplay",
+          "seat": 1,
+          "starting_player": "P1",
+          "max_own_turns": 60,
+          "decisions": 852,
+          "neural_choices": 232,
+          "status": "loss",
+          "own_turns_to_win": null,
+          "trajectories": [
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/threads-4/game-00011-p0.pkl.gz",
+              "samples": 111,
+              "reward": 1.0
+            },
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/threads-4/game-00011-p1.pkl.gz",
+              "samples": 121,
+              "reward": -1.0
+            }
+          ],
+          "actions": {
+            "p1:Mulligan": 2,
+            "p0:Mulligan": 1,
+            "p1:Bottom": 3,
+            "p0:Bottom": 1,
+            "p0:Keep": 1,
+            "p1:Keep": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:Pass": 310,
+            "p0:Pass": 309,
+            "p1:FinishAttackers": 17,
+            "p1:PlayLand": 5,
+            "p1:TapMana": 54,
+            "p0:PlayLand": 5,
+            "p0:TapMana": 49,
+            "p0:FinishAttackers": 17,
+            "p1:AnnounceCast": 10,
+            "p1:ChooseKicker": 3,
+            "p1:ChooseTarget": 8,
+            "p1:PayCosts": 10,
+            "p0:AnnounceCast": 10,
+            "p0:PayCosts": 10,
+            "p0:Activate": 1,
+            "p0:ChooseKicker": 3,
+            "p0:ChooseTarget": 7,
+            "p1:Activate": 1,
+            "p0:Discard": 2,
+            "p1:Discard": 1,
+            "p0:Cast": 2,
+            "p1:Cast": 2,
+            "p0:Attack": 3,
+            "p1:FinishBlockers": 2
+          },
+          "winner": 0,
+          "terminal_rewards": [
+            1.0,
+            -1.0
+          ],
+          "own_turns_observed": [
+            17,
+            18
+          ],
+          "final_life": [
+            12,
+            0
+          ],
+          "seconds": 5.17348981599207
+        },
+        {
+          "seed": 71000012,
+          "index": 12,
+          "mode": "selfplay",
+          "seat": 0,
+          "starting_player": "P0",
+          "max_own_turns": 60,
+          "decisions": 2293,
+          "neural_choices": 1068,
+          "status": "loss",
+          "own_turns_to_win": null,
+          "trajectories": [
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/threads-4/game-00012-p0.pkl.gz",
+              "samples": 491,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/threads-4/game-00012-p1.pkl.gz",
+              "samples": 577,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p0:Mulligan": 2,
+            "p1:Mulligan": 2,
+            "p0:Bottom": 3,
+            "p1:Bottom": 3,
+            "p0:Keep": 1,
+            "p1:Keep": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:Pass": 687,
+            "p1:Pass": 683,
+            "p0:PlayLand": 15,
+            "p0:AnnounceCast": 17,
+            "p0:ChooseKicker": 4,
+            "p0:ChooseTarget": 15,
+            "p0:TapMana": 298,
+            "p0:PayCosts": 17,
+            "p0:FinishAttackers": 38,
+            "p1:FinishAttackers": 37,
+            "p1:PlayLand": 16,
+            "p1:TapMana": 359,
+            "p1:AnnounceCast": 20,
+            "p1:ChooseKicker": 4,
+            "p1:ChooseTarget": 15,
+            "p1:PayCosts": 20,
+            "p1:Activate": 3,
+            "p0:Activate": 4,
+            "p1:Cast": 6,
+            "p0:Cast": 9,
+            "p0:Attack": 3,
+            "p1:FinishBlockers": 2,
+            "p1:Attack": 3,
+            "p0:FinishBlockers": 3,
+            "p0:Block": 1
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            38,
+            38
+          ],
+          "final_life": [
+            0,
+            1
+          ],
+          "seconds": 17.857242018988472
+        },
+        {
+          "seed": 71000013,
+          "index": 13,
+          "mode": "selfplay",
+          "seat": 1,
+          "starting_player": "P0",
+          "max_own_turns": 60,
+          "decisions": 735,
+          "neural_choices": 251,
+          "status": "win",
+          "own_turns_to_win": 13,
+          "trajectories": [
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/threads-4/game-00013-p0.pkl.gz",
+              "samples": 120,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/threads-4/game-00013-p1.pkl.gz",
+              "samples": 131,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p0:Mulligan": 1,
+            "p1:Keep": 1,
+            "p0:Bottom": 1,
+            "p0:Keep": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:Pass": 254,
+            "p1:Pass": 256,
+            "p0:PlayLand": 7,
+            "p0:TapMana": 57,
+            "p0:Cast": 3,
+            "p0:FinishAttackers": 13,
+            "p1:FinishAttackers": 13,
+            "p1:PlayLand": 7,
+            "p1:AnnounceCast": 9,
+            "p1:ChooseKicker": 2,
+            "p1:ChooseTarget": 6,
+            "p1:TapMana": 55,
+            "p1:PayCosts": 9,
+            "p0:AnnounceCast": 7,
+            "p0:ChooseTarget": 5,
+            "p0:PayCosts": 7,
+            "p0:Attack": 2,
+            "p1:Block": 2,
+            "p1:FinishBlockers": 2,
+            "p1:Cast": 3,
+            "p0:Activate": 1,
+            "p1:Attack": 4,
+            "p0:FinishBlockers": 3,
+            "p1:PutTrigger": 2
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            14,
+            13
+          ],
+          "final_life": [
+            0,
+            16
+          ],
+          "seconds": 4.93560941600299
+        },
+        {
+          "seed": 71000014,
+          "index": 14,
+          "mode": "selfplay",
+          "seat": 0,
+          "starting_player": "P1",
+          "max_own_turns": 60,
+          "decisions": 1253,
+          "neural_choices": 533,
+          "status": "loss",
+          "own_turns_to_win": null,
+          "trajectories": [
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/threads-4/game-00014-p0.pkl.gz",
+              "samples": 235,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/threads-4/game-00014-p1.pkl.gz",
+              "samples": 298,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p1:Keep": 1,
+            "p0:Keep": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:Pass": 387,
+            "p0:Pass": 388,
+            "p1:PlayLand": 13,
+            "p1:FinishAttackers": 21,
+            "p1:TapMana": 188,
+            "p0:PlayLand": 10,
+            "p0:AnnounceCast": 12,
+            "p0:ChooseKicker": 1,
+            "p0:ChooseTarget": 9,
+            "p0:TapMana": 128,
+            "p0:PayCosts": 12,
+            "p0:FinishAttackers": 21,
+            "p0:Activate": 1,
+            "p1:AnnounceCast": 11,
+            "p1:ChooseKicker": 2,
+            "p1:ChooseTarget": 6,
+            "p1:PayCosts": 11,
+            "p0:Attack": 3,
+            "p1:FinishBlockers": 3,
+            "p0:Cast": 5,
+            "p1:Cast": 2,
+            "p1:Activate": 1,
+            "p1:Attack": 6,
+            "p0:FinishBlockers": 3,
+            "p0:Block": 3,
+            "p1:AssignDamage": 2
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            21,
+            22
+          ],
+          "final_life": [
+            0,
+            6
+          ],
+          "seconds": 10.259606366991648
+        },
+        {
+          "seed": 71000015,
+          "index": 15,
+          "mode": "selfplay",
+          "seat": 1,
+          "starting_player": "P1",
+          "max_own_turns": 60,
+          "decisions": 1400,
+          "neural_choices": 551,
+          "status": "win",
+          "own_turns_to_win": 25,
+          "trajectories": [
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/threads-4/game-00015-p0.pkl.gz",
+              "samples": 228,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/threads-4/game-00015-p1.pkl.gz",
+              "samples": 323,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p1:Keep": 1,
+            "p0:Mulligan": 3,
+            "p0:Bottom": 6,
+            "p0:Keep": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:Pass": 451,
+            "p0:Pass": 450,
+            "p1:PlayLand": 11,
+            "p1:AnnounceCast": 13,
+            "p1:ChooseKicker": 3,
+            "p1:ChooseTarget": 6,
+            "p1:TapMana": 184,
+            "p1:PayCosts": 13,
+            "p1:FinishAttackers": 25,
+            "p0:PlayLand": 9,
+            "p0:TapMana": 131,
+            "p0:FinishAttackers": 24,
+            "p0:AnnounceCast": 13,
+            "p0:PayCosts": 13,
+            "p1:Cast": 6,
+            "p0:Cast": 4,
+            "p0:ChooseTarget": 9,
+            "p1:Attack": 7,
+            "p0:FinishBlockers": 7,
+            "p1:Activate": 2,
+            "p0:Activate": 2,
+            "p0:ChooseKicker": 2,
+            "p0:Attack": 1,
+            "p1:FinishBlockers": 1
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            24,
+            25
+          ],
+          "final_life": [
+            0,
+            8
+          ],
+          "seconds": 9.821387526986655
+        }
+      ],
+      "matching_game_summaries_against_threads": 16
+    },
+    {
+      "collector": "processes",
+      "workers": 4,
+      "seconds": 26.034685933002038,
+      "completed": 16,
+      "games_per_minute": 36.8738844198265,
+      "mean_cpu_cores": 1.7200570883489943,
+      "mean_inference_batch": 1.9176195426195426,
+      "games": [
+        {
+          "seed": 71000000,
+          "index": 0,
+          "mode": "selfplay",
+          "seat": 0,
+          "starting_player": "P0",
+          "max_own_turns": 60,
+          "decisions": 1599,
+          "neural_choices": 615,
+          "status": "win",
+          "own_turns_to_win": 28,
+          "trajectories": [
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-4/game-00000-p0.pkl.gz",
+              "samples": 337,
+              "reward": 1.0
+            },
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-4/game-00000-p1.pkl.gz",
+              "samples": 278,
+              "reward": -1.0
+            }
+          ],
+          "actions": {
+            "p0:Mulligan": 1,
+            "p1:Mulligan": 2,
+            "p0:Bottom": 1,
+            "p1:Bottom": 3,
+            "p0:Keep": 1,
+            "p1:Keep": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:Pass": 505,
+            "p1:Pass": 505,
+            "p0:PlayLand": 10,
+            "p0:AnnounceCast": 17,
+            "p0:TapMana": 206,
+            "p0:PayCosts": 18,
+            "p0:FinishAttackers": 27,
+            "p1:PlayLand": 11,
+            "p1:AnnounceCast": 17,
+            "p1:TapMana": 167,
+            "p1:PayCosts": 17,
+            "p1:FinishAttackers": 27,
+            "p0:Activate": 2,
+            "p1:Activate": 3,
+            "p1:Attack": 4,
+            "p0:FinishBlockers": 4,
+            "p0:Attack": 6,
+            "p1:FinishBlockers": 6,
+            "p0:ChooseTarget": 12,
+            "p1:ChooseTarget": 12,
+            "p1:Cast": 2,
+            "p1:ChooseKicker": 2,
+            "p0:Cast": 3,
+            "p0:ChooseKicker": 4,
+            "p0:AnnounceActivate": 1
+          },
+          "winner": 0,
+          "terminal_rewards": [
+            1.0,
+            -1.0
+          ],
+          "own_turns_observed": [
+            28,
+            27
+          ],
+          "final_life": [
+            2,
+            0
+          ],
+          "seconds": 7.674306223008898,
+          "worker_cpu_seconds": 2.343509752
+        },
+        {
+          "seed": 71000001,
+          "index": 1,
+          "mode": "selfplay",
+          "seat": 1,
+          "starting_player": "P0",
+          "max_own_turns": 60,
+          "decisions": 1073,
+          "neural_choices": 363,
+          "status": "win",
+          "own_turns_to_win": 19,
+          "trajectories": [
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-4/game-00001-p0.pkl.gz",
+              "samples": 122,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-4/game-00001-p1.pkl.gz",
+              "samples": 241,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p0:Keep": 1,
+            "p1:Mulligan": 1,
+            "p1:Bottom": 1,
+            "p1:Keep": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:Pass": 363,
+            "p1:Pass": 363,
+            "p0:PlayLand": 5,
+            "p0:AnnounceCast": 13,
+            "p0:ChooseKicker": 2,
+            "p0:ChooseTarget": 11,
+            "p0:TapMana": 50,
+            "p0:PayCosts": 13,
+            "p0:FinishAttackers": 20,
+            "p1:PlayLand": 12,
+            "p1:TapMana": 140,
+            "p1:FinishAttackers": 19,
+            "p0:Discard": 3,
+            "p1:AnnounceCast": 12,
+            "p1:PayCosts": 13,
+            "p1:Attack": 4,
+            "p0:FinishBlockers": 4,
+            "p1:ChooseTarget": 6,
+            "p0:Cast": 3,
+            "p0:Activate": 3,
+            "p1:ChooseKicker": 1,
+            "p1:AnnounceActivate": 1,
+            "p0:Block": 1,
+            "p0:Attack": 2,
+            "p1:FinishBlockers": 2,
+            "p1:Activate": 1
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            20,
+            19
+          ],
+          "final_life": [
+            0,
+            13
+          ],
+          "seconds": 4.270245232997695,
+          "worker_cpu_seconds": 1.2688532160000001
+        },
+        {
+          "seed": 71000002,
+          "index": 2,
+          "mode": "selfplay",
+          "seat": 0,
+          "starting_player": "P1",
+          "max_own_turns": 60,
+          "decisions": 1047,
+          "neural_choices": 388,
+          "status": "loss",
+          "own_turns_to_win": null,
+          "trajectories": [
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-4/game-00002-p0.pkl.gz",
+              "samples": 215,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-4/game-00002-p1.pkl.gz",
+              "samples": 173,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p1:Keep": 1,
+            "p0:Mulligan": 1,
+            "p0:Bottom": 1,
+            "p0:Keep": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:Pass": 342,
+            "p0:Pass": 340,
+            "p1:FinishAttackers": 19,
+            "p0:FinishAttackers": 18,
+            "p0:PlayLand": 11,
+            "p0:TapMana": 130,
+            "p0:Cast": 2,
+            "p0:Activate": 2,
+            "p1:PlayLand": 8,
+            "p1:AnnounceCast": 14,
+            "p1:ChooseKicker": 1,
+            "p1:ChooseTarget": 6,
+            "p1:TapMana": 93,
+            "p1:PayCosts": 14,
+            "p1:Activate": 2,
+            "p0:AnnounceCast": 11,
+            "p0:PayCosts": 11,
+            "p1:Cast": 1,
+            "p0:ChooseTarget": 7,
+            "p1:Attack": 3,
+            "p0:FinishBlockers": 3,
+            "p0:ChooseKicker": 2,
+            "p0:PutTrigger": 1
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            19,
+            19
+          ],
+          "final_life": [
+            0,
+            18
+          ],
+          "seconds": 4.463256369010196,
+          "worker_cpu_seconds": 1.155846393
+        },
+        {
+          "seed": 71000003,
+          "index": 3,
+          "mode": "selfplay",
+          "seat": 1,
+          "starting_player": "P1",
+          "max_own_turns": 60,
+          "decisions": 791,
+          "neural_choices": 303,
+          "status": "loss",
+          "own_turns_to_win": null,
+          "trajectories": [
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-4/game-00003-p0.pkl.gz",
+              "samples": 143,
+              "reward": 1.0
+            },
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-4/game-00003-p1.pkl.gz",
+              "samples": 160,
+              "reward": -1.0
+            }
+          ],
+          "actions": {
+            "p1:Keep": 1,
+            "p0:Keep": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:Pass": 261,
+            "p0:Pass": 261,
+            "p1:PlayLand": 10,
+            "p1:FinishAttackers": 14,
+            "p1:TapMana": 85,
+            "p0:PlayLand": 8,
+            "p0:TapMana": 64,
+            "p0:Cast": 1,
+            "p0:Activate": 1,
+            "p0:FinishAttackers": 14,
+            "p1:AnnounceCast": 9,
+            "p1:PayCosts": 10,
+            "p1:AnnounceActivate": 1,
+            "p1:ChooseTarget": 7,
+            "p0:AnnounceCast": 8,
+            "p0:ChooseKicker": 2,
+            "p0:ChooseTarget": 4,
+            "p0:PayCosts": 8,
+            "p1:Attack": 2,
+            "p0:FinishBlockers": 2,
+            "p0:Attack": 7,
+            "p1:Block": 2,
+            "p1:FinishBlockers": 4,
+            "p1:ChooseKicker": 2
+          },
+          "winner": 0,
+          "terminal_rewards": [
+            1.0,
+            -1.0
+          ],
+          "own_turns_observed": [
+            14,
+            14
+          ],
+          "final_life": [
+            6,
+            0
+          ],
+          "seconds": 3.2920097669993993,
+          "worker_cpu_seconds": 0.8051327090000004
+        },
+        {
+          "seed": 71000004,
+          "index": 4,
+          "mode": "selfplay",
+          "seat": 0,
+          "starting_player": "P0",
+          "max_own_turns": 60,
+          "decisions": 725,
+          "neural_choices": 248,
+          "status": "win",
+          "own_turns_to_win": 13,
+          "trajectories": [
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-4/game-00004-p0.pkl.gz",
+              "samples": 111,
+              "reward": 1.0
+            },
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-4/game-00004-p1.pkl.gz",
+              "samples": 137,
+              "reward": -1.0
+            }
+          ],
+          "actions": {
+            "p0:Keep": 1,
+            "p1:Keep": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:Pass": 240,
+            "p1:Pass": 240,
+            "p0:PlayLand": 6,
+            "p0:AnnounceCast": 8,
+            "p0:TapMana": 53,
+            "p0:PayCosts": 8,
+            "p0:FinishAttackers": 13,
+            "p1:PlayLand": 10,
+            "p1:TapMana": 72,
+            "p1:FinishAttackers": 12,
+            "p0:ChooseKicker": 2,
+            "p0:ChooseTarget": 5,
+            "p0:Attack": 9,
+            "p1:FinishBlockers": 7,
+            "p1:AnnounceCast": 9,
+            "p1:ChooseKicker": 3,
+            "p1:ChooseTarget": 5,
+            "p1:PayCosts": 9,
+            "p0:Cast": 4,
+            "p1:Activate": 1,
+            "p0:Activate": 1,
+            "p1:Attack": 2,
+            "p0:FinishBlockers": 2
+          },
+          "winner": 0,
+          "terminal_rewards": [
+            1.0,
+            -1.0
+          ],
+          "own_turns_observed": [
+            13,
+            12
+          ],
+          "final_life": [
+            10,
+            0
+          ],
+          "seconds": 3.0395245340041583,
+          "worker_cpu_seconds": 0.8160974860000003
+        },
+        {
+          "seed": 71000005,
+          "index": 5,
+          "mode": "selfplay",
+          "seat": 1,
+          "starting_player": "P0",
+          "max_own_turns": 60,
+          "decisions": 1570,
+          "neural_choices": 523,
+          "status": "loss",
+          "own_turns_to_win": null,
+          "trajectories": [
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-4/game-00005-p0.pkl.gz",
+              "samples": 247,
+              "reward": 1.0
+            },
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-4/game-00005-p1.pkl.gz",
+              "samples": 276,
+              "reward": -1.0
+            }
+          ],
+          "actions": {
+            "p0:Mulligan": 4,
+            "p1:Mulligan": 1,
+            "p0:Bottom": 10,
+            "p1:Bottom": 1,
+            "p1:Keep": 1,
+            "p0:Keep": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:Pass": 536,
+            "p1:Pass": 537,
+            "p0:PlayLand": 8,
+            "p0:TapMana": 116,
+            "p0:FinishAttackers": 30,
+            "p1:PlayLand": 9,
+            "p1:AnnounceCast": 21,
+            "p1:TapMana": 152,
+            "p1:PayCosts": 21,
+            "p1:FinishAttackers": 29,
+            "p0:AnnounceCast": 15,
+            "p0:ChooseKicker": 4,
+            "p0:ChooseTarget": 10,
+            "p0:PayCosts": 15,
+            "p1:Attack": 2,
+            "p0:FinishBlockers": 2,
+            "p1:Activate": 4,
+            "p1:Cast": 3,
+            "p1:ChooseTarget": 11,
+            "p0:Activate": 3,
+            "p1:ChooseKicker": 2,
+            "p0:Attack": 6,
+            "p1:FinishBlockers": 5,
+            "p0:Cast": 4,
+            "p1:Block": 3,
+            "p0:AssignDamage": 1,
+            "p1:PutTrigger": 1
+          },
+          "winner": 0,
+          "terminal_rewards": [
+            1.0,
+            -1.0
+          ],
+          "own_turns_observed": [
+            30,
+            29
+          ],
+          "final_life": [
+            7,
+            -1
+          ],
+          "seconds": 6.682882554989192,
+          "worker_cpu_seconds": 1.9372605800000002
+        },
+        {
+          "seed": 71000006,
+          "index": 6,
+          "mode": "selfplay",
+          "seat": 0,
+          "starting_player": "P1",
+          "max_own_turns": 60,
+          "decisions": 903,
+          "neural_choices": 313,
+          "status": "win",
+          "own_turns_to_win": 16,
+          "trajectories": [
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-4/game-00006-p0.pkl.gz",
+              "samples": 180,
+              "reward": 1.0
+            },
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-4/game-00006-p1.pkl.gz",
+              "samples": 133,
+              "reward": -1.0
+            }
+          ],
+          "actions": {
+            "p1:Mulligan": 2,
+            "p0:Keep": 1,
+            "p1:Bottom": 3,
+            "p1:Keep": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:Pass": 301,
+            "p0:Pass": 301,
+            "p1:PlayLand": 7,
+            "p1:FinishAttackers": 16,
+            "p1:AnnounceCast": 10,
+            "p1:TapMana": 75,
+            "p1:PayCosts": 10,
+            "p0:PlayLand": 10,
+            "p0:TapMana": 93,
+            "p0:AnnounceCast": 10,
+            "p0:PayCosts": 10,
+            "p0:FinishAttackers": 16,
+            "p1:Attack": 2,
+            "p0:FinishBlockers": 2,
+            "p0:Cast": 3,
+            "p0:Activate": 2,
+            "p1:ChooseTarget": 8,
+            "p0:ChooseTarget": 3,
+            "p1:ChooseKicker": 4,
+            "p0:Attack": 3,
+            "p1:FinishBlockers": 3,
+            "p0:PutTrigger": 2,
+            "p0:ChooseKicker": 1,
+            "p0:Block": 1,
+            "p1:Cast": 1
+          },
+          "winner": 0,
+          "terminal_rewards": [
+            1.0,
+            -1.0
+          ],
+          "own_turns_observed": [
+            16,
+            17
+          ],
+          "final_life": [
+            13,
+            0
+          ],
+          "seconds": 3.7442845229961677,
+          "worker_cpu_seconds": 0.8587727550000004
+        },
+        {
+          "seed": 71000007,
+          "index": 7,
+          "mode": "selfplay",
+          "seat": 1,
+          "starting_player": "P1",
+          "max_own_turns": 60,
+          "decisions": 1126,
+          "neural_choices": 340,
+          "status": "loss",
+          "own_turns_to_win": null,
+          "trajectories": [
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-4/game-00007-p0.pkl.gz",
+              "samples": 161,
+              "reward": 1.0
+            },
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-4/game-00007-p1.pkl.gz",
+              "samples": 179,
+              "reward": -1.0
+            }
+          ],
+          "actions": {
+            "p1:Mulligan": 4,
+            "p0:Keep": 1,
+            "p1:Bottom": 10,
+            "p1:Keep": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:Pass": 390,
+            "p0:Pass": 390,
+            "p1:PlayLand": 7,
+            "p1:FinishAttackers": 21,
+            "p1:TapMana": 81,
+            "p0:PlayLand": 8,
+            "p0:TapMana": 78,
+            "p0:Cast": 2,
+            "p0:FinishAttackers": 21,
+            "p0:AnnounceCast": 16,
+            "p0:ChooseTarget": 11,
+            "p0:PayCosts": 17,
+            "p1:AnnounceCast": 13,
+            "p1:PayCosts": 13,
+            "p1:ChooseTarget": 7,
+            "p0:ChooseKicker": 3,
+            "p1:Activate": 1,
+            "p0:Discard": 1,
+            "p1:Cast": 2,
+            "p0:Attack": 8,
+            "p1:FinishBlockers": 6,
+            "p0:AnnounceActivate": 1,
+            "p0:Activate": 1,
+            "p1:Attack": 5,
+            "p0:FinishBlockers": 2,
+            "p1:Block": 3
+          },
+          "winner": 0,
+          "terminal_rewards": [
+            1.0,
+            -1.0
+          ],
+          "own_turns_observed": [
+            21,
+            21
+          ],
+          "final_life": [
+            6,
+            -1
+          ],
+          "seconds": 4.290610570998979,
+          "worker_cpu_seconds": 1.1970779389999997
+        },
+        {
+          "seed": 71000008,
+          "index": 8,
+          "mode": "selfplay",
+          "seat": 0,
+          "starting_player": "P0",
+          "max_own_turns": 60,
+          "decisions": 1429,
+          "neural_choices": 599,
+          "status": "win",
+          "own_turns_to_win": 24,
+          "trajectories": [
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-4/game-00008-p0.pkl.gz",
+              "samples": 310,
+              "reward": 1.0
+            },
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-4/game-00008-p1.pkl.gz",
+              "samples": 289,
+              "reward": -1.0
+            }
+          ],
+          "actions": {
+            "p0:Mulligan": 1,
+            "p1:Keep": 1,
+            "p0:Bottom": 1,
+            "p0:Keep": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:Pass": 445,
+            "p1:Pass": 445,
+            "p0:PlayLand": 12,
+            "p0:AnnounceCast": 13,
+            "p0:TapMana": 179,
+            "p0:PayCosts": 14,
+            "p0:FinishAttackers": 24,
+            "p1:PlayLand": 12,
+            "p1:TapMana": 169,
+            "p1:FinishAttackers": 23,
+            "p0:Attack": 11,
+            "p1:FinishBlockers": 10,
+            "p0:ChooseTarget": 8,
+            "p1:AnnounceCast": 14,
+            "p1:ChooseTarget": 12,
+            "p1:PayCosts": 14,
+            "p1:ChooseKicker": 1,
+            "p1:Cast": 4,
+            "p0:Cast": 3,
+            "p1:Attack": 2,
+            "p0:FinishBlockers": 2,
+            "p0:Activate": 2,
+            "p1:Block": 1,
+            "p0:Block": 1,
+            "p0:AnnounceActivate": 1,
+            "p1:Activate": 1
+          },
+          "winner": 0,
+          "terminal_rewards": [
+            1.0,
+            -1.0
+          ],
+          "own_turns_observed": [
+            24,
+            23
+          ],
+          "final_life": [
+            5,
+            -1
+          ],
+          "seconds": 7.798936840001261,
+          "worker_cpu_seconds": 2.2242368579999994
+        },
+        {
+          "seed": 71000009,
+          "index": 9,
+          "mode": "selfplay",
+          "seat": 1,
+          "starting_player": "P0",
+          "max_own_turns": 60,
+          "decisions": 1338,
+          "neural_choices": 457,
+          "status": "win",
+          "own_turns_to_win": 25,
+          "trajectories": [
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-4/game-00009-p0.pkl.gz",
+              "samples": 220,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-4/game-00009-p1.pkl.gz",
+              "samples": 237,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p0:Mulligan": 1,
+            "p1:Mulligan": 1,
+            "p0:Bottom": 1,
+            "p1:Bottom": 1,
+            "p0:Keep": 1,
+            "p1:Keep": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:Pass": 452,
+            "p1:Pass": 453,
+            "p0:PlayLand": 9,
+            "p0:FinishAttackers": 25,
+            "p0:TapMana": 124,
+            "p1:FinishAttackers": 24,
+            "p1:Discard": 1,
+            "p1:PlayLand": 10,
+            "p1:AnnounceCast": 17,
+            "p1:TapMana": 115,
+            "p1:PayCosts": 18,
+            "p1:AnnounceActivate": 1,
+            "p1:ChooseTarget": 14,
+            "p1:ChooseKicker": 3,
+            "p0:AnnounceCast": 16,
+            "p0:ChooseTarget": 11,
+            "p0:PayCosts": 17,
+            "p0:Cast": 4,
+            "p1:Activate": 1,
+            "p0:ChooseKicker": 1,
+            "p0:Attack": 3,
+            "p1:FinishBlockers": 3,
+            "p0:AnnounceActivate": 1,
+            "p1:Cast": 3,
+            "p1:PutTrigger": 1,
+            "p1:Block": 2,
+            "p0:Activate": 1
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            25,
+            25
+          ],
+          "final_life": [
+            0,
+            13
+          ],
+          "seconds": 5.9548125750006875,
+          "worker_cpu_seconds": 1.6927188549999999
+        },
+        {
+          "seed": 71000010,
+          "index": 10,
+          "mode": "selfplay",
+          "seat": 0,
+          "starting_player": "P1",
+          "max_own_turns": 60,
+          "decisions": 1484,
+          "neural_choices": 595,
+          "status": "win",
+          "own_turns_to_win": 26,
+          "trajectories": [
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-4/game-00010-p0.pkl.gz",
+              "samples": 308,
+              "reward": 1.0
+            },
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-4/game-00010-p1.pkl.gz",
+              "samples": 287,
+              "reward": -1.0
+            }
+          ],
+          "actions": {
+            "p1:Mulligan": 5,
+            "p0:Mulligan": 1,
+            "p1:Bottom": 15,
+            "p0:Bottom": 1,
+            "p0:Keep": 1,
+            "p1:Keep": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:Pass": 475,
+            "p0:Pass": 475,
+            "p1:FinishAttackers": 26,
+            "p0:FinishAttackers": 26,
+            "p1:PlayLand": 10,
+            "p1:TapMana": 146,
+            "p1:AnnounceCast": 11,
+            "p1:PayCosts": 11,
+            "p1:Activate": 3,
+            "p0:PlayLand": 11,
+            "p0:AnnounceCast": 17,
+            "p0:ChooseKicker": 4,
+            "p0:ChooseTarget": 12,
+            "p0:TapMana": 181,
+            "p0:PayCosts": 17,
+            "p1:ChooseKicker": 2,
+            "p1:ChooseTarget": 6,
+            "p0:Activate": 1,
+            "p0:Discard": 1,
+            "p1:Cast": 5,
+            "p0:Attack": 6,
+            "p1:FinishBlockers": 4,
+            "p1:Attack": 1,
+            "p0:FinishBlockers": 1,
+            "p0:Cast": 3,
+            "p0:PutTrigger": 1,
+            "p1:Block": 2
+          },
+          "winner": 0,
+          "terminal_rewards": [
+            1.0,
+            -1.0
+          ],
+          "own_turns_observed": [
+            26,
+            26
+          ],
+          "final_life": [
+            6,
+            -1
+          ],
+          "seconds": 7.559381781000411,
+          "worker_cpu_seconds": 2.0103049110000004
+        },
+        {
+          "seed": 71000011,
+          "index": 11,
+          "mode": "selfplay",
+          "seat": 1,
+          "starting_player": "P1",
+          "max_own_turns": 60,
+          "decisions": 852,
+          "neural_choices": 232,
+          "status": "loss",
+          "own_turns_to_win": null,
+          "trajectories": [
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-4/game-00011-p0.pkl.gz",
+              "samples": 111,
+              "reward": 1.0
+            },
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-4/game-00011-p1.pkl.gz",
+              "samples": 121,
+              "reward": -1.0
+            }
+          ],
+          "actions": {
+            "p1:Mulligan": 2,
+            "p0:Mulligan": 1,
+            "p1:Bottom": 3,
+            "p0:Bottom": 1,
+            "p0:Keep": 1,
+            "p1:Keep": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:Pass": 310,
+            "p0:Pass": 309,
+            "p1:FinishAttackers": 17,
+            "p1:PlayLand": 5,
+            "p1:TapMana": 54,
+            "p0:PlayLand": 5,
+            "p0:TapMana": 49,
+            "p0:FinishAttackers": 17,
+            "p1:AnnounceCast": 10,
+            "p1:ChooseKicker": 3,
+            "p1:ChooseTarget": 8,
+            "p1:PayCosts": 10,
+            "p0:AnnounceCast": 10,
+            "p0:PayCosts": 10,
+            "p0:Activate": 1,
+            "p0:ChooseKicker": 3,
+            "p0:ChooseTarget": 7,
+            "p1:Activate": 1,
+            "p0:Discard": 2,
+            "p1:Discard": 1,
+            "p0:Cast": 2,
+            "p1:Cast": 2,
+            "p0:Attack": 3,
+            "p1:FinishBlockers": 2
+          },
+          "winner": 0,
+          "terminal_rewards": [
+            1.0,
+            -1.0
+          ],
+          "own_turns_observed": [
+            17,
+            18
+          ],
+          "final_life": [
+            12,
+            0
+          ],
+          "seconds": 2.757222902000649,
+          "worker_cpu_seconds": 0.6690944289999994
+        },
+        {
+          "seed": 71000012,
+          "index": 12,
+          "mode": "selfplay",
+          "seat": 0,
+          "starting_player": "P0",
+          "max_own_turns": 60,
+          "decisions": 2293,
+          "neural_choices": 1068,
+          "status": "loss",
+          "own_turns_to_win": null,
+          "trajectories": [
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-4/game-00012-p0.pkl.gz",
+              "samples": 491,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-4/game-00012-p1.pkl.gz",
+              "samples": 577,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p0:Mulligan": 2,
+            "p1:Mulligan": 2,
+            "p0:Bottom": 3,
+            "p1:Bottom": 3,
+            "p0:Keep": 1,
+            "p1:Keep": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:Pass": 687,
+            "p1:Pass": 683,
+            "p0:PlayLand": 15,
+            "p0:AnnounceCast": 17,
+            "p0:ChooseKicker": 4,
+            "p0:ChooseTarget": 15,
+            "p0:TapMana": 298,
+            "p0:PayCosts": 17,
+            "p0:FinishAttackers": 38,
+            "p1:FinishAttackers": 37,
+            "p1:PlayLand": 16,
+            "p1:TapMana": 359,
+            "p1:AnnounceCast": 20,
+            "p1:ChooseKicker": 4,
+            "p1:ChooseTarget": 15,
+            "p1:PayCosts": 20,
+            "p1:Activate": 3,
+            "p0:Activate": 4,
+            "p1:Cast": 6,
+            "p0:Cast": 9,
+            "p0:Attack": 3,
+            "p1:FinishBlockers": 2,
+            "p1:Attack": 3,
+            "p0:FinishBlockers": 3,
+            "p0:Block": 1
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            38,
+            38
+          ],
+          "final_life": [
+            0,
+            1
+          ],
+          "seconds": 12.321259454998653,
+          "worker_cpu_seconds": 3.7614910249999998
+        },
+        {
+          "seed": 71000013,
+          "index": 13,
+          "mode": "selfplay",
+          "seat": 1,
+          "starting_player": "P0",
+          "max_own_turns": 60,
+          "decisions": 735,
+          "neural_choices": 251,
+          "status": "win",
+          "own_turns_to_win": 13,
+          "trajectories": [
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-4/game-00013-p0.pkl.gz",
+              "samples": 120,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-4/game-00013-p1.pkl.gz",
+              "samples": 131,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p0:Mulligan": 1,
+            "p1:Keep": 1,
+            "p0:Bottom": 1,
+            "p0:Keep": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:Pass": 254,
+            "p1:Pass": 256,
+            "p0:PlayLand": 7,
+            "p0:TapMana": 57,
+            "p0:Cast": 3,
+            "p0:FinishAttackers": 13,
+            "p1:FinishAttackers": 13,
+            "p1:PlayLand": 7,
+            "p1:AnnounceCast": 9,
+            "p1:ChooseKicker": 2,
+            "p1:ChooseTarget": 6,
+            "p1:TapMana": 55,
+            "p1:PayCosts": 9,
+            "p0:AnnounceCast": 7,
+            "p0:ChooseTarget": 5,
+            "p0:PayCosts": 7,
+            "p0:Attack": 2,
+            "p1:Block": 2,
+            "p1:FinishBlockers": 2,
+            "p1:Cast": 3,
+            "p0:Activate": 1,
+            "p1:Attack": 4,
+            "p0:FinishBlockers": 3,
+            "p1:PutTrigger": 2
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            14,
+            13
+          ],
+          "final_life": [
+            0,
+            16
+          ],
+          "seconds": 2.8393994810030563,
+          "worker_cpu_seconds": 0.6156746159999997
+        },
+        {
+          "seed": 71000014,
+          "index": 14,
+          "mode": "selfplay",
+          "seat": 0,
+          "starting_player": "P1",
+          "max_own_turns": 60,
+          "decisions": 1253,
+          "neural_choices": 533,
+          "status": "loss",
+          "own_turns_to_win": null,
+          "trajectories": [
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-4/game-00014-p0.pkl.gz",
+              "samples": 235,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-4/game-00014-p1.pkl.gz",
+              "samples": 298,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p1:Keep": 1,
+            "p0:Keep": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:Pass": 387,
+            "p0:Pass": 388,
+            "p1:PlayLand": 13,
+            "p1:FinishAttackers": 21,
+            "p1:TapMana": 188,
+            "p0:PlayLand": 10,
+            "p0:AnnounceCast": 12,
+            "p0:ChooseKicker": 1,
+            "p0:ChooseTarget": 9,
+            "p0:TapMana": 128,
+            "p0:PayCosts": 12,
+            "p0:FinishAttackers": 21,
+            "p0:Activate": 1,
+            "p1:AnnounceCast": 11,
+            "p1:ChooseKicker": 2,
+            "p1:ChooseTarget": 6,
+            "p1:PayCosts": 11,
+            "p0:Attack": 3,
+            "p1:FinishBlockers": 3,
+            "p0:Cast": 5,
+            "p1:Cast": 2,
+            "p1:Activate": 1,
+            "p1:Attack": 6,
+            "p0:FinishBlockers": 3,
+            "p0:Block": 3,
+            "p1:AssignDamage": 2
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            21,
+            22
+          ],
+          "final_life": [
+            0,
+            6
+          ],
+          "seconds": 6.537665055991965,
+          "worker_cpu_seconds": 1.7304654490000004
+        },
+        {
+          "seed": 71000015,
+          "index": 15,
+          "mode": "selfplay",
+          "seat": 1,
+          "starting_player": "P1",
+          "max_own_turns": 60,
+          "decisions": 1400,
+          "neural_choices": 551,
+          "status": "win",
+          "own_turns_to_win": 25,
+          "trajectories": [
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-4/game-00015-p0.pkl.gz",
+              "samples": 228,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-4/game-00015-p1.pkl.gz",
+              "samples": 323,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p1:Keep": 1,
+            "p0:Mulligan": 3,
+            "p0:Bottom": 6,
+            "p0:Keep": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:Pass": 451,
+            "p0:Pass": 450,
+            "p1:PlayLand": 11,
+            "p1:AnnounceCast": 13,
+            "p1:ChooseKicker": 3,
+            "p1:ChooseTarget": 6,
+            "p1:TapMana": 184,
+            "p1:PayCosts": 13,
+            "p1:FinishAttackers": 25,
+            "p0:PlayLand": 9,
+            "p0:TapMana": 131,
+            "p0:FinishAttackers": 24,
+            "p0:AnnounceCast": 13,
+            "p0:PayCosts": 13,
+            "p1:Cast": 6,
+            "p0:Cast": 4,
+            "p0:ChooseTarget": 9,
+            "p1:Attack": 7,
+            "p0:FinishBlockers": 7,
+            "p1:Activate": 2,
+            "p0:Activate": 2,
+            "p0:ChooseKicker": 2,
+            "p0:Attack": 1,
+            "p1:FinishBlockers": 1
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            24,
+            25
+          ],
+          "final_life": [
+            0,
+            8
+          ],
+          "seconds": 6.3322801790054655,
+          "worker_cpu_seconds": 1.812717783
+        }
+      ],
+      "matching_game_summaries_against_threads": 16
+    },
+    {
+      "collector": "processes",
+      "workers": 8,
+      "seconds": 19.995584018994123,
+      "completed": 16,
+      "games_per_minute": 48.0106006950375,
+      "mean_cpu_cores": 2.1277972964722784,
+      "mean_inference_batch": 2.930500397140588,
+      "games": [
+        {
+          "seed": 71000000,
+          "index": 0,
+          "mode": "selfplay",
+          "seat": 0,
+          "starting_player": "P0",
+          "max_own_turns": 60,
+          "decisions": 1599,
+          "neural_choices": 615,
+          "status": "win",
+          "own_turns_to_win": 28,
+          "trajectories": [
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-8/game-00000-p0.pkl.gz",
+              "samples": 337,
+              "reward": 1.0
+            },
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-8/game-00000-p1.pkl.gz",
+              "samples": 278,
+              "reward": -1.0
+            }
+          ],
+          "actions": {
+            "p0:Mulligan": 1,
+            "p1:Mulligan": 2,
+            "p0:Bottom": 1,
+            "p1:Bottom": 3,
+            "p0:Keep": 1,
+            "p1:Keep": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:Pass": 505,
+            "p1:Pass": 505,
+            "p0:PlayLand": 10,
+            "p0:AnnounceCast": 17,
+            "p0:TapMana": 206,
+            "p0:PayCosts": 18,
+            "p0:FinishAttackers": 27,
+            "p1:PlayLand": 11,
+            "p1:AnnounceCast": 17,
+            "p1:TapMana": 167,
+            "p1:PayCosts": 17,
+            "p1:FinishAttackers": 27,
+            "p0:Activate": 2,
+            "p1:Activate": 3,
+            "p1:Attack": 4,
+            "p0:FinishBlockers": 4,
+            "p0:Attack": 6,
+            "p1:FinishBlockers": 6,
+            "p0:ChooseTarget": 12,
+            "p1:ChooseTarget": 12,
+            "p1:Cast": 2,
+            "p1:ChooseKicker": 2,
+            "p0:Cast": 3,
+            "p0:ChooseKicker": 4,
+            "p0:AnnounceActivate": 1
+          },
+          "winner": 0,
+          "terminal_rewards": [
+            1.0,
+            -1.0
+          ],
+          "own_turns_observed": [
+            28,
+            27
+          ],
+          "final_life": [
+            2,
+            0
+          ],
+          "seconds": 9.83958270799485,
+          "worker_cpu_seconds": 2.3628220090000003
+        },
+        {
+          "seed": 71000001,
+          "index": 1,
+          "mode": "selfplay",
+          "seat": 1,
+          "starting_player": "P0",
+          "max_own_turns": 60,
+          "decisions": 1073,
+          "neural_choices": 363,
+          "status": "win",
+          "own_turns_to_win": 19,
+          "trajectories": [
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-8/game-00001-p0.pkl.gz",
+              "samples": 122,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-8/game-00001-p1.pkl.gz",
+              "samples": 241,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p0:Keep": 1,
+            "p1:Mulligan": 1,
+            "p1:Bottom": 1,
+            "p1:Keep": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:Pass": 363,
+            "p1:Pass": 363,
+            "p0:PlayLand": 5,
+            "p0:AnnounceCast": 13,
+            "p0:ChooseKicker": 2,
+            "p0:ChooseTarget": 11,
+            "p0:TapMana": 50,
+            "p0:PayCosts": 13,
+            "p0:FinishAttackers": 20,
+            "p1:PlayLand": 12,
+            "p1:TapMana": 140,
+            "p1:FinishAttackers": 19,
+            "p0:Discard": 3,
+            "p1:AnnounceCast": 12,
+            "p1:PayCosts": 13,
+            "p1:Attack": 4,
+            "p0:FinishBlockers": 4,
+            "p1:ChooseTarget": 6,
+            "p0:Cast": 3,
+            "p0:Activate": 3,
+            "p1:ChooseKicker": 1,
+            "p1:AnnounceActivate": 1,
+            "p0:Block": 1,
+            "p0:Attack": 2,
+            "p1:FinishBlockers": 2,
+            "p1:Activate": 1
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            20,
+            19
+          ],
+          "final_life": [
+            0,
+            13
+          ],
+          "seconds": 5.327003042999422,
+          "worker_cpu_seconds": 1.227476309
+        },
+        {
+          "seed": 71000002,
+          "index": 2,
+          "mode": "selfplay",
+          "seat": 0,
+          "starting_player": "P1",
+          "max_own_turns": 60,
+          "decisions": 1047,
+          "neural_choices": 388,
+          "status": "loss",
+          "own_turns_to_win": null,
+          "trajectories": [
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-8/game-00002-p0.pkl.gz",
+              "samples": 215,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-8/game-00002-p1.pkl.gz",
+              "samples": 173,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p1:Keep": 1,
+            "p0:Mulligan": 1,
+            "p0:Bottom": 1,
+            "p0:Keep": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:Pass": 342,
+            "p0:Pass": 340,
+            "p1:FinishAttackers": 19,
+            "p0:FinishAttackers": 18,
+            "p0:PlayLand": 11,
+            "p0:TapMana": 130,
+            "p0:Cast": 2,
+            "p0:Activate": 2,
+            "p1:PlayLand": 8,
+            "p1:AnnounceCast": 14,
+            "p1:ChooseKicker": 1,
+            "p1:ChooseTarget": 6,
+            "p1:TapMana": 93,
+            "p1:PayCosts": 14,
+            "p1:Activate": 2,
+            "p0:AnnounceCast": 11,
+            "p0:PayCosts": 11,
+            "p1:Cast": 1,
+            "p0:ChooseTarget": 7,
+            "p1:Attack": 3,
+            "p0:FinishBlockers": 3,
+            "p0:ChooseKicker": 2,
+            "p0:PutTrigger": 1
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            19,
+            19
+          ],
+          "final_life": [
+            0,
+            18
+          ],
+          "seconds": 5.847532293002587,
+          "worker_cpu_seconds": 1.2813095150000002
+        },
+        {
+          "seed": 71000003,
+          "index": 3,
+          "mode": "selfplay",
+          "seat": 1,
+          "starting_player": "P1",
+          "max_own_turns": 60,
+          "decisions": 791,
+          "neural_choices": 303,
+          "status": "loss",
+          "own_turns_to_win": null,
+          "trajectories": [
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-8/game-00003-p0.pkl.gz",
+              "samples": 143,
+              "reward": 1.0
+            },
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-8/game-00003-p1.pkl.gz",
+              "samples": 160,
+              "reward": -1.0
+            }
+          ],
+          "actions": {
+            "p1:Keep": 1,
+            "p0:Keep": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:Pass": 261,
+            "p0:Pass": 261,
+            "p1:PlayLand": 10,
+            "p1:FinishAttackers": 14,
+            "p1:TapMana": 85,
+            "p0:PlayLand": 8,
+            "p0:TapMana": 64,
+            "p0:Cast": 1,
+            "p0:Activate": 1,
+            "p0:FinishAttackers": 14,
+            "p1:AnnounceCast": 9,
+            "p1:PayCosts": 10,
+            "p1:AnnounceActivate": 1,
+            "p1:ChooseTarget": 7,
+            "p0:AnnounceCast": 8,
+            "p0:ChooseKicker": 2,
+            "p0:ChooseTarget": 4,
+            "p0:PayCosts": 8,
+            "p1:Attack": 2,
+            "p0:FinishBlockers": 2,
+            "p0:Attack": 7,
+            "p1:Block": 2,
+            "p1:FinishBlockers": 4,
+            "p1:ChooseKicker": 2
+          },
+          "winner": 0,
+          "terminal_rewards": [
+            1.0,
+            -1.0
+          ],
+          "own_turns_observed": [
+            14,
+            14
+          ],
+          "final_life": [
+            6,
+            0
+          ],
+          "seconds": 4.2645058979978785,
+          "worker_cpu_seconds": 0.8594549949999997
+        },
+        {
+          "seed": 71000004,
+          "index": 4,
+          "mode": "selfplay",
+          "seat": 0,
+          "starting_player": "P0",
+          "max_own_turns": 60,
+          "decisions": 725,
+          "neural_choices": 248,
+          "status": "win",
+          "own_turns_to_win": 13,
+          "trajectories": [
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-8/game-00004-p0.pkl.gz",
+              "samples": 111,
+              "reward": 1.0
+            },
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-8/game-00004-p1.pkl.gz",
+              "samples": 137,
+              "reward": -1.0
+            }
+          ],
+          "actions": {
+            "p0:Keep": 1,
+            "p1:Keep": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:Pass": 240,
+            "p1:Pass": 240,
+            "p0:PlayLand": 6,
+            "p0:AnnounceCast": 8,
+            "p0:TapMana": 53,
+            "p0:PayCosts": 8,
+            "p0:FinishAttackers": 13,
+            "p1:PlayLand": 10,
+            "p1:TapMana": 72,
+            "p1:FinishAttackers": 12,
+            "p0:ChooseKicker": 2,
+            "p0:ChooseTarget": 5,
+            "p0:Attack": 9,
+            "p1:FinishBlockers": 7,
+            "p1:AnnounceCast": 9,
+            "p1:ChooseKicker": 3,
+            "p1:ChooseTarget": 5,
+            "p1:PayCosts": 9,
+            "p0:Cast": 4,
+            "p1:Activate": 1,
+            "p0:Activate": 1,
+            "p1:Attack": 2,
+            "p0:FinishBlockers": 2
+          },
+          "winner": 0,
+          "terminal_rewards": [
+            1.0,
+            -1.0
+          ],
+          "own_turns_observed": [
+            13,
+            12
+          ],
+          "final_life": [
+            10,
+            0
+          ],
+          "seconds": 3.3352340569981607,
+          "worker_cpu_seconds": 0.7431196740000003
+        },
+        {
+          "seed": 71000005,
+          "index": 5,
+          "mode": "selfplay",
+          "seat": 1,
+          "starting_player": "P0",
+          "max_own_turns": 60,
+          "decisions": 1570,
+          "neural_choices": 523,
+          "status": "loss",
+          "own_turns_to_win": null,
+          "trajectories": [
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-8/game-00005-p0.pkl.gz",
+              "samples": 247,
+              "reward": 1.0
+            },
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-8/game-00005-p1.pkl.gz",
+              "samples": 276,
+              "reward": -1.0
+            }
+          ],
+          "actions": {
+            "p0:Mulligan": 4,
+            "p1:Mulligan": 1,
+            "p0:Bottom": 10,
+            "p1:Bottom": 1,
+            "p1:Keep": 1,
+            "p0:Keep": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:Pass": 536,
+            "p1:Pass": 537,
+            "p0:PlayLand": 8,
+            "p0:TapMana": 116,
+            "p0:FinishAttackers": 30,
+            "p1:PlayLand": 9,
+            "p1:AnnounceCast": 21,
+            "p1:TapMana": 152,
+            "p1:PayCosts": 21,
+            "p1:FinishAttackers": 29,
+            "p0:AnnounceCast": 15,
+            "p0:ChooseKicker": 4,
+            "p0:ChooseTarget": 10,
+            "p0:PayCosts": 15,
+            "p1:Attack": 2,
+            "p0:FinishBlockers": 2,
+            "p1:Activate": 4,
+            "p1:Cast": 3,
+            "p1:ChooseTarget": 11,
+            "p0:Activate": 3,
+            "p1:ChooseKicker": 2,
+            "p0:Attack": 6,
+            "p1:FinishBlockers": 5,
+            "p0:Cast": 4,
+            "p1:Block": 3,
+            "p0:AssignDamage": 1,
+            "p1:PutTrigger": 1
+          },
+          "winner": 0,
+          "terminal_rewards": [
+            1.0,
+            -1.0
+          ],
+          "own_turns_observed": [
+            30,
+            29
+          ],
+          "final_life": [
+            7,
+            -1
+          ],
+          "seconds": 8.19990081700962,
+          "worker_cpu_seconds": 2.09872506
+        },
+        {
+          "seed": 71000006,
+          "index": 6,
+          "mode": "selfplay",
+          "seat": 0,
+          "starting_player": "P1",
+          "max_own_turns": 60,
+          "decisions": 903,
+          "neural_choices": 313,
+          "status": "win",
+          "own_turns_to_win": 16,
+          "trajectories": [
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-8/game-00006-p0.pkl.gz",
+              "samples": 180,
+              "reward": 1.0
+            },
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-8/game-00006-p1.pkl.gz",
+              "samples": 133,
+              "reward": -1.0
+            }
+          ],
+          "actions": {
+            "p1:Mulligan": 2,
+            "p0:Keep": 1,
+            "p1:Bottom": 3,
+            "p1:Keep": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:Pass": 301,
+            "p0:Pass": 301,
+            "p1:PlayLand": 7,
+            "p1:FinishAttackers": 16,
+            "p1:AnnounceCast": 10,
+            "p1:TapMana": 75,
+            "p1:PayCosts": 10,
+            "p0:PlayLand": 10,
+            "p0:TapMana": 93,
+            "p0:AnnounceCast": 10,
+            "p0:PayCosts": 10,
+            "p0:FinishAttackers": 16,
+            "p1:Attack": 2,
+            "p0:FinishBlockers": 2,
+            "p0:Cast": 3,
+            "p0:Activate": 2,
+            "p1:ChooseTarget": 8,
+            "p0:ChooseTarget": 3,
+            "p1:ChooseKicker": 4,
+            "p0:Attack": 3,
+            "p1:FinishBlockers": 3,
+            "p0:PutTrigger": 2,
+            "p0:ChooseKicker": 1,
+            "p0:Block": 1,
+            "p1:Cast": 1
+          },
+          "winner": 0,
+          "terminal_rewards": [
+            1.0,
+            -1.0
+          ],
+          "own_turns_observed": [
+            16,
+            17
+          ],
+          "final_life": [
+            13,
+            0
+          ],
+          "seconds": 4.443374818991288,
+          "worker_cpu_seconds": 0.9635698290000008
+        },
+        {
+          "seed": 71000007,
+          "index": 7,
+          "mode": "selfplay",
+          "seat": 1,
+          "starting_player": "P1",
+          "max_own_turns": 60,
+          "decisions": 1126,
+          "neural_choices": 340,
+          "status": "loss",
+          "own_turns_to_win": null,
+          "trajectories": [
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-8/game-00007-p0.pkl.gz",
+              "samples": 161,
+              "reward": 1.0
+            },
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-8/game-00007-p1.pkl.gz",
+              "samples": 179,
+              "reward": -1.0
+            }
+          ],
+          "actions": {
+            "p1:Mulligan": 4,
+            "p0:Keep": 1,
+            "p1:Bottom": 10,
+            "p1:Keep": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:Pass": 390,
+            "p0:Pass": 390,
+            "p1:PlayLand": 7,
+            "p1:FinishAttackers": 21,
+            "p1:TapMana": 81,
+            "p0:PlayLand": 8,
+            "p0:TapMana": 78,
+            "p0:Cast": 2,
+            "p0:FinishAttackers": 21,
+            "p0:AnnounceCast": 16,
+            "p0:ChooseTarget": 11,
+            "p0:PayCosts": 17,
+            "p1:AnnounceCast": 13,
+            "p1:PayCosts": 13,
+            "p1:ChooseTarget": 7,
+            "p0:ChooseKicker": 3,
+            "p1:Activate": 1,
+            "p0:Discard": 1,
+            "p1:Cast": 2,
+            "p0:Attack": 8,
+            "p1:FinishBlockers": 6,
+            "p0:AnnounceActivate": 1,
+            "p0:Activate": 1,
+            "p1:Attack": 5,
+            "p0:FinishBlockers": 2,
+            "p1:Block": 3
+          },
+          "winner": 0,
+          "terminal_rewards": [
+            1.0,
+            -1.0
+          ],
+          "own_turns_observed": [
+            21,
+            21
+          ],
+          "final_life": [
+            6,
+            -1
+          ],
+          "seconds": 4.821911986000487,
+          "worker_cpu_seconds": 1.162570756
+        },
+        {
+          "seed": 71000008,
+          "index": 8,
+          "mode": "selfplay",
+          "seat": 0,
+          "starting_player": "P0",
+          "max_own_turns": 60,
+          "decisions": 1429,
+          "neural_choices": 599,
+          "status": "win",
+          "own_turns_to_win": 24,
+          "trajectories": [
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-8/game-00008-p0.pkl.gz",
+              "samples": 310,
+              "reward": 1.0
+            },
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-8/game-00008-p1.pkl.gz",
+              "samples": 289,
+              "reward": -1.0
+            }
+          ],
+          "actions": {
+            "p0:Mulligan": 1,
+            "p1:Keep": 1,
+            "p0:Bottom": 1,
+            "p0:Keep": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:Pass": 445,
+            "p1:Pass": 445,
+            "p0:PlayLand": 12,
+            "p0:AnnounceCast": 13,
+            "p0:TapMana": 179,
+            "p0:PayCosts": 14,
+            "p0:FinishAttackers": 24,
+            "p1:PlayLand": 12,
+            "p1:TapMana": 169,
+            "p1:FinishAttackers": 23,
+            "p0:Attack": 11,
+            "p1:FinishBlockers": 10,
+            "p0:ChooseTarget": 8,
+            "p1:AnnounceCast": 14,
+            "p1:ChooseTarget": 12,
+            "p1:PayCosts": 14,
+            "p1:ChooseKicker": 1,
+            "p1:Cast": 4,
+            "p0:Cast": 3,
+            "p1:Attack": 2,
+            "p0:FinishBlockers": 2,
+            "p0:Activate": 2,
+            "p1:Block": 1,
+            "p0:Block": 1,
+            "p0:AnnounceActivate": 1,
+            "p1:Activate": 1
+          },
+          "winner": 0,
+          "terminal_rewards": [
+            1.0,
+            -1.0
+          ],
+          "own_turns_observed": [
+            24,
+            23
+          ],
+          "final_life": [
+            5,
+            -1
+          ],
+          "seconds": 9.612517889996525,
+          "worker_cpu_seconds": 2.0372479949999995
+        },
+        {
+          "seed": 71000009,
+          "index": 9,
+          "mode": "selfplay",
+          "seat": 1,
+          "starting_player": "P0",
+          "max_own_turns": 60,
+          "decisions": 1338,
+          "neural_choices": 457,
+          "status": "win",
+          "own_turns_to_win": 25,
+          "trajectories": [
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-8/game-00009-p0.pkl.gz",
+              "samples": 220,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-8/game-00009-p1.pkl.gz",
+              "samples": 237,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p0:Mulligan": 1,
+            "p1:Mulligan": 1,
+            "p0:Bottom": 1,
+            "p1:Bottom": 1,
+            "p0:Keep": 1,
+            "p1:Keep": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:Pass": 452,
+            "p1:Pass": 453,
+            "p0:PlayLand": 9,
+            "p0:FinishAttackers": 25,
+            "p0:TapMana": 124,
+            "p1:FinishAttackers": 24,
+            "p1:Discard": 1,
+            "p1:PlayLand": 10,
+            "p1:AnnounceCast": 17,
+            "p1:TapMana": 115,
+            "p1:PayCosts": 18,
+            "p1:AnnounceActivate": 1,
+            "p1:ChooseTarget": 14,
+            "p1:ChooseKicker": 3,
+            "p0:AnnounceCast": 16,
+            "p0:ChooseTarget": 11,
+            "p0:PayCosts": 17,
+            "p0:Cast": 4,
+            "p1:Activate": 1,
+            "p0:ChooseKicker": 1,
+            "p0:Attack": 3,
+            "p1:FinishBlockers": 3,
+            "p0:AnnounceActivate": 1,
+            "p1:Cast": 3,
+            "p1:PutTrigger": 1,
+            "p1:Block": 2,
+            "p0:Activate": 1
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            25,
+            25
+          ],
+          "final_life": [
+            0,
+            13
+          ],
+          "seconds": 7.560956614994211,
+          "worker_cpu_seconds": 1.7049496310000003
+        },
+        {
+          "seed": 71000010,
+          "index": 10,
+          "mode": "selfplay",
+          "seat": 0,
+          "starting_player": "P1",
+          "max_own_turns": 60,
+          "decisions": 1484,
+          "neural_choices": 595,
+          "status": "win",
+          "own_turns_to_win": 26,
+          "trajectories": [
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-8/game-00010-p0.pkl.gz",
+              "samples": 308,
+              "reward": 1.0
+            },
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-8/game-00010-p1.pkl.gz",
+              "samples": 287,
+              "reward": -1.0
+            }
+          ],
+          "actions": {
+            "p1:Mulligan": 5,
+            "p0:Mulligan": 1,
+            "p1:Bottom": 15,
+            "p0:Bottom": 1,
+            "p0:Keep": 1,
+            "p1:Keep": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:Pass": 475,
+            "p0:Pass": 475,
+            "p1:FinishAttackers": 26,
+            "p0:FinishAttackers": 26,
+            "p1:PlayLand": 10,
+            "p1:TapMana": 146,
+            "p1:AnnounceCast": 11,
+            "p1:PayCosts": 11,
+            "p1:Activate": 3,
+            "p0:PlayLand": 11,
+            "p0:AnnounceCast": 17,
+            "p0:ChooseKicker": 4,
+            "p0:ChooseTarget": 12,
+            "p0:TapMana": 181,
+            "p0:PayCosts": 17,
+            "p1:ChooseKicker": 2,
+            "p1:ChooseTarget": 6,
+            "p0:Activate": 1,
+            "p0:Discard": 1,
+            "p1:Cast": 5,
+            "p0:Attack": 6,
+            "p1:FinishBlockers": 4,
+            "p1:Attack": 1,
+            "p0:FinishBlockers": 1,
+            "p0:Cast": 3,
+            "p0:PutTrigger": 1,
+            "p1:Block": 2
+          },
+          "winner": 0,
+          "terminal_rewards": [
+            1.0,
+            -1.0
+          ],
+          "own_turns_observed": [
+            26,
+            26
+          ],
+          "final_life": [
+            6,
+            -1
+          ],
+          "seconds": 9.317759173995,
+          "worker_cpu_seconds": 1.8945393590000004
+        },
+        {
+          "seed": 71000011,
+          "index": 11,
+          "mode": "selfplay",
+          "seat": 1,
+          "starting_player": "P1",
+          "max_own_turns": 60,
+          "decisions": 852,
+          "neural_choices": 232,
+          "status": "loss",
+          "own_turns_to_win": null,
+          "trajectories": [
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-8/game-00011-p0.pkl.gz",
+              "samples": 111,
+              "reward": 1.0
+            },
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-8/game-00011-p1.pkl.gz",
+              "samples": 121,
+              "reward": -1.0
+            }
+          ],
+          "actions": {
+            "p1:Mulligan": 2,
+            "p0:Mulligan": 1,
+            "p1:Bottom": 3,
+            "p0:Bottom": 1,
+            "p0:Keep": 1,
+            "p1:Keep": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:Pass": 310,
+            "p0:Pass": 309,
+            "p1:FinishAttackers": 17,
+            "p1:PlayLand": 5,
+            "p1:TapMana": 54,
+            "p0:PlayLand": 5,
+            "p0:TapMana": 49,
+            "p0:FinishAttackers": 17,
+            "p1:AnnounceCast": 10,
+            "p1:ChooseKicker": 3,
+            "p1:ChooseTarget": 8,
+            "p1:PayCosts": 10,
+            "p0:AnnounceCast": 10,
+            "p0:PayCosts": 10,
+            "p0:Activate": 1,
+            "p0:ChooseKicker": 3,
+            "p0:ChooseTarget": 7,
+            "p1:Activate": 1,
+            "p0:Discard": 2,
+            "p1:Discard": 1,
+            "p0:Cast": 2,
+            "p1:Cast": 2,
+            "p0:Attack": 3,
+            "p1:FinishBlockers": 2
+          },
+          "winner": 0,
+          "terminal_rewards": [
+            1.0,
+            -1.0
+          ],
+          "own_turns_observed": [
+            17,
+            18
+          ],
+          "final_life": [
+            12,
+            0
+          ],
+          "seconds": 3.841260963003151,
+          "worker_cpu_seconds": 0.7531011239999996
+        },
+        {
+          "seed": 71000012,
+          "index": 12,
+          "mode": "selfplay",
+          "seat": 0,
+          "starting_player": "P0",
+          "max_own_turns": 60,
+          "decisions": 2293,
+          "neural_choices": 1068,
+          "status": "loss",
+          "own_turns_to_win": null,
+          "trajectories": [
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-8/game-00012-p0.pkl.gz",
+              "samples": 491,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-8/game-00012-p1.pkl.gz",
+              "samples": 577,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p0:Mulligan": 2,
+            "p1:Mulligan": 2,
+            "p0:Bottom": 3,
+            "p1:Bottom": 3,
+            "p0:Keep": 1,
+            "p1:Keep": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:Pass": 687,
+            "p1:Pass": 683,
+            "p0:PlayLand": 15,
+            "p0:AnnounceCast": 17,
+            "p0:ChooseKicker": 4,
+            "p0:ChooseTarget": 15,
+            "p0:TapMana": 298,
+            "p0:PayCosts": 17,
+            "p0:FinishAttackers": 38,
+            "p1:FinishAttackers": 37,
+            "p1:PlayLand": 16,
+            "p1:TapMana": 359,
+            "p1:AnnounceCast": 20,
+            "p1:ChooseKicker": 4,
+            "p1:ChooseTarget": 15,
+            "p1:PayCosts": 20,
+            "p1:Activate": 3,
+            "p0:Activate": 4,
+            "p1:Cast": 6,
+            "p0:Cast": 9,
+            "p0:Attack": 3,
+            "p1:FinishBlockers": 2,
+            "p1:Attack": 3,
+            "p0:FinishBlockers": 3,
+            "p0:Block": 1
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            38,
+            38
+          ],
+          "final_life": [
+            0,
+            1
+          ],
+          "seconds": 14.66595564999443,
+          "worker_cpu_seconds": 4.134911068999999
+        },
+        {
+          "seed": 71000013,
+          "index": 13,
+          "mode": "selfplay",
+          "seat": 1,
+          "starting_player": "P0",
+          "max_own_turns": 60,
+          "decisions": 735,
+          "neural_choices": 251,
+          "status": "win",
+          "own_turns_to_win": 13,
+          "trajectories": [
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-8/game-00013-p0.pkl.gz",
+              "samples": 120,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-8/game-00013-p1.pkl.gz",
+              "samples": 131,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p0:Mulligan": 1,
+            "p1:Keep": 1,
+            "p0:Bottom": 1,
+            "p0:Keep": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:Pass": 254,
+            "p1:Pass": 256,
+            "p0:PlayLand": 7,
+            "p0:TapMana": 57,
+            "p0:Cast": 3,
+            "p0:FinishAttackers": 13,
+            "p1:FinishAttackers": 13,
+            "p1:PlayLand": 7,
+            "p1:AnnounceCast": 9,
+            "p1:ChooseKicker": 2,
+            "p1:ChooseTarget": 6,
+            "p1:TapMana": 55,
+            "p1:PayCosts": 9,
+            "p0:AnnounceCast": 7,
+            "p0:ChooseTarget": 5,
+            "p0:PayCosts": 7,
+            "p0:Attack": 2,
+            "p1:Block": 2,
+            "p1:FinishBlockers": 2,
+            "p1:Cast": 3,
+            "p0:Activate": 1,
+            "p1:Attack": 4,
+            "p0:FinishBlockers": 3,
+            "p1:PutTrigger": 2
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            14,
+            13
+          ],
+          "final_life": [
+            0,
+            16
+          ],
+          "seconds": 4.146280172004481,
+          "worker_cpu_seconds": 0.7248546439999997
+        },
+        {
+          "seed": 71000014,
+          "index": 14,
+          "mode": "selfplay",
+          "seat": 0,
+          "starting_player": "P1",
+          "max_own_turns": 60,
+          "decisions": 1253,
+          "neural_choices": 533,
+          "status": "loss",
+          "own_turns_to_win": null,
+          "trajectories": [
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-8/game-00014-p0.pkl.gz",
+              "samples": 235,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-8/game-00014-p1.pkl.gz",
+              "samples": 298,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p1:Keep": 1,
+            "p0:Keep": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:Pass": 387,
+            "p0:Pass": 388,
+            "p1:PlayLand": 13,
+            "p1:FinishAttackers": 21,
+            "p1:TapMana": 188,
+            "p0:PlayLand": 10,
+            "p0:AnnounceCast": 12,
+            "p0:ChooseKicker": 1,
+            "p0:ChooseTarget": 9,
+            "p0:TapMana": 128,
+            "p0:PayCosts": 12,
+            "p0:FinishAttackers": 21,
+            "p0:Activate": 1,
+            "p1:AnnounceCast": 11,
+            "p1:ChooseKicker": 2,
+            "p1:ChooseTarget": 6,
+            "p1:PayCosts": 11,
+            "p0:Attack": 3,
+            "p1:FinishBlockers": 3,
+            "p0:Cast": 5,
+            "p1:Cast": 2,
+            "p1:Activate": 1,
+            "p1:Attack": 6,
+            "p0:FinishBlockers": 3,
+            "p0:Block": 3,
+            "p1:AssignDamage": 2
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            21,
+            22
+          ],
+          "final_life": [
+            0,
+            6
+          ],
+          "seconds": 7.496805447997758,
+          "worker_cpu_seconds": 1.7295395789999999
+        },
+        {
+          "seed": 71000015,
+          "index": 15,
+          "mode": "selfplay",
+          "seat": 1,
+          "starting_player": "P1",
+          "max_own_turns": 60,
+          "decisions": 1400,
+          "neural_choices": 551,
+          "status": "win",
+          "own_turns_to_win": 25,
+          "trajectories": [
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-8/game-00015-p0.pkl.gz",
+              "samples": 228,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-separate-collector-benchmark-2026-10-18/processes-8/game-00015-p1.pkl.gz",
+              "samples": 323,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p1:Keep": 1,
+            "p0:Mulligan": 3,
+            "p0:Bottom": 6,
+            "p0:Keep": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:Pass": 451,
+            "p0:Pass": 450,
+            "p1:PlayLand": 11,
+            "p1:AnnounceCast": 13,
+            "p1:ChooseKicker": 3,
+            "p1:ChooseTarget": 6,
+            "p1:TapMana": 184,
+            "p1:PayCosts": 13,
+            "p1:FinishAttackers": 25,
+            "p0:PlayLand": 9,
+            "p0:TapMana": 131,
+            "p0:FinishAttackers": 24,
+            "p0:AnnounceCast": 13,
+            "p0:PayCosts": 13,
+            "p1:Cast": 6,
+            "p0:Cast": 4,
+            "p0:ChooseTarget": 9,
+            "p1:Attack": 7,
+            "p0:FinishBlockers": 7,
+            "p1:Activate": 2,
+            "p0:Activate": 2,
+            "p0:ChooseKicker": 2,
+            "p0:Attack": 1,
+            "p1:FinishBlockers": 1
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            24,
+            25
+          ],
+          "final_life": [
+            0,
+            8
+          ],
+          "seconds": 7.654008782003075,
+          "worker_cpu_seconds": 1.8845691579999997
+        }
+      ],
+      "matching_game_summaries_against_threads": 16
+    }
+  ],
+  "parameters": 367714,
+  "timing": "Warm-up/startup excluded; trajectory writing included",
+  "source_sha256": {
+    "examples/benchmark_rustmage_collectors.py": "8acbedc509e017a5bdac551e5aaf2e6f29461472f2999da6a799d6f60b24d800",
+    "src/patchwork_automaton/neural/model.py": "09741d1f396980effd972c26bd9da901a5cdd085f20c9d5184e83879b131892e",
+    "src/patchwork_automaton/rl/rustmage_processes.py": "9eaea177acb57dce6330f14fcc60d36281fc8471217461b71e3415a4fae75c56",
+    "src/patchwork_automaton/rl/rustmage_experiment.py": "cb8ab42e786b1f09ca5da2b8d25ab5b859173da5d92358a3e0811c31c90e5633",
+    "src/patchwork_automaton/rl/rustmage.py": "3d347ff0deee35bb0a84d7dbf9ff8bb7ba8af19d86a67ae242c072ff110459ab"
+  },
+  "library_sha256": "b0994769ed13210bb924e3673541ba87cecc1b832f1c5d8d5d423d473074cd20",
+  "scope": "One short matched frozen-policy benchmark; game-summary equivalence, not tensor-by-tensor equivalence. No training updates."
+}

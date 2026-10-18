@@ -19,6 +19,9 @@ neural = [
     "tensorflow-cpu>=2.20,<2.22",
     "orjson>=3.10,<4",
 ]
+plots = [
+    "matplotlib>=3.9,<4",
+]
 
 [tool.setuptools.packages.find]
 where = ["src"]

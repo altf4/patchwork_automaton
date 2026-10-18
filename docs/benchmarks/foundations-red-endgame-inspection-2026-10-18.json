@@ -1,0 +1,1882 @@
+{
+  "scope": "Three final self-play games plus four final evaluation games and three slow final-checkpoint evaluation games; purposive sample, not an overall error-rate estimate.",
+  "reconstruction": "Self-play choices read from original rollout files and matched to reconstructed feature tensors. Final evaluation replay uses the saved checkpoint and original shuffle/action RNG seeds; outcomes, turns, decisions, action-kind counts and final life all match the saved report.",
+  "final_checkpoint_sha256": "c9aa7483d00602ccbccac7e6b8ea34e430c6663b04853bcdbdb7ab959399c6a3",
+  "selfplay_behavior_checkpoint_sha256": "12659c6a80bea1ee5ddad103c0d4aec928a234ed7544dc56e9186f8b1d225153",
+  "library_sha256": "b0994769ed13210bb924e3673541ba87cecc1b832f1c5d8d5d423d473074cd20",
+  "replays": [
+    {
+      "mode": "selfplay",
+      "index": 997,
+      "seed": 1743,
+      "matched": true,
+      "differences": {},
+      "trace": ".local/red-curve-1000-2026-10-18/inspection/selfplay-00997.jsonl.gz"
+    },
+    {
+      "mode": "selfplay",
+      "index": 998,
+      "seed": 1744,
+      "matched": true,
+      "differences": {},
+      "trace": ".local/red-curve-1000-2026-10-18/inspection/selfplay-00998.jsonl.gz"
+    },
+    {
+      "mode": "selfplay",
+      "index": 999,
+      "seed": 1745,
+      "matched": true,
+      "differences": {},
+      "trace": ".local/red-curve-1000-2026-10-18/inspection/selfplay-00999.jsonl.gz"
+    },
+    {
+      "mode": "goldfish",
+      "index": 4,
+      "seed": 10000725,
+      "matched": true,
+      "differences": {},
+      "trace": ".local/red-curve-1000-2026-10-18/inspection/goldfish-00004.jsonl.gz"
+    },
+    {
+      "mode": "goldfish",
+      "index": 23,
+      "seed": 10000744,
+      "matched": true,
+      "differences": {},
+      "trace": ".local/red-curve-1000-2026-10-18/inspection/goldfish-00023.jsonl.gz"
+    },
+    {
+      "mode": "goldfish",
+      "index": 32,
+      "seed": 10000753,
+      "matched": true,
+      "differences": {},
+      "trace": ".local/red-curve-1000-2026-10-18/inspection/goldfish-00032.jsonl.gz"
+    },
+    {
+      "mode": "goldfish",
+      "index": 36,
+      "seed": 10000757,
+      "matched": true,
+      "differences": {},
+      "trace": ".local/red-curve-1000-2026-10-18/inspection/goldfish-00036.jsonl.gz"
+    },
+    {
+      "mode": "goldfish",
+      "index": 37,
+      "seed": 10000758,
+      "matched": true,
+      "differences": {},
+      "trace": ".local/red-curve-1000-2026-10-18/inspection/goldfish-00037.jsonl.gz"
+    },
+    {
+      "mode": "goldfish",
+      "index": 38,
+      "seed": 10000759,
+      "matched": true,
+      "differences": {},
+      "trace": ".local/red-curve-1000-2026-10-18/inspection/goldfish-00038.jsonl.gz"
+    },
+    {
+      "mode": "goldfish",
+      "index": 39,
+      "seed": 10000760,
+      "matched": true,
+      "differences": {},
+      "trace": ".local/red-curve-1000-2026-10-18/inspection/goldfish-00039.jsonl.gz"
+    }
+  ],
+  "lethal_counterfactual": {
+    "seed": 1744,
+    "revision": 1284,
+    "method": "Replay exact recorded actions; change only Pyromancer target; both subsequent actions are the recorded forced passes.",
+    "results": [
+      {
+        "target": "P1",
+        "outcome": {
+          "Winner": "P0"
+        },
+        "life": [
+          2,
+          0
+        ]
+      },
+      {
+        "target": "P0",
+        "outcome": {
+          "Winner": "P1"
+        },
+        "life": [
+          0,
+          2
+        ]
+      }
+    ]
+  },
+  "selected_events": [
+    {
+      "mode": "selfplay",
+      "game_number": 999,
+      "seed": 1744,
+      "revision": 1284,
+      "description": "Both players at 2 life; chose self for Pyromancer trigger and lost. Opponent target wins under the forced continuation.",
+      "own_turn": 19,
+      "actor": "P1",
+      "active": "P1",
+      "step": "Main1",
+      "life": [
+        2,
+        2
+      ],
+      "value_estimate": 0.4038810431957245,
+      "chosen": {
+        "kind": "ChooseTarget",
+        "target": {
+          "Player": "P1"
+        }
+      },
+      "chosen_probability": 0.0973113906247678,
+      "options": [
+        {
+          "action": {
+            "kind": "ChooseTarget",
+            "target": {
+              "Player": "P0"
+            }
+          },
+          "probability": 0.9026886177550292
+        },
+        {
+          "action": {
+            "kind": "ChooseTarget",
+            "target": {
+              "Player": "P1"
+            }
+          },
+          "probability": 0.0973113906247678
+        }
+      ],
+      "hand": [
+        "Goblin Smuggler"
+      ],
+      "battlefield": [
+        {
+          "id": 1,
+          "name": "Mountain",
+          "controller": "P0",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": true,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 2,
+          "name": "Mountain",
+          "controller": "P0",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": true,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 3,
+          "name": "Mountain",
+          "controller": "P0",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": true,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 8,
+          "name": "Mountain",
+          "controller": "P0",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": true,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 10,
+          "name": "Mountain",
+          "controller": "P0",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": true,
+          "summoning_sick": true,
+          "keywords": 0
+        },
+        {
+          "id": 11,
+          "name": "Mountain",
+          "controller": "P0",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": true,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 12,
+          "name": "Mountain",
+          "controller": "P0",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": true,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 13,
+          "name": "Mountain",
+          "controller": "P0",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": true,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 16,
+          "name": "Mountain",
+          "controller": "P0",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": true,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 18,
+          "name": "Mountain",
+          "controller": "P0",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": true,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 19,
+          "name": "Mountain",
+          "controller": "P0",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": true,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 20,
+          "name": "Mountain",
+          "controller": "P0",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": true,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 21,
+          "name": "Mountain",
+          "controller": "P0",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": true,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 22,
+          "name": "Mountain",
+          "controller": "P0",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": true,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 45,
+          "name": "Goblin Smuggler",
+          "controller": "P0",
+          "power": 2,
+          "toughness": 2,
+          "damage": 0,
+          "tapped": true,
+          "summoning_sick": false,
+          "keywords": 16388
+        },
+        {
+          "id": 61,
+          "name": "Mountain",
+          "controller": "P1",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": true,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 66,
+          "name": "Mountain",
+          "controller": "P1",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": true,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 70,
+          "name": "Mountain",
+          "controller": "P1",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": true,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 77,
+          "name": "Mountain",
+          "controller": "P1",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": true,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 78,
+          "name": "Mountain",
+          "controller": "P1",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": true,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 79,
+          "name": "Mountain",
+          "controller": "P1",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": true,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 81,
+          "name": "Mountain",
+          "controller": "P1",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": true,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 83,
+          "name": "Mountain",
+          "controller": "P1",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": true,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 95,
+          "name": "Swab Goblin",
+          "controller": "P1",
+          "power": 2,
+          "toughness": 2,
+          "damage": 0,
+          "tapped": false,
+          "summoning_sick": false,
+          "keywords": 16384
+        },
+        {
+          "id": 102,
+          "name": "Viashino Pyromancer",
+          "controller": "P1",
+          "power": 2,
+          "toughness": 1,
+          "damage": 0,
+          "tapped": false,
+          "summoning_sick": true,
+          "keywords": 0
+        },
+        {
+          "id": 105,
+          "name": "Goblin Smuggler",
+          "controller": "P1",
+          "power": 2,
+          "toughness": 2,
+          "damage": 0,
+          "tapped": true,
+          "summoning_sick": false,
+          "keywords": 4
+        },
+        {
+          "id": 106,
+          "name": "Goblin Smuggler",
+          "controller": "P1",
+          "power": 2,
+          "toughness": 2,
+          "damage": 0,
+          "tapped": true,
+          "summoning_sick": false,
+          "keywords": 4
+        }
+      ],
+      "pending_source": "Viashino Pyromancer",
+      "trace": ".local/red-curve-1000-2026-10-18/inspection/selfplay-00998.jsonl.gz"
+    },
+    {
+      "mode": "selfplay",
+      "game_number": 1000,
+      "seed": 1745,
+      "revision": 13,
+      "description": "Turn-one Fanatical Firebrand targets itself and is sacrificed as the cost. No damage is dealt.",
+      "own_turn": 1,
+      "actor": "P1",
+      "active": "P1",
+      "step": "Main1",
+      "life": [
+        20,
+        20
+      ],
+      "value_estimate": 0.39701732993125916,
+      "chosen": {
+        "kind": "ChooseTarget",
+        "target": {
+          "Card": 84
+        },
+        "target_name": "Fanatical Firebrand",
+        "target_controller": "P1"
+      },
+      "chosen_probability": 0.7073309529802553,
+      "options": [
+        {
+          "action": {
+            "kind": "ChooseTarget",
+            "target": {
+              "Player": "P0"
+            }
+          },
+          "probability": 0.2339656873592757
+        },
+        {
+          "action": {
+            "kind": "ChooseTarget",
+            "target": {
+              "Player": "P1"
+            }
+          },
+          "probability": 0.05870336399850174
+        },
+        {
+          "action": {
+            "kind": "ChooseTarget",
+            "target": {
+              "Card": 84
+            },
+            "target_name": "Fanatical Firebrand",
+            "target_controller": "P1"
+          },
+          "probability": 0.7073309529802553
+        }
+      ],
+      "hand": [
+        "Mountain",
+        "Swab Goblin",
+        "Firebrand Archer",
+        "Goblin Smuggler",
+        "Raging Redcap"
+      ],
+      "battlefield": [
+        {
+          "id": 65,
+          "name": "Mountain",
+          "controller": "P1",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": true,
+          "summoning_sick": true,
+          "keywords": 0
+        },
+        {
+          "id": 84,
+          "name": "Fanatical Firebrand",
+          "controller": "P1",
+          "power": 1,
+          "toughness": 1,
+          "damage": 0,
+          "tapped": false,
+          "summoning_sick": true,
+          "keywords": 4
+        }
+      ],
+      "pending_source": "Fanatical Firebrand",
+      "trace": ".local/red-curve-1000-2026-10-18/inspection/selfplay-00999.jsonl.gz"
+    },
+    {
+      "mode": "selfplay",
+      "game_number": 998,
+      "seed": 1743,
+      "revision": 203,
+      "description": "Eventual winner sacrifices Fanatical Firebrand targeting itself; this seat still receives terminal +1.",
+      "own_turn": 4,
+      "actor": "P1",
+      "active": "P1",
+      "step": "Main1",
+      "life": [
+        16,
+        18
+      ],
+      "value_estimate": 0.4218774139881134,
+      "chosen": {
+        "kind": "ChooseTarget",
+        "target": {
+          "Card": 86
+        },
+        "target_name": "Fanatical Firebrand",
+        "target_controller": "P1"
+      },
+      "chosen_probability": 0.20891927565153603,
+      "options": [
+        {
+          "action": {
+            "kind": "ChooseTarget",
+            "target": {
+              "Player": "P0"
+            }
+          },
+          "probability": 0.07485822623319885
+        },
+        {
+          "action": {
+            "kind": "ChooseTarget",
+            "target": {
+              "Player": "P1"
+            }
+          },
+          "probability": 0.014937274153320954
+        },
+        {
+          "action": {
+            "kind": "ChooseTarget",
+            "target": {
+              "Card": 36
+            },
+            "target_name": "Firebrand Archer",
+            "target_controller": "P0"
+          },
+          "probability": 0.2536994049536213
+        },
+        {
+          "action": {
+            "kind": "ChooseTarget",
+            "target": {
+              "Card": 86
+            },
+            "target_name": "Fanatical Firebrand",
+            "target_controller": "P1"
+          },
+          "probability": 0.20891927565153603
+        },
+        {
+          "action": {
+            "kind": "ChooseTarget",
+            "target": {
+              "Card": 92
+            },
+            "target_name": "Swab Goblin",
+            "target_controller": "P1"
+          },
+          "probability": 0.2849670885460454
+        },
+        {
+          "action": {
+            "kind": "ChooseTarget",
+            "target": {
+              "Card": 102
+            },
+            "target_name": "Viashino Pyromancer",
+            "target_controller": "P1"
+          },
+          "probability": 0.16261869351780456
+        }
+      ],
+      "hand": [
+        "Mountain",
+        "Goblin Smuggler",
+        "Goblin Smuggler"
+      ],
+      "battlefield": [
+        {
+          "id": 1,
+          "name": "Mountain",
+          "controller": "P0",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": true,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 3,
+          "name": "Mountain",
+          "controller": "P0",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": true,
+          "summoning_sick": true,
+          "keywords": 0
+        },
+        {
+          "id": 7,
+          "name": "Mountain",
+          "controller": "P0",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": true,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 12,
+          "name": "Mountain",
+          "controller": "P0",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": true,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 36,
+          "name": "Firebrand Archer",
+          "controller": "P0",
+          "power": 2,
+          "toughness": 1,
+          "damage": 0,
+          "tapped": false,
+          "summoning_sick": true,
+          "keywords": 0
+        },
+        {
+          "id": 60,
+          "name": "Mountain",
+          "controller": "P1",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": true,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 61,
+          "name": "Mountain",
+          "controller": "P1",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": true,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 64,
+          "name": "Mountain",
+          "controller": "P1",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": true,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 77,
+          "name": "Mountain",
+          "controller": "P1",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": true,
+          "summoning_sick": true,
+          "keywords": 0
+        },
+        {
+          "id": 86,
+          "name": "Fanatical Firebrand",
+          "controller": "P1",
+          "power": 1,
+          "toughness": 1,
+          "damage": 0,
+          "tapped": false,
+          "summoning_sick": true,
+          "keywords": 4
+        },
+        {
+          "id": 92,
+          "name": "Swab Goblin",
+          "controller": "P1",
+          "power": 2,
+          "toughness": 2,
+          "damage": 0,
+          "tapped": false,
+          "summoning_sick": true,
+          "keywords": 0
+        },
+        {
+          "id": 102,
+          "name": "Viashino Pyromancer",
+          "controller": "P1",
+          "power": 2,
+          "toughness": 1,
+          "damage": 0,
+          "tapped": false,
+          "summoning_sick": false,
+          "keywords": 0
+        }
+      ],
+      "pending_source": "Fanatical Firebrand",
+      "trace": ".local/red-curve-1000-2026-10-18/inspection/selfplay-00997.jsonl.gz"
+    },
+    {
+      "mode": "goldfish",
+      "game_number": 5,
+      "seed": 10000725,
+      "revision": 45,
+      "description": "Burst Lightning kills own Ghitu Lavarunner on own turn 2.",
+      "own_turn": 2,
+      "actor": "P0",
+      "active": "P0",
+      "step": "Upkeep",
+      "life": [
+        20,
+        20
+      ],
+      "value_estimate": 0.06289886683225632,
+      "chosen": {
+        "kind": "ChooseTarget",
+        "target": {
+          "Card": 29
+        },
+        "target_name": "Ghitu Lavarunner",
+        "target_controller": "P0"
+      },
+      "chosen_probability": 0.33760817136049753,
+      "options": [
+        {
+          "action": {
+            "kind": "ChooseTarget",
+            "target": {
+              "Player": "P0"
+            }
+          },
+          "probability": 0.25009225425297077
+        },
+        {
+          "action": {
+            "kind": "ChooseTarget",
+            "target": {
+              "Player": "P1"
+            }
+          },
+          "probability": 0.412299585756553
+        },
+        {
+          "action": {
+            "kind": "ChooseTarget",
+            "target": {
+              "Card": 29
+            },
+            "target_name": "Ghitu Lavarunner",
+            "target_controller": "P0"
+          },
+          "probability": 0.33760817136049753
+        }
+      ],
+      "hand": [
+        "Mountain",
+        "Mountain",
+        "Mountain",
+        "Swab Goblin"
+      ],
+      "battlefield": [
+        {
+          "id": 4,
+          "name": "Mountain",
+          "controller": "P0",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": false,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 29,
+          "name": "Ghitu Lavarunner",
+          "controller": "P0",
+          "power": 1,
+          "toughness": 2,
+          "damage": 0,
+          "tapped": false,
+          "summoning_sick": false,
+          "keywords": 0
+        }
+      ],
+      "pending_source": "Burst Lightning",
+      "trace": ".local/red-curve-1000-2026-10-18/inspection/goldfish-00004.jsonl.gz"
+    },
+    {
+      "mode": "goldfish",
+      "game_number": 5,
+      "seed": 10000725,
+      "revision": 231,
+      "description": "Burst Lightning kills own Swab Goblin on own turn 6.",
+      "own_turn": 6,
+      "actor": "P0",
+      "active": "P0",
+      "step": "Draw",
+      "life": [
+        20,
+        16
+      ],
+      "value_estimate": 0.07504839450120926,
+      "chosen": {
+        "kind": "ChooseTarget",
+        "target": {
+          "Card": 33
+        },
+        "target_name": "Swab Goblin",
+        "target_controller": "P0"
+      },
+      "chosen_probability": 0.3617892305171047,
+      "options": [
+        {
+          "action": {
+            "kind": "ChooseTarget",
+            "target": {
+              "Player": "P0"
+            }
+          },
+          "probability": 0.2376167686335307
+        },
+        {
+          "action": {
+            "kind": "ChooseTarget",
+            "target": {
+              "Player": "P1"
+            }
+          },
+          "probability": 0.4005939723540809
+        },
+        {
+          "action": {
+            "kind": "ChooseTarget",
+            "target": {
+              "Card": 33
+            },
+            "target_name": "Swab Goblin",
+            "target_controller": "P0"
+          },
+          "probability": 0.3617892305171047
+        }
+      ],
+      "hand": [
+        "Mountain",
+        "Mountain",
+        "Goblin Smuggler"
+      ],
+      "battlefield": [
+        {
+          "id": 4,
+          "name": "Mountain",
+          "controller": "P0",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": false,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 9,
+          "name": "Mountain",
+          "controller": "P0",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": false,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 16,
+          "name": "Mountain",
+          "controller": "P0",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": true,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 17,
+          "name": "Mountain",
+          "controller": "P0",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": false,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 23,
+          "name": "Mountain",
+          "controller": "P0",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": false,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 33,
+          "name": "Swab Goblin",
+          "controller": "P0",
+          "power": 2,
+          "toughness": 2,
+          "damage": 0,
+          "tapped": false,
+          "summoning_sick": false,
+          "keywords": 0
+        }
+      ],
+      "pending_source": "Burst Lightning",
+      "trace": ".local/red-curve-1000-2026-10-18/inspection/goldfish-00004.jsonl.gz"
+    },
+    {
+      "mode": "goldfish",
+      "game_number": 5,
+      "seed": 10000725,
+      "revision": 294,
+      "description": "Goblin Smuggler taps before combat to make a summoning-sick Firebrand Archer unblockable; opponent has no battlefield.",
+      "own_turn": 7,
+      "actor": "P0",
+      "active": "P0",
+      "step": "BeginCombat",
+      "life": [
+        20,
+        16
+      ],
+      "value_estimate": 0.025019720196723938,
+      "chosen": {
+        "kind": "Activate",
+        "card": 47,
+        "ability": 0,
+        "target": {
+          "Card": 38
+        },
+        "payment": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "counter_payment": {
+          "plus_one": 0,
+          "minus_one": 0,
+          "stun": 0
+        },
+        "card_name": "Goblin Smuggler",
+        "target_name": "Firebrand Archer",
+        "target_controller": "P0"
+      },
+      "chosen_probability": 0.334976531076588,
+      "options": [
+        {
+          "action": {
+            "kind": "Pass"
+          },
+          "probability": 0.3299514261771365
+        },
+        {
+          "action": {
+            "kind": "TapMana",
+            "card": 12,
+            "card_name": "Mountain"
+          },
+          "probability": 0.10297550138309737
+        },
+        {
+          "action": {
+            "kind": "TapMana",
+            "card": 23,
+            "card_name": "Mountain"
+          },
+          "probability": 0.09253437205725606
+        },
+        {
+          "action": {
+            "kind": "AnnounceActivate",
+            "card": 47,
+            "ability": 0,
+            "counter_payment": {
+              "plus_one": 0,
+              "minus_one": 0,
+              "stun": 0
+            },
+            "card_name": "Goblin Smuggler"
+          },
+          "probability": 0.13956215862956087
+        },
+        {
+          "action": {
+            "kind": "Activate",
+            "card": 47,
+            "ability": 0,
+            "target": {
+              "Card": 38
+            },
+            "payment": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "counter_payment": {
+              "plus_one": 0,
+              "minus_one": 0,
+              "stun": 0
+            },
+            "card_name": "Goblin Smuggler",
+            "target_name": "Firebrand Archer",
+            "target_controller": "P0"
+          },
+          "probability": 0.334976531076588
+        }
+      ],
+      "hand": [],
+      "battlefield": [
+        {
+          "id": 4,
+          "name": "Mountain",
+          "controller": "P0",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": true,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 9,
+          "name": "Mountain",
+          "controller": "P0",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": true,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 12,
+          "name": "Mountain",
+          "controller": "P0",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": false,
+          "summoning_sick": true,
+          "keywords": 0
+        },
+        {
+          "id": 14,
+          "name": "Mountain",
+          "controller": "P0",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": true,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 16,
+          "name": "Mountain",
+          "controller": "P0",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": true,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 17,
+          "name": "Mountain",
+          "controller": "P0",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": true,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 23,
+          "name": "Mountain",
+          "controller": "P0",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": false,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 38,
+          "name": "Firebrand Archer",
+          "controller": "P0",
+          "power": 2,
+          "toughness": 1,
+          "damage": 0,
+          "tapped": false,
+          "summoning_sick": true,
+          "keywords": 0
+        },
+        {
+          "id": 47,
+          "name": "Goblin Smuggler",
+          "controller": "P0",
+          "power": 2,
+          "toughness": 2,
+          "damage": 0,
+          "tapped": false,
+          "summoning_sick": true,
+          "keywords": 4
+        }
+      ],
+      "pending_source": null,
+      "trace": ".local/red-curve-1000-2026-10-18/inspection/goldfish-00004.jsonl.gz"
+    },
+    {
+      "mode": "goldfish",
+      "game_number": 5,
+      "seed": 10000725,
+      "revision": 401,
+      "description": "Declines a legal Goblin Smuggler attack against an empty battlefield.",
+      "own_turn": 9,
+      "actor": "P0",
+      "active": "P0",
+      "step": "Attackers",
+      "life": [
+        20,
+        14
+      ],
+      "value_estimate": 0.07394881546497345,
+      "chosen": {
+        "kind": "FinishAttackers"
+      },
+      "chosen_probability": 0.08056994813382,
+      "options": [
+        {
+          "action": {
+            "kind": "FinishAttackers"
+          },
+          "probability": 0.08056994813382
+        },
+        {
+          "action": {
+            "kind": "Attack",
+            "card": 44,
+            "card_name": "Goblin Smuggler"
+          },
+          "probability": 0.919430044634656
+        }
+      ],
+      "hand": [
+        "Swab Goblin"
+      ],
+      "battlefield": [
+        {
+          "id": 4,
+          "name": "Mountain",
+          "controller": "P0",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": false,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 9,
+          "name": "Mountain",
+          "controller": "P0",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": false,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 12,
+          "name": "Mountain",
+          "controller": "P0",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": false,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 14,
+          "name": "Mountain",
+          "controller": "P0",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": false,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 16,
+          "name": "Mountain",
+          "controller": "P0",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": false,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 17,
+          "name": "Mountain",
+          "controller": "P0",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": true,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 23,
+          "name": "Mountain",
+          "controller": "P0",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": false,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 38,
+          "name": "Firebrand Archer",
+          "controller": "P0",
+          "power": 2,
+          "toughness": 1,
+          "damage": 0,
+          "tapped": false,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 44,
+          "name": "Goblin Smuggler",
+          "controller": "P0",
+          "power": 2,
+          "toughness": 2,
+          "damage": 0,
+          "tapped": false,
+          "summoning_sick": false,
+          "keywords": 16388
+        },
+        {
+          "id": 47,
+          "name": "Goblin Smuggler",
+          "controller": "P0",
+          "power": 2,
+          "toughness": 2,
+          "damage": 0,
+          "tapped": true,
+          "summoning_sick": false,
+          "keywords": 4
+        }
+      ],
+      "pending_source": null,
+      "trace": ".local/red-curve-1000-2026-10-18/inspection/goldfish-00004.jsonl.gz"
+    },
+    {
+      "mode": "goldfish",
+      "game_number": 24,
+      "seed": 10000744,
+      "revision": 0,
+      "description": "Keeps seven cards with zero lands.",
+      "own_turn": 0,
+      "actor": "P1",
+      "active": "P1",
+      "step": "Pregame",
+      "life": [
+        20,
+        20
+      ],
+      "value_estimate": -0.013644300401210785,
+      "chosen": {
+        "kind": "Keep"
+      },
+      "chosen_probability": 0.9471509195658001,
+      "options": [
+        {
+          "action": {
+            "kind": "Keep"
+          },
+          "probability": 0.9471509195658001
+        },
+        {
+          "action": {
+            "kind": "Mulligan"
+          },
+          "probability": 0.05284907822489245
+        }
+      ],
+      "hand": [
+        "Swab Goblin",
+        "Firebrand Archer",
+        "Viashino Pyromancer",
+        "Raging Redcap",
+        "Firespitter Whelp",
+        "Firespitter Whelp",
+        "Burst Lightning"
+      ],
+      "battlefield": [],
+      "pending_source": null,
+      "trace": ".local/red-curve-1000-2026-10-18/inspection/goldfish-00023.jsonl.gz"
+    },
+    {
+      "mode": "goldfish",
+      "game_number": 33,
+      "seed": 10000753,
+      "revision": 0,
+      "description": "Keeps seven cards with zero lands.",
+      "own_turn": 0,
+      "actor": "P0",
+      "active": "P0",
+      "step": "Pregame",
+      "life": [
+        20,
+        20
+      ],
+      "value_estimate": -0.006017036736011505,
+      "chosen": {
+        "kind": "Keep"
+      },
+      "chosen_probability": 0.9472358028514193,
+      "options": [
+        {
+          "action": {
+            "kind": "Keep"
+          },
+          "probability": 0.9472358028514193
+        },
+        {
+          "action": {
+            "kind": "Mulligan"
+          },
+          "probability": 0.05276419590105011
+        }
+      ],
+      "hand": [
+        "Firebrand Archer",
+        "Firebrand Archer",
+        "Viashino Pyromancer",
+        "Goblin Smuggler",
+        "Goblin Smuggler",
+        "Goblin Smuggler",
+        "Raging Redcap"
+      ],
+      "battlefield": [],
+      "pending_source": null,
+      "trace": ".local/red-curve-1000-2026-10-18/inspection/goldfish-00032.jsonl.gz"
+    },
+    {
+      "mode": "goldfish",
+      "game_number": 33,
+      "seed": 10000753,
+      "revision": 235,
+      "description": "Fanatical Firebrand targeting itself is the highest-probability target.",
+      "own_turn": 7,
+      "actor": "P0",
+      "active": "P0",
+      "step": "Main1",
+      "life": [
+        20,
+        20
+      ],
+      "value_estimate": 0.24328860640525818,
+      "chosen": {
+        "kind": "ChooseTarget",
+        "target": {
+          "Card": 25
+        },
+        "target_name": "Fanatical Firebrand",
+        "target_controller": "P0"
+      },
+      "chosen_probability": 0.5396894881321515,
+      "options": [
+        {
+          "action": {
+            "kind": "ChooseTarget",
+            "target": {
+              "Player": "P0"
+            }
+          },
+          "probability": 0.06248942059488035
+        },
+        {
+          "action": {
+            "kind": "ChooseTarget",
+            "target": {
+              "Player": "P1"
+            }
+          },
+          "probability": 0.2389982401694594
+        },
+        {
+          "action": {
+            "kind": "ChooseTarget",
+            "target": {
+              "Card": 25
+            },
+            "target_name": "Fanatical Firebrand",
+            "target_controller": "P0"
+          },
+          "probability": 0.5396894881321515
+        },
+        {
+          "action": {
+            "kind": "ChooseTarget",
+            "target": {
+              "Card": 29
+            },
+            "target_name": "Ghitu Lavarunner",
+            "target_controller": "P0"
+          },
+          "probability": 0.15882285452968495
+        }
+      ],
+      "hand": [
+        "Ghitu Lavarunner",
+        "Ghitu Lavarunner",
+        "Firebrand Archer",
+        "Viashino Pyromancer",
+        "Viashino Pyromancer",
+        "Goblin Smuggler",
+        "Goblin Smuggler"
+      ],
+      "battlefield": [
+        {
+          "id": 22,
+          "name": "Mountain",
+          "controller": "P0",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": true,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 25,
+          "name": "Fanatical Firebrand",
+          "controller": "P0",
+          "power": 1,
+          "toughness": 1,
+          "damage": 0,
+          "tapped": false,
+          "summoning_sick": true,
+          "keywords": 4
+        },
+        {
+          "id": 29,
+          "name": "Ghitu Lavarunner",
+          "controller": "P0",
+          "power": 1,
+          "toughness": 2,
+          "damage": 0,
+          "tapped": false,
+          "summoning_sick": false,
+          "keywords": 0
+        }
+      ],
+      "pending_source": "Fanatical Firebrand",
+      "trace": ".local/red-curve-1000-2026-10-18/inspection/goldfish-00032.jsonl.gz"
+    },
+    {
+      "mode": "goldfish",
+      "game_number": 33,
+      "seed": 10000753,
+      "revision": 296,
+      "description": "Passes the final main phase with one land in play and a legal second land in hand; then discards Viashino Pyromancer in cleanup.",
+      "own_turn": 8,
+      "actor": "P0",
+      "active": "P0",
+      "step": "Main2",
+      "life": [
+        20,
+        18
+      ],
+      "value_estimate": 0.10765040665864944,
+      "chosen": {
+        "kind": "Pass"
+      },
+      "chosen_probability": 0.45228550367658893,
+      "options": [
+        {
+          "action": {
+            "kind": "Pass"
+          },
+          "probability": 0.45228550367658893
+        },
+        {
+          "action": {
+            "kind": "PlayLand",
+            "card": 8,
+            "card_name": "Mountain"
+          },
+          "probability": 0.5477145231241632
+        }
+      ],
+      "hand": [
+        "Mountain",
+        "Ghitu Lavarunner",
+        "Ghitu Lavarunner",
+        "Firebrand Archer",
+        "Viashino Pyromancer",
+        "Viashino Pyromancer",
+        "Goblin Smuggler",
+        "Goblin Smuggler"
+      ],
+      "battlefield": [
+        {
+          "id": 22,
+          "name": "Mountain",
+          "controller": "P0",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": true,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 29,
+          "name": "Ghitu Lavarunner",
+          "controller": "P0",
+          "power": 1,
+          "toughness": 2,
+          "damage": 0,
+          "tapped": true,
+          "summoning_sick": false,
+          "keywords": 0
+        }
+      ],
+      "pending_source": null,
+      "trace": ".local/red-curve-1000-2026-10-18/inspection/goldfish-00032.jsonl.gz"
+    },
+    {
+      "mode": "goldfish",
+      "game_number": 40,
+      "seed": 10000760,
+      "revision": 360,
+      "description": "Final evaluation game: casts Burst Lightning at own Swab Goblin while opponent is at 3 life.",
+      "own_turn": 8,
+      "actor": "P1",
+      "active": "P1",
+      "step": "Draw",
+      "life": [
+        3,
+        20
+      ],
+      "value_estimate": 0.14690861105918884,
+      "chosen": {
+        "kind": "ChooseTarget",
+        "target": {
+          "Card": 94
+        },
+        "target_name": "Swab Goblin",
+        "target_controller": "P1"
+      },
+      "chosen_probability": 0.1630967083963314,
+      "options": [
+        {
+          "action": {
+            "kind": "ChooseTarget",
+            "target": {
+              "Player": "P0"
+            }
+          },
+          "probability": 0.18033597149408992
+        },
+        {
+          "action": {
+            "kind": "ChooseTarget",
+            "target": {
+              "Player": "P1"
+            }
+          },
+          "probability": 0.10913523011801202
+        },
+        {
+          "action": {
+            "kind": "ChooseTarget",
+            "target": {
+              "Card": 89
+            },
+            "target_name": "Ghitu Lavarunner",
+            "target_controller": "P1"
+          },
+          "probability": 0.15019635671244191
+        },
+        {
+          "action": {
+            "kind": "ChooseTarget",
+            "target": {
+              "Card": 94
+            },
+            "target_name": "Swab Goblin",
+            "target_controller": "P1"
+          },
+          "probability": 0.1630967083963314
+        },
+        {
+          "action": {
+            "kind": "ChooseTarget",
+            "target": {
+              "Card": 109
+            },
+            "target_name": "Raging Redcap",
+            "target_controller": "P1"
+          },
+          "probability": 0.11884467539969491
+        },
+        {
+          "action": {
+            "kind": "ChooseTarget",
+            "target": {
+              "Card": 110
+            },
+            "target_name": "Raging Redcap",
+            "target_controller": "P1"
+          },
+          "probability": 0.11884467539969491
+        },
+        {
+          "action": {
+            "kind": "ChooseTarget",
+            "target": {
+              "Card": 112
+            },
+            "target_name": "Firespitter Whelp",
+            "target_controller": "P1"
+          },
+          "probability": 0.1595463620666316
+        }
+      ],
+      "hand": [
+        "Swab Goblin"
+      ],
+      "battlefield": [
+        {
+          "id": 65,
+          "name": "Mountain",
+          "controller": "P1",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": false,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 68,
+          "name": "Mountain",
+          "controller": "P1",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": true,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 72,
+          "name": "Mountain",
+          "controller": "P1",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": false,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 76,
+          "name": "Mountain",
+          "controller": "P1",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": false,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 79,
+          "name": "Mountain",
+          "controller": "P1",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": false,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 82,
+          "name": "Mountain",
+          "controller": "P1",
+          "power": 0,
+          "toughness": 0,
+          "damage": 0,
+          "tapped": false,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 89,
+          "name": "Ghitu Lavarunner",
+          "controller": "P1",
+          "power": 1,
+          "toughness": 2,
+          "damage": 0,
+          "tapped": false,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 94,
+          "name": "Swab Goblin",
+          "controller": "P1",
+          "power": 2,
+          "toughness": 2,
+          "damage": 0,
+          "tapped": false,
+          "summoning_sick": false,
+          "keywords": 0
+        },
+        {
+          "id": 109,
+          "name": "Raging Redcap",
+          "controller": "P1",
+          "power": 1,
+          "toughness": 2,
+          "damage": 0,
+          "tapped": false,
+          "summoning_sick": false,
+          "keywords": 1024
+        },
+        {
+          "id": 110,
+          "name": "Raging Redcap",
+          "controller": "P1",
+          "power": 1,
+          "toughness": 2,
+          "damage": 0,
+          "tapped": false,
+          "summoning_sick": false,
+          "keywords": 1024
+        },
+        {
+          "id": 112,
+          "name": "Firespitter Whelp",
+          "controller": "P1",
+          "power": 2,
+          "toughness": 2,
+          "damage": 0,
+          "tapped": false,
+          "summoning_sick": false,
+          "keywords": 1
+        }
+      ],
+      "pending_source": "Burst Lightning",
+      "trace": ".local/red-curve-1000-2026-10-18/inspection/goldfish-00039.jsonl.gz"
+    }
+  ],
+  "sample_mix": {
+    "last_three_training_games": 3,
+    "nonforced_choices": 1226,
+    "pass_or_tap_mana_choices": 910
+  },
+  "external_card_text_verification": "https://mtg-jp.com/products/card-gallery/0000165/447302/",
+  "notes": [
+    "No checkpoint or training code was changed.",
+    "The current run starts from random weights and has no synthetic warm-up.",
+    "Only terminal win/loss/draw rewards were used."
+  ]
+}

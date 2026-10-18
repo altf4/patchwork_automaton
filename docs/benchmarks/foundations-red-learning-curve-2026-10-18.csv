@@ -1,0 +1,12 @@
+training_games,mean_kill_turn,ci95_low,ci95_high,wins,attempts,failures,completion_rate,capped_turns_mean,checkpoint
+0,15.025,14.05,16.1,40,40,0,1.0,15.025,.local/red-curve-1000-2026-10-18/checkpoints/round-0000/policy.keras
+100,13.05,12.025,14.125,40,40,0,1.0,13.05,.local/red-curve-1000-2026-10-18/checkpoints/round-0004/policy.keras
+200,11.9,11.175,12.7,40,40,0,1.0,11.9,.local/red-curve-1000-2026-10-18/checkpoints/round-0008/policy.keras
+300,11.1,10.475,11.75,40,40,0,1.0,11.1,.local/red-curve-1000-2026-10-18/checkpoints/round-0012/policy.keras
+400,9.4,8.8,10.05,40,40,0,1.0,9.4,.local/red-curve-1000-2026-10-18/checkpoints/round-0016/policy.keras
+500,9.35,8.75,9.975,40,40,0,1.0,9.35,.local/red-curve-1000-2026-10-18/checkpoints/round-0020/policy.keras
+600,8.775,8.175,9.45,40,40,0,1.0,8.775,.local/red-curve-1000-2026-10-18/checkpoints/round-0024/policy.keras
+700,8.25,7.75,8.775,40,40,0,1.0,8.25,.local/red-curve-1000-2026-10-18/checkpoints/round-0028/policy.keras
+800,8.3,7.825,8.775,40,40,0,1.0,8.3,.local/red-curve-1000-2026-10-18/checkpoints/round-0032/policy.keras
+900,8.05,7.55,8.6,40,40,0,1.0,8.05,.local/red-curve-1000-2026-10-18/checkpoints/round-0036/policy.keras
+1000,7.775,7.275,8.325,40,40,0,1.0,7.775,.local/red-curve-1000-2026-10-18/checkpoints/round-0040/policy.keras

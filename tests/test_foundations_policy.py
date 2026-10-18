@@ -67,3 +67,42 @@ class FoundationsPolicyTests(unittest.TestCase):
         self.assertEqual(p.choose(attacking).option, 'special')
         done = replace(attacking, decision=replace(attacking.decision, token=replace(attacking.decision.token, generation=2)))
         self.assertEqual(p.choose(done).option, 'no')
+
+    def test_new_instants_require_suitable_targets_and_buff_only_before_combat(self):
+        for spell, target_name, controller in (
+                ('Kindled Fury', 'Firebrand Archer', ME),
+                ('Sure Strike', 'Firebrand Archer', ME),
+                ('Scorching Dragonfire', 'Savannah Lions', OTHER),
+                ('Fiery Annihilation', 'Savannah Lions', OTHER)):
+            with self.subTest(spell=spell):
+                p = FoundationsAggro()
+                objects = (card(spell, 'spell'), *(card('Mountain', str(i), zone='battlefield') for i in range(3)))
+                state = obs(objects=objects, options=(option('spell'), Option('no', 'boolean', 'Pass')))
+                self.assertEqual(p.choose(state).option, 'no')
+                target = card(target_name, 'target', zone='battlefield', controller=controller)
+                state = replace(state, objects={**state.objects, target.id: target})
+                self.assertEqual(p.choose(state).option, 'object:spell')
+                decoy = card('Fanatical Firebrand', 'decoy', zone='battlefield',
+                             controller=OTHER if controller == ME else ME)
+                targeting = replace(state, objects={**state.objects, decoy.id: decoy},
+                    decision=replace(state.decision, kind='GAME_TARGET', options=(option('decoy'), option('target'))))
+                self.assertEqual(p.choose(targeting).option, 'object:target')
+                expected = 'no' if controller == ME else 'object:spell'
+                self.assertEqual(p.choose(replace(state, phase='postcombat_main')).option, expected)
+
+    def test_native_buff_and_removal_target_binding(self):
+        actor = Handle('rustmage', 'player', 'P0'); enemy = Handle('rustmage', 'player', 'P1')
+        game = Handle('rustmage', 'game', 'game')
+        token = DecisionToken('rustmage', 'session', game, actor, 1)
+        objects = [ObjectView(Handle('rustmage', 'object', str(i)), 'Fanatical Firebrand',
+                              'battlefield', owner, {'tapped': False})
+                   for i, owner in ((1, actor), (2, enemy))]
+        options = tuple(Option(str(i), 'finite', '', {'action': {'kind': 'ChooseTarget', 'target': {'Card': i}}})
+                        for i in (1, 2))
+        for spell, expected in (('Kindled Fury', '1'), ('Sure Strike', '1'),
+                                ('Scorching Dragonfire', '2'), ('Fiery Annihilation', '2')):
+            state = Observation('rustmage', game, actor, 1,
+                (PlayerView(actor, 'P0', 20, native={'mana': [0]*6}), PlayerView(enemy, 'P1', 20)),
+                {o.id:o for o in objects}, Decision(token, 'targets', '', options),
+                native={'announcing': {'source_card': spell}})
+            self.assertEqual(FoundationsAggro().choose(state).option, expected)

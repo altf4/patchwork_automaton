@@ -10,7 +10,7 @@ from unittest.mock import patch
 
 from patchwork_automaton.backends.rustmage import (
     RustMageMatch, action_options, domain_action, _plain)
-from patchwork_automaton.baselines.foundations import DATA, FoundationsAggro, foundations_deck
+from patchwork_automaton.baselines.foundations import DATA, FACTS, FoundationsAggro, foundations_deck
 from patchwork_automaton.core import CardSpec, DeckSpec, GameHandle, Response
 from patchwork_automaton.errors import Disconnected, StaleDecision, UnsupportedInteraction
 from patchwork_automaton.rl import EpisodeEnd, RustMageSelfPlay
@@ -45,7 +45,12 @@ class DomainTests(unittest.TestCase):
         for color in ('red', 'white'):
             deck = foundations_deck(color)
             self.assertEqual(sum(c.quantity for c in deck.cards), 60)
-            self.assertEqual(len(deck.cards), 10)
+            counts = Counter()
+            for c in deck.cards:
+                kind = FACTS[c.name]['type_line'].split(' — ')[0].removeprefix('Basic ')
+                counts[kind] += c.quantity
+            expected = dict(Land=22, Creature=19, Instant=19) if color == 'red' else dict(Land=24, Creature=36)
+            self.assertEqual(counts, expected)
             self.assertTrue(all(c.set_code == 'FDN' and c.collector_number and not c.sideboard for c in deck.cards))
             self.assertTrue(all(c.quantity <= 4 or c.name in ('Mountain', 'Plains') for c in deck.cards))
 

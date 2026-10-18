@@ -107,6 +107,9 @@ def save_checkpoint(directory,model,trainer,state,*,policy_type=NeuralPolicy):
     policy_type(model).save(temporary/'policy.keras')
     np.savez(temporary/'optimizer.npz',**{f'v{i}':np.asarray(v) for i,v in enumerate(trainer.optimizer.variables)})
     saved_state=dict(state,optimizer_steps=int(trainer.optimizer.iterations))
+    if hasattr(trainer, 'critic_optimizer'):
+        np.savez(temporary/'critic-optimizer.npz', **{f'v{i}':np.asarray(v) for i,v in enumerate(trainer.critic_optimizer.variables)})
+        saved_state['critic_optimizer_steps'] = int(trainer.critic_optimizer.iterations)
     if hasattr(trainer,'rng'):saved_state['trainer_rng_state']=trainer.rng.bit_generator.state
     atomic_json(temporary/'state.json',saved_state)
     temporary.rename(destination)
@@ -136,6 +139,15 @@ def load_checkpoint(directory):
             if tuple(value.shape)!=tuple(variable.shape):raise ValueError('Optimizer shape mismatch')
             variable.assign(value)
     if int(trainer.optimizer.iterations)!=state.get('optimizer_steps',state['round']):raise ValueError('Optimizer/checkpoint mismatch')
+    if hasattr(trainer, 'critic_optimizer'):
+        with np.load(root/'critic-optimizer.npz', allow_pickle=False) as archive:
+            if len(archive.files) != len(trainer.critic_optimizer.variables): raise ValueError('Critic optimizer variable mismatch')
+            for i, variable in enumerate(trainer.critic_optimizer.variables):
+                value = archive[f'v{i}']
+                if tuple(value.shape) != tuple(variable.shape): raise ValueError('Critic optimizer shape mismatch')
+                variable.assign(value)
+        if int(trainer.critic_optimizer.iterations) != state['critic_optimizer_steps']:
+            raise ValueError('Critic optimizer/checkpoint mismatch')
     if hasattr(trainer,'rng') and 'trainer_rng_state' in state:
         trainer.rng.bit_generator.state=state['trainer_rng_state']
     return model,trainer,state

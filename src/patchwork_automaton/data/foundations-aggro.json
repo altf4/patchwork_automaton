@@ -7,7 +7,7 @@
       "cards": [
         {
           "name": "Mountain",
-          "quantity": 24,
+          "quantity": 22,
           "set_code": "FDN",
           "collector_number": "278"
         },
@@ -24,12 +24,6 @@
           "collector_number": "623"
         },
         {
-          "name": "Swab Goblin",
-          "quantity": 4,
-          "set_code": "FDN",
-          "collector_number": "548"
-        },
-        {
           "name": "Firebrand Archer",
           "quantity": 4,
           "set_code": "FDN",
@@ -42,20 +36,8 @@
           "collector_number": "634"
         },
         {
-          "name": "Goblin Smuggler",
-          "quantity": 4,
-          "set_code": "FDN",
-          "collector_number": "540"
-        },
-        {
-          "name": "Raging Redcap",
-          "quantity": 4,
-          "set_code": "FDN",
-          "collector_number": "543"
-        },
-        {
           "name": "Firespitter Whelp",
-          "quantity": 4,
+          "quantity": 3,
           "set_code": "FDN",
           "collector_number": "197"
         },
@@ -64,6 +46,30 @@
           "quantity": 4,
           "set_code": "FDN",
           "collector_number": "192"
+        },
+        {
+          "name": "Kindled Fury",
+          "quantity": 4,
+          "set_code": "FDN",
+          "collector_number": "542"
+        },
+        {
+          "name": "Sure Strike",
+          "quantity": 4,
+          "set_code": "FDN",
+          "collector_number": "209"
+        },
+        {
+          "name": "Scorching Dragonfire",
+          "quantity": 4,
+          "set_code": "FDN",
+          "collector_number": "545"
+        },
+        {
+          "name": "Fiery Annihilation",
+          "quantity": 3,
+          "set_code": "FDN",
+          "collector_number": "86"
         }
       ]
     },
@@ -158,14 +164,6 @@
       "definition_path": "src/card_definitions/fdn/ghitu_lavarunner.json",
       "definition_sha256": "c0c273f6eae583c7cdc2eeecca6ea1a555fabdd26db6c8cebb4e40287a5a436a"
     },
-    "Swab Goblin": {
-      "mana_cost": "{1}{R}",
-      "type_line": "Creature \u2014 Goblin Pirate",
-      "oracle_id": "343ecf2f-0bbc-4840-8fb3-f5f61b26e76f",
-      "mana_value": 2,
-      "definition_path": "src/card_definitions/fdn/swab_goblin.json",
-      "definition_sha256": "d8f8fe9264082a05d6193239e25baf62b17a8d5f26ba271f10283a2912da0975"
-    },
     "Firebrand Archer": {
       "mana_cost": "{1}{R}",
       "type_line": "Creature \u2014 Human Archer",
@@ -181,22 +179,6 @@
       "mana_value": 2,
       "definition_path": "src/card_definitions/fdn/viashino_pyromancer.json",
       "definition_sha256": "daf1143c96d74425f3ce08ef215d33fb44ff267b2db8237604e1be71602fbaa1"
-    },
-    "Goblin Smuggler": {
-      "mana_cost": "{2}{R}",
-      "type_line": "Creature \u2014 Goblin Rogue",
-      "oracle_id": "eae15f7d-1f6e-4dfc-afea-7698b93cd145",
-      "mana_value": 3,
-      "definition_path": "src/card_definitions/fdn/goblin_smuggler.json",
-      "definition_sha256": "bd2dd010ed60f7f42de97584f96f2d95162e6d0513fc42509eddf6b8c9c4cb6e"
-    },
-    "Raging Redcap": {
-      "mana_cost": "{2}{R}",
-      "type_line": "Creature \u2014 Goblin Knight",
-      "oracle_id": "679841ad-f3ac-48e2-ba11-2cf6d78642b4",
-      "mana_value": 3,
-      "definition_path": "src/card_definitions/fdn/raging_redcap.json",
-      "definition_sha256": "a9bda0e4e32ebdeb8cfffdd9123998d8ad5c51065a0642c4d52c119c545f44c2"
     },
     "Firespitter Whelp": {
       "mana_cost": "{2}{R}",
@@ -293,6 +275,38 @@
       "mana_value": 3,
       "definition_path": "src/card_definitions/fdn/inspiring_overseer.json",
       "definition_sha256": "d5c34dfa93f2055f46d3931225b2a744a7e6264d99eea3cc6307d106792f30e5"
+    },
+    "Kindled Fury": {
+      "mana_cost": "{R}",
+      "type_line": "Instant",
+      "oracle_id": "ebeee06e-3345-4f02-896f-cb0b2cfa5548",
+      "mana_value": 1,
+      "definition_path": "src/card_definitions/fdn/kindled_fury.json",
+      "definition_sha256": "35e41219924ee336b0210a23633aa68d23aff323cd070a63d6c997d4e33c9bfd"
+    },
+    "Sure Strike": {
+      "mana_cost": "{1}{R}",
+      "type_line": "Instant",
+      "oracle_id": "fb694e7e-f66e-4958-b6ed-aa74bc9ac43e",
+      "mana_value": 2,
+      "definition_path": "src/card_definitions/fdn/sure_strike.json",
+      "definition_sha256": "02474fb9ad5ddf26bf8832a679f5dcbe8f690f201e8ec7d78a6bc9c8e9cbc20e"
+    },
+    "Scorching Dragonfire": {
+      "mana_cost": "{1}{R}",
+      "type_line": "Instant",
+      "oracle_id": "d14f313c-fea6-49c4-8197-5b74ee584a6b",
+      "mana_value": 2,
+      "definition_path": "src/card_definitions/fdn/scorching_dragonfire.json",
+      "definition_sha256": "c5be249d7fa983245773ea21cd1ee1c2b4d56a5845d6438d877368ffeac545eb"
+    },
+    "Fiery Annihilation": {
+      "mana_cost": "{2}{R}",
+      "type_line": "Instant",
+      "oracle_id": "d44f3724-17b7-48f0-885d-75292669f971",
+      "mana_value": 3,
+      "definition_path": "src/card_definitions/fdn/fiery_annihilation.json",
+      "definition_sha256": "2cbb67a8d3f0e17d4a3375b7d8649a84f8ff39782fb33e45c5a82be51592a4c5"
     }
   }
 }

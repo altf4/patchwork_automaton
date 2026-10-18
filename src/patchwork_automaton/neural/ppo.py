@@ -44,15 +44,23 @@ class PPOTrainer:
         if max_state_kl <= 0 or backtracks < 0:
             raise ValueError('Invalid trust-region limits')
         self.optimizer = keras.optimizers.Adam(learning_rate)
-        self.optimizer.build(model.trainable_variables)
+        self.separate_value = bool(getattr(model, 'separate_value', False))
+        self.actor_variables = tuple(model.actor.trainable_variables if self.separate_value else model.trainable_variables)
+        self.optimizer.build(self.actor_variables)
+        if self.separate_value:
+            self.critic_optimizer = keras.optimizers.Adam(learning_rate)
+            self.critic_optimizer.build(model.critic.trainable_variables)
         signature = [input_signature(example_batch(model.memory_size, getattr(model, 'feature_spec', None))),
                      tf.TensorSpec([None], tf.int32)] + [tf.TensorSpec([None], tf.float32)] * 3
         self.step = tf.function(self._step, input_signature=signature, autograph=False)
+        if self.separate_value:
+            self.critic_step = tf.function(self._critic_step,
+                input_signature=[signature[0], tf.TensorSpec([None], tf.float32)], autograph=False)
         self.measure = tf.function(self._measure, input_signature=signature, autograph=False)
         self.drift = tf.function(self._drift, input_signature=[signature[0], tf.TensorSpec([None, None], tf.float32)], autograph=False)
         self.measure_with_drift = tf.function(self._measure_with_drift,
             input_signature=signature + [tf.TensorSpec([None, None], tf.float32)], autograph=False)
-        self.guard_variables = tuple(self.model.variables) + tuple(self.optimizer.variables)
+        self.guard_variables = tuple(model.actor.variables if self.separate_value else model.variables) + tuple(self.optimizer.variables)
         self.snapshot = tf.function(lambda: tuple(tf.identity(v) for v in self.guard_variables), autograph=False)
         self.restore = tf.function(self._restore,
             input_signature=[tuple(tf.TensorSpec(v.shape, tf.as_dtype(v.dtype)) for v in self.guard_variables)], autograph=False)
@@ -106,16 +114,43 @@ class PPOTrainer:
 
     def _step(self, *args):
         with tf.GradientTape() as tape:
-            metrics = self._terms(*args)
-            loss = metrics[0]
-        gradients = tape.gradient(loss, self.model.trainable_variables)
+            if self.separate_value:
+                output = self.model.actor_output(args[0], training=True)
+                metrics = self._terms_from_output(output, tf.nn.log_softmax(output['logits']), *args)
+                loss = metrics[1] - self.entropy_weight * metrics[3]
+            else:
+                loss = self._terms(*args)[0]
+        gradients = tape.gradient(loss, self.actor_variables)
         gradients = [tf.zeros_like(v) if g is None else tf.convert_to_tensor(g)
-                     for g, v in zip(gradients, self.model.trainable_variables)]
+                     for g, v in zip(gradients, self.actor_variables)]
         for gradient in gradients:
             tf.debugging.assert_all_finite(gradient, 'Nonfinite PPO gradient')
         gradients, norm = tf.clip_by_global_norm(gradients, self.clip_norm)
-        self.optimizer.apply_gradients(zip(gradients, self.model.trainable_variables))
+        self.optimizer.apply_gradients(zip(gradients, self.actor_variables))
         return norm
+
+    def _critic_step(self, inputs, returns):
+        with tf.GradientTape() as tape:
+            value = self.model.value_output(inputs, training=True)['value'][:, 0]
+            mask = inputs['advance_memory'][:, 0]
+            loss = tf.math.divide_no_nan(tf.reduce_sum(tf.square(value - returns) * mask), tf.reduce_sum(mask))
+        variables = self.model.critic.trainable_variables
+        gradients = tape.gradient(loss, variables)
+        gradients = [tf.zeros_like(v) if g is None else tf.convert_to_tensor(g) for g, v in zip(gradients, variables)]
+        for gradient in gradients: tf.debugging.assert_all_finite(gradient, 'Nonfinite critic gradient')
+        gradients, norm = tf.clip_by_global_norm(gradients, self.clip_norm)
+        self.critic_optimizer.apply_gradients(zip(gradients, variables))
+        return norm
+
+    def fit_critic(self, batches):
+        """Independent MSE epochs; actor trust-region rejection cannot undo these."""
+        if not self.separate_value: return {}
+        steps = 0; norm = 0.
+        for _ in range(self.epochs):
+            for inputs, returns in batches():
+                norm = float(self.critic_step(inputs, returns)); steps += 1
+        return dict(critic_steps=steps, critic_optimizer_steps=int(self.critic_optimizer.iterations),
+                    critic_gradient_norm=norm)
 
     def update(self, inputs, actions, returns, old_logp, old_values, *, rng, old_log_probs=None):
         """Optimize one frozen rollout; returns must come from its task outcome.
@@ -154,6 +189,15 @@ class PPOTrainer:
         exact = np.zeros(2)
         largest_exact = np.zeros(2)
         metrics = np.asarray(self.measure(inputs, actions, returns, old_logp, advantages))
+        value_loss_before = float(metrics[2])
+        def critic_batches():
+            order = rng.permutation(count)
+            for start in range(0, count, self.batch_size):
+                ix = order[start:start + self.batch_size]
+                yield {k: np.asarray(v)[ix] for k, v in inputs.items()}, returns[ix]
+        critic_stats = self.fit_critic(critic_batches)
+        if self.separate_value:
+            metrics = np.asarray(self.measure(inputs, actions, returns, old_logp, advantages))
         for epoch in range(self.epochs):
             order = rng.permutation(count)
             saved = self.snapshot() if self.trust_guard else ()
@@ -199,4 +243,5 @@ class PPOTrainer:
                     reward_std=float(returns.std()), raw_advantage_std=float((returns-old_values).std()),
                     normalized_advantage_std=float(advantages.std()),
                     largest_accepted_kl=float(largest_exact[0]), largest_accepted_state_kl=float(largest_exact[1]),
-                    learning_rate=float(self.optimizer.learning_rate.numpy()))
+                    learning_rate=float(self.optimizer.learning_rate.numpy()),
+                    value_loss_before=value_loss_before, **critic_stats)
