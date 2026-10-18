@@ -1,9 +1,17 @@
 # Patchwork Automaton
 
-An experimental Python 3.11+ async gameplay library for MTGO and local XMage.
+An experimental Python 3.11+ async gameplay library for MTGO, local XMage and in-memory RustMage.
 The MTGO backend talks directly to its server over TLS. It runs on Linux without Wine or the running MTGO client.
-The server runs the rules; callers choose actions. The package contains no bot
-policy, deck strategy, or local Magic rules engine.
+The selected engine runs the rules; callers choose actions. Optional numerical
+neural policies and scripted baselines are provided for training and evaluation.
+
+The [RustMage backend](docs/rustmage.md) supports seeded in-process games, private
+views, exact structured actions and owned branch/restore for future search. Two
+60-card Foundations aggro decks and a shared policy support a complete-game
+games/minute comparison against XMage.
+The [mono-red RustMage trainer](docs/rustmage-training.md) runs batched CPU PPO
+in mirror matches and measures frozen checkpoints against a do-nothing opponent
+using turns to lethal and completion rate.
 
 Version 0.4.0 adds an opt-in common game API, XMage backend and local self-play
 episode tools. See [XMage setup and usage](docs/xmage.md). The MTGO implementation builds on the authenticated connection and Legacy Burn

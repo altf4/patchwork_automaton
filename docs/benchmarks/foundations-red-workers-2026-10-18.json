@@ -1,0 +1,4506 @@
+{
+  "checkpoint": ".local/red-ppo-2026-10-18/checkpoints/round-0032/policy.keras",
+  "checkpoint_sha256": "cb03805656200916826e58f0dcf2c3c71cfe4e8ac54cda0484e664aebc24d865",
+  "description": "Frozen policy, real mono-red mirrors, trajectory writes included, four warmup games excluded per trial, no PPO updates",
+  "logical_cpus": 8,
+  "tf_intra_threads": "2",
+  "tf_inter_threads": "1",
+  "inference_wait_ms": 2,
+  "source_sha256": "b8a494301c0583b0dbb5bdda5b4e09d14a6f98f94ca9fb2e3e48d494e7956efd",
+  "trials": [
+    {
+      "workers": 4,
+      "seed_group": 0,
+      "games": [
+        {
+          "seed": 23000000,
+          "index": 0,
+          "mode": "selfplay",
+          "seat": 0,
+          "starting_player": "P0",
+          "max_own_turns": 60,
+          "decisions": 423,
+          "neural_choices": 179,
+          "status": "loss",
+          "own_turns_to_win": null,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-0/game-00000-p0.pkl.gz",
+              "samples": 89,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-0/game-00000-p1.pkl.gz",
+              "samples": 90,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p0:Keep": 1,
+            "p1:Keep": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:Pass": 143,
+            "p1:Pass": 145,
+            "p0:PlayLand": 5,
+            "p0:AnnounceCast": 3,
+            "p0:TapMana": 25,
+            "p0:PayCosts": 3,
+            "p0:FinishAttackers": 7,
+            "p1:PlayLand": 6,
+            "p1:AnnounceCast": 7,
+            "p1:TapMana": 25,
+            "p1:PayCosts": 7,
+            "p1:FinishAttackers": 7,
+            "p0:Attack": 5,
+            "p1:Block": 3,
+            "p1:FinishBlockers": 4,
+            "p1:Activate": 1,
+            "p1:Attack": 14,
+            "p0:FinishBlockers": 6,
+            "p0:Block": 1,
+            "p1:ChooseKicker": 1,
+            "p1:ChooseTarget": 1
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            7,
+            7
+          ],
+          "final_life": [
+            -4,
+            18
+          ],
+          "seconds": 3.8317534289963078
+        },
+        {
+          "seed": 23000001,
+          "index": 1,
+          "mode": "selfplay",
+          "seat": 1,
+          "starting_player": "P0",
+          "max_own_turns": 60,
+          "decisions": 672,
+          "neural_choices": 299,
+          "status": "loss",
+          "own_turns_to_win": null,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-0/game-00001-p0.pkl.gz",
+              "samples": 137,
+              "reward": 1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-0/game-00001-p1.pkl.gz",
+              "samples": 162,
+              "reward": -1.0
+            }
+          ],
+          "actions": {
+            "p0:Mulligan": 1,
+            "p1:Keep": 1,
+            "p0:Bottom": 1,
+            "p0:Keep": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:Pass": 231,
+            "p1:Pass": 231,
+            "p0:PlayLand": 5,
+            "p0:TapMana": 44,
+            "p0:FinishAttackers": 12,
+            "p1:PlayLand": 8,
+            "p1:FinishAttackers": 11,
+            "p1:Discard": 1,
+            "p0:AnnounceCast": 10,
+            "p0:PayCosts": 10,
+            "p1:TapMana": 46,
+            "p1:AnnounceCast": 8,
+            "p1:PayCosts": 8,
+            "p1:Activate": 4,
+            "p0:Attack": 11,
+            "p1:FinishBlockers": 5,
+            "p0:Activate": 2,
+            "p1:Attack": 5,
+            "p0:FinishBlockers": 4,
+            "p0:Block": 2,
+            "p0:ChooseTarget": 2,
+            "p1:Block": 2,
+            "p1:ChooseTarget": 2,
+            "p1:Cast": 1,
+            "p1:ChooseKicker": 1
+          },
+          "winner": 0,
+          "terminal_rewards": [
+            1.0,
+            -1.0
+          ],
+          "own_turns_observed": [
+            12,
+            11
+          ],
+          "final_life": [
+            16,
+            -1
+          ],
+          "seconds": 6.601910944998963
+        },
+        {
+          "seed": 23000002,
+          "index": 2,
+          "mode": "selfplay",
+          "seat": 0,
+          "starting_player": "P1",
+          "max_own_turns": 60,
+          "decisions": 675,
+          "neural_choices": 323,
+          "status": "loss",
+          "own_turns_to_win": null,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-0/game-00002-p0.pkl.gz",
+              "samples": 184,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-0/game-00002-p1.pkl.gz",
+              "samples": 139,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p1:Keep": 1,
+            "p0:Keep": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:Pass": 225,
+            "p0:Pass": 222,
+            "p1:FinishAttackers": 12,
+            "p1:PlayLand": 6,
+            "p0:PlayLand": 11,
+            "p0:TapMana": 65,
+            "p0:FinishAttackers": 11,
+            "p1:TapMana": 50,
+            "p0:AnnounceCast": 6,
+            "p0:PayCosts": 6,
+            "p1:AnnounceCast": 10,
+            "p1:PayCosts": 10,
+            "p0:Attack": 3,
+            "p1:Block": 4,
+            "p1:FinishBlockers": 3,
+            "p0:ChooseKicker": 2,
+            "p0:ChooseTarget": 2,
+            "p1:Attack": 13,
+            "p0:FinishBlockers": 6,
+            "p0:AssignDamage": 1,
+            "p1:Activate": 1,
+            "p0:Activate": 2
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            11,
+            12
+          ],
+          "final_life": [
+            -7,
+            19
+          ],
+          "seconds": 7.153381834003085
+        },
+        {
+          "seed": 23000003,
+          "index": 3,
+          "mode": "selfplay",
+          "seat": 1,
+          "starting_player": "P1",
+          "max_own_turns": 60,
+          "decisions": 553,
+          "neural_choices": 278,
+          "status": "loss",
+          "own_turns_to_win": null,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-0/game-00003-p0.pkl.gz",
+              "samples": 124,
+              "reward": 1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-0/game-00003-p1.pkl.gz",
+              "samples": 154,
+              "reward": -1.0
+            }
+          ],
+          "actions": {
+            "p1:Keep": 1,
+            "p0:Keep": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:Pass": 187,
+            "p0:Pass": 188,
+            "p1:PlayLand": 7,
+            "p1:FinishAttackers": 9,
+            "p1:AnnounceCast": 7,
+            "p1:TapMana": 36,
+            "p1:PayCosts": 7,
+            "p1:Activate": 1,
+            "p0:FinishAttackers": 9,
+            "p0:PlayLand": 5,
+            "p0:TapMana": 29,
+            "p1:ChooseKicker": 2,
+            "p1:ChooseTarget": 2,
+            "p0:AnnounceCast": 8,
+            "p0:PayCosts": 8,
+            "p0:ChooseTarget": 3,
+            "p0:Attack": 11,
+            "p1:FinishBlockers": 7,
+            "p0:ChooseKicker": 1,
+            "p1:Block": 4,
+            "p1:Attack": 10,
+            "p0:FinishBlockers": 5,
+            "p0:AssignDamage": 1,
+            "p0:Block": 2
+          },
+          "winner": 0,
+          "terminal_rewards": [
+            1.0,
+            -1.0
+          ],
+          "own_turns_observed": [
+            9,
+            9
+          ],
+          "final_life": [
+            1,
+            0
+          ],
+          "seconds": 6.001047730998835
+        },
+        {
+          "seed": 23000004,
+          "index": 4,
+          "mode": "selfplay",
+          "seat": 0,
+          "starting_player": "P0",
+          "max_own_turns": 60,
+          "decisions": 497,
+          "neural_choices": 184,
+          "status": "win",
+          "own_turns_to_win": 9,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-0/game-00004-p0.pkl.gz",
+              "samples": 94,
+              "reward": 1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-0/game-00004-p1.pkl.gz",
+              "samples": 90,
+              "reward": -1.0
+            }
+          ],
+          "actions": {
+            "p0:Keep": 1,
+            "p1:Keep": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:Pass": 172,
+            "p1:Pass": 169,
+            "p0:PlayLand": 5,
+            "p0:AnnounceCast": 10,
+            "p0:TapMana": 27,
+            "p0:PayCosts": 10,
+            "p0:FinishAttackers": 9,
+            "p1:FinishAttackers": 8,
+            "p1:Discard": 1,
+            "p0:ChooseKicker": 3,
+            "p0:ChooseTarget": 4,
+            "p1:PlayLand": 6,
+            "p1:AnnounceCast": 6,
+            "p1:ChooseKicker": 2,
+            "p1:ChooseTarget": 2,
+            "p1:TapMana": 27,
+            "p1:PayCosts": 6,
+            "p0:Attack": 13,
+            "p1:Block": 3,
+            "p1:FinishBlockers": 6,
+            "p1:Cast": 1,
+            "p1:Activate": 2,
+            "p0:Activate": 1
+          },
+          "winner": 0,
+          "terminal_rewards": [
+            1.0,
+            -1.0
+          ],
+          "own_turns_observed": [
+            9,
+            8
+          ],
+          "final_life": [
+            18,
+            -4
+          ],
+          "seconds": 4.485284428999876
+        },
+        {
+          "seed": 23000005,
+          "index": 5,
+          "mode": "selfplay",
+          "seat": 1,
+          "starting_player": "P0",
+          "max_own_turns": 60,
+          "decisions": 369,
+          "neural_choices": 139,
+          "status": "win",
+          "own_turns_to_win": 7,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-0/game-00005-p0.pkl.gz",
+              "samples": 44,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-0/game-00005-p1.pkl.gz",
+              "samples": 95,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p0:Keep": 1,
+            "p1:Keep": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:Pass": 134,
+            "p1:Pass": 133,
+            "p0:FinishAttackers": 7,
+            "p1:FinishAttackers": 6,
+            "p1:PlayLand": 4,
+            "p1:AnnounceCast": 6,
+            "p1:ChooseKicker": 1,
+            "p1:ChooseTarget": 4,
+            "p1:TapMana": 20,
+            "p1:PayCosts": 6,
+            "p0:Discard": 1,
+            "p0:PlayLand": 4,
+            "p0:TapMana": 14,
+            "p1:Attack": 7,
+            "p0:FinishBlockers": 4,
+            "p0:AnnounceCast": 3,
+            "p0:PayCosts": 3,
+            "p0:ChooseTarget": 1,
+            "p0:Attack": 3,
+            "p1:FinishBlockers": 3,
+            "p0:Block": 1
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            7,
+            7
+          ],
+          "final_life": [
+            0,
+            12
+          ],
+          "seconds": 3.163484538003104
+        },
+        {
+          "seed": 23000006,
+          "index": 6,
+          "mode": "selfplay",
+          "seat": 0,
+          "starting_player": "P1",
+          "max_own_turns": 60,
+          "decisions": 566,
+          "neural_choices": 234,
+          "status": "win",
+          "own_turns_to_win": 10,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-0/game-00006-p0.pkl.gz",
+              "samples": 145,
+              "reward": 1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-0/game-00006-p1.pkl.gz",
+              "samples": 89,
+              "reward": -1.0
+            }
+          ],
+          "actions": {
+            "p1:Keep": 1,
+            "p0:Keep": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:Pass": 200,
+            "p0:Pass": 199,
+            "p1:FinishAttackers": 10,
+            "p0:FinishAttackers": 10,
+            "p0:PlayLand": 7,
+            "p0:AnnounceCast": 10,
+            "p0:TapMana": 40,
+            "p0:PayCosts": 10,
+            "p1:Discard": 1,
+            "p0:Attack": 15,
+            "p1:FinishBlockers": 8,
+            "p1:PlayLand": 4,
+            "p1:AnnounceCast": 8,
+            "p1:TapMana": 19,
+            "p1:PayCosts": 8,
+            "p1:Activate": 3,
+            "p1:Block": 5,
+            "p0:Activate": 2,
+            "p1:ChooseTarget": 1,
+            "p0:ChooseTarget": 2
+          },
+          "winner": 0,
+          "terminal_rewards": [
+            1.0,
+            -1.0
+          ],
+          "own_turns_observed": [
+            10,
+            10
+          ],
+          "final_life": [
+            15,
+            0
+          ],
+          "seconds": 5.184851264995814
+        },
+        {
+          "seed": 23000007,
+          "index": 7,
+          "mode": "selfplay",
+          "seat": 1,
+          "starting_player": "P1",
+          "max_own_turns": 60,
+          "decisions": 742,
+          "neural_choices": 277,
+          "status": "win",
+          "own_turns_to_win": 14,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-0/game-00007-p0.pkl.gz",
+              "samples": 112,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-0/game-00007-p1.pkl.gz",
+              "samples": 165,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p1:Keep": 1,
+            "p0:Mulligan": 1,
+            "p0:Bottom": 1,
+            "p0:Keep": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:Pass": 271,
+            "p0:Pass": 270,
+            "p1:FinishAttackers": 14,
+            "p0:FinishAttackers": 13,
+            "p1:PlayLand": 6,
+            "p1:AnnounceCast": 10,
+            "p1:TapMana": 49,
+            "p1:PayCosts": 10,
+            "p0:Discard": 3,
+            "p1:ChooseKicker": 1,
+            "p1:ChooseTarget": 2,
+            "p1:Attack": 15,
+            "p0:FinishBlockers": 11,
+            "p0:PlayLand": 4,
+            "p0:AnnounceCast": 7,
+            "p0:ChooseKicker": 3,
+            "p0:ChooseTarget": 4,
+            "p0:TapMana": 23,
+            "p0:PayCosts": 7,
+            "p1:Activate": 4,
+            "p0:Cast": 1,
+            "p0:Activate": 1,
+            "p0:Block": 3,
+            "p1:Cast": 1,
+            "p0:Attack": 1,
+            "p1:Block": 1,
+            "p1:FinishBlockers": 1
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            13,
+            14
+          ],
+          "final_life": [
+            0,
+            13
+          ],
+          "seconds": 6.798384071997134
+        },
+        {
+          "seed": 23000008,
+          "index": 8,
+          "mode": "selfplay",
+          "seat": 0,
+          "starting_player": "P0",
+          "max_own_turns": 60,
+          "decisions": 1000,
+          "neural_choices": 491,
+          "status": "loss",
+          "own_turns_to_win": null,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-0/game-00008-p0.pkl.gz",
+              "samples": 287,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-0/game-00008-p1.pkl.gz",
+              "samples": 204,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p0:Keep": 1,
+            "p1:Keep": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:Pass": 328,
+            "p1:Pass": 340,
+            "p0:FinishAttackers": 16,
+            "p0:PlayLand": 11,
+            "p0:AnnounceCast": 10,
+            "p0:TapMana": 90,
+            "p0:PayCosts": 10,
+            "p1:PlayLand": 9,
+            "p1:TapMana": 79,
+            "p1:FinishAttackers": 16,
+            "p0:Attack": 10,
+            "p1:FinishBlockers": 7,
+            "p1:AnnounceCast": 11,
+            "p1:ChooseKicker": 1,
+            "p1:ChooseTarget": 2,
+            "p1:PayCosts": 11,
+            "p0:Cast": 1,
+            "p0:Activate": 2,
+            "p1:Attack": 15,
+            "p0:Block": 5,
+            "p0:FinishBlockers": 9,
+            "p0:ChooseTarget": 4,
+            "p1:Block": 2,
+            "p0:ChooseKicker": 2,
+            "p1:Cast": 2,
+            "p1:Activate": 3
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            16,
+            16
+          ],
+          "final_life": [
+            -1,
+            1
+          ],
+          "seconds": 12.074008731004142
+        },
+        {
+          "seed": 23000009,
+          "index": 9,
+          "mode": "selfplay",
+          "seat": 1,
+          "starting_player": "P0",
+          "max_own_turns": 60,
+          "decisions": 660,
+          "neural_choices": 300,
+          "status": "loss",
+          "own_turns_to_win": null,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-0/game-00009-p0.pkl.gz",
+              "samples": 145,
+              "reward": 1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-0/game-00009-p1.pkl.gz",
+              "samples": 155,
+              "reward": -1.0
+            }
+          ],
+          "actions": {
+            "p0:Keep": 1,
+            "p1:Keep": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:Pass": 228,
+            "p1:Pass": 227,
+            "p0:FinishAttackers": 12,
+            "p0:PlayLand": 7,
+            "p1:PlayLand": 7,
+            "p0:TapMana": 48,
+            "p1:AnnounceCast": 8,
+            "p1:TapMana": 42,
+            "p1:PayCosts": 8,
+            "p1:FinishAttackers": 11,
+            "p0:AnnounceCast": 10,
+            "p0:PayCosts": 10,
+            "p1:ChooseKicker": 1,
+            "p1:ChooseTarget": 1,
+            "p1:Attack": 3,
+            "p0:FinishBlockers": 3,
+            "p0:ChooseTarget": 2,
+            "p0:Block": 2,
+            "p1:Activate": 2,
+            "p0:Attack": 13,
+            "p1:Block": 4,
+            "p1:FinishBlockers": 6,
+            "p1:Cast": 1
+          },
+          "winner": 0,
+          "terminal_rewards": [
+            1.0,
+            -1.0
+          ],
+          "own_turns_observed": [
+            12,
+            11
+          ],
+          "final_life": [
+            17,
+            -1
+          ],
+          "seconds": 7.383528019003279
+        },
+        {
+          "seed": 23000010,
+          "index": 10,
+          "mode": "selfplay",
+          "seat": 0,
+          "starting_player": "P1",
+          "max_own_turns": 60,
+          "decisions": 783,
+          "neural_choices": 325,
+          "status": "loss",
+          "own_turns_to_win": null,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-0/game-00010-p0.pkl.gz",
+              "samples": 184,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-0/game-00010-p1.pkl.gz",
+              "samples": 141,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p1:Keep": 1,
+            "p0:Keep": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:Pass": 275,
+            "p0:Pass": 269,
+            "p1:FinishAttackers": 14,
+            "p0:FinishAttackers": 13,
+            "p0:Discard": 1,
+            "p1:PlayLand": 5,
+            "p1:AnnounceCast": 11,
+            "p1:ChooseKicker": 2,
+            "p1:ChooseTarget": 3,
+            "p1:TapMana": 44,
+            "p1:PayCosts": 11,
+            "p0:PlayLand": 8,
+            "p0:AnnounceCast": 10,
+            "p0:TapMana": 54,
+            "p0:PayCosts": 10,
+            "p0:ChooseKicker": 2,
+            "p0:ChooseTarget": 2,
+            "p0:Activate": 2,
+            "p0:Attack": 11,
+            "p1:FinishBlockers": 8,
+            "p1:Block": 5,
+            "p1:Attack": 11,
+            "p0:FinishBlockers": 5,
+            "p0:Block": 1,
+            "p0:AssignDamage": 1,
+            "p1:Cast": 1
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            13,
+            14
+          ],
+          "final_life": [
+            -2,
+            4
+          ],
+          "seconds": 8.58982706900133
+        },
+        {
+          "seed": 23000011,
+          "index": 11,
+          "mode": "selfplay",
+          "seat": 1,
+          "starting_player": "P1",
+          "max_own_turns": 60,
+          "decisions": 831,
+          "neural_choices": 416,
+          "status": "win",
+          "own_turns_to_win": 14,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-0/game-00011-p0.pkl.gz",
+              "samples": 239,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-0/game-00011-p1.pkl.gz",
+              "samples": 177,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p1:Keep": 1,
+            "p0:Keep": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:Pass": 282,
+            "p0:Pass": 281,
+            "p1:FinishAttackers": 14,
+            "p0:FinishAttackers": 13,
+            "p0:PlayLand": 8,
+            "p0:TapMana": 69,
+            "p1:PlayLand": 8,
+            "p1:AnnounceCast": 11,
+            "p1:TapMana": 53,
+            "p1:PayCosts": 11,
+            "p0:AnnounceCast": 10,
+            "p0:PayCosts": 11,
+            "p1:Attack": 7,
+            "p0:Block": 1,
+            "p0:FinishBlockers": 6,
+            "p1:ChooseKicker": 3,
+            "p1:ChooseTarget": 4,
+            "p0:Attack": 5,
+            "p1:Block": 5,
+            "p1:FinishBlockers": 5,
+            "p0:Activate": 8,
+            "p0:ChooseKicker": 2,
+            "p0:ChooseTarget": 4,
+            "p0:AnnounceActivate": 1,
+            "p1:Activate": 4,
+            "p0:AssignDamage": 1
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            13,
+            14
+          ],
+          "final_life": [
+            -1,
+            15
+          ],
+          "seconds": 10.521032220996858
+        },
+        {
+          "seed": 23000012,
+          "index": 12,
+          "mode": "selfplay",
+          "seat": 0,
+          "starting_player": "P0",
+          "max_own_turns": 60,
+          "decisions": 495,
+          "neural_choices": 157,
+          "status": "loss",
+          "own_turns_to_win": null,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-0/game-00012-p0.pkl.gz",
+              "samples": 75,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-0/game-00012-p1.pkl.gz",
+              "samples": 82,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p0:Keep": 1,
+            "p1:Keep": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:Pass": 178,
+            "p1:Pass": 179,
+            "p0:PlayLand": 3,
+            "p0:FinishAttackers": 9,
+            "p0:AnnounceCast": 5,
+            "p0:ChooseKicker": 1,
+            "p0:ChooseTarget": 2,
+            "p0:TapMana": 15,
+            "p0:PayCosts": 5,
+            "p1:PlayLand": 4,
+            "p1:AnnounceCast": 9,
+            "p1:TapMana": 25,
+            "p1:PayCosts": 9,
+            "p1:FinishAttackers": 9,
+            "p1:Attack": 15,
+            "p0:Block": 3,
+            "p0:FinishBlockers": 8,
+            "p0:Attack": 3,
+            "p1:FinishBlockers": 3,
+            "p1:Activate": 1,
+            "p1:ChooseKicker": 1,
+            "p1:ChooseTarget": 1,
+            "p0:Discard": 1,
+            "p1:Block": 2
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            9,
+            9
+          ],
+          "final_life": [
+            -1,
+            19
+          ],
+          "seconds": 4.394499093999912
+        },
+        {
+          "seed": 23000013,
+          "index": 13,
+          "mode": "selfplay",
+          "seat": 1,
+          "starting_player": "P0",
+          "max_own_turns": 60,
+          "decisions": 510,
+          "neural_choices": 176,
+          "status": "loss",
+          "own_turns_to_win": null,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-0/game-00013-p0.pkl.gz",
+              "samples": 116,
+              "reward": 1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-0/game-00013-p1.pkl.gz",
+              "samples": 60,
+              "reward": -1.0
+            }
+          ],
+          "actions": {
+            "p0:Keep": 1,
+            "p1:Keep": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:Pass": 180,
+            "p1:Pass": 182,
+            "p0:FinishAttackers": 10,
+            "p0:PlayLand": 5,
+            "p0:AnnounceCast": 10,
+            "p0:ChooseKicker": 3,
+            "p0:ChooseTarget": 3,
+            "p0:TapMana": 33,
+            "p0:PayCosts": 10,
+            "p1:PlayLand": 3,
+            "p1:TapMana": 22,
+            "p1:FinishAttackers": 9,
+            "p1:Discard": 1,
+            "p0:Attack": 12,
+            "p1:FinishBlockers": 7,
+            "p1:AnnounceCast": 5,
+            "p1:PayCosts": 5,
+            "p1:ChooseKicker": 1,
+            "p1:ChooseTarget": 1,
+            "p1:Block": 3,
+            "p0:PutTrigger": 1
+          },
+          "winner": 0,
+          "terminal_rewards": [
+            1.0,
+            -1.0
+          ],
+          "own_turns_observed": [
+            10,
+            9
+          ],
+          "final_life": [
+            18,
+            0
+          ],
+          "seconds": 4.549980162002612
+        },
+        {
+          "seed": 23000014,
+          "index": 14,
+          "mode": "selfplay",
+          "seat": 0,
+          "starting_player": "P1",
+          "max_own_turns": 60,
+          "decisions": 540,
+          "neural_choices": 215,
+          "status": "win",
+          "own_turns_to_win": 10,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-0/game-00014-p0.pkl.gz",
+              "samples": 123,
+              "reward": 1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-0/game-00014-p1.pkl.gz",
+              "samples": 92,
+              "reward": -1.0
+            }
+          ],
+          "actions": {
+            "p1:Keep": 1,
+            "p0:Keep": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:Pass": 193,
+            "p0:Pass": 193,
+            "p1:FinishAttackers": 10,
+            "p0:PlayLand": 5,
+            "p0:FinishAttackers": 10,
+            "p0:TapMana": 33,
+            "p1:Discard": 1,
+            "p0:AnnounceCast": 8,
+            "p0:PayCosts": 8,
+            "p1:PlayLand": 7,
+            "p1:AnnounceCast": 4,
+            "p1:TapMana": 30,
+            "p1:PayCosts": 4,
+            "p1:Activate": 2,
+            "p1:Cast": 1,
+            "p1:ChooseKicker": 1,
+            "p1:ChooseTarget": 1,
+            "p0:Attack": 9,
+            "p1:FinishBlockers": 6,
+            "p0:Activate": 1,
+            "p1:Attack": 1,
+            "p0:Block": 1,
+            "p0:FinishBlockers": 1,
+            "p0:ChooseKicker": 2,
+            "p0:ChooseTarget": 2,
+            "p0:PutTrigger": 2
+          },
+          "winner": 0,
+          "terminal_rewards": [
+            1.0,
+            -1.0
+          ],
+          "own_turns_observed": [
+            10,
+            10
+          ],
+          "final_life": [
+            20,
+            -3
+          ],
+          "seconds": 4.951223476004088
+        },
+        {
+          "seed": 23000015,
+          "index": 15,
+          "mode": "selfplay",
+          "seat": 1,
+          "starting_player": "P1",
+          "max_own_turns": 60,
+          "decisions": 602,
+          "neural_choices": 230,
+          "status": "win",
+          "own_turns_to_win": 11,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-0/game-00015-p0.pkl.gz",
+              "samples": 103,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-0/game-00015-p1.pkl.gz",
+              "samples": 127,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p1:Keep": 1,
+            "p0:Keep": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:Pass": 214,
+            "p0:Pass": 216,
+            "p1:PlayLand": 6,
+            "p1:TapMana": 30,
+            "p1:FinishAttackers": 11,
+            "p0:FinishAttackers": 10,
+            "p0:Discard": 2,
+            "p1:AnnounceCast": 8,
+            "p1:ChooseKicker": 1,
+            "p1:ChooseTarget": 2,
+            "p1:PayCosts": 8,
+            "p0:PlayLand": 6,
+            "p0:AnnounceCast": 7,
+            "p0:TapMana": 28,
+            "p0:PayCosts": 7,
+            "p0:Attack": 3,
+            "p1:FinishBlockers": 3,
+            "p1:Attack": 13,
+            "p0:Block": 4,
+            "p0:FinishBlockers": 7,
+            "p0:Activate": 8,
+            "p1:Block": 1,
+            "p1:Activate": 3
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            10,
+            11
+          ],
+          "final_life": [
+            0,
+            16
+          ],
+          "seconds": 4.724945980000484
+        }
+      ],
+      "seconds": 25.699610955001845,
+      "cpu_seconds": 29.653318083,
+      "mean_cores": 1.1538430731469362,
+      "games_per_minute": 37.35465107549256,
+      "mean_batch": 1.802390098164746,
+      "outcomes": {
+        "loss": 9,
+        "win": 7
+      }
+    },
+    {
+      "workers": 8,
+      "seed_group": 0,
+      "games": [
+        {
+          "seed": 23000000,
+          "index": 0,
+          "mode": "selfplay",
+          "seat": 0,
+          "starting_player": "P0",
+          "max_own_turns": 60,
+          "decisions": 423,
+          "neural_choices": 179,
+          "status": "loss",
+          "own_turns_to_win": null,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-1/game-00000-p0.pkl.gz",
+              "samples": 89,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-1/game-00000-p1.pkl.gz",
+              "samples": 90,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p0:Keep": 1,
+            "p1:Keep": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:Pass": 143,
+            "p1:Pass": 145,
+            "p0:PlayLand": 5,
+            "p0:AnnounceCast": 3,
+            "p0:TapMana": 25,
+            "p0:PayCosts": 3,
+            "p0:FinishAttackers": 7,
+            "p1:PlayLand": 6,
+            "p1:AnnounceCast": 7,
+            "p1:TapMana": 25,
+            "p1:PayCosts": 7,
+            "p1:FinishAttackers": 7,
+            "p0:Attack": 5,
+            "p1:Block": 3,
+            "p1:FinishBlockers": 4,
+            "p1:Activate": 1,
+            "p1:Attack": 14,
+            "p0:FinishBlockers": 6,
+            "p0:Block": 1,
+            "p1:ChooseKicker": 1,
+            "p1:ChooseTarget": 1
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            7,
+            7
+          ],
+          "final_life": [
+            -4,
+            18
+          ],
+          "seconds": 8.208755933999782
+        },
+        {
+          "seed": 23000001,
+          "index": 1,
+          "mode": "selfplay",
+          "seat": 1,
+          "starting_player": "P0",
+          "max_own_turns": 60,
+          "decisions": 672,
+          "neural_choices": 299,
+          "status": "loss",
+          "own_turns_to_win": null,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-1/game-00001-p0.pkl.gz",
+              "samples": 137,
+              "reward": 1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-1/game-00001-p1.pkl.gz",
+              "samples": 162,
+              "reward": -1.0
+            }
+          ],
+          "actions": {
+            "p0:Mulligan": 1,
+            "p1:Keep": 1,
+            "p0:Bottom": 1,
+            "p0:Keep": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:Pass": 231,
+            "p1:Pass": 231,
+            "p0:PlayLand": 5,
+            "p0:TapMana": 44,
+            "p0:FinishAttackers": 12,
+            "p1:PlayLand": 8,
+            "p1:FinishAttackers": 11,
+            "p1:Discard": 1,
+            "p0:AnnounceCast": 10,
+            "p0:PayCosts": 10,
+            "p1:TapMana": 46,
+            "p1:AnnounceCast": 8,
+            "p1:PayCosts": 8,
+            "p1:Activate": 4,
+            "p0:Attack": 11,
+            "p1:FinishBlockers": 5,
+            "p0:Activate": 2,
+            "p1:Attack": 5,
+            "p0:FinishBlockers": 4,
+            "p0:Block": 2,
+            "p0:ChooseTarget": 2,
+            "p1:Block": 2,
+            "p1:ChooseTarget": 2,
+            "p1:Cast": 1,
+            "p1:ChooseKicker": 1
+          },
+          "winner": 0,
+          "terminal_rewards": [
+            1.0,
+            -1.0
+          ],
+          "own_turns_observed": [
+            12,
+            11
+          ],
+          "final_life": [
+            16,
+            -1
+          ],
+          "seconds": 14.376006448001135
+        },
+        {
+          "seed": 23000002,
+          "index": 2,
+          "mode": "selfplay",
+          "seat": 0,
+          "starting_player": "P1",
+          "max_own_turns": 60,
+          "decisions": 675,
+          "neural_choices": 323,
+          "status": "loss",
+          "own_turns_to_win": null,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-1/game-00002-p0.pkl.gz",
+              "samples": 184,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-1/game-00002-p1.pkl.gz",
+              "samples": 139,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p1:Keep": 1,
+            "p0:Keep": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:Pass": 225,
+            "p0:Pass": 222,
+            "p1:FinishAttackers": 12,
+            "p1:PlayLand": 6,
+            "p0:PlayLand": 11,
+            "p0:TapMana": 65,
+            "p0:FinishAttackers": 11,
+            "p1:TapMana": 50,
+            "p0:AnnounceCast": 6,
+            "p0:PayCosts": 6,
+            "p1:AnnounceCast": 10,
+            "p1:PayCosts": 10,
+            "p0:Attack": 3,
+            "p1:Block": 4,
+            "p1:FinishBlockers": 3,
+            "p0:ChooseKicker": 2,
+            "p0:ChooseTarget": 2,
+            "p1:Attack": 13,
+            "p0:FinishBlockers": 6,
+            "p0:AssignDamage": 1,
+            "p1:Activate": 1,
+            "p0:Activate": 2
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            11,
+            12
+          ],
+          "final_life": [
+            -7,
+            19
+          ],
+          "seconds": 15.095770212996285
+        },
+        {
+          "seed": 23000003,
+          "index": 3,
+          "mode": "selfplay",
+          "seat": 1,
+          "starting_player": "P1",
+          "max_own_turns": 60,
+          "decisions": 553,
+          "neural_choices": 278,
+          "status": "loss",
+          "own_turns_to_win": null,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-1/game-00003-p0.pkl.gz",
+              "samples": 124,
+              "reward": 1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-1/game-00003-p1.pkl.gz",
+              "samples": 154,
+              "reward": -1.0
+            }
+          ],
+          "actions": {
+            "p1:Keep": 1,
+            "p0:Keep": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:Pass": 187,
+            "p0:Pass": 188,
+            "p1:PlayLand": 7,
+            "p1:FinishAttackers": 9,
+            "p1:AnnounceCast": 7,
+            "p1:TapMana": 36,
+            "p1:PayCosts": 7,
+            "p1:Activate": 1,
+            "p0:FinishAttackers": 9,
+            "p0:PlayLand": 5,
+            "p0:TapMana": 29,
+            "p1:ChooseKicker": 2,
+            "p1:ChooseTarget": 2,
+            "p0:AnnounceCast": 8,
+            "p0:PayCosts": 8,
+            "p0:ChooseTarget": 3,
+            "p0:Attack": 11,
+            "p1:FinishBlockers": 7,
+            "p0:ChooseKicker": 1,
+            "p1:Block": 4,
+            "p1:Attack": 10,
+            "p0:FinishBlockers": 5,
+            "p0:AssignDamage": 1,
+            "p0:Block": 2
+          },
+          "winner": 0,
+          "terminal_rewards": [
+            1.0,
+            -1.0
+          ],
+          "own_turns_observed": [
+            9,
+            9
+          ],
+          "final_life": [
+            1,
+            0
+          ],
+          "seconds": 12.776977314002579
+        },
+        {
+          "seed": 23000004,
+          "index": 4,
+          "mode": "selfplay",
+          "seat": 0,
+          "starting_player": "P0",
+          "max_own_turns": 60,
+          "decisions": 497,
+          "neural_choices": 184,
+          "status": "win",
+          "own_turns_to_win": 9,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-1/game-00004-p0.pkl.gz",
+              "samples": 94,
+              "reward": 1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-1/game-00004-p1.pkl.gz",
+              "samples": 90,
+              "reward": -1.0
+            }
+          ],
+          "actions": {
+            "p0:Keep": 1,
+            "p1:Keep": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:Pass": 172,
+            "p1:Pass": 169,
+            "p0:PlayLand": 5,
+            "p0:AnnounceCast": 10,
+            "p0:TapMana": 27,
+            "p0:PayCosts": 10,
+            "p0:FinishAttackers": 9,
+            "p1:FinishAttackers": 8,
+            "p1:Discard": 1,
+            "p0:ChooseKicker": 3,
+            "p0:ChooseTarget": 4,
+            "p1:PlayLand": 6,
+            "p1:AnnounceCast": 6,
+            "p1:ChooseKicker": 2,
+            "p1:ChooseTarget": 2,
+            "p1:TapMana": 27,
+            "p1:PayCosts": 6,
+            "p0:Attack": 13,
+            "p1:Block": 3,
+            "p1:FinishBlockers": 6,
+            "p1:Cast": 1,
+            "p1:Activate": 2,
+            "p0:Activate": 1
+          },
+          "winner": 0,
+          "terminal_rewards": [
+            1.0,
+            -1.0
+          ],
+          "own_turns_observed": [
+            9,
+            8
+          ],
+          "final_life": [
+            18,
+            -4
+          ],
+          "seconds": 8.532655788003467
+        },
+        {
+          "seed": 23000005,
+          "index": 5,
+          "mode": "selfplay",
+          "seat": 1,
+          "starting_player": "P0",
+          "max_own_turns": 60,
+          "decisions": 369,
+          "neural_choices": 139,
+          "status": "win",
+          "own_turns_to_win": 7,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-1/game-00005-p0.pkl.gz",
+              "samples": 44,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-1/game-00005-p1.pkl.gz",
+              "samples": 95,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p0:Keep": 1,
+            "p1:Keep": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:Pass": 134,
+            "p1:Pass": 133,
+            "p0:FinishAttackers": 7,
+            "p1:FinishAttackers": 6,
+            "p1:PlayLand": 4,
+            "p1:AnnounceCast": 6,
+            "p1:ChooseKicker": 1,
+            "p1:ChooseTarget": 4,
+            "p1:TapMana": 20,
+            "p1:PayCosts": 6,
+            "p0:Discard": 1,
+            "p0:PlayLand": 4,
+            "p0:TapMana": 14,
+            "p1:Attack": 7,
+            "p0:FinishBlockers": 4,
+            "p0:AnnounceCast": 3,
+            "p0:PayCosts": 3,
+            "p0:ChooseTarget": 1,
+            "p0:Attack": 3,
+            "p1:FinishBlockers": 3,
+            "p0:Block": 1
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            7,
+            7
+          ],
+          "final_life": [
+            0,
+            12
+          ],
+          "seconds": 6.198000659998797
+        },
+        {
+          "seed": 23000006,
+          "index": 6,
+          "mode": "selfplay",
+          "seat": 0,
+          "starting_player": "P1",
+          "max_own_turns": 60,
+          "decisions": 566,
+          "neural_choices": 234,
+          "status": "win",
+          "own_turns_to_win": 10,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-1/game-00006-p0.pkl.gz",
+              "samples": 145,
+              "reward": 1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-1/game-00006-p1.pkl.gz",
+              "samples": 89,
+              "reward": -1.0
+            }
+          ],
+          "actions": {
+            "p1:Keep": 1,
+            "p0:Keep": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:Pass": 200,
+            "p0:Pass": 199,
+            "p1:FinishAttackers": 10,
+            "p0:FinishAttackers": 10,
+            "p0:PlayLand": 7,
+            "p0:AnnounceCast": 10,
+            "p0:TapMana": 40,
+            "p0:PayCosts": 10,
+            "p1:Discard": 1,
+            "p0:Attack": 15,
+            "p1:FinishBlockers": 8,
+            "p1:PlayLand": 4,
+            "p1:AnnounceCast": 8,
+            "p1:TapMana": 19,
+            "p1:PayCosts": 8,
+            "p1:Activate": 3,
+            "p1:Block": 5,
+            "p0:Activate": 2,
+            "p1:ChooseTarget": 1,
+            "p0:ChooseTarget": 2
+          },
+          "winner": 0,
+          "terminal_rewards": [
+            1.0,
+            -1.0
+          ],
+          "own_turns_observed": [
+            10,
+            10
+          ],
+          "final_life": [
+            15,
+            0
+          ],
+          "seconds": 10.780925719998777
+        },
+        {
+          "seed": 23000007,
+          "index": 7,
+          "mode": "selfplay",
+          "seat": 1,
+          "starting_player": "P1",
+          "max_own_turns": 60,
+          "decisions": 742,
+          "neural_choices": 277,
+          "status": "win",
+          "own_turns_to_win": 14,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-1/game-00007-p0.pkl.gz",
+              "samples": 112,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-1/game-00007-p1.pkl.gz",
+              "samples": 165,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p1:Keep": 1,
+            "p0:Mulligan": 1,
+            "p0:Bottom": 1,
+            "p0:Keep": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:Pass": 271,
+            "p0:Pass": 270,
+            "p1:FinishAttackers": 14,
+            "p0:FinishAttackers": 13,
+            "p1:PlayLand": 6,
+            "p1:AnnounceCast": 10,
+            "p1:TapMana": 49,
+            "p1:PayCosts": 10,
+            "p0:Discard": 3,
+            "p1:ChooseKicker": 1,
+            "p1:ChooseTarget": 2,
+            "p1:Attack": 15,
+            "p0:FinishBlockers": 11,
+            "p0:PlayLand": 4,
+            "p0:AnnounceCast": 7,
+            "p0:ChooseKicker": 3,
+            "p0:ChooseTarget": 4,
+            "p0:TapMana": 23,
+            "p0:PayCosts": 7,
+            "p1:Activate": 4,
+            "p0:Cast": 1,
+            "p0:Activate": 1,
+            "p0:Block": 3,
+            "p1:Cast": 1,
+            "p0:Attack": 1,
+            "p1:Block": 1,
+            "p1:FinishBlockers": 1
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            13,
+            14
+          ],
+          "final_life": [
+            0,
+            13
+          ],
+          "seconds": 13.56396636399586
+        },
+        {
+          "seed": 23000008,
+          "index": 8,
+          "mode": "selfplay",
+          "seat": 0,
+          "starting_player": "P0",
+          "max_own_turns": 60,
+          "decisions": 1000,
+          "neural_choices": 491,
+          "status": "loss",
+          "own_turns_to_win": null,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-1/game-00008-p0.pkl.gz",
+              "samples": 287,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-1/game-00008-p1.pkl.gz",
+              "samples": 204,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p0:Keep": 1,
+            "p1:Keep": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:Pass": 328,
+            "p1:Pass": 340,
+            "p0:FinishAttackers": 16,
+            "p0:PlayLand": 11,
+            "p0:AnnounceCast": 10,
+            "p0:TapMana": 90,
+            "p0:PayCosts": 10,
+            "p1:PlayLand": 9,
+            "p1:TapMana": 79,
+            "p1:FinishAttackers": 16,
+            "p0:Attack": 10,
+            "p1:FinishBlockers": 7,
+            "p1:AnnounceCast": 11,
+            "p1:ChooseKicker": 1,
+            "p1:ChooseTarget": 2,
+            "p1:PayCosts": 11,
+            "p0:Cast": 1,
+            "p0:Activate": 2,
+            "p1:Attack": 15,
+            "p0:Block": 5,
+            "p0:FinishBlockers": 9,
+            "p0:ChooseTarget": 4,
+            "p1:Block": 2,
+            "p0:ChooseKicker": 2,
+            "p1:Cast": 2,
+            "p1:Activate": 3
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            16,
+            16
+          ],
+          "final_life": [
+            -1,
+            1
+          ],
+          "seconds": 20.41584087299998
+        },
+        {
+          "seed": 23000009,
+          "index": 9,
+          "mode": "selfplay",
+          "seat": 1,
+          "starting_player": "P0",
+          "max_own_turns": 60,
+          "decisions": 660,
+          "neural_choices": 300,
+          "status": "loss",
+          "own_turns_to_win": null,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-1/game-00009-p0.pkl.gz",
+              "samples": 145,
+              "reward": 1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-1/game-00009-p1.pkl.gz",
+              "samples": 155,
+              "reward": -1.0
+            }
+          ],
+          "actions": {
+            "p0:Keep": 1,
+            "p1:Keep": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:Pass": 228,
+            "p1:Pass": 227,
+            "p0:FinishAttackers": 12,
+            "p0:PlayLand": 7,
+            "p1:PlayLand": 7,
+            "p0:TapMana": 48,
+            "p1:AnnounceCast": 8,
+            "p1:TapMana": 42,
+            "p1:PayCosts": 8,
+            "p1:FinishAttackers": 11,
+            "p0:AnnounceCast": 10,
+            "p0:PayCosts": 10,
+            "p1:ChooseKicker": 1,
+            "p1:ChooseTarget": 1,
+            "p1:Attack": 3,
+            "p0:FinishBlockers": 3,
+            "p0:ChooseTarget": 2,
+            "p0:Block": 2,
+            "p1:Activate": 2,
+            "p0:Attack": 13,
+            "p1:Block": 4,
+            "p1:FinishBlockers": 6,
+            "p1:Cast": 1
+          },
+          "winner": 0,
+          "terminal_rewards": [
+            1.0,
+            -1.0
+          ],
+          "own_turns_observed": [
+            12,
+            11
+          ],
+          "final_life": [
+            17,
+            -1
+          ],
+          "seconds": 15.277813441003673
+        },
+        {
+          "seed": 23000010,
+          "index": 10,
+          "mode": "selfplay",
+          "seat": 0,
+          "starting_player": "P1",
+          "max_own_turns": 60,
+          "decisions": 783,
+          "neural_choices": 325,
+          "status": "loss",
+          "own_turns_to_win": null,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-1/game-00010-p0.pkl.gz",
+              "samples": 184,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-1/game-00010-p1.pkl.gz",
+              "samples": 141,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p1:Keep": 1,
+            "p0:Keep": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:Pass": 275,
+            "p0:Pass": 269,
+            "p1:FinishAttackers": 14,
+            "p0:FinishAttackers": 13,
+            "p0:Discard": 1,
+            "p1:PlayLand": 5,
+            "p1:AnnounceCast": 11,
+            "p1:ChooseKicker": 2,
+            "p1:ChooseTarget": 3,
+            "p1:TapMana": 44,
+            "p1:PayCosts": 11,
+            "p0:PlayLand": 8,
+            "p0:AnnounceCast": 10,
+            "p0:TapMana": 54,
+            "p0:PayCosts": 10,
+            "p0:ChooseKicker": 2,
+            "p0:ChooseTarget": 2,
+            "p0:Activate": 2,
+            "p0:Attack": 11,
+            "p1:FinishBlockers": 8,
+            "p1:Block": 5,
+            "p1:Attack": 11,
+            "p0:FinishBlockers": 5,
+            "p0:Block": 1,
+            "p0:AssignDamage": 1,
+            "p1:Cast": 1
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            13,
+            14
+          ],
+          "final_life": [
+            -2,
+            4
+          ],
+          "seconds": 16.23081850300514
+        },
+        {
+          "seed": 23000011,
+          "index": 11,
+          "mode": "selfplay",
+          "seat": 1,
+          "starting_player": "P1",
+          "max_own_turns": 60,
+          "decisions": 831,
+          "neural_choices": 416,
+          "status": "win",
+          "own_turns_to_win": 14,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-1/game-00011-p0.pkl.gz",
+              "samples": 239,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-1/game-00011-p1.pkl.gz",
+              "samples": 177,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p1:Keep": 1,
+            "p0:Keep": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:Pass": 282,
+            "p0:Pass": 281,
+            "p1:FinishAttackers": 14,
+            "p0:FinishAttackers": 13,
+            "p0:PlayLand": 8,
+            "p0:TapMana": 69,
+            "p1:PlayLand": 8,
+            "p1:AnnounceCast": 11,
+            "p1:TapMana": 53,
+            "p1:PayCosts": 11,
+            "p0:AnnounceCast": 10,
+            "p0:PayCosts": 11,
+            "p1:Attack": 7,
+            "p0:Block": 1,
+            "p0:FinishBlockers": 6,
+            "p1:ChooseKicker": 3,
+            "p1:ChooseTarget": 4,
+            "p0:Attack": 5,
+            "p1:Block": 5,
+            "p1:FinishBlockers": 5,
+            "p0:Activate": 8,
+            "p0:ChooseKicker": 2,
+            "p0:ChooseTarget": 4,
+            "p0:AnnounceActivate": 1,
+            "p1:Activate": 4,
+            "p0:AssignDamage": 1
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            13,
+            14
+          ],
+          "final_life": [
+            -1,
+            15
+          ],
+          "seconds": 15.98781878000591
+        },
+        {
+          "seed": 23000012,
+          "index": 12,
+          "mode": "selfplay",
+          "seat": 0,
+          "starting_player": "P0",
+          "max_own_turns": 60,
+          "decisions": 495,
+          "neural_choices": 157,
+          "status": "loss",
+          "own_turns_to_win": null,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-1/game-00012-p0.pkl.gz",
+              "samples": 75,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-1/game-00012-p1.pkl.gz",
+              "samples": 82,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p0:Keep": 1,
+            "p1:Keep": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:Pass": 178,
+            "p1:Pass": 179,
+            "p0:PlayLand": 3,
+            "p0:FinishAttackers": 9,
+            "p0:AnnounceCast": 5,
+            "p0:ChooseKicker": 1,
+            "p0:ChooseTarget": 2,
+            "p0:TapMana": 15,
+            "p0:PayCosts": 5,
+            "p1:PlayLand": 4,
+            "p1:AnnounceCast": 9,
+            "p1:TapMana": 25,
+            "p1:PayCosts": 9,
+            "p1:FinishAttackers": 9,
+            "p1:Attack": 15,
+            "p0:Block": 3,
+            "p0:FinishBlockers": 8,
+            "p0:Attack": 3,
+            "p1:FinishBlockers": 3,
+            "p1:Activate": 1,
+            "p1:ChooseKicker": 1,
+            "p1:ChooseTarget": 1,
+            "p0:Discard": 1,
+            "p1:Block": 2
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            9,
+            9
+          ],
+          "final_life": [
+            -1,
+            19
+          ],
+          "seconds": 8.813176686002407
+        },
+        {
+          "seed": 23000013,
+          "index": 13,
+          "mode": "selfplay",
+          "seat": 1,
+          "starting_player": "P0",
+          "max_own_turns": 60,
+          "decisions": 510,
+          "neural_choices": 176,
+          "status": "loss",
+          "own_turns_to_win": null,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-1/game-00013-p0.pkl.gz",
+              "samples": 116,
+              "reward": 1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-1/game-00013-p1.pkl.gz",
+              "samples": 60,
+              "reward": -1.0
+            }
+          ],
+          "actions": {
+            "p0:Keep": 1,
+            "p1:Keep": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:Pass": 180,
+            "p1:Pass": 182,
+            "p0:FinishAttackers": 10,
+            "p0:PlayLand": 5,
+            "p0:AnnounceCast": 10,
+            "p0:ChooseKicker": 3,
+            "p0:ChooseTarget": 3,
+            "p0:TapMana": 33,
+            "p0:PayCosts": 10,
+            "p1:PlayLand": 3,
+            "p1:TapMana": 22,
+            "p1:FinishAttackers": 9,
+            "p1:Discard": 1,
+            "p0:Attack": 12,
+            "p1:FinishBlockers": 7,
+            "p1:AnnounceCast": 5,
+            "p1:PayCosts": 5,
+            "p1:ChooseKicker": 1,
+            "p1:ChooseTarget": 1,
+            "p1:Block": 3,
+            "p0:PutTrigger": 1
+          },
+          "winner": 0,
+          "terminal_rewards": [
+            1.0,
+            -1.0
+          ],
+          "own_turns_observed": [
+            10,
+            9
+          ],
+          "final_life": [
+            18,
+            0
+          ],
+          "seconds": 9.517360300000291
+        },
+        {
+          "seed": 23000014,
+          "index": 14,
+          "mode": "selfplay",
+          "seat": 0,
+          "starting_player": "P1",
+          "max_own_turns": 60,
+          "decisions": 540,
+          "neural_choices": 215,
+          "status": "win",
+          "own_turns_to_win": 10,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-1/game-00014-p0.pkl.gz",
+              "samples": 123,
+              "reward": 1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-1/game-00014-p1.pkl.gz",
+              "samples": 92,
+              "reward": -1.0
+            }
+          ],
+          "actions": {
+            "p1:Keep": 1,
+            "p0:Keep": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:Pass": 193,
+            "p0:Pass": 193,
+            "p1:FinishAttackers": 10,
+            "p0:PlayLand": 5,
+            "p0:FinishAttackers": 10,
+            "p0:TapMana": 33,
+            "p1:Discard": 1,
+            "p0:AnnounceCast": 8,
+            "p0:PayCosts": 8,
+            "p1:PlayLand": 7,
+            "p1:AnnounceCast": 4,
+            "p1:TapMana": 30,
+            "p1:PayCosts": 4,
+            "p1:Activate": 2,
+            "p1:Cast": 1,
+            "p1:ChooseKicker": 1,
+            "p1:ChooseTarget": 1,
+            "p0:Attack": 9,
+            "p1:FinishBlockers": 6,
+            "p0:Activate": 1,
+            "p1:Attack": 1,
+            "p0:Block": 1,
+            "p0:FinishBlockers": 1,
+            "p0:ChooseKicker": 2,
+            "p0:ChooseTarget": 2,
+            "p0:PutTrigger": 2
+          },
+          "winner": 0,
+          "terminal_rewards": [
+            1.0,
+            -1.0
+          ],
+          "own_turns_observed": [
+            10,
+            10
+          ],
+          "final_life": [
+            20,
+            -3
+          ],
+          "seconds": 10.55662598300114
+        },
+        {
+          "seed": 23000015,
+          "index": 15,
+          "mode": "selfplay",
+          "seat": 1,
+          "starting_player": "P1",
+          "max_own_turns": 60,
+          "decisions": 602,
+          "neural_choices": 230,
+          "status": "win",
+          "own_turns_to_win": 11,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-1/game-00015-p0.pkl.gz",
+              "samples": 103,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-1/game-00015-p1.pkl.gz",
+              "samples": 127,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p1:Keep": 1,
+            "p0:Keep": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:Pass": 214,
+            "p0:Pass": 216,
+            "p1:PlayLand": 6,
+            "p1:TapMana": 30,
+            "p1:FinishAttackers": 11,
+            "p0:FinishAttackers": 10,
+            "p0:Discard": 2,
+            "p1:AnnounceCast": 8,
+            "p1:ChooseKicker": 1,
+            "p1:ChooseTarget": 2,
+            "p1:PayCosts": 8,
+            "p0:PlayLand": 6,
+            "p0:AnnounceCast": 7,
+            "p0:TapMana": 28,
+            "p0:PayCosts": 7,
+            "p0:Attack": 3,
+            "p1:FinishBlockers": 3,
+            "p1:Attack": 13,
+            "p0:Block": 4,
+            "p0:FinishBlockers": 7,
+            "p0:Activate": 8,
+            "p1:Block": 1,
+            "p1:Activate": 3
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            10,
+            11
+          ],
+          "final_life": [
+            0,
+            16
+          ],
+          "seconds": 10.558061622999958
+        }
+      ],
+      "seconds": 26.781571529005305,
+      "cpu_seconds": 31.121392667000002,
+      "mean_cores": 1.1620450515121763,
+      "games_per_minute": 35.84554397639769,
+      "mean_batch": 3.1074319352465047,
+      "outcomes": {
+        "loss": 9,
+        "win": 7
+      }
+    },
+    {
+      "workers": 8,
+      "seed_group": 1,
+      "games": [
+        {
+          "seed": 23000016,
+          "index": 0,
+          "mode": "selfplay",
+          "seat": 0,
+          "starting_player": "P0",
+          "max_own_turns": 60,
+          "decisions": 759,
+          "neural_choices": 284,
+          "status": "loss",
+          "own_turns_to_win": null,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-2/game-00000-p0.pkl.gz",
+              "samples": 127,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-2/game-00000-p1.pkl.gz",
+              "samples": 157,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p0:Keep": 1,
+            "p1:Keep": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:Pass": 267,
+            "p1:Pass": 264,
+            "p0:PlayLand": 6,
+            "p0:FinishAttackers": 13,
+            "p0:TapMana": 39,
+            "p0:AnnounceCast": 11,
+            "p0:ChooseKicker": 2,
+            "p0:ChooseTarget": 4,
+            "p0:PayCosts": 11,
+            "p1:PlayLand": 7,
+            "p1:FinishAttackers": 13,
+            "p1:TapMana": 49,
+            "p1:AnnounceCast": 11,
+            "p1:PayCosts": 12,
+            "p1:AnnounceActivate": 1,
+            "p1:ChooseTarget": 6,
+            "p1:Attack": 7,
+            "p0:Block": 3,
+            "p0:FinishBlockers": 7,
+            "p0:Attack": 5,
+            "p1:FinishBlockers": 5,
+            "p1:Block": 5,
+            "p1:ChooseKicker": 2,
+            "p0:Activate": 3,
+            "p1:Cast": 1,
+            "p0:AssignDamage": 1
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            13,
+            13
+          ],
+          "final_life": [
+            0,
+            13
+          ],
+          "seconds": 14.577246549997653
+        },
+        {
+          "seed": 23000017,
+          "index": 1,
+          "mode": "selfplay",
+          "seat": 1,
+          "starting_player": "P0",
+          "max_own_turns": 60,
+          "decisions": 1028,
+          "neural_choices": 537,
+          "status": "win",
+          "own_turns_to_win": 16,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-2/game-00001-p0.pkl.gz",
+              "samples": 295,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-2/game-00001-p1.pkl.gz",
+              "samples": 242,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p0:Mulligan": 1,
+            "p1:Keep": 1,
+            "p0:Bottom": 1,
+            "p0:Keep": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:Pass": 340,
+            "p1:Pass": 342,
+            "p0:FinishAttackers": 16,
+            "p1:PlayLand": 7,
+            "p1:FinishAttackers": 16,
+            "p1:TapMana": 77,
+            "p1:AnnounceCast": 10,
+            "p1:ChooseKicker": 3,
+            "p1:ChooseTarget": 4,
+            "p1:PayCosts": 11,
+            "p0:PlayLand": 11,
+            "p0:AnnounceCast": 9,
+            "p0:ChooseKicker": 2,
+            "p0:ChooseTarget": 4,
+            "p0:TapMana": 94,
+            "p0:PayCosts": 10,
+            "p0:AnnounceActivate": 1,
+            "p1:Cast": 3,
+            "p1:AnnounceActivate": 1,
+            "p1:Activate": 20,
+            "p0:Cast": 1,
+            "p0:Activate": 12,
+            "p0:Attack": 3,
+            "p1:Block": 1,
+            "p1:FinishBlockers": 3,
+            "p1:Attack": 12,
+            "p0:FinishBlockers": 6,
+            "p0:Block": 3
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            16,
+            16
+          ],
+          "final_life": [
+            0,
+            10
+          ],
+          "seconds": 27.74497983299807
+        },
+        {
+          "seed": 23000018,
+          "index": 2,
+          "mode": "selfplay",
+          "seat": 0,
+          "starting_player": "P1",
+          "max_own_turns": 60,
+          "decisions": 619,
+          "neural_choices": 328,
+          "status": "win",
+          "own_turns_to_win": 11,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-2/game-00002-p0.pkl.gz",
+              "samples": 163,
+              "reward": 1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-2/game-00002-p1.pkl.gz",
+              "samples": 165,
+              "reward": -1.0
+            }
+          ],
+          "actions": {
+            "p1:Keep": 1,
+            "p0:Keep": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:Pass": 215,
+            "p0:Pass": 221,
+            "p1:PlayLand": 6,
+            "p1:FinishAttackers": 11,
+            "p1:TapMana": 35,
+            "p1:Cast": 3,
+            "p1:Activate": 5,
+            "p0:PlayLand": 9,
+            "p0:FinishAttackers": 11,
+            "p0:TapMana": 45,
+            "p0:AnnounceCast": 7,
+            "p0:PayCosts": 7,
+            "p0:ChooseKicker": 2,
+            "p0:ChooseTarget": 2,
+            "p0:Attack": 10,
+            "p1:Block": 2,
+            "p1:FinishBlockers": 7,
+            "p1:AnnounceCast": 4,
+            "p1:PayCosts": 4,
+            "p1:ChooseKicker": 1,
+            "p1:ChooseTarget": 1,
+            "p1:Attack": 2,
+            "p0:Block": 1,
+            "p0:FinishBlockers": 2,
+            "p0:Activate": 2
+          },
+          "winner": 0,
+          "terminal_rewards": [
+            1.0,
+            -1.0
+          ],
+          "own_turns_observed": [
+            11,
+            11
+          ],
+          "final_life": [
+            16,
+            0
+          ],
+          "seconds": 15.931453836994478
+        },
+        {
+          "seed": 23000019,
+          "index": 3,
+          "mode": "selfplay",
+          "seat": 1,
+          "starting_player": "P1",
+          "max_own_turns": 60,
+          "decisions": 789,
+          "neural_choices": 343,
+          "status": "win",
+          "own_turns_to_win": 13,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-2/game-00003-p0.pkl.gz",
+              "samples": 206,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-2/game-00003-p1.pkl.gz",
+              "samples": 137,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p1:Keep": 1,
+            "p0:Keep": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:Pass": 268,
+            "p0:Pass": 267,
+            "p1:PlayLand": 6,
+            "p1:AnnounceCast": 11,
+            "p1:TapMana": 42,
+            "p1:PayCosts": 11,
+            "p1:FinishAttackers": 13,
+            "p0:PlayLand": 8,
+            "p0:FinishAttackers": 12,
+            "p0:AnnounceCast": 12,
+            "p0:ChooseKicker": 3,
+            "p0:ChooseTarget": 7,
+            "p0:TapMana": 68,
+            "p0:PayCosts": 13,
+            "p1:ChooseKicker": 2,
+            "p1:ChooseTarget": 4,
+            "p1:Activate": 2,
+            "p0:PutTrigger": 1,
+            "p0:Attack": 8,
+            "p1:FinishBlockers": 7,
+            "p1:Block": 5,
+            "p1:Attack": 6,
+            "p0:FinishBlockers": 4,
+            "p0:Activate": 4,
+            "p0:AnnounceActivate": 1
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            13,
+            13
+          ],
+          "final_life": [
+            0,
+            2
+          ],
+          "seconds": 17.416251666996686
+        },
+        {
+          "seed": 23000020,
+          "index": 4,
+          "mode": "selfplay",
+          "seat": 0,
+          "starting_player": "P0",
+          "max_own_turns": 60,
+          "decisions": 1043,
+          "neural_choices": 544,
+          "status": "win",
+          "own_turns_to_win": 17,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-2/game-00004-p0.pkl.gz",
+              "samples": 278,
+              "reward": 1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-2/game-00004-p1.pkl.gz",
+              "samples": 266,
+              "reward": -1.0
+            }
+          ],
+          "actions": {
+            "p0:Keep": 1,
+            "p1:Mulligan": 1,
+            "p1:Bottom": 1,
+            "p1:Keep": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:Pass": 342,
+            "p1:Pass": 339,
+            "p0:FinishAttackers": 17,
+            "p0:PlayLand": 9,
+            "p0:TapMana": 95,
+            "p1:PlayLand": 11,
+            "p1:AnnounceCast": 11,
+            "p1:TapMana": 99,
+            "p1:PayCosts": 11,
+            "p1:Attack": 6,
+            "p1:FinishAttackers": 16,
+            "p0:FinishBlockers": 6,
+            "p1:Activate": 2,
+            "p1:ChooseTarget": 3,
+            "p0:AnnounceCast": 13,
+            "p0:PayCosts": 14,
+            "p0:Block": 3,
+            "p1:ChooseKicker": 2,
+            "p0:ChooseKicker": 1,
+            "p0:ChooseTarget": 2,
+            "p0:Attack": 16,
+            "p1:Block": 5,
+            "p1:FinishBlockers": 10,
+            "p0:Activate": 2,
+            "p0:AnnounceActivate": 1,
+            "p0:Cast": 1
+          },
+          "winner": 0,
+          "terminal_rewards": [
+            1.0,
+            -1.0
+          ],
+          "own_turns_observed": [
+            17,
+            16
+          ],
+          "final_life": [
+            13,
+            -2
+          ],
+          "seconds": 28.314043972000945
+        },
+        {
+          "seed": 23000021,
+          "index": 5,
+          "mode": "selfplay",
+          "seat": 1,
+          "starting_player": "P0",
+          "max_own_turns": 60,
+          "decisions": 734,
+          "neural_choices": 331,
+          "status": "win",
+          "own_turns_to_win": 12,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-2/game-00005-p0.pkl.gz",
+              "samples": 156,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-2/game-00005-p1.pkl.gz",
+              "samples": 175,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p0:Keep": 1,
+            "p1:Keep": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:Pass": 251,
+            "p1:Pass": 251,
+            "p0:PlayLand": 6,
+            "p0:AnnounceCast": 10,
+            "p0:TapMana": 43,
+            "p0:PayCosts": 10,
+            "p0:FinishAttackers": 12,
+            "p1:FinishAttackers": 12,
+            "p1:PlayLand": 8,
+            "p1:TapMana": 55,
+            "p0:Attack": 7,
+            "p1:FinishBlockers": 7,
+            "p0:ChooseKicker": 2,
+            "p0:ChooseTarget": 4,
+            "p1:AnnounceCast": 9,
+            "p1:PayCosts": 9,
+            "p1:Block": 3,
+            "p1:Discard": 1,
+            "p1:Attack": 12,
+            "p0:Block": 3,
+            "p0:FinishBlockers": 5,
+            "p1:Activate": 1,
+            "p0:Activate": 5,
+            "p0:Cast": 2,
+            "p1:ChooseKicker": 1,
+            "p1:ChooseTarget": 1
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            12,
+            12
+          ],
+          "final_life": [
+            0,
+            9
+          ],
+          "seconds": 16.502416510003968
+        },
+        {
+          "seed": 23000022,
+          "index": 6,
+          "mode": "selfplay",
+          "seat": 0,
+          "starting_player": "P1",
+          "max_own_turns": 60,
+          "decisions": 1453,
+          "neural_choices": 792,
+          "status": "win",
+          "own_turns_to_win": 21,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-2/game-00006-p0.pkl.gz",
+              "samples": 398,
+              "reward": 1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-2/game-00006-p1.pkl.gz",
+              "samples": 394,
+              "reward": -1.0
+            }
+          ],
+          "actions": {
+            "p1:Keep": 1,
+            "p0:Keep": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:Pass": 464,
+            "p0:Pass": 459,
+            "p1:FinishAttackers": 21,
+            "p0:PlayLand": 12,
+            "p0:FinishAttackers": 21,
+            "p0:AnnounceCast": 13,
+            "p0:TapMana": 151,
+            "p0:PayCosts": 14,
+            "p0:Activate": 18,
+            "p1:Discard": 1,
+            "p1:PlayLand": 12,
+            "p1:AnnounceCast": 14,
+            "p1:TapMana": 133,
+            "p1:PayCosts": 18,
+            "p0:ChooseTarget": 4,
+            "p1:Attack": 8,
+            "p0:Block": 3,
+            "p0:FinishBlockers": 8,
+            "p1:AssignDamage": 1,
+            "p0:Attack": 18,
+            "p1:FinishBlockers": 11,
+            "p1:ChooseTarget": 8,
+            "p1:Block": 4,
+            "p1:AnnounceActivate": 4,
+            "p1:Activate": 22,
+            "p0:Cast": 3,
+            "p1:ChooseKicker": 2,
+            "p0:ChooseKicker": 1,
+            "p0:AnnounceActivate": 1
+          },
+          "winner": 0,
+          "terminal_rewards": [
+            1.0,
+            -1.0
+          ],
+          "own_turns_observed": [
+            21,
+            21
+          ],
+          "final_life": [
+            1,
+            -4
+          ],
+          "seconds": 36.648788051003066
+        },
+        {
+          "seed": 23000023,
+          "index": 7,
+          "mode": "selfplay",
+          "seat": 1,
+          "starting_player": "P1",
+          "max_own_turns": 60,
+          "decisions": 518,
+          "neural_choices": 223,
+          "status": "loss",
+          "own_turns_to_win": null,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-2/game-00007-p0.pkl.gz",
+              "samples": 116,
+              "reward": 1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-2/game-00007-p1.pkl.gz",
+              "samples": 107,
+              "reward": -1.0
+            }
+          ],
+          "actions": {
+            "p1:Mulligan": 1,
+            "p0:Keep": 1,
+            "p1:Bottom": 1,
+            "p1:Keep": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:Pass": 178,
+            "p0:Pass": 181,
+            "p1:FinishAttackers": 9,
+            "p1:PlayLand": 5,
+            "p1:AnnounceCast": 7,
+            "p1:TapMana": 28,
+            "p1:PayCosts": 7,
+            "p0:FinishAttackers": 9,
+            "p0:Discard": 1,
+            "p1:Attack": 1,
+            "p0:FinishBlockers": 1,
+            "p1:Activate": 5,
+            "p0:PlayLand": 7,
+            "p0:AnnounceCast": 7,
+            "p0:ChooseKicker": 2,
+            "p0:ChooseTarget": 2,
+            "p0:TapMana": 31,
+            "p0:PayCosts": 7,
+            "p1:ChooseKicker": 1,
+            "p1:ChooseTarget": 2,
+            "p0:Attack": 10,
+            "p1:FinishBlockers": 5,
+            "p0:Activate": 3,
+            "p0:Cast": 1,
+            "p1:Block": 2
+          },
+          "winner": 0,
+          "terminal_rewards": [
+            1.0,
+            -1.0
+          ],
+          "own_turns_observed": [
+            9,
+            9
+          ],
+          "final_life": [
+            17,
+            0
+          ],
+          "seconds": 10.626297759998124
+        },
+        {
+          "seed": 23000024,
+          "index": 8,
+          "mode": "selfplay",
+          "seat": 0,
+          "starting_player": "P0",
+          "max_own_turns": 60,
+          "decisions": 859,
+          "neural_choices": 330,
+          "status": "win",
+          "own_turns_to_win": 14,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-2/game-00008-p0.pkl.gz",
+              "samples": 143,
+              "reward": 1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-2/game-00008-p1.pkl.gz",
+              "samples": 187,
+              "reward": -1.0
+            }
+          ],
+          "actions": {
+            "p0:Keep": 1,
+            "p1:Keep": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:Pass": 294,
+            "p1:Pass": 293,
+            "p0:FinishAttackers": 14,
+            "p1:FinishAttackers": 13,
+            "p1:Discard": 1,
+            "p0:Discard": 2,
+            "p1:PlayLand": 10,
+            "p1:AnnounceCast": 9,
+            "p1:TapMana": 66,
+            "p1:PayCosts": 12,
+            "p1:ChooseTarget": 4,
+            "p1:Attack": 12,
+            "p0:FinishBlockers": 9,
+            "p0:PlayLand": 6,
+            "p0:AnnounceCast": 10,
+            "p0:ChooseKicker": 1,
+            "p0:ChooseTarget": 3,
+            "p0:TapMana": 47,
+            "p0:PayCosts": 10,
+            "p0:Block": 4,
+            "p0:Attack": 10,
+            "p1:FinishBlockers": 7,
+            "p1:Activate": 10,
+            "p1:Block": 2,
+            "p0:Activate": 2,
+            "p1:AnnounceActivate": 3,
+            "p0:Cast": 1
+          },
+          "winner": 0,
+          "terminal_rewards": [
+            1.0,
+            -1.0
+          ],
+          "own_turns_observed": [
+            14,
+            13
+          ],
+          "final_life": [
+            3,
+            0
+          ],
+          "seconds": 19.108979698998155
+        },
+        {
+          "seed": 23000025,
+          "index": 9,
+          "mode": "selfplay",
+          "seat": 1,
+          "starting_player": "P0",
+          "max_own_turns": 60,
+          "decisions": 737,
+          "neural_choices": 331,
+          "status": "loss",
+          "own_turns_to_win": null,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-2/game-00009-p0.pkl.gz",
+              "samples": 149,
+              "reward": 1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-2/game-00009-p1.pkl.gz",
+              "samples": 182,
+              "reward": -1.0
+            }
+          ],
+          "actions": {
+            "p0:Keep": 1,
+            "p1:Mulligan": 1,
+            "p1:Bottom": 1,
+            "p1:Keep": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:Pass": 252,
+            "p1:Pass": 246,
+            "p0:FinishAttackers": 13,
+            "p1:PlayLand": 9,
+            "p1:AnnounceCast": 9,
+            "p1:ChooseKicker": 1,
+            "p1:ChooseTarget": 1,
+            "p1:TapMana": 68,
+            "p1:PayCosts": 9,
+            "p1:FinishAttackers": 12,
+            "p0:PlayLand": 7,
+            "p0:AnnounceCast": 9,
+            "p0:TapMana": 41,
+            "p0:PayCosts": 9,
+            "p0:Attack": 15,
+            "p1:FinishBlockers": 8,
+            "p1:Block": 4,
+            "p0:Discard": 1,
+            "p1:Attack": 4,
+            "p0:FinishBlockers": 3,
+            "p0:Block": 2,
+            "p0:ChooseTarget": 2,
+            "p0:ChooseKicker": 1,
+            "p1:Activate": 3,
+            "p0:Cast": 1,
+            "p0:Activate": 1
+          },
+          "winner": 0,
+          "terminal_rewards": [
+            1.0,
+            -1.0
+          ],
+          "own_turns_observed": [
+            13,
+            12
+          ],
+          "final_life": [
+            13,
+            0
+          ],
+          "seconds": 17.806227580003906
+        },
+        {
+          "seed": 23000026,
+          "index": 10,
+          "mode": "selfplay",
+          "seat": 0,
+          "starting_player": "P1",
+          "max_own_turns": 60,
+          "decisions": 513,
+          "neural_choices": 220,
+          "status": "loss",
+          "own_turns_to_win": null,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-2/game-00010-p0.pkl.gz",
+              "samples": 105,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-2/game-00010-p1.pkl.gz",
+              "samples": 115,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p1:Keep": 1,
+            "p0:Keep": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:Pass": 177,
+            "p0:Pass": 176,
+            "p1:FinishAttackers": 9,
+            "p1:PlayLand": 4,
+            "p0:PlayLand": 6,
+            "p0:TapMana": 31,
+            "p0:Cast": 1,
+            "p0:Activate": 3,
+            "p0:FinishAttackers": 8,
+            "p1:AnnounceCast": 9,
+            "p1:TapMana": 28,
+            "p1:PayCosts": 9,
+            "p0:AnnounceCast": 7,
+            "p0:ChooseKicker": 3,
+            "p0:ChooseTarget": 5,
+            "p0:PayCosts": 8,
+            "p1:Activate": 1,
+            "p0:Attack": 4,
+            "p1:FinishBlockers": 3,
+            "p1:Block": 2,
+            "p1:Attack": 9,
+            "p0:FinishBlockers": 4,
+            "p0:AnnounceActivate": 1,
+            "p1:ChooseTarget": 1
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            8,
+            9
+          ],
+          "final_life": [
+            0,
+            14
+          ],
+          "seconds": 12.622596308996435
+        },
+        {
+          "seed": 23000027,
+          "index": 11,
+          "mode": "selfplay",
+          "seat": 1,
+          "starting_player": "P1",
+          "max_own_turns": 60,
+          "decisions": 707,
+          "neural_choices": 251,
+          "status": "win",
+          "own_turns_to_win": 12,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-2/game-00011-p0.pkl.gz",
+              "samples": 123,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-2/game-00011-p1.pkl.gz",
+              "samples": 128,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p1:Keep": 1,
+            "p0:Mulligan": 1,
+            "p0:Bottom": 1,
+            "p0:Keep": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:Pass": 242,
+            "p0:Pass": 243,
+            "p1:FinishAttackers": 12,
+            "p0:FinishAttackers": 11,
+            "p1:Discard": 1,
+            "p0:PlayLand": 7,
+            "p0:TapMana": 47,
+            "p1:PlayLand": 7,
+            "p1:AnnounceCast": 9,
+            "p1:TapMana": 44,
+            "p1:PayCosts": 9,
+            "p0:AnnounceCast": 7,
+            "p0:PayCosts": 7,
+            "p0:Activate": 7,
+            "p1:Attack": 14,
+            "p0:FinishBlockers": 9,
+            "p0:Cast": 1,
+            "p0:Block": 3,
+            "p0:Attack": 7,
+            "p1:FinishBlockers": 6,
+            "p1:Block": 3,
+            "p0:AssignDamage": 1,
+            "p1:Activate": 3,
+            "p1:ChooseTarget": 1
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            11,
+            12
+          ],
+          "final_life": [
+            0,
+            10
+          ],
+          "seconds": 14.563944653004
+        },
+        {
+          "seed": 23000028,
+          "index": 12,
+          "mode": "selfplay",
+          "seat": 0,
+          "starting_player": "P0",
+          "max_own_turns": 60,
+          "decisions": 700,
+          "neural_choices": 322,
+          "status": "loss",
+          "own_turns_to_win": null,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-2/game-00012-p0.pkl.gz",
+              "samples": 132,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-2/game-00012-p1.pkl.gz",
+              "samples": 190,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p0:Keep": 1,
+            "p1:Mulligan": 1,
+            "p1:Bottom": 1,
+            "p1:Keep": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:Pass": 249,
+            "p1:Pass": 249,
+            "p0:FinishAttackers": 12,
+            "p1:FinishAttackers": 12,
+            "p1:PlayLand": 7,
+            "p1:AnnounceCast": 9,
+            "p1:ChooseKicker": 1,
+            "p1:ChooseTarget": 2,
+            "p1:TapMana": 48,
+            "p1:PayCosts": 9,
+            "p0:Discard": 1,
+            "p0:PlayLand": 5,
+            "p0:AnnounceCast": 7,
+            "p0:TapMana": 31,
+            "p0:PayCosts": 8,
+            "p0:Attack": 6,
+            "p1:Block": 4,
+            "p1:FinishBlockers": 5,
+            "p0:AnnounceActivate": 1,
+            "p0:ChooseTarget": 1,
+            "p0:Activate": 1,
+            "p1:Activate": 6,
+            "p1:Cast": 1,
+            "p1:Attack": 10,
+            "p0:FinishBlockers": 8,
+            "p0:Cast": 1
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            12,
+            12
+          ],
+          "final_life": [
+            -2,
+            12
+          ],
+          "seconds": 16.32666964400414
+        },
+        {
+          "seed": 23000029,
+          "index": 13,
+          "mode": "selfplay",
+          "seat": 1,
+          "starting_player": "P0",
+          "max_own_turns": 60,
+          "decisions": 551,
+          "neural_choices": 191,
+          "status": "win",
+          "own_turns_to_win": 10,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-2/game-00013-p0.pkl.gz",
+              "samples": 76,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-2/game-00013-p1.pkl.gz",
+              "samples": 115,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p0:Keep": 1,
+            "p1:Keep": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:Pass": 194,
+            "p1:Pass": 192,
+            "p0:PlayLand": 4,
+            "p0:TapMana": 26,
+            "p0:FinishAttackers": 10,
+            "p1:PlayLand": 4,
+            "p1:TapMana": 34,
+            "p1:AnnounceCast": 9,
+            "p1:ChooseKicker": 3,
+            "p1:ChooseTarget": 4,
+            "p1:PayCosts": 9,
+            "p1:FinishAttackers": 9,
+            "p0:AnnounceCast": 10,
+            "p0:ChooseKicker": 2,
+            "p0:ChooseTarget": 3,
+            "p0:PayCosts": 10,
+            "p0:Activate": 2,
+            "p1:Activate": 1,
+            "p1:Attack": 12,
+            "p0:FinishBlockers": 6,
+            "p0:Block": 3
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            10,
+            10
+          ],
+          "final_life": [
+            -1,
+            18
+          ],
+          "seconds": 7.734626678000495
+        },
+        {
+          "seed": 23000030,
+          "index": 14,
+          "mode": "selfplay",
+          "seat": 0,
+          "starting_player": "P1",
+          "max_own_turns": 60,
+          "decisions": 560,
+          "neural_choices": 222,
+          "status": "loss",
+          "own_turns_to_win": null,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-2/game-00014-p0.pkl.gz",
+              "samples": 100,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-2/game-00014-p1.pkl.gz",
+              "samples": 122,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p1:Keep": 1,
+            "p0:Keep": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:Pass": 194,
+            "p0:Pass": 191,
+            "p1:PlayLand": 7,
+            "p1:TapMana": 39,
+            "p1:AnnounceCast": 9,
+            "p1:ChooseKicker": 1,
+            "p1:ChooseTarget": 2,
+            "p1:PayCosts": 9,
+            "p1:FinishAttackers": 10,
+            "p0:PlayLand": 5,
+            "p0:AnnounceCast": 6,
+            "p0:TapMana": 26,
+            "p0:PayCosts": 6,
+            "p0:FinishAttackers": 9,
+            "p0:Attack": 2,
+            "p1:Block": 2,
+            "p1:FinishBlockers": 2,
+            "p1:Activate": 3,
+            "p1:Attack": 19,
+            "p0:FinishBlockers": 8,
+            "p0:ChooseKicker": 1,
+            "p0:ChooseTarget": 1,
+            "p0:Block": 4
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            9,
+            10
+          ],
+          "final_life": [
+            0,
+            16
+          ],
+          "seconds": 7.9962717720045475
+        },
+        {
+          "seed": 23000031,
+          "index": 15,
+          "mode": "selfplay",
+          "seat": 1,
+          "starting_player": "P1",
+          "max_own_turns": 60,
+          "decisions": 938,
+          "neural_choices": 438,
+          "status": "loss",
+          "own_turns_to_win": null,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-2/game-00015-p0.pkl.gz",
+              "samples": 249,
+              "reward": 1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-2/game-00015-p1.pkl.gz",
+              "samples": 189,
+              "reward": -1.0
+            }
+          ],
+          "actions": {
+            "p1:Keep": 1,
+            "p0:Keep": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:Pass": 314,
+            "p0:Pass": 315,
+            "p1:PlayLand": 7,
+            "p1:TapMana": 65,
+            "p1:FinishAttackers": 15,
+            "p0:PlayLand": 9,
+            "p0:FinishAttackers": 15,
+            "p1:AnnounceCast": 12,
+            "p1:PayCosts": 12,
+            "p1:ChooseTarget": 4,
+            "p0:AnnounceCast": 12,
+            "p0:TapMana": 78,
+            "p0:PayCosts": 13,
+            "p0:ChooseTarget": 4,
+            "p1:Attack": 8,
+            "p0:FinishBlockers": 6,
+            "p0:Attack": 11,
+            "p1:Block": 5,
+            "p1:FinishBlockers": 9,
+            "p0:Block": 5,
+            "p0:Activate": 4,
+            "p1:ChooseKicker": 2,
+            "p0:ChooseKicker": 1,
+            "p1:AssignDamage": 1,
+            "p0:AnnounceActivate": 1,
+            "p1:Cast": 1,
+            "p1:Activate": 5
+          },
+          "winner": 0,
+          "terminal_rewards": [
+            1.0,
+            -1.0
+          ],
+          "own_turns_observed": [
+            15,
+            15
+          ],
+          "final_life": [
+            5,
+            0
+          ],
+          "seconds": 10.025253512001655
+        }
+      ],
+      "seconds": 38.60301960099605,
+      "cpu_seconds": 44.35319601500001,
+      "mean_cores": 1.148956648299492,
+      "games_per_minute": 24.868520906463747,
+      "mean_batch": 3.059171597633136,
+      "outcomes": {
+        "loss": 7,
+        "win": 9
+      }
+    },
+    {
+      "workers": 4,
+      "seed_group": 1,
+      "games": [
+        {
+          "seed": 23000016,
+          "index": 0,
+          "mode": "selfplay",
+          "seat": 0,
+          "starting_player": "P0",
+          "max_own_turns": 60,
+          "decisions": 759,
+          "neural_choices": 284,
+          "status": "loss",
+          "own_turns_to_win": null,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-3/game-00000-p0.pkl.gz",
+              "samples": 127,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-3/game-00000-p1.pkl.gz",
+              "samples": 157,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p0:Keep": 1,
+            "p1:Keep": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:Pass": 267,
+            "p1:Pass": 264,
+            "p0:PlayLand": 6,
+            "p0:FinishAttackers": 13,
+            "p0:TapMana": 39,
+            "p0:AnnounceCast": 11,
+            "p0:ChooseKicker": 2,
+            "p0:ChooseTarget": 4,
+            "p0:PayCosts": 11,
+            "p1:PlayLand": 7,
+            "p1:FinishAttackers": 13,
+            "p1:TapMana": 49,
+            "p1:AnnounceCast": 11,
+            "p1:PayCosts": 12,
+            "p1:AnnounceActivate": 1,
+            "p1:ChooseTarget": 6,
+            "p1:Attack": 7,
+            "p0:Block": 3,
+            "p0:FinishBlockers": 7,
+            "p0:Attack": 5,
+            "p1:FinishBlockers": 5,
+            "p1:Block": 5,
+            "p1:ChooseKicker": 2,
+            "p0:Activate": 3,
+            "p1:Cast": 1,
+            "p0:AssignDamage": 1
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            13,
+            13
+          ],
+          "final_life": [
+            0,
+            13
+          ],
+          "seconds": 7.168456833998789
+        },
+        {
+          "seed": 23000017,
+          "index": 1,
+          "mode": "selfplay",
+          "seat": 1,
+          "starting_player": "P0",
+          "max_own_turns": 60,
+          "decisions": 1028,
+          "neural_choices": 537,
+          "status": "win",
+          "own_turns_to_win": 16,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-3/game-00001-p0.pkl.gz",
+              "samples": 295,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-3/game-00001-p1.pkl.gz",
+              "samples": 242,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p0:Mulligan": 1,
+            "p1:Keep": 1,
+            "p0:Bottom": 1,
+            "p0:Keep": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:Pass": 340,
+            "p1:Pass": 342,
+            "p0:FinishAttackers": 16,
+            "p1:PlayLand": 7,
+            "p1:FinishAttackers": 16,
+            "p1:TapMana": 77,
+            "p1:AnnounceCast": 10,
+            "p1:ChooseKicker": 3,
+            "p1:ChooseTarget": 4,
+            "p1:PayCosts": 11,
+            "p0:PlayLand": 11,
+            "p0:AnnounceCast": 9,
+            "p0:ChooseKicker": 2,
+            "p0:ChooseTarget": 4,
+            "p0:TapMana": 94,
+            "p0:PayCosts": 10,
+            "p0:AnnounceActivate": 1,
+            "p1:Cast": 3,
+            "p1:AnnounceActivate": 1,
+            "p1:Activate": 20,
+            "p0:Cast": 1,
+            "p0:Activate": 12,
+            "p0:Attack": 3,
+            "p1:Block": 1,
+            "p1:FinishBlockers": 3,
+            "p1:Attack": 12,
+            "p0:FinishBlockers": 6,
+            "p0:Block": 3
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            16,
+            16
+          ],
+          "final_life": [
+            0,
+            10
+          ],
+          "seconds": 13.031843369994021
+        },
+        {
+          "seed": 23000018,
+          "index": 2,
+          "mode": "selfplay",
+          "seat": 0,
+          "starting_player": "P1",
+          "max_own_turns": 60,
+          "decisions": 619,
+          "neural_choices": 328,
+          "status": "win",
+          "own_turns_to_win": 11,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-3/game-00002-p0.pkl.gz",
+              "samples": 163,
+              "reward": 1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-3/game-00002-p1.pkl.gz",
+              "samples": 165,
+              "reward": -1.0
+            }
+          ],
+          "actions": {
+            "p1:Keep": 1,
+            "p0:Keep": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:Pass": 215,
+            "p0:Pass": 221,
+            "p1:PlayLand": 6,
+            "p1:FinishAttackers": 11,
+            "p1:TapMana": 35,
+            "p1:Cast": 3,
+            "p1:Activate": 5,
+            "p0:PlayLand": 9,
+            "p0:FinishAttackers": 11,
+            "p0:TapMana": 45,
+            "p0:AnnounceCast": 7,
+            "p0:PayCosts": 7,
+            "p0:ChooseKicker": 2,
+            "p0:ChooseTarget": 2,
+            "p0:Attack": 10,
+            "p1:Block": 2,
+            "p1:FinishBlockers": 7,
+            "p1:AnnounceCast": 4,
+            "p1:PayCosts": 4,
+            "p1:ChooseKicker": 1,
+            "p1:ChooseTarget": 1,
+            "p1:Attack": 2,
+            "p0:Block": 1,
+            "p0:FinishBlockers": 2,
+            "p0:Activate": 2
+          },
+          "winner": 0,
+          "terminal_rewards": [
+            1.0,
+            -1.0
+          ],
+          "own_turns_observed": [
+            11,
+            11
+          ],
+          "final_life": [
+            16,
+            0
+          ],
+          "seconds": 7.828678673002287
+        },
+        {
+          "seed": 23000019,
+          "index": 3,
+          "mode": "selfplay",
+          "seat": 1,
+          "starting_player": "P1",
+          "max_own_turns": 60,
+          "decisions": 789,
+          "neural_choices": 343,
+          "status": "win",
+          "own_turns_to_win": 13,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-3/game-00003-p0.pkl.gz",
+              "samples": 206,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-3/game-00003-p1.pkl.gz",
+              "samples": 137,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p1:Keep": 1,
+            "p0:Keep": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:Pass": 268,
+            "p0:Pass": 267,
+            "p1:PlayLand": 6,
+            "p1:AnnounceCast": 11,
+            "p1:TapMana": 42,
+            "p1:PayCosts": 11,
+            "p1:FinishAttackers": 13,
+            "p0:PlayLand": 8,
+            "p0:FinishAttackers": 12,
+            "p0:AnnounceCast": 12,
+            "p0:ChooseKicker": 3,
+            "p0:ChooseTarget": 7,
+            "p0:TapMana": 68,
+            "p0:PayCosts": 13,
+            "p1:ChooseKicker": 2,
+            "p1:ChooseTarget": 4,
+            "p1:Activate": 2,
+            "p0:PutTrigger": 1,
+            "p0:Attack": 8,
+            "p1:FinishBlockers": 7,
+            "p1:Block": 5,
+            "p1:Attack": 6,
+            "p0:FinishBlockers": 4,
+            "p0:Activate": 4,
+            "p0:AnnounceActivate": 1
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            13,
+            13
+          ],
+          "final_life": [
+            0,
+            2
+          ],
+          "seconds": 8.590324470002088
+        },
+        {
+          "seed": 23000020,
+          "index": 4,
+          "mode": "selfplay",
+          "seat": 0,
+          "starting_player": "P0",
+          "max_own_turns": 60,
+          "decisions": 1043,
+          "neural_choices": 544,
+          "status": "win",
+          "own_turns_to_win": 17,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-3/game-00004-p0.pkl.gz",
+              "samples": 278,
+              "reward": 1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-3/game-00004-p1.pkl.gz",
+              "samples": 266,
+              "reward": -1.0
+            }
+          ],
+          "actions": {
+            "p0:Keep": 1,
+            "p1:Mulligan": 1,
+            "p1:Bottom": 1,
+            "p1:Keep": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:Pass": 342,
+            "p1:Pass": 339,
+            "p0:FinishAttackers": 17,
+            "p0:PlayLand": 9,
+            "p0:TapMana": 95,
+            "p1:PlayLand": 11,
+            "p1:AnnounceCast": 11,
+            "p1:TapMana": 99,
+            "p1:PayCosts": 11,
+            "p1:Attack": 6,
+            "p1:FinishAttackers": 16,
+            "p0:FinishBlockers": 6,
+            "p1:Activate": 2,
+            "p1:ChooseTarget": 3,
+            "p0:AnnounceCast": 13,
+            "p0:PayCosts": 14,
+            "p0:Block": 3,
+            "p1:ChooseKicker": 2,
+            "p0:ChooseKicker": 1,
+            "p0:ChooseTarget": 2,
+            "p0:Attack": 16,
+            "p1:Block": 5,
+            "p1:FinishBlockers": 10,
+            "p0:Activate": 2,
+            "p0:AnnounceActivate": 1,
+            "p0:Cast": 1
+          },
+          "winner": 0,
+          "terminal_rewards": [
+            1.0,
+            -1.0
+          ],
+          "own_turns_observed": [
+            17,
+            16
+          ],
+          "final_life": [
+            13,
+            -2
+          ],
+          "seconds": 13.804600342999038
+        },
+        {
+          "seed": 23000021,
+          "index": 5,
+          "mode": "selfplay",
+          "seat": 1,
+          "starting_player": "P0",
+          "max_own_turns": 60,
+          "decisions": 734,
+          "neural_choices": 331,
+          "status": "win",
+          "own_turns_to_win": 12,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-3/game-00005-p0.pkl.gz",
+              "samples": 156,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-3/game-00005-p1.pkl.gz",
+              "samples": 175,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p0:Keep": 1,
+            "p1:Keep": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:Pass": 251,
+            "p1:Pass": 251,
+            "p0:PlayLand": 6,
+            "p0:AnnounceCast": 10,
+            "p0:TapMana": 43,
+            "p0:PayCosts": 10,
+            "p0:FinishAttackers": 12,
+            "p1:FinishAttackers": 12,
+            "p1:PlayLand": 8,
+            "p1:TapMana": 55,
+            "p0:Attack": 7,
+            "p1:FinishBlockers": 7,
+            "p0:ChooseKicker": 2,
+            "p0:ChooseTarget": 4,
+            "p1:AnnounceCast": 9,
+            "p1:PayCosts": 9,
+            "p1:Block": 3,
+            "p1:Discard": 1,
+            "p1:Attack": 12,
+            "p0:Block": 3,
+            "p0:FinishBlockers": 5,
+            "p1:Activate": 1,
+            "p0:Activate": 5,
+            "p0:Cast": 2,
+            "p1:ChooseKicker": 1,
+            "p1:ChooseTarget": 1
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            12,
+            12
+          ],
+          "final_life": [
+            0,
+            9
+          ],
+          "seconds": 8.216103314996872
+        },
+        {
+          "seed": 23000022,
+          "index": 6,
+          "mode": "selfplay",
+          "seat": 0,
+          "starting_player": "P1",
+          "max_own_turns": 60,
+          "decisions": 1453,
+          "neural_choices": 792,
+          "status": "win",
+          "own_turns_to_win": 21,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-3/game-00006-p0.pkl.gz",
+              "samples": 398,
+              "reward": 1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-3/game-00006-p1.pkl.gz",
+              "samples": 394,
+              "reward": -1.0
+            }
+          ],
+          "actions": {
+            "p1:Keep": 1,
+            "p0:Keep": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:Pass": 464,
+            "p0:Pass": 459,
+            "p1:FinishAttackers": 21,
+            "p0:PlayLand": 12,
+            "p0:FinishAttackers": 21,
+            "p0:AnnounceCast": 13,
+            "p0:TapMana": 151,
+            "p0:PayCosts": 14,
+            "p0:Activate": 18,
+            "p1:Discard": 1,
+            "p1:PlayLand": 12,
+            "p1:AnnounceCast": 14,
+            "p1:TapMana": 133,
+            "p1:PayCosts": 18,
+            "p0:ChooseTarget": 4,
+            "p1:Attack": 8,
+            "p0:Block": 3,
+            "p0:FinishBlockers": 8,
+            "p1:AssignDamage": 1,
+            "p0:Attack": 18,
+            "p1:FinishBlockers": 11,
+            "p1:ChooseTarget": 8,
+            "p1:Block": 4,
+            "p1:AnnounceActivate": 4,
+            "p1:Activate": 22,
+            "p0:Cast": 3,
+            "p1:ChooseKicker": 2,
+            "p0:ChooseKicker": 1,
+            "p0:AnnounceActivate": 1
+          },
+          "winner": 0,
+          "terminal_rewards": [
+            1.0,
+            -1.0
+          ],
+          "own_turns_observed": [
+            21,
+            21
+          ],
+          "final_life": [
+            1,
+            -4
+          ],
+          "seconds": 20.832416983997973
+        },
+        {
+          "seed": 23000023,
+          "index": 7,
+          "mode": "selfplay",
+          "seat": 1,
+          "starting_player": "P1",
+          "max_own_turns": 60,
+          "decisions": 518,
+          "neural_choices": 223,
+          "status": "loss",
+          "own_turns_to_win": null,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-3/game-00007-p0.pkl.gz",
+              "samples": 116,
+              "reward": 1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-3/game-00007-p1.pkl.gz",
+              "samples": 107,
+              "reward": -1.0
+            }
+          ],
+          "actions": {
+            "p1:Mulligan": 1,
+            "p0:Keep": 1,
+            "p1:Bottom": 1,
+            "p1:Keep": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:Pass": 178,
+            "p0:Pass": 181,
+            "p1:FinishAttackers": 9,
+            "p1:PlayLand": 5,
+            "p1:AnnounceCast": 7,
+            "p1:TapMana": 28,
+            "p1:PayCosts": 7,
+            "p0:FinishAttackers": 9,
+            "p0:Discard": 1,
+            "p1:Attack": 1,
+            "p0:FinishBlockers": 1,
+            "p1:Activate": 5,
+            "p0:PlayLand": 7,
+            "p0:AnnounceCast": 7,
+            "p0:ChooseKicker": 2,
+            "p0:ChooseTarget": 2,
+            "p0:TapMana": 31,
+            "p0:PayCosts": 7,
+            "p1:ChooseKicker": 1,
+            "p1:ChooseTarget": 2,
+            "p0:Attack": 10,
+            "p1:FinishBlockers": 5,
+            "p0:Activate": 3,
+            "p0:Cast": 1,
+            "p1:Block": 2
+          },
+          "winner": 0,
+          "terminal_rewards": [
+            1.0,
+            -1.0
+          ],
+          "own_turns_observed": [
+            9,
+            9
+          ],
+          "final_life": [
+            17,
+            0
+          ],
+          "seconds": 5.920093317996361
+        },
+        {
+          "seed": 23000024,
+          "index": 8,
+          "mode": "selfplay",
+          "seat": 0,
+          "starting_player": "P0",
+          "max_own_turns": 60,
+          "decisions": 859,
+          "neural_choices": 330,
+          "status": "win",
+          "own_turns_to_win": 14,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-3/game-00008-p0.pkl.gz",
+              "samples": 143,
+              "reward": 1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-3/game-00008-p1.pkl.gz",
+              "samples": 187,
+              "reward": -1.0
+            }
+          ],
+          "actions": {
+            "p0:Keep": 1,
+            "p1:Keep": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:Pass": 294,
+            "p1:Pass": 293,
+            "p0:FinishAttackers": 14,
+            "p1:FinishAttackers": 13,
+            "p1:Discard": 1,
+            "p0:Discard": 2,
+            "p1:PlayLand": 10,
+            "p1:AnnounceCast": 9,
+            "p1:TapMana": 66,
+            "p1:PayCosts": 12,
+            "p1:ChooseTarget": 4,
+            "p1:Attack": 12,
+            "p0:FinishBlockers": 9,
+            "p0:PlayLand": 6,
+            "p0:AnnounceCast": 10,
+            "p0:ChooseKicker": 1,
+            "p0:ChooseTarget": 3,
+            "p0:TapMana": 47,
+            "p0:PayCosts": 10,
+            "p0:Block": 4,
+            "p0:Attack": 10,
+            "p1:FinishBlockers": 7,
+            "p1:Activate": 10,
+            "p1:Block": 2,
+            "p0:Activate": 2,
+            "p1:AnnounceActivate": 3,
+            "p0:Cast": 1
+          },
+          "winner": 0,
+          "terminal_rewards": [
+            1.0,
+            -1.0
+          ],
+          "own_turns_observed": [
+            14,
+            13
+          ],
+          "final_life": [
+            3,
+            0
+          ],
+          "seconds": 9.395502409999608
+        },
+        {
+          "seed": 23000025,
+          "index": 9,
+          "mode": "selfplay",
+          "seat": 1,
+          "starting_player": "P0",
+          "max_own_turns": 60,
+          "decisions": 737,
+          "neural_choices": 331,
+          "status": "loss",
+          "own_turns_to_win": null,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-3/game-00009-p0.pkl.gz",
+              "samples": 149,
+              "reward": 1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-3/game-00009-p1.pkl.gz",
+              "samples": 182,
+              "reward": -1.0
+            }
+          ],
+          "actions": {
+            "p0:Keep": 1,
+            "p1:Mulligan": 1,
+            "p1:Bottom": 1,
+            "p1:Keep": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:Pass": 252,
+            "p1:Pass": 246,
+            "p0:FinishAttackers": 13,
+            "p1:PlayLand": 9,
+            "p1:AnnounceCast": 9,
+            "p1:ChooseKicker": 1,
+            "p1:ChooseTarget": 1,
+            "p1:TapMana": 68,
+            "p1:PayCosts": 9,
+            "p1:FinishAttackers": 12,
+            "p0:PlayLand": 7,
+            "p0:AnnounceCast": 9,
+            "p0:TapMana": 41,
+            "p0:PayCosts": 9,
+            "p0:Attack": 15,
+            "p1:FinishBlockers": 8,
+            "p1:Block": 4,
+            "p0:Discard": 1,
+            "p1:Attack": 4,
+            "p0:FinishBlockers": 3,
+            "p0:Block": 2,
+            "p0:ChooseTarget": 2,
+            "p0:ChooseKicker": 1,
+            "p1:Activate": 3,
+            "p0:Cast": 1,
+            "p0:Activate": 1
+          },
+          "winner": 0,
+          "terminal_rewards": [
+            1.0,
+            -1.0
+          ],
+          "own_turns_observed": [
+            13,
+            12
+          ],
+          "final_life": [
+            13,
+            0
+          ],
+          "seconds": 9.077843054001278
+        },
+        {
+          "seed": 23000026,
+          "index": 10,
+          "mode": "selfplay",
+          "seat": 0,
+          "starting_player": "P1",
+          "max_own_turns": 60,
+          "decisions": 513,
+          "neural_choices": 220,
+          "status": "loss",
+          "own_turns_to_win": null,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-3/game-00010-p0.pkl.gz",
+              "samples": 105,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-3/game-00010-p1.pkl.gz",
+              "samples": 115,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p1:Keep": 1,
+            "p0:Keep": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:Pass": 177,
+            "p0:Pass": 176,
+            "p1:FinishAttackers": 9,
+            "p1:PlayLand": 4,
+            "p0:PlayLand": 6,
+            "p0:TapMana": 31,
+            "p0:Cast": 1,
+            "p0:Activate": 3,
+            "p0:FinishAttackers": 8,
+            "p1:AnnounceCast": 9,
+            "p1:TapMana": 28,
+            "p1:PayCosts": 9,
+            "p0:AnnounceCast": 7,
+            "p0:ChooseKicker": 3,
+            "p0:ChooseTarget": 5,
+            "p0:PayCosts": 8,
+            "p1:Activate": 1,
+            "p0:Attack": 4,
+            "p1:FinishBlockers": 3,
+            "p1:Block": 2,
+            "p1:Attack": 9,
+            "p0:FinishBlockers": 4,
+            "p0:AnnounceActivate": 1,
+            "p1:ChooseTarget": 1
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            8,
+            9
+          ],
+          "final_life": [
+            0,
+            14
+          ],
+          "seconds": 6.027091511998151
+        },
+        {
+          "seed": 23000027,
+          "index": 11,
+          "mode": "selfplay",
+          "seat": 1,
+          "starting_player": "P1",
+          "max_own_turns": 60,
+          "decisions": 707,
+          "neural_choices": 251,
+          "status": "win",
+          "own_turns_to_win": 12,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-3/game-00011-p0.pkl.gz",
+              "samples": 123,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-3/game-00011-p1.pkl.gz",
+              "samples": 128,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p1:Keep": 1,
+            "p0:Mulligan": 1,
+            "p0:Bottom": 1,
+            "p0:Keep": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:Pass": 242,
+            "p0:Pass": 243,
+            "p1:FinishAttackers": 12,
+            "p0:FinishAttackers": 11,
+            "p1:Discard": 1,
+            "p0:PlayLand": 7,
+            "p0:TapMana": 47,
+            "p1:PlayLand": 7,
+            "p1:AnnounceCast": 9,
+            "p1:TapMana": 44,
+            "p1:PayCosts": 9,
+            "p0:AnnounceCast": 7,
+            "p0:PayCosts": 7,
+            "p0:Activate": 7,
+            "p1:Attack": 14,
+            "p0:FinishBlockers": 9,
+            "p0:Cast": 1,
+            "p0:Block": 3,
+            "p0:Attack": 7,
+            "p1:FinishBlockers": 6,
+            "p1:Block": 3,
+            "p0:AssignDamage": 1,
+            "p1:Activate": 3,
+            "p1:ChooseTarget": 1
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            11,
+            12
+          ],
+          "final_life": [
+            0,
+            10
+          ],
+          "seconds": 7.172435831002076
+        },
+        {
+          "seed": 23000028,
+          "index": 12,
+          "mode": "selfplay",
+          "seat": 0,
+          "starting_player": "P0",
+          "max_own_turns": 60,
+          "decisions": 700,
+          "neural_choices": 322,
+          "status": "loss",
+          "own_turns_to_win": null,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-3/game-00012-p0.pkl.gz",
+              "samples": 132,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-3/game-00012-p1.pkl.gz",
+              "samples": 190,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p0:Keep": 1,
+            "p1:Mulligan": 1,
+            "p1:Bottom": 1,
+            "p1:Keep": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:Pass": 249,
+            "p1:Pass": 249,
+            "p0:FinishAttackers": 12,
+            "p1:FinishAttackers": 12,
+            "p1:PlayLand": 7,
+            "p1:AnnounceCast": 9,
+            "p1:ChooseKicker": 1,
+            "p1:ChooseTarget": 2,
+            "p1:TapMana": 48,
+            "p1:PayCosts": 9,
+            "p0:Discard": 1,
+            "p0:PlayLand": 5,
+            "p0:AnnounceCast": 7,
+            "p0:TapMana": 31,
+            "p0:PayCosts": 8,
+            "p0:Attack": 6,
+            "p1:Block": 4,
+            "p1:FinishBlockers": 5,
+            "p0:AnnounceActivate": 1,
+            "p0:ChooseTarget": 1,
+            "p0:Activate": 1,
+            "p1:Activate": 6,
+            "p1:Cast": 1,
+            "p1:Attack": 10,
+            "p0:FinishBlockers": 8,
+            "p0:Cast": 1
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            12,
+            12
+          ],
+          "final_life": [
+            -2,
+            12
+          ],
+          "seconds": 7.801293582000653
+        },
+        {
+          "seed": 23000029,
+          "index": 13,
+          "mode": "selfplay",
+          "seat": 1,
+          "starting_player": "P0",
+          "max_own_turns": 60,
+          "decisions": 551,
+          "neural_choices": 191,
+          "status": "win",
+          "own_turns_to_win": 10,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-3/game-00013-p0.pkl.gz",
+              "samples": 76,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-3/game-00013-p1.pkl.gz",
+              "samples": 115,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p0:Keep": 1,
+            "p1:Keep": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:Pass": 194,
+            "p1:Pass": 192,
+            "p0:PlayLand": 4,
+            "p0:TapMana": 26,
+            "p0:FinishAttackers": 10,
+            "p1:PlayLand": 4,
+            "p1:TapMana": 34,
+            "p1:AnnounceCast": 9,
+            "p1:ChooseKicker": 3,
+            "p1:ChooseTarget": 4,
+            "p1:PayCosts": 9,
+            "p1:FinishAttackers": 9,
+            "p0:AnnounceCast": 10,
+            "p0:ChooseKicker": 2,
+            "p0:ChooseTarget": 3,
+            "p0:PayCosts": 10,
+            "p0:Activate": 2,
+            "p1:Activate": 1,
+            "p1:Attack": 12,
+            "p0:FinishBlockers": 6,
+            "p0:Block": 3
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            10,
+            10
+          ],
+          "final_life": [
+            -1,
+            18
+          ],
+          "seconds": 5.081493249999767
+        },
+        {
+          "seed": 23000030,
+          "index": 14,
+          "mode": "selfplay",
+          "seat": 0,
+          "starting_player": "P1",
+          "max_own_turns": 60,
+          "decisions": 560,
+          "neural_choices": 222,
+          "status": "loss",
+          "own_turns_to_win": null,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-3/game-00014-p0.pkl.gz",
+              "samples": 100,
+              "reward": -1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-3/game-00014-p1.pkl.gz",
+              "samples": 122,
+              "reward": 1.0
+            }
+          ],
+          "actions": {
+            "p1:Keep": 1,
+            "p0:Keep": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:Pass": 194,
+            "p0:Pass": 191,
+            "p1:PlayLand": 7,
+            "p1:TapMana": 39,
+            "p1:AnnounceCast": 9,
+            "p1:ChooseKicker": 1,
+            "p1:ChooseTarget": 2,
+            "p1:PayCosts": 9,
+            "p1:FinishAttackers": 10,
+            "p0:PlayLand": 5,
+            "p0:AnnounceCast": 6,
+            "p0:TapMana": 26,
+            "p0:PayCosts": 6,
+            "p0:FinishAttackers": 9,
+            "p0:Attack": 2,
+            "p1:Block": 2,
+            "p1:FinishBlockers": 2,
+            "p1:Activate": 3,
+            "p1:Attack": 19,
+            "p0:FinishBlockers": 8,
+            "p0:ChooseKicker": 1,
+            "p0:ChooseTarget": 1,
+            "p0:Block": 4
+          },
+          "winner": 1,
+          "terminal_rewards": [
+            -1.0,
+            1.0
+          ],
+          "own_turns_observed": [
+            9,
+            10
+          ],
+          "final_life": [
+            0,
+            16
+          ],
+          "seconds": 5.337406541002565
+        },
+        {
+          "seed": 23000031,
+          "index": 15,
+          "mode": "selfplay",
+          "seat": 1,
+          "starting_player": "P1",
+          "max_own_turns": 60,
+          "decisions": 938,
+          "neural_choices": 438,
+          "status": "loss",
+          "own_turns_to_win": null,
+          "trajectories": [
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-3/game-00015-p0.pkl.gz",
+              "samples": 249,
+              "reward": 1.0
+            },
+            {
+              "path": ".local/red-worker-benchmark-2026-10-18/trial-3/game-00015-p1.pkl.gz",
+              "samples": 189,
+              "reward": -1.0
+            }
+          ],
+          "actions": {
+            "p1:Keep": 1,
+            "p0:Keep": 1,
+            "p1:FinishOpeningHand": 1,
+            "p0:FinishOpeningHand": 1,
+            "p1:Pass": 314,
+            "p0:Pass": 315,
+            "p1:PlayLand": 7,
+            "p1:TapMana": 65,
+            "p1:FinishAttackers": 15,
+            "p0:PlayLand": 9,
+            "p0:FinishAttackers": 15,
+            "p1:AnnounceCast": 12,
+            "p1:PayCosts": 12,
+            "p1:ChooseTarget": 4,
+            "p0:AnnounceCast": 12,
+            "p0:TapMana": 78,
+            "p0:PayCosts": 13,
+            "p0:ChooseTarget": 4,
+            "p1:Attack": 8,
+            "p0:FinishBlockers": 6,
+            "p0:Attack": 11,
+            "p1:Block": 5,
+            "p1:FinishBlockers": 9,
+            "p0:Block": 5,
+            "p0:Activate": 4,
+            "p1:ChooseKicker": 2,
+            "p0:ChooseKicker": 1,
+            "p1:AssignDamage": 1,
+            "p0:AnnounceActivate": 1,
+            "p1:Cast": 1,
+            "p1:Activate": 5
+          },
+          "winner": 0,
+          "terminal_rewards": [
+            1.0,
+            -1.0
+          ],
+          "own_turns_observed": [
+            15,
+            15
+          ],
+          "final_life": [
+            5,
+            0
+          ],
+          "seconds": 5.316603911000129
+        }
+      ],
+      "seconds": 37.955687701003626,
+      "cpu_seconds": 42.625481939999986,
+      "mean_cores": 1.1230327922334782,
+      "games_per_minute": 25.2926519883505,
+      "mean_batch": 1.75633106856084,
+      "outcomes": {
+        "loss": 7,
+        "win": 9
+      }
+    }
+  ],
+  "summary": {
+    "4": {
+      "games_per_minute": 30.162453724013126,
+      "mean_cores": 1.135471854646321
+    },
+    "8": {
+      "games_per_minute": 29.36471677528039,
+      "mean_cores": 1.1543176668633923
+    }
+  },
+  "eight_vs_four_speedup": 0.9735519876455662,
+  "paired_game_records_identical": 32,
+  "paired_game_records_compared": 32,
+  "benchmark_source": "\"\"\"Short frozen-policy thread-scaling diagnostic; includes trajectory writes.\"\"\"\nimport asyncio\nfrom collections import Counter\nimport hashlib\nimport json\nimport os\nfrom pathlib import Path\nimport time\n\nfrom examples import train_rustmage  # CPU settings before TensorFlow imports\nfrom patchwork_automaton.neural.batching import InferenceBatcher\nfrom patchwork_automaton.neural.experiment import atomic_json\nfrom patchwork_automaton.neural.rustmage_policy import RustMagePolicy\nfrom patchwork_automaton.rl.rustmage_experiment import run_games\n\n\nasync def main():\n    checkpoint=Path('.local/red-ppo-2026-10-18/checkpoints/round-0032/policy.keras')\n    output=Path('.local/red-worker-benchmark-2026-10-18')\n    output.mkdir(exist_ok=False)\n    policy=RustMagePolicy.load(checkpoint)\n    sha=hashlib.sha256(checkpoint.read_bytes()).hexdigest()\n    report=dict(checkpoint=str(checkpoint),checkpoint_sha256=sha,\n        description='Frozen policy, real mono-red mirrors, trajectory writes included, four warmup games excluded per trial, no PPO updates',\n        logical_cpus=os.cpu_count(),tf_intra_threads=os.environ['TF_NUM_INTRAOP_THREADS'],\n        tf_inter_threads=os.environ['TF_NUM_INTEROP_THREADS'],inference_wait_ms=2,\n        source_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),\n        trials=[])\n    # Two matched seed groups, reversing configuration order for the second.\n    for trial,(workers,group) in enumerate(((4,0),(8,0),(8,1),(4,1))):\n        batcher=await InferenceBatcher(policy.model,max_batch=workers,wait_ms=2).start()\n        try:\n            await run_games(games=4,workers=workers,seed_base=23001000+group*4,\n                mode='selfplay',model=policy.model,batcher=batcher,max_own_turns=60)\n            previous=batcher.stats(); cpu=time.process_time(); start=time.monotonic()\n            rows=await run_games(games=16,workers=workers,seed_base=23000000+group*16,\n                mode='selfplay',model=policy.model,batcher=batcher,max_own_turns=60,\n                output=output/f'trial-{trial}')\n            if any(row['status'] not in ('win','loss','draw') for row in rows):\n                atomic_json(output/f'trial-{trial}-failed.json',rows)\n                raise RuntimeError('Benchmark requires natural terminal games')\n            wall=time.monotonic()-start; cpu=time.process_time()-cpu; current=batcher.stats()\n            calls=current['calls']-previous['calls']; requests=current['requests']-previous['requests']\n            result=dict(workers=workers,seed_group=group,games=rows,seconds=wall,\n                cpu_seconds=cpu,mean_cores=cpu/wall,games_per_minute=16*60/wall,\n                mean_batch=requests/calls,outcomes=dict(Counter(r['status'] for r in rows)))\n            report['trials'].append(result); atomic_json(output/'report.json',report)\n            print(json.dumps({k:v for k,v in result.items() if k!='games'}),flush=True)\n        finally:\n            await batcher.close()\n    report['summary']={str(w):dict(games_per_minute=32*60/sum(t['seconds'] for t in report['trials'] if t['workers']==w),\n        mean_cores=sum(t['cpu_seconds'] for t in report['trials'] if t['workers']==w)/sum(t['seconds'] for t in report['trials'] if t['workers']==w)) for w in (4,8)}\n    report['eight_vs_four_speedup']=report['summary']['8']['games_per_minute']/report['summary']['4']['games_per_minute']\n    assert hashlib.sha256(checkpoint.read_bytes()).hexdigest()==sha\n    atomic_json(output/'report.json',report)\n    print(json.dumps(report['summary']),flush=True)\n\n\nasyncio.run(main())\n"
+}

@@ -36,7 +36,7 @@ def read_trajectory(path):
 
 class StreamingTrainer(TerminalActorCritic):
     def compile(self):
-        batch = example_batch(self.model.memory_size)
+        batch = example_batch(self.model.memory_size, self.model.feature_spec)
         self.model(batch,training=False)
         self.optimizer.build(self.model.trainable_variables)
         signature=[input_signature(batch),tf.TensorSpec([None],tf.int32),
@@ -96,7 +96,7 @@ def atomic_json(path,value):
     temporary.replace(path)
 
 
-def save_checkpoint(directory,model,trainer,state):
+def save_checkpoint(directory,model,trainer,state,*,policy_type=NeuralPolicy):
     directory=Path(directory); directory.mkdir(parents=True,exist_ok=True)
     name=f"round-{state['round']:04d}"
     destination=directory/name
@@ -104,7 +104,7 @@ def save_checkpoint(directory,model,trainer,state):
     temporary=directory/(name+'.tmp')
     if temporary.exists():shutil.rmtree(temporary)
     temporary.mkdir()
-    NeuralPolicy(model).save(temporary/'policy.keras')
+    policy_type(model).save(temporary/'policy.keras')
     np.savez(temporary/'optimizer.npz',**{f'v{i}':np.asarray(v) for i,v in enumerate(trainer.optimizer.variables)})
     saved_state=dict(state,optimizer_steps=int(trainer.optimizer.iterations))
     if hasattr(trainer,'rng'):saved_state['trainer_rng_state']=trainer.rng.bit_generator.state
@@ -120,7 +120,12 @@ def load_checkpoint(directory):
     if Path(name).name!=name:raise ValueError('Invalid checkpoint path')
     root=directory/name
     state=json.loads((root/'state.json').read_text())
-    model=NeuralPolicy.load(root/'policy.keras').model
+    manifest=json.loads((root/'policy.manifest.json').read_text())
+    if manifest.get('backend') == 'rustmage':
+        from .rustmage_policy import RustMagePolicy
+        model=RustMagePolicy.load(root/'policy.keras').model
+    else:
+        model=NeuralPolicy.load(root/'policy.keras').model
     config=state['config']
     trainer=make_trainer(model,config)
     trainer.compile()

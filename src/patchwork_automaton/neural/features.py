@@ -361,12 +361,15 @@ def collate(items):
     a = max(len(x['candidates']) for x in items)
     s = max(x['semantics'].shape[1] for x in items)
     h = max(len(x['history']) for x in items)
-    from .history import HISTORY_WIDTH
-    shapes = {'entities': (n, ENTITY_WIDTH), 'card_ids': (n,), 'entity_mask': (n,),
-        'semantics': (n, s, SEMANTIC_WIDTH), 'semantic_mask': (n, s), 'relations': (n, n, 4),
-        'context': (CONTEXT_WIDTH,), 'candidates': (a, CANDIDATE_WIDTH),
-        'candidate_refs': (a, n), 'candidate_mask': (a,), 'selection': (CANDIDATE_WIDTH,),
-        'history': (h, HISTORY_WIDTH), 'history_cards': (h,), 'history_mask': (h,)}
+    widths = {k: items[0][k].shape[-1] for k in
+              ('entities', 'semantics', 'context', 'candidates', 'selection', 'history')}
+    if any(item[k].shape[-1] != width for item in items for k, width in widths.items()):
+        raise ValueError('Cannot mix feature schemas in a batch')
+    shapes = {'entities': (n, widths['entities']), 'card_ids': (n,), 'entity_mask': (n,),
+        'semantics': (n, s, widths['semantics']), 'semantic_mask': (n, s), 'relations': (n, n, 4),
+        'context': (widths['context'],), 'candidates': (a, widths['candidates']),
+        'candidate_refs': (a, n), 'candidate_mask': (a,), 'selection': (widths['selection'],),
+        'history': (h, widths['history']), 'history_cards': (h,), 'history_mask': (h,)}
     batch = {key: np.zeros((len(items), *shape), dtype=items[0][key].dtype) for key, shape in shapes.items()}
     for i, item in enumerate(items):
         if not np.any(item['candidate_mask']): raise ValueError('Decision has no allowed candidate')

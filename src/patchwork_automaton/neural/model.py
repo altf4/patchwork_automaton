@@ -30,7 +30,12 @@ class FeatureStandardization(layers.Layer):
 
 @keras.saving.register_keras_serializable(package='patchwork')
 class PolicyNetwork(keras.Model):
-    def __init__(self, card_count, width=128, memory_size=256, blocks=3, candidate_interactions=False, player_readout=False, stable_heads=False, standardize_inputs=False, isolate_value=False, fact_readout=False, **kwargs):
+    # Forward execution has no dropout, batch-statistic updates or other
+    # training-mode side effects. PPO can reuse one output for loss and KL.
+    # Revisit this contract if stochastic/stateful layers are introduced.
+    deterministic_forward = True
+
+    def __init__(self, card_count, width=128, memory_size=256, blocks=3, candidate_interactions=False, player_readout=False, stable_heads=False, standardize_inputs=False, isolate_value=False, fact_readout=False, feature_spec=None, **kwargs):
         super().__init__(**kwargs)
         self.card_count, self.width, self.memory_size, self.blocks = card_count, width, memory_size, blocks
         self.candidate_interactions = candidate_interactions
@@ -39,6 +44,7 @@ class PolicyNetwork(keras.Model):
         self.standardize_inputs = standardize_inputs
         self.isolate_value = isolate_value
         self.fact_readout = fact_readout
+        self.feature_spec = feature_spec
         if standardize_inputs:
             self.entity_standardization = FeatureStandardization()
             self.candidate_standardization = FeatureStandardization()
@@ -150,4 +156,4 @@ class PolicyNetwork(keras.Model):
                 'memory_size': self.memory_size, 'blocks': self.blocks,
                 'candidate_interactions': self.candidate_interactions,
                 'player_readout': self.player_readout, 'stable_heads': self.stable_heads, 'standardize_inputs': self.standardize_inputs, 'isolate_value': self.isolate_value,
-                'fact_readout': self.fact_readout}
+                'fact_readout': self.fact_readout, 'feature_spec': self.feature_spec}

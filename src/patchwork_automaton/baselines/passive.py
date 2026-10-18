@@ -10,6 +10,14 @@ def passive_deck():
 class PassivePolicy:
     def choose(self,obs):
         if obs.decision is None:raise UnsupportedInteraction('Passive policy needs a decision')
+        if obs.backend == 'rustmage':
+            # Never play a land, cast, activate, attack, block or concede.
+            for kind in ('Keep', 'FinishOpeningHand', 'Pass', 'FinishAttackers',
+                         'FinishBlockers', 'Discard', 'Bottom'):
+                option = next((o for o in obs.decision.options if o.kind == 'finite'
+                               and o.constraints['action']['kind'] == kind), None)
+                if option is not None: return Response(option.id)
+            raise UnsupportedInteraction('Unhandled passive RustMage choice: ' + obs.decision.kind)
         decision=obs.decision;options=sorted(decision.options,key=lambda o:o.id)
         by_id={o.id:o for o in options}
         if decision.kind=='GAME_TARGET':

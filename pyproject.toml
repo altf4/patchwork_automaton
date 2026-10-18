@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "patchwork-automaton"
 version = "0.4.0"
-description = "Async MTGO and XMage gameplay interaction library"
+description = "Async MTGO, XMage and in-memory RustMage gameplay interaction library"
 requires-python = ">=3.11"
 readme = "README.md"
 license = {file = "LICENSE"}
@@ -13,7 +13,12 @@ license = {file = "LICENSE"}
 [project.optional-dependencies]
 xmage = ["websockets>=14,<17"]
 rl = ["gymnasium>=1,<2", "pettingzoo>=1.24,<2"]
-neural = ["numpy>=1.26,<3", "keras>=3.10,<4", "tensorflow-cpu>=2.20,<2.22"]
+neural = [
+    "numpy>=1.26,<3",
+    "keras>=3.10,<4",
+    "tensorflow-cpu>=2.20,<2.22",
+    "orjson>=3.10,<4",
+]
 
 [tool.setuptools.packages.find]
 where = ["src"]

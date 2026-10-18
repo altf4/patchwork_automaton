@@ -45,11 +45,13 @@ class PPOTrainer:
             raise ValueError('Invalid trust-region limits')
         self.optimizer = keras.optimizers.Adam(learning_rate)
         self.optimizer.build(model.trainable_variables)
-        signature = [input_signature(example_batch(model.memory_size)),
+        signature = [input_signature(example_batch(model.memory_size, getattr(model, 'feature_spec', None))),
                      tf.TensorSpec([None], tf.int32)] + [tf.TensorSpec([None], tf.float32)] * 3
         self.step = tf.function(self._step, input_signature=signature, autograph=False)
         self.measure = tf.function(self._measure, input_signature=signature, autograph=False)
         self.drift = tf.function(self._drift, input_signature=[signature[0], tf.TensorSpec([None, None], tf.float32)], autograph=False)
+        self.measure_with_drift = tf.function(self._measure_with_drift,
+            input_signature=signature + [tf.TensorSpec([None, None], tf.float32)], autograph=False)
         self.guard_variables = tuple(self.model.variables) + tuple(self.optimizer.variables)
         self.snapshot = tf.function(lambda: tuple(tf.identity(v) for v in self.guard_variables), autograph=False)
         self.restore = tf.function(self._restore,
@@ -58,6 +60,9 @@ class PPOTrainer:
     def _terms(self, inputs, actions, returns, old_logp, advantages):
         output = self.model(inputs, training=True)
         logp = tf.nn.log_softmax(output['logits'])
+        return self._terms_from_output(output, logp, inputs, actions, returns, old_logp, advantages)
+
+    def _terms_from_output(self, output, logp, inputs, actions, returns, old_logp, advantages):
         chosen = tf.gather(logp, actions, axis=1, batch_dims=1)
         mask = tf.cast(tf.reduce_sum(tf.cast(inputs['candidate_mask'], tf.int32), axis=1) > 1, tf.float32)
         def mean_choice(x):
@@ -80,9 +85,21 @@ class PPOTrainer:
 
     def _drift(self, inputs, old_log_probs):
         new = tf.nn.log_softmax(self.model(inputs, training=False)['logits'])
+        return self._drift_from_logp(inputs, old_log_probs, new)
+
+    def _drift_from_logp(self, inputs, old_log_probs, new):
         kl = tf.maximum(tf.reduce_sum(tf.exp(old_log_probs) * (old_log_probs - new), axis=1), 0.)
         choices = tf.cast(tf.reduce_sum(tf.cast(inputs['candidate_mask'], tf.int32), axis=1) > 1, tf.float32)
         return tf.stack([tf.math.divide_no_nan(tf.reduce_sum(kl * choices), tf.reduce_sum(choices)), tf.reduce_max(kl * choices)])
+
+    def _measure_with_drift(self, inputs, actions, returns, old_logp, advantages, old_log_probs):
+        if not getattr(self.model, 'deterministic_forward', False):
+            return (self._terms(inputs, actions, returns, old_logp, advantages),
+                    self._drift(inputs, old_log_probs))
+        output = self.model(inputs, training=False)
+        logp = tf.nn.log_softmax(output['logits'])
+        return (self._terms_from_output(output, logp, inputs, actions, returns, old_logp, advantages),
+                self._drift_from_logp(inputs, old_log_probs, logp))
 
     def _measure(self, *args):
         return self._terms(*args)
@@ -149,8 +166,12 @@ class PPOTrainer:
                     batch = {k: np.asarray(v)[ix] for k, v in inputs.items()}
                     norm = float(self.step(batch, actions[ix], returns[ix], old_logp[ix], advantages[ix]))
                     epoch_steps += 1
-                proposed = np.asarray(self.measure(inputs, actions, returns, old_logp, advantages))
-                drift = np.asarray(self.drift(inputs, old_log_probs)) if self.trust_guard else np.zeros(2)
+                if self.trust_guard:
+                    proposed, drift = map(np.asarray, self.measure_with_drift(
+                        inputs, actions, returns, old_logp, advantages, old_log_probs))
+                else:
+                    proposed = np.asarray(self.measure(inputs, actions, returns, old_logp, advantages))
+                    drift = np.zeros(2)
                 if (np.isfinite(proposed).all() and np.isfinite(drift).all()
                         and (not self.trust_guard or (drift[0] <= self.target_kl and drift[1] <= self.max_state_kl))):
                     metrics, exact = proposed, drift

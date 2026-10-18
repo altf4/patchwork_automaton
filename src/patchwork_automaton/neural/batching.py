@@ -13,14 +13,16 @@ from .policy import NeuralPolicy
 from .training import Sample
 
 
-def example_batch(memory_size):
-    arrays = dict(entities=np.zeros((2, ENTITY_WIDTH), np.float32),
+def example_batch(memory_size, feature_spec=None):
+    spec = feature_spec or dict(entities=ENTITY_WIDTH, semantics=SEMANTIC_WIDTH,
+        context=CONTEXT_WIDTH, candidates=CANDIDATE_WIDTH, history=HISTORY_WIDTH)
+    arrays = dict(entities=np.zeros((2, spec['entities']), np.float32),
         card_ids=np.zeros(2, np.int32), entity_mask=np.ones(2, bool),
-        semantics=np.zeros((2, 1, SEMANTIC_WIDTH), np.float32), semantic_mask=np.ones((2, 1), bool),
-        relations=np.zeros((2, 2, 4), np.float32), context=np.zeros(CONTEXT_WIDTH, np.float32),
-        candidates=np.zeros((1, CANDIDATE_WIDTH), np.float32), candidate_refs=np.zeros((1, 2), np.float32),
-        candidate_mask=np.ones(1, bool), selection=np.zeros(CANDIDATE_WIDTH, np.float32),
-        history=np.zeros((1, HISTORY_WIDTH), np.float32), history_cards=np.zeros(1, np.int32),
+        semantics=np.zeros((2, 1, spec['semantics']), np.float32), semantic_mask=np.ones((2, 1), bool),
+        relations=np.zeros((2, 2, 4), np.float32), context=np.zeros(spec['context'], np.float32),
+        candidates=np.zeros((1, spec['candidates']), np.float32), candidate_refs=np.zeros((1, 2), np.float32),
+        candidate_mask=np.ones(1, bool), selection=np.zeros(spec['candidates'], np.float32),
+        history=np.zeros((1, spec['history']), np.float32), history_cards=np.zeros(1, np.int32),
         history_mask=np.zeros(1, bool))
     batch = collate([arrays])
     batch.update(memory_in=np.zeros((1, memory_size), np.float32), advance_memory=np.ones((1, 1), np.float32))
@@ -44,6 +46,17 @@ class Request:
     identity: tuple
     future: asyncio.Future
     queued: float
+    unbatched: bool = False
+
+
+def pack_requests(requests):
+    """Accept both existing batch-of-one callers and direct numerical records."""
+    items = [{k: v if r.unbatched else v[0] for k, v in r.batch.items()
+              if k not in ('memory_in', 'advance_memory')} for r in requests]
+    batch = collate(items)
+    for key in ('memory_in', 'advance_memory'):
+        batch[key] = np.stack([r.batch[key] if r.unbatched else r.batch[key][0] for r in requests])
+    return items, batch
 
 
 class InferenceBatcher:
@@ -63,7 +76,7 @@ class InferenceBatcher:
     async def start(self):
         self.loop = asyncio.get_running_loop()
         def warm():
-            batch = example_batch(self.model.memory_size)
+            batch = example_batch(self.model.memory_size, getattr(self.model, 'feature_spec', None))
             self.model(batch, training=False)
             self.compiled = tf.function(self.model.call, input_signature=[input_signature(batch)], autograph=False)
             self.compiled(batch)
@@ -71,18 +84,18 @@ class InferenceBatcher:
         self.task = asyncio.create_task(self._serve())
         return self
 
-    def predict(self, batch, *, version, identity):
+    def predict(self, batch, *, version, identity, unbatched=False):
         # Called only by a game-policy thread, never by the event loop.
-        pending = asyncio.run_coroutine_threadsafe(self._request(batch, version, identity), self.loop)
+        pending = asyncio.run_coroutine_threadsafe(self._request(batch, version, identity, unbatched), self.loop)
         try: return pending.result(timeout=120)
         except BaseException:
             pending.cancel()
             raise
 
-    async def _request(self, batch, version, identity):
+    async def _request(self, batch, version, identity, unbatched=False):
         if self.closed or version != self.version: raise RuntimeError('Stale model version or closed batcher')
         future = self.loop.create_future()
-        await self.queue.put(Request(batch, version, identity, future, time.monotonic()))
+        await self.queue.put(Request(batch, version, identity, future, time.monotonic(), unbatched))
         return await future
 
     def set_version(self, version):
@@ -102,9 +115,7 @@ class InferenceBatcher:
         self.queue_seconds = stats['mean_queue_ms'] * self.requests / 1000
 
     def _infer(self, requests):
-        items = [{k: v[0] for k,v in r.batch.items() if k not in ('memory_in','advance_memory')} for r in requests]
-        batch = collate(items)
-        for key in ('memory_in','advance_memory'): batch[key] = np.concatenate([r.batch[key] for r in requests])
+        items, batch = pack_requests(requests)
         output = {k: np.asarray(v) for k,v in self.compiled(batch).items()}
         return [{k: (v[i:i+1, :len(items[i]['candidates'])] if k == 'logits' else v[i:i+1])
                  for k,v in output.items()} for i in range(len(requests))]

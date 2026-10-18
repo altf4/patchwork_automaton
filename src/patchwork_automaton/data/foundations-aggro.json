@@ -1,0 +1,298 @@
+{
+  "rustmage_revision": "78d717856af36274018634b54a3fc8cbacf4c829",
+  "set_manifest_sha256": "9aa2b281a2b034420aad3ded40b8d7ca39de1e8a3ae91fc8080760b6e6cb950c",
+  "decks": {
+    "red": {
+      "name": "Foundations Red Aggro",
+      "cards": [
+        {
+          "name": "Mountain",
+          "quantity": 24,
+          "set_code": "FDN",
+          "collector_number": "278"
+        },
+        {
+          "name": "Fanatical Firebrand",
+          "quantity": 4,
+          "set_code": "FDN",
+          "collector_number": "195"
+        },
+        {
+          "name": "Ghitu Lavarunner",
+          "quantity": 4,
+          "set_code": "FDN",
+          "collector_number": "623"
+        },
+        {
+          "name": "Swab Goblin",
+          "quantity": 4,
+          "set_code": "FDN",
+          "collector_number": "548"
+        },
+        {
+          "name": "Firebrand Archer",
+          "quantity": 4,
+          "set_code": "FDN",
+          "collector_number": "196"
+        },
+        {
+          "name": "Viashino Pyromancer",
+          "quantity": 4,
+          "set_code": "FDN",
+          "collector_number": "634"
+        },
+        {
+          "name": "Goblin Smuggler",
+          "quantity": 4,
+          "set_code": "FDN",
+          "collector_number": "540"
+        },
+        {
+          "name": "Raging Redcap",
+          "quantity": 4,
+          "set_code": "FDN",
+          "collector_number": "543"
+        },
+        {
+          "name": "Firespitter Whelp",
+          "quantity": 4,
+          "set_code": "FDN",
+          "collector_number": "197"
+        },
+        {
+          "name": "Burst Lightning",
+          "quantity": 4,
+          "set_code": "FDN",
+          "collector_number": "192"
+        }
+      ]
+    },
+    "white": {
+      "name": "Foundations White Aggro",
+      "cards": [
+        {
+          "name": "Plains",
+          "quantity": 24,
+          "set_code": "FDN",
+          "collector_number": "272"
+        },
+        {
+          "name": "Savannah Lions",
+          "quantity": 4,
+          "set_code": "FDN",
+          "collector_number": "146"
+        },
+        {
+          "name": "Healer's Hawk",
+          "quantity": 4,
+          "set_code": "FDN",
+          "collector_number": "142"
+        },
+        {
+          "name": "Bishop's Soldier",
+          "quantity": 4,
+          "set_code": "FDN",
+          "collector_number": "491"
+        },
+        {
+          "name": "Leonin Skyhunter",
+          "quantity": 4,
+          "set_code": "FDN",
+          "collector_number": "498"
+        },
+        {
+          "name": "Helpful Hunter",
+          "quantity": 4,
+          "set_code": "FDN",
+          "collector_number": "16"
+        },
+        {
+          "name": "Dazzling Angel",
+          "quantity": 4,
+          "set_code": "FDN",
+          "collector_number": "9"
+        },
+        {
+          "name": "Inspiring Paladin",
+          "quantity": 4,
+          "set_code": "FDN",
+          "collector_number": "18"
+        },
+        {
+          "name": "Prideful Parent",
+          "quantity": 4,
+          "set_code": "FDN",
+          "collector_number": "21"
+        },
+        {
+          "name": "Inspiring Overseer",
+          "quantity": 4,
+          "set_code": "FDN",
+          "collector_number": "496"
+        }
+      ]
+    }
+  },
+  "cards": {
+    "Mountain": {
+      "mana_cost": "",
+      "type_line": "Basic Land \u2014 Mountain",
+      "oracle_id": "a3fb7228-e76b-4e96-a40e-20b5fed75685",
+      "mana_value": 0,
+      "definition_path": "src/card_definitions/fra/mountain.json",
+      "definition_sha256": "9a1fa2974d16b42b2a40ae93993e34d7be3ebd405e8f86daa870cab93ef2a81e"
+    },
+    "Fanatical Firebrand": {
+      "mana_cost": "{R}",
+      "type_line": "Creature \u2014 Goblin Pirate",
+      "oracle_id": "d36e11f1-6ab3-4273-8114-a8fbbe21c1c3",
+      "mana_value": 1,
+      "definition_path": "src/card_definitions/fdn/fanatical_firebrand.json",
+      "definition_sha256": "57faece9712bb58ae952ad2e6f90c877e33256c5f2c39a0087dab649f0209dbb"
+    },
+    "Ghitu Lavarunner": {
+      "mana_cost": "{R}",
+      "type_line": "Creature \u2014 Human Wizard",
+      "oracle_id": "8e3f4987-6f31-4bc5-8bcd-6adb0440ee7c",
+      "mana_value": 1,
+      "definition_path": "src/card_definitions/fdn/ghitu_lavarunner.json",
+      "definition_sha256": "c0c273f6eae583c7cdc2eeecca6ea1a555fabdd26db6c8cebb4e40287a5a436a"
+    },
+    "Swab Goblin": {
+      "mana_cost": "{1}{R}",
+      "type_line": "Creature \u2014 Goblin Pirate",
+      "oracle_id": "343ecf2f-0bbc-4840-8fb3-f5f61b26e76f",
+      "mana_value": 2,
+      "definition_path": "src/card_definitions/fdn/swab_goblin.json",
+      "definition_sha256": "d8f8fe9264082a05d6193239e25baf62b17a8d5f26ba271f10283a2912da0975"
+    },
+    "Firebrand Archer": {
+      "mana_cost": "{1}{R}",
+      "type_line": "Creature \u2014 Human Archer",
+      "oracle_id": "2e9289d6-dbc6-456d-88cf-d1f534e731d6",
+      "mana_value": 2,
+      "definition_path": "src/card_definitions/fdn/firebrand_archer.json",
+      "definition_sha256": "fd5687e31cc11563dff7feb82bfea2481bc97b38aca372954d61391dab912445"
+    },
+    "Viashino Pyromancer": {
+      "mana_cost": "{1}{R}",
+      "type_line": "Creature \u2014 Lizard Wizard",
+      "oracle_id": "5e78e6e0-60f0-4c3c-b8dd-bd673f5152b8",
+      "mana_value": 2,
+      "definition_path": "src/card_definitions/fdn/viashino_pyromancer.json",
+      "definition_sha256": "daf1143c96d74425f3ce08ef215d33fb44ff267b2db8237604e1be71602fbaa1"
+    },
+    "Goblin Smuggler": {
+      "mana_cost": "{2}{R}",
+      "type_line": "Creature \u2014 Goblin Rogue",
+      "oracle_id": "eae15f7d-1f6e-4dfc-afea-7698b93cd145",
+      "mana_value": 3,
+      "definition_path": "src/card_definitions/fdn/goblin_smuggler.json",
+      "definition_sha256": "bd2dd010ed60f7f42de97584f96f2d95162e6d0513fc42509eddf6b8c9c4cb6e"
+    },
+    "Raging Redcap": {
+      "mana_cost": "{2}{R}",
+      "type_line": "Creature \u2014 Goblin Knight",
+      "oracle_id": "679841ad-f3ac-48e2-ba11-2cf6d78642b4",
+      "mana_value": 3,
+      "definition_path": "src/card_definitions/fdn/raging_redcap.json",
+      "definition_sha256": "a9bda0e4e32ebdeb8cfffdd9123998d8ad5c51065a0642c4d52c119c545f44c2"
+    },
+    "Firespitter Whelp": {
+      "mana_cost": "{2}{R}",
+      "type_line": "Creature \u2014 Dragon",
+      "oracle_id": "1cad92ce-55c8-4b78-8d8c-56645ef8e6ee",
+      "mana_value": 3,
+      "definition_path": "src/card_definitions/fdn/firespitter_whelp.json",
+      "definition_sha256": "fd92d45c4511f2644718f349db80dc577683bbfda1e2ac22783624c4408591eb"
+    },
+    "Burst Lightning": {
+      "mana_cost": "{R}",
+      "type_line": "Instant",
+      "oracle_id": "ac2086fe-98ee-4280-9c7c-c5c2d6548a8b",
+      "mana_value": 1,
+      "definition_path": "src/card_definitions/fdn/burst_lightning.json",
+      "definition_sha256": "a9dd3d95917f36a0d7cb7fe7c27536a2dccec322c9f41d66a2bce4c0a19eb11f"
+    },
+    "Plains": {
+      "mana_cost": "",
+      "type_line": "Basic Land \u2014 Plains",
+      "oracle_id": "bc71ebf6-2056-41f7-be35-b2e5c34afa99",
+      "mana_value": 0,
+      "definition_path": "src/card_definitions/fra/plains.json",
+      "definition_sha256": "473d64b9ac6a1b0c4ea507ebb642b9c779fb61a3ebd304f40c70c24bd5d7329e"
+    },
+    "Savannah Lions": {
+      "mana_cost": "{W}",
+      "type_line": "Creature \u2014 Cat",
+      "oracle_id": "60ba93eb-39e6-4af2-9c66-cd38f72daff2",
+      "mana_value": 1,
+      "definition_path": "src/card_definitions/fdn/savannah_lions.json",
+      "definition_sha256": "04c0bceec1b413ff29ccb5ea5795bd428b5b8cef6876c11d839c8b905885ff6b"
+    },
+    "Healer's Hawk": {
+      "mana_cost": "{W}",
+      "type_line": "Creature \u2014 Bird",
+      "oracle_id": "28a52ba1-95da-44e1-8ac5-0dc23c902394",
+      "mana_value": 1,
+      "definition_path": "src/card_definitions/fdn/healer_s_hawk.json",
+      "definition_sha256": "223aa8b4cbde089ff5e9485ad170067b95ada531863b191371d8bacecce4dd82"
+    },
+    "Bishop's Soldier": {
+      "mana_cost": "{1}{W}",
+      "type_line": "Creature \u2014 Vampire Soldier",
+      "oracle_id": "84487586-4f71-457a-b983-4f1f7a71deef",
+      "mana_value": 2,
+      "definition_path": "src/card_definitions/fdn/bishop_s_soldier.json",
+      "definition_sha256": "3eb345c2099973bb5e78d06a48e9cabd387aa994530c7b30388ce06ea2665b5b"
+    },
+    "Leonin Skyhunter": {
+      "mana_cost": "{W}{W}",
+      "type_line": "Creature \u2014 Cat Knight",
+      "oracle_id": "517c7295-8ba2-47a6-a1c6-aee722f8ca88",
+      "mana_value": 2,
+      "definition_path": "src/card_definitions/ddg/leonin_skyhunter.json",
+      "definition_sha256": "7b8c5c92401138fe20f17e51a14b875ca1d180485413e579f76e09550c8dafb4"
+    },
+    "Helpful Hunter": {
+      "mana_cost": "{1}{W}",
+      "type_line": "Creature \u2014 Cat",
+      "oracle_id": "c0864adb-e9aa-40b6-91ff-a0646193e887",
+      "mana_value": 2,
+      "definition_path": "src/card_definitions/fdn/helpful_hunter.json",
+      "definition_sha256": "1f8bb78d6843c29a5b2f2fa77d506701ddd188fc2446aa0e60999c642e11ee1b"
+    },
+    "Dazzling Angel": {
+      "mana_cost": "{2}{W}",
+      "type_line": "Creature \u2014 Angel",
+      "oracle_id": "7de464e3-fae3-44cc-8233-776fc727c00a",
+      "mana_value": 3,
+      "definition_path": "src/card_definitions/fdn/dazzling_angel.json",
+      "definition_sha256": "dc06c8d136e33613866917ac15f8a9a3a79e45b48006288955ad2174280466e5"
+    },
+    "Inspiring Paladin": {
+      "mana_cost": "{2}{W}",
+      "type_line": "Creature \u2014 Human Knight",
+      "oracle_id": "95efbb81-2418-42ed-ae34-5759efff8253",
+      "mana_value": 3,
+      "definition_path": "src/card_definitions/fdn/inspiring_paladin.json",
+      "definition_sha256": "0c3829a5bec7836d2c75eec568affd6360465224e9af97d3754ef63ded5967d5"
+    },
+    "Prideful Parent": {
+      "mana_cost": "{2}{W}",
+      "type_line": "Creature \u2014 Cat",
+      "oracle_id": "a90d1d35-6d67-43b3-8256-b0318b3a4b07",
+      "mana_value": 3,
+      "definition_path": "src/card_definitions/fdn/prideful_parent.json",
+      "definition_sha256": "e8f655b7ae76fc87b97848e4dbcad9a0f4a2bb5a282f130ac5c609f4db953507"
+    },
+    "Inspiring Overseer": {
+      "mana_cost": "{2}{W}",
+      "type_line": "Creature \u2014 Angel Cleric",
+      "oracle_id": "d646e42b-5635-4798-b633-29c093b66a55",
+      "mana_value": 3,
+      "definition_path": "src/card_definitions/fdn/inspiring_overseer.json",
+      "definition_sha256": "d5c34dfa93f2055f46d3931225b2a744a7e6264d99eea3cc6307d106792f30e5"
+    }
+  }
+}

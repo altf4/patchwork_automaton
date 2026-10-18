@@ -1,0 +1,3794 @@
+{
+  "schema": 1,
+  "rustmage_revision": "78d717856af36274018634b54a3fc8cbacf4c829",
+  "observation_schema": 131,
+  "source_sha256": {
+    "/home/altf4/Code/mtgo-bot/patchwork_automaton/examples/compare_engines.py": "f3722bd3213bce0e905751c2b28cfc5742ccf78d4ba369546beb0dce08b9c3d4",
+    "src/patchwork_automaton/backends/rustmage.py": "d23f4ac62b13df271e825629cab5bd1a9478a9b5fa5a4cbff6ac875eb9dd2d77",
+    "src/patchwork_automaton/baselines/foundations.py": "b5f9a862b254734568b625c5e0cc0996bb1d36220d906340a4cfa3fbd2168f81",
+    "src/patchwork_automaton/data/foundations-aggro.json": "34ae7c297940be820877841e0b3556e549c9ccee18a694f1b2275a8555823648",
+    "src/patchwork_automaton/rl/runner.py": "67875c760120ce5b6c4e8ff44ab63caadb101848898d806e6cc79708052e0e63",
+    "src/patchwork_automaton/rl/rustmage.py": "d2d372d4876868123e7ee2f4fcec709e6e040aa247ed3f4c5818d53d249a7814",
+    "src/patchwork_automaton/backends/xmage.py": "32159c91b58ffbf780fc87cf4b25442b3bce8babf7aab1e00ef372f539139223",
+    ".local/rustmage/python/rustmage.py": "a609b50882d940fe99b206b53dcab8d1d7844f09e29677dd19580e74ecda1a8f"
+  },
+  "library_sha256": "b0994769ed13210bb924e3673541ba87cecc1b832f1c5d8d5d423d473074cd20",
+  "decks": {
+    "rustmage_revision": "78d717856af36274018634b54a3fc8cbacf4c829",
+    "set_manifest_sha256": "9aa2b281a2b034420aad3ded40b8d7ca39de1e8a3ae91fc8080760b6e6cb950c",
+    "decks": {
+      "red": {
+        "name": "Foundations Red Aggro",
+        "cards": [
+          {
+            "name": "Mountain",
+            "quantity": 24,
+            "set_code": "FDN",
+            "collector_number": "278"
+          },
+          {
+            "name": "Fanatical Firebrand",
+            "quantity": 4,
+            "set_code": "FDN",
+            "collector_number": "195"
+          },
+          {
+            "name": "Ghitu Lavarunner",
+            "quantity": 4,
+            "set_code": "FDN",
+            "collector_number": "623"
+          },
+          {
+            "name": "Swab Goblin",
+            "quantity": 4,
+            "set_code": "FDN",
+            "collector_number": "548"
+          },
+          {
+            "name": "Firebrand Archer",
+            "quantity": 4,
+            "set_code": "FDN",
+            "collector_number": "196"
+          },
+          {
+            "name": "Viashino Pyromancer",
+            "quantity": 4,
+            "set_code": "FDN",
+            "collector_number": "634"
+          },
+          {
+            "name": "Goblin Smuggler",
+            "quantity": 4,
+            "set_code": "FDN",
+            "collector_number": "540"
+          },
+          {
+            "name": "Raging Redcap",
+            "quantity": 4,
+            "set_code": "FDN",
+            "collector_number": "543"
+          },
+          {
+            "name": "Firespitter Whelp",
+            "quantity": 4,
+            "set_code": "FDN",
+            "collector_number": "197"
+          },
+          {
+            "name": "Burst Lightning",
+            "quantity": 4,
+            "set_code": "FDN",
+            "collector_number": "192"
+          }
+        ]
+      },
+      "white": {
+        "name": "Foundations White Aggro",
+        "cards": [
+          {
+            "name": "Plains",
+            "quantity": 24,
+            "set_code": "FDN",
+            "collector_number": "272"
+          },
+          {
+            "name": "Savannah Lions",
+            "quantity": 4,
+            "set_code": "FDN",
+            "collector_number": "146"
+          },
+          {
+            "name": "Healer's Hawk",
+            "quantity": 4,
+            "set_code": "FDN",
+            "collector_number": "142"
+          },
+          {
+            "name": "Bishop's Soldier",
+            "quantity": 4,
+            "set_code": "FDN",
+            "collector_number": "491"
+          },
+          {
+            "name": "Leonin Skyhunter",
+            "quantity": 4,
+            "set_code": "FDN",
+            "collector_number": "498"
+          },
+          {
+            "name": "Helpful Hunter",
+            "quantity": 4,
+            "set_code": "FDN",
+            "collector_number": "16"
+          },
+          {
+            "name": "Dazzling Angel",
+            "quantity": 4,
+            "set_code": "FDN",
+            "collector_number": "9"
+          },
+          {
+            "name": "Inspiring Paladin",
+            "quantity": 4,
+            "set_code": "FDN",
+            "collector_number": "18"
+          },
+          {
+            "name": "Prideful Parent",
+            "quantity": 4,
+            "set_code": "FDN",
+            "collector_number": "21"
+          },
+          {
+            "name": "Inspiring Overseer",
+            "quantity": 4,
+            "set_code": "FDN",
+            "collector_number": "496"
+          }
+        ]
+      }
+    },
+    "cards": {
+      "Mountain": {
+        "mana_cost": "",
+        "type_line": "Basic Land \u2014 Mountain",
+        "oracle_id": "a3fb7228-e76b-4e96-a40e-20b5fed75685",
+        "mana_value": 0,
+        "definition_path": "src/card_definitions/fra/mountain.json",
+        "definition_sha256": "9a1fa2974d16b42b2a40ae93993e34d7be3ebd405e8f86daa870cab93ef2a81e"
+      },
+      "Fanatical Firebrand": {
+        "mana_cost": "{R}",
+        "type_line": "Creature \u2014 Goblin Pirate",
+        "oracle_id": "d36e11f1-6ab3-4273-8114-a8fbbe21c1c3",
+        "mana_value": 1,
+        "definition_path": "src/card_definitions/fdn/fanatical_firebrand.json",
+        "definition_sha256": "57faece9712bb58ae952ad2e6f90c877e33256c5f2c39a0087dab649f0209dbb"
+      },
+      "Ghitu Lavarunner": {
+        "mana_cost": "{R}",
+        "type_line": "Creature \u2014 Human Wizard",
+        "oracle_id": "8e3f4987-6f31-4bc5-8bcd-6adb0440ee7c",
+        "mana_value": 1,
+        "definition_path": "src/card_definitions/fdn/ghitu_lavarunner.json",
+        "definition_sha256": "c0c273f6eae583c7cdc2eeecca6ea1a555fabdd26db6c8cebb4e40287a5a436a"
+      },
+      "Swab Goblin": {
+        "mana_cost": "{1}{R}",
+        "type_line": "Creature \u2014 Goblin Pirate",
+        "oracle_id": "343ecf2f-0bbc-4840-8fb3-f5f61b26e76f",
+        "mana_value": 2,
+        "definition_path": "src/card_definitions/fdn/swab_goblin.json",
+        "definition_sha256": "d8f8fe9264082a05d6193239e25baf62b17a8d5f26ba271f10283a2912da0975"
+      },
+      "Firebrand Archer": {
+        "mana_cost": "{1}{R}",
+        "type_line": "Creature \u2014 Human Archer",
+        "oracle_id": "2e9289d6-dbc6-456d-88cf-d1f534e731d6",
+        "mana_value": 2,
+        "definition_path": "src/card_definitions/fdn/firebrand_archer.json",
+        "definition_sha256": "fd5687e31cc11563dff7feb82bfea2481bc97b38aca372954d61391dab912445"
+      },
+      "Viashino Pyromancer": {
+        "mana_cost": "{1}{R}",
+        "type_line": "Creature \u2014 Lizard Wizard",
+        "oracle_id": "5e78e6e0-60f0-4c3c-b8dd-bd673f5152b8",
+        "mana_value": 2,
+        "definition_path": "src/card_definitions/fdn/viashino_pyromancer.json",
+        "definition_sha256": "daf1143c96d74425f3ce08ef215d33fb44ff267b2db8237604e1be71602fbaa1"
+      },
+      "Goblin Smuggler": {
+        "mana_cost": "{2}{R}",
+        "type_line": "Creature \u2014 Goblin Rogue",
+        "oracle_id": "eae15f7d-1f6e-4dfc-afea-7698b93cd145",
+        "mana_value": 3,
+        "definition_path": "src/card_definitions/fdn/goblin_smuggler.json",
+        "definition_sha256": "bd2dd010ed60f7f42de97584f96f2d95162e6d0513fc42509eddf6b8c9c4cb6e"
+      },
+      "Raging Redcap": {
+        "mana_cost": "{2}{R}",
+        "type_line": "Creature \u2014 Goblin Knight",
+        "oracle_id": "679841ad-f3ac-48e2-ba11-2cf6d78642b4",
+        "mana_value": 3,
+        "definition_path": "src/card_definitions/fdn/raging_redcap.json",
+        "definition_sha256": "a9bda0e4e32ebdeb8cfffdd9123998d8ad5c51065a0642c4d52c119c545f44c2"
+      },
+      "Firespitter Whelp": {
+        "mana_cost": "{2}{R}",
+        "type_line": "Creature \u2014 Dragon",
+        "oracle_id": "1cad92ce-55c8-4b78-8d8c-56645ef8e6ee",
+        "mana_value": 3,
+        "definition_path": "src/card_definitions/fdn/firespitter_whelp.json",
+        "definition_sha256": "fd92d45c4511f2644718f349db80dc577683bbfda1e2ac22783624c4408591eb"
+      },
+      "Burst Lightning": {
+        "mana_cost": "{R}",
+        "type_line": "Instant",
+        "oracle_id": "ac2086fe-98ee-4280-9c7c-c5c2d6548a8b",
+        "mana_value": 1,
+        "definition_path": "src/card_definitions/fdn/burst_lightning.json",
+        "definition_sha256": "a9dd3d95917f36a0d7cb7fe7c27536a2dccec322c9f41d66a2bce4c0a19eb11f"
+      },
+      "Plains": {
+        "mana_cost": "",
+        "type_line": "Basic Land \u2014 Plains",
+        "oracle_id": "bc71ebf6-2056-41f7-be35-b2e5c34afa99",
+        "mana_value": 0,
+        "definition_path": "src/card_definitions/fra/plains.json",
+        "definition_sha256": "473d64b9ac6a1b0c4ea507ebb642b9c779fb61a3ebd304f40c70c24bd5d7329e"
+      },
+      "Savannah Lions": {
+        "mana_cost": "{W}",
+        "type_line": "Creature \u2014 Cat",
+        "oracle_id": "60ba93eb-39e6-4af2-9c66-cd38f72daff2",
+        "mana_value": 1,
+        "definition_path": "src/card_definitions/fdn/savannah_lions.json",
+        "definition_sha256": "04c0bceec1b413ff29ccb5ea5795bd428b5b8cef6876c11d839c8b905885ff6b"
+      },
+      "Healer's Hawk": {
+        "mana_cost": "{W}",
+        "type_line": "Creature \u2014 Bird",
+        "oracle_id": "28a52ba1-95da-44e1-8ac5-0dc23c902394",
+        "mana_value": 1,
+        "definition_path": "src/card_definitions/fdn/healer_s_hawk.json",
+        "definition_sha256": "223aa8b4cbde089ff5e9485ad170067b95ada531863b191371d8bacecce4dd82"
+      },
+      "Bishop's Soldier": {
+        "mana_cost": "{1}{W}",
+        "type_line": "Creature \u2014 Vampire Soldier",
+        "oracle_id": "84487586-4f71-457a-b983-4f1f7a71deef",
+        "mana_value": 2,
+        "definition_path": "src/card_definitions/fdn/bishop_s_soldier.json",
+        "definition_sha256": "3eb345c2099973bb5e78d06a48e9cabd387aa994530c7b30388ce06ea2665b5b"
+      },
+      "Leonin Skyhunter": {
+        "mana_cost": "{W}{W}",
+        "type_line": "Creature \u2014 Cat Knight",
+        "oracle_id": "517c7295-8ba2-47a6-a1c6-aee722f8ca88",
+        "mana_value": 2,
+        "definition_path": "src/card_definitions/ddg/leonin_skyhunter.json",
+        "definition_sha256": "7b8c5c92401138fe20f17e51a14b875ca1d180485413e579f76e09550c8dafb4"
+      },
+      "Helpful Hunter": {
+        "mana_cost": "{1}{W}",
+        "type_line": "Creature \u2014 Cat",
+        "oracle_id": "c0864adb-e9aa-40b6-91ff-a0646193e887",
+        "mana_value": 2,
+        "definition_path": "src/card_definitions/fdn/helpful_hunter.json",
+        "definition_sha256": "1f8bb78d6843c29a5b2f2fa77d506701ddd188fc2446aa0e60999c642e11ee1b"
+      },
+      "Dazzling Angel": {
+        "mana_cost": "{2}{W}",
+        "type_line": "Creature \u2014 Angel",
+        "oracle_id": "7de464e3-fae3-44cc-8233-776fc727c00a",
+        "mana_value": 3,
+        "definition_path": "src/card_definitions/fdn/dazzling_angel.json",
+        "definition_sha256": "dc06c8d136e33613866917ac15f8a9a3a79e45b48006288955ad2174280466e5"
+      },
+      "Inspiring Paladin": {
+        "mana_cost": "{2}{W}",
+        "type_line": "Creature \u2014 Human Knight",
+        "oracle_id": "95efbb81-2418-42ed-ae34-5759efff8253",
+        "mana_value": 3,
+        "definition_path": "src/card_definitions/fdn/inspiring_paladin.json",
+        "definition_sha256": "0c3829a5bec7836d2c75eec568affd6360465224e9af97d3754ef63ded5967d5"
+      },
+      "Prideful Parent": {
+        "mana_cost": "{2}{W}",
+        "type_line": "Creature \u2014 Cat",
+        "oracle_id": "a90d1d35-6d67-43b3-8256-b0318b3a4b07",
+        "mana_value": 3,
+        "definition_path": "src/card_definitions/fdn/prideful_parent.json",
+        "definition_sha256": "e8f655b7ae76fc87b97848e4dbcad9a0f4a2bb5a282f130ac5c609f4db953507"
+      },
+      "Inspiring Overseer": {
+        "mana_cost": "{2}{W}",
+        "type_line": "Creature \u2014 Angel Cleric",
+        "oracle_id": "d646e42b-5635-4798-b633-29c093b66a55",
+        "mana_value": 3,
+        "definition_path": "src/card_definitions/fdn/inspiring_overseer.json",
+        "definition_sha256": "d5c34dfa93f2055f46d3931225b2a744a7e6264d99eea3cc6307d106792f30e5"
+      }
+    }
+  },
+  "config": {
+    "engine": "both",
+    "games": 40,
+    "warmup": 2,
+    "seed": 801,
+    "limit": 3000,
+    "timeout": 30,
+    "game_timeout": 120,
+    "rustmage": ".local/rustmage",
+    "output": ".local/foundations-comparison-2026-10-18.json",
+    "one_cpu": true
+  },
+  "machine": {
+    "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.43",
+    "processor": "",
+    "logical_cpus": 8,
+    "cpu_model": "Intel(R) Core(TM) Ultra 5 335"
+  },
+  "methodology": [
+    "One sequential worker, same deterministic policy and exact 60-card FDN decks.",
+    "Seat and starting-player independently rotated. Engines interleaved; warmups excluded.",
+    "Full natural games; time includes reset/login/deck/table setup, policy, adapters, gameplay and cleanup.",
+    "Excludes engine startup, library compilation, inference and training. Failures retained.",
+    "RustMage seeded; stock XMage shuffles unseeded. Comparable workload, not identical trajectories.",
+    "RustMage uses ctypes/JSON and common Python observation conversion; not a raw Rust rollout benchmark.",
+    "Native decision granularity differs; decisions/second is diagnostic, not an equal-work metric."
+  ],
+  "logical_cpu": 7,
+  "games": [
+    {
+      "engine": "rustmage",
+      "index": 0,
+      "colors": [
+        "red",
+        "white"
+      ],
+      "starting_seat": 0,
+      "seed": 801,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 1,
+      "turn": 12,
+      "life": {
+        "player_0": -5,
+        "player_1": 11
+      },
+      "decisions": 358,
+      "callbacks": {
+        "mulligan:Keep": 2,
+        "opening_hand:FinishOpeningHand": 2,
+        "priority:Pass": 248,
+        "priority:PlayLand": 9,
+        "attackers:FinishAttackers": 12,
+        "priority:AnnounceCast": 12,
+        "pay_costs:TapMana": 26,
+        "pay_costs:PayCosts": 12,
+        "attackers:Attack": 25,
+        "blockers:FinishBlockers": 9,
+        "targets:ChooseTarget": 1
+      },
+      "seconds": 0.6240322429948719,
+      "setup_seconds": 0.0022322719960357063,
+      "play_seconds": 0.6217540249999729,
+      "cleanup_seconds": 4.594599886331707e-05
+    },
+    {
+      "engine": "xmage",
+      "index": 0,
+      "colors": [
+        "red",
+        "white"
+      ],
+      "starting_seat": 0,
+      "seed": null,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 1,
+      "turn": 12,
+      "life": {
+        "player_0": -8,
+        "player_1": 12
+      },
+      "decisions": 215,
+      "callbacks": {
+        "GAME_TARGET:pw500798870": 1,
+        "GAME_ASK:Keep": 2,
+        "GAME_SELECT:Mountain": 5,
+        "GAME_SELECT:Pass": 147,
+        "GAME_SELECT:Plains": 5,
+        "GAME_SELECT:Healer's Hawk": 1,
+        "GAME_PLAY_MANA:Plains": 16,
+        "GAME_SELECT:Burst Lightning": 2,
+        "GAME_ASK:No": 2,
+        "GAME_TARGET:pw500798871": 3,
+        "GAME_PLAY_MANA:Mountain": 12,
+        "GAME_SELECT:Bishop's Soldier": 1,
+        "GAME_SELECT:All attack": 8,
+        "GAME_SELECT:Swab Goblin": 1,
+        "GAME_SELECT:Helpful Hunter": 1,
+        "GAME_SELECT:Viashino Pyromancer": 1,
+        "GAME_SELECT:Leonin Skyhunter": 2,
+        "GAME_SELECT:Goblin Smuggler": 2,
+        "GAME_SELECT:Savannah Lions": 1,
+        "GAME_SELECT:Dazzling Angel": 2
+      },
+      "seconds": 14.206270925002173,
+      "setup_seconds": 3.3197514080020483,
+      "play_seconds": 10.873465168995608,
+      "cleanup_seconds": 0.013054348004516214
+    },
+    {
+      "engine": "xmage",
+      "index": 1,
+      "colors": [
+        "white",
+        "red"
+      ],
+      "starting_seat": 0,
+      "seed": null,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 0,
+      "turn": 11,
+      "life": {
+        "player_0": 9,
+        "player_1": -1
+      },
+      "decisions": 191,
+      "callbacks": {
+        "GAME_TARGET:pw2b90ac020": 3,
+        "GAME_ASK:Keep": 2,
+        "GAME_SELECT:Plains": 6,
+        "GAME_SELECT:Savannah Lions": 1,
+        "GAME_PLAY_MANA:Plains": 11,
+        "GAME_SELECT:Pass": 134,
+        "GAME_SELECT:Mountain": 5,
+        "GAME_SELECT:Bishop's Soldier": 1,
+        "GAME_SELECT:All attack": 8,
+        "GAME_SELECT:Viashino Pyromancer": 1,
+        "GAME_PLAY_MANA:Mountain": 11,
+        "GAME_SELECT:Helpful Hunter": 1,
+        "GAME_SELECT:Swab Goblin": 1,
+        "GAME_SELECT:Inspiring Overseer": 1,
+        "GAME_SELECT:Goblin Smuggler": 1,
+        "GAME_SELECT:Inspiring Paladin": 1,
+        "GAME_SELECT:Burst Lightning": 1,
+        "GAME_ASK:No": 1,
+        "GAME_SELECT:Raging Redcap": 1
+      },
+      "seconds": 11.955405041000631,
+      "setup_seconds": 3.1924428610000177,
+      "play_seconds": 8.74308306400053,
+      "cleanup_seconds": 0.01987911600008374
+    },
+    {
+      "engine": "rustmage",
+      "index": 1,
+      "colors": [
+        "white",
+        "red"
+      ],
+      "starting_seat": 0,
+      "seed": 802,
+      "status": "completed",
+      "winner_color": "red",
+      "winner_seat": 1,
+      "turn": 12,
+      "life": {
+        "player_0": -10,
+        "player_1": 7
+      },
+      "decisions": 357,
+      "callbacks": {
+        "mulligan:Keep": 2,
+        "opening_hand:FinishOpeningHand": 2,
+        "priority:Pass": 246,
+        "priority:PlayLand": 11,
+        "attackers:FinishAttackers": 12,
+        "priority:AnnounceCast": 12,
+        "pay_costs:TapMana": 27,
+        "pay_costs:PayCosts": 12,
+        "attackers:Attack": 24,
+        "blockers:FinishBlockers": 8,
+        "targets:ChooseTarget": 1
+      },
+      "seconds": 0.6488729260017863,
+      "setup_seconds": 0.0018791710026562214,
+      "play_seconds": 0.6469231369992485,
+      "cleanup_seconds": 7.061799988150597e-05
+    },
+    {
+      "engine": "rustmage",
+      "index": 2,
+      "colors": [
+        "red",
+        "white"
+      ],
+      "starting_seat": 1,
+      "seed": 803,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 1,
+      "turn": 11,
+      "life": {
+        "player_0": -6,
+        "player_1": 24
+      },
+      "decisions": 300,
+      "callbacks": {
+        "mulligan:Keep": 2,
+        "opening_hand:FinishOpeningHand": 2,
+        "priority:Pass": 218,
+        "priority:PlayLand": 7,
+        "priority:AnnounceCast": 8,
+        "pay_costs:TapMana": 16,
+        "pay_costs:PayCosts": 8,
+        "attackers:FinishAttackers": 11,
+        "attackers:Attack": 17,
+        "blockers:FinishBlockers": 8,
+        "discard:Discard": 3
+      },
+      "seconds": 0.4687955219997093,
+      "setup_seconds": 0.001674015999014955,
+      "play_seconds": 0.46705456000199774,
+      "cleanup_seconds": 6.694599869661033e-05
+    },
+    {
+      "engine": "xmage",
+      "index": 2,
+      "colors": [
+        "red",
+        "white"
+      ],
+      "starting_seat": 1,
+      "seed": null,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 1,
+      "turn": 13,
+      "life": {
+        "player_0": 0,
+        "player_1": 3
+      },
+      "decisions": 244,
+      "callbacks": {
+        "GAME_TARGET:pwf203a7981": 2,
+        "GAME_ASK:Keep": 2,
+        "GAME_SELECT:Plains": 6,
+        "GAME_SELECT:Pass": 173,
+        "GAME_SELECT:Mountain": 6,
+        "GAME_SELECT:Fanatical Firebrand": 2,
+        "GAME_PLAY_MANA:Mountain": 12,
+        "GAME_SELECT:All attack": 11,
+        "GAME_SELECT:Healer's Hawk": 1,
+        "GAME_PLAY_MANA:Plains": 18,
+        "GAME_SELECT:Firebrand Archer": 1,
+        "GAME_SELECT:Bishop's Soldier": 2,
+        "GAME_SELECT:Firespitter Whelp": 1,
+        "GAME_SELECT:Goblin Smuggler": 1,
+        "GAME_SELECT:Helpful Hunter": 1,
+        "GAME_SELECT:Leonin Skyhunter": 1,
+        "GAME_SELECT:Viashino Pyromancer": 1,
+        "GAME_SELECT:Inspiring Paladin": 1,
+        "GAME_SELECT:Prideful Parent": 2
+      },
+      "seconds": 16.845185641999706,
+      "setup_seconds": 3.230820707998646,
+      "play_seconds": 13.59508425599779,
+      "cleanup_seconds": 0.019280678003269713
+    },
+    {
+      "engine": "xmage",
+      "index": 3,
+      "colors": [
+        "white",
+        "red"
+      ],
+      "starting_seat": 1,
+      "seed": null,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 0,
+      "turn": 12,
+      "life": {
+        "player_0": 10,
+        "player_1": -1
+      },
+      "decisions": 226,
+      "callbacks": {
+        "GAME_TARGET:pwef9b327d1": 1,
+        "GAME_ASK:Keep": 2,
+        "GAME_SELECT:Mountain": 4,
+        "GAME_SELECT:Burst Lightning": 2,
+        "GAME_ASK:No": 2,
+        "GAME_TARGET:pwef9b327d0": 2,
+        "GAME_PLAY_MANA:Mountain": 13,
+        "GAME_SELECT:Pass": 156,
+        "GAME_SELECT:Plains": 6,
+        "GAME_SELECT:Ghitu Lavarunner": 1,
+        "GAME_SELECT:Bishop's Soldier": 1,
+        "GAME_PLAY_MANA:Plains": 17,
+        "GAME_SELECT:Firebrand Archer": 1,
+        "GAME_SELECT:All attack": 8,
+        "GAME_SELECT:Helpful Hunter": 1,
+        "GAME_SELECT:Healer's Hawk": 2,
+        "GAME_SELECT:Swab Goblin": 1,
+        "GAME_SELECT:Leonin Skyhunter": 1,
+        "GAME_SELECT:Firespitter Whelp": 1,
+        "GAME_SELECT:Inspiring Overseer": 2,
+        "GAME_SELECT:Raging Redcap": 1,
+        "GAME_SELECT:Prideful Parent": 1
+      },
+      "seconds": 15.460806110000703,
+      "setup_seconds": 3.230508202999772,
+      "play_seconds": 12.212019863000023,
+      "cleanup_seconds": 0.018278044000908267
+    },
+    {
+      "engine": "rustmage",
+      "index": 3,
+      "colors": [
+        "white",
+        "red"
+      ],
+      "starting_seat": 1,
+      "seed": 804,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 0,
+      "turn": 12,
+      "life": {
+        "player_0": 11,
+        "player_1": -2
+      },
+      "decisions": 387,
+      "callbacks": {
+        "mulligan:Keep": 2,
+        "opening_hand:FinishOpeningHand": 2,
+        "priority:Pass": 264,
+        "priority:PlayLand": 11,
+        "priority:AnnounceCast": 13,
+        "pay_costs:TapMana": 30,
+        "pay_costs:PayCosts": 13,
+        "attackers:Attack": 24,
+        "attackers:FinishAttackers": 12,
+        "blockers:FinishBlockers": 10,
+        "kicker:ChooseKicker": 1,
+        "targets:ChooseTarget": 2,
+        "order_triggers:PutTrigger": 3
+      },
+      "seconds": 0.6981814550017589,
+      "setup_seconds": 0.001893410000775475,
+      "play_seconds": 0.6962322469989886,
+      "cleanup_seconds": 5.5798001994844526e-05
+    },
+    {
+      "engine": "rustmage",
+      "index": 4,
+      "colors": [
+        "red",
+        "white"
+      ],
+      "starting_seat": 0,
+      "seed": 805,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 1,
+      "turn": 12,
+      "life": {
+        "player_0": -10,
+        "player_1": 7
+      },
+      "decisions": 388,
+      "callbacks": {
+        "mulligan:Keep": 2,
+        "opening_hand:FinishOpeningHand": 2,
+        "priority:Pass": 260,
+        "priority:PlayLand": 9,
+        "priority:AnnounceCast": 15,
+        "pay_costs:TapMana": 30,
+        "pay_costs:PayCosts": 15,
+        "attackers:Attack": 32,
+        "attackers:FinishAttackers": 12,
+        "blockers:FinishBlockers": 10,
+        "targets:ChooseTarget": 1
+      },
+      "seconds": 0.7042741129989736,
+      "setup_seconds": 0.0016664440045133233,
+      "play_seconds": 0.7025619349951739,
+      "cleanup_seconds": 4.573399928631261e-05
+    },
+    {
+      "engine": "xmage",
+      "index": 4,
+      "colors": [
+        "red",
+        "white"
+      ],
+      "starting_seat": 0,
+      "seed": null,
+      "status": "completed",
+      "winner_color": "red",
+      "winner_seat": 0,
+      "turn": 11,
+      "life": {
+        "player_0": 5,
+        "player_1": 0
+      },
+      "decisions": 199,
+      "callbacks": {
+        "GAME_TARGET:pw251d15380": 1,
+        "GAME_ASK:Keep": 2,
+        "GAME_SELECT:Mountain": 5,
+        "GAME_SELECT:Fanatical Firebrand": 1,
+        "GAME_PLAY_MANA:Mountain": 12,
+        "GAME_SELECT:Pass": 144,
+        "GAME_SELECT:All attack": 10,
+        "GAME_SELECT:Plains": 5,
+        "GAME_SELECT:Savannah Lions": 1,
+        "GAME_PLAY_MANA:Plains": 7,
+        "GAME_SELECT:Ghitu Lavarunner": 2,
+        "GAME_SELECT:Burst Lightning": 1,
+        "GAME_ASK:No": 1,
+        "GAME_TARGET:pw251d15381": 2,
+        "GAME_SELECT:Viashino Pyromancer": 1,
+        "GAME_SELECT:Inspiring Overseer": 1,
+        "GAME_SELECT:Goblin Smuggler": 1,
+        "GAME_SELECT:Inspiring Paladin": 1,
+        "GAME_SELECT:Raging Redcap": 1
+      },
+      "seconds": 12.195052978000604,
+      "setup_seconds": 3.2097044450056273,
+      "play_seconds": 8.970674046999193,
+      "cleanup_seconds": 0.01467448599578347
+    },
+    {
+      "engine": "xmage",
+      "index": 5,
+      "colors": [
+        "white",
+        "red"
+      ],
+      "starting_seat": 0,
+      "seed": null,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 0,
+      "turn": 13,
+      "life": {
+        "player_0": 10,
+        "player_1": -8
+      },
+      "decisions": 227,
+      "callbacks": {
+        "GAME_TARGET:pw9c22c6020": 4,
+        "GAME_ASK:Keep": 2,
+        "GAME_SELECT:Plains": 4,
+        "GAME_SELECT:Pass": 156,
+        "GAME_SELECT:Mountain": 6,
+        "GAME_SELECT:Burst Lightning": 3,
+        "GAME_ASK:No": 3,
+        "GAME_PLAY_MANA:Mountain": 14,
+        "GAME_SELECT:Bishop's Soldier": 1,
+        "GAME_PLAY_MANA:Plains": 15,
+        "GAME_SELECT:Leonin Skyhunter": 2,
+        "GAME_SELECT:All attack": 8,
+        "GAME_SELECT:Firebrand Archer": 1,
+        "GAME_SELECT:Helpful Hunter": 1,
+        "GAME_SELECT:Firespitter Whelp": 1,
+        "GAME_TARGET:Firebrand Archer": 1,
+        "GAME_SELECT:Goblin Smuggler": 1,
+        "GAME_SELECT:Healer's Hawk": 1,
+        "GAME_SELECT:Dazzling Angel": 2,
+        "GAME_SELECT:Raging Redcap": 1
+      },
+      "seconds": 14.54648175699549,
+      "setup_seconds": 3.197585452995554,
+      "play_seconds": 11.338343461000477,
+      "cleanup_seconds": 0.010552842999459244
+    },
+    {
+      "engine": "rustmage",
+      "index": 5,
+      "colors": [
+        "white",
+        "red"
+      ],
+      "starting_seat": 0,
+      "seed": 806,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 0,
+      "turn": 11,
+      "life": {
+        "player_0": 12,
+        "player_1": -4
+      },
+      "decisions": 334,
+      "callbacks": {
+        "mulligan:Keep": 2,
+        "opening_hand:FinishOpeningHand": 2,
+        "priority:Pass": 232,
+        "priority:PlayLand": 11,
+        "attackers:FinishAttackers": 11,
+        "priority:AnnounceCast": 10,
+        "pay_costs:TapMana": 22,
+        "pay_costs:PayCosts": 10,
+        "targets:ChooseTarget": 2,
+        "attackers:Attack": 23,
+        "blockers:FinishBlockers": 8,
+        "order_triggers:PutTrigger": 1
+      },
+      "seconds": 0.5790108540022629,
+      "setup_seconds": 0.0019728629995370284,
+      "play_seconds": 0.5769926040011342,
+      "cleanup_seconds": 4.538700159173459e-05
+    },
+    {
+      "engine": "rustmage",
+      "index": 6,
+      "colors": [
+        "red",
+        "white"
+      ],
+      "starting_seat": 1,
+      "seed": 807,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 1,
+      "turn": 11,
+      "life": {
+        "player_0": 0,
+        "player_1": 11
+      },
+      "decisions": 329,
+      "callbacks": {
+        "mulligan:Keep": 2,
+        "opening_hand:FinishOpeningHand": 2,
+        "priority:Pass": 232,
+        "priority:PlayLand": 10,
+        "priority:AnnounceCast": 10,
+        "pay_costs:TapMana": 19,
+        "pay_costs:PayCosts": 10,
+        "attackers:FinishAttackers": 11,
+        "attackers:Attack": 22,
+        "blockers:FinishBlockers": 10,
+        "targets:ChooseTarget": 1
+      },
+      "seconds": 0.5582282739997027,
+      "setup_seconds": 0.0016723549997550435,
+      "play_seconds": 0.5565065589980804,
+      "cleanup_seconds": 4.936000186717138e-05
+    },
+    {
+      "engine": "xmage",
+      "index": 6,
+      "colors": [
+        "red",
+        "white"
+      ],
+      "starting_seat": 1,
+      "seed": null,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 1,
+      "turn": 11,
+      "life": {
+        "player_0": -5,
+        "player_1": 22
+      },
+      "decisions": 208,
+      "callbacks": {
+        "GAME_TARGET:pw9032e6951": 1,
+        "GAME_ASK:Keep": 2,
+        "GAME_SELECT:Plains": 4,
+        "GAME_SELECT:Healer's Hawk": 1,
+        "GAME_PLAY_MANA:Plains": 14,
+        "GAME_SELECT:Pass": 150,
+        "GAME_SELECT:Mountain": 5,
+        "GAME_SELECT:Fanatical Firebrand": 2,
+        "GAME_PLAY_MANA:Mountain": 9,
+        "GAME_SELECT:All attack": 10,
+        "GAME_SELECT:Bishop's Soldier": 1,
+        "GAME_SELECT:Leonin Skyhunter": 1,
+        "GAME_SELECT:Firebrand Archer": 1,
+        "GAME_SELECT:Dazzling Angel": 1,
+        "GAME_SELECT:Swab Goblin": 1,
+        "GAME_SELECT:Inspiring Overseer": 2,
+        "GAME_TARGET:Dazzling Angel": 2,
+        "GAME_SELECT:Firespitter Whelp": 1
+      },
+      "seconds": 12.545176730003732,
+      "setup_seconds": 3.216921352999634,
+      "play_seconds": 9.311293739003304,
+      "cleanup_seconds": 0.016961638000793755
+    },
+    {
+      "engine": "xmage",
+      "index": 7,
+      "colors": [
+        "white",
+        "red"
+      ],
+      "starting_seat": 1,
+      "seed": null,
+      "status": "completed",
+      "winner_color": "red",
+      "winner_seat": 1,
+      "turn": 9,
+      "life": {
+        "player_0": -3,
+        "player_1": 9
+      },
+      "decisions": 169,
+      "callbacks": {
+        "GAME_TARGET:pwbef87c441": 1,
+        "GAME_ASK:Keep": 2,
+        "GAME_SELECT:Mountain": 5,
+        "GAME_SELECT:Fanatical Firebrand": 1,
+        "GAME_PLAY_MANA:Mountain": 12,
+        "GAME_SELECT:Pass": 119,
+        "GAME_SELECT:All attack": 8,
+        "GAME_SELECT:Plains": 4,
+        "GAME_SELECT:Savannah Lions": 1,
+        "GAME_PLAY_MANA:Plains": 7,
+        "GAME_SELECT:Swab Goblin": 1,
+        "GAME_SELECT:Leonin Skyhunter": 1,
+        "GAME_SELECT:Viashino Pyromancer": 1,
+        "GAME_TARGET:pwbef87c440": 1,
+        "GAME_SELECT:Healer's Hawk": 1,
+        "GAME_SELECT:Ghitu Lavarunner": 1,
+        "GAME_SELECT:Goblin Smuggler": 2,
+        "GAME_SELECT:Dazzling Angel": 1
+      },
+      "seconds": 11.571513807000883,
+      "setup_seconds": 3.2072964619947015,
+      "play_seconds": 8.350493193000148,
+      "cleanup_seconds": 0.013724152006034274
+    },
+    {
+      "engine": "rustmage",
+      "index": 7,
+      "colors": [
+        "white",
+        "red"
+      ],
+      "starting_seat": 1,
+      "seed": 808,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 0,
+      "turn": 12,
+      "life": {
+        "player_0": 10,
+        "player_1": -3
+      },
+      "decisions": 384,
+      "callbacks": {
+        "mulligan:Keep": 2,
+        "opening_hand:FinishOpeningHand": 2,
+        "priority:Pass": 260,
+        "priority:PlayLand": 9,
+        "priority:AnnounceCast": 15,
+        "kicker:ChooseKicker": 1,
+        "targets:ChooseTarget": 3,
+        "pay_costs:TapMana": 27,
+        "pay_costs:PayCosts": 15,
+        "attackers:FinishAttackers": 12,
+        "attackers:Attack": 28,
+        "blockers:FinishBlockers": 9,
+        "order_triggers:PutTrigger": 1
+      },
+      "seconds": 0.7170037290052278,
+      "setup_seconds": 0.0018547300060163252,
+      "play_seconds": 0.7150685710003017,
+      "cleanup_seconds": 8.042799890972674e-05
+    },
+    {
+      "engine": "rustmage",
+      "index": 8,
+      "colors": [
+        "red",
+        "white"
+      ],
+      "starting_seat": 0,
+      "seed": 809,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 1,
+      "turn": 12,
+      "life": {
+        "player_0": -5,
+        "player_1": 4
+      },
+      "decisions": 376,
+      "callbacks": {
+        "mulligan:Keep": 2,
+        "opening_hand:FinishOpeningHand": 2,
+        "priority:Pass": 258,
+        "priority:PlayLand": 11,
+        "priority:AnnounceCast": 12,
+        "pay_costs:TapMana": 25,
+        "pay_costs:PayCosts": 12,
+        "attackers:FinishAttackers": 12,
+        "attackers:Attack": 30,
+        "blockers:FinishBlockers": 10,
+        "order_triggers:PutTrigger": 2
+      },
+      "seconds": 0.7052416070000618,
+      "setup_seconds": 0.0018372120030107908,
+      "play_seconds": 0.7033397999985027,
+      "cleanup_seconds": 6.4594998548273e-05
+    },
+    {
+      "engine": "xmage",
+      "index": 8,
+      "colors": [
+        "red",
+        "white"
+      ],
+      "starting_seat": 0,
+      "seed": null,
+      "status": "completed",
+      "winner_color": "red",
+      "winner_seat": 0,
+      "turn": 13,
+      "life": {
+        "player_0": 4,
+        "player_1": -3
+      },
+      "decisions": 225,
+      "callbacks": {
+        "GAME_TARGET:pwbdbe236d0": 1,
+        "GAME_ASK:Keep": 2,
+        "GAME_SELECT:Mountain": 4,
+        "GAME_SELECT:Burst Lightning": 1,
+        "GAME_ASK:No": 1,
+        "GAME_TARGET:pwbdbe236d1": 1,
+        "GAME_PLAY_MANA:Mountain": 15,
+        "GAME_SELECT:Pass": 164,
+        "GAME_SELECT:Plains": 4,
+        "GAME_SELECT:Healer's Hawk": 2,
+        "GAME_PLAY_MANA:Plains": 10,
+        "GAME_SELECT:Ghitu Lavarunner": 1,
+        "GAME_SELECT:All attack": 10,
+        "GAME_SELECT:Swab Goblin": 1,
+        "GAME_SELECT:Helpful Hunter": 2,
+        "GAME_SELECT:Firebrand Archer": 1,
+        "GAME_SELECT:Savannah Lions": 1,
+        "GAME_SELECT:Firespitter Whelp": 1,
+        "GAME_SELECT:Inspiring Overseer": 1,
+        "GAME_SELECT:Goblin Smuggler": 2
+      },
+      "seconds": 13.943391510998481,
+      "setup_seconds": 3.1987590589997126,
+      "play_seconds": 10.732235930998286,
+      "cleanup_seconds": 0.012396521000482608
+    },
+    {
+      "engine": "xmage",
+      "index": 9,
+      "colors": [
+        "white",
+        "red"
+      ],
+      "starting_seat": 0,
+      "seed": null,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 0,
+      "turn": 11,
+      "life": {
+        "player_0": 24,
+        "player_1": -5
+      },
+      "decisions": 217,
+      "callbacks": {
+        "GAME_TARGET:pw26551fed0": 1,
+        "GAME_ASK:Keep": 2,
+        "GAME_SELECT:Plains": 5,
+        "GAME_SELECT:Healer's Hawk": 2,
+        "GAME_PLAY_MANA:Plains": 15,
+        "GAME_SELECT:Pass": 157,
+        "GAME_SELECT:Mountain": 4,
+        "GAME_SELECT:Fanatical Firebrand": 1,
+        "GAME_PLAY_MANA:Mountain": 9,
+        "GAME_SELECT:All attack": 10,
+        "GAME_SELECT:Bishop's Soldier": 1,
+        "GAME_SELECT:Swab Goblin": 1,
+        "GAME_SELECT:Leonin Skyhunter": 1,
+        "GAME_SELECT:Ghitu Lavarunner": 1,
+        "GAME_SELECT:Dazzling Angel": 2,
+        "GAME_SELECT:Firebrand Archer": 1,
+        "GAME_SELECT:Firespitter Whelp": 1,
+        "GAME_SELECT:Inspiring Overseer": 1,
+        "GAME_TARGET:Dazzling Angel": 2
+      },
+      "seconds": 13.243588913996064,
+      "setup_seconds": 3.2104418689996237,
+      "play_seconds": 10.021215323999058,
+      "cleanup_seconds": 0.01193172099738149
+    },
+    {
+      "engine": "rustmage",
+      "index": 9,
+      "colors": [
+        "white",
+        "red"
+      ],
+      "starting_seat": 0,
+      "seed": 810,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 0,
+      "turn": 11,
+      "life": {
+        "player_0": 10,
+        "player_1": 0
+      },
+      "decisions": 324,
+      "callbacks": {
+        "mulligan:Keep": 2,
+        "opening_hand:FinishOpeningHand": 2,
+        "priority:Pass": 220,
+        "priority:PlayLand": 10,
+        "attackers:FinishAttackers": 11,
+        "priority:AnnounceCast": 12,
+        "kicker:ChooseKicker": 1,
+        "targets:ChooseTarget": 1,
+        "pay_costs:TapMana": 26,
+        "pay_costs:PayCosts": 12,
+        "attackers:Attack": 20,
+        "blockers:FinishBlockers": 7
+      },
+      "seconds": 0.5681165200003306,
+      "setup_seconds": 0.002045890003500972,
+      "play_seconds": 0.5660189939953852,
+      "cleanup_seconds": 5.163600144442171e-05
+    },
+    {
+      "engine": "rustmage",
+      "index": 10,
+      "colors": [
+        "red",
+        "white"
+      ],
+      "starting_seat": 1,
+      "seed": 811,
+      "status": "completed",
+      "winner_color": "red",
+      "winner_seat": 0,
+      "turn": 10,
+      "life": {
+        "player_0": 5,
+        "player_1": 0
+      },
+      "decisions": 325,
+      "callbacks": {
+        "mulligan:Keep": 2,
+        "opening_hand:FinishOpeningHand": 2,
+        "priority:Pass": 220,
+        "priority:PlayLand": 8,
+        "priority:AnnounceCast": 13,
+        "pay_costs:TapMana": 22,
+        "pay_costs:PayCosts": 13,
+        "attackers:FinishAttackers": 10,
+        "kicker:ChooseKicker": 2,
+        "targets:ChooseTarget": 5,
+        "attackers:Attack": 20,
+        "blockers:FinishBlockers": 8
+      },
+      "seconds": 0.5553558929968858,
+      "setup_seconds": 0.0016584859986323863,
+      "play_seconds": 0.5536482399984379,
+      "cleanup_seconds": 4.916699981549755e-05
+    },
+    {
+      "engine": "xmage",
+      "index": 10,
+      "colors": [
+        "red",
+        "white"
+      ],
+      "starting_seat": 1,
+      "seed": null,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 1,
+      "turn": 11,
+      "life": {
+        "player_0": -2,
+        "player_1": 12
+      },
+      "decisions": 212,
+      "callbacks": {
+        "GAME_TARGET:pw9eab27bd1": 3,
+        "GAME_ASK:Keep": 2,
+        "GAME_SELECT:Plains": 4,
+        "GAME_SELECT:Healer's Hawk": 1,
+        "GAME_PLAY_MANA:Plains": 13,
+        "GAME_SELECT:Pass": 152,
+        "GAME_SELECT:Mountain": 5,
+        "GAME_SELECT:Fanatical Firebrand": 1,
+        "GAME_PLAY_MANA:Mountain": 9,
+        "GAME_SELECT:All attack": 10,
+        "GAME_SELECT:Savannah Lions": 2,
+        "GAME_SELECT:Burst Lightning": 1,
+        "GAME_ASK:No": 1,
+        "GAME_SELECT:Helpful Hunter": 2,
+        "GAME_SELECT:Viashino Pyromancer": 1,
+        "GAME_SELECT:Swab Goblin": 1,
+        "GAME_SELECT:Bishop's Soldier": 1,
+        "GAME_SELECT:Leonin Skyhunter": 2,
+        "GAME_SELECT:Firespitter Whelp": 1
+      },
+      "seconds": 13.35462852299679,
+      "setup_seconds": 3.2136131349980133,
+      "play_seconds": 10.130359876995499,
+      "cleanup_seconds": 0.010655511003278662
+    },
+    {
+      "engine": "xmage",
+      "index": 11,
+      "colors": [
+        "white",
+        "red"
+      ],
+      "starting_seat": 1,
+      "seed": null,
+      "status": "completed",
+      "winner_color": "red",
+      "winner_seat": 1,
+      "turn": 11,
+      "life": {
+        "player_0": -2,
+        "player_1": 10
+      },
+      "decisions": 192,
+      "callbacks": {
+        "GAME_TARGET:pwaa0418b81": 1,
+        "GAME_ASK:Keep": 2,
+        "GAME_SELECT:Mountain": 5,
+        "GAME_SELECT:Ghitu Lavarunner": 2,
+        "GAME_PLAY_MANA:Mountain": 13,
+        "GAME_SELECT:Pass": 137,
+        "GAME_SELECT:Plains": 5,
+        "GAME_SELECT:Healer's Hawk": 1,
+        "GAME_PLAY_MANA:Plains": 9,
+        "GAME_SELECT:All attack": 9,
+        "GAME_SELECT:Viashino Pyromancer": 1,
+        "GAME_TARGET:pwaa0418b80": 1,
+        "GAME_SELECT:Inspiring Overseer": 1,
+        "GAME_SELECT:Goblin Smuggler": 3,
+        "GAME_SELECT:Bishop's Soldier": 1,
+        "GAME_SELECT:Dazzling Angel": 1
+      },
+      "seconds": 11.931032480002614,
+      "setup_seconds": 3.202751951001119,
+      "play_seconds": 8.711140977000468,
+      "cleanup_seconds": 0.01713955200102646
+    },
+    {
+      "engine": "rustmage",
+      "index": 11,
+      "colors": [
+        "white",
+        "red"
+      ],
+      "starting_seat": 1,
+      "seed": 812,
+      "status": "completed",
+      "winner_color": "red",
+      "winner_seat": 1,
+      "turn": 11,
+      "life": {
+        "player_0": -7,
+        "player_1": 5
+      },
+      "decisions": 340,
+      "callbacks": {
+        "mulligan:Keep": 2,
+        "opening_hand:FinishOpeningHand": 2,
+        "priority:Pass": 232,
+        "priority:PlayLand": 10,
+        "priority:AnnounceCast": 12,
+        "pay_costs:TapMana": 26,
+        "pay_costs:PayCosts": 12,
+        "attackers:Attack": 24,
+        "attackers:FinishAttackers": 11,
+        "blockers:FinishBlockers": 9
+      },
+      "seconds": 0.6513049870045506,
+      "setup_seconds": 0.0019609640003181994,
+      "play_seconds": 0.6492904080005246,
+      "cleanup_seconds": 5.361500370781869e-05
+    },
+    {
+      "engine": "rustmage",
+      "index": 12,
+      "colors": [
+        "red",
+        "white"
+      ],
+      "starting_seat": 0,
+      "seed": 813,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 1,
+      "turn": 12,
+      "life": {
+        "player_0": -7,
+        "player_1": 7
+      },
+      "decisions": 386,
+      "callbacks": {
+        "mulligan:Keep": 2,
+        "opening_hand:FinishOpeningHand": 2,
+        "priority:Pass": 262,
+        "priority:PlayLand": 10,
+        "priority:AnnounceCast": 13,
+        "pay_costs:TapMana": 23,
+        "pay_costs:PayCosts": 13,
+        "attackers:Attack": 36,
+        "attackers:FinishAttackers": 12,
+        "blockers:FinishBlockers": 11,
+        "targets:ChooseTarget": 1,
+        "order_triggers:PutTrigger": 1
+      },
+      "seconds": 0.7629040289975819,
+      "setup_seconds": 0.0020198429992888123,
+      "play_seconds": 0.7608095120012877,
+      "cleanup_seconds": 7.467399700544775e-05
+    },
+    {
+      "engine": "xmage",
+      "index": 12,
+      "colors": [
+        "red",
+        "white"
+      ],
+      "starting_seat": 0,
+      "seed": null,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 1,
+      "turn": 12,
+      "life": {
+        "player_0": -5,
+        "player_1": 11
+      },
+      "decisions": 241,
+      "callbacks": {
+        "GAME_TARGET:pwfbde8b000": 1,
+        "GAME_ASK:Keep": 2,
+        "GAME_SELECT:Mountain": 4,
+        "GAME_SELECT:Fanatical Firebrand": 1,
+        "GAME_PLAY_MANA:Mountain": 14,
+        "GAME_SELECT:Pass": 169,
+        "GAME_SELECT:All attack": 11,
+        "GAME_SELECT:Plains": 6,
+        "GAME_SELECT:Healer's Hawk": 1,
+        "GAME_PLAY_MANA:Plains": 15,
+        "GAME_SELECT:Burst Lightning": 1,
+        "GAME_ASK:No": 1,
+        "GAME_TARGET:pwfbde8b001": 1,
+        "GAME_SELECT:Ghitu Lavarunner": 2,
+        "GAME_SELECT:Bishop's Soldier": 2,
+        "GAME_SELECT:Firebrand Archer": 2,
+        "GAME_SELECT:Leonin Skyhunter": 1,
+        "GAME_SELECT:Goblin Smuggler": 2,
+        "GAME_SELECT:Dazzling Angel": 1,
+        "GAME_SELECT:Helpful Hunter": 1,
+        "GAME_TARGET:Dazzling Angel": 2,
+        "GAME_SELECT:Inspiring Overseer": 1
+      },
+      "seconds": 14.748469477999606,
+      "setup_seconds": 3.2008494199981214,
+      "play_seconds": 11.536397330004547,
+      "cleanup_seconds": 0.011222727996937465
+    },
+    {
+      "engine": "xmage",
+      "index": 13,
+      "colors": [
+        "white",
+        "red"
+      ],
+      "starting_seat": 0,
+      "seed": null,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 0,
+      "turn": 11,
+      "life": {
+        "player_0": 19,
+        "player_1": -4
+      },
+      "decisions": 208,
+      "callbacks": {
+        "GAME_TARGET:pw6b1306910": 1,
+        "GAME_ASK:Keep": 2,
+        "GAME_SELECT:Plains": 6,
+        "GAME_SELECT:Pass": 149,
+        "GAME_SELECT:Mountain": 5,
+        "GAME_SELECT:Fanatical Firebrand": 1,
+        "GAME_PLAY_MANA:Mountain": 10,
+        "GAME_SELECT:All attack": 9,
+        "GAME_SELECT:Bishop's Soldier": 1,
+        "GAME_PLAY_MANA:Plains": 13,
+        "GAME_SELECT:Firebrand Archer": 1,
+        "GAME_SELECT:Dazzling Angel": 1,
+        "GAME_SELECT:Swab Goblin": 2,
+        "GAME_SELECT:Healer's Hawk": 1,
+        "GAME_SELECT:Inspiring Overseer": 2,
+        "GAME_TARGET:Dazzling Angel": 2,
+        "GAME_SELECT:Savannah Lions": 1,
+        "GAME_SELECT:Firespitter Whelp": 1
+      },
+      "seconds": 12.788926626999455,
+      "setup_seconds": 3.2752349260044866,
+      "play_seconds": 9.502330532995984,
+      "cleanup_seconds": 0.011361167998984456
+    },
+    {
+      "engine": "rustmage",
+      "index": 13,
+      "colors": [
+        "white",
+        "red"
+      ],
+      "starting_seat": 0,
+      "seed": 814,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 0,
+      "turn": 9,
+      "life": {
+        "player_0": 15,
+        "player_1": 0
+      },
+      "decisions": 259,
+      "callbacks": {
+        "mulligan:Keep": 2,
+        "opening_hand:FinishOpeningHand": 2,
+        "priority:Pass": 184,
+        "priority:PlayLand": 6,
+        "priority:AnnounceCast": 9,
+        "pay_costs:TapMana": 14,
+        "pay_costs:PayCosts": 9,
+        "attackers:FinishAttackers": 9,
+        "kicker:ChooseKicker": 1,
+        "targets:ChooseTarget": 1,
+        "attackers:Attack": 15,
+        "blockers:FinishBlockers": 7
+      },
+      "seconds": 0.39902243400138104,
+      "setup_seconds": 0.0019676779993460514,
+      "play_seconds": 0.3970074980024947,
+      "cleanup_seconds": 4.725799954030663e-05
+    },
+    {
+      "engine": "rustmage",
+      "index": 14,
+      "colors": [
+        "red",
+        "white"
+      ],
+      "starting_seat": 1,
+      "seed": 815,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 1,
+      "turn": 11,
+      "life": {
+        "player_0": -9,
+        "player_1": 11
+      },
+      "decisions": 331,
+      "callbacks": {
+        "mulligan:Keep": 2,
+        "opening_hand:FinishOpeningHand": 2,
+        "priority:Pass": 224,
+        "priority:PlayLand": 11,
+        "attackers:FinishAttackers": 11,
+        "priority:AnnounceCast": 12,
+        "kicker:ChooseKicker": 1,
+        "targets:ChooseTarget": 2,
+        "pay_costs:TapMana": 26,
+        "pay_costs:PayCosts": 12,
+        "attackers:Attack": 21,
+        "blockers:FinishBlockers": 7
+      },
+      "seconds": 0.5643582410048111,
+      "setup_seconds": 0.0017115119990194216,
+      "play_seconds": 0.5626009670013445,
+      "cleanup_seconds": 4.57620044471696e-05
+    },
+    {
+      "engine": "xmage",
+      "index": 14,
+      "colors": [
+        "red",
+        "white"
+      ],
+      "starting_seat": 1,
+      "seed": null,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 1,
+      "turn": 13,
+      "life": {
+        "player_0": -1,
+        "player_1": 3
+      },
+      "decisions": 231,
+      "callbacks": {
+        "GAME_TARGET:pw05ea77b81": 4,
+        "GAME_ASK:Keep": 2,
+        "GAME_SELECT:Plains": 7,
+        "GAME_SELECT:Healer's Hawk": 2,
+        "GAME_PLAY_MANA:Plains": 13,
+        "GAME_SELECT:Pass": 168,
+        "GAME_SELECT:Mountain": 2,
+        "GAME_SELECT:Burst Lightning": 3,
+        "GAME_ASK:No": 3,
+        "GAME_PLAY_MANA:Mountain": 7,
+        "GAME_SELECT:All attack": 10,
+        "GAME_SELECT:Savannah Lions": 1,
+        "GAME_SELECT:Fanatical Firebrand": 2,
+        "GAME_SELECT:Ghitu Lavarunner": 2,
+        "GAME_SELECT:Dazzling Angel": 1,
+        "GAME_SELECT:Inspiring Paladin": 1,
+        "GAME_SELECT:Helpful Hunter": 1,
+        "GAME_TARGET:Dazzling Angel": 1,
+        "GAME_SELECT:Bishop's Soldier": 1
+      },
+      "seconds": 13.919371677999152,
+      "setup_seconds": 3.201213956999709,
+      "play_seconds": 10.706303906001267,
+      "cleanup_seconds": 0.011853814998175949
+    },
+    {
+      "engine": "xmage",
+      "index": 15,
+      "colors": [
+        "white",
+        "red"
+      ],
+      "starting_seat": 1,
+      "seed": null,
+      "status": "completed",
+      "winner_color": "red",
+      "winner_seat": 1,
+      "turn": 15,
+      "life": {
+        "player_0": -6,
+        "player_1": 20
+      },
+      "decisions": 154,
+      "callbacks": {
+        "GAME_TARGET:pw878c88a61": 1,
+        "GAME_ASK:Keep": 2,
+        "GAME_SELECT:Mountain": 8,
+        "GAME_SELECT:Pass": 119,
+        "GAME_TARGET:Bishop's Soldier": 2,
+        "GAME_SELECT:Firespitter Whelp": 1,
+        "GAME_PLAY_MANA:Mountain": 8,
+        "GAME_TARGET:Healer's Hawk": 2,
+        "GAME_SELECT:Firebrand Archer": 2,
+        "GAME_SELECT:All attack": 5,
+        "GAME_TARGET:Helpful Hunter": 2,
+        "GAME_SELECT:Ghitu Lavarunner": 1,
+        "GAME_TARGET:Inspiring Overseer": 1
+      },
+      "seconds": 9.72734120500536,
+      "setup_seconds": 3.2142121490032878,
+      "play_seconds": 6.500463072996354,
+      "cleanup_seconds": 0.012665983005717862
+    },
+    {
+      "engine": "rustmage",
+      "index": 15,
+      "colors": [
+        "white",
+        "red"
+      ],
+      "starting_seat": 1,
+      "seed": 816,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 0,
+      "turn": 12,
+      "life": {
+        "player_0": 6,
+        "player_1": -3
+      },
+      "decisions": 385,
+      "callbacks": {
+        "mulligan:Keep": 2,
+        "opening_hand:FinishOpeningHand": 2,
+        "priority:Pass": 266,
+        "priority:PlayLand": 9,
+        "priority:AnnounceCast": 13,
+        "kicker:ChooseKicker": 1,
+        "targets:ChooseTarget": 1,
+        "pay_costs:TapMana": 27,
+        "pay_costs:PayCosts": 13,
+        "attackers:FinishAttackers": 12,
+        "attackers:Attack": 25,
+        "blockers:FinishBlockers": 9,
+        "order_triggers:PutTrigger": 5
+      },
+      "seconds": 0.6961181340011535,
+      "setup_seconds": 0.0021183210046729073,
+      "play_seconds": 0.69394832499529,
+      "cleanup_seconds": 5.1488001190591604e-05
+    },
+    {
+      "engine": "rustmage",
+      "index": 16,
+      "colors": [
+        "red",
+        "white"
+      ],
+      "starting_seat": 0,
+      "seed": 817,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 1,
+      "turn": 12,
+      "life": {
+        "player_0": -6,
+        "player_1": 4
+      },
+      "decisions": 366,
+      "callbacks": {
+        "mulligan:Keep": 2,
+        "opening_hand:FinishOpeningHand": 2,
+        "priority:Pass": 254,
+        "priority:PlayLand": 7,
+        "priority:AnnounceCast": 13,
+        "kicker:ChooseKicker": 1,
+        "targets:ChooseTarget": 2,
+        "pay_costs:TapMana": 22,
+        "pay_costs:PayCosts": 13,
+        "attackers:FinishAttackers": 12,
+        "attackers:Attack": 28,
+        "blockers:FinishBlockers": 10
+      },
+      "seconds": 0.6329318689968204,
+      "setup_seconds": 0.0018463460000930354,
+      "play_seconds": 0.6310416259948397,
+      "cleanup_seconds": 4.389700188767165e-05
+    },
+    {
+      "engine": "xmage",
+      "index": 16,
+      "colors": [
+        "red",
+        "white"
+      ],
+      "starting_seat": 0,
+      "seed": null,
+      "status": "completed",
+      "winner_color": "red",
+      "winner_seat": 0,
+      "turn": 9,
+      "life": {
+        "player_0": 8,
+        "player_1": -3
+      },
+      "decisions": 182,
+      "callbacks": {
+        "GAME_TARGET:pwf27cbcca0": 1,
+        "GAME_ASK:Keep": 2,
+        "GAME_SELECT:Mountain": 4,
+        "GAME_SELECT:Fanatical Firebrand": 2,
+        "GAME_PLAY_MANA:Mountain": 12,
+        "GAME_SELECT:Pass": 129,
+        "GAME_SELECT:All attack": 8,
+        "GAME_SELECT:Plains": 4,
+        "GAME_SELECT:Savannah Lions": 2,
+        "GAME_PLAY_MANA:Plains": 8,
+        "GAME_SELECT:Firebrand Archer": 1,
+        "GAME_SELECT:Ghitu Lavarunner": 1,
+        "GAME_SELECT:Viashino Pyromancer": 2,
+        "GAME_TARGET:pwf27cbcca1": 2,
+        "GAME_SELECT:Bishop's Soldier": 1,
+        "GAME_SELECT:Raging Redcap": 1,
+        "GAME_SELECT:Helpful Hunter": 1,
+        "GAME_SELECT:Leonin Skyhunter": 1
+      },
+      "seconds": 11.682278166001197,
+      "setup_seconds": 3.2591572780002025,
+      "play_seconds": 8.412125475995708,
+      "cleanup_seconds": 0.010995412005286198
+    },
+    {
+      "engine": "xmage",
+      "index": 17,
+      "colors": [
+        "white",
+        "red"
+      ],
+      "starting_seat": 0,
+      "seed": null,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 0,
+      "turn": 11,
+      "life": {
+        "player_0": 21,
+        "player_1": -5
+      },
+      "decisions": 193,
+      "callbacks": {
+        "GAME_TARGET:pwe23734960": 2,
+        "GAME_ASK:Keep": 2,
+        "GAME_SELECT:Plains": 3,
+        "GAME_SELECT:Healer's Hawk": 1,
+        "GAME_PLAY_MANA:Plains": 14,
+        "GAME_SELECT:Pass": 139,
+        "GAME_SELECT:Mountain": 5,
+        "GAME_SELECT:Bishop's Soldier": 1,
+        "GAME_SELECT:All attack": 8,
+        "GAME_SELECT:Firebrand Archer": 1,
+        "GAME_PLAY_MANA:Mountain": 10,
+        "GAME_SELECT:Leonin Skyhunter": 1,
+        "GAME_SELECT:Viashino Pyromancer": 1,
+        "GAME_SELECT:Dazzling Angel": 3,
+        "GAME_SELECT:Firespitter Whelp": 2
+      },
+      "seconds": 12.336288982995029,
+      "setup_seconds": 3.228900515001442,
+      "play_seconds": 9.095042480999837,
+      "cleanup_seconds": 0.012345986993750557
+    },
+    {
+      "engine": "rustmage",
+      "index": 17,
+      "colors": [
+        "white",
+        "red"
+      ],
+      "starting_seat": 0,
+      "seed": 818,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 0,
+      "turn": 11,
+      "life": {
+        "player_0": 25,
+        "player_1": -11
+      },
+      "decisions": 379,
+      "callbacks": {
+        "mulligan:Keep": 2,
+        "opening_hand:FinishOpeningHand": 2,
+        "priority:Pass": 252,
+        "priority:PlayLand": 8,
+        "priority:AnnounceCast": 17,
+        "pay_costs:TapMana": 30,
+        "pay_costs:PayCosts": 17,
+        "attackers:FinishAttackers": 11,
+        "kicker:ChooseKicker": 1,
+        "targets:ChooseTarget": 2,
+        "attackers:Attack": 27,
+        "blockers:FinishBlockers": 8,
+        "order_triggers:PutTrigger": 2
+      },
+      "seconds": 0.7106602649946581,
+      "setup_seconds": 0.0020656709966715425,
+      "play_seconds": 0.7085362779980642,
+      "cleanup_seconds": 5.83159999223426e-05
+    },
+    {
+      "engine": "rustmage",
+      "index": 18,
+      "colors": [
+        "red",
+        "white"
+      ],
+      "starting_seat": 1,
+      "seed": 819,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 1,
+      "turn": 11,
+      "life": {
+        "player_0": -3,
+        "player_1": 14
+      },
+      "decisions": 370,
+      "callbacks": {
+        "mulligan:Keep": 2,
+        "opening_hand:FinishOpeningHand": 2,
+        "priority:Pass": 252,
+        "priority:PlayLand": 9,
+        "priority:AnnounceCast": 13,
+        "pay_costs:TapMana": 24,
+        "pay_costs:PayCosts": 13,
+        "attackers:FinishAttackers": 11,
+        "attackers:Attack": 25,
+        "blockers:FinishBlockers": 9,
+        "kicker:ChooseKicker": 2,
+        "targets:ChooseTarget": 2,
+        "order_triggers:PutTrigger": 6
+      },
+      "seconds": 0.6698495210002875,
+      "setup_seconds": 0.0018083070026477799,
+      "play_seconds": 0.6679703850022634,
+      "cleanup_seconds": 7.082899537635967e-05
+    },
+    {
+      "engine": "xmage",
+      "index": 18,
+      "colors": [
+        "red",
+        "white"
+      ],
+      "starting_seat": 1,
+      "seed": null,
+      "status": "completed",
+      "winner_color": "red",
+      "winner_seat": 0,
+      "turn": 14,
+      "life": {
+        "player_0": 5,
+        "player_1": -8
+      },
+      "decisions": 235,
+      "callbacks": {
+        "GAME_TARGET:pw7bbf78341": 2,
+        "GAME_ASK:Keep": 2,
+        "GAME_SELECT:Pass": 170,
+        "GAME_SELECT:Mountain": 6,
+        "GAME_SELECT:Plains": 3,
+        "GAME_SELECT:Healer's Hawk": 3,
+        "GAME_PLAY_MANA:Plains": 9,
+        "GAME_SELECT:Swab Goblin": 3,
+        "GAME_PLAY_MANA:Mountain": 19,
+        "GAME_SELECT:All attack": 10,
+        "GAME_SELECT:Firebrand Archer": 1,
+        "GAME_SELECT:Viashino Pyromancer": 1,
+        "GAME_SELECT:Bishop's Soldier": 1,
+        "GAME_SELECT:Helpful Hunter": 1,
+        "GAME_SELECT:Goblin Smuggler": 2,
+        "GAME_SELECT:Leonin Skyhunter": 1,
+        "GAME_SELECT:Raging Redcap": 1
+      },
+      "seconds": 14.083338133001234,
+      "setup_seconds": 3.243871061000391,
+      "play_seconds": 10.822302302003663,
+      "cleanup_seconds": 0.017164769997179974
+    },
+    {
+      "engine": "xmage",
+      "index": 19,
+      "colors": [
+        "white",
+        "red"
+      ],
+      "starting_seat": 1,
+      "seed": null,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 0,
+      "turn": 12,
+      "life": {
+        "player_0": 19,
+        "player_1": -5
+      },
+      "decisions": 202,
+      "callbacks": {
+        "GAME_TARGET:pwbcf2a5771": 1,
+        "GAME_ASK:Keep": 2,
+        "GAME_SELECT:Mountain": 1,
+        "GAME_SELECT:Fanatical Firebrand": 2,
+        "GAME_PLAY_MANA:Mountain": 4,
+        "GAME_SELECT:Pass": 156,
+        "GAME_SELECT:All attack": 11,
+        "GAME_SELECT:Plains": 5,
+        "GAME_SELECT:Savannah Lions": 1,
+        "GAME_PLAY_MANA:Plains": 12,
+        "GAME_SELECT:Ghitu Lavarunner": 2,
+        "GAME_SELECT:Bishop's Soldier": 2,
+        "GAME_SELECT:Helpful Hunter": 2,
+        "GAME_SELECT:Inspiring Overseer": 1
+      },
+      "seconds": 11.742363083001692,
+      "setup_seconds": 3.2270670479992987,
+      "play_seconds": 8.498226055002306,
+      "cleanup_seconds": 0.017069980000087526
+    },
+    {
+      "engine": "rustmage",
+      "index": 19,
+      "colors": [
+        "white",
+        "red"
+      ],
+      "starting_seat": 1,
+      "seed": 820,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 0,
+      "turn": 12,
+      "life": {
+        "player_0": 6,
+        "player_1": -1
+      },
+      "decisions": 381,
+      "callbacks": {
+        "mulligan:Keep": 2,
+        "opening_hand:FinishOpeningHand": 2,
+        "priority:Pass": 260,
+        "priority:PlayLand": 9,
+        "priority:AnnounceCast": 14,
+        "pay_costs:TapMana": 30,
+        "pay_costs:PayCosts": 14,
+        "attackers:FinishAttackers": 12,
+        "attackers:Attack": 27,
+        "blockers:FinishBlockers": 9,
+        "targets:ChooseTarget": 1,
+        "order_triggers:PutTrigger": 1
+      },
+      "seconds": 0.6958017150027445,
+      "setup_seconds": 0.0018877589973271824,
+      "play_seconds": 0.6938681400060887,
+      "cleanup_seconds": 4.581599932862446e-05
+    },
+    {
+      "engine": "rustmage",
+      "index": 20,
+      "colors": [
+        "red",
+        "white"
+      ],
+      "starting_seat": 0,
+      "seed": 821,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 1,
+      "turn": 10,
+      "life": {
+        "player_0": 0,
+        "player_1": 13
+      },
+      "decisions": 300,
+      "callbacks": {
+        "mulligan:Keep": 2,
+        "opening_hand:FinishOpeningHand": 2,
+        "priority:Pass": 208,
+        "priority:PlayLand": 10,
+        "attackers:FinishAttackers": 10,
+        "priority:AnnounceCast": 10,
+        "pay_costs:TapMana": 22,
+        "pay_costs:PayCosts": 10,
+        "targets:ChooseTarget": 1,
+        "attackers:Attack": 17,
+        "blockers:FinishBlockers": 7,
+        "order_triggers:PutTrigger": 1
+      },
+      "seconds": 0.49403639799857046,
+      "setup_seconds": 0.00190961999760475,
+      "play_seconds": 0.4920774260026519,
+      "cleanup_seconds": 4.9351998313795775e-05
+    },
+    {
+      "engine": "xmage",
+      "index": 20,
+      "colors": [
+        "red",
+        "white"
+      ],
+      "starting_seat": 0,
+      "seed": null,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 1,
+      "turn": 12,
+      "life": {
+        "player_0": -9,
+        "player_1": 8
+      },
+      "decisions": 233,
+      "callbacks": {
+        "GAME_TARGET:pw3ccf531a0": 1,
+        "GAME_ASK:Keep": 2,
+        "GAME_SELECT:Mountain": 4,
+        "GAME_SELECT:Burst Lightning": 1,
+        "GAME_ASK:No": 1,
+        "GAME_TARGET:pw3ccf531a1": 3,
+        "GAME_PLAY_MANA:Mountain": 10,
+        "GAME_SELECT:Pass": 166,
+        "GAME_SELECT:Plains": 6,
+        "GAME_SELECT:Healer's Hawk": 2,
+        "GAME_PLAY_MANA:Plains": 16,
+        "GAME_SELECT:Ghitu Lavarunner": 1,
+        "GAME_SELECT:Helpful Hunter": 1,
+        "GAME_SELECT:All attack": 9,
+        "GAME_SELECT:Swab Goblin": 2,
+        "GAME_SELECT:Savannah Lions": 1,
+        "GAME_SELECT:Leonin Skyhunter": 1,
+        "GAME_SELECT:Viashino Pyromancer": 2,
+        "GAME_SELECT:Dazzling Angel": 1,
+        "GAME_SELECT:Prideful Parent": 1,
+        "GAME_TARGET:Dazzling Angel": 1,
+        "GAME_SELECT:Inspiring Paladin": 1
+      },
+      "seconds": 15.023519848997239,
+      "setup_seconds": 3.2371229140044306,
+      "play_seconds": 11.771773643995402,
+      "cleanup_seconds": 0.014623290997406002
+    },
+    {
+      "engine": "xmage",
+      "index": 21,
+      "colors": [
+        "white",
+        "red"
+      ],
+      "starting_seat": 0,
+      "seed": null,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 0,
+      "turn": 11,
+      "life": {
+        "player_0": 17,
+        "player_1": -2
+      },
+      "decisions": 180,
+      "callbacks": {
+        "GAME_TARGET:pw8fbf10350": 1,
+        "GAME_ASK:Keep": 2,
+        "GAME_SELECT:Plains": 6,
+        "GAME_SELECT:Healer's Hawk": 2,
+        "GAME_PLAY_MANA:Plains": 9,
+        "GAME_SELECT:Pass": 130,
+        "GAME_SELECT:Mountain": 5,
+        "GAME_SELECT:Helpful Hunter": 1,
+        "GAME_SELECT:All attack": 8,
+        "GAME_SELECT:Swab Goblin": 2,
+        "GAME_PLAY_MANA:Mountain": 10,
+        "GAME_SELECT:Leonin Skyhunter": 1,
+        "GAME_SELECT:Inspiring Overseer": 1,
+        "GAME_SELECT:Firespitter Whelp": 1,
+        "GAME_SELECT:Raging Redcap": 1
+      },
+      "seconds": 11.707975197998167,
+      "setup_seconds": 3.220094763004454,
+      "play_seconds": 8.472915171994828,
+      "cleanup_seconds": 0.01496526299888501
+    },
+    {
+      "engine": "rustmage",
+      "index": 21,
+      "colors": [
+        "white",
+        "red"
+      ],
+      "starting_seat": 0,
+      "seed": 822,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 0,
+      "turn": 13,
+      "life": {
+        "player_0": 5,
+        "player_1": -2
+      },
+      "decisions": 385,
+      "callbacks": {
+        "mulligan:Keep": 2,
+        "opening_hand:FinishOpeningHand": 2,
+        "priority:Pass": 270,
+        "priority:PlayLand": 9,
+        "attackers:FinishAttackers": 13,
+        "priority:AnnounceCast": 12,
+        "pay_costs:TapMana": 21,
+        "pay_costs:PayCosts": 12,
+        "attackers:Attack": 33,
+        "blockers:FinishBlockers": 11
+      },
+      "seconds": 0.6976553349959431,
+      "setup_seconds": 0.0018357199951424263,
+      "play_seconds": 0.6957728370034602,
+      "cleanup_seconds": 4.677799734054133e-05
+    },
+    {
+      "engine": "rustmage",
+      "index": 22,
+      "colors": [
+        "red",
+        "white"
+      ],
+      "starting_seat": 1,
+      "seed": 823,
+      "status": "completed",
+      "winner_color": "red",
+      "winner_seat": 0,
+      "turn": 12,
+      "life": {
+        "player_0": 1,
+        "player_1": -6
+      },
+      "decisions": 368,
+      "callbacks": {
+        "mulligan:Keep": 2,
+        "opening_hand:FinishOpeningHand": 2,
+        "priority:Pass": 256,
+        "priority:PlayLand": 7,
+        "priority:AnnounceCast": 12,
+        "pay_costs:TapMana": 22,
+        "pay_costs:PayCosts": 12,
+        "attackers:FinishAttackers": 12,
+        "attackers:Attack": 30,
+        "blockers:FinishBlockers": 11,
+        "targets:ChooseTarget": 2
+      },
+      "seconds": 0.5884828359994572,
+      "setup_seconds": 0.0018514529947424307,
+      "play_seconds": 0.5865880950004794,
+      "cleanup_seconds": 4.32880042353645e-05
+    },
+    {
+      "engine": "xmage",
+      "index": 22,
+      "colors": [
+        "red",
+        "white"
+      ],
+      "starting_seat": 1,
+      "seed": null,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 1,
+      "turn": 13,
+      "life": {
+        "player_0": -1,
+        "player_1": 15
+      },
+      "decisions": 223,
+      "callbacks": {
+        "GAME_TARGET:pw4b2f72c11": 1,
+        "GAME_ASK:Keep": 2,
+        "GAME_SELECT:Plains": 7,
+        "GAME_SELECT:Pass": 163,
+        "GAME_TARGET:Burst Lightning": 1,
+        "GAME_SELECT:Helpful Hunter": 1,
+        "GAME_PLAY_MANA:Plains": 16,
+        "GAME_SELECT:Mountain": 3,
+        "GAME_SELECT:Fanatical Firebrand": 1,
+        "GAME_PLAY_MANA:Mountain": 8,
+        "GAME_SELECT:All attack": 10,
+        "GAME_SELECT:Bishop's Soldier": 1,
+        "GAME_SELECT:Ghitu Lavarunner": 1,
+        "GAME_SELECT:Healer's Hawk": 1,
+        "GAME_SELECT:Leonin Skyhunter": 1,
+        "GAME_SELECT:Firebrand Archer": 2,
+        "GAME_SELECT:Inspiring Overseer": 1,
+        "GAME_SELECT:Inspiring Paladin": 1,
+        "GAME_SELECT:Swab Goblin": 1,
+        "GAME_SELECT:Prideful Parent": 1
+      },
+      "seconds": 13.710158472997136,
+      "setup_seconds": 3.1623807289943215,
+      "play_seconds": 10.538390936002543,
+      "cleanup_seconds": 0.00938680800027214
+    },
+    {
+      "engine": "xmage",
+      "index": 23,
+      "colors": [
+        "white",
+        "red"
+      ],
+      "starting_seat": 1,
+      "seed": null,
+      "status": "completed",
+      "winner_color": "red",
+      "winner_seat": 1,
+      "turn": 9,
+      "life": {
+        "player_0": 0,
+        "player_1": 10
+      },
+      "decisions": 170,
+      "callbacks": {
+        "GAME_TARGET:pwacab1a151": 1,
+        "GAME_ASK:Keep": 2,
+        "GAME_SELECT:Mountain": 5,
+        "GAME_SELECT:Fanatical Firebrand": 1,
+        "GAME_PLAY_MANA:Mountain": 10,
+        "GAME_SELECT:Pass": 120,
+        "GAME_SELECT:All attack": 8,
+        "GAME_SELECT:Plains": 4,
+        "GAME_SELECT:Savannah Lions": 1,
+        "GAME_PLAY_MANA:Plains": 9,
+        "GAME_SELECT:Ghitu Lavarunner": 1,
+        "GAME_SELECT:Helpful Hunter": 1,
+        "GAME_SELECT:Viashino Pyromancer": 1,
+        "GAME_TARGET:pwacab1a150": 1,
+        "GAME_SELECT:Leonin Skyhunter": 3,
+        "GAME_SELECT:Goblin Smuggler": 2
+      },
+      "seconds": 10.798620678993757,
+      "setup_seconds": 3.2396064149943413,
+      "play_seconds": 7.548241392003547,
+      "cleanup_seconds": 0.010772871995868627
+    },
+    {
+      "engine": "rustmage",
+      "index": 23,
+      "colors": [
+        "white",
+        "red"
+      ],
+      "starting_seat": 1,
+      "seed": 824,
+      "status": "completed",
+      "winner_color": "red",
+      "winner_seat": 1,
+      "turn": 11,
+      "life": {
+        "player_0": -5,
+        "player_1": 7
+      },
+      "decisions": 350,
+      "callbacks": {
+        "mulligan:Keep": 2,
+        "opening_hand:FinishOpeningHand": 2,
+        "priority:Pass": 234,
+        "priority:PlayLand": 10,
+        "priority:AnnounceCast": 12,
+        "pay_costs:TapMana": 27,
+        "pay_costs:PayCosts": 12,
+        "attackers:FinishAttackers": 11,
+        "attackers:Attack": 30,
+        "blockers:FinishBlockers": 9,
+        "order_triggers:PutTrigger": 1
+      },
+      "seconds": 0.6787471350035048,
+      "setup_seconds": 0.0019232430058764294,
+      "play_seconds": 0.676769167999737,
+      "cleanup_seconds": 5.472399789141491e-05
+    },
+    {
+      "engine": "rustmage",
+      "index": 24,
+      "colors": [
+        "red",
+        "white"
+      ],
+      "starting_seat": 0,
+      "seed": 825,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 1,
+      "turn": 12,
+      "life": {
+        "player_0": -10,
+        "player_1": 11
+      },
+      "decisions": 382,
+      "callbacks": {
+        "mulligan:Keep": 2,
+        "opening_hand:FinishOpeningHand": 2,
+        "priority:Pass": 256,
+        "priority:PlayLand": 9,
+        "priority:AnnounceCast": 14,
+        "pay_costs:TapMana": 26,
+        "pay_costs:PayCosts": 14,
+        "attackers:FinishAttackers": 12,
+        "attackers:Attack": 36,
+        "blockers:FinishBlockers": 10,
+        "targets:ChooseTarget": 1
+      },
+      "seconds": 0.753348136000568,
+      "setup_seconds": 0.0017490669997641817,
+      "play_seconds": 0.7515506600029767,
+      "cleanup_seconds": 4.840899782720953e-05
+    },
+    {
+      "engine": "xmage",
+      "index": 24,
+      "colors": [
+        "red",
+        "white"
+      ],
+      "starting_seat": 0,
+      "seed": null,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 1,
+      "turn": 10,
+      "life": {
+        "player_0": 0,
+        "player_1": 5
+      },
+      "decisions": 170,
+      "callbacks": {
+        "GAME_TARGET:pweb23e1150": 1,
+        "GAME_ASK:Keep": 2,
+        "GAME_SELECT:Mountain": 4,
+        "GAME_SELECT:Ghitu Lavarunner": 2,
+        "GAME_PLAY_MANA:Mountain": 10,
+        "GAME_SELECT:Pass": 126,
+        "GAME_SELECT:Plains": 2,
+        "GAME_SELECT:Savannah Lions": 2,
+        "GAME_PLAY_MANA:Plains": 6,
+        "GAME_SELECT:Firebrand Archer": 2,
+        "GAME_SELECT:All attack": 8,
+        "GAME_SELECT:Bishop's Soldier": 1,
+        "GAME_SELECT:Swab Goblin": 1,
+        "GAME_SELECT:Leonin Skyhunter": 1,
+        "GAME_SELECT:Viashino Pyromancer": 1,
+        "GAME_TARGET:pweb23e1151": 1
+      },
+      "seconds": 10.656648015996325,
+      "setup_seconds": 3.217665087999194,
+      "play_seconds": 7.425803272999474,
+      "cleanup_seconds": 0.013179654997657053
+    },
+    {
+      "engine": "xmage",
+      "index": 25,
+      "colors": [
+        "white",
+        "red"
+      ],
+      "starting_seat": 0,
+      "seed": null,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 0,
+      "turn": 11,
+      "life": {
+        "player_0": 8,
+        "player_1": 0
+      },
+      "decisions": 206,
+      "callbacks": {
+        "GAME_TARGET:pw762b1fd10": 2,
+        "GAME_ASK:Keep": 2,
+        "GAME_SELECT:Plains": 6,
+        "GAME_SELECT:Savannah Lions": 1,
+        "GAME_PLAY_MANA:Plains": 16,
+        "GAME_SELECT:Pass": 143,
+        "GAME_SELECT:Mountain": 5,
+        "GAME_SELECT:Ghitu Lavarunner": 1,
+        "GAME_PLAY_MANA:Mountain": 10,
+        "GAME_SELECT:Helpful Hunter": 1,
+        "GAME_SELECT:All attack": 9,
+        "GAME_SELECT:Leonin Skyhunter": 2,
+        "GAME_SELECT:Swab Goblin": 1,
+        "GAME_SELECT:Burst Lightning": 1,
+        "GAME_ASK:No": 1,
+        "GAME_SELECT:Firespitter Whelp": 1,
+        "GAME_SELECT:Inspiring Paladin": 2,
+        "GAME_SELECT:Raging Redcap": 1,
+        "GAME_SELECT:Prideful Parent": 1
+      },
+      "seconds": 12.741964194996399,
+      "setup_seconds": 3.198632130995975,
+      "play_seconds": 9.532382254001277,
+      "cleanup_seconds": 0.010949809999146964
+    },
+    {
+      "engine": "rustmage",
+      "index": 25,
+      "colors": [
+        "white",
+        "red"
+      ],
+      "starting_seat": 0,
+      "seed": 826,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 0,
+      "turn": 11,
+      "life": {
+        "player_0": 4,
+        "player_1": -7
+      },
+      "decisions": 329,
+      "callbacks": {
+        "mulligan:Keep": 2,
+        "opening_hand:FinishOpeningHand": 2,
+        "priority:Pass": 226,
+        "priority:PlayLand": 9,
+        "priority:AnnounceCast": 11,
+        "pay_costs:TapMana": 22,
+        "pay_costs:PayCosts": 11,
+        "attackers:FinishAttackers": 11,
+        "kicker:ChooseKicker": 1,
+        "targets:ChooseTarget": 1,
+        "attackers:Attack": 24,
+        "blockers:FinishBlockers": 9
+      },
+      "seconds": 0.5530653759997222,
+      "setup_seconds": 0.0019468259997665882,
+      "play_seconds": 0.551064140003291,
+      "cleanup_seconds": 5.440999666461721e-05
+    },
+    {
+      "engine": "rustmage",
+      "index": 26,
+      "colors": [
+        "red",
+        "white"
+      ],
+      "starting_seat": 1,
+      "seed": 827,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 1,
+      "turn": 11,
+      "life": {
+        "player_0": -5,
+        "player_1": 2
+      },
+      "decisions": 359,
+      "callbacks": {
+        "mulligan:Keep": 2,
+        "opening_hand:FinishOpeningHand": 2,
+        "priority:Pass": 240,
+        "priority:PlayLand": 9,
+        "priority:AnnounceCast": 14,
+        "pay_costs:TapMana": 28,
+        "pay_costs:PayCosts": 14,
+        "attackers:FinishAttackers": 11,
+        "kicker:ChooseKicker": 2,
+        "targets:ChooseTarget": 3,
+        "attackers:Attack": 25,
+        "blockers:FinishBlockers": 9
+      },
+      "seconds": 0.6606804569964879,
+      "setup_seconds": 0.001920723996590823,
+      "play_seconds": 0.6587129370018374,
+      "cleanup_seconds": 4.679599805967882e-05
+    },
+    {
+      "engine": "xmage",
+      "index": 26,
+      "colors": [
+        "red",
+        "white"
+      ],
+      "starting_seat": 1,
+      "seed": null,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 1,
+      "turn": 13,
+      "life": {
+        "player_0": -8,
+        "player_1": 5
+      },
+      "decisions": 262,
+      "callbacks": {
+        "GAME_TARGET:pwec140eaf1": 2,
+        "GAME_ASK:Keep": 2,
+        "GAME_SELECT:Plains": 7,
+        "GAME_SELECT:Pass": 186,
+        "GAME_SELECT:Mountain": 4,
+        "GAME_SELECT:Burst Lightning": 1,
+        "GAME_ASK:No": 1,
+        "GAME_PLAY_MANA:Mountain": 16,
+        "GAME_SELECT:Swab Goblin": 1,
+        "GAME_SELECT:Dazzling Angel": 2,
+        "GAME_PLAY_MANA:Plains": 19,
+        "GAME_SELECT:Firespitter Whelp": 3,
+        "GAME_SELECT:All attack": 8,
+        "GAME_SELECT:Inspiring Paladin": 2,
+        "GAME_SELECT:Ghitu Lavarunner": 1,
+        "GAME_SELECT:Goblin Smuggler": 1,
+        "GAME_SELECT:Helpful Hunter": 1,
+        "GAME_TARGET:Dazzling Angel": 3,
+        "GAME_SELECT:Bishop's Soldier": 1,
+        "GAME_SELECT:Prideful Parent": 1
+      },
+      "seconds": 16.695407221006462,
+      "setup_seconds": 3.2414905350015033,
+      "play_seconds": 13.440164184998139,
+      "cleanup_seconds": 0.013752501006820239
+    },
+    {
+      "engine": "xmage",
+      "index": 27,
+      "colors": [
+        "white",
+        "red"
+      ],
+      "starting_seat": 1,
+      "seed": null,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 0,
+      "turn": 12,
+      "life": {
+        "player_0": 18,
+        "player_1": -4
+      },
+      "decisions": 223,
+      "callbacks": {
+        "GAME_TARGET:pw81d542431": 1,
+        "GAME_ASK:Keep": 2,
+        "GAME_SELECT:Mountain": 5,
+        "GAME_SELECT:Fanatical Firebrand": 1,
+        "GAME_PLAY_MANA:Mountain": 12,
+        "GAME_SELECT:Pass": 165,
+        "GAME_SELECT:All attack": 11,
+        "GAME_SELECT:Plains": 3,
+        "GAME_SELECT:Healer's Hawk": 1,
+        "GAME_PLAY_MANA:Plains": 11,
+        "GAME_SELECT:Ghitu Lavarunner": 1,
+        "GAME_SELECT:Bishop's Soldier": 3,
+        "GAME_SELECT:Swab Goblin": 1,
+        "GAME_SELECT:Viashino Pyromancer": 1,
+        "GAME_TARGET:pw81d542430": 1,
+        "GAME_SELECT:Firespitter Whelp": 2,
+        "GAME_SELECT:Helpful Hunter": 2
+      },
+      "seconds": 13.234703943002387,
+      "setup_seconds": 3.211862635005673,
+      "play_seconds": 10.009095674999116,
+      "cleanup_seconds": 0.013745632997597568
+    },
+    {
+      "engine": "rustmage",
+      "index": 27,
+      "colors": [
+        "white",
+        "red"
+      ],
+      "starting_seat": 1,
+      "seed": 828,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 0,
+      "turn": 10,
+      "life": {
+        "player_0": 16,
+        "player_1": -2
+      },
+      "decisions": 307,
+      "callbacks": {
+        "mulligan:Keep": 2,
+        "opening_hand:FinishOpeningHand": 2,
+        "priority:Pass": 210,
+        "priority:PlayLand": 10,
+        "priority:AnnounceCast": 11,
+        "kicker:ChooseKicker": 1,
+        "targets:ChooseTarget": 1,
+        "pay_costs:TapMana": 21,
+        "pay_costs:PayCosts": 11,
+        "attackers:FinishAttackers": 10,
+        "attackers:Attack": 20,
+        "blockers:FinishBlockers": 8
+      },
+      "seconds": 0.5390357970027253,
+      "setup_seconds": 0.0019276300008641556,
+      "play_seconds": 0.5370605269999942,
+      "cleanup_seconds": 4.7640001866966486e-05
+    },
+    {
+      "engine": "rustmage",
+      "index": 28,
+      "colors": [
+        "red",
+        "white"
+      ],
+      "starting_seat": 0,
+      "seed": 829,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 1,
+      "turn": 14,
+      "life": {
+        "player_0": -1,
+        "player_1": 6
+      },
+      "decisions": 454,
+      "callbacks": {
+        "mulligan:Keep": 2,
+        "opening_hand:FinishOpeningHand": 2,
+        "priority:Pass": 316,
+        "priority:PlayLand": 14,
+        "attackers:FinishAttackers": 14,
+        "priority:AnnounceCast": 14,
+        "pay_costs:TapMana": 30,
+        "pay_costs:PayCosts": 14,
+        "attackers:Attack": 30,
+        "blockers:FinishBlockers": 10,
+        "order_triggers:PutTrigger": 4,
+        "kicker:ChooseKicker": 2,
+        "targets:ChooseTarget": 2
+      },
+      "seconds": 0.9661475690008956,
+      "setup_seconds": 0.0018501459999242797,
+      "play_seconds": 0.9642316719982773,
+      "cleanup_seconds": 6.575100269401446e-05
+    },
+    {
+      "engine": "xmage",
+      "index": 28,
+      "colors": [
+        "red",
+        "white"
+      ],
+      "starting_seat": 0,
+      "seed": null,
+      "status": "completed",
+      "winner_color": "red",
+      "winner_seat": 0,
+      "turn": 11,
+      "life": {
+        "player_0": 8,
+        "player_1": 0
+      },
+      "decisions": 201,
+      "callbacks": {
+        "GAME_TARGET:pw1f9bf3550": 1,
+        "GAME_ASK:Keep": 2,
+        "GAME_SELECT:Mountain": 2,
+        "GAME_SELECT:Fanatical Firebrand": 2,
+        "GAME_PLAY_MANA:Mountain": 11,
+        "GAME_SELECT:Pass": 146,
+        "GAME_SELECT:All attack": 9,
+        "GAME_SELECT:Plains": 5,
+        "GAME_SELECT:Ghitu Lavarunner": 1,
+        "GAME_SELECT:Bishop's Soldier": 1,
+        "GAME_PLAY_MANA:Plains": 11,
+        "GAME_SELECT:Firebrand Archer": 2,
+        "GAME_SELECT:Helpful Hunter": 1,
+        "GAME_SELECT:Healer's Hawk": 1,
+        "GAME_SELECT:Swab Goblin": 1,
+        "GAME_SELECT:Leonin Skyhunter": 1,
+        "GAME_SELECT:Savannah Lions": 1,
+        "GAME_SELECT:Inspiring Overseer": 1,
+        "GAME_SELECT:Viashino Pyromancer": 1,
+        "GAME_TARGET:pw1f9bf3551": 1
+      },
+      "seconds": 12.381452237001213,
+      "setup_seconds": 3.192638109001564,
+      "play_seconds": 9.177564142999472,
+      "cleanup_seconds": 0.011249985000176821
+    },
+    {
+      "engine": "xmage",
+      "index": 29,
+      "colors": [
+        "white",
+        "red"
+      ],
+      "starting_seat": 0,
+      "seed": null,
+      "status": "completed",
+      "winner_color": "red",
+      "winner_seat": 1,
+      "turn": 12,
+      "life": {
+        "player_0": -1,
+        "player_1": 12
+      },
+      "decisions": 190,
+      "callbacks": {
+        "GAME_TARGET:pwc6f910ad0": 1,
+        "GAME_ASK:Keep": 2,
+        "GAME_SELECT:Pass": 140,
+        "GAME_SELECT:Mountain": 6,
+        "GAME_SELECT:Ghitu Lavarunner": 2,
+        "GAME_PLAY_MANA:Mountain": 11,
+        "GAME_TARGET:Dazzling Angel": 1,
+        "GAME_SELECT:Fanatical Firebrand": 1,
+        "GAME_SELECT:All attack": 8,
+        "GAME_SELECT:Plains": 3,
+        "GAME_SELECT:Healer's Hawk": 1,
+        "GAME_PLAY_MANA:Plains": 7,
+        "GAME_SELECT:Firebrand Archer": 1,
+        "GAME_SELECT:Savannah Lions": 2,
+        "GAME_SELECT:Firespitter Whelp": 1,
+        "GAME_SELECT:Helpful Hunter": 2,
+        "GAME_SELECT:Raging Redcap": 1
+      },
+      "seconds": 11.728164419000677,
+      "setup_seconds": 3.1991149539971957,
+      "play_seconds": 8.519077189004747,
+      "cleanup_seconds": 0.009972275998734403
+    },
+    {
+      "engine": "rustmage",
+      "index": 29,
+      "colors": [
+        "white",
+        "red"
+      ],
+      "starting_seat": 0,
+      "seed": 830,
+      "status": "completed",
+      "winner_color": "red",
+      "winner_seat": 1,
+      "turn": 10,
+      "life": {
+        "player_0": -2,
+        "player_1": 11
+      },
+      "decisions": 289,
+      "callbacks": {
+        "mulligan:Keep": 2,
+        "opening_hand:FinishOpeningHand": 2,
+        "priority:Pass": 204,
+        "priority:PlayLand": 8,
+        "attackers:FinishAttackers": 10,
+        "priority:AnnounceCast": 10,
+        "kicker:ChooseKicker": 2,
+        "targets:ChooseTarget": 4,
+        "pay_costs:TapMana": 17,
+        "pay_costs:PayCosts": 10,
+        "attackers:Attack": 13,
+        "blockers:FinishBlockers": 7
+      },
+      "seconds": 0.49252746000274783,
+      "setup_seconds": 0.001990147997275926,
+      "play_seconds": 0.49047023599996464,
+      "cleanup_seconds": 6.707600550726056e-05
+    },
+    {
+      "engine": "rustmage",
+      "index": 30,
+      "colors": [
+        "red",
+        "white"
+      ],
+      "starting_seat": 1,
+      "seed": 831,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 1,
+      "turn": 11,
+      "life": {
+        "player_0": -4,
+        "player_1": 11
+      },
+      "decisions": 347,
+      "callbacks": {
+        "mulligan:Keep": 2,
+        "opening_hand:FinishOpeningHand": 2,
+        "priority:Pass": 238,
+        "priority:PlayLand": 8,
+        "priority:AnnounceCast": 12,
+        "pay_costs:TapMana": 19,
+        "pay_costs:PayCosts": 12,
+        "attackers:FinishAttackers": 11,
+        "attackers:Attack": 30,
+        "blockers:FinishBlockers": 10,
+        "kicker:ChooseKicker": 1,
+        "targets:ChooseTarget": 1,
+        "order_triggers:PutTrigger": 1
+      },
+      "seconds": 0.6135489789958228,
+      "setup_seconds": 0.0018509209985495545,
+      "play_seconds": 0.6116310700017493,
+      "cleanup_seconds": 6.69879955239594e-05
+    },
+    {
+      "engine": "xmage",
+      "index": 30,
+      "colors": [
+        "red",
+        "white"
+      ],
+      "starting_seat": 1,
+      "seed": null,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 1,
+      "turn": 11,
+      "life": {
+        "player_0": -3,
+        "player_1": 13
+      },
+      "decisions": 201,
+      "callbacks": {
+        "GAME_TARGET:pwd02038651": 4,
+        "GAME_ASK:Keep": 2,
+        "GAME_SELECT:Plains": 6,
+        "GAME_SELECT:Savannah Lions": 2,
+        "GAME_PLAY_MANA:Plains": 14,
+        "GAME_SELECT:Pass": 143,
+        "GAME_SELECT:Mountain": 3,
+        "GAME_SELECT:Burst Lightning": 2,
+        "GAME_ASK:No": 2,
+        "GAME_PLAY_MANA:Mountain": 7,
+        "GAME_SELECT:All attack": 8,
+        "GAME_SELECT:Fanatical Firebrand": 1,
+        "GAME_SELECT:Dazzling Angel": 1,
+        "GAME_SELECT:Swab Goblin": 1,
+        "GAME_SELECT:Inspiring Paladin": 2,
+        "GAME_SELECT:Viashino Pyromancer": 1,
+        "GAME_SELECT:Prideful Parent": 1,
+        "GAME_TARGET:Dazzling Angel": 1
+      },
+      "seconds": 12.155951209002524,
+      "setup_seconds": 3.2192029020006885,
+      "play_seconds": 8.927719762999914,
+      "cleanup_seconds": 0.009028544001921546
+    },
+    {
+      "engine": "xmage",
+      "index": 31,
+      "colors": [
+        "white",
+        "red"
+      ],
+      "starting_seat": 1,
+      "seed": null,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 0,
+      "turn": 12,
+      "life": {
+        "player_0": 7,
+        "player_1": -6
+      },
+      "decisions": 204,
+      "callbacks": {
+        "GAME_TARGET:pwb01e87061": 1,
+        "GAME_ASK:Keep": 2,
+        "GAME_SELECT:Mountain": 6,
+        "GAME_SELECT:Pass": 144,
+        "GAME_SELECT:Plains": 6,
+        "GAME_SELECT:Firebrand Archer": 1,
+        "GAME_PLAY_MANA:Mountain": 13,
+        "GAME_SELECT:Bishop's Soldier": 1,
+        "GAME_PLAY_MANA:Plains": 12,
+        "GAME_SELECT:Viashino Pyromancer": 1,
+        "GAME_TARGET:pwb01e87060": 1,
+        "GAME_SELECT:All attack": 8,
+        "GAME_SELECT:Healer's Hawk": 1,
+        "GAME_SELECT:Leonin Skyhunter": 1,
+        "GAME_SELECT:Firespitter Whelp": 1,
+        "GAME_SELECT:Dazzling Angel": 1,
+        "GAME_SELECT:Goblin Smuggler": 2,
+        "GAME_SELECT:Savannah Lions": 1,
+        "GAME_SELECT:Inspiring Paladin": 1
+      },
+      "seconds": 12.926916278003773,
+      "setup_seconds": 3.1917906040034723,
+      "play_seconds": 9.7212297379956,
+      "cleanup_seconds": 0.01389593600470107
+    },
+    {
+      "engine": "rustmage",
+      "index": 31,
+      "colors": [
+        "white",
+        "red"
+      ],
+      "starting_seat": 1,
+      "seed": 832,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 0,
+      "turn": 12,
+      "life": {
+        "player_0": 19,
+        "player_1": -12
+      },
+      "decisions": 366,
+      "callbacks": {
+        "mulligan:Keep": 2,
+        "opening_hand:FinishOpeningHand": 2,
+        "priority:Pass": 248,
+        "priority:PlayLand": 8,
+        "attackers:FinishAttackers": 12,
+        "priority:AnnounceCast": 15,
+        "pay_costs:TapMana": 27,
+        "pay_costs:PayCosts": 15,
+        "kicker:ChooseKicker": 1,
+        "targets:ChooseTarget": 1,
+        "attackers:Attack": 27,
+        "blockers:FinishBlockers": 8
+      },
+      "seconds": 0.7085411090010894,
+      "setup_seconds": 0.0020478080041357316,
+      "play_seconds": 0.7064158889988903,
+      "cleanup_seconds": 7.741199806332588e-05
+    },
+    {
+      "engine": "rustmage",
+      "index": 32,
+      "colors": [
+        "red",
+        "white"
+      ],
+      "starting_seat": 0,
+      "seed": 833,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 1,
+      "turn": 10,
+      "life": {
+        "player_0": -1,
+        "player_1": 8
+      },
+      "decisions": 310,
+      "callbacks": {
+        "mulligan:Keep": 2,
+        "opening_hand:FinishOpeningHand": 2,
+        "priority:Pass": 210,
+        "priority:PlayLand": 9,
+        "priority:AnnounceCast": 12,
+        "pay_costs:TapMana": 23,
+        "pay_costs:PayCosts": 12,
+        "attackers:FinishAttackers": 10,
+        "attackers:Attack": 22,
+        "blockers:FinishBlockers": 8
+      },
+      "seconds": 0.5356727319958736,
+      "setup_seconds": 0.0021669779962394387,
+      "play_seconds": 0.533456949997344,
+      "cleanup_seconds": 4.8804002290125936e-05
+    },
+    {
+      "engine": "xmage",
+      "index": 32,
+      "colors": [
+        "red",
+        "white"
+      ],
+      "starting_seat": 0,
+      "seed": null,
+      "status": "completed",
+      "winner_color": "red",
+      "winner_seat": 0,
+      "turn": 11,
+      "life": {
+        "player_0": 4,
+        "player_1": -3
+      },
+      "decisions": 208,
+      "callbacks": {
+        "GAME_TARGET:pw9dd2fb480": 1,
+        "GAME_ASK:Keep": 2,
+        "GAME_SELECT:Mountain": 4,
+        "GAME_SELECT:Burst Lightning": 3,
+        "GAME_ASK:No": 3,
+        "GAME_TARGET:pw9dd2fb481": 4,
+        "GAME_PLAY_MANA:Mountain": 13,
+        "GAME_SELECT:Pass": 145,
+        "GAME_SELECT:Plains": 5,
+        "GAME_SELECT:Savannah Lions": 1,
+        "GAME_PLAY_MANA:Plains": 9,
+        "GAME_SELECT:Ghitu Lavarunner": 1,
+        "GAME_SELECT:All attack": 9,
+        "GAME_SELECT:Healer's Hawk": 1,
+        "GAME_SELECT:Swab Goblin": 2,
+        "GAME_SELECT:Bishop's Soldier": 1,
+        "GAME_SELECT:Helpful Hunter": 1,
+        "GAME_SELECT:Viashino Pyromancer": 1,
+        "GAME_SELECT:Dazzling Angel": 1,
+        "GAME_SELECT:Raging Redcap": 1
+      },
+      "seconds": 12.547401561998413,
+      "setup_seconds": 3.1956323760023224,
+      "play_seconds": 9.34240316299838,
+      "cleanup_seconds": 0.009366022997710388
+    },
+    {
+      "engine": "xmage",
+      "index": 33,
+      "colors": [
+        "white",
+        "red"
+      ],
+      "starting_seat": 0,
+      "seed": null,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 0,
+      "turn": 11,
+      "life": {
+        "player_0": 18,
+        "player_1": -8
+      },
+      "decisions": 216,
+      "callbacks": {
+        "GAME_TARGET:pwa02cbd430": 2,
+        "GAME_ASK:Keep": 2,
+        "GAME_SELECT:Plains": 6,
+        "GAME_SELECT:Savannah Lions": 1,
+        "GAME_PLAY_MANA:Plains": 14,
+        "GAME_SELECT:Pass": 153,
+        "GAME_SELECT:Mountain": 4,
+        "GAME_SELECT:Burst Lightning": 1,
+        "GAME_ASK:No": 1,
+        "GAME_PLAY_MANA:Mountain": 10,
+        "GAME_SELECT:Bishop's Soldier": 1,
+        "GAME_SELECT:All attack": 9,
+        "GAME_SELECT:Fanatical Firebrand": 1,
+        "GAME_SELECT:Dazzling Angel": 2,
+        "GAME_SELECT:Ghitu Lavarunner": 1,
+        "GAME_SELECT:Firebrand Archer": 1,
+        "GAME_SELECT:Helpful Hunter": 1,
+        "GAME_TARGET:Dazzling Angel": 3,
+        "GAME_SELECT:Swab Goblin": 1,
+        "GAME_SELECT:Goblin Smuggler": 1,
+        "GAME_SELECT:Prideful Parent": 1
+      },
+      "seconds": 13.296607497002697,
+      "setup_seconds": 3.193173599000147,
+      "play_seconds": 10.09301190199767,
+      "cleanup_seconds": 0.010421996004879475
+    },
+    {
+      "engine": "rustmage",
+      "index": 33,
+      "colors": [
+        "white",
+        "red"
+      ],
+      "starting_seat": 0,
+      "seed": 834,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 0,
+      "turn": 11,
+      "life": {
+        "player_0": 11,
+        "player_1": -6
+      },
+      "decisions": 330,
+      "callbacks": {
+        "mulligan:Keep": 2,
+        "opening_hand:FinishOpeningHand": 2,
+        "priority:Pass": 228,
+        "priority:PlayLand": 10,
+        "priority:AnnounceCast": 11,
+        "pay_costs:TapMana": 19,
+        "pay_costs:PayCosts": 11,
+        "attackers:FinishAttackers": 11,
+        "kicker:ChooseKicker": 1,
+        "targets:ChooseTarget": 1,
+        "attackers:Attack": 25,
+        "blockers:FinishBlockers": 9
+      },
+      "seconds": 0.5987071710042073,
+      "setup_seconds": 0.0019448230013949797,
+      "play_seconds": 0.596715375999338,
+      "cleanup_seconds": 4.697200347436592e-05
+    },
+    {
+      "engine": "rustmage",
+      "index": 34,
+      "colors": [
+        "red",
+        "white"
+      ],
+      "starting_seat": 1,
+      "seed": 835,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 1,
+      "turn": 11,
+      "life": {
+        "player_0": 0,
+        "player_1": 15
+      },
+      "decisions": 357,
+      "callbacks": {
+        "mulligan:Keep": 2,
+        "opening_hand:FinishOpeningHand": 2,
+        "priority:Pass": 242,
+        "priority:PlayLand": 10,
+        "attackers:FinishAttackers": 11,
+        "priority:AnnounceCast": 14,
+        "pay_costs:TapMana": 27,
+        "pay_costs:PayCosts": 14,
+        "attackers:Attack": 22,
+        "blockers:FinishBlockers": 9,
+        "targets:ChooseTarget": 2,
+        "kicker:ChooseKicker": 1,
+        "order_triggers:PutTrigger": 1
+      },
+      "seconds": 0.6305719290030538,
+      "setup_seconds": 0.0018369710014667362,
+      "play_seconds": 0.6286889609982609,
+      "cleanup_seconds": 4.59970033261925e-05
+    },
+    {
+      "engine": "xmage",
+      "index": 34,
+      "colors": [
+        "red",
+        "white"
+      ],
+      "starting_seat": 1,
+      "seed": null,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 1,
+      "turn": 13,
+      "life": {
+        "player_0": -3,
+        "player_1": 7
+      },
+      "decisions": 229,
+      "callbacks": {
+        "GAME_TARGET:pw4c379c291": 4,
+        "GAME_ASK:Keep": 2,
+        "GAME_SELECT:Plains": 4,
+        "GAME_SELECT:Pass": 165,
+        "GAME_SELECT:Mountain": 4,
+        "GAME_SELECT:Burst Lightning": 1,
+        "GAME_ASK:No": 1,
+        "GAME_PLAY_MANA:Mountain": 13,
+        "GAME_SELECT:Healer's Hawk": 2,
+        "GAME_PLAY_MANA:Plains": 13,
+        "GAME_SELECT:Ghitu Lavarunner": 1,
+        "GAME_SELECT:Helpful Hunter": 1,
+        "GAME_SELECT:All attack": 9,
+        "GAME_SELECT:Firebrand Archer": 1,
+        "GAME_SELECT:Bishop's Soldier": 1,
+        "GAME_SELECT:Swab Goblin": 1,
+        "GAME_SELECT:Viashino Pyromancer": 2,
+        "GAME_SELECT:Dazzling Angel": 1,
+        "GAME_SELECT:Leonin Skyhunter": 2,
+        "GAME_SELECT:Goblin Smuggler": 1
+      },
+      "seconds": 14.123913329000061,
+      "setup_seconds": 3.197367681998003,
+      "play_seconds": 10.915044936002232,
+      "cleanup_seconds": 0.01150071099982597
+    },
+    {
+      "engine": "xmage",
+      "index": 35,
+      "colors": [
+        "white",
+        "red"
+      ],
+      "starting_seat": 1,
+      "seed": null,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 0,
+      "turn": 12,
+      "life": {
+        "player_0": 6,
+        "player_1": -1
+      },
+      "decisions": 228,
+      "callbacks": {
+        "GAME_TARGET:pwb43a4e2f1": 1,
+        "GAME_ASK:Keep": 2,
+        "GAME_SELECT:Mountain": 5,
+        "GAME_SELECT:Pass": 160,
+        "GAME_SELECT:Plains": 6,
+        "GAME_SELECT:Ghitu Lavarunner": 1,
+        "GAME_PLAY_MANA:Mountain": 12,
+        "GAME_SELECT:Leonin Skyhunter": 1,
+        "GAME_PLAY_MANA:Plains": 17,
+        "GAME_SELECT:Firebrand Archer": 2,
+        "GAME_SELECT:All attack": 8,
+        "GAME_SELECT:Helpful Hunter": 1,
+        "GAME_SELECT:Savannah Lions": 2,
+        "GAME_SELECT:Dazzling Angel": 1,
+        "GAME_SELECT:Swab Goblin": 1,
+        "GAME_SELECT:Viashino Pyromancer": 1,
+        "GAME_TARGET:pwb43a4e2f0": 1,
+        "GAME_SELECT:Inspiring Overseer": 2,
+        "GAME_TARGET:Dazzling Angel": 2,
+        "GAME_SELECT:Firespitter Whelp": 1,
+        "GAME_SELECT:Bishop's Soldier": 1
+      },
+      "seconds": 14.259549802998663,
+      "setup_seconds": 3.1967105680014356,
+      "play_seconds": 11.049103024000942,
+      "cleanup_seconds": 0.013736210996285081
+    },
+    {
+      "engine": "rustmage",
+      "index": 35,
+      "colors": [
+        "white",
+        "red"
+      ],
+      "starting_seat": 1,
+      "seed": 836,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 0,
+      "turn": 12,
+      "life": {
+        "player_0": 11,
+        "player_1": -7
+      },
+      "decisions": 388,
+      "callbacks": {
+        "mulligan:Keep": 2,
+        "opening_hand:FinishOpeningHand": 2,
+        "priority:Pass": 258,
+        "priority:PlayLand": 10,
+        "priority:AnnounceCast": 14,
+        "pay_costs:TapMana": 25,
+        "pay_costs:PayCosts": 14,
+        "attackers:Attack": 39,
+        "attackers:FinishAttackers": 12,
+        "blockers:FinishBlockers": 11,
+        "targets:ChooseTarget": 1
+      },
+      "seconds": 0.7281388490009704,
+      "setup_seconds": 0.0020065670032636262,
+      "play_seconds": 0.7260836329951417,
+      "cleanup_seconds": 4.864900256507099e-05
+    },
+    {
+      "engine": "rustmage",
+      "index": 36,
+      "colors": [
+        "red",
+        "white"
+      ],
+      "starting_seat": 0,
+      "seed": 837,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 1,
+      "turn": 12,
+      "life": {
+        "player_0": -2,
+        "player_1": 10
+      },
+      "decisions": 374,
+      "callbacks": {
+        "mulligan:Keep": 2,
+        "opening_hand:FinishOpeningHand": 2,
+        "priority:Pass": 262,
+        "priority:PlayLand": 9,
+        "priority:AnnounceCast": 12,
+        "kicker:ChooseKicker": 1,
+        "targets:ChooseTarget": 3,
+        "pay_costs:TapMana": 25,
+        "pay_costs:PayCosts": 12,
+        "attackers:FinishAttackers": 12,
+        "attackers:Attack": 21,
+        "blockers:FinishBlockers": 9,
+        "order_triggers:PutTrigger": 4
+      },
+      "seconds": 0.6519253549995483,
+      "setup_seconds": 0.0019406089995754883,
+      "play_seconds": 0.6499185970023973,
+      "cleanup_seconds": 6.61489975755103e-05
+    },
+    {
+      "engine": "xmage",
+      "index": 36,
+      "colors": [
+        "red",
+        "white"
+      ],
+      "starting_seat": 0,
+      "seed": null,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 1,
+      "turn": 12,
+      "life": {
+        "player_0": -4,
+        "player_1": 4
+      },
+      "decisions": 194,
+      "callbacks": {
+        "GAME_TARGET:pw0ecd2cbc0": 1,
+        "GAME_ASK:Keep": 2,
+        "GAME_SELECT:Mountain": 4,
+        "GAME_SELECT:Burst Lightning": 1,
+        "GAME_ASK:No": 1,
+        "GAME_TARGET:pw0ecd2cbc1": 1,
+        "GAME_PLAY_MANA:Mountain": 12,
+        "GAME_SELECT:Pass": 144,
+        "GAME_SELECT:Plains": 2,
+        "GAME_SELECT:Savannah Lions": 2,
+        "GAME_PLAY_MANA:Plains": 7,
+        "GAME_SELECT:Ghitu Lavarunner": 1,
+        "GAME_SELECT:Healer's Hawk": 1,
+        "GAME_SELECT:All attack": 9,
+        "GAME_SELECT:Firebrand Archer": 2,
+        "GAME_SELECT:Firespitter Whelp": 1,
+        "GAME_SELECT:Leonin Skyhunter": 1,
+        "GAME_SELECT:Goblin Smuggler": 1,
+        "GAME_SELECT:Helpful Hunter": 1
+      },
+      "seconds": 11.869963611999992,
+      "setup_seconds": 3.243812942004297,
+      "play_seconds": 8.611283641999762,
+      "cleanup_seconds": 0.014867027995933313
+    },
+    {
+      "engine": "xmage",
+      "index": 37,
+      "colors": [
+        "white",
+        "red"
+      ],
+      "starting_seat": 0,
+      "seed": null,
+      "status": "completed",
+      "winner_color": "red",
+      "winner_seat": 1,
+      "turn": 12,
+      "life": {
+        "player_0": -1,
+        "player_1": 1
+      },
+      "decisions": 216,
+      "callbacks": {
+        "GAME_TARGET:pw420d28810": 1,
+        "GAME_ASK:Keep": 2,
+        "GAME_SELECT:Plains": 6,
+        "GAME_SELECT:Pass": 155,
+        "GAME_SELECT:Mountain": 6,
+        "GAME_SELECT:Fanatical Firebrand": 1,
+        "GAME_PLAY_MANA:Mountain": 13,
+        "GAME_SELECT:All attack": 10,
+        "GAME_SELECT:Helpful Hunter": 1,
+        "GAME_PLAY_MANA:Plains": 12,
+        "GAME_SELECT:Firebrand Archer": 1,
+        "GAME_SELECT:Leonin Skyhunter": 1,
+        "GAME_SELECT:Ghitu Lavarunner": 1,
+        "GAME_SELECT:Dazzling Angel": 1,
+        "GAME_SELECT:Firespitter Whelp": 1,
+        "GAME_SELECT:Bishop's Soldier": 1,
+        "GAME_SELECT:Inspiring Paladin": 1,
+        "GAME_SELECT:Goblin Smuggler": 1,
+        "GAME_SELECT:Raging Redcap": 1
+      },
+      "seconds": 13.244885275998968,
+      "setup_seconds": 3.2061718900004053,
+      "play_seconds": 10.029482703001122,
+      "cleanup_seconds": 0.009230682997440454
+    },
+    {
+      "engine": "rustmage",
+      "index": 37,
+      "colors": [
+        "white",
+        "red"
+      ],
+      "starting_seat": 0,
+      "seed": 838,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 0,
+      "turn": 13,
+      "life": {
+        "player_0": 13,
+        "player_1": -5
+      },
+      "decisions": 415,
+      "callbacks": {
+        "mulligan:Keep": 2,
+        "opening_hand:FinishOpeningHand": 2,
+        "priority:Pass": 286,
+        "priority:PlayLand": 11,
+        "attackers:FinishAttackers": 13,
+        "priority:AnnounceCast": 15,
+        "kicker:ChooseKicker": 3,
+        "targets:ChooseTarget": 4,
+        "pay_costs:TapMana": 33,
+        "pay_costs:PayCosts": 15,
+        "order_triggers:PutTrigger": 4,
+        "attackers:Attack": 20,
+        "blockers:FinishBlockers": 7
+      },
+      "seconds": 0.8214635359981912,
+      "setup_seconds": 0.0020581790013238788,
+      "play_seconds": 0.8193475430016406,
+      "cleanup_seconds": 5.781399522675201e-05
+    },
+    {
+      "engine": "rustmage",
+      "index": 38,
+      "colors": [
+        "red",
+        "white"
+      ],
+      "starting_seat": 1,
+      "seed": 839,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 1,
+      "turn": 11,
+      "life": {
+        "player_0": -2,
+        "player_1": 1
+      },
+      "decisions": 356,
+      "callbacks": {
+        "mulligan:Keep": 2,
+        "opening_hand:FinishOpeningHand": 2,
+        "priority:Pass": 236,
+        "priority:PlayLand": 11,
+        "priority:AnnounceCast": 13,
+        "pay_costs:TapMana": 24,
+        "pay_costs:PayCosts": 13,
+        "attackers:FinishAttackers": 11,
+        "attackers:Attack": 32,
+        "blockers:FinishBlockers": 10,
+        "kicker:ChooseKicker": 1,
+        "targets:ChooseTarget": 1
+      },
+      "seconds": 0.6793860930047231,
+      "setup_seconds": 0.0017906920038512908,
+      "play_seconds": 0.6775414349976927,
+      "cleanup_seconds": 5.396600317908451e-05
+    },
+    {
+      "engine": "xmage",
+      "index": 38,
+      "colors": [
+        "red",
+        "white"
+      ],
+      "starting_seat": 1,
+      "seed": null,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 1,
+      "turn": 11,
+      "life": {
+        "player_0": -6,
+        "player_1": 23
+      },
+      "decisions": 224,
+      "callbacks": {
+        "GAME_TARGET:pw8eb8e7201": 3,
+        "GAME_ASK:Keep": 2,
+        "GAME_SELECT:Plains": 6,
+        "GAME_SELECT:Healer's Hawk": 1,
+        "GAME_PLAY_MANA:Plains": 18,
+        "GAME_SELECT:Pass": 152,
+        "GAME_SELECT:Mountain": 5,
+        "GAME_SELECT:Burst Lightning": 2,
+        "GAME_ASK:No": 2,
+        "GAME_PLAY_MANA:Mountain": 11,
+        "GAME_SELECT:Savannah Lions": 1,
+        "GAME_SELECT:All attack": 7,
+        "GAME_SELECT:Dazzling Angel": 3,
+        "GAME_SELECT:Firespitter Whelp": 1,
+        "GAME_SELECT:Goblin Smuggler": 2,
+        "GAME_SELECT:Helpful Hunter": 1,
+        "GAME_TARGET:Dazzling Angel": 5,
+        "GAME_SELECT:Inspiring Overseer": 1,
+        "GAME_SELECT:Bishop's Soldier": 1
+      },
+      "seconds": 14.099184007995063,
+      "setup_seconds": 3.202593669993803,
+      "play_seconds": 10.881308836003882,
+      "cleanup_seconds": 0.015281501997378655
+    },
+    {
+      "engine": "xmage",
+      "index": 39,
+      "colors": [
+        "white",
+        "red"
+      ],
+      "starting_seat": 1,
+      "seed": null,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 0,
+      "turn": 12,
+      "life": {
+        "player_0": 12,
+        "player_1": 0
+      },
+      "decisions": 216,
+      "callbacks": {
+        "GAME_TARGET:pw346cdaa81": 1,
+        "GAME_ASK:Keep": 2,
+        "GAME_SELECT:Mountain": 4,
+        "GAME_SELECT:Pass": 151,
+        "GAME_SELECT:Plains": 6,
+        "GAME_SELECT:Ghitu Lavarunner": 1,
+        "GAME_PLAY_MANA:Mountain": 12,
+        "GAME_SELECT:Bishop's Soldier": 2,
+        "GAME_PLAY_MANA:Plains": 17,
+        "GAME_SELECT:Firebrand Archer": 2,
+        "GAME_SELECT:All attack": 8,
+        "GAME_SELECT:Helpful Hunter": 1,
+        "GAME_SELECT:Viashino Pyromancer": 1,
+        "GAME_TARGET:pw346cdaa80": 1,
+        "GAME_SELECT:Healer's Hawk": 2,
+        "GAME_SELECT:Goblin Smuggler": 1,
+        "GAME_SELECT:Inspiring Overseer": 1,
+        "GAME_SELECT:Swab Goblin": 1,
+        "GAME_SELECT:Inspiring Paladin": 1,
+        "GAME_SELECT:Prideful Parent": 1
+      },
+      "seconds": 13.726911532001395,
+      "setup_seconds": 3.1955576079999446,
+      "play_seconds": 10.513895346004574,
+      "cleanup_seconds": 0.017458577996876556
+    },
+    {
+      "engine": "rustmage",
+      "index": 39,
+      "colors": [
+        "white",
+        "red"
+      ],
+      "starting_seat": 1,
+      "seed": 840,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 0,
+      "turn": 10,
+      "life": {
+        "player_0": 15,
+        "player_1": -2
+      },
+      "decisions": 297,
+      "callbacks": {
+        "mulligan:Keep": 2,
+        "opening_hand:FinishOpeningHand": 2,
+        "priority:Pass": 206,
+        "priority:PlayLand": 7,
+        "priority:AnnounceCast": 12,
+        "kicker:ChooseKicker": 1,
+        "targets:ChooseTarget": 1,
+        "pay_costs:TapMana": 18,
+        "pay_costs:PayCosts": 12,
+        "attackers:FinishAttackers": 10,
+        "attackers:Attack": 19,
+        "blockers:FinishBlockers": 7
+      },
+      "seconds": 0.49138122699514497,
+      "setup_seconds": 0.0019182649994036183,
+      "play_seconds": 0.4894095909985481,
+      "cleanup_seconds": 5.337099719326943e-05
+    }
+  ],
+  "warmups": [
+    {
+      "engine": "rustmage",
+      "index": 100000,
+      "colors": [
+        "red",
+        "white"
+      ],
+      "starting_seat": 0,
+      "seed": 100801,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 1,
+      "turn": 14,
+      "life": {
+        "player_0": -11,
+        "player_1": 26
+      },
+      "decisions": 393,
+      "callbacks": {
+        "mulligan:Keep": 2,
+        "opening_hand:FinishOpeningHand": 2,
+        "priority:Pass": 288,
+        "attackers:FinishAttackers": 14,
+        "priority:PlayLand": 7,
+        "discard:Discard": 4,
+        "priority:AnnounceCast": 11,
+        "pay_costs:TapMana": 21,
+        "pay_costs:PayCosts": 11,
+        "attackers:Attack": 21,
+        "blockers:FinishBlockers": 7,
+        "order_triggers:PutTrigger": 5
+      },
+      "seconds": 0.7003368280056748,
+      "setup_seconds": 0.006097197001508903,
+      "play_seconds": 0.6941576870012796,
+      "cleanup_seconds": 8.194400288630277e-05
+    },
+    {
+      "engine": "xmage",
+      "index": 100000,
+      "colors": [
+        "red",
+        "white"
+      ],
+      "starting_seat": 0,
+      "seed": null,
+      "status": "completed",
+      "winner_color": "red",
+      "winner_seat": 0,
+      "turn": 11,
+      "life": {
+        "player_0": 9,
+        "player_1": 0
+      },
+      "decisions": 197,
+      "callbacks": {
+        "GAME_TARGET:pw16b7631b0": 1,
+        "GAME_ASK:Keep": 2,
+        "GAME_SELECT:Mountain": 5,
+        "GAME_SELECT:Ghitu Lavarunner": 1,
+        "GAME_PLAY_MANA:Mountain": 12,
+        "GAME_SELECT:Pass": 142,
+        "GAME_SELECT:Plains": 5,
+        "GAME_SELECT:Healer's Hawk": 1,
+        "GAME_PLAY_MANA:Plains": 10,
+        "GAME_SELECT:Fanatical Firebrand": 1,
+        "GAME_SELECT:All attack": 9,
+        "GAME_SELECT:Swab Goblin": 1,
+        "GAME_SELECT:Inspiring Overseer": 1,
+        "GAME_SELECT:Viashino Pyromancer": 1,
+        "GAME_TARGET:pw16b7631b1": 1,
+        "GAME_SELECT:Inspiring Paladin": 2,
+        "GAME_SELECT:Firespitter Whelp": 2
+      },
+      "seconds": 14.091230029000144,
+      "setup_seconds": 3.292579091001244,
+      "play_seconds": 10.778514046003693,
+      "cleanup_seconds": 0.020136891995207407
+    },
+    {
+      "engine": "rustmage",
+      "index": 100001,
+      "colors": [
+        "white",
+        "red"
+      ],
+      "starting_seat": 0,
+      "seed": 100802,
+      "status": "completed",
+      "winner_color": "white",
+      "winner_seat": 0,
+      "turn": 11,
+      "life": {
+        "player_0": 13,
+        "player_1": -4
+      },
+      "decisions": 338,
+      "callbacks": {
+        "mulligan:Keep": 2,
+        "opening_hand:FinishOpeningHand": 2,
+        "priority:Pass": 228,
+        "priority:PlayLand": 8,
+        "attackers:FinishAttackers": 11,
+        "priority:AnnounceCast": 14,
+        "kicker:ChooseKicker": 2,
+        "targets:ChooseTarget": 2,
+        "pay_costs:TapMana": 23,
+        "pay_costs:PayCosts": 14,
+        "attackers:Attack": 24,
+        "blockers:FinishBlockers": 8
+      },
+      "seconds": 0.6428245310016791,
+      "setup_seconds": 0.0017377850017510355,
+      "play_seconds": 0.6410130949952872,
+      "cleanup_seconds": 7.365100464085117e-05
+    },
+    {
+      "engine": "xmage",
+      "index": 100001,
+      "colors": [
+        "white",
+        "red"
+      ],
+      "starting_seat": 0,
+      "seed": null,
+      "status": "completed",
+      "winner_color": "red",
+      "winner_seat": 1,
+      "turn": 12,
+      "life": {
+        "player_0": -6,
+        "player_1": 3
+      },
+      "decisions": 214,
+      "callbacks": {
+        "GAME_TARGET:pw4a24ecec0": 4,
+        "GAME_ASK:Keep": 2,
+        "GAME_SELECT:Plains": 4,
+        "GAME_SELECT:Pass": 151,
+        "GAME_SELECT:Mountain": 5,
+        "GAME_SELECT:Burst Lightning": 1,
+        "GAME_ASK:No": 1,
+        "GAME_PLAY_MANA:Mountain": 16,
+        "GAME_SELECT:Leonin Skyhunter": 2,
+        "GAME_PLAY_MANA:Plains": 9,
+        "GAME_SELECT:Fanatical Firebrand": 1,
+        "GAME_SELECT:All attack": 9,
+        "GAME_SELECT:Swab Goblin": 1,
+        "GAME_SELECT:Healer's Hawk": 2,
+        "GAME_SELECT:Viashino Pyromancer": 2,
+        "GAME_SELECT:Goblin Smuggler": 2,
+        "GAME_SELECT:Dazzling Angel": 1,
+        "GAME_SELECT:Firebrand Archer": 1
+      },
+      "seconds": 14.633806101002847,
+      "setup_seconds": 3.2485963970029843,
+      "play_seconds": 11.371028002999083,
+      "cleanup_seconds": 0.014181701000779867
+    }
+  ],
+  "summary": {
+    "rustmage": {
+      "attempts": 40,
+      "completed": 40,
+      "failures": 0,
+      "seconds": 25.493127810004808,
+      "games_per_minute": 94.14301838074641,
+      "bootstrap_95_percent_gpm": [
+        89.82139590165792,
+        99.33258632684661
+      ],
+      "mean_game_seconds": 0.6373281952501202,
+      "mean_setup_seconds": 0.0019059910002397374,
+      "mean_play_seconds": 0.6353670138498273,
+      "mean_cleanup_seconds": 5.5190400053106715e-05,
+      "mean_decisions": 353.05,
+      "mean_global_turns": 11.35,
+      "wins": {
+        "white": 34,
+        "red": 6
+      },
+      "decisions_per_second": 553.9532106553753
+    },
+    "xmage": {
+      "attempts": 40,
+      "completed": 40,
+      "failures": 0,
+      "seconds": 523.7568101069919,
+      "games_per_minute": 4.582279320644505,
+      "bootstrap_95_percent_gpm": [
+        4.418063934652982,
+        4.7494928287268054
+      ],
+      "mean_game_seconds": 13.093920252674797,
+      "mean_setup_seconds": 3.2160931343751145,
+      "mean_play_seconds": 9.864562274324816,
+      "mean_cleanup_seconds": 0.01326484397486638,
+      "mean_decisions": 209.125,
+      "mean_global_turns": 11.65,
+      "wins": {
+        "white": 28,
+        "red": 12
+      },
+      "decisions_per_second": 15.97115271549637
+    }
+  },
+  "affinity_restored": true,
+  "affinity_restoration_verified": true,
+  "audit": {
+    "date": "2026-10-18",
+    "completed_naturally": 80,
+    "failed": 0,
+    "measured_games_per_engine": 40,
+    "excluded_warmups_per_engine": 2,
+    "each_seat_start_combination_per_engine": 10,
+    "source_hashes_verified": true,
+    "engine_revision_verified": true,
+    "affinity_restoration_verified": true
+  },
+  "speedup": 20.545019583726518,
+  "xmage_version": "1.4.62-V1; Nexus gateway protocol 1 (checked by adapter on each login)",
+  "measurement_source_snapshots": {
+    "/home/altf4/Code/mtgo-bot/patchwork_automaton/examples/compare_engines.py": "\"\"\"Complete Foundations aggro games through the same API, policy, and CPU budget.\n\nBoth seats use FoundationsAggro. Rotate color/seat and starting player separately.\nInterleave engines to reduce ordering bias. Failures are retained, never replaced.\nNo neural inference, training, network startup, forced concessions or short games.\n\"\"\"\nimport argparse\nimport asyncio\nfrom collections import Counter\nimport hashlib\nimport json\nimport os\nfrom pathlib import Path\nimport platform\nimport random\nimport statistics\nimport time\n\nfrom examples.xmage_benchmark import affinity\nfrom patchwork_automaton.backends.rustmage import OBSERVATION_SCHEMA, RUSTMAGE_REVISION\nfrom patchwork_automaton.backends.xmage_prompts import prompt_metadata\nfrom patchwork_automaton.baselines.foundations import DATA, FoundationsAggro, foundations_deck\nfrom patchwork_automaton.core import Response\nfrom patchwork_automaton.rl import EpisodeEnd, RustMageSelfPlay, XMageSelfPlay\n\n\ndef summary(rows):\n    seconds = sum(r['seconds'] for r in rows)\n    completed = [r for r in rows if r['status'] == 'completed']\n    rng = random.Random(0)\n    rates = sorted(60*sum(r['status'] == 'completed' for r in sample)/sum(r['seconds'] for r in sample)\n                   for sample in (rng.choices(rows, k=len(rows)) for _ in range(2000))) if rows else []\n    return dict(attempts=len(rows), completed=len(completed), failures=len(rows)-len(completed),\n        seconds=seconds, games_per_minute=60*len(completed)/seconds if seconds else None,\n        bootstrap_95_percent_gpm=[rates[50], rates[1949]] if rates else None,\n        mean_game_seconds=statistics.mean(r['seconds'] for r in rows) if rows else None,\n        mean_setup_seconds=statistics.mean(r['setup_seconds'] for r in rows) if rows else None,\n        mean_play_seconds=statistics.mean(r['play_seconds'] for r in rows) if rows else None,\n        mean_cleanup_seconds=statistics.mean(r['cleanup_seconds'] for r in rows) if rows else None,\n        mean_decisions=statistics.mean(r['decisions'] for r in completed) if completed else None,\n        mean_global_turns=statistics.mean(r['turn'] for r in completed) if completed else None,\n        wins=dict(Counter(r['winner_color'] for r in completed)),\n        decisions_per_second=sum(r['decisions'] for r in rows)/seconds if seconds else None)\n\n\nasync def episode(engine, index, args):\n    colors = ('red', 'white') if index % 2 == 0 else ('white', 'red')\n    starting_seat = (index // 2) % 2\n    decks = tuple(foundations_deck(c) for c in colors)\n    policy = FoundationsAggro()\n    options = dict(timeout=args.timeout, max_decisions=args.limit)\n    factory = (RustMageSelfPlay(*decks, checkout=args.rustmage, starting_player=f'P{starting_seat}', **options)\n               if engine == 'rustmage' else XMageSelfPlay(*decks, deck_type='Constructed - Standard', **options))\n    row = dict(engine=engine, index=index, colors=colors, starting_seat=starting_seat,\n               seed=args.seed+index if engine == 'rustmage' else None)\n    counts = Counter(); recent = []; start = time.perf_counter(); first = start; ended = start\n    runner = None; first_active = None\n    try:\n        async with asyncio.timeout(args.game_timeout):\n            runner = await factory.reset(seed=args.seed+index) if engine == 'rustmage' else await factory.reset()\n            seat_actors = {s: (await g.snapshot()).actor for s, g in runner.games.items()}\n            desired_start = seat_actors[f'player_{starting_seat}']\n            turn = await runner.next(); first = time.perf_counter()\n            while not isinstance(turn, EpisodeEnd):\n                obs = turn.observation\n                if obs.phase is not None and first_active is None:\n                    first_active = obs.active_player\n                    if first_active != desired_start: raise RuntimeError('Starting player mismatch')\n                purpose = prompt_metadata(obs.decision.kind, obs.decision.native)['purpose'] if engine == 'xmage' else None\n                if purpose == 'starting_player':\n                    response = Response('object:' + desired_start.value)\n                else: response = policy.choose(obs)\n                option = next(o for o in obs.decision.options if o.id == response.option)\n                counts[obs.decision.kind + ':' + option.label] += 1\n                recent.append(dict(turn=obs.turn, actor=turn.actor, kind=obs.decision.kind,\n                                   choice=option.label, response=response.option))\n                recent = recent[-12:]\n                await runner.submit(response)\n                turn = await runner.next()\n            ended = time.perf_counter()\n            if turn.truncated:\n                row.update(status='cutoff', reason=turn.reason, recent=recent)\n            else:\n                if len(turn.observations) != 2: raise RuntimeError('Missing terminal seat')\n                outcomes = [turn.observations[f'player_{i}'].outcome for i in range(2)]\n                if any(o is None for o in outcomes): raise RuntimeError('Missing result')\n                winners = [i for i, o in enumerate(outcomes) if o.won is True]\n                draws = all(o.draw is True for o in outcomes)\n                if not draws and (len(winners) != 1 or outcomes[1-winners[0]].won is not False):\n                    raise RuntimeError('Inconsistent terminal results')\n                final = turn.observations['player_0']\n                row.update(status='completed', winner_color=colors[winners[0]] if winners else 'draw',\n                           winner_seat=winners[0] if winners else None, turn=final.turn,\n                           life={s: next(p.life for p in final.players if p.id == a) for s, a in seat_actors.items()})\n    except TimeoutError:\n        ended = time.perf_counter(); row.update(status='cutoff', reason='wall_clock_limit', recent=recent)\n    except Exception as error:\n        ended = time.perf_counter(); row.update(status='error', reason=repr(error), recent=recent)\n    finally:\n        row['decisions'] = runner.steps if runner else 0\n        row['callbacks'] = dict(counts)\n        await factory.close()\n        closed = time.perf_counter()\n        row.update(seconds=closed-start, setup_seconds=first-start,\n                   play_seconds=ended-first, cleanup_seconds=closed-ended)\n    return row\n\n\nasync def run(args):\n    if args.output.exists(): raise FileExistsError(args.output)\n    args.output.parent.mkdir(parents=True, exist_ok=True)\n    rows = []; warmups = []\n    engine_names = ('rustmage', 'xmage') if args.engine == 'both' else (args.engine,)\n    library = args.rustmage / 'target/release/librustmage.so'\n    sources = [Path(__file__), Path('src/patchwork_automaton/backends/rustmage.py'),\n               Path('src/patchwork_automaton/baselines/foundations.py'),\n               Path('src/patchwork_automaton/data/foundations-aggro.json'),\n               Path('src/patchwork_automaton/rl/runner.py'), Path('src/patchwork_automaton/rl/rustmage.py'),\n               Path('src/patchwork_automaton/backends/xmage.py'), args.rustmage/'python/rustmage.py']\n    report = dict(schema=1, rustmage_revision=RUSTMAGE_REVISION, observation_schema=OBSERVATION_SCHEMA,\n        source_sha256={str(p): hashlib.sha256(p.read_bytes()).hexdigest() for p in sources},\n        library_sha256=hashlib.sha256(library.read_bytes()).hexdigest() if library.exists() else None,\n        decks=DATA, config={k: str(v) if isinstance(v, Path) else v for k, v in vars(args).items()},\n        machine=dict(platform=platform.platform(), processor=platform.processor(), logical_cpus=os.cpu_count()),\n        methodology=['One sequential worker, same deterministic policy and exact 60-card FDN decks.',\n            'Seat and starting-player independently rotated. Engines interleaved; warmups excluded.',\n            'Full natural games; time includes reset/login/deck/table setup, policy, adapters, gameplay and cleanup.',\n            'Excludes engine startup, library compilation, inference and training. Failures retained.',\n            'RustMage seeded; stock XMage shuffles unseeded. Comparable workload, not identical trajectories.',\n            'RustMage uses ctypes/JSON and common Python observation conversion; not a raw Rust rollout benchmark.',\n            'Native decision granularity differs; decisions/second is diagnostic, not an equal-work metric.'])\n    def persist():\n        report.update(games=rows, warmups=warmups,\n                      summary={e: summary([r for r in rows if r['engine'] == e]) for e in engine_names})\n        tmp = args.output.with_suffix('.tmp'); tmp.write_text(json.dumps(report, indent=2)+'\\n'); tmp.replace(args.output)\n    with affinity(args.one_cpu, args.output) as cpu:\n        report['logical_cpu'] = cpu\n        for index in range(args.warmup):\n            for engine in engine_names:\n                row = await episode(engine, index+100000, args); warmups.append(row)\n                print(json.dumps(dict(warmup=index, engine=engine, status=row['status'], seconds=row['seconds'])), flush=True)\n                persist()\n                if row['status'] != 'completed': raise RuntimeError('Warmup failed: ' + repr(row))\n        for index in range(args.games):\n            order = engine_names if index % 2 == 0 else engine_names[::-1]\n            for engine in order:\n                row = await episode(engine, index, args); rows.append(row); persist()\n                print(json.dumps(dict(index=index, engine=engine, status=row['status'], seconds=row['seconds'],\n                                      turn=row.get('turn'), winner=row.get('winner_color'))), flush=True)\n    report['affinity_restored'] = True\n    if args.one_cpu:\n        recovery = json.loads(args.output.with_suffix('.affinity.json').read_text())\n        for pid, default in recovery['defaults'].items():\n            for task in Path(f'/proc/{pid}/task').iterdir():\n                try:\n                    expected = recovery['threads'].get(task.name, default)\n                    if sorted(os.sched_getaffinity(int(task.name))) != expected:\n                        raise RuntimeError('CPU affinity was not restored for thread ' + task.name)\n                except ProcessLookupError: pass\n    report['affinity_restoration_verified'] = args.one_cpu\n    persist()\n    print(json.dumps(report['summary'], indent=2), flush=True)\n\n\nif __name__ == '__main__':\n    p = argparse.ArgumentParser(description=__doc__)\n    p.add_argument('--engine', choices=('both', 'rustmage', 'xmage'), default='both')\n    p.add_argument('--games', type=int, default=40, help='Measured attempts per engine')\n    p.add_argument('--warmup', type=int, default=2)\n    p.add_argument('--seed', type=int, default=801)\n    p.add_argument('--limit', type=int, default=3000)\n    p.add_argument('--timeout', type=float, default=30)\n    p.add_argument('--game-timeout', type=float, default=120)\n    p.add_argument('--rustmage', type=Path, default=Path('.local/rustmage'))\n    p.add_argument('--output', type=Path, required=True)\n    p.add_argument('--one-cpu', action='store_true')\n    args = p.parse_args()\n    if min(args.games, args.limit, args.timeout, args.game_timeout) <= 0 or args.warmup < 0:\n        p.error('Counts/timeouts must be positive and warmup nonnegative')\n    asyncio.run(run(args))\n",
+    "/home/altf4/Code/mtgo-bot/patchwork_automaton/src/patchwork_automaton/rl/rustmage.py": "\"\"\"Seedable in-memory self-play with the same DecisionRunner as XMage.\"\"\"\nfrom ..backends.rustmage import RustMageMatch\nfrom .runner import DecisionRunner\n\n\nclass RustMageSelfPlay:\n    def __init__(self, first_deck, second_deck=None, *, timeout=30,\n                 max_decisions=10000, **match_options):\n        self.decks = first_deck, second_deck\n        self.timeout, self.max_decisions = timeout, max_decisions\n        self.match_options = match_options\n        self.match = self.runner = None\n\n    async def reset(self, *, seed=None):\n        await self.close()\n        self.match = RustMageMatch(*self.decks, seed=0 if seed is None else seed, **self.match_options)\n        self.runner = DecisionRunner(self.match.games, timeout=self.timeout, max_decisions=self.max_decisions)\n        return self.runner\n\n    async def close(self):\n        if self.runner: await self.runner.close()\n        if self.match: self.match.close()\n        self.match = self.runner = None\n"
+  },
+  "validation": {
+    "tests": 280,
+    "passed": true,
+    "log_sha256": "e82e09ceed5c3d0c3ac0149d50a7fafe85abeb1f09d172d716b8e0f9a9fbd06b",
+    "post_measurement_hardening_smoke": "One additional RustMage game completed; excluded from measured sample",
+    "wheel_built": true
+  }
+}

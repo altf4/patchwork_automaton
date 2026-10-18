@@ -2,11 +2,58 @@
 import tempfile
 from pathlib import Path
 import unittest
+from unittest.mock import patch
 from test_neural import AVAILABLE
 
 
 @unittest.skipUnless(AVAILABLE,'Install neural dependencies with uv')
 class StreamingPPOTests(unittest.TestCase):
+    def test_cached_shared_validation_matches_uncached_separate_passes(self):
+        import numpy as np
+        from patchwork_automaton.neural.streaming_ppo import StreamingPPOTrainer
+        from patchwork_automaton.neural.experiment import read_trajectory
+        with tempfile.TemporaryDirectory() as directory:
+            model, trajectories = self.fixture(Path(directory)/'first')
+            other, _ = self.fixture(Path(directory)/'second')
+            other.set_weights(model.get_weights())
+            options = dict(seed=21, batch_size=2, epochs=2, learning_rate=.0001,
+                advantage_scale_floor=1., target_kl=.01, max_state_kl=.05)
+            uncached = StreamingPPOTrainer(model, cache_bytes=0, **options)
+            cached = StreamingPPOTrainer(other, cache_bytes=16*1024**2, **options)
+            uncached.compile(); cached.compile()
+            # Keep the former two-forward validation as an independent oracle.
+            uncached.measure_with_drift = lambda *args: (uncached.measure(*args[:-1]),
+                                                        uncached.drift(args[0], args[-1]))
+            with patch('patchwork_automaton.neural.streaming_ppo.read_trajectory', wraps=read_trajectory) as reads:
+                reference = uncached.update_files(trajectories)
+                uncached_reads = reads.call_count
+                reads.reset_mock()
+                result = cached.update_files(trajectories)
+                self.assertEqual(reads.call_count, len(trajectories))
+                self.assertGreater(uncached_reads, reads.call_count)
+            self.assertEqual(result['accepted_steps'], reference['accepted_steps'])
+            self.assertEqual(result['rejected_epochs'], reference['rejected_epochs'])
+            self.assertGreater(result['cache']['batch_hits'], 0)
+            self.assertLessEqual(result['cache']['retained_bytes'], cached.cache_bytes)
+            self.assertEqual(reference['cache']['retained_bytes'], 0)
+            self.assertEqual(uncached.rng.bit_generator.state, cached.rng.bit_generator.state)
+            for left, right in zip(model.get_weights(), other.get_weights()):
+                np.testing.assert_allclose(left, right, rtol=1e-6, atol=1e-7)
+            for left, right in zip(uncached.optimizer.variables, cached.optimizer.variables):
+                np.testing.assert_allclose(left, right, rtol=1e-6, atol=1e-7)
+
+    def test_rollout_cache_accounts_for_views_and_obeys_small_budget(self):
+        import numpy as np
+        from patchwork_automaton.neural.rollout_cache import RolloutCache, retained_bytes
+        array = np.ones(1000, np.float32)
+        self.assertGreaterEqual(retained_bytes(array[:1]), array.nbytes)
+        cache = RolloutCache(1024)
+        self.assertFalse(cache.put('too_big', array))
+        self.assertEqual(cache.bytes, 0)
+        self.assertTrue(cache.put('small', (1, 2)))
+        self.assertEqual(cache.get('small'), (1, 2))
+        self.assertLessEqual(cache.bytes, cache.limit)
+
     def fixture(self, directory, *, missing_behavior=False):
         import numpy as np
         from patchwork_automaton.neural.policy import untrained_policy
