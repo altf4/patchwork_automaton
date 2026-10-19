@@ -1,0 +1,1470 @@
+{
+  "small_split": {
+    "scope": "Frozen saved numeric rollouts, split by whole game with both seats together. Terminal targets only; actor frozen. Larger diagnostic uses four successive behavior policies. These are state-weighted prediction metrics from one split, not a new gameplay evaluation.",
+    "train_games": 20,
+    "heldout_games": 5,
+    "train_samples": 6974,
+    "heldout_samples": 2019,
+    "heldout_game_indices": [
+      2,
+      3,
+      7,
+      12,
+      13
+    ],
+    "all_advancing": true,
+    "cases": {
+      "grouped_existing": [
+        {
+          "epoch": 0,
+          "train": {
+            "mse": 1.0294175148010254,
+            "explained_variance": 4.285573959350586e-05,
+            "prediction_mean": 0.14273470640182495,
+            "prediction_std": 0.0012627760879695415,
+            "sign_accuracy": 0.48408373960424433,
+            "label_mean": -0.03183251991868019,
+            "late_mse": 1.0283207893371582
+          },
+          "heldout": {
+            "mse": 0.9691219329833984,
+            "explained_variance": -7.927417755126953e-05,
+            "prediction_mean": 0.14277036488056183,
+            "prediction_std": 0.0011576884426176548,
+            "sign_accuracy": 0.5898959881129272,
+            "label_mean": 0.17979197204113007,
+            "late_mse": 0.969953179359436
+          }
+        },
+        {
+          "epoch": 1,
+          "seconds": 5.103066556999693,
+          "pure_batches": 198,
+          "batches": 218,
+          "mean_gradient_norm": 2.832152397602523,
+          "train": {
+            "mse": 1.0193530321121216,
+            "explained_variance": -1.4424324035644531e-05,
+            "prediction_mean": 0.11082787066698074,
+            "prediction_std": 0.00024314124311786145,
+            "sign_accuracy": 0.48408373960424433,
+            "label_mean": -0.03183251991868019,
+            "late_mse": 1.0184890031814575
+          },
+          "heldout": {
+            "mse": 0.9724297523498535,
+            "explained_variance": 5.960464477539062e-07,
+            "prediction_mean": 0.11083108931779861,
+            "prediction_std": 0.0002378234639763832,
+            "sign_accuracy": 0.5898959881129272,
+            "label_mean": 0.17979197204113007,
+            "late_mse": 0.9729905128479004
+          }
+        },
+        {
+          "epoch": 2,
+          "seconds": 3.8011461769929156,
+          "pure_batches": 201,
+          "batches": 218,
+          "mean_gradient_norm": 2.4257427983396096,
+          "train": {
+            "mse": 1.0155653953552246,
+            "explained_variance": 0.0001227855682373047,
+            "prediction_mean": 0.09740129113197327,
+            "prediction_std": 0.0016685944283381104,
+            "sign_accuracy": 0.48408373960424433,
+            "label_mean": -0.03183251991868019,
+            "late_mse": 1.0144740343093872
+          },
+          "heldout": {
+            "mse": 0.974499523639679,
+            "explained_variance": -1.0728836059570312e-05,
+            "prediction_mean": 0.09724223613739014,
+            "prediction_std": 0.001692565274424851,
+            "sign_accuracy": 0.5898959881129272,
+            "label_mean": 0.17979197204113007,
+            "late_mse": 0.9749608039855957
+          }
+        },
+        {
+          "epoch": 3,
+          "seconds": 3.744057337011327,
+          "pure_batches": 203,
+          "batches": 218,
+          "mean_gradient_norm": 2.2451747112454625,
+          "train": {
+            "mse": 1.011276364326477,
+            "explained_variance": 0.00010192394256591797,
+            "prediction_mean": 0.07948479056358337,
+            "prediction_std": 0.001293478300794959,
+            "sign_accuracy": 0.48408373960424433,
+            "label_mean": -0.03183251991868019,
+            "late_mse": 1.010648488998413
+          },
+          "heldout": {
+            "mse": 0.9779106378555298,
+            "explained_variance": -0.0001817941665649414,
+            "prediction_mean": 0.07949189841747284,
+            "prediction_std": 0.0013235050719231367,
+            "sign_accuracy": 0.5898959881129272,
+            "label_mean": 0.17979197204113007,
+            "late_mse": 0.978251039981842
+          }
+        },
+        {
+          "epoch": 4,
+          "seconds": 3.796231690008426,
+          "pure_batches": 197,
+          "batches": 218,
+          "mean_gradient_norm": 2.210684003154619,
+          "train": {
+            "mse": 1.0114487409591675,
+            "explained_variance": 0.00014960765838623047,
+            "prediction_mean": 0.08046900480985641,
+            "prediction_std": 0.00186345842666924,
+            "sign_accuracy": 0.48408373960424433,
+            "label_mean": -0.03183251991868019,
+            "late_mse": 1.0108567476272583
+          },
+          "heldout": {
+            "mse": 0.9777902364730835,
+            "explained_variance": -0.0002690553665161133,
+            "prediction_mean": 0.08051908016204834,
+            "prediction_std": 0.0018277507042512298,
+            "sign_accuracy": 0.5898959881129272,
+            "label_mean": 0.17979197204113007,
+            "late_mse": 0.9781467318534851
+          }
+        },
+        {
+          "epoch": 5,
+          "seconds": 3.8563278779911343,
+          "pure_batches": 192,
+          "batches": 218,
+          "mean_gradient_norm": 2.1152019716047366,
+          "train": {
+            "mse": 1.0094199180603027,
+            "explained_variance": 0.0001620650291442871,
+            "prediction_mean": 0.07110009342432022,
+            "prediction_std": 0.001426776172593236,
+            "sign_accuracy": 0.48408373960424433,
+            "label_mean": -0.03183251991868019,
+            "late_mse": 1.0088605880737305
+          },
+          "heldout": {
+            "mse": 0.9796618223190308,
+            "explained_variance": -0.00018393993377685547,
+            "prediction_mean": 0.07112191617488861,
+            "prediction_std": 0.0014582775766029954,
+            "sign_accuracy": 0.5898959881129272,
+            "label_mean": 0.17979197204113007,
+            "late_mse": 0.9799179434776306
+          }
+        },
+        {
+          "epoch": 6,
+          "seconds": 3.672403399992618,
+          "pure_batches": 196,
+          "batches": 218,
+          "mean_gradient_norm": 2.096386621441316,
+          "train": {
+            "mse": 1.0087250471115112,
+            "explained_variance": 0.00020712614059448242,
+            "prediction_mean": 0.06789348274469376,
+            "prediction_std": 0.0018593521090224385,
+            "sign_accuracy": 0.48408373960424433,
+            "label_mean": -0.03183251991868019,
+            "late_mse": 1.0080876350402832
+          },
+          "heldout": {
+            "mse": 0.9804052710533142,
+            "explained_variance": -0.00020372867584228516,
+            "prediction_mean": 0.06783968210220337,
+            "prediction_std": 0.0018713001627475023,
+            "sign_accuracy": 0.5898959881129272,
+            "label_mean": 0.17979197204113007,
+            "late_mse": 0.9806780815124512
+          }
+        }
+      ],
+      "shuffled_existing": [
+        {
+          "epoch": 0,
+          "train": {
+            "mse": 1.0294175148010254,
+            "explained_variance": 4.285573959350586e-05,
+            "prediction_mean": 0.14273470640182495,
+            "prediction_std": 0.0012627760879695415,
+            "sign_accuracy": 0.48408373960424433,
+            "label_mean": -0.03183251991868019,
+            "late_mse": 1.0283207893371582
+          },
+          "heldout": {
+            "mse": 0.9691219329833984,
+            "explained_variance": -7.927417755126953e-05,
+            "prediction_mean": 0.14277036488056183,
+            "prediction_std": 0.0011576884426176548,
+            "sign_accuracy": 0.5898959881129272,
+            "label_mean": 0.17979197204113007,
+            "late_mse": 0.969953179359436
+          }
+        },
+        {
+          "epoch": 1,
+          "seconds": 6.013227913004812,
+          "pure_batches": 0,
+          "batches": 218,
+          "mean_gradient_norm": 0.6749506367951494,
+          "train": {
+            "mse": 0.9924638271331787,
+            "explained_variance": 0.006539642810821533,
+            "prediction_mean": -0.035028357058763504,
+            "prediction_std": 0.02676273137331009,
+            "sign_accuracy": 0.5391453971895612,
+            "label_mean": -0.03183251991868019,
+            "late_mse": 0.9888373613357544
+          },
+          "heldout": {
+            "mse": 1.0178641080856323,
+            "explained_variance": -0.004121303558349609,
+            "prediction_mean": -0.035152994096279144,
+            "prediction_std": 0.027300678193569183,
+            "sign_accuracy": 0.40762753838533927,
+            "label_mean": 0.17979197204113007,
+            "late_mse": 1.013766884803772
+          }
+        },
+        {
+          "epoch": 2,
+          "seconds": 5.95603765299893,
+          "pure_batches": 0,
+          "batches": 218,
+          "mean_gradient_norm": 0.7416227189909428,
+          "train": {
+            "mse": 0.9824444651603699,
+            "explained_variance": 0.01860487461090088,
+            "prediction_mean": 0.013377954252064228,
+            "prediction_std": 0.0596696212887764,
+            "sign_accuracy": 0.5732721537137941,
+            "label_mean": -0.03183251991868019,
+            "late_mse": 0.9757777452468872
+          },
+          "heldout": {
+            "mse": 1.0088505744934082,
+            "explained_variance": -0.014135241508483887,
+            "prediction_mean": 0.013968262821435928,
+            "prediction_std": 0.06133318692445755,
+            "sign_accuracy": 0.4814264487369985,
+            "label_mean": 0.17979197204113007,
+            "late_mse": 0.9990596771240234
+          }
+        },
+        {
+          "epoch": 3,
+          "seconds": 6.043407900011516,
+          "pure_batches": 0,
+          "batches": 218,
+          "mean_gradient_norm": 0.9043607274326709,
+          "train": {
+            "mse": 0.9521395564079285,
+            "explained_variance": 0.06346720457077026,
+            "prediction_mean": 0.09683706611394882,
+            "prediction_std": 0.13155896961688995,
+            "sign_accuracy": 0.5807284198451391,
+            "label_mean": -0.03183251991868019,
+            "late_mse": 0.9306554794311523
+          },
+          "heldout": {
+            "mse": 1.0217645168304443,
+            "explained_variance": -0.04940640926361084,
+            "prediction_mean": 0.10054270923137665,
+            "prediction_std": 0.13446572422981262,
+            "sign_accuracy": 0.5368994551758296,
+            "label_mean": 0.17979197204113007,
+            "late_mse": 1.0056214332580566
+          }
+        },
+        {
+          "epoch": 4,
+          "seconds": 5.979775172992959,
+          "pure_batches": 0,
+          "batches": 218,
+          "mean_gradient_norm": 2.5377225718640406,
+          "train": {
+            "mse": 0.8100550174713135,
+            "explained_variance": 0.20352154970169067,
+            "prediction_mean": 0.08809953927993774,
+            "prediction_std": 0.3679935932159424,
+            "sign_accuracy": 0.6889876684829366,
+            "label_mean": -0.03183251991868019,
+            "late_mse": 0.6857101917266846
+          },
+          "heldout": {
+            "mse": 1.2560184001922607,
+            "explained_variance": -0.2932966947555542,
+            "prediction_mean": 0.11250156164169312,
+            "prediction_std": 0.35620757937431335,
+            "sign_accuracy": 0.45864289252105,
+            "label_mean": 0.17979197204113007,
+            "late_mse": 1.2193045616149902
+          }
+        },
+        {
+          "epoch": 5,
+          "seconds": 5.821177732999786,
+          "pure_batches": 0,
+          "batches": 218,
+          "mean_gradient_norm": 4.813174313908323,
+          "train": {
+            "mse": 0.344539612531662,
+            "explained_variance": 0.6551470756530762,
+            "prediction_mean": -0.03784850612282753,
+            "prediction_std": 0.7721635103225708,
+            "sign_accuracy": 0.8851448236306281,
+            "label_mean": -0.03183251991868019,
+            "late_mse": 0.1948046237230301
+          },
+          "heldout": {
+            "mse": 1.487486481666565,
+            "explained_variance": -0.4830232858657837,
+            "prediction_mean": -0.04912378266453743,
+            "prediction_std": 0.6292219161987305,
+            "sign_accuracy": 0.4735017335314512,
+            "label_mean": 0.17979197204113007,
+            "late_mse": 0.7391718029975891
+          }
+        },
+        {
+          "epoch": 6,
+          "seconds": 6.0604646029969444,
+          "pure_batches": 0,
+          "batches": 218,
+          "mean_gradient_norm": 4.283838431222724,
+          "train": {
+            "mse": 0.2710534930229187,
+            "explained_variance": 0.7404849529266357,
+            "prediction_mean": -0.14046701788902283,
+            "prediction_std": 0.8671490550041199,
+            "sign_accuracy": 0.9065098938915973,
+            "label_mean": -0.03183251991868019,
+            "late_mse": 0.07277530431747437
+          },
+          "heldout": {
+            "mse": 1.5800410509109497,
+            "explained_variance": -0.47124505043029785,
+            "prediction_mean": -0.21562474966049194,
+            "prediction_std": 0.7471309304237366,
+            "sign_accuracy": 0.5056958890539871,
+            "label_mean": 0.17979197204113007,
+            "late_mse": 0.46542397141456604
+          }
+        }
+      ],
+      "grouped_fresh": [
+        {
+          "epoch": 0,
+          "train": {
+            "mse": 0.9997245073318481,
+            "explained_variance": -0.00020325183868408203,
+            "prediction_mean": -0.008705119602382183,
+            "prediction_std": 0.003924492746591568,
+            "sign_accuracy": 0.5147691425293949,
+            "label_mean": -0.03183251991868019,
+            "late_mse": 0.9998518824577332
+          },
+          "heldout": {
+            "mse": 1.0031230449676514,
+            "explained_variance": -0.00042557716369628906,
+            "prediction_mean": -0.007388508412986994,
+            "prediction_std": 0.0041975718922913074,
+            "sign_accuracy": 0.4006934125804854,
+            "label_mean": 0.17979197204113007,
+            "late_mse": 1.0032061338424683
+          }
+        },
+        {
+          "epoch": 1,
+          "seconds": 3.818076846000622,
+          "pure_batches": 198,
+          "batches": 218,
+          "mean_gradient_norm": 11.44336728519256,
+          "train": {
+            "mse": 1.009413480758667,
+            "explained_variance": 0.0004267096519470215,
+            "prediction_mean": 0.0723462626338005,
+            "prediction_std": 0.009496321901679039,
+            "sign_accuracy": 0.48408373960424433,
+            "label_mean": -0.03183251991868019,
+            "late_mse": 1.010423183441162
+          },
+          "heldout": {
+            "mse": 0.9791997671127319,
+            "explained_variance": -0.0003523826599121094,
+            "prediction_mean": 0.07403720915317535,
+            "prediction_std": 0.01009462308138609,
+            "sign_accuracy": 0.5898959881129272,
+            "label_mean": 0.17979197204113007,
+            "late_mse": 0.9776048064231873
+          }
+        },
+        {
+          "epoch": 2,
+          "seconds": 3.752129597007297,
+          "pure_batches": 201,
+          "batches": 218,
+          "mean_gradient_norm": 12.305127386653096,
+          "train": {
+            "mse": 1.0014244318008423,
+            "explained_variance": 0.0001677870750427246,
+            "prediction_mean": 0.019211256876587868,
+            "prediction_std": 0.008240815252065659,
+            "sign_accuracy": 0.483653570404359,
+            "label_mean": -0.03183251991868019,
+            "late_mse": 1.0002988576889038
+          },
+          "heldout": {
+            "mse": 0.9940787553787231,
+            "explained_variance": -0.00028514862060546875,
+            "prediction_mean": 0.018150020390748978,
+            "prediction_std": 0.008233713917434216,
+            "sign_accuracy": 0.5894006934125805,
+            "label_mean": 0.17979197204113007,
+            "late_mse": 0.9961262345314026
+          }
+        },
+        {
+          "epoch": 3,
+          "seconds": 3.811643938999623,
+          "pure_batches": 203,
+          "batches": 218,
+          "mean_gradient_norm": 10.323900876788919,
+          "train": {
+            "mse": 1.0430006980895996,
+            "explained_variance": 0.0001646280288696289,
+            "prediction_mean": 0.1783544272184372,
+            "prediction_std": 0.035420097410678864,
+            "sign_accuracy": 0.48408373960424433,
+            "label_mean": -0.03183251991868019,
+            "late_mse": 1.0564988851547241
+          },
+          "heldout": {
+            "mse": 0.9710204005241394,
+            "explained_variance": -0.0034331083297729492,
+            "prediction_mean": 0.18464615941047668,
+            "prediction_std": 0.03802425041794777,
+            "sign_accuracy": 0.5898959881129272,
+            "label_mean": 0.17979197204113007,
+            "late_mse": 0.9740411043167114
+          }
+        },
+        {
+          "epoch": 4,
+          "seconds": 3.7205235209985403,
+          "pure_batches": 197,
+          "batches": 218,
+          "mean_gradient_norm": 21.47575644246482,
+          "train": {
+            "mse": 1.145227074623108,
+            "explained_variance": -0.0037616491317749023,
+            "prediction_mean": 0.34563612937927246,
+            "prediction_std": 0.08320287615060806,
+            "sign_accuracy": 0.48408373960424433,
+            "label_mean": -0.03183251991868019,
+            "late_mse": 1.2073204517364502
+          },
+          "heldout": {
+            "mse": 1.0134931802749634,
+            "explained_variance": -0.013699769973754883,
+            "prediction_mean": 0.3602398931980133,
+            "prediction_std": 0.08994896709918976,
+            "sign_accuracy": 0.5898959881129272,
+            "label_mean": 0.17979197204113007,
+            "late_mse": 1.0561414957046509
+          }
+        },
+        {
+          "epoch": 5,
+          "seconds": 3.741459443990607,
+          "pure_batches": 192,
+          "batches": 218,
+          "mean_gradient_norm": 14.842967294224906,
+          "train": {
+            "mse": 1.0107769966125488,
+            "explained_variance": 0.00039374828338623047,
+            "prediction_mean": 0.07854732871055603,
+            "prediction_std": 0.037931568920612335,
+            "sign_accuracy": 0.48408373960424433,
+            "label_mean": -0.03183251991868019,
+            "late_mse": 1.0193872451782227
+          },
+          "heldout": {
+            "mse": 0.9812343120574951,
+            "explained_variance": -0.0047980546951293945,
+            "prediction_mean": 0.08536361902952194,
+            "prediction_std": 0.041728850454092026,
+            "sign_accuracy": 0.5898959881129272,
+            "label_mean": 0.17979197204113007,
+            "late_mse": 0.9754416346549988
+          }
+        },
+        {
+          "epoch": 6,
+          "seconds": 3.735891015996458,
+          "pure_batches": 196,
+          "batches": 218,
+          "mean_gradient_norm": 5.327912940344679,
+          "train": {
+            "mse": 1.0021185874938965,
+            "explained_variance": -0.0003439188003540039,
+            "prediction_mean": -0.08463737368583679,
+            "prediction_std": 0.01904638484120369,
+            "sign_accuracy": 0.5159162603957557,
+            "label_mean": -0.03183251991868019,
+            "late_mse": 1.0044810771942139
+          },
+          "heldout": {
+            "mse": 1.0398434400558472,
+            "explained_variance": -0.0010993480682373047,
+            "prediction_mean": -0.0868631899356842,
+            "prediction_std": 0.018823567777872086,
+            "sign_accuracy": 0.4101040118870728,
+            "label_mean": 0.17979197204113007,
+            "late_mse": 1.0474311113357544
+          }
+        }
+      ],
+      "shuffled_fresh": [
+        {
+          "epoch": 0,
+          "train": {
+            "mse": 0.9997245073318481,
+            "explained_variance": -0.00020325183868408203,
+            "prediction_mean": -0.008705119602382183,
+            "prediction_std": 0.003924492746591568,
+            "sign_accuracy": 0.5147691425293949,
+            "label_mean": -0.03183251991868019,
+            "late_mse": 0.9998518824577332
+          },
+          "heldout": {
+            "mse": 1.0031230449676514,
+            "explained_variance": -0.00042557716369628906,
+            "prediction_mean": -0.007388508412986994,
+            "prediction_std": 0.0041975718922913074,
+            "sign_accuracy": 0.4006934125804854,
+            "label_mean": 0.17979197204113007,
+            "late_mse": 1.0032061338424683
+          }
+        },
+        {
+          "epoch": 1,
+          "seconds": 5.879352509000455,
+          "pure_batches": 0,
+          "batches": 218,
+          "mean_gradient_norm": 0.7561429254710674,
+          "train": {
+            "mse": 0.995832622051239,
+            "explained_variance": 0.006796777248382568,
+            "prediction_mean": 0.02846570499241352,
+            "prediction_std": 0.0328320637345314,
+            "sign_accuracy": 0.5263837109262977,
+            "label_mean": -0.03183251991868019,
+            "late_mse": 1.0005172491073608
+          },
+          "heldout": {
+            "mse": 0.9958983659744263,
+            "explained_variance": -0.007349252700805664,
+            "prediction_mean": 0.03449233993887901,
+            "prediction_std": 0.0342441201210022,
+            "sign_accuracy": 0.5393759286775631,
+            "label_mean": 0.17979197204113007,
+            "late_mse": 0.986915111541748
+          }
+        },
+        {
+          "epoch": 2,
+          "seconds": 6.049651620007353,
+          "pure_batches": 0,
+          "batches": 218,
+          "mean_gradient_norm": 3.8002437218476874,
+          "train": {
+            "mse": 0.47211283445358276,
+            "explained_variance": 0.5365420579910278,
+            "prediction_mean": 0.0636899322271347,
+            "prediction_std": 0.670667827129364,
+            "sign_accuracy": 0.8375394321766562,
+            "label_mean": -0.03183251991868019,
+            "late_mse": 0.36116161942481995
+          },
+          "heldout": {
+            "mse": 1.5275919437408447,
+            "explained_variance": -0.5415153503417969,
+            "prediction_mean": 0.3692820966243744,
+            "prediction_std": 0.39623913168907166,
+            "sign_accuracy": 0.43784051510648836,
+            "label_mean": 0.17979197204113007,
+            "late_mse": 1.671746015548706
+          }
+        },
+        {
+          "epoch": 3,
+          "seconds": 6.020105538991629,
+          "pure_batches": 0,
+          "batches": 218,
+          "mean_gradient_norm": 8.942664471788143,
+          "train": {
+            "mse": 0.20822307467460632,
+            "explained_variance": 0.7916218042373657,
+            "prediction_mean": -0.039318960160017014,
+            "prediction_std": 0.8541465401649475,
+            "sign_accuracy": 0.9354746200172067,
+            "label_mean": -0.03183251991868019,
+            "late_mse": 0.10895444452762604
+          },
+          "heldout": {
+            "mse": 1.9661020040512085,
+            "explained_variance": -0.9721728563308716,
+            "prediction_mean": -0.06037510186433792,
+            "prediction_std": 0.6856534481048584,
+            "sign_accuracy": 0.3635463100544824,
+            "label_mean": 0.17979197204113007,
+            "late_mse": 1.213096261024475
+          }
+        },
+        {
+          "epoch": 4,
+          "seconds": 5.9502746740035946,
+          "pure_batches": 0,
+          "batches": 218,
+          "mean_gradient_norm": 10.51152768813142,
+          "train": {
+            "mse": 0.17665570974349976,
+            "explained_variance": 0.8272823095321655,
+            "prediction_mean": -0.09596569836139679,
+            "prediction_std": 0.8341280817985535,
+            "sign_accuracy": 0.937338686550043,
+            "label_mean": -0.03183251991868019,
+            "late_mse": 0.044687602669000626
+          },
+          "heldout": {
+            "mse": 1.9986764192581177,
+            "explained_variance": -0.9561659097671509,
+            "prediction_mean": -0.14539103209972382,
+            "prediction_std": 0.7191705107688904,
+            "sign_accuracy": 0.3630510153541357,
+            "label_mean": 0.17979197204113007,
+            "late_mse": 1.0949134826660156
+          }
+        },
+        {
+          "epoch": 5,
+          "seconds": 6.0739639249950415,
+          "pure_batches": 0,
+          "batches": 218,
+          "mean_gradient_norm": 12.003725577931885,
+          "train": {
+            "mse": 0.13090623915195465,
+            "explained_variance": 0.8694778084754944,
+            "prediction_mean": -0.054555512964725494,
+            "prediction_std": 0.8839312791824341,
+            "sign_accuracy": 0.958273587611127,
+            "label_mean": -0.03183251991868019,
+            "late_mse": 0.022164033725857735
+          },
+          "heldout": {
+            "mse": 1.9678294658660889,
+            "explained_variance": -0.9571269750595093,
+            "prediction_mean": -0.09217740595340729,
+            "prediction_std": 0.7939844131469727,
+            "sign_accuracy": 0.41654284299158,
+            "label_mean": 0.17979197204113007,
+            "late_mse": 0.7136326432228088
+          }
+        },
+        {
+          "epoch": 6,
+          "seconds": 6.021605832997011,
+          "pure_batches": 0,
+          "batches": 218,
+          "mean_gradient_norm": 11.339492935653126,
+          "train": {
+            "mse": 0.1265571564435959,
+            "explained_variance": 0.8735114336013794,
+            "prediction_mean": -0.045860905200242996,
+            "prediction_std": 0.9482960104942322,
+            "sign_accuracy": 0.9571264697447662,
+            "label_mean": -0.03183251991868019,
+            "late_mse": 0.019654318690299988
+          },
+          "heldout": {
+            "mse": 2.0050034523010254,
+            "explained_variance": -1.042551040649414,
+            "prediction_mean": 0.011035678908228874,
+            "prediction_std": 0.8820274472236633,
+            "sign_accuracy": 0.4432887568103021,
+            "label_mean": 0.17979197204113007,
+            "late_mse": 0.6678338050842285
+          }
+        }
+      ]
+    },
+    "player_facts_ridge_probe": {
+      "train": {
+        "mse": 0.6805333659821204,
+        "explained_variance": 0.3187762831501798,
+        "prediction_mean": -0.03183331923009192,
+        "prediction_std": 0.44944502061104596,
+        "sign_accuracy": 0.7608259248637798,
+        "label_mean": -0.03183251991868019,
+        "late_mse": 0.38179767349024
+      },
+      "heldout": {
+        "mse": 0.8232344411974414,
+        "explained_variance": 0.18655320468931091,
+        "prediction_mean": -0.010162175781193631,
+        "prediction_std": 0.4200155037539632,
+        "sign_accuracy": 0.6310054482417038,
+        "label_mean": 0.17979197204113007,
+        "late_mse": 0.49581131191117495
+      }
+    },
+    "actor_unchanged": true,
+    "configuration": {
+      "rounds": [
+        40
+      ],
+      "checkpoint": "round-0039",
+      "epochs": 6,
+      "batch_size": 32,
+      "learning_rate": 0.0003,
+      "split_seed": 881,
+      "shuffle_seed": 991,
+      "player_facts_probe_ridge": 10
+    },
+    "input_sha256": {
+      ".local/red-separate-1000-2026-10-18/report.json": "58baa9efef213ee33cb746ee42e100e47df62b143abb055b36d8495c038cba97",
+      ".local/red-separate-1000-2026-10-18/checkpoints/round-0039/policy.keras": "f707079fbce5f92e02e2268ca9466591b9b2453ddb36d1cda34d2d7b1ce989fd",
+      ".local/red-separate-1000-2026-10-18/checkpoints/round-0039/critic-optimizer.npz": "7292f32098bd3d312a0e0de30614821fa4ad76a10fed68aed6fbf25cf2208d61",
+      ".local/red-separate-1000-2026-10-18/checkpoints/round-0000/policy.keras": "b93ed7e3dd6b1eab89b9e383da8a68131ef860de1eb4554c5ce58d5b1939775d"
+    },
+    "trajectory_sha256": {
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00975-p0.pkl.gz": "879a317255c1b73f80e80edcfeb3f6b4450e1a45841df6b8b0dc95e0e42e45ef",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00975-p1.pkl.gz": "c247a4000868b65670372332034e5c6a20d54653cb20333b81e899bf2b502836",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00976-p0.pkl.gz": "f0d36bb69d85c7ecc0540c937351cbf569d1199b51b4d5e22283d15c66aca51f",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00976-p1.pkl.gz": "1ec4aa20517a77dc7560e67cf2f882f31ff2365c3c706444957b80029fb24ca5",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00977-p0.pkl.gz": "eb5bed2b4c9d01beb416102a189fc25559992c402dd76aba908c180d5f35479f",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00977-p1.pkl.gz": "7cd4379c5536bd29a687c749bd838cc3ff8b5a6d843d5eacfb90db30ff023fba",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00978-p0.pkl.gz": "dbdcee70c46f84938318fe2cc4b4928f1f999ff8395eee9cea6cfe54c2b4591a",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00978-p1.pkl.gz": "2b4f05e3b4b98ecd01479f5e0c987b9e9ab7f563f1d54b98118aa7ca3eec9311",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00979-p0.pkl.gz": "b9fb61c2f5fef4495331566f28f320c790e94c4d8137d0aca1621f34397d7068",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00979-p1.pkl.gz": "819636c20778c3518fbe687a185cf55ef1b39f7971192447e26c598fb0dd456f",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00980-p0.pkl.gz": "fb2c7f242e1f1b9c5012c8366244996ccadf99d2fa6d1c86f08f5e4db0945659",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00980-p1.pkl.gz": "4aac0f793eb3023c1cd5571a685efa505ad952baa1cf4b6b197046a8eb6a0e6c",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00981-p0.pkl.gz": "84b14fce1cde90cb146c8c7e815c9ff53448e10d68c23ce05019b5b0d02bd1b4",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00981-p1.pkl.gz": "67e0ea2d69d6f061cd31bfb6ddfa389ba5a00571ad15be386c1f9a09a1c36b1f",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00982-p0.pkl.gz": "54b1c6a033b903770f01b4e86593985671c6605cc6ad45213bd346e0e6c166ab",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00982-p1.pkl.gz": "10e3a7547ccb58683e4ce626c071c03fa62c10d79be69b4719fd89b0ef31ee89",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00983-p0.pkl.gz": "9ff14b746299357786f69225792f4d90cb2453dca5161f2f65bf5e440714a892",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00983-p1.pkl.gz": "5fb01d18a52c1a6b81104fdbbb52327a4173e2866be96b627bff13c5abc213d4",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00984-p0.pkl.gz": "5d3f8905fb0849337a3653206be296fca1cc0d9ef08368301867093184145a04",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00984-p1.pkl.gz": "bad88d3c8fabc9e7d6a486785c517e360692d9fcdb3217c1f63ed488fd4c7dc2",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00985-p0.pkl.gz": "1973fd91406941b100c10f9e823973a1e8982baa79618055033405be704b33ba",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00985-p1.pkl.gz": "05b3b9befba534b1260b0943faa38ed66702680239580f3a986e2d8980eb2d16",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00986-p0.pkl.gz": "1e838f24a4a16e26b3ca6b0b0498b5bd2e4b9981211b07c8faa2b56d02b7159e",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00986-p1.pkl.gz": "351ed48d9fd94b0d4e9268e9e4a6e5a2b4bd82a7a0d83a445addb3a08a087c00",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00987-p0.pkl.gz": "65db65d2d4d0561893a0ddc09dffbdecd4acc9f97941c25ce43c1309b5bbd32f",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00987-p1.pkl.gz": "9364c465612ba10127b8a2d49450c3ab411ebb92db8e2ecf1c6931bd49892895",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00988-p0.pkl.gz": "cbd336e23aefbe6861a7a9a8efbcabbc84381d3c65a0439687ffe298af3a6521",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00988-p1.pkl.gz": "7611d5dfb544fe3b5d4e80dba6f48bb474d53f7c2f4260e0c6a98bb8036213f3",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00989-p0.pkl.gz": "292a53b355b783da2b533effb2f45a72d5e73d67d9ff1f3bb6dac31947a95b62",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00989-p1.pkl.gz": "a8e5c6c820f9b068c0846ca0bf893a07982af4579f96afa5bc6c764ad1a101ab",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00990-p0.pkl.gz": "a1ed92bd17f6c71dc31b9c54cf1b42be3047dc5f10c946ec51bb9715a3c186ea",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00990-p1.pkl.gz": "392c735da00a1514deeec8d5a20b63e69dfa88b3de0f4e33bc396dc8602765fa",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00991-p0.pkl.gz": "5e178607688fcca8ce3f1366cba10f6dbfe48e1942f6e72f7c4b89f283ad178e",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00991-p1.pkl.gz": "272f981c74d061893995966fe02551d8be924826cece5a8360bbf1d268a7682d",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00992-p0.pkl.gz": "52d381a02a4b2be9cecfc297b300f9c1a98f3d81df7d82e44169f4d0f59fb41e",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00992-p1.pkl.gz": "c8e83f6ae126d25e9ee6aafecabaa0d09f404cbb3abd9d95d9833336f780b4b3",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00993-p0.pkl.gz": "5b81e99b146022d219c4a5755c2e8a0c5ea7ac5072b3b296e0a8d3f0bf33e104",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00993-p1.pkl.gz": "d561077fd4add8108b87efc4be3a3f3a5b911913c8ceac200519683c68b75da2",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00994-p0.pkl.gz": "f37f6b673b175faf65cf8d7cc1b4c9f766b0cfb06283e7f84017af45ea95d988",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00994-p1.pkl.gz": "7e9be24ba3ad2f5e9df0a8304798ff81ff325da35073f1205de8f9ac67761e46",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00995-p0.pkl.gz": "88d5374d965a7d3fc05a29789aafc2b7dcb421b2ad26120060bf28b00c2a42b0",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00995-p1.pkl.gz": "6454bb7180f87ba968ab07d927f4894183165086f8ce181952460a6329b37a66",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00996-p0.pkl.gz": "829546374b376d5083c490c1d2f93ed045f4b0712d889c516fd5c3bbbb66e474",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00996-p1.pkl.gz": "e423a4bae7ff735e80e7a9f06587d66ce7caed80d0afcf399800ebc1885a0ede",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00997-p0.pkl.gz": "0c61989c28a6a1326baf9f0491a8923e1a00de94c82e08a01995ad7b8a5e50a5",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00997-p1.pkl.gz": "f31a3128df60b84e7c49df5a333737c98b356e389ce785a9d2305690f5a8462b",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00998-p0.pkl.gz": "0d8b518632430676503b86c329624803e633a6e4c0b207e78ab187b70e732e1b",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00998-p1.pkl.gz": "f5add8f8a6035b6511fe21abea2e2567d48239a2ed7f6f75f75eec2483072e0a",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00999-p0.pkl.gz": "30a23b406ca0d9aa5d4ddb7cf8b773c9164b1fea3c504bdb0dc7f2d2fee231fb",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00999-p1.pkl.gz": "5cdbdb1a5d37fb6a5431d7801a95296a9dfb0c91e57a7e1641eb4ae6e96fd03f"
+    },
+    "late_mse_definition": "Last 20% of decisions within each seat trajectory, not a turn cutoff.",
+    "memory_scope": "Frozen behavior memories from saved rollouts; no sequence replay/BPTT. Fresh cases reset critic weights and Adam, retaining the same numeric inputs."
+  },
+  "larger_split": {
+    "scope": "Frozen saved numeric rollouts, split by whole game with both seats together. Terminal targets only; actor frozen. Larger diagnostic uses four successive behavior policies. These are state-weighted prediction metrics from one split, not a new gameplay evaluation.",
+    "train_games": 75,
+    "heldout_games": 25,
+    "train_samples": 24710,
+    "heldout_samples": 7233,
+    "heldout_game_indices": [
+      3,
+      6,
+      11,
+      12,
+      17,
+      18,
+      19,
+      20,
+      24,
+      29,
+      35,
+      38,
+      40,
+      41,
+      45,
+      48,
+      49,
+      53,
+      54,
+      65,
+      66,
+      71,
+      76,
+      79,
+      90
+    ],
+    "all_advancing": true,
+    "cases": {
+      "grouped_existing": [
+        {
+          "epoch": 0,
+          "train": {
+            "mse": 1.0085583925247192,
+            "explained_variance": 9.113550186157227e-05,
+            "prediction_mean": 0.10180213302373886,
+            "prediction_std": 0.0030853564385324717,
+            "sign_accuracy": 0.504208822339134,
+            "label_mean": 0.008417644537985325,
+            "late_mse": 1.0084521770477295
+          },
+          "heldout": {
+            "mse": 1.0014560222625732,
+            "explained_variance": 3.2067298889160156e-05,
+            "prediction_mean": 0.10172993689775467,
+            "prediction_std": 0.0030841242987662554,
+            "sign_accuracy": 0.5217751970136872,
+            "label_mean": 0.04355039447546005,
+            "late_mse": 1.0013426542282104
+          }
+        },
+        {
+          "epoch": 1,
+          "seconds": 14.738568357002805,
+          "pure_batches": 690,
+          "batches": 773,
+          "mean_gradient_norm": 1.990577944432702,
+          "train": {
+            "mse": 1.0082004070281982,
+            "explained_variance": 4.220008850097656e-05,
+            "prediction_mean": 0.09959683567285538,
+            "prediction_std": 0.0010917031904682517,
+            "sign_accuracy": 0.504208822339134,
+            "label_mean": 0.008417644537985325,
+            "late_mse": 1.0080524682998657
+          },
+          "heldout": {
+            "mse": 1.0012420415878296,
+            "explained_variance": 2.6226043701171875e-06,
+            "prediction_mean": 0.09959862381219864,
+            "prediction_std": 0.0011287471279501915,
+            "sign_accuracy": 0.5217751970136872,
+            "label_mean": 0.04355039447546005,
+            "late_mse": 1.0011001825332642
+          }
+        },
+        {
+          "epoch": 2,
+          "seconds": 13.49935379800445,
+          "pure_batches": 698,
+          "batches": 773,
+          "mean_gradient_norm": 2.5260370436279924,
+          "train": {
+            "mse": 1.3446850776672363,
+            "explained_variance": 0.000979304313659668,
+            "prediction_mean": 0.5964103937149048,
+            "prediction_std": 0.0634879395365715,
+            "sign_accuracy": 0.504208822339134,
+            "label_mean": 0.008417644537985325,
+            "late_mse": 1.4145687818527222
+          },
+          "heldout": {
+            "mse": 1.3057955503463745,
+            "explained_variance": -0.00208890438079834,
+            "prediction_mean": 0.5963680148124695,
+            "prediction_std": 0.07060690969228745,
+            "sign_accuracy": 0.5217751970136872,
+            "label_mean": 0.04355039447546005,
+            "late_mse": 1.3727331161499023
+          }
+        }
+      ],
+      "shuffled_existing": [
+        {
+          "epoch": 0,
+          "train": {
+            "mse": 1.0085583925247192,
+            "explained_variance": 9.113550186157227e-05,
+            "prediction_mean": 0.10180213302373886,
+            "prediction_std": 0.0030853564385324717,
+            "sign_accuracy": 0.504208822339134,
+            "label_mean": 0.008417644537985325,
+            "late_mse": 1.0084521770477295
+          },
+          "heldout": {
+            "mse": 1.0014560222625732,
+            "explained_variance": 3.2067298889160156e-05,
+            "prediction_mean": 0.10172993689775467,
+            "prediction_std": 0.0030841242987662554,
+            "sign_accuracy": 0.5217751970136872,
+            "label_mean": 0.04355039447546005,
+            "late_mse": 1.0013426542282104
+          }
+        },
+        {
+          "epoch": 1,
+          "seconds": 21.799550822004676,
+          "pure_batches": 0,
+          "batches": 773,
+          "mean_gradient_norm": 0.42355828597312756,
+          "train": {
+            "mse": 0.9885245561599731,
+            "explained_variance": 0.01637941598892212,
+            "prediction_mean": -0.06210675090551376,
+            "prediction_std": 0.06526578962802887,
+            "sign_accuracy": 0.5363820315661676,
+            "label_mean": 0.008417644537985325,
+            "late_mse": 0.9616967439651489
+          },
+          "heldout": {
+            "mse": 0.9959786534309387,
+            "explained_variance": 0.014524698257446289,
+            "prediction_mean": -0.06768156588077545,
+            "prediction_std": 0.06588459014892578,
+            "sign_accuracy": 0.5212221761371492,
+            "label_mean": 0.04355039447546005,
+            "late_mse": 0.9595381021499634
+          }
+        },
+        {
+          "epoch": 2,
+          "seconds": 21.720564731003833,
+          "pure_batches": 0,
+          "batches": 773,
+          "mean_gradient_norm": 1.6088613316532403,
+          "train": {
+            "mse": 0.7665942311286926,
+            "explained_variance": 0.24183768033981323,
+            "prediction_mean": 0.10053545236587524,
+            "prediction_std": 0.46039316058158875,
+            "sign_accuracy": 0.6998785916632942,
+            "label_mean": 0.008417644537985325,
+            "late_mse": 0.4156453311443329
+          },
+          "heldout": {
+            "mse": 0.8137957453727722,
+            "explained_variance": 0.18824148178100586,
+            "prediction_mean": 0.10335762053728104,
+            "prediction_std": 0.44424596428871155,
+            "sign_accuracy": 0.6817364855523296,
+            "label_mean": 0.04355039447546005,
+            "late_mse": 0.527128279209137
+          }
+        }
+      ],
+      "grouped_fresh": [
+        {
+          "epoch": 0,
+          "train": {
+            "mse": 1.0003933906555176,
+            "explained_variance": -0.00010204315185546875,
+            "prediction_mean": -0.010618667118251324,
+            "prediction_std": 0.003780568717047572,
+            "sign_accuracy": 0.49461756373937676,
+            "label_mean": 0.008417644537985325,
+            "late_mse": 1.0008271932601929
+          },
+          "heldout": {
+            "mse": 1.0011783838272095,
+            "explained_variance": -9.965896606445312e-05,
+            "prediction_mean": -0.010999881662428379,
+            "prediction_std": 0.003844848368316889,
+            "sign_accuracy": 0.48098990736900316,
+            "label_mean": 0.04355039447546005,
+            "late_mse": 1.0020666122436523
+          }
+        },
+        {
+          "epoch": 1,
+          "seconds": 13.754232142004184,
+          "pure_batches": 690,
+          "batches": 773,
+          "mean_gradient_norm": 19.66549976419701,
+          "train": {
+            "mse": 1.1950311660766602,
+            "explained_variance": -0.002548813819885254,
+            "prediction_mean": 0.44722697138786316,
+            "prediction_std": 0.08339343219995499,
+            "sign_accuracy": 0.504208822339134,
+            "label_mean": 0.008417644537985325,
+            "late_mse": 1.2710093259811401
+          },
+          "heldout": {
+            "mse": 1.1694642305374146,
+            "explained_variance": -0.007547140121459961,
+            "prediction_mean": 0.4483071267604828,
+            "prediction_std": 0.09803294390439987,
+            "sign_accuracy": 0.5217751970136872,
+            "label_mean": 0.04355039447546005,
+            "late_mse": 1.2461082935333252
+          }
+        },
+        {
+          "epoch": 2,
+          "seconds": 14.395174353005132,
+          "pure_batches": 698,
+          "batches": 773,
+          "mean_gradient_norm": 16.695091946968596,
+          "train": {
+            "mse": 1.1604253053665161,
+            "explained_variance": -0.001445174217224121,
+            "prediction_mean": 0.4072299599647522,
+            "prediction_std": 0.0759439691901207,
+            "sign_accuracy": 0.504208822339134,
+            "label_mean": 0.008417644537985325,
+            "late_mse": 1.2205445766448975
+          },
+          "heldout": {
+            "mse": 1.1366885900497437,
+            "explained_variance": -0.005777478218078613,
+            "prediction_mean": 0.4079938530921936,
+            "prediction_std": 0.0874858945608139,
+            "sign_accuracy": 0.5217751970136872,
+            "label_mean": 0.04355039447546005,
+            "late_mse": 1.19608736038208
+          }
+        }
+      ],
+      "shuffled_fresh": [
+        {
+          "epoch": 0,
+          "train": {
+            "mse": 1.0003933906555176,
+            "explained_variance": -0.00010204315185546875,
+            "prediction_mean": -0.010618667118251324,
+            "prediction_std": 0.003780568717047572,
+            "sign_accuracy": 0.49461756373937676,
+            "label_mean": 0.008417644537985325,
+            "late_mse": 1.0008271932601929
+          },
+          "heldout": {
+            "mse": 1.0011783838272095,
+            "explained_variance": -9.965896606445312e-05,
+            "prediction_mean": -0.010999881662428379,
+            "prediction_std": 0.003844848368316889,
+            "sign_accuracy": 0.48098990736900316,
+            "label_mean": 0.04355039447546005,
+            "late_mse": 1.0020666122436523
+          }
+        },
+        {
+          "epoch": 1,
+          "seconds": 22.965156641002977,
+          "pure_batches": 0,
+          "batches": 773,
+          "mean_gradient_norm": 3.6618940506279856,
+          "train": {
+            "mse": 0.8337437510490417,
+            "explained_variance": 0.28892982006073,
+            "prediction_mean": 0.35873767733573914,
+            "prediction_std": 0.5274510383605957,
+            "sign_accuracy": 0.6717927964386888,
+            "label_mean": 0.008417644537985325,
+            "late_mse": 0.4532928466796875
+          },
+          "heldout": {
+            "mse": 0.9621742367744446,
+            "explained_variance": 0.1328478455543518,
+            "prediction_mean": 0.3544633984565735,
+            "prediction_std": 0.5127752423286438,
+            "sign_accuracy": 0.65270288953408,
+            "label_mean": 0.04355039447546005,
+            "late_mse": 0.7701877951622009
+          }
+        },
+        {
+          "epoch": 2,
+          "seconds": 22.018099587003235,
+          "pure_batches": 0,
+          "batches": 773,
+          "mean_gradient_norm": 9.928932409391367,
+          "train": {
+            "mse": 0.5206608772277832,
+            "explained_variance": 0.480816125869751,
+            "prediction_mean": 0.047326426953077316,
+            "prediction_std": 0.6255985498428345,
+            "sign_accuracy": 0.8098340752731688,
+            "label_mean": 0.008417644537985325,
+            "late_mse": 0.1664961278438568
+          },
+          "heldout": {
+            "mse": 0.8982094526290894,
+            "explained_variance": 0.10026490688323975,
+            "prediction_mean": 0.030102478340268135,
+            "prediction_std": 0.5428652763366699,
+            "sign_accuracy": 0.6155122355868934,
+            "label_mean": 0.04355039447546005,
+            "late_mse": 0.5341794490814209
+          }
+        }
+      ]
+    },
+    "player_facts_ridge_probe": {
+      "train": {
+        "mse": 0.7223469866161273,
+        "explained_variance": 0.2776016878987132,
+        "prediction_mean": 0.008416155605885614,
+        "prediction_std": 0.4947888632466583,
+        "sign_accuracy": 0.7326993120194253,
+        "label_mean": 0.008417644537985325,
+        "late_mse": 0.33538475493988484
+      },
+      "heldout": {
+        "mse": 0.8846688715178463,
+        "explained_variance": 0.11474084791325467,
+        "prediction_mean": 0.010553045719972395,
+        "prediction_std": 0.5318481933055677,
+        "sign_accuracy": 0.628646481404673,
+        "label_mean": 0.04355039447546005,
+        "late_mse": 0.6061176930029316
+      }
+    },
+    "actor_unchanged": true,
+    "configuration": {
+      "rounds": [
+        37,
+        38,
+        39,
+        40
+      ],
+      "checkpoint": "round-0036",
+      "epochs": 2,
+      "batch_size": 32,
+      "learning_rate": 0.0003,
+      "split_seed": 881,
+      "shuffle_seed": 991,
+      "player_facts_probe_ridge": 10
+    },
+    "input_sha256": {
+      ".local/red-separate-1000-2026-10-18/report.json": "58baa9efef213ee33cb746ee42e100e47df62b143abb055b36d8495c038cba97",
+      ".local/red-separate-1000-2026-10-18/checkpoints/round-0036/policy.keras": "26b2e3859ca7821196db2aa1402444f0b6d52a9c47984b181ef15eaa34221dce",
+      ".local/red-separate-1000-2026-10-18/checkpoints/round-0036/critic-optimizer.npz": "bdc91d84bfccced5c6f4f5098bd76b927208e508e659d311ef6681121c51017f",
+      ".local/red-separate-1000-2026-10-18/checkpoints/round-0000/policy.keras": "b93ed7e3dd6b1eab89b9e383da8a68131ef860de1eb4554c5ce58d5b1939775d"
+    },
+    "trajectory_sha256": {
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00900-p0.pkl.gz": "84094ddea6b43fd50916eccd5b7b38dd28df026b3b2cae3eef4c4d9d1cc81a0f",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00900-p1.pkl.gz": "f778c235c043875efa57f5253d0b679b1c183a6f6bde2a605e03f351e9162f90",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00901-p0.pkl.gz": "e254d5f9909b6dbaf6f924293c36ab9fa40f954541b8438906b7011864459d29",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00901-p1.pkl.gz": "31208ffb821e6457ef26757764ec7aa855c18ab8ff4a8c32a8181d9712a69a44",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00902-p0.pkl.gz": "b8bf59fa088aa57f92961411861585827afe844227548659accd88c9906cf242",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00902-p1.pkl.gz": "1e5e2c11b0954d339f6315ae167ff54d06f7d4b565647ff4e499e6f08cfe17ec",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00903-p0.pkl.gz": "3d04389ca079630ff65058a5ec9726c28284ab919b1f28d7e7c5bd5d938f4b80",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00903-p1.pkl.gz": "5e90972f05f281f2aa9be5401751099f416a3b62f515d329a7ff497193de2f91",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00904-p0.pkl.gz": "632c91b3f4d5ddf46bd84a54be29f6d818b367c070715d4ec7677083a0f86e4c",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00904-p1.pkl.gz": "1476fcdbcfcf1012b7ab8ab01aa8e6c11f285b6cf393f4ff5c4d8071d9af06c0",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00905-p0.pkl.gz": "4ac75b7f8df1f64e4a2a9fbec643dbb442fb5a34b0bdf75d3aab539d52df1eea",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00905-p1.pkl.gz": "48f2c8ca116c82f3b50a471bf43403bb5ff16f8228904300e9cff52e42702560",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00906-p0.pkl.gz": "7c77599dd64bbf3051d197bcc27e0dc0722870495e99fd79752c9ccad6bf4e6a",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00906-p1.pkl.gz": "7f9a2f4e0eea246f24b2ce662c1e6d40e23d45bdce30e61bc2c42824f4fec820",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00907-p0.pkl.gz": "8c8c9207ed6a54eaad06fd7d49eab6b4557c9faf8c91b05ef56470a88ee12f64",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00907-p1.pkl.gz": "21b1470569c201a22de8a90aef25ef8d8f661fe3277fbc1e2fb1b406702c1758",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00908-p0.pkl.gz": "c109d2f6a2b76af553a11af6f468683f3056e2245b1924baade35cb5721f5da7",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00908-p1.pkl.gz": "47e02d0acb66c05c2a2b0d8b7543c356fede74d1510c64ef05364a016a125e9e",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00909-p0.pkl.gz": "9883e368609e16ae4298a245656ba862b0c7f96be6478b7d4983624b0284a4df",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00909-p1.pkl.gz": "53296c1a8a7f8467fcf52d5dbd6498bbe908fa50a27bd398ab75d7222dea37a4",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00910-p0.pkl.gz": "fe6bed767ab9d416b30adcb162b7e79298429ba8897056cb82a63ffbd2009d90",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00910-p1.pkl.gz": "9c5debf66f2a8e804a8b860527f385f75233e5aacf03e04d9cce13b71d223207",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00911-p0.pkl.gz": "018cf5fd1083a16d3fdf1131c45988f5df20f0ad37d15336419fa51dc1c215ef",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00911-p1.pkl.gz": "ae71a2b5e9b2bb8c130514d9862296e2bdcb9411a0af708b8a327aea816763f3",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00912-p0.pkl.gz": "86aadff6ec1243f1f178ba6cd71fbd786acc5c9931c6eef105dfe034966c7929",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00912-p1.pkl.gz": "7a301b46cfbc3fbdc03ae811203e430bec6983f9bcc9c844cbfa6e062d469e49",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00913-p0.pkl.gz": "4c3a81f8d62aa02711ff3fbe64cf2dc07383edb9fbcd3acbaff0727224f0c2db",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00913-p1.pkl.gz": "9af05ef943e615c40451edddd9e60127e6c8cdb46dba475e7f924234bbd71c3c",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00914-p0.pkl.gz": "5b59e56baaceaa5b9336acc4b4cc9286fcb821da2ee885971049ab0d4b003184",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00914-p1.pkl.gz": "f7157c7580365d2451c656e43b71f1d8ea31f8feb9c7ae3496e24a3901f76beb",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00915-p0.pkl.gz": "787170018ce505cab8270c5b33f3462e4c86d12785666a15bc26d42435fc09a6",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00915-p1.pkl.gz": "52539330aefcd6c47abdc0e96275b66e5074bda33aea2cf660e2f5bef61a3402",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00916-p0.pkl.gz": "a669e683fcd0f932f75794ab92468c68eed271e63b9971378f4d86191ce01caa",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00916-p1.pkl.gz": "95db36798c711aad27676f4203f9094b933b8a815839fea3fd8d9a49df911b54",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00917-p0.pkl.gz": "158e6323aa4bf884d9b77ede52538bbd57fc7d574b74fca4980a8f7e2d54f66f",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00917-p1.pkl.gz": "4455cdf29a0548741a90d85ec1e04b9347f4f3d9b665eedc8c81b0a89bbfe346",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00918-p0.pkl.gz": "8ccf52e64041914237fda2fdf46f03a318ec3dd57beda272b2d8a12f245678c7",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00918-p1.pkl.gz": "954e30560ce0d32880f846e9f92d75542d6083bec9cf01a0f96c55e40f9dc19d",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00919-p0.pkl.gz": "38d7501ca64220a6a0791f54f0710901dca741225a6b7af293b43aa3410d859c",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00919-p1.pkl.gz": "05be8f904263708103961507183cb408d3b24a81257ba6571c6a8716128c7402",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00920-p0.pkl.gz": "6d2633c0259ade90cdc634df321e1e157c8507470399a8dacd680e7f20ad9759",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00920-p1.pkl.gz": "ec2063b1cdf1dca0c9c0549589066c4278181cda3d223ddb792573a5c531789a",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00921-p0.pkl.gz": "bed4edba44ca23e7ee2a8933c9041ccfe0536b024313c336f3382c61ac8bfbc6",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00921-p1.pkl.gz": "ffeabbbcb744ff185a4dbb220f4b4623299beb111c2a2a0191aea77db584f3d8",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00922-p0.pkl.gz": "7139ac8f8e88bc731a9b15094ca4649f1210bae4a8098a4c7ec9aaf6f9558804",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00922-p1.pkl.gz": "6686e1e4da435f78c037b338865b174bdf95abf35223ad502b50bbfcd26b9895",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00923-p0.pkl.gz": "545599f60d63a74a2aa1738270e8a179fa34782a1fd77453869d87912cf93ada",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00923-p1.pkl.gz": "1a276d3461a84e36e683e1aa96895c076a007961f9a1d45a68ba79b4ab66dab0",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00924-p0.pkl.gz": "e15ae0aecffb23ca7992e4b37c2531f5e14efed7c7324e1446a211f8483875f4",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00924-p1.pkl.gz": "566bdeadc2a202abaf6379c3314db339e8543c953035ce1748c63ea8d0325802",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00925-p0.pkl.gz": "6de1dc9da114c75b3122cd78ff58616a9cda651dd37fee7dca2c103bd3a5f4a5",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00925-p1.pkl.gz": "c2bd78954dfdfcef591b21a2045d384d710f99c92daa7e8e569ac422a081aeb6",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00926-p0.pkl.gz": "258e9c0bdbc45f4eaa954be3326999e20ba8ea37f858ab3b8a3d5afa862809d2",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00926-p1.pkl.gz": "b2f729cbc39db378e28b7a908cdc03aeb4c36a13ae2f0c194419849ae05a0035",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00927-p0.pkl.gz": "512f03ee0b9fcb4fc080557e14627fd5777b716599e9fe71075ef4cc36a2dd17",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00927-p1.pkl.gz": "b0728a773ced7fa6d86a4dfdb6524cefc4ca321b47220b3a0dd21ade0ce01939",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00928-p0.pkl.gz": "8736195fc19b9c819109795acc28921c76dc2d02452818f4f0ab73105a8c7396",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00928-p1.pkl.gz": "184991d15198252d461dffc159fbb3ec9b40692d88fbfda69552fafad98017c6",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00929-p0.pkl.gz": "14fb52d125eac63ca81d35eea7edd79767ddc8b0793c961cfdde224cee55b9f9",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00929-p1.pkl.gz": "655a7b9dcb05dfcdae940114cef0507cf8cb8e4516817811f9d34324feb8d869",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00930-p0.pkl.gz": "47317dfa49a2d2df09b6405960d8cba4f961142a7eae7e5a914c112172faf40a",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00930-p1.pkl.gz": "50f1381e754057e5b88af5292baa1e6eff981c1b4c44a9a2c2bbd2dcfb0488dc",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00931-p0.pkl.gz": "77c11d04061c91f17b6a3c90324d90311a0ac7afd3ffbe511b06d2ac837f27ab",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00931-p1.pkl.gz": "21dceb7f2f211073fc6caba61ac72872d44124e249595e9f2c2922630a1537e8",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00932-p0.pkl.gz": "bf275ba65420ab45b873951e4beb7064c761e87a154ecf9d14100c985b3c351d",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00932-p1.pkl.gz": "19c97355f2aed410c72482965e2b49ec5499f8857e746cfd0f41ec7aa602e0e8",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00933-p0.pkl.gz": "444cd607635a6fbd0bbd64402bf08f4f0c1eef92f1f02825cf82fdf81163b2df",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00933-p1.pkl.gz": "1c2df8272a761fc8709b1950ac99f468ece5764ba0a0555c1ef0972df6d281b8",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00934-p0.pkl.gz": "103043304330ede730c1e100ad05c2d0df1b3f32971de8acdf64efa742d56f59",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00934-p1.pkl.gz": "fea841e04ad574a5ef90367f7f3dc09eb2a644504d550c1b7d7b514ffa5e1fe3",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00935-p0.pkl.gz": "68319c1ec7e0fe10a9e8081dd5dbfdd9b61ffa9e6a09c14fbdc957ea5decc7ab",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00935-p1.pkl.gz": "98dd1a08911d4977fe7fe581b9fc24d8ca268f9cdafb160c4b47ecf9d1843850",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00936-p0.pkl.gz": "52a51e5b132a346984869ef044ddaefdb59b2b65fa3c18508398de8c9a1a4494",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00936-p1.pkl.gz": "126ebdd919047c814d0593cd563fbcde063a23266f4ea28be6f0899e73c7b39c",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00937-p0.pkl.gz": "fca976121dc491fee0cbca9698c6dea53e36f9fa6480c1e5a51dfd4bd80eebfb",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00937-p1.pkl.gz": "39c1a24d72eeb6a5b34293eece825f5452e9d8e2ff046a87ab60bd96a92b63c9",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00938-p0.pkl.gz": "4f8737e0d083c77d5a2b3a0141aa80b2ba9f8e94b153c5e17707343fe0c10e03",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00938-p1.pkl.gz": "a88f82c22875f640cd3dd99241edf1b0024c8227aafb29f9931e0af0e56a15d9",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00939-p0.pkl.gz": "7855e21e1d4cde4ca7d3ebd0c94dfd80e68acef9d191d10be649981fa35f2078",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00939-p1.pkl.gz": "61db7398f60817a26f5f6efc8bfc0b6086ad8471b931f00099a7d8b85ffd9136",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00940-p0.pkl.gz": "9bf864f1e2d4aad3248abb1a2078c6420debc000fd0ac0a20509550fe2a5326b",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00940-p1.pkl.gz": "cc721da4863216453be52d00fad6fc0cdcb44ae974e9402adb9e0cbcd2ce71f8",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00941-p0.pkl.gz": "d4a05133004a90f7a553131d80554f5f6ec7f20214029a45cc77e50c22af51c0",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00941-p1.pkl.gz": "4d757d8ca98c6cd7481566751df2fb53cdce0db4362b3b0bab7fe55c612739e8",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00942-p0.pkl.gz": "985876bcc8a291ac2a27865d564a36762c7705c9c31f441026a5704f4a7e46aa",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00942-p1.pkl.gz": "41f2be218013cc61eb41b0957a3b09c82adc0d01448c0dc4829fb201129008cf",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00943-p0.pkl.gz": "9625557c3758cba083ad4b5c63e0b25adf328989adaefcb0124342f2011755bc",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00943-p1.pkl.gz": "c67777d31c335bf4dfe631c49d0f285c4c01c044127644779ed589b131badf26",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00944-p0.pkl.gz": "eb85d819df36bc7fc5a26d84fe59f50eb6358f085d6802d72f3df98915bf7113",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00944-p1.pkl.gz": "f71cd6c8a3d93477b3eb8af0d8518ea6b6aae94e58fb3f6c8df07fc164ee41dc",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00945-p0.pkl.gz": "91aedcf5864ed99403eab3ba792194749b2772861fbf6b69cbbc462f1ca9e653",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00945-p1.pkl.gz": "ae9c0e4ad3101ee554e7924287cafd921bbdb9095cf5e1e638f402526da35b43",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00946-p0.pkl.gz": "25168085077f878a635161c197e525ee8f4e07c6fca27781997025a75b154b14",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00946-p1.pkl.gz": "2597273a387b7585a676bd987cdfa1703c54466e921af70a25ea795447c2fed8",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00947-p0.pkl.gz": "96213e689f3af34a249bf61bc83284b90ac9696e193705ff893f3c4a165be340",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00947-p1.pkl.gz": "983425e466fb8c10cb37305799ffd4df3dfc554c7d65312c8e6f63e3777eb782",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00948-p0.pkl.gz": "3c65ada2130028794b857b2cc301db7e24153095d273cd3f896d5fbfb8712728",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00948-p1.pkl.gz": "44d194ad98614fe9cd9a5f2e976febdbbe32d079048052dfbb8c55186f498644",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00949-p0.pkl.gz": "fa96cce3199d747b13a0a3bd21f6e45194718c19adb82652ccae97ac5efbdc71",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00949-p1.pkl.gz": "c8c26e9a4ea1b44bdd78cf67ba79e424759cac4fda8af818879ce57549874fc4",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00950-p0.pkl.gz": "e47d500960916df012f3f7895250e3dca2e0a5d093422e4e1ff5c636626027e6",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00950-p1.pkl.gz": "b04e1a10b3f5d7276ac3f396e226edeb52578c5aeca38cb68b83064a7d517c61",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00951-p0.pkl.gz": "8f0efb17068d524e2588a79bad86b64897ce1117c037c32257a06f7fcd395b72",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00951-p1.pkl.gz": "7574fc00127dd67316d37b880edeb2714c6d6b67fea7fab1109f6fdb8f893449",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00952-p0.pkl.gz": "b5f4ff57ea1cd2587ca4a880dd858a12fd852817d7a7204fefee7edd03fd1043",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00952-p1.pkl.gz": "b83b136b8ea09830844b5ed05ad3d83de80c258c4f4872f9379fcd670ce50e35",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00953-p0.pkl.gz": "38349d8073320c0479fed1a9a308d0e5a679b9447fd2da00bb04dbbbac122164",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00953-p1.pkl.gz": "b003e759da614154edce2fa3e2705e8b049499bbef8d2155036effef7bdd57ac",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00954-p0.pkl.gz": "21249321b8fbbfd13807b4029c65a2362509740ac5f8418622c8c324ed314137",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00954-p1.pkl.gz": "2dd0cb51aedb565e044e97ecbe189bf7fcd7c6f024e9f38de9a0ed4258e9f118",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00955-p0.pkl.gz": "a37ad8f0e958c307aed5785e9f993ef7561b92ef53bd6ce1dcad2c88a0134078",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00955-p1.pkl.gz": "391ebc00dbfd1c4481cb25044cde9fe600eddfad14cfbfd5baaf37d9e305ad08",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00956-p0.pkl.gz": "ff5f2383d512a0523e5a881210889cdbd629454a8f4cea70bd86a580beb62ce6",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00956-p1.pkl.gz": "120ba876219c9d71b1377b85a623dcac228e1c84646fef13eaf9e309296fa473",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00957-p0.pkl.gz": "11d83b60ecbe9e494122ae3076f83c6488fcea6f4360ee41571199d11cc6dc76",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00957-p1.pkl.gz": "bd3b75e0b40d115d07753c2a8814822573344f0a8e1e4c00e01fc58ae32a25fd",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00958-p0.pkl.gz": "69e9d26399eea61be2083bfec35a55c1721572a07937b0beb750b13a3e7ee52a",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00958-p1.pkl.gz": "e60e11c67a784000ba19a936f57d423c531594d244a04bb42ab248e07f666a69",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00959-p0.pkl.gz": "1dcee6871bbc1f69fe6e5d1e0622849d18a0f19b11785a8cb11ea1ccd8c47fe5",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00959-p1.pkl.gz": "c2b7bae4d9ec333489bbdb89f2e486ce132c064ece0c8b03a444ba91a32caba1",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00960-p0.pkl.gz": "78ceb8e6c310e591ede7b774e385b216cf67895a6a03483f864dae6777631a4a",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00960-p1.pkl.gz": "9d64887f1ed450807c278a601cf9bedb6ad244b9d09ac944f88b62c00593689f",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00961-p0.pkl.gz": "55b6ac10eae7551e2af418ba18e784f64ce2c66b9ff490fb16ccd3de89db1e56",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00961-p1.pkl.gz": "c894ba88b9fab82406b247f71a74cb5193ecfc53a2b4109978a72ba2b3c72c26",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00962-p0.pkl.gz": "cd2d93c72cbb1fb72d3cc79f8c93943508dc0057739dc24c14d285df30cce0b5",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00962-p1.pkl.gz": "7272e2fb18455de3971414992b3bc6fba2d77813077183cb8569791c49952e5b",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00963-p0.pkl.gz": "57d915474fa5a33ea5c1abb3e5ad6814d2faa259821647af95f647199ad88e3b",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00963-p1.pkl.gz": "2b8e8202b9bb30a46dadd0d2cf52b79f49c2dad7013bf0d040361d10e8412f78",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00964-p0.pkl.gz": "394407917411da20fa334e8e755ab1eab9c688ab8924a27346bddfcaa1a5bb43",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00964-p1.pkl.gz": "0c8e064309484f56aab9ff5e19d3b803e3a42e200f8531905bff76297ffc38a6",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00965-p0.pkl.gz": "55b9c413b913feb9041924664055d1de707d8d52b396e1cef97c672be95c4840",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00965-p1.pkl.gz": "f076a9d1698c1613e3f1a1624d472e55149365d02e66f1aea226877fd11918fa",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00966-p0.pkl.gz": "c6034663effc48e2138149d18b13ead8d7539b7ff42ff5ce1b4e1f28fd4b4843",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00966-p1.pkl.gz": "600ef39bf2b7d7dd87b74667fb544fd338a6ed97140abaa9d988a74ff8eea7b9",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00967-p0.pkl.gz": "6d01e85581aaf2f4c817f14d94a5bd12fc79f0e73ab9bdf29a024fe9285c468e",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00967-p1.pkl.gz": "1710b132dc59030cf84d4027a5115489a580c68d4647b1984b2ff338a299b9f4",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00968-p0.pkl.gz": "aced9822c21c6e0f04366667efc6acafc9ae03c9209d3e6684e22f2bda7d859c",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00968-p1.pkl.gz": "a55a949545bae5bc298a1b82b647ae93a096306c59920a1c5910a61ae6e40526",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00969-p0.pkl.gz": "7c4eed9f4f662cbf08e273a2484657030b32a028148afbc4228ad96ed315b2fb",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00969-p1.pkl.gz": "5990f0374ad43f308a8516d6ae38de76b690d5a538ca590fd559497c5fd26b43",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00970-p0.pkl.gz": "68ebe003c1e6556d385e1d695c9f7a6bf0c27b4650edaf0db3258cedaf79816a",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00970-p1.pkl.gz": "c4020a95c3a9aad9ce194d2876cd3ef3cee5c20238d07e658c8185261950605b",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00971-p0.pkl.gz": "674ad75dc5490c213502f018c83a0974297d3b9fbf2d4e2149be86bb503bf98a",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00971-p1.pkl.gz": "e697e706cc28376c74a31653f9b327ebbefefc9783be13e7d22048346e19c6d6",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00972-p0.pkl.gz": "b41fdc5812ac2ade3fd0eb5f3632386cc9ecaca9ebd88a99874c7bad48a08682",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00972-p1.pkl.gz": "d3f2a75bbec833e16403447bf29258c18bf44220c33ccf35cf9262159a24e4ab",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00973-p0.pkl.gz": "e22802e1ba868974d0b56f1ffba723bc9d8e90730f86ffec4965870cd06d1aec",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00973-p1.pkl.gz": "011f977cfc9484cdba140ec3cf56ec300ce7041a4585e1e4b476f14673a4d04b",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00974-p0.pkl.gz": "7a9f939465c09f8472c9f00826dadb5f034ead0545ea2578f48a206e044c948b",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00974-p1.pkl.gz": "f40b49933da8be46811412a14a82465b9715af7701408636e7533188c8f3f7c2",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00975-p0.pkl.gz": "879a317255c1b73f80e80edcfeb3f6b4450e1a45841df6b8b0dc95e0e42e45ef",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00975-p1.pkl.gz": "c247a4000868b65670372332034e5c6a20d54653cb20333b81e899bf2b502836",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00976-p0.pkl.gz": "f0d36bb69d85c7ecc0540c937351cbf569d1199b51b4d5e22283d15c66aca51f",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00976-p1.pkl.gz": "1ec4aa20517a77dc7560e67cf2f882f31ff2365c3c706444957b80029fb24ca5",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00977-p0.pkl.gz": "eb5bed2b4c9d01beb416102a189fc25559992c402dd76aba908c180d5f35479f",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00977-p1.pkl.gz": "7cd4379c5536bd29a687c749bd838cc3ff8b5a6d843d5eacfb90db30ff023fba",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00978-p0.pkl.gz": "dbdcee70c46f84938318fe2cc4b4928f1f999ff8395eee9cea6cfe54c2b4591a",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00978-p1.pkl.gz": "2b4f05e3b4b98ecd01479f5e0c987b9e9ab7f563f1d54b98118aa7ca3eec9311",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00979-p0.pkl.gz": "b9fb61c2f5fef4495331566f28f320c790e94c4d8137d0aca1621f34397d7068",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00979-p1.pkl.gz": "819636c20778c3518fbe687a185cf55ef1b39f7971192447e26c598fb0dd456f",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00980-p0.pkl.gz": "fb2c7f242e1f1b9c5012c8366244996ccadf99d2fa6d1c86f08f5e4db0945659",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00980-p1.pkl.gz": "4aac0f793eb3023c1cd5571a685efa505ad952baa1cf4b6b197046a8eb6a0e6c",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00981-p0.pkl.gz": "84b14fce1cde90cb146c8c7e815c9ff53448e10d68c23ce05019b5b0d02bd1b4",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00981-p1.pkl.gz": "67e0ea2d69d6f061cd31bfb6ddfa389ba5a00571ad15be386c1f9a09a1c36b1f",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00982-p0.pkl.gz": "54b1c6a033b903770f01b4e86593985671c6605cc6ad45213bd346e0e6c166ab",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00982-p1.pkl.gz": "10e3a7547ccb58683e4ce626c071c03fa62c10d79be69b4719fd89b0ef31ee89",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00983-p0.pkl.gz": "9ff14b746299357786f69225792f4d90cb2453dca5161f2f65bf5e440714a892",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00983-p1.pkl.gz": "5fb01d18a52c1a6b81104fdbbb52327a4173e2866be96b627bff13c5abc213d4",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00984-p0.pkl.gz": "5d3f8905fb0849337a3653206be296fca1cc0d9ef08368301867093184145a04",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00984-p1.pkl.gz": "bad88d3c8fabc9e7d6a486785c517e360692d9fcdb3217c1f63ed488fd4c7dc2",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00985-p0.pkl.gz": "1973fd91406941b100c10f9e823973a1e8982baa79618055033405be704b33ba",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00985-p1.pkl.gz": "05b3b9befba534b1260b0943faa38ed66702680239580f3a986e2d8980eb2d16",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00986-p0.pkl.gz": "1e838f24a4a16e26b3ca6b0b0498b5bd2e4b9981211b07c8faa2b56d02b7159e",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00986-p1.pkl.gz": "351ed48d9fd94b0d4e9268e9e4a6e5a2b4bd82a7a0d83a445addb3a08a087c00",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00987-p0.pkl.gz": "65db65d2d4d0561893a0ddc09dffbdecd4acc9f97941c25ce43c1309b5bbd32f",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00987-p1.pkl.gz": "9364c465612ba10127b8a2d49450c3ab411ebb92db8e2ecf1c6931bd49892895",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00988-p0.pkl.gz": "cbd336e23aefbe6861a7a9a8efbcabbc84381d3c65a0439687ffe298af3a6521",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00988-p1.pkl.gz": "7611d5dfb544fe3b5d4e80dba6f48bb474d53f7c2f4260e0c6a98bb8036213f3",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00989-p0.pkl.gz": "292a53b355b783da2b533effb2f45a72d5e73d67d9ff1f3bb6dac31947a95b62",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00989-p1.pkl.gz": "a8e5c6c820f9b068c0846ca0bf893a07982af4579f96afa5bc6c764ad1a101ab",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00990-p0.pkl.gz": "a1ed92bd17f6c71dc31b9c54cf1b42be3047dc5f10c946ec51bb9715a3c186ea",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00990-p1.pkl.gz": "392c735da00a1514deeec8d5a20b63e69dfa88b3de0f4e33bc396dc8602765fa",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00991-p0.pkl.gz": "5e178607688fcca8ce3f1366cba10f6dbfe48e1942f6e72f7c4b89f283ad178e",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00991-p1.pkl.gz": "272f981c74d061893995966fe02551d8be924826cece5a8360bbf1d268a7682d",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00992-p0.pkl.gz": "52d381a02a4b2be9cecfc297b300f9c1a98f3d81df7d82e44169f4d0f59fb41e",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00992-p1.pkl.gz": "c8e83f6ae126d25e9ee6aafecabaa0d09f404cbb3abd9d95d9833336f780b4b3",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00993-p0.pkl.gz": "5b81e99b146022d219c4a5755c2e8a0c5ea7ac5072b3b296e0a8d3f0bf33e104",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00993-p1.pkl.gz": "d561077fd4add8108b87efc4be3a3f3a5b911913c8ceac200519683c68b75da2",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00994-p0.pkl.gz": "f37f6b673b175faf65cf8d7cc1b4c9f766b0cfb06283e7f84017af45ea95d988",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00994-p1.pkl.gz": "7e9be24ba3ad2f5e9df0a8304798ff81ff325da35073f1205de8f9ac67761e46",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00995-p0.pkl.gz": "88d5374d965a7d3fc05a29789aafc2b7dcb421b2ad26120060bf28b00c2a42b0",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00995-p1.pkl.gz": "6454bb7180f87ba968ab07d927f4894183165086f8ce181952460a6329b37a66",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00996-p0.pkl.gz": "829546374b376d5083c490c1d2f93ed045f4b0712d889c516fd5c3bbbb66e474",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00996-p1.pkl.gz": "e423a4bae7ff735e80e7a9f06587d66ce7caed80d0afcf399800ebc1885a0ede",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00997-p0.pkl.gz": "0c61989c28a6a1326baf9f0491a8923e1a00de94c82e08a01995ad7b8a5e50a5",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00997-p1.pkl.gz": "f31a3128df60b84e7c49df5a333737c98b356e389ce785a9d2305690f5a8462b",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00998-p0.pkl.gz": "0d8b518632430676503b86c329624803e633a6e4c0b207e78ab187b70e732e1b",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00998-p1.pkl.gz": "f5add8f8a6035b6511fe21abea2e2567d48239a2ed7f6f75f75eec2483072e0a",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00999-p0.pkl.gz": "30a23b406ca0d9aa5d4ddb7cf8b773c9164b1fea3c504bdb0dc7f2d2fee231fb",
+      ".local/red-separate-1000-2026-10-18/rollouts/game-00999-p1.pkl.gz": "5cdbdb1a5d37fb6a5431d7801a95296a9dfb0c91e57a7e1641eb4ae6e96fd03f"
+    },
+    "late_mse_definition": "Last 20% of decisions within each seat trajectory, not a turn cutoff.",
+    "memory_scope": "Frozen behavior memories from saved rollouts; no sequence replay/BPTT. Fresh cases reset critic weights and Adam, retaining the same numeric inputs."
+  },
+  "validation": {
+    "full_suite": {
+      "tests": 309,
+      "seconds": 77.423,
+      "result": "OK"
+    },
+    "full_ppo_update": {
+      "samples": 8993,
+      "metrics": {
+        "loss": 0.4828558741114457,
+        "policy_loss": -0.002923985649292559,
+        "value_loss": 0.9959483436505256,
+        "entropy": 1.2194312064524544,
+        "approx_kl": 0.004404247789185999,
+        "clip_fraction": 0.014900478149671968,
+        "samples": 8993,
+        "optimizer_steps": 22554,
+        "accepted_steps": 564,
+        "rejected_epochs": 0,
+        "early_stop": false,
+        "gradient_norm": 1.0287665128707886,
+        "exact_kl": 0.004328006780563885,
+        "max_state_kl": 0.03908899053931236,
+        "largest_accepted_kl": 0.005229219838056955,
+        "largest_accepted_state_kl": 0.03908899053931236,
+        "reward_std": 0.9998770952224731,
+        "advantage_std": 0.9998676180839539,
+        "cache": {
+          "budget_bytes": 268435456,
+          "retained_bytes": 141141994,
+          "trajectories": 50,
+          "trajectory_hits": 68776,
+          "batches": 33,
+          "batch_hits": 99,
+          "spill_bytes": 0
+        },
+        "sample_order": "global_shuffle_v1",
+        "behavior_critic": {
+          "samples": 8993,
+          "mse": 1.0158806653987071,
+          "zero_baseline_mse": 1.0,
+          "constant_baseline_mse": 0.9997541733071879,
+          "target_mean": 0.01567886133659513,
+          "prediction_mean": 0.142742714603658,
+          "prediction_std": 0.001240047959476362,
+          "explained_variance": 1.8735321196450272e-05
+        },
+        "recurrent_updates": "detached behavior states",
+        "terminal_rewards_only": true,
+        "value_loss_before": 1.0158806661669781,
+        "critic_steps": 564,
+        "critic_optimizer_steps": 22554,
+        "critic_gradient_norm": 4.703302383422852
+      },
+      "checkpoint_sha256": "f707079fbce5f92e02e2268ca9466591b9b2453ddb36d1cda34d2d7b1ce989fd",
+      "source_sha256": {
+        "/home/altf4/Code/mtgo-bot/patchwork_automaton/examples/benchmark_rustmage_parallelism.py": "85c68585f0d76c606c32b9188c45a722908e5593f41d7ebd2c8a4d10725e99fd",
+        "src/patchwork_automaton/neural/augmentation.py": "215ef801da040da9db1821b419209a3d49a5a22a0fde2aff6f83c6cdb7690a07",
+        "src/patchwork_automaton/neural/calibration.py": "a867ec3615f74c2cb812171d3bd5b2bce5c25e733196b924cac137eeddbbb802",
+        "src/patchwork_automaton/neural/history.py": "76bb00cf3589898e8cde5ef0ae8fd306b0a7d48198102b81275b7a713342fc26",
+        "src/patchwork_automaton/neural/rustmage_features.py": "d0f81552f3201e3c85824f15ccd7bf08284020959c5b296949edb270332cab72",
+        "src/patchwork_automaton/neural/batching.py": "15f6c90848482936c35d51d9bbd8899b527270b844b190befce7c7a8915a24a3",
+        "src/patchwork_automaton/neural/__init__.py": "83a1588922dcdf47a7dbbcc41d76f5edf3934b3100e55582f5c814d155c7532a",
+        "src/patchwork_automaton/neural/training.py": "7ea5b47c5621d54515ffd77aab0b20f15d67eedadf44604fec76d724e8a22f96",
+        "src/patchwork_automaton/neural/ppo.py": "250df57cdbf2dbb6ac518975ae468c6e0a47f30e248d69ca99342ffbff4bf87c",
+        "src/patchwork_automaton/neural/rustmage_observation.py": "cb63ad988d5b2b0c8d8318ecafb6176a136a5a609ca9c041abb5333c1029d6f9",
+        "src/patchwork_automaton/neural/native_layout.py": "e5cb94f329a4621a92fa9e6e2210c3694e2fbd6e4977e3790656bb206ef1dc91",
+        "src/patchwork_automaton/neural/payment_scenarios.py": "011be640915449167ce429d80cb1bd8586a37d527454cf0161b95f2c86e9c243",
+        "src/patchwork_automaton/neural/curriculum.py": "0b04a9667acd622c09717f4efb5b49e842558c2abc84f14919c199eaa7f9f853",
+        "src/patchwork_automaton/neural/experiment.py": "e88f6a4d27fc0e2b44212651352caff5c72f87daef82ae11ed59d47362d20538",
+        "src/patchwork_automaton/neural/rollout_cache.py": "cfc2e492f39adb0d42bb6324db50229e2d0da1d07b8b9daf482ae6b9bf7ccdf6",
+        "src/patchwork_automaton/neural/episodes.py": "c519dc6dd780d02ea23a8f2fe73dab522a6b612bebada15610874918b65ab62b",
+        "src/patchwork_automaton/neural/model.py": "09741d1f396980effd972c26bd9da901a5cdd085f20c9d5184e83879b131892e",
+        "src/patchwork_automaton/neural/policy.py": "fe226a1e8b6ed50184c948eebd750fa2d9d3c56d569a9abab7ffd60a0ad556b1",
+        "src/patchwork_automaton/neural/scenarios.py": "6b36460767475498b7130c52a2fbbeab98d36310a843c747200f6bff4da480c2",
+        "src/patchwork_automaton/neural/features.py": "58d032b9dc018c474c1b245ea8989afe4885254985af005cbc748eeb33ee2fe0",
+        "src/patchwork_automaton/neural/streaming_ppo.py": "93d2150355d22ba9b2f60c77581b2aed9424d986a70ad546659d3c4050d44ec8",
+        "src/patchwork_automaton/neural/rustmage_policy.py": "c88927849301ff0c57cf537e4f0e5f99f7e4870d1c34bfe327f49c631c016ba9",
+        "src/patchwork_automaton/rl/rustmage_processes.py": "76a3b32742601a94b5509b15078e6dc7bc69e03f4514502389f11b0abddb1c74",
+        "src/patchwork_automaton/rl/rustmage_experiment.py": "cb8ab42e786b1f09ca5da2b8d25ab5b859173da5d92358a3e0811c31c90e5633",
+        "src/patchwork_automaton/rl/rustmage.py": "3d347ff0deee35bb0a84d7dbf9ff8bb7ba8af19d86a67ae242c072ff110459ab"
+      },
+      "status": "complete"
+    },
+    "diagnostic_cli_smoke": {
+      "actor_unchanged": true,
+      "source_files_unchanged": true,
+      "train_games": 1,
+      "heldout_games": 24
+    }
+  }
+}

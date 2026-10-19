@@ -1,0 +1,375 @@
+{
+  "training_outcomes": {
+    "win": 523,
+    "loss": 477
+  },
+  "training_choices": 400681,
+  "baseline": {
+    "games": 40,
+    "win": 40,
+    "loss": 0,
+    "draw": 0,
+    "cutoff": 0,
+    "error": 0,
+    "win_rate": 1.0,
+    "failed_attempts": 0,
+    "failure_rate": 0.0,
+    "mean_own_turns_to_win": 6.45,
+    "median_own_turns_to_win": 6.0,
+    "p90_own_turns_to_win": 8,
+    "fastest_win": 4,
+    "slowest_win": 12,
+    "wins_by_own_turn": {
+      "4": 0.025,
+      "5": 0.2,
+      "6": 0.7,
+      "10": 0.95
+    },
+    "win_turn_histogram": {
+      "4": 1,
+      "5": 7,
+      "6": 20,
+      "7": 6,
+      "8": 2,
+      "9": 2,
+      "11": 1,
+      "12": 1
+    },
+    "turn_horizon": 25,
+    "capped_turns_mean": 6.45,
+    "capped_turns_failure_value": 26
+  },
+  "before": {
+    "games": 40,
+    "win": 30,
+    "loss": 0,
+    "draw": 0,
+    "cutoff": 10,
+    "error": 0,
+    "win_rate": 0.75,
+    "failed_attempts": 10,
+    "failure_rate": 0.25,
+    "mean_own_turns_to_win": 17,
+    "median_own_turns_to_win": 17.0,
+    "p90_own_turns_to_win": 23,
+    "fastest_win": 9,
+    "slowest_win": 25,
+    "wins_by_own_turn": {
+      "4": 0.0,
+      "5": 0.0,
+      "6": 0.0,
+      "10": 0.1
+    },
+    "win_turn_histogram": {
+      "9": 1,
+      "10": 3,
+      "12": 2,
+      "13": 2,
+      "14": 4,
+      "15": 2,
+      "17": 2,
+      "18": 1,
+      "19": 2,
+      "20": 3,
+      "22": 3,
+      "23": 2,
+      "24": 2,
+      "25": 1
+    },
+    "turn_horizon": 25,
+    "capped_turns_mean": 19.25,
+    "capped_turns_failure_value": 26
+  },
+  "after": {
+    "games": 40,
+    "win": 36,
+    "loss": 0,
+    "draw": 0,
+    "cutoff": 4,
+    "error": 0,
+    "win_rate": 0.9,
+    "failed_attempts": 4,
+    "failure_rate": 0.1,
+    "mean_own_turns_to_win": 14.555555555555555,
+    "median_own_turns_to_win": 14.5,
+    "p90_own_turns_to_win": 21,
+    "fastest_win": 7,
+    "slowest_win": 24,
+    "wins_by_own_turn": {
+      "4": 0.0,
+      "5": 0.0,
+      "6": 0.0,
+      "10": 0.2
+    },
+    "win_turn_histogram": {
+      "7": 1,
+      "8": 4,
+      "9": 3,
+      "11": 2,
+      "12": 4,
+      "13": 3,
+      "14": 1,
+      "15": 2,
+      "16": 2,
+      "17": 5,
+      "18": 1,
+      "19": 1,
+      "20": 3,
+      "21": 1,
+      "23": 2,
+      "24": 1
+    },
+    "turn_horizon": 25,
+    "capped_turns_mean": 15.7,
+    "capped_turns_failure_value": 26
+  },
+  "curve": [
+    {
+      "games": 0,
+      "wins": 30,
+      "mean": 17,
+      "score": 19.25
+    },
+    {
+      "games": 100,
+      "wins": 31,
+      "mean": 18.225806451612904,
+      "score": 19.975
+    },
+    {
+      "games": 200,
+      "wins": 33,
+      "mean": 17.21212121212121,
+      "score": 18.75
+    },
+    {
+      "games": 300,
+      "wins": 35,
+      "mean": 16.857142857142858,
+      "score": 18
+    },
+    {
+      "games": 400,
+      "wins": 36,
+      "mean": 15.527777777777779,
+      "score": 16.575
+    },
+    {
+      "games": 500,
+      "wins": 38,
+      "mean": 15.131578947368421,
+      "score": 15.675
+    },
+    {
+      "games": 600,
+      "wins": 39,
+      "mean": 14.76923076923077,
+      "score": 15.05
+    },
+    {
+      "games": 700,
+      "wins": 37,
+      "mean": 14.864864864864865,
+      "score": 15.7
+    },
+    {
+      "games": 800,
+      "wins": 39,
+      "mean": 15.35897435897436,
+      "score": 15.625
+    },
+    {
+      "games": 900,
+      "wins": 39,
+      "mean": 14.128205128205128,
+      "score": 14.425
+    },
+    {
+      "games": 1000,
+      "wins": 36,
+      "mean": 14.555555555555555,
+      "score": 15.7
+    }
+  ],
+  "comparison": {
+    "capped_turn_reduction": 3.55,
+    "bootstrap_95_interval": [
+      2.125,
+      5.05
+    ],
+    "improved_attempts": 30,
+    "worsened_attempts": 7,
+    "tied_attempts": 3
+  },
+  "parameters": {
+    "actor": 125729,
+    "critic": 241985
+  },
+  "throughput": {
+    "timed_selfplay_games": 1000,
+    "collection_seconds": 407.6131367170019,
+    "update_seconds": 2043.5885718130157,
+    "collection_games_per_minute": 147.19839621277188,
+    "collection_and_updates_games_per_minute": 24.47778972705674
+  },
+  "seconds": 2528.339341084007,
+  "critic_first": 0.710182942871341,
+  "critic_final": 0.06613155073393903,
+  "critic_last5_mean": 0.05858766480323359,
+  "critic_last5_fresh_mse": 1.2156835650241784,
+  "critic_curve": [
+    {
+      "games": 100,
+      "after_mse": 0.710182942871341,
+      "samples": 47661,
+      "mse": 1.0004465698365903,
+      "zero_baseline_mse": 1.0,
+      "constant_baseline_mse": 0.9999611682826258,
+      "target_mean": 0.006231510039655064,
+      "prediction_mean": -0.012151035835753925,
+      "prediction_std": 0.0033915327754235228,
+      "explained_variance": -0.0001474892883650547
+    },
+    {
+      "games": 200,
+      "after_mse": 0.37287599244312764,
+      "samples": 50323,
+      "mse": 0.8904236202729215,
+      "zero_baseline_mse": 1.0,
+      "constant_baseline_mse": 0.9999989729128281,
+      "target_mean": 0.0010134530930190966,
+      "prediction_mean": 0.021567039319226135,
+      "prediction_std": 0.5047821015563199,
+      "explained_variance": 0.10999791552411275
+    },
+    {
+      "games": 300,
+      "after_mse": 0.19983653731614556,
+      "samples": 42544,
+      "mse": 1.0808106233891377,
+      "zero_baseline_mse": 1.0,
+      "constant_baseline_mse": 0.9989569699386768,
+      "target_mean": 0.03229597593080105,
+      "prediction_mean": -0.05198949764729342,
+      "prediction_std": 0.7193928330561663,
+      "explained_variance": -0.07482765989286388
+    },
+    {
+      "games": 400,
+      "after_mse": 0.11300573499655128,
+      "samples": 39289,
+      "mse": 1.1743761740671053,
+      "zero_baseline_mse": 1.0,
+      "constant_baseline_mse": 0.9997858126886983,
+      "target_mean": 0.014635139606505638,
+      "prediction_mean": -0.08492757159135152,
+      "prediction_std": 0.8220179534464368,
+      "explained_variance": -0.1647129073320972
+    },
+    {
+      "games": 500,
+      "after_mse": 0.11046414490183333,
+      "samples": 39839,
+      "mse": 1.180604590769008,
+      "zero_baseline_mse": 1.0,
+      "constant_baseline_mse": 0.9993406220649574,
+      "target_mean": 0.025678355380406134,
+      "prediction_mean": -0.04497265940928892,
+      "prediction_std": 0.7659343119241511,
+      "explained_variance": -0.17638870963636188
+    },
+    {
+      "games": 600,
+      "after_mse": 0.07960284169363686,
+      "samples": 37128,
+      "mse": 1.2466242953280766,
+      "zero_baseline_mse": 1.0,
+      "constant_baseline_mse": 0.9995654109189793,
+      "target_mean": 0.020846800258564963,
+      "prediction_mean": -0.022481345532446347,
+      "prediction_std": 0.7418483622148259,
+      "explained_variance": -0.2452881557456008
+    },
+    {
+      "games": 700,
+      "after_mse": 0.055918055825821184,
+      "samples": 35678,
+      "mse": 1.1357279497275297,
+      "zero_baseline_mse": 1.0,
+      "constant_baseline_mse": 0.9995767557004798,
+      "target_mean": 0.020572902068501597,
+      "prediction_mean": -0.02251086130187891,
+      "prediction_std": 0.7480942455939775,
+      "explained_variance": -0.13435184701427372
+    },
+    {
+      "games": 800,
+      "after_mse": 0.04668518322520393,
+      "samples": 36377,
+      "mse": 1.1973278755576577,
+      "zero_baseline_mse": 1.0,
+      "constant_baseline_mse": 0.9996914340813737,
+      "target_mean": 0.017566044478654095,
+      "prediction_mean": 0.05176219296038133,
+      "prediction_std": 0.7764281376405898,
+      "explained_variance": -0.19652770665763963
+    },
+    {
+      "games": 900,
+      "after_mse": 0.04460069253756693,
+      "samples": 37207,
+      "mse": 1.1387865045142507,
+      "zero_baseline_mse": 1.0,
+      "constant_baseline_mse": 0.9995706025633204,
+      "target_mean": 0.02072190716800602,
+      "prediction_mean": 0.08691277618017318,
+      "prediction_std": 0.7100956841293364,
+      "explained_variance": -0.13489259334415338
+    },
+    {
+      "games": 1000,
+      "after_mse": 0.06613155073393903,
+      "samples": 34635,
+      "mse": 1.3667655013610607,
+      "zero_baseline_mse": 1.0,
+      "constant_baseline_mse": 0.9991000866154994,
+      "target_mean": 0.02999855637361051,
+      "prediction_mean": 0.09720314601945816,
+      "prediction_std": 0.7907619605579496,
+      "explained_variance": -0.3634760548427931
+    }
+  ],
+  "critic_improved_rounds": 10,
+  "batching": {
+    "calls": 55872,
+    "requests": 473335,
+    "mean_batch": 8.471774770904926,
+    "batch_histogram": {
+      "1": 8393,
+      "7": 2224,
+      "2": 2560,
+      "4": 1465,
+      "3": 1766,
+      "8": 3050,
+      "5": 1461,
+      "6": 1673,
+      "9": 4472,
+      "14": 3262,
+      "17": 332,
+      "13": 4862,
+      "11": 6208,
+      "10": 5689,
+      "12": 5659,
+      "16": 833,
+      "15": 1763,
+      "18": 131,
+      "19": 31,
+      "21": 13,
+      "20": 21,
+      "22": 4
+    },
+    "inference_seconds": 464.7209166636603,
+    "mean_queue_ms": 4.085269493879946,
+    "graph_traces": 1
+  }
+}

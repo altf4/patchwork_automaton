@@ -37,28 +37,52 @@ uv run --no-sync python -m examples.train_rustmage \
 ```
 
 That collects 1,024 self-play games, with 32 games per update round, using 24
-independent native match processes and one shared batched TensorFlow inference
-service. Updates occur only after all workers finish their collection round.
+independent native match processes and two frozen TensorFlow inference processes,
+with 12 game engines assigned to each. The engine count is 24 total, not per
+inference process. Updates occur only after all workers finish their collection round.
 CPU execution is the default; one TensorFlow intra-operation thread and four
 inter-operation threads are used unless explicitly configured in the environment.
+`--inference-processes N` selects the replica count. New process-collector runs
+default to two (one if there is only one engine); the thread collector uses one.
+Each replica has its own queue, batching thread and TensorFlow runtime. Game
+engines send observations directly to their assigned replica through local
+pipes, bypassing the learner. Replicas persist across rounds and receive identical
+weights after each update, before evaluation or new collection. All must acknowledge
+the expected weight hash and policy version before collection can proceed.
+The count is checkpointed. A resume without an explicit override uses the saved
+count; checkpoints predating replicas retain one. A different count is rejected
+by the normal configuration check. `--inference-processes 1` remains available
+for new comparison runs.
 `--rounds` is the total target round number, including previously completed rounds.
+For a separate actor/critic, `--concurrent-updates` overlaps their independent
+optimizer work. It is opt-in and recorded in the experiment configuration;
+resuming requires the original setting. Older checkpoints default to sequential
+updates. The shared architecture cannot enable this option.
+`--prefetch-batches N` prepares up to N queued minibatches per optimizer stream;
+the default 0 prepares them synchronously. `--measurement-workers N` runs loss
+and KL batches concurrently while the measured weights are frozen; its default
+is 1. These pipeline options are also recorded and checked on resume. Retained
+cache data still has its byte budget; queued batches and active graph workspaces
+are additional bounded-by-count transient allocations.
 
 For an exact 1,000-game run with a held-out evaluation every 100 games and a
-learning-curve graph, use 40 update rounds of 25 games:
+learning-curve graph, use 10 update rounds of 100 games. This uses the corrected
+cross-game shuffle and increases the number of independent outcomes per update:
 
 ```sh
 uv sync --extra neural --extra plots
 TF_NUM_INTRAOP_THREADS=1 TF_NUM_INTEROP_THREADS=4 \
 uv run --no-sync python -m examples.train_rustmage \
-  --output .local/red-curve --rounds 40 --games-per-round 25 \
+  --output .local/red-curve --rounds 10 --games-per-round 100 \
   --eval-every-games 100 --eval-games 40 --eval-horizon 25 --workers 24 \
-  --architecture separate --collector processes --inference-wait-ms 0 --plot
+  --architecture separate --collector processes --inference-processes 2 --inference-wait-ms 0 --plot
 ```
 
 These CPU concurrency settings were measured on the eight-core development
 laptop; see [the parallelism experiment](#cpu-parallelism-experiment-october-18-2026).
-They are now the defaults for new RustMage training runs: 24 processes, one
-inference service, TF intra/inter limits of 1/4 and zero batching delay. Counts
+The defaults retain 24 game processes, TF intra/inter limits of 1/4 and zero
+batching delay. The later replicated-inference change uses two inference
+processes sharing those 24 engines. Counts
 and environment variables remain overridable for other machines. Zero delay
 serves all currently queued requests immediately, still up to the worker count
 per batch. Each invocation records its TensorFlow thread environment.
@@ -72,7 +96,7 @@ reject a different value. Set `TF_NUM_INTRAOP_THREADS=2` and
 This starts from fresh random weights and evaluates at 0, 100, ..., 1,000
 self-play games. Every point uses the same held-out seeds, seats, starting
 players and action-sampling seeds. Evaluation data never enters PPO. Each
-25-game update is checkpointed; the reports associate each evaluation with its
+100-game update is checkpointed; the reports associate each evaluation with its
 checkpoint hash. `learning-curve.png`, `.svg` and `.csv` show wins-only mean kill
 turn, bootstrap intervals over evaluation games, and completion counts. A
 failure-adjusted score appears when any attempts fail. These intervals describe
@@ -84,6 +108,13 @@ value loss and policy entropy after each accepted update. The accompanying
 losses are measured on each round's own frozen self-play data, so they need not
 decrease monotonically as the policy and its opponents change. Use the held-out
 kill-turn curve to judge improvement at this metric.
+
+For runs that record `behavior_critic`, `learning-curve-critic.png`, `.svg` and
+`.csv` additionally show prediction error before and after fitting each rollout,
+fresh-game explained variance, prediction spread and prediction bias. These
+fresh-game predictions come from the preceding checkpoint, before training on
+those outcomes. A collection of 100 games gives one point at its ending game
+count, not an extra fixed validation set for the newly updated checkpoint.
 
 Use the same command with `--resume` after interruption. A missing evaluation at
 the latest checkpoint boundary is completed before collecting more training
@@ -139,13 +170,16 @@ comparisons on the current deck. The exact parameter counts are in each report
 (125,026 for the old deck and original architecture). These are numerical models;
 freeform prompts, card rules text and display labels never enter their tensors.
 
-`--collector processes` runs persistent spawned game workers with a single parent
-inference service. Workers send private numerical arrays over dedicated pipes;
-the parent batches requests and owns the model weights. Workers do not execute
-neural models. The same game/action seeds and trajectory format are used with
+`--collector processes` runs persistent spawned game workers. By default their
+private numerical arrays travel over dedicated pipes directly to two inference
+processes, each with its own batching queue and frozen copy of the policy.
+The learner owns the trainable model and synchronizes replicas at round
+boundaries. Game workers do not execute neural models. The same game/action
+seeds and trajectory format are used with
 `--collector threads`. Checkpoint updates occur only after all jobs finish, and
 inference rejects stale model versions. Spawn avoids forking TensorFlow's live
-runtime. Benchmark warmed collection, including trajectory writing, with:
+runtime. The historical single-service collector comparison below remains
+available with:
 
 ```sh
 uv run --no-sync python -m examples.benchmark_rustmage_collectors \
@@ -324,7 +358,9 @@ four. Multiple inference services also had diminishing returns: at 24 game
 workers and TF 1/4, one, two and four services respectively completed the same
 48 games at **200.46, 203.36 and 175.80 games/minute**. One service remains the
 recommended configuration. The multiple-service option exists only in the
-benchmark; production still uses one inference service.
+benchmark; production at the time used one inference service. The later
+replicated-inference implementation instead gives each service a separate
+process and keeps the total game-engine count at 24.
 
 The fixed 2 ms batching delay was another source of idle time. In confirmation
 trials, removing it increased the inference service's busy fraction from about
@@ -343,14 +379,13 @@ The update breakdown was:
 | Loading, packing and other work | 3.52 s | 3.33 s |
 | Optimizer snapshots | 0.11 s | 0.12 s |
 
-The update phase still averages only about two cores. Its batches and many
-tensor operations depend on preceding results; game workers are idle throughout
-this phase. Increasing the game-worker count cannot fill that gap. A further
-parallelism investigation could run independent actor and critic work
-concurrently, with frozen advantages and explicit synchronization, but that
-requires changes to the update scheduler and has not been implemented here.
-Larger training minibatches would also change the learning experiment, so this
-sweep held them at 32.
+In this initial benchmark, the update phase averaged only about two cores. Its
+batches and many tensor operations depend on preceding results; game workers
+are idle throughout this phase. Increasing the game-worker count cannot fill
+that gap. The later [actor/critic concurrency experiment](#actorcritic-update-concurrency)
+tests overlapping their independent work with frozen advantages and explicit
+synchronization. Larger training minibatches would also change the learning
+experiment, so both investigations held them at 32.
 
 All **678 timed collection games** ended naturally and matched the reference
 game summaries. All **300 confirmation trajectories** matched their numerical
@@ -441,12 +476,11 @@ they are not a fixed final-model validation set. Synthetic tests establish that
 critic gradients can fit a simple diagnostic and leave the actor unchanged;
 that capability did not translate into useful value learning in this run.
 
-One candidate for the next investigation is critic batch composition: streaming
-batches are grouped by trajectory, so many consecutive minibatches carry one
-terminal label. Mixing decisions across games could reduce that correlation.
-This is a hypothesis, not an established explanation. The deck also changed
-between experiments, so these results do not isolate the effect of separating
-the networks. A same-deck comparison is needed for that conclusion.
+The subsequent [batch-order investigation](#critic-batch-order-investigation)
+confirmed that grouping decisions by trajectory was a learning defect. The
+deck also changed between architecture experiments, so those experiments do
+not isolate the effect of separating the networks. A same-deck comparison is
+needed for that conclusion.
 
 The entire experiment took **54.3 minutes**, including evaluations and baseline
 games. Self-play collection took **843.68 seconds (14.1 minutes)**, and updates
@@ -793,3 +827,530 @@ cached all 64 trajectories plus 46 packed batches, retaining about 143 MiB
 within the 256 MiB budget. The full suite passed 299 tests, including cached
 versus streaming PPO equivalence, response-viewer checks, private history and
 tensor equality, and repetition-guard semantics.
+
+## Critic batch-order investigation
+
+The [October 18 critic diagnostic](benchmarks/foundations-red-critic-batching-2026-10-18.json)
+found a defect in `StreamingPPOTrainer`: it shuffled trajectory order, then
+shuffled rows **inside** each already assembled minibatch. A seat trajectory
+has one terminal target, so around 90% of minibatches contained only wins or
+only losses. Many successive Adam steps therefore optimized for the same
+label. The in-memory `PPOTrainer.update` already shuffled individual samples;
+the full-game streaming path did not.
+
+The fix shuffles individual decisions across the complete frozen rollout for
+both actor and critic. Targets, behavior probabilities, detached memories and
+advantages stay aligned with their decisions. Backtracking reuses exactly the
+same order, and measurement passes are deterministic. The decoded-record cache
+still has a byte budget. Uncached trajectories are indexed in a temporary
+seekable file so global shuffling also works beyond that budget; the file is
+closed on completion or failure. `cache.spill_bytes` reports temporary disk use.
+Index/statistic metadata and TensorFlow workspaces are outside the cache budget.
+Updated rounds record `sample_order: global_shuffle_v1`; continuing an old
+checkpoint now uses the corrected sampler rather than reproducing the old
+batch order.
+
+The controlled critic-only diagnostic kept the actor and numeric input records
+fixed. It used the last 100 saved games (rounds 37–40), split into 75 fitting and
+25 held-out games, with both seats kept together. Each variant received two
+epochs, batch size 32 and learning rate 0.0003. Existing-critic variants started
+at checkpoint 36 with its Adam state; fresh variants restored the round-zero
+critic and reset its Adam state. All targets remained terminal ±1 outcomes.
+
+| Critic initialization / batches | Training MSE | Held-out MSE | Held-out explained variance |
+| --- | ---: | ---: | ---: |
+| Existing / grouped by trajectory | 1.345 | 1.306 | −0.002 |
+| Existing / shuffled decisions | **0.767** | **0.814** | **0.188** |
+| Fresh / grouped by trajectory | 1.160 | 1.137 | −0.006 |
+| Fresh / shuffled decisions | **0.521** | **0.898** | **0.100** |
+
+Always predicting zero gives MSE 1.0. The existing critic started at held-out
+MSE 1.0015. Its shuffled variant also reduced MSE on the last 20% of each
+held-out seat trajectory to 0.527. A ridge-regression probe using only visible
+player facts reached held-out MSE 0.885, confirming that outcome information is
+present in the existing features. This probe uses the same terminal labels;
+it is not an intermediate reward or a production policy.
+
+A smaller 20-training/5-held-out-game diagnostic exposed a second limitation:
+after six shuffled epochs, the existing critic reached training MSE 0.271 but
+held-out MSE **1.580**. The grouped control remained nearly constant. Thousands
+of decisions from 20 games do not provide thousands of independent outcomes;
+repeated epochs can memorize those games. The next on-policy experiment should
+test more independent games per collection round, such as 100–128, while
+keeping the critic epoch count modest. The current network and terminal-only
+reward scheme can be retained.
+
+These are state-weighted diagnostics from one whole-game split, with frozen
+behavior memories. The larger dataset spans four successive behavior policies;
+this is not an estimate of a newly trained policy's win rate or kill turn.
+More seeds and a new on-policy run are needed to establish gameplay improvement.
+
+Training logs now include `behavior_critic` statistics computed from predictions
+recorded **before** learning each new rollout: MSE, zero/constant baselines,
+prediction mean and standard deviation, and explained variance. This adds no
+model forward pass. A low MSE caused solely by outcome imbalance is distinguishable
+from useful state-dependent predictions. Zero target variance produces a null
+explained variance rather than a fabricated number.
+
+Reproduce the larger diagnostic from the locally retained experiment:
+
+```sh
+UV_CACHE_DIR=.local/uv-cache KERAS_HOME=.local/keras \
+  .local/uv/uv run --no-sync python -m examples.diagnose_rustmage_critic \
+  --report .local/red-separate-1000-2026-10-18/report.json \
+  --output .local/critic-diagnostic-new \
+  --rounds 4 --heldout-games 25 --epochs 2
+```
+
+The diagnostic loads the selected records into RAM. It checks that the actor
+and original checkpoints stay unchanged and writes no replacement model. For
+the small diagnostic, use `--rounds 1 --heldout-games 5 --epochs 6`.
+
+Validation: **309 tests passed**, including global mixing, exact sample/target/
+advantage alignment, cache/spill equivalence, checkpoint resume and independent
+actor/critic updates. A full replay of the saved 25-game final PPO round processed
+8,993 samples, accepted 564 actor steps and 564 critic steps, and rejected no
+epochs. Its exact mean/max-state KL remained within the configured limits;
+the original checkpoint was preserved. This smoke run was not a throughput
+comparison, since other diagnostics were running concurrently.
+
+## Shuffled 1,000-game evaluation, October 18, 2026
+
+The [completed run](benchmarks/foundations-red-shuffled-learning-curve-2026-10-18.json)
+trained a fresh separate actor/critic for ten rounds of 100 self-play games,
+with two PPO epochs per round and 40 fixed goldfish evaluation games at every
+100-game checkpoint, including game zero. All 1,000 training games ended
+naturally; none were replaced or excluded for errors or cutoffs. Rewards were
+terminal win/loss/draw only. The run took **42.14 minutes**, including checkpoint
+evaluations and the scripted baseline. Collection took 407.61 seconds and PPO
+updates took 2,043.59 seconds: 147.20 collection games/minute, or 24.48 games/minute
+including updates but excluding evaluation and checkpoint overhead.
+
+| Model | Kills / 40 | Mean own turns among wins | Failure-adjusted turn score |
+| --- | ---: | ---: | ---: |
+| Fresh initialization | 30 | 17.000 | 19.250 |
+| New final checkpoint, 1,000 games | 36 | 14.556 | 15.700 |
+| Previous separate-critic final checkpoint | 40 | 12.625 | 12.625 |
+| Scripted baseline | 40 | 6.450 | 6.450 |
+
+The adjusted score includes every attempt, assigning 26 to failures at the
+25-own-turn horizon. This is an evaluation convention, never a training reward.
+The new final checkpoint had four horizon cutoffs and no losses or errors.
+Its score improved by 3.55 turns versus initialization (paired-game bootstrap
+95% interval 2.125–5.050), but was 3.075 turns worse than the previous final
+checkpoint (interval 1.624–4.650). These intervals describe the evaluation games
+within these runs, not variability across training seeds. The best observed
+new checkpoint was game 900 at 14.425; the final update regressed to 15.700.
+
+![Previous and new training curves](benchmarks/foundations-red-shuffled-learning-curve-2026-10-18-comparison.png)
+
+The [initialization audit](benchmarks/foundations-red-shuffled-learning-curve-2026-10-18-initialization.json)
+confirmed all 86 initial weight arrays exactly matched the earlier run, and
+the initial-model and scripted-baseline evaluation gameplay records also
+matched exactly. Both runs used the same 22/19/19 deck and fixed evaluation
+seeds, seats, starting players and action seeds. This comparison changes both
+sampling order and games per update (25 to 100), as well as CPU concurrency;
+the round-based training seed schedule consequently changes too. One run per
+recipe does not isolate which change caused the gameplay difference.
+
+The critic now fits its training data, but does not generalize adequately.
+After-update training MSE fell from 0.710 in round one to **0.066** in round ten.
+Fresh rollout predictions, recorded before each update, instead showed MSE
+1.367 and explained variance −0.363 in the final collection round. Those
+predictions come from checkpoint 900, so an additional validation froze the
+actual final checkpoint and collected **100 new self-play games**, excluded
+from training. Both weights and the checkpoint file stayed unchanged.
+
+| Frozen final critic, 100 new games | Result |
+| --- | ---: |
+| Decision samples | 35,378 |
+| Mean squared error | **1.285** |
+| Always-zero baseline MSE | 1.000 |
+| MSE, game-block bootstrap 95% interval | 1.120–1.453 |
+| Explained variance | **−0.251** |
+| Prediction/outcome correlation | 0.211 |
+| Outcome-sign accuracy, weighted by decisions | 59.25% |
+| Predictions outside terminal target range [−1, +1] | 23.31% |
+| MSE after diagnostic clipping to [−1, +1] | 1.232 |
+| MSE on final 20% of each seat's decisions | 0.912 |
+
+The critic has some outcome signal, but the large training/validation gap and
+poor prediction calibration remain. Clipping predictions alone does not beat
+the always-zero baseline. These results do not establish whether memorization,
+changes in the policy, or reuse of detached behavior memories during updates
+is the dominant cause. The next diagnostic should compare held-out prediction
+quality using frozen behavior memories versus memories recomputed by the
+updated critic, before committing to another long training run.
+
+![Critic training and fresh-game diagnostics](benchmarks/foundations-red-shuffled-learning-curve-2026-10-18-critic.png)
+
+Saved artifacts: [actor/critic loss graphs](benchmarks/foundations-red-shuffled-learning-curve-2026-10-18-losses.png),
+[learning curve](benchmarks/foundations-red-shuffled-learning-curve-2026-10-18.png),
+[paired comparison](benchmarks/foundations-red-shuffled-learning-curve-2026-10-18-comparison.json),
+[frozen-critic validation with game records](benchmarks/foundations-red-shuffled-learning-curve-2026-10-18-critic-validation.json),
+and [run audit](benchmarks/foundations-red-shuffled-learning-curve-2026-10-18-audit.json).
+Each plot also has SVG and CSV versions, except the comparison plot whose data
+is in the two run reports. Local model/optimizer checkpoints remain under
+`.local/red-shuffled-1000-2026-10-18/checkpoints/`; the final model is
+`round-0010/policy.keras`.
+
+## Actor/critic update concurrency
+
+The saved final update from the shuffled run contains 34,635 decisions from
+100 games. Profiling its original sequential execution with TF intra/inter
+threads 1/4 measured **178.08 seconds** and **1.99 active CPU cores** on average:
+
+| Work | Wall seconds |
+| --- | ---: |
+| Critic gradient steps | 69.04 |
+| Actor gradient steps | 48.64 |
+| Full loss and KL scans | 41.08 |
+| Loading, packing and other work | 19.23 |
+| Actor/optimizer snapshots | 0.10 |
+
+The new streaming scheduler can run the critic on one background thread while
+the calling thread trains the actor. It precomputes the critic's permutations
+before the actor draws its permutations, preserving the original RNG sequence
+and each optimizer's sample order. Returns, advantages, behavior probabilities
+and detached memories remain frozen. TensorFlow executes the two networks with
+disjoint parameters and Adam states. The bounded trajectory/packed caches and
+seekable spill file share a preparation lock, released before every graph call.
+
+Actor trust-region checks now evaluate only the actor; they cannot read critic
+weights during a critic update. Both sequential and concurrent modes use those
+checks, with full loss measurements before updates and after both networks
+finish. Actor rollback restores only the actor and its Adam state. The worker
+is joined even on exceptions, before closing the spill file or allowing a
+checkpoint to be saved. Shared weights and nondeterministic separate models are
+rejected by this scheduler.
+
+Reproduce one matched trial (use a fresh output directory each time):
+
+```sh
+uv run --no-sync python -m examples.benchmark_rustmage_parallelism update \
+  --checkpoint .local/red-shuffled-1000-2026-10-18/checkpoints/round-0009/policy.keras \
+  --rollout-report .local/red-shuffled-1000-2026-10-18/report.json \
+  --round 10 --output .local/concurrent-update-trial \
+  --intra 1 --inter 4 --concurrent-updates
+```
+
+Omit `--concurrent-updates` for the sequential control. Graphs are warmed before
+timing; loading, packing, spill access, measurements and optimizer work are
+included. In concurrent mode, per-stage durations overlap and cannot be added
+to obtain elapsed time. The report records their interval union and overlap;
+total process CPU time counts all TensorFlow workers without double counting.
+Original checkpoint and rollout hashes, updated weights, both Adam states and
+the final shuffle RNG state are retained for equivalence checks.
+
+The [matched benchmark report](benchmarks/foundations-red-actor-critic-concurrency-2026-10-18.json)
+contains the original profile and two trials per new schedule, run in the order
+sequential, concurrent, concurrent, sequential. Each trial used a fresh process,
+the same 100-game rollout, checkpoint 900, both Adam states and the saved shuffle
+RNG. No other training or benchmark ran alongside these trials.
+
+| Update schedule | Mean seconds | Observed range | Mean active cores / 8 |
+| --- | ---: | ---: | ---: |
+| Original sequential, full checks (one profile) | 178.08 | — | 1.99 |
+| Sequential, independent actor checks | 174.99 | 174.13–175.86 | 1.93 |
+| Concurrent, independent actor checks | **96.48** | **96.31–96.64** | **2.75** |
+
+Concurrency alone delivered **1.81× update throughput**, or **44.87% less wall
+time**, relative to the sequential control with the same measurement schedule.
+The combined change was 1.85× faster than the single original-profile trial.
+Per-process CPU use rose from 24.1% to 34.4% of the eight-core machine; this
+does not saturate all cores. Graph calls overlapped for 47.31 seconds on average.
+Total CPU work also fell from 337.66 to 265.34 core-seconds per update. The latter
+is a measured runtime effect; this benchmark does not isolate its internal
+TensorFlow scheduling or hardware cause.
+
+![Saved update runtime and CPU usage](benchmarks/foundations-red-actor-critic-concurrency-2026-10-18.png)
+
+All four replays produced **bit-for-bit identical** model weights (86 arrays),
+actor Adam state (90 arrays), critic Adam state (86 arrays), and shuffle RNG
+state compared with the original result. Each accepted 2,166 actor steps and
+2,166 critic steps with no rejected epochs; full loss, value MSE and exact KL
+also matched. All trajectory hashes and original checkpoint files were
+unchanged, and each replay respected the 256 MiB retained-cache budget.
+
+Applying the measured final-update speed ratio to all PPO update time in the
+42.14-minute run projects roughly **26.5 minutes** for that workload. This is
+only an estimate: earlier rounds have different shapes, game lengths and
+backtracking counts. No new 1,000-game run or gameplay-improvement claim is made
+by this benchmark. The option remains explicit via `--concurrent-updates`.
+
+Validation: **314 tests passed**. New tests cover exact sample/RNG scheduling,
+numerical agreement of model and optimizer state, cache and spill paths, forced
+actor backtracking and complete rejection, genuine optimizer overlap, actor-only
+checks that cannot read the critic, worker cleanup after either side fails,
+checkpoint continuation and shared-network rejection. A separate two-game
+RustMage training smoke run completed with concurrent updates, saved both
+optimizers, evaluated and resumed successfully without extra games or a changed
+checkpoint. Goldfish horizon cutoffs remained failures in its report. These
+smoke results check execution only; they are not a learning-quality evaluation.
+
+## Ordered prefetch and concurrent measurement
+
+The next optimization changes only batch preparation and measurement scheduling.
+Minibatch size remains 32, with the same two epochs, learning rate, sample order,
+terminal returns, model architecture and optimizer steps. Larger minibatches
+were not tested. The existing TensorFlow intra/inter limits remain 1/4.
+
+`--prefetch-batches 2` prepares the next two minibatches in a bounded background
+queue for each optimizer. A shared lock protects cache and spill-file access;
+TensorFlow runs outside that lock. Each optimizer consumes exactly its original
+batch sequence. The calling thread generates every permutation, so worker
+scheduling cannot change the shuffle RNG. Each queue holds at most two pending
+results plus the batch currently being consumed; these transient allocations
+are separate from the 256 MiB retained-cache budget.
+
+`--measurement-workers 4` runs independent loss/KL batches concurrently. Every
+measurement reads a frozen network, and results are summed in their original
+order. All measurement workers join before that network can change again.
+Actor-only checks can overlap the independent critic's updates without reading
+the critic. Failed optimizers, failed measurements and early exits also join
+all background work before closing rollout files or saving a checkpoint.
+
+Use the existing benchmark command with the new pipeline flags:
+
+```sh
+uv run --no-sync python -m examples.benchmark_rustmage_parallelism update \
+  --checkpoint .local/red-shuffled-1000-2026-10-18/checkpoints/round-0009/policy.keras \
+  --rollout-report .local/red-shuffled-1000-2026-10-18/report.json \
+  --round 10 --output .local/pipeline-update-trial \
+  --intra 1 --inter 4 --concurrent-updates \
+  --prefetch-batches 2 --measurement-workers 4
+```
+
+For new training runs, add `--concurrent-updates --prefetch-batches 2
+--measurement-workers 4` to the separate-architecture command above. These
+options remain explicit and are saved in checkpoint configuration. Existing
+checkpoints without the new fields retain synchronous preparation and one
+measurement worker. Resuming checks the original configuration.
+
+The [pipeline benchmark report](benchmarks/foundations-red-learner-pipeline-2026-10-18.json)
+replays the same saved 100-game update, restoring checkpoint 900, both Adam
+states and the shuffle RNG for every trial. Graph warm-up is excluded; loading,
+packing, measurements and optimizer work are included. Trials ran sequentially
+in fresh processes. The selected pipeline and its control each have two trials,
+with their order reversed for the confirmation pair; other variants have one
+screening trial. Desktop background work was not controlled.
+
+| Pipeline, both optimizers already concurrent | Mean seconds | Observed range | Mean active cores / 8 |
+| --- | ---: | ---: | ---: |
+| Synchronous preparation, one measurement worker | 97.22 | 96.83–97.62 | 2.77 |
+| Prefetch two, one measurement worker (one trial) | 93.75 | — | 2.82 |
+| Synchronous preparation, four measurement workers (one trial) | 80.46 | — | 3.32 |
+| Prefetch two, four measurement workers | **76.30** | **74.52–78.08** | **3.53** |
+
+The combined pipeline reduced update wall time by **21.52%**, giving **1.27×
+throughput** over the already-concurrent optimizer control. Mean CPU use rose
+from 34.58% to 44.13% of the eight-core machine. Total CPU work stayed nearly
+constant, 268.94 versus 269.25 core-seconds: the improvement comes from doing
+the same work with more overlap. This still does not saturate the machine.
+Increasing TF inter-operation threads to eight raised use to 52.83% but took
+80.72 seconds, slower than the selected pipeline. Higher utilization alone
+did not improve throughput. An earlier intra/inter 2/8 screening trial was
+both slower and numerically different; it is excluded from the recommendation.
+
+All selected-pipeline and control trials produced **bit-for-bit identical**
+model weights (86 arrays), actor Adam state (90 arrays), critic Adam state
+(86 arrays) and shuffle RNG. Each performed 2,166 actor and 2,166 critic steps,
+with zero rejected epochs. Original checkpoint files stayed unchanged and
+retained caches remained within their byte budget. Equality was checked on
+this rollout and local TensorFlow CPU configuration; it is not a universal
+cross-hardware determinism claim. No new 1,000-game run was needed for this
+update-only comparison.
+
+Validation: **323 tests passed**. Pipeline regression tests require exact model
+and optimizer arrays, identical loss/KL results and shuffle RNG, including
+forced actor backtracking with both cached and spilled trajectories. Other
+tests prove concurrent measurements, bounded queues, cleanup after source,
+worker or optimizer failures, and checkpoint continuation. A separate two-game
+RustMage training smoke run saved both optimizers and evaluated successfully;
+resuming the completed run added no games and preserved its checkpoint hash.
+
+## More game engines and independent collection processes
+
+The 44% CPU figure above measures a **PPO update**, during which the game
+engines are idle. Game collection has a different utilization and bottleneck.
+To test more engines, a subsequent sweep collected the same 100 self-play games
+from the frozen final checkpoint with 24, 48 and 64 worker processes. Every
+configuration kept TF intra/inter 1/4, zero batching delay, the same deck, game
+seeds, seats and starting players. Inference maximum batch followed the worker
+count, as in production; no training minibatch or optimizer setting changed.
+
+The fourth configuration ran two independent collection processes, each with
+24 engines and its own frozen policy/inference service. They collected disjoint
+50-game shards with original global indices, preserving each game's seed and
+seat schedule. Both finished warm-up before a common file signal released them;
+their timed starts were 45.5 ms apart. Its elapsed time spans the first start
+through the last finish, and its CPU time sums both parents and all workers.
+
+| Configuration | Seconds / 100 games | Games/minute | Mean CPU use / 8 cores |
+| --- | ---: | ---: | ---: |
+| 24 engines, one inference service | 31.67 | 189.48 | 66.79% |
+| 48 engines, one inference service | 30.69 | 195.51 | 67.36% |
+| 64 engines, one inference service | 29.82 | 201.22 | 69.83% |
+| Two independent collectors, 24 engines each | **28.21** | **212.73** | **80.96%** |
+
+These are single screening trials, excluding startup and warm-up, not repeated
+end-to-end training benchmarks. More engines alone gave modest gains: roughly
+3% and 6% more throughput at 48 and 64 workers. The single inference service
+was busy 97–98% of collection time. Workers spent 82%, 88% and 89% of their
+own wall time waiting for inference, respectively; those waits overlap. The
+two independent collectors improved throughput by about 12% over 24 engines.
+They consumed more total CPU work as well, so the higher utilization did not
+translate proportionally into faster games. A spot check during the 64-worker
+trial also observed increased host swap use; memory was not continuously
+profiled. Desktop background work and thermal conditions were not controlled.
+
+All 400 timed games ended naturally. All 100 game summaries and all 33,543
+observation records, selected actions and memory-advance flags matched across
+configurations. Model weights and the source checkpoint stayed unchanged.
+However, different inference batches changed recurrent states, behavior log
+probabilities and value estimates slightly: maximum differences were about
+3.22e-6, 4.77e-7 and 4.95e-6, respectively. Thus this collection experiment
+preserved the learning algorithm but **did not establish bit-identical training
+inputs**. Such differences could propagate into later optimizer updates.
+At that point production defaults were unchanged; the integrated implementation
+below replaces that experiment with two inference processes and 24 total engines.
+
+More engines cannot occupy the update phase with the next round's on-policy
+games: that round requires the policy produced by the unfinished update. The
+current loop therefore still collects a round, finishes its update, then
+collects the next round. Generating next-round games from older weights would
+change this training schedule.
+
+The [collection scaling report](benchmarks/foundations-red-collection-scaling-2026-10-18.json)
+contains all game records and trajectory comparisons. Reproduce one engine
+count with `benchmark_rustmage_parallelism collect`, `--games 100`,
+`--seed 72000000`, `--workers N --max-batch N --wait-ms 0 --intra 1 --inter 4`
+and checkpoint `round-0010/policy.keras` from the saved shuffled run. For
+disjoint shards, the benchmark now supports `--index-base`; the two shards
+used index bases 0/50 and seed bases 72000000/72000050 with 50 games each.
+`--start-signal PATH` publishes each output directory's `ready` file after
+warm-up, then waits for the coordinator to create PATH. These options only
+coordinate benchmarking.
+
+## Replicated inference with 24 total engines
+
+The production process collector now supports independent inference processes.
+The default assigns the existing 24 game-engine processes to two persistent
+TensorFlow processes, 12 engines per replica. Every game engine sends numerical
+observations directly to its assigned replica; the learner handles weight
+broadcasts and round boundaries. There is no shared per-action inference queue.
+Both replicas acknowledge the checkpoint's weight digest and version before
+evaluation or the next collection round. Synchronization during collection is
+rejected. The model, terminal rewards, optimizer settings, sample ordering and
+on-policy round barriers are unchanged.
+
+Two fresh-process trials per configuration collected the same 100 fixed-seed
+games from a frozen checkpoint, in order single/replicated/replicated/single.
+All trials used 24 engines, zero batching delay, TF intra/inter threads 1/4,
+and warmed every engine before timing. Startup is excluded. Timings include
+numerical trajectory writing. CPU totals include the learner, game engines
+and inference replicas.
+
+| Inference configuration | Mean seconds / 100 games | Range | Games/minute | Mean CPU use / 8 cores |
+| --- | ---: | ---: | ---: | ---: |
+| One service | 32.42 | 32.07–32.76 | 185.09 | 65.79% |
+| Two processes, 12 engines each | **28.91** | **28.65–29.17** | **207.54** | **82.67%** |
+
+Collection took **10.82% less time**, or **1.12× throughput**, in this repeated
+comparison. These numbers describe collection, not a full training run. Desktop
+background work and thermal conditions were not controlled.
+
+All 400 timed games ended naturally. Across all trials, the 100 game summaries
+and all 33,543 feature records, selected actions and memory-advance flags matched.
+Checkpoint files stayed unchanged. Different batching schedules produced small
+floating-point differences in recurrent state, log probabilities and critic
+predictions (maximum 3.94e-6, 4.77e-7 and 5.03e-6 respectively). Later training
+trajectories may therefore diverge despite unchanged learning rules. This is
+not a bit-identical training guarantee.
+
+The [replicated-inference benchmark report](benchmarks/foundations-red-replicated-inference-2026-10-18.json)
+contains raw timings and trajectory comparisons. Reproduce with
+`benchmark_rustmage_parallelism collect`, `--games 100 --seed 72000000`,
+`--workers 24 --max-batch 24 --wait-ms 0 --intra 1 --inter 4` and
+`--inference-processes 1` or `2`, using the saved shuffled run's final checkpoint.
+Standalone `evaluate_rustmage` also supports `--inference-processes` and defaults
+to two with 24 engines when evaluating a checkpoint.
+
+Validation: **328 tests passed**. The new checks cover direct routing, frozen
+snapshots, exact synchronization, stale-version rejection, round barriers,
+replica failure, cancelled startup and process cleanup. A two-round training
+smoke test and standalone evaluation used the exact saved checkpoint weights;
+completed-run resume preserved its checkpoint, and a legacy run retained its
+original single-service configuration.
+
+## Full 1,000-game run with the pipeline improvements
+
+The fresh run in `.local/red-replicated-1000-2026-10-18` completed all 1,000
+self-play games naturally, with no errors or training cutoffs. It used 24 total
+game engines, two inference processes, concurrent actor/critic updates, two
+prefetched minibatches per optimizer stream, and four measurement workers.
+The deck, initial model weights, training algorithm, minibatch size 32, two PPO
+epochs, learning rate 0.0003 and seed 721 matched the previous shuffled run.
+Rewards remained undiscounted terminal +1/−1/0 only.
+
+There were 40 fixed-seed passive-opponent evaluation games at game 0 and after
+each 100 training games: 440 neural evaluation attempts, plus 40 scripted
+baseline attempts. These games did not contribute training rewards.
+
+| Timed phase | Previous run | Improved pipeline |
+| --- | ---: | ---: |
+| Self-play collection | 407.61 s | 375.01 s |
+| PPO updates | 2,043.59 s | 906.52 s |
+| Evaluation and other loop work | 77.14 s | 75.85 s |
+| Training/evaluation loop | **2,528.34 s (42:08)** | **1,357.37 s (22:37)** |
+
+The comparable loop took **46.31% less time**, a **1.86× throughput increase**.
+Timing the entire new command, including initialization, graph generation and
+shutdown, gave **1,367.97 seconds (22:48)**. The new evaluation timer recorded
+74.24 seconds; all ten weight broadcasts together took 0.23 seconds. The wrapper
+recorded 6,265.15 CPU-seconds across the completed child process tree, equivalent
+to 57.25% of eight cores averaged over the full command. The 82.67% utilization
+in the preceding benchmark measures collection only.
+
+Most of the end-to-end savings came from the earlier update-pipeline changes;
+the isolated repeated collection benchmark above measures the replica change
+separately. The full runs are one trial each, with 400,681 versus 437,710 training
+samples and one versus zero rejected PPO epochs. Different inference batching
+can produce numerical differences that propagate into later sampled games.
+Thus their timings measure the observed complete runs, not equal workloads or
+the isolated effect of any single optimization.
+
+| Evaluation | Kills / 40 | Mean own turn among kills | Failure-adjusted mean |
+| --- | ---: | ---: | ---: |
+| Fresh model | 30 | 17.00 | 19.25 |
+| After 1,000 games | 39 | 13.56 | 13.875 |
+| Scripted baseline | 40 | 6.45 | 6.45 |
+
+The remaining final failure was a 25-turn cutoff. Assigning every failed attempt
+26 turns, as before, gives a paired improvement of 5.375 turns, with a bootstrap
+95% interval of 3.775–7.05 over the 40 evaluation seeds. Twenty-nine attempts
+improved, nine worsened and two tied. This describes evaluation-game variation
+within one training run, not variation across independent training runs. The
+baseline remains substantially stronger on this competency metric.
+
+The critic fits its own rollout well: final post-update MSE was 0.0286. Its
+preceding checkpoint's predictions on the final fresh collection had MSE 1.203
+and explained variance −0.201. This still indicates weak generalization; it is
+not a held-out critic evaluation of the final checkpoint.
+
+The final audit loaded all 11 checkpoints and verified each collection's exact
+weight digest and policy version. Initial weights and the initial evaluation
+actions/outcomes matched the prior run. Source and engine-library hashes stayed
+unchanged throughout the run, all 24 game workers participated, both replicas
+finished at policy version 10, and all saved checkpoints were readable.
+
+Artifacts: [full report](benchmarks/foundations-red-replicated-learning-curve-2026-10-18.json),
+[timing and checkpoint audit](benchmarks/foundations-red-replicated-learning-curve-2026-10-18-audit.json),
+[kill-turn graph](benchmarks/foundations-red-replicated-learning-curve-2026-10-18.png),
+[actor/critic loss graphs](benchmarks/foundations-red-replicated-learning-curve-2026-10-18-losses.png),
+and [critic generalization graphs](benchmarks/foundations-red-replicated-learning-curve-2026-10-18-critic.png).
+SVG and CSV versions are saved alongside each graph. The final model is
+`.local/red-replicated-1000-2026-10-18/checkpoints/round-0010/policy.keras`.
+
+Reproduce the run with the 1,000-game command above, a new output directory,
+and `--concurrent-updates --prefetch-batches 2 --measurement-workers 4`.

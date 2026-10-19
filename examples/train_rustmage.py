@@ -11,7 +11,7 @@ import os
 from pathlib import Path
 import time
 
-# Set before importing Keras/TensorFlow. Worker games share one inference service.
+# Set before importing Keras/TensorFlow, including in spawned inference replicas.
 os.environ.setdefault('KERAS_BACKEND', 'tensorflow')
 os.environ.setdefault('CUDA_VISIBLE_DEVICES', '-1')
 os.environ.setdefault('TF_NUM_INTRAOP_THREADS', '1')
@@ -41,6 +41,8 @@ def parser():
     p.add_argument('--eval-horizon', type=int, default=20)
     p.add_argument('--train-horizon', type=int, default=60)
     p.add_argument('--workers', type=int, default=24)
+    p.add_argument('--inference-processes',type=int,
+        help='Frozen inference replicas sharing the total engine count (new process runs: 2; old resumes: 1)')
     p.add_argument('--inference-wait-ms', type=float, default=0,
         help='Maximum batching delay; 0 immediately serves currently queued requests')
     p.add_argument('--collector', choices=('threads','processes'), default='processes')
@@ -48,10 +50,27 @@ def parser():
     p.add_argument('--train-batch', type=int, default=32)
     p.add_argument('--learning-rate', type=float, default=.0003)
     p.add_argument('--ppo-epochs', type=int, default=2)
+    p.add_argument('--concurrent-updates', action='store_true',
+        help='Overlap independent actor/critic updates (requires separate architecture)')
+    p.add_argument('--prefetch-batches',type=int,default=0,
+        help='Prepared minibatches queued ahead per optimizer stream (0: synchronous)')
+    p.add_argument('--measurement-workers',type=int,default=1,
+        help='Concurrent loss/KL batches while the measured network is frozen')
     p.add_argument('--seed', type=int, default=721)
     p.add_argument('--resume', action='store_true')
     p.add_argument('--plot', action='store_true', help='Save a learning-curve PNG/SVG (requires the plots extra)')
     return p
+
+
+def inference_process_count(args, saved=None):
+    count = args.inference_processes
+    if count is None:
+        count = (saved.get('inference_processes',1) if saved is not None
+                 else min(2,args.workers) if args.collector == 'processes' else 1)
+    if not 1 <= count <= args.workers: raise ValueError('Inference processes must be between one and workers')
+    if args.collector != 'processes' and count != 1:
+        raise ValueError('Multiple inference processes require the process collector')
+    return count
 
 
 async def run(args):
@@ -62,8 +81,13 @@ async def run(args):
         raise ValueError('Evaluation interval must be a nonnegative multiple of games-per-round')
     if not 0 <= args.inference_wait_ms < float('inf'):
         raise ValueError('Inference wait must be finite and nonnegative')
+    if args.concurrent_updates and args.architecture != 'separate':
+        raise ValueError('Concurrent updates require separate architecture')
+    if args.prefetch_batches < 0 or args.measurement_workers < 1:
+        raise ValueError('Invalid prefetch depth or measurement worker count')
     output = args.output
     config = {k:v for k,v in vars(args).items() if k not in ('output','resume','rounds','plot')}
+    config['inference_processes'] = inference_process_count(args)
     config.update(algorithm='ppo', target_kl=.02, max_state_kl=.1,
                   advantage_scale_floor=1., ppo_clip=.2)
     report_path = output/'report.json'
@@ -74,6 +98,11 @@ async def run(args):
         saved_config.setdefault('collector', 'threads')
         saved_config.setdefault('architecture', 'shared')
         saved_config.setdefault('inference_wait_ms', 2)
+        saved_config.setdefault('concurrent_updates', False)
+        saved_config.setdefault('prefetch_batches',0)
+        saved_config.setdefault('measurement_workers',1)
+        saved_config.setdefault('inference_processes',1)
+        config['inference_processes'] = inference_process_count(args,saved_config)
         if saved_config != config: raise ValueError('Resume requires the same experiment configuration')
         if args.rounds < state['round']: raise ValueError('Target round precedes the saved checkpoint')
         first_round = state['round']+1
@@ -118,6 +147,7 @@ async def run(args):
         save_checkpoint(output/'checkpoints',model,trainer,dict(round=0,config=config),policy_type=RustMagePolicy)
         atomic_json(report_path,report)
     invocation=dict(first_round=first_round,requested_last_round=args.rounds,
+        game_engines=args.workers,inference_processes=config['inference_processes'],
         runtime={key: os.environ.get(key) for key in ('TF_NUM_INTRAOP_THREADS',
             'TF_NUM_INTEROP_THREADS', 'TF_ENABLE_ONEDNN_OPTS', 'CUDA_VISIBLE_DEVICES')},
         started_utc=datetime.now(timezone.utc).isoformat(),
@@ -128,15 +158,17 @@ async def run(args):
                   training_games_target=args.rounds*args.games_per_round)
     report.pop('after', None); report.pop('comparison', None)
     atomic_json(report_path,report)
-    batcher = await InferenceBatcher(model,max_batch=args.workers,wait_ms=args.inference_wait_ms).start()
-    collector = None
-    if args.collector == 'processes':
-        from patchwork_automaton.rl.rustmage_processes import ProcessGameCollector
-        collector = ProcessGameCollector(model, batcher, workers=args.workers)
+    batcher = collector = None
+    def collection_version():
+        return collector.version if collector else batcher.version
+    def collection_stats():
+        return collector.stats() if collector else batcher.stats()
+    async def sync_weights(version):
+        if collector: await collector.sync_weights(model,version)
+        else: batcher.set_version(version)
     async def collect(**options):
         if collector: return await collector.run_games(**options)
         return await run_games(workers=args.workers, model=model, batcher=batcher, **options)
-    started=time.monotonic()
     def progress(label):
         count=0
         def completed(row):
@@ -147,10 +179,12 @@ async def run(args):
                 **({'error':row['error']} if row['status']=='error' else {}))),flush=True)
         return completed
     async def evaluate(label,mode):
+        evaluation_started=time.monotonic()
         rows=await collect(games=args.eval_games,
             seed_base=args.seed+10_000_000,mode=mode,
-            version=batcher.version,max_own_turns=args.eval_horizon,progress=progress(label))
-        result=dict(summary=goldfish_summary(rows,args.eval_horizon),games=rows)
+            version=collection_version(),max_own_turns=args.eval_horizon,progress=progress(label))
+        result=dict(summary=goldfish_summary(rows,args.eval_horizon),games=rows,
+                    seconds=time.monotonic()-evaluation_started)
         print(json.dumps(dict(stage=label,summary=result['summary'])),flush=True)
         return result
     def record_evaluation(round_id, result):
@@ -168,6 +202,20 @@ async def run(args):
         result=await evaluate(f'eval-{round_id*args.games_per_round:04d}','goldfish')
         return record_evaluation(round_id,result)
     try:
+        if args.collector == 'processes' and config['inference_processes'] > 1:
+            from patchwork_automaton.rl.rustmage_processes import ProcessGameCollector
+            collector = ProcessGameCollector(model,workers=args.workers,
+                inference_processes=config['inference_processes'],wait_ms=args.inference_wait_ms)
+            await collector.start(version=first_round-1)
+        else:
+            batcher = InferenceBatcher(model,max_batch=args.workers,wait_ms=args.inference_wait_ms)
+            await batcher.start()
+            batcher.set_version(first_round-1)
+            if args.collector == 'processes':
+                from patchwork_automaton.rl.rustmage_processes import ProcessGameCollector
+                collector = ProcessGameCollector(model,batcher,workers=args.workers)
+                await collector.start(version=first_round-1)
+        started = time.monotonic()
         if 'baseline' not in report:
             report['baseline']=await evaluate('baseline','baseline');atomic_json(report_path,report)
         if 'before' not in report:
@@ -179,17 +227,19 @@ async def run(args):
         if completed and args.eval_every_games and completed*args.games_per_round % args.eval_every_games == 0:
             await evaluate_checkpoint(completed)
         for round_id in range(first_round,args.rounds+1):
-            batcher.set_version(round_id)
             collection_started=time.monotonic()
             rows=await collect(games=args.games_per_round,
                 seed_base=args.seed+round_id*args.games_per_round,
                 index_base=(round_id-1)*args.games_per_round,mode='selfplay',
-                version=round_id,output=output/'rollouts',
+                version=collection_version(),output=output/'rollouts',
                 max_own_turns=args.train_horizon,progress=progress(f'train-{round_id}'))
             trajectories=[t for r in rows for t in r['trajectories']]
             stats=dict(round=round_id,collection_seconds=time.monotonic()-collection_started,
                        outcomes=dict(Counter(r['status'] for r in rows)),games=rows,
                        seat_wins=dict(Counter(str(r.get('winner')) for r in rows if 'winner' in r)))
+            if collector:
+                frozen = collection_stats()
+                stats['collection_policy'] = dict(version=frozen['version'],weights_sha256=frozen['weights_sha256'])
             if not trajectories: raise RuntimeError('No verified terminal games; refusing a fabricated update')
             # All workers finished; the frozen behavior model can now change.
             update_started=time.monotonic()
@@ -198,7 +248,10 @@ async def run(args):
             stats['checkpoint']=str(output/'checkpoints'/f'round-{round_id:04d}')
             save_checkpoint(output/'checkpoints',model,trainer,
                 dict(round=round_id,config=config,round_result=stats),policy_type=RustMagePolicy)
-            report['rounds'].append(stats);report['batching']=batcher.stats()
+            sync_started=time.monotonic()
+            await sync_weights(round_id)
+            stats['inference_sync_seconds']=time.monotonic()-sync_started
+            report['rounds'].append(stats);report['batching']=collection_stats()
             report['training_games_completed']=round_id*args.games_per_round
             atomic_json(report_path,report)
             print(json.dumps(dict(stage='update',round=round_id,metrics=stats['update'])),flush=True)
@@ -218,7 +271,7 @@ async def run(args):
             report['throughput']=dict(timed_selfplay_games=games,collection_seconds=collection,
                 update_seconds=updates,collection_games_per_minute=60*games/collection,
                 collection_and_updates_games_per_minute=60*games/(collection+updates))
-        report['batching']=batcher.stats()
+        report['batching']=collection_stats()
         report['status']='complete'
         atomic_json(report_path,report)
         if args.plot:
@@ -227,7 +280,7 @@ async def run(args):
         print(json.dumps(dict(stage='result',comparison=report['comparison'],report=str(report_path))),flush=True)
     finally:
         if collector: await collector.close()
-        await batcher.close()
+        if batcher: await batcher.close()
 
 
 if __name__ == '__main__': asyncio.run(run(parser().parse_args()))

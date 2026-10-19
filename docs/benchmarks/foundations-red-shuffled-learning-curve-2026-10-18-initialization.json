@@ -1,0 +1,9 @@
+{
+  "reference": ".local/red-separate-1000-2026-10-18/checkpoints/round-0000/policy.keras",
+  "current": ".local/red-shuffled-1000-2026-10-18/checkpoints/round-0000/policy.keras",
+  "identical_arrays": 86,
+  "matched": true,
+  "initial_evaluation_gameplay_matches": true,
+  "scripted_baseline_matches": true,
+  "compared_games_per_stage": 40
+}

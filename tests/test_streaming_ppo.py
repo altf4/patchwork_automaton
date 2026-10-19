@@ -8,6 +8,84 @@ from test_neural import AVAILABLE
 
 @unittest.skipUnless(AVAILABLE,'Install neural dependencies with uv')
 class StreamingPPOTests(unittest.TestCase):
+    def test_value_diagnostics_distinguish_constant_bias_from_prediction(self):
+        from patchwork_automaton.neural.ppo import value_prediction_diagnostics
+        constant = value_prediction_diagnostics([1,1,1,-1,100], [.5,.5,.5,.5,100], [1,1,1,1,0])
+        self.assertEqual(constant['samples'], 4)
+        self.assertEqual(constant['mse'], .75)
+        self.assertEqual(constant['zero_baseline_mse'], 1.)
+        self.assertEqual(constant['constant_baseline_mse'], .75)
+        self.assertEqual(constant['prediction_std'], 0.)
+        self.assertEqual(constant['explained_variance'], 0.)
+        perfect = value_prediction_diagnostics([1,-1], [1,-1], [1,1])
+        self.assertEqual(perfect['mse'], 0.)
+        self.assertEqual(perfect['explained_variance'], 1.)
+        self.assertIsNone(value_prediction_diagnostics([1,1], [0,0], [1,1])['explained_variance'])
+
+    def test_global_shuffle_mixes_games_and_preserves_sample_alignment(self):
+        import numpy as np
+        from patchwork_automaton.neural.streaming_ppo import StreamingPPOTrainer
+        from patchwork_automaton.neural.experiment import read_trajectory, TrajectoryWriter
+        from patchwork_automaton.neural.training import Sample
+        from patchwork_automaton.neural.ppo import normalized_advantages
+        with tempfile.TemporaryDirectory() as directory:
+            model, originals = self.fixture(directory)
+            trajectories = []
+            expected = {}
+            for game, original in enumerate(originals):
+                template = next(read_trajectory(original['path']))
+                path = Path(directory)/f'long-{game}.pkl.gz'
+                writer = TrajectoryWriter(path)
+                try:
+                    for position in range(96):
+                        identity = game*96 + position
+                        memory = template.memory.copy(); memory[0] = identity
+                        sample = Sample(template.arrays, memory, True, template.action,
+                            identity / 1000., template.log_probs)
+                        writer.write(sample)
+                        expected[identity] = sample, original['reward']
+                finally: writer.close()
+                trajectories.append(dict(path=str(path), samples=96, reward=original['reward']))
+            returns = np.array([expected[i][1] for i in range(192)], np.float32)
+            values = np.array([expected[i][0].value for i in range(192)], np.float32)
+            choices = np.array([expected[i][0].arrays['candidate_mask'].sum()>1 for i in range(192)])
+            advantages = normalized_advantages(returns, values, choices, 1.)
+            orders = []
+            for cache_bytes in (0, 16*1024**2):
+                trainer = StreamingPPOTrainer(model, seed=21, epochs=2, batch_size=16,
+                    cache_bytes=cache_bytes, target_kl=100., max_state_kl=100., advantage_scale_floor=1.)
+                seen = {'critic': [], 'actor': []}; pure = []
+                def capture(inputs, rewards, kind):
+                    ids = np.asarray(inputs['memory_in'])[:,0].astype(int)
+                    np.testing.assert_array_equal(rewards, returns[ids])
+                    seen[kind].extend(ids.tolist())
+                    if kind=='critic': pure.append(len(set(rewards))==1)
+                    return ids
+                def critic_batches(batches):
+                    for _ in range(2):
+                        for inputs, rewards in batches(): capture(inputs, rewards, 'critic')
+                    return {}
+                def actor_step(inputs, actions, rewards, chosen, adv):
+                    ids = capture(inputs, rewards, 'actor')
+                    np.testing.assert_allclose(adv, advantages[ids], atol=1e-7)
+                    for row, identity in enumerate(ids):
+                        sample = expected[identity][0]
+                        self.assertEqual(actions[row], sample.action)
+                        self.assertEqual(chosen[row], sample.log_probs[sample.action])
+                    return 0.
+                trainer.fit_critic = critic_batches
+                trainer.step = actor_step
+                result = trainer.update_files(trajectories)
+                self.assertEqual(result['rejected_epochs'], 0)
+                for kind in seen:
+                    for epoch in range(2):
+                        self.assertEqual(sorted(seen[kind][epoch*192:(epoch+1)*192]), list(range(192)))
+                self.assertLess(sum(pure), len(pure)*.1)
+                self.assertEqual(result['sample_order'], 'global_shuffle_v1')
+                self.assertEqual(result['cache']['spill_bytes'] == 0, cache_bytes != 0)
+                orders.append((seen, trainer.rng.bit_generator.state))
+            self.assertEqual(orders[0], orders[1])
+
     def test_cached_shared_validation_matches_uncached_separate_passes(self):
         import numpy as np
         from patchwork_automaton.neural.streaming_ppo import StreamingPPOTrainer

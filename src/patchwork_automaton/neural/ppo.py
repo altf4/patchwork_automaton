@@ -27,6 +27,24 @@ def normalized_advantages(returns, values, choices, scale_floor):
     return np.asarray(advantages, np.float32)
 
 
+def value_prediction_diagnostics(returns, values, mask):
+    """Audit frozen behavior predictions before learning from these outcomes.
+
+    A low MSE from a nearly constant prediction can just reflect outcome
+    imbalance. Explained variance and prediction spread expose that collapse.
+    """
+    target = np.asarray(returns, np.float64)[np.asarray(mask, bool)]
+    prediction = np.asarray(values, np.float64)[np.asarray(mask, bool)]
+    if not len(target): return {'samples': 0}
+    residual = target - prediction
+    variance = float(target.var())
+    return dict(samples=len(target), mse=float(np.mean(residual**2)),
+        zero_baseline_mse=float(np.mean(target**2)),
+        constant_baseline_mse=variance, target_mean=float(target.mean()),
+        prediction_mean=float(prediction.mean()), prediction_std=float(prediction.std()),
+        explained_variance=float(1-residual.var()/variance) if variance > 0 else None)
+
+
 class PPOTrainer:
     def __init__(self, model, *, learning_rate=0.0003, epochs=4, batch_size=48,
                  clip_ratio=0.2, target_kl=0.02, value_weight=0.5,
@@ -60,6 +78,9 @@ class PPOTrainer:
         self.drift = tf.function(self._drift, input_signature=[signature[0], tf.TensorSpec([None, None], tf.float32)], autograph=False)
         self.measure_with_drift = tf.function(self._measure_with_drift,
             input_signature=signature + [tf.TensorSpec([None, None], tf.float32)], autograph=False)
+        if self.separate_value:
+            self.measure_actor_with_drift = tf.function(self._measure_actor_with_drift,
+                input_signature=signature + [tf.TensorSpec([None, None], tf.float32)], autograph=False)
         self.guard_variables = tuple(model.actor.variables if self.separate_value else model.variables) + tuple(self.optimizer.variables)
         self.snapshot = tf.function(lambda: tuple(tf.identity(v) for v in self.guard_variables), autograph=False)
         self.restore = tf.function(self._restore,
@@ -112,6 +133,17 @@ class PPOTrainer:
     def _measure(self, *args):
         return self._terms(*args)
 
+    def _measure_actor_with_drift(self, inputs, actions, returns, old_logp, advantages, old_log_probs):
+        """Trust-region checks that never read the independently updated critic."""
+        output = self.model.actor_output(inputs, training=False)
+        logp = tf.nn.log_softmax(output['logits'])
+        terms = self._terms_from_output(output, logp, inputs, actions, returns, old_logp, advantages)
+        # Value loss is measured after joining the critic worker. It plays no
+        # part in accepting or rolling back a separate actor's optimizer step.
+        metrics = tf.stack([terms[1] - self.entropy_weight * terms[3], terms[1],
+                            tf.constant(0., tf.float32), terms[3], terms[4], terms[5]])
+        return metrics, self._drift_from_logp(inputs, old_log_probs, logp)
+
     def _step(self, *args):
         with tf.GradientTape() as tape:
             if self.separate_value:
@@ -147,8 +179,15 @@ class PPOTrainer:
         if not self.separate_value: return {}
         steps = 0; norm = 0.
         for _ in range(self.epochs):
-            for inputs, returns in batches():
-                norm = float(self.critic_step(inputs, returns)); steps += 1
+            stream = batches()
+            try:
+                for inputs, returns in stream:
+                    norm = float(self.critic_step(inputs, returns)); steps += 1
+            finally:
+                # A prefetched stream owns background readers. Join them even
+                # if the optimizer fails, before shared rollout files close.
+                close = getattr(stream,'close',None)
+                if close is not None: close()
         return dict(critic_steps=steps, critic_optimizer_steps=int(self.critic_optimizer.iterations),
                     critic_gradient_norm=norm)
 

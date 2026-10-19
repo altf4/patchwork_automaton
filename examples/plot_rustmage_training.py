@@ -58,7 +58,7 @@ def plot_losses(report, output):
                  fontsize=11, color='#526175')
         x = [r['training_games'] for r in rows]
         panels = [('loss','Total PPO loss','#2463c5'), ('policy_loss','Policy loss','#8b51a3'),
-                  ('value_loss','Value loss (mean squared error)','#bd6225'),
+                  ('value_loss','Critic loss (mean squared error)','#bd6225'),
                   ('entropy','Policy entropy (nats)','#258374')]
         for ax, (key, label, color) in zip(axes.flat, panels):
             ax.plot(x, [r[key] for r in rows], color=color, marker='o', markersize=3.5, linewidth=1.7)
@@ -83,6 +83,61 @@ def plot_losses(report, output):
             fig.savefig(path, dpi=160, facecolor='white'); paths.append(str(path))
         plt.close(fig)
     print(json.dumps(dict(stage='loss_plot', files=paths, csv=str(csv_path))), flush=True)
+    return paths
+
+
+def plot_critic(report, output):
+    """Distinguish fitting the rollout from predicting its outcomes beforehand."""
+    import matplotlib.pyplot as plt
+    rounds = report['rounds']
+    if not rounds or not all(r['update'].get('behavior_critic') for r in rounds): return []
+    rows = [dict(training_games=r['round']*report['config']['games_per_round'],
+                 post_update_mse=r['update']['value_loss'], **r['update']['behavior_critic']) for r in rounds]
+    output = Path(output)
+    with output.with_suffix('.csv').open('w', newline='') as stream:
+        writer = csv.DictWriter(stream, fieldnames=list(rows[0]))
+        writer.writeheader(); writer.writerows(rows)
+    x = [r['training_games'] for r in rows]
+    def column(name): return [np.nan if r[name] is None else r[name] for r in rows]
+    with plt.rc_context({'font.family':'DejaVu Sans', 'font.size':10,
+                         'axes.spines.top':False, 'axes.spines.right':False}):
+        fig, axes = plt.subplots(2, 2, figsize=(11.5, 8), sharex=True)
+        fig.subplots_adjust(left=.095, right=.97, top=.84, bottom=.17, hspace=.37, wspace=.28)
+        fig.suptitle('Foundations mono-red · critic learning', x=.095, y=.97,
+                     ha='left', fontsize=19, fontweight='bold')
+        fig.text(.095, .915, 'Fresh-game predictions were recorded before training on those outcomes',
+                 fontsize=11, color='#526175')
+        loss, explained, spread, mean = axes.flat
+        loss.plot(x, column('mse'), color='#2463c5', marker='o', label='Fresh games, before update')
+        loss.plot(x, column('post_update_mse'), color='#bd6225', marker='o', label='Same games, after update')
+        loss.plot(x, column('zero_baseline_mse'), color='#7f8b99', linestyle='--', label='Always predict zero')
+        loss.set_title('Critic mean squared error · lower is better', loc='left', fontweight='bold', fontsize=10)
+        loss.legend(frameon=False, fontsize=8)
+        explained.plot(x, column('explained_variance'), color='#258374', marker='o')
+        explained.axhline(0, color='#7f8b99', linestyle='--')
+        explained.set_title('Fresh-game explained variance · higher is better', loc='left', fontweight='bold', fontsize=10)
+        spread.plot(x, column('prediction_std'), color='#8b51a3', marker='o')
+        spread.axhline(0, color='#7f8b99', linestyle='--')
+        spread.set_title('Fresh-game prediction standard deviation', loc='left', fontweight='bold', fontsize=10)
+        mean.plot(x, column('prediction_mean'), color='#2463c5', marker='o', label='Mean prediction')
+        mean.plot(x, column('target_mean'), color='#7f8b99', linestyle=':', marker='o', label='Mean terminal target')
+        mean.set_title('Fresh-game prediction bias', loc='left', fontweight='bold', fontsize=10)
+        mean.legend(frameon=False, fontsize=8)
+        for ax in axes.flat:
+            ax.grid(axis='y', color='#e4e9ef'); ax.set_axisbelow(True)
+            ax.ticklabel_format(axis='y', style='plain', useOffset=False)
+        for ax in axes[-1]: ax.set_xlabel('Self-play games attempted')
+        fig.text(.095, .035,
+            'X marks the end of each collection round. Fresh-game predictions use the checkpoint from the preceding update.\n'
+            'These are successive on-policy rollouts, not one fixed validation set. Prediction spread alone does not measure accuracy.\n'
+            'Targets remain terminal win/loss/draw (+1 / −1 / 0); no intermediate rewards.',
+            fontsize=8.5, color='#526175')
+        paths = []
+        for suffix in ('.png', '.svg'):
+            path = output.with_suffix(suffix)
+            fig.savefig(path, dpi=160, facecolor='white'); paths.append(str(path))
+        plt.close(fig)
+    print(json.dumps(dict(stage='critic_plot', files=paths, csv=str(output.with_suffix('.csv')))), flush=True)
     return paths
 
 
@@ -160,7 +215,8 @@ def plot_report(path, output=None):
             paths.append(str(target))
         plt.close(fig)
     print(json.dumps(dict(stage='plot', files=paths, csv=str(csv_path))), flush=True)
-    return paths + plot_losses(report, output.parent/(output.name+'-losses'))
+    return (paths + plot_losses(report, output.parent/(output.name+'-losses'))
+            + plot_critic(report, output.parent/(output.name+'-critic')))
 
 
 if __name__ == '__main__':
