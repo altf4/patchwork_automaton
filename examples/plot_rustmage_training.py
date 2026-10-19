@@ -193,7 +193,12 @@ def plot_report(path, output=None):
                     xytext=(0,11), textcoords='offset points', ha='center',
                     color=blue, fontweight='bold')
         success.plot(x, 100*column('completion_rate'), color=blue, marker='o', linewidth=1.8)
-        for point in points:
+        ticks = x
+        if len(points) > 12:
+            ticks = MaxNLocator(nbins=8, steps=[1,2,5,10], integer=True).tick_values(x[0],x[-1])
+            ticks = ticks[(ticks >= x[0]) & (ticks <= x[-1])]
+        labels = [p for p in points if p['training_games'] in ticks or p in (points[0],points[-1])]
+        for point in labels:
             success.annotate(f"{point['wins']}/{point['attempts']}",
                 (point['training_games'],100*point['completion_rate']),
                 xytext=(0,-18), textcoords='offset points', ha='center', fontsize=8, color=gray)
@@ -202,7 +207,7 @@ def plot_report(path, output=None):
         success.set_ylabel('Completed kills')
         failures = any(r['status'] not in ('win','loss','draw') for round_ in report['rounds'] for r in round_['games'])
         success.set_xlabel('Self-play games attempted' if failures else 'Self-play games completed')
-        success.set_xticks(x)
+        success.set_xticks(ticks)
         success.grid(axis='y', color='#e4e9ef'); success.set_axisbelow(True)
         fig.text(.095, .025,
             'Training rewards: terminal win/loss/draw only. Evaluation: sampled policy vs a do-nothing opponent.\n'

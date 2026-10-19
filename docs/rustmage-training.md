@@ -1354,3 +1354,76 @@ SVG and CSV versions are saved alongside each graph. The final model is
 
 Reproduce the run with the 1,000-game command above, a new output directory,
 and `--concurrent-updates --prefetch-batches 2 --measurement-workers 4`.
+
+## Continuation to 3,000 games
+
+The same run was resumed from round 10 through round 30, adding 2,000 self-play
+games while preserving both networks, Adam states and the shuffle RNG. All
+training settings stayed fixed: 24 engines, two inference processes, 100 games
+per update, and 40 evaluation attempts every 100 games. The original 1,000-game
+reports above remain saved separately. The active directory still has its
+original name, `.local/red-replicated-1000-2026-10-18`, and now contains the
+complete 3,000-game history and a latest-checkpoint pointer to round 30.
+
+All **3,000 training games ended naturally**, with no errors or cutoffs. The
+complete curve contains 31 evaluation points (1,240 neural evaluation games),
+plus the original 40 scripted-baseline games. Continuation ran on source commit
+`5227fdf0305413f643a51626cedc80a1d6fc6dc7`.
+
+| Checkpoint | Kills / 40 | Mean own turn among kills | Failure-adjusted mean |
+| --- | ---: | ---: | ---: |
+| Fresh | 30 | 17.00 | 19.25 |
+| 1,000 games | 39 | 13.56 | 13.875 |
+| 1,400 games, best observed failure-adjusted score | 40 | 12.50 | 12.50 |
+| 2,000 games | 40 | 12.85 | 12.85 |
+| 3,000 games | 38 | 13.45 | 14.075 |
+
+The curve improved beyond 1,000 initially, then largely plateaued and fluctuated.
+At 3,000, the two failed attempts were 25-turn cutoffs. Compared on the same 40
+seeds with failure assigned 26 turns, the paired improvement from 1,000 to
+3,000 was **−0.20 turns**, with a bootstrap 95% interval of **−1.675 to +1.325**.
+Eighteen attempts improved, seventeen worsened and five tied. There is no clear
+net improvement from the additional 2,000 games on this metric. The best
+observed checkpoint was selected from this same evaluation curve, so its score
+is descriptive rather than an independent confirmation of superiority.
+
+The final model remains better than the fresh model on this metric: the paired
+failure-adjusted improvement is 5.175 turns (95% interval 3.30–7.025). These
+intervals describe evaluation-game variation within this one training run.
+Kill turn against a passive opponent does not establish head-to-head playing
+strength, and training still rewards only terminal wins/losses/draws.
+
+The continuation command took **2,345.71 seconds (39:06)** including startup,
+plotting and shutdown. Combined with the original command, the two segments
+used **3,713.68 seconds (61:54)**, excluding the idle gap and post-run audits.
+The continuation loop itself took 2,334.62 seconds: 580.23 collecting games,
+1,657.31 updating the networks, 91.10 evaluating, and 5.97 for synchronization,
+checkpointing and reporting. Some later PPO epochs required retries; round 29
+took 149.09 seconds with four rejected attempts before both epochs were accepted.
+
+Critic generalization remains weak. Final fitted rollout MSE was 0.0317, while
+the preceding checkpoint's predictions on the final fresh collection had MSE
+1.3515 and explained variance −0.3475. The additional training did not resolve
+this gap. This measurement uses the preceding checkpoint, not a fresh critic
+validation set for the final model.
+
+The audit verified all 31 checkpoint weight digests against their collection
+versions, optimizer iteration continuity, unchanged original checkpoint files,
+unchanged configuration and training sources, and identical preserved results
+for the first 1,000 games. The outer timing wrapper initially checked the mutable
+`latest.json` pointer as if it were an immutable checkpoint; that post-run check
+failed after training exited successfully. The corrected audit checks the
+checkpoint contents and requires the pointer to advance to round 30; it passed.
+
+The longer curve uses fewer axis and completion labels to avoid overlapping
+text; every evaluation point remains plotted and present in the CSV.
+
+Artifacts: [full report](benchmarks/foundations-red-replicated-3000-learning-curve-2026-10-18.json),
+[continuation audit](benchmarks/foundations-red-replicated-3000-learning-curve-2026-10-18-audit.json),
+[kill-turn graph](benchmarks/foundations-red-replicated-3000-learning-curve-2026-10-18.png),
+[actor/critic losses](benchmarks/foundations-red-replicated-3000-learning-curve-2026-10-18-losses.png),
+and [critic diagnostics](benchmarks/foundations-red-replicated-3000-learning-curve-2026-10-18-critic.png).
+SVG and CSV versions are saved alongside the graphs. The final model is
+`.local/red-replicated-1000-2026-10-18/checkpoints/round-0030/policy.keras`;
+the best observed goldfish checkpoint is `round-0014/policy.keras` in the same
+directory. Model weights and raw rollouts remain local under `.local/`.
