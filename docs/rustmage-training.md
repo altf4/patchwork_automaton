@@ -23,6 +23,25 @@ and spell casts are observation features, never reward bonuses. Errors and
 compute-limit cutoffs are excluded from PPO and reported explicitly. They are
 not converted to losses, draws, concessions, or successful replacement games.
 
+New runs default to an **80% training / 20% validation split within each
+self-play collection round**. All decisions from both seats of one game stay
+together. Splitting is deterministic by experiment seed and round, independent
+of worker completion order, and happens before filtering errors or cutoffs.
+Only training games enter either optimizer or advantage normalization. Held-out
+games are used for read-only diagnostics after the update, then remain held out;
+subsequent rounds collect new seeds. This is a rolling on-policy validation set,
+separate from the fixed goldfish evaluations.
+
+With 100 games per round, 80 train the networks and 20 validate them. A
+1,000-game collection therefore gives 800 training games and 200 validation
+games, before exclusions for failed attempts. Non-multiples of five round the
+validation count up: the 32-game recipe below gives 25 training / 7 validation
+games per round. Reports distinguish collected, optimized, and held-out counts.
+Historical `training_games` fields retain their original collected-attempt
+meaning for compatibility. `--validation-fraction` is saved and checked on
+resume; **resuming older runs requires explicit `--validation-fraction 0`**.
+Historical experiments below predate this split unless stated otherwise.
+
 ## Run and resume
 
 Install the neural dependencies and build the pinned RustMage backend as
@@ -108,6 +127,19 @@ value loss and policy entropy after each accepted update. The accompanying
 losses are measured on each round's own frozen self-play data, so they need not
 decrease monotonically as the policy and its opponents change. Use the held-out
 kill-turn curve to judge improvement at this metric.
+
+`learning-curve-validation.png`, `.svg` and `.csv` compare the newly updated
+policy and value networks on their training and held-out games. Value error is
+MSE against terminal returns, with an always-zero reference. Policy validation
+measures change in the clipped PPO surrogate relative to the behavior policy,
+using frozen behavior probabilities/values and training-only normalization.
+It is a local, noisy outcome-based proxy, not action accuracy or a win rate.
+Both partitions regenerate recurrent state from zero using current weights on
+the recorded observations/actions. Confidence intervals resample whole games,
+keeping both seats and all decisions together. These diagnostics currently
+monitor training; they do not select checkpoints, alter rewards, or stop an
+optimizer early. Validation time is recorded separately, including a throughput
+metric that includes collection, updates and validation.
 
 For runs that record `behavior_critic`, `learning-curve-critic.png`, `.svg` and
 `.csv` additionally show prediction error before and after fitting each rollout,
@@ -1423,7 +1455,220 @@ Artifacts: [full report](benchmarks/foundations-red-replicated-3000-learning-cur
 [kill-turn graph](benchmarks/foundations-red-replicated-3000-learning-curve-2026-10-18.png),
 [actor/critic losses](benchmarks/foundations-red-replicated-3000-learning-curve-2026-10-18-losses.png),
 and [critic diagnostics](benchmarks/foundations-red-replicated-3000-learning-curve-2026-10-18-critic.png).
+
+## Critic plateau investigation
+
+The [saved-rollout diagnostic](benchmarks/foundations-red-plateau-2026-10-18.json)
+confirms substantial critic overfitting. The small post-update loss measures
+fitting outcomes already used for optimization. It does not measure the
+accuracy of predictions on new games. The loss plotting utility now labels
+these curves explicitly and includes the always-zero baseline in the critic
+panel; it changes no training behavior.
+
+![Critic training and held-out error](benchmarks/foundations-red-plateau-2026-10-18.png)
+
+The final collection contains 34,016 decisions from only 100 games. Each
+seat's terminal return is repeated across its decisions. Two epochs therefore
+perform 2,126 critic optimizer steps, although the data contain only 100 game
+outcomes. Shuffling decisions fixes correlated minibatch ordering, but does
+not make these labels independent. The independent critic still shares the
+actor's configured learning rate and epoch count; it has no validation-based
+stopping rule. Its output head is unbounded.
+
+To separate overfitting from a change in playing policy, the diagnostic fitted
+a disposable copy of checkpoint 29 on 75 of round 30's games and held out
+the other 25. Both seats and all decisions from a game stay in one partition.
+The actor stays frozen. The split uses seed 881; fitting uses global shuffling
+with seed 991, batch 32, learning rate 0.0003, and the checkpoint's Adam state.
+
+| Critic epochs | Training MSE, 75 games | Held-out MSE, 25 games |
+| --- | ---: | ---: |
+| Before fitting | 1.3431 | 1.3787 |
+| 0.25 | 0.3078 | 1.3022 |
+| 0.5 | 0.1294 | 1.3179 |
+| 1 | 0.0567 | 1.4118 |
+| 2 | 0.0207 | 1.4252 |
+| Always predict zero | 1.0000 | 1.0000 |
+
+These measurements use the same frozen behavior memories for training and
+validation. Replaying the fitted critic's own memory on the held-out sequences
+gives MSE 1.4387, so validation failure is not explained by that distinction.
+The held-out partition is small and this is one exploratory split; hyperparameter
+selection on it would require a separate final test set.
+
+The complete final update was also audited by replaying the recorded
+observations and actions, regenerating each seat's recurrent state from zero.
+The preceding checkpoint reproduces recorded values to within 8.3e-6 and
+action KL to within 3.2e-7, validating the replay. Checkpoint 30 has MSE 0.03170
+with saved memories and 0.05478 with regenerated memories, on its own training
+games. This is a real consistency gap, but much smaller than the generalization
+gap. Actor mean KL changes only from 0.001482 to 0.001521 under replay. This
+replay does not resample actions or establish performance of the updated policy.
+
+Resetting incoming critic memory at every decision did not solve the problem.
+Starting from the existing critic gave training/held-out MSE 0.0230/1.4385
+after two epochs. Starting from the fresh critic with reset Adam gave
+0.7092/1.1113. These controls retain the current observation and local history
+delta but remove carried memory. A ridge probe using only player facts reached
+0.9114/1.0422. None of these controls beat zero on this held-out partition.
+
+The behavior critic has some outcome signal, but is overconfident: on round 30,
+correlation with outcomes is 0.1805, 22.5% of predictions are outside [-1, 1],
+and raw advantage variance is 1.3472 versus return variance 0.9998. These are
+scalar advantage statistics, not a measurement of policy-gradient variance.
+Simply clipping predictions to the valid return range improves MSE from
+1.3515 to only 1.3119, so output bounds alone are insufficient.
+
+A separate calibration probe fitted an affine correction using only round 29's
+recorded behavior predictions and outcomes. Applying
+`clip(0.020811 + 0.164046 * value, -1, 1)` to round 30's predictions gives
+MSE **0.96970**, versus 1.35148 originally and 1.0 for zero. A paired bootstrap
+over 100 whole games (10,000 resamples, seed 771) gives a 95% interval of
+[-0.06078, -0.00015] for calibrated-minus-zero MSE. The predictors are successive
+checkpoints, and this small improvement is evidence for testing calibration,
+not evidence that a calibrated actor already plays better. No correction was
+applied to production training or saved checkpoints.
+
+The next experiments should prioritize whole-game validation and separate
+critic optimization settings. Test fewer optimizer steps, stronger regularization,
+a bounded value head, and more independent games per update. Use independent
+validation to select or calibrate the critic; include a zero-baseline actor
+control in a short matched training run. Do not select a critic by how close
+its training MSE gets to zero. The zero-memory control does not justify removing
+recurrence as a general fix, and the existing critic can already fit the data,
+so increasing capacity is not the first intervention suggested by this audit.
+
+Sequence training with burn-in would address the remaining recurrent mismatch.
+After value predictions generalize, [generalized advantage estimation](https://arxiv.org/abs/1506.02438)
+is another experiment for reducing estimator variance. It can retain zero
+intermediate rewards and undiscounted terminal outcomes; bootstrapping changes
+the estimator and introduces a bias/variance tradeoff, so it needs separate
+validation. Goldfish kill turn should remain a competency metric alongside
+fixed-opponent head-to-head results: the current curve does not establish that
+head-to-head strength has plateaued, or that the critic explains the entire curve.
+
+The diagnostic verified that actor weights and source checkpoints were unchanged.
+All real-game targets remain terminal win/loss/draw outcomes. The two existing
+learning-curve tests passed, and the regenerated figures were visually checked.
+The reusable replay and fitting audit is
+[`examples/diagnose_rustmage_recurrence.py`](../examples/diagnose_rustmage_recurrence.py):
+
+```bash
+UV_CACHE_DIR=.local/uv-cache KERAS_HOME=.local/keras \
+  .local/uv/uv run --no-sync python -m examples.diagnose_rustmage_recurrence \
+  --report .local/red-replicated-1000-2026-10-18/report.json \
+  --output .local/critic-recurrence-repeat --round 30 --fit
+```
+
+The combined report also records the separately computed calibration probe and
+action-count audit. [Updated loss graph](benchmarks/foundations-red-plateau-2026-10-18-losses.png).
 SVG and CSV versions are saved alongside the graphs. The final model is
 `.local/red-replicated-1000-2026-10-18/checkpoints/round-0030/policy.keras`;
 the best observed goldfish checkpoint is `round-0014/policy.keras` in the same
 directory. Model weights and raw rollouts remain local under `.local/`.
+
+## Policy and value generalization audit, October 18, 2026
+
+The [whole-game audit](benchmarks/foundations-red-policy-value-generalization-2026-10-18.json)
+tests both networks, using the new 80/20 methodology. For each of rounds 10,
+20 and 30, it loads a disposable copy of the preceding original checkpoint,
+including both Adam states and the shuffle RNG. It repeats that update using
+80 games and excludes 20 entirely from optimization and normalization. These
+are three independent probes of saved updates, not a new continuous training
+run. All metrics below replay current recurrent state on the recorded sequences.
+
+| Original rollout milestone | Training value MSE | Held-out value MSE | Training policy surrogate gain | Held-out policy surrogate gain |
+| --- | ---: | ---: | ---: | ---: |
+| 1,000 games | 0.0450 | 1.3082 | +0.000466 | −0.002862 |
+| 2,000 games | 0.0556 | 1.4906 | +0.000544 | −0.000239 |
+| 3,000 games | 0.0393 | 1.5084 | +0.001104 | −0.000132 |
+
+Value overfitting is substantial and consistent. Pooled state-weighted MSE is
+0.0466 on training games versus 1.4337 on held-out games; an always-zero
+prediction gives 1.0. The held-out-minus-training gap is 1.3871, with a 95%
+whole-game bootstrap interval of [1.1120, 1.6576], stratified by update.
+
+The policy also has an objective generalization gap. Pooled surrogate gain is
++0.000692 on training games and −0.001103 on held-out games. The difference is
+0.001795, with a 95% interval of [0.000384, 0.003335]. Two of the three individual
+gap intervals exclude zero, although every individual held-out gain interval
+includes zero. The gain uses the clipped probability ratio times frozen,
+normalized outcome advantage, minus its no-change value. This is evidence of
+fitting rollout-specific signal/noise; it does not by itself measure a win-rate
+decline. Poor behavior-value predictions also make this policy proxy noisy.
+
+The audit additionally played the original 1,000- and 3,000-game checkpoints
+against two fixed opponents. Each condition uses 100 games, with matching seeds,
+seats, starting players and policy sampling across checkpoints. Familiar seeds
+821–920 come from the original first training round; unused seeds
+30,000,721–30,000,820 are disjoint from all original training and goldfish seeds.
+These opponents produce new trajectories even on familiar seeds, so this tests
+transfer across deal seeds, not memorization of identical recorded states.
+
+| Opponent | 1,000-game checkpoint, familiar | 1,000-game checkpoint, unused | 3,000-game checkpoint, familiar | 3,000-game checkpoint, unused |
+| --- | ---: | ---: | ---: | ---: |
+| Scripted Foundations baseline | 4/100 | 5/100 | 7/100 | 12/100 |
+| Uniform random legal action | 86/100 | 89/100 | 94/100 | 93/100 |
+
+All 800 scored games ended naturally, with no draws, cutoffs or errors. The
+uniform opponent samples the same enumerated non-concession actions available
+to the neural policy; it is not an uninitialized network. The baseline's first
+batch exposed an unsupported blocked-attacker damage prompt. The policy now
+assigns the maximum offered damage to the current target, with a regression
+test covering finite menus and complete integer domains. The entire 100-game
+batch was rerun after that fix; the initial failed attempt remains recorded in
+the audit and was not selectively replaced in an otherwise scored batch.
+
+There is no consistent familiar-seed advantage: all four unused-minus-familiar
+score intervals include zero. Combining both seed sets, checkpoint improvement
+is +5 percentage points against the baseline (paired 95% interval +0.5 to +9.5)
+and +6 points against uniform (+1 to +11). On unused seeds alone the intervals
+are wider: baseline +7 points [0, +14], uniform +4 points [−4, +12]. These are
+exploratory bootstrap intervals for one training run, not replicated-training
+confidence or multiple-comparison-adjusted tests. They support continued policy
+learning and do not establish a harmful seed-generalization failure. The policy
+still loses heavily to the scripted opponent.
+
+![Policy and value generalization](benchmarks/foundations-red-policy-value-generalization-2026-10-18.png)
+
+The practical priority is still value generalization: optimize fewer times per
+independent outcome and evaluate separate value optimization settings using
+the new held-out metric. Policy updates already have clipping and KL guards;
+the value fit has no comparable validation control. Keep tracking actual
+head-to-head wins alongside the local policy proxy. If validation begins driving
+hyperparameter or checkpoint selection, reserve another untouched final test
+set. Neither this audit nor the validation integration changes terminal rewards,
+network architecture, or PPO optimizer settings.
+
+The integration smoke test collected 20 games over two rounds: 16 entered
+updates and four remained held out. Update sample counts matched the training
+partition exactly. Both partitions used training-only normalization; checkpoint
+resume preserved all 16 checkpoint/pointer file hashes. Original 3,000-game
+run reports and source checkpoint hashes were unchanged by the audit. The smoke
+test verifies plumbing, not learning performance.
+
+Reproduce the diagnostic with the local checkpoints/rollouts still present:
+
+```sh
+UV_CACHE_DIR=.local/uv-cache KERAS_HOME=.local/keras \
+  .local/uv/uv run --no-sync python -m examples.diagnose_policy_value_generalization \
+  --report .local/red-replicated-1000-2026-10-18/report.json \
+  --output .local/policy-value-generalization-repeat
+UV_CACHE_DIR=.local/uv-cache MPLCONFIGDIR=.local/matplotlib \
+  .local/uv/uv run --no-sync python -m examples.plot_policy_value_generalization \
+  .local/policy-value-generalization-repeat/report.json \
+  --output .local/policy-value-generalization-repeat/summary
+```
+
+`--resume` skips completed diagnostic updates and match groups while checking
+all source hashes. The durable JSON preserves per-game objective totals and
+match outcomes for reanalysis, plus the pre-fix error; full action-count logs
+remain in the local report. [SVG](benchmarks/foundations-red-policy-value-generalization-2026-10-18.svg)
+and [CSV](benchmarks/foundations-red-policy-value-generalization-2026-10-18.csv)
+versions accompany the graph.
+
+Validation: the full repository suite passed **333 tests**, followed by a
+four-test validation rerun after adding forced-action-only coverage. The
+[integration audit](benchmarks/foundations-red-policy-value-generalization-2026-10-18-audit.json)
+records partition/sample counts, unchanged source and smoke checkpoint hashes,
+and the measured validation overhead. The figures were visually inspected.

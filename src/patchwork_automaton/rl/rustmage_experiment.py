@@ -22,6 +22,17 @@ from ..core import Handle
 from .goldfish import OwnTurnCounter, summarize
 
 
+class UniformLegalPolicy:
+    """Fixed stochastic opponent, uniform over the neural encoder's legal actions."""
+    def __init__(self, seed):
+        self.rng = np.random.default_rng(seed)
+
+    def choose(self, observation):
+        from ..neural.rustmage_features import expand_options
+        choices = expand_options(observation.decision, allow_concede=False)
+        return choices[int(self.rng.integers(len(choices)))][0]
+
+
 def learning_view(match, viewer):
     """Read one seat's private response without generic immutable conversion."""
     return learning_observation(match, viewer)
@@ -46,19 +57,23 @@ def play_game(*, seed, index, mode, model=None, batcher=None, version=0,
     Self-play uses terminal returns only. Cutoffs/errors have no reward and no
     training trajectories. Evaluation attempts are never replaced by retries.
     """
+    if mode not in ('selfplay','goldfish','baseline','versus_baseline','versus_uniform'):
+        raise ValueError('Unknown RustMage experiment mode')
     async def play():
         started = time.monotonic()
         seat = index % 2
         start = f'P{(index//2)%2}'
         decks = [foundations_deck('red'), foundations_deck('red')]
-        if mode != 'selfplay': decks[1-seat] = passive_deck()
+        if mode in ('goldfish','baseline'): decks[1-seat] = passive_deck()
         writers, policies, visits = {}, {}, Counter()
         row = dict(seed=seed, index=index, mode=mode, seat=seat, starting_player=start,
                    max_own_turns=max_own_turns, decisions=0, neural_choices=0,
                    status='error', own_turns_to_win=None, trajectories=[])
         try:
             for player in range(2):
-                if mode != 'selfplay' and player != seat: policies[player] = PassivePolicy()
+                if mode == 'versus_baseline' and player != seat: policies[player] = FoundationsAggro()
+                elif mode == 'versus_uniform' and player != seat: policies[player] = UniformLegalPolicy(seed*2+player)
+                elif mode in ('goldfish','baseline') and player != seat: policies[player] = PassivePolicy()
                 elif mode == 'baseline': policies[player] = FoundationsAggro()
                 else:
                     if output and mode == 'selfplay':
@@ -90,7 +105,7 @@ def play_game(*, seed, index, mode, model=None, batcher=None, version=0,
                     # A horizon is an evaluation/compute cutoff, never a fabricated
                     # loss or draw and never a turn-based training reward.
                     if step == max_decisions or (min(t.turns for t in turns) > max_own_turns
-                            if mode == 'selfplay' else turns[seat].turns > max_own_turns):
+                            if mode in ('selfplay','versus_baseline','versus_uniform') else turns[seat].turns > max_own_turns):
                         row.update(status='cutoff', reason='decision_or_turn_limit')
                         break
                     p = next(p for p, v in enumerate(views) if v.decision is not None)

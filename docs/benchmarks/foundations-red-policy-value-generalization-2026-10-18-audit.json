@@ -1,0 +1,39 @@
+{
+  "status": "passed",
+  "whole_game_split": "80/20",
+  "smoke_checks": [
+    {
+      "round": 1,
+      "training_games": 8,
+      "validation_games": 2,
+      "optimizer_samples": 3690,
+      "heldout_samples": 742
+    },
+    {
+      "round": 2,
+      "training_games": 8,
+      "validation_games": 2,
+      "optimizer_samples": 3367,
+      "heldout_samples": 991
+    }
+  ],
+  "smoke_resume_hashes_unchanged": 16,
+  "original_source_files_unchanged": 26,
+  "scored_evaluation_games": 800,
+  "full_suite_tests": 333,
+  "final_validation_tests": 4,
+  "smoke_throughput": {
+    "timed_selfplay_games": 20,
+    "collection_seconds": 23.70134357699135,
+    "update_seconds": 23.455276598993805,
+    "validation_seconds": 8.144117193005513,
+    "collection_games_per_minute": 50.63004112412129,
+    "collection_and_updates_games_per_minute": 25.44711634382798,
+    "collection_updates_validation_games_per_minute": 21.699529827117424
+  },
+  "validation_code_sha256": {
+    "src/patchwork_automaton/neural/validation.py": "c9fb62daaf783a2ac68a2ab883be0c5317fcb968baa52bd4dff4702b4c278c31",
+    "examples/train_rustmage.py": "f6e1aa5942d94d0619e4e17031d275e3510adbcc5a23bc44510f24ebee0d4065",
+    "tests/test_game_validation.py": "ba7a621fc9faabed7262949b44d93def4a0bbf16e057eed4475e966fedbffd39"
+  }
+}

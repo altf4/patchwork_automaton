@@ -31,7 +31,7 @@ def curve_points(report):
 
 
 def plot_losses(report, output):
-    """Plot accepted post-update metrics on each round's own frozen rollout."""
+    """Plot accepted update metrics, including the critic's pre-update error."""
     import matplotlib.pyplot as plt
     if not report['rounds']: return []
     rows = []
@@ -42,6 +42,7 @@ def plot_losses(report, output):
         row.update({k: metrics.get(k) for k in ('loss','policy_loss','value_loss','entropy',
             'exact_kl','max_state_kl','gradient_norm','rejected_epochs','accepted_steps',
             'value_loss_before','critic_steps','critic_gradient_norm')})
+        row['zero_baseline_mse'] = metrics.get('behavior_critic', {}).get('zero_baseline_mse')
         rows.append(row)
     output = Path(output)
     csv_path = output.with_suffix('.csv')
@@ -54,18 +55,21 @@ def plot_losses(report, output):
         fig.subplots_adjust(left=.095, right=.97, top=.84, bottom=.16, hspace=.34, wspace=.28)
         fig.suptitle('Foundations mono-red · PPO training diagnostics', x=.095, y=.97,
                      ha='left', fontsize=18, fontweight='bold')
-        fig.text(.095, .915, 'Accepted post-update metrics · one point per self-play collection round',
+        fig.text(.095, .915, 'Training fit and fresh-game predictions · one point per self-play collection round',
                  fontsize=11, color='#526175')
         x = [r['training_games'] for r in rows]
         panels = [('loss','Total PPO loss','#2463c5'), ('policy_loss','Policy loss','#8b51a3'),
-                  ('value_loss','Critic loss (mean squared error)','#bd6225'),
+                  ('value_loss','Value error: training vs fresh games','#bd6225'),
                   ('entropy','Policy entropy (nats)','#258374')]
         for ax, (key, label, color) in zip(axes.flat, panels):
             ax.plot(x, [r[key] for r in rows], color=color, marker='o', markersize=3.5, linewidth=1.7)
             if key=='value_loss' and all(r['value_loss_before'] is not None for r in rows):
-                ax.plot(x,[r['value_loss_before'] for r in rows],color='#7f8b99',linestyle=':',
-                        linewidth=1.2,label='Before update (same rollout)')
-                ax.lines[0].set_label('After update')
+                ax.plot(x,[r['value_loss_before'] for r in rows],color='#2463c5',
+                        linewidth=1.7,label='Fresh games (previous checkpoint)')
+                ax.lines[0].set_label('Training fit (after update)')
+                if all(r['zero_baseline_mse'] is not None for r in rows):
+                    ax.plot(x,[r['zero_baseline_mse'] for r in rows],color='#7f8b99',
+                            linestyle='--',linewidth=1.,label='Always predict zero')
                 ax.legend(fontsize=8,frameon=False)
             ax.set_title(label, loc='left', fontsize=11, fontweight='bold')
             ax.grid(axis='y', color='#e4e9ef'); ax.set_axisbelow(True)
@@ -73,9 +77,9 @@ def plot_losses(report, output):
         for ax in axes[-1]: ax.set_xlabel('Self-play games attempted')
         separate=report['config'].get('architecture')=='separate'
         fig.text(.095, .035,
-            ('Actor and critic use independent optimizers; the combined total is a diagnostic only.\n' if separate else '')+
+            ('Policy and value networks use independent optimizers; the combined total is a diagnostic only.\n' if separate else '')+
             'Total = policy loss + 0.5 × value loss − 0.01 × entropy. Rewards remain terminal win/loss/draw only.\n'
-            'Rounds contain different self-play data; losses need not fall monotonically. Use held-out kill turn to assess progress.',
+            'A low value fitting loss alone does not establish useful predictions. Fresh-game error uses the preceding checkpoint.',
             fontsize=8.5, color='#526175')
         paths = []
         for suffix in ('.png', '.svg'):
@@ -103,7 +107,7 @@ def plot_critic(report, output):
                          'axes.spines.top':False, 'axes.spines.right':False}):
         fig, axes = plt.subplots(2, 2, figsize=(11.5, 8), sharex=True)
         fig.subplots_adjust(left=.095, right=.97, top=.84, bottom=.17, hspace=.37, wspace=.28)
-        fig.suptitle('Foundations mono-red · critic learning', x=.095, y=.97,
+        fig.suptitle('Foundations mono-red · value network learning', x=.095, y=.97,
                      ha='left', fontsize=19, fontweight='bold')
         fig.text(.095, .915, 'Fresh-game predictions were recorded before training on those outcomes',
                  fontsize=11, color='#526175')
@@ -111,7 +115,7 @@ def plot_critic(report, output):
         loss.plot(x, column('mse'), color='#2463c5', marker='o', label='Fresh games, before update')
         loss.plot(x, column('post_update_mse'), color='#bd6225', marker='o', label='Same games, after update')
         loss.plot(x, column('zero_baseline_mse'), color='#7f8b99', linestyle='--', label='Always predict zero')
-        loss.set_title('Critic mean squared error · lower is better', loc='left', fontweight='bold', fontsize=10)
+        loss.set_title('Value mean squared error · lower is better', loc='left', fontweight='bold', fontsize=10)
         loss.legend(frameon=False, fontsize=8)
         explained.plot(x, column('explained_variance'), color='#258374', marker='o')
         explained.axhline(0, color='#7f8b99', linestyle='--')
@@ -138,6 +142,59 @@ def plot_critic(report, output):
             fig.savefig(path, dpi=160, facecolor='white'); paths.append(str(path))
         plt.close(fig)
     print(json.dumps(dict(stage='critic_plot', files=paths, csv=str(output.with_suffix('.csv')))), flush=True)
+    return paths
+
+
+def plot_generalization(report, output):
+    """Both networks on whole-game training/validation partitions after fitting."""
+    import matplotlib.pyplot as plt
+    rounds = [r for r in report['rounds'] if 'generalization' in r]
+    if not rounds: return []
+    rows = []
+    for r in rounds:
+        row = dict(collected_games=r['round']*report['config']['games_per_round'],
+                   training_games=r['split']['training']['terminal_games'],
+                   validation_games=r['split']['validation']['terminal_games'])
+        for partition in ('training','validation'):
+            for metric in ('value_mse','policy_surrogate_gain'):
+                measurement=r['generalization'][partition][metric]
+                for key,value in zip(('mean','low','high'),
+                        (measurement['mean'],*measurement['game_bootstrap_95_interval']) if measurement else (None,None,None)):
+                    row[f'{partition}_{metric}_{key}']=value
+        rows.append(row)
+    output=Path(output)
+    with output.with_suffix('.csv').open('w',newline='') as stream:
+        writer=csv.DictWriter(stream,fieldnames=list(rows[0]));writer.writeheader();writer.writerows(rows)
+    with plt.rc_context({'font.family':'DejaVu Sans','font.size':10,
+                         'axes.spines.top':False,'axes.spines.right':False}):
+        fig,axes=plt.subplots(1,2,figsize=(11.5,5))
+        fig.subplots_adjust(left=.08,right=.97,top=.77,bottom=.23,wspace=.30)
+        fig.suptitle('Policy and value networks · whole-game validation',x=.08,y=.96,
+                     ha='left',fontsize=17,fontweight='bold')
+        fig.text(.08,.87,'Held-out games never enter either optimizer or advantage normalization',color='#526175')
+        x=[r['collected_games'] for r in rows]
+        for ax,metric,title in zip(axes,('value_mse','policy_surrogate_gain'),
+                ('Value prediction error · lower is better','Policy surrogate gain · higher is better')):
+            for partition,color in [('training','#bd6225'),('validation','#2463c5')]:
+                def column(key):return np.asarray([np.nan if r[key] is None else r[key] for r in rows])
+                prefix=f'{partition}_{metric}_'
+                ax.plot(x,column(prefix+'mean'),'-o',color=color,label=partition.capitalize(),markersize=4)
+                ax.fill_between(x,column(prefix+'low'),column(prefix+'high'),color=color,alpha=.13)
+            if metric=='value_mse':
+                baseline=[r['generalization']['validation']['value_after'].get('zero_baseline_mse',np.nan) for r in rounds]
+                ax.plot(x,baseline,'--',color='#7f8b99',label='Always predict zero')
+            else:ax.axhline(0,color='#7f8b99',linestyle='--',label='No policy change')
+            ax.set_title(title,loc='left',fontsize=11,fontweight='bold')
+            ax.set_xlabel('Self-play games collected (includes validation)')
+            ax.grid(axis='y',color='#e4e9ef');ax.set_axisbelow(True)
+            ax.legend(frameon=False,fontsize=8)
+        fig.text(.08,.06,'Current recurrent states are replayed from the start of each recorded trajectory. Bands: 95% whole-game bootstrap.\n'
+                 'Policy surrogate gain is a local outcome-based proxy, not a win rate. Terminal win/loss/draw rewards only.',
+                 color='#526175',fontsize=9)
+        paths=[]
+        for suffix in ('.png','.svg'):
+            path=output.with_suffix(suffix);fig.savefig(path,dpi=160,facecolor='white');paths.append(str(path))
+        plt.close(fig)
     return paths
 
 
@@ -169,7 +226,7 @@ def plot_report(path, output=None):
                      ha='left', fontsize=19, fontweight='bold')
         fig.text(.095, .918,
                  f"{report['config']['eval_games']} fixed goldfish seeds per checkpoint · lower kill turn is better"
-                 + (' · independent actor / critic' if report['config'].get('architecture')=='separate' else ''),
+                 + (' · independent policy / value networks' if report['config'].get('architecture')=='separate' else ''),
                  fontsize=11, color=gray)
         ax.plot(x, column('mean_kill_turn'), color=blue, marker='o', linewidth=2.4,
                 label='Neural policy: mean own turns to win')
@@ -221,7 +278,8 @@ def plot_report(path, output=None):
         plt.close(fig)
     print(json.dumps(dict(stage='plot', files=paths, csv=str(csv_path))), flush=True)
     return (paths + plot_losses(report, output.parent/(output.name+'-losses'))
-            + plot_critic(report, output.parent/(output.name+'-critic')))
+            + plot_critic(report, output.parent/(output.name+'-critic'))
+            + plot_generalization(report, output.parent/(output.name+'-validation')))
 
 
 if __name__ == '__main__':

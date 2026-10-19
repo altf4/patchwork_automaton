@@ -23,7 +23,7 @@ class ProcessCollectionTests(unittest.TestCase):
             batcher=await InferenceBatcher(model,max_batch=2,wait_ms=2).start()
             collector=ProcessGameCollector(model,batcher,workers=2)
             try:
-                for mode in ('baseline','goldfish'):
+                for mode in ('baseline','goldfish','versus_baseline','versus_uniform'):
                     options=dict(games=2,seed_base=45,mode=mode,max_decisions=150,max_own_turns=3)
                     expected=await run_games(workers=2,model=model,batcher=batcher,**options)
                     actual=await collector.run_games(**options)
@@ -34,6 +34,12 @@ class ProcessCollectionTests(unittest.TestCase):
                         self.assertLessEqual(b['worker_inference_seconds'], b['seconds'])
                         if mode == 'baseline': self.assertEqual(b['worker_inference_requests'], 0)
                         else: self.assertGreater(b['worker_inference_requests'], 0)
+                        if mode == 'versus_baseline':
+                            opponent=f"p{1-b['seat']}:"
+                            self.assertGreater(sum(v for k,v in b['actions'].items()
+                                if k.startswith(opponent) and k.endswith(('AnnounceCast','Cast'))),0)
+                        if mode == 'versus_uniform':
+                            self.assertNotIn(f"p{1-b['seat']}:Concede",b['actions'])
                         for key in ('seed','index','seat','starting_player','status','actions','decisions','final_life'):
                             self.assertEqual(a[key],b[key],key)
                 rows=await collector.run_games(games=2,seed_base=45,mode='goldfish',version=99,max_decisions=150)

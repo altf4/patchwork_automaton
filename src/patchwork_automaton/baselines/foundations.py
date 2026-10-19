@@ -66,6 +66,12 @@ class FoundationsAggro:
         return True
 
     def _rustmage(self, obs):
+        # A blocked attacker can require an explicit damage assignment. Keep
+        # this baseline simple: assign all available damage to the offered
+        # target, including when the complete range exceeds the finite menu.
+        damage = next((o for o in obs.decision.options if o.id == 'domain:damage_assignment'), None)
+        if damage is not None:
+            return Response(damage.id, damage.constraints['maximum'])
         candidates = []
         objects = {int(h.value): o for h, o in obs.objects.items()}
         main = self._main(obs)
@@ -88,6 +94,7 @@ class FoundationsAggro:
                 if target and source_name in PUMPS | REMOVAL:
                     if (target.controller == obs.actor) == (source_name in PUMPS): rank = 0
             elif k == 'Attack': rank = 0
+            elif k == 'AssignDamage': rank = -a['amount']
             elif k in ('FinishTargets', 'FinishAttackers', 'FinishBlockers'): rank = 5
             elif k in ('Bottom', 'Discard'): rank = 0
             elif k == 'Pass': rank = 10

@@ -9,6 +9,26 @@ from test_burn_baseline import obs, card, option, ME, OTHER
 
 
 class FoundationsPolicyTests(unittest.TestCase):
+    def test_native_combat_damage_assignment_uses_complete_domain(self):
+        from patchwork_automaton.backends.rustmage import action_options, domain_action
+        actor = Handle('rustmage', 'player', 'P0')
+        game = Handle('rustmage', 'game', 'game')
+        actions = [{'kind': 'Concede'}, *({'kind': 'AssignDamage', 'target': {'Card': 7}, 'amount': n}
+                                        for n in (0, 1, 3, 2))]
+        for maximum in (None, 3, 2**80):
+            raw = dict(actions=actions)
+            if maximum is not None:
+                raw['damage_assignment'] = dict(target={'Card': 7}, minimum=0, maximum=maximum)
+            options = action_options(raw)
+            state = Observation('rustmage', game, actor, 1,
+                (PlayerView(actor, 'P0', 20, native={'mana': [0]*6}),), {},
+                Decision(None, 'damage', '', options))
+            response = FoundationsAggro().choose(state)
+            chosen = next(o for o in options if o.id == response.option)
+            action = chosen.constraints['action'] if chosen.kind == 'finite' else domain_action(chosen, response.value)
+            self.assertEqual(action, dict(kind='AssignDamage', target={'Card': 7},
+                                          amount=3 if maximum is None else maximum))
+
     def test_benchmark_throughput_retains_failed_attempt_time(self):
         from examples.compare_engines import summary
         common = dict(setup_seconds=1, play_seconds=8, cleanup_seconds=1, decisions=100)
