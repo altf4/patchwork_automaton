@@ -142,18 +142,48 @@ class ConcurrentPPOTests(unittest.TestCase):
         from patchwork_automaton.neural.rustmage_policy import RustMagePolicy
         with tempfile.TemporaryDirectory() as directory:
             model, trajectories, config = self.fixture(directory)
-            trainer = self.trainer(model,True,16*1024**2,prefetch_batches=2,measurement_workers=3)
+            trainer = self.trainer(model,True,16*1024**2,prefetch_batches=2,measurement_workers=3,
+                                   value_max_steps=3,value_learning_rate=.00007)
             config.update(concurrent_updates=True,learning_rate=.0001,train_batch=4,ppo_epochs=2,
                           target_kl=.02,max_state_kl=.1,advantage_scale_floor=.1,
-                          prefetch_batches=2,measurement_workers=3)
+                          prefetch_batches=2,measurement_workers=3,
+                          value_max_steps=3,value_learning_rate=.00007)
             trainer.update_files(trajectories)
             save_checkpoint(Path(directory)/'checkpoints',model,trainer,dict(round=1,config=config),policy_type=RustMagePolicy)
             _, restored, _ = load_checkpoint(Path(directory)/'checkpoints')
             self.assertTrue(restored.concurrent_updates)
             self.assertEqual(restored.prefetch_batches,2)
             self.assertEqual(restored.measurement_workers,3)
+            self.assertEqual(restored.value_max_steps,3)
+            self.assertAlmostEqual(restored.value_learning_rate,.00007)
             trainer.update_files(trajectories); restored.update_files(trajectories)
             self.assert_state_equal(trainer,restored)
+
+    def test_value_budget_preserves_policy_updates_rng_and_concurrent_equivalence(self):
+        import numpy as np
+        with tempfile.TemporaryDirectory() as directory:
+            model, trajectories, _ = self.fixture(directory)
+            initial = model.get_weights()
+            trainers = []; results = []
+            for i, (concurrent, limit) in enumerate(((False,None),(False,3),(True,3))):
+                current, _, _ = self.fixture(Path(directory)/str(i))
+                current.set_weights(initial)
+                trainer = self.trainer(current,concurrent,0,prefetch_batches=2,
+                    value_max_steps=limit,value_learning_rate=.00007)
+                results.append(trainer.update_files(trajectories)); trainers.append(trainer)
+            self.assertEqual([r['critic_steps'] for r in results],[8,3,3])
+            self.assertEqual([r['accepted_steps'] for r in results],[8,8,8])
+            self.assertEqual([r['value_step_limit_reached'] for r in results],[False,True,True])
+            for trainer in trainers[1:]:
+                for a,b in zip(trainers[0].model.actor.variables,trainer.model.actor.variables):
+                    np.testing.assert_array_equal(a,b)
+                for a,b in zip(trainers[0].optimizer.variables,trainer.optimizer.variables):
+                    np.testing.assert_array_equal(a,b)
+                self.assertEqual(trainers[0].rng.bit_generator.state,trainer.rng.bit_generator.state)
+            self.assert_state_equal(trainers[1],trainers[2])
+            self.assertTrue(any(not np.array_equal(a,b) for a,b in
+                zip(trainers[0].model.critic.variables,trainers[1].model.critic.variables)))
+            self.assertFalse(any(t.name.startswith(('ppo-prefetch','ppo-critic')) for t in threading.enumerate()))
 
     def test_shared_network_cannot_enable_concurrent_updates(self):
         from patchwork_automaton.neural.policy import untrained_policy

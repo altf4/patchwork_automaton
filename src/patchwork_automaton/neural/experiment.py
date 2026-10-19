@@ -161,6 +161,8 @@ def make_trainer(model,config):
             target_kl=config.get('target_kl',.01),max_state_kl=config.get('max_state_kl',.05),
             advantage_scale_floor=config.get('advantage_scale_floor',1.),trust_guard=True,
             concurrent_updates=config.get('concurrent_updates',False),
+            value_learning_rate=config.get('value_learning_rate'),
+            value_max_steps=config.get('value_max_steps'),
             prefetch_batches=config.get('prefetch_batches',0),
             measurement_workers=config.get('measurement_workers',1))
     if config.get('algorithm','actor-critic')!='actor-critic':raise ValueError('Unknown training algorithm')

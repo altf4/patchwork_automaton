@@ -53,6 +53,10 @@ def parser():
     p.add_argument('--train-batch', type=int, default=32)
     p.add_argument('--learning-rate', type=float, default=.0003)
     p.add_argument('--ppo-epochs', type=int, default=2)
+    p.add_argument('--value-learning-rate', type=float,
+        help='Separate value optimizer learning rate (default: learning-rate; separate architecture only)')
+    p.add_argument('--value-max-steps', type=int,
+        help='Cap value optimizer steps per rollout update across all PPO epochs (default: uncapped; separate architecture only)')
     p.add_argument('--concurrent-updates', action='store_true',
         help='Overlap independent actor/critic updates (requires separate architecture)')
     p.add_argument('--prefetch-batches',type=int,default=0,
@@ -86,6 +90,12 @@ async def run(args):
         raise ValueError('Inference wait must be finite and nonnegative')
     if args.concurrent_updates and args.architecture != 'separate':
         raise ValueError('Concurrent updates require separate architecture')
+    if args.value_learning_rate is not None and not 0 < args.value_learning_rate < float('inf'):
+        raise ValueError('Value learning rate must be finite and positive')
+    if args.value_max_steps is not None and args.value_max_steps < 1:
+        raise ValueError('Value step limit must be positive')
+    if args.architecture != 'separate' and (args.value_learning_rate is not None or args.value_max_steps is not None):
+        raise ValueError('Independent value settings require separate architecture')
     if args.prefetch_batches < 0 or args.measurement_workers < 1:
         raise ValueError('Invalid prefetch depth or measurement worker count')
     if not 0 <= args.validation_fraction < 1 or (args.validation_fraction and args.games_per_round < 2):
@@ -108,6 +118,8 @@ async def run(args):
         saved_config.setdefault('measurement_workers',1)
         saved_config.setdefault('inference_processes',1)
         saved_config.setdefault('validation_fraction',0.)
+        saved_config.setdefault('value_learning_rate',None)
+        saved_config.setdefault('value_max_steps',None)
         config['inference_processes'] = inference_process_count(args,saved_config)
         if saved_config != config:
             raise ValueError('Resume requires the same experiment configuration; legacy runs without a holdout require explicit --validation-fraction 0')

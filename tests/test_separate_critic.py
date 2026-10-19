@@ -34,6 +34,58 @@ class SeparateCriticTests(unittest.TestCase):
         trainer = make_trainer(model, config); trainer.compile()
         return model, trainer, batch, config
 
+    def test_value_limit_spans_epochs_closes_streams_and_resets_per_update(self):
+        model, _, batch, config = self.setup_model()
+        config.update(ppo_epochs=4,value_max_steps=3,value_learning_rate=.00007)
+        trainer = make_trainer(model,config)
+        opened = []; closed = []
+        def batches():
+            opened.append(True)
+            try:
+                for _ in range(2): yield batch,np.array([1.,-1.],np.float32)
+            finally: closed.append(True)
+        for invocation in (1,2):
+            stats = trainer.fit_critic(batches)
+            self.assertEqual(stats['critic_steps'],3)
+            self.assertEqual(stats['critic_optimizer_steps'],3*invocation)
+            self.assertTrue(stats['value_step_limit_reached'])
+            self.assertEqual(len(opened),2*invocation)
+            self.assertEqual(len(closed),len(opened))
+        self.assertAlmostEqual(float(trainer.optimizer.learning_rate.numpy()),.001)
+        self.assertAlmostEqual(float(trainer.critic_optimizer.learning_rate.numpy()),.00007)
+        trainer.value_max_steps = 20
+        stats = trainer.fit_critic(batches)
+        self.assertEqual(stats['critic_steps'],8)
+        self.assertFalse(stats['value_step_limit_reached'])
+
+    def test_invalid_value_settings_and_shared_network_rejected(self):
+        from patchwork_automaton.neural.ppo import PPOTrainer
+        model, _, _, _ = self.setup_model()
+        for settings in ({'value_max_steps':v} for v in (0,-1,1.5,True)):
+            with self.subTest(settings=settings), self.assertRaisesRegex(ValueError,'Value step limit'):
+                PPOTrainer(model,**settings)
+        for rate in (0,-1,float('inf'),float('nan')):
+            with self.subTest(rate=rate), self.assertRaisesRegex(ValueError,'Value learning rate'):
+                PPOTrainer(model,value_learning_rate=rate)
+        for settings in ({'value_max_steps':3},{'value_learning_rate':.0001}):
+            with self.subTest(settings=settings), self.assertRaisesRegex(ValueError,'separate policy and value'):
+                PPOTrainer(model.actor,**settings)
+
+    def test_in_memory_value_limit_does_not_change_policy_shuffle(self):
+        from patchwork_automaton.neural.ppo import PPOTrainer
+        model, _, batch, _ = self.setup_model()
+        other, _, _, _ = self.setup_model()
+        other.set_weights(model.get_weights())
+        old = np.asarray(tf.nn.log_softmax(model(batch)['logits']))[:,0]
+        values = np.asarray(model(batch)['value'])[:,0]
+        returns = np.array([1.,-1.],np.float32)
+        rngs = [np.random.default_rng(821),np.random.default_rng(821)]
+        for current,limit,rng in zip((model,other),(None,1),rngs):
+            trainer = PPOTrainer(current,epochs=3,batch_size=1,value_max_steps=limit)
+            trainer.update(batch,np.zeros(2,np.int32),returns,old,values,rng=rng)
+        for a,b in zip(model.actor.variables,other.actor.variables): np.testing.assert_array_equal(a,b)
+        self.assertEqual(rngs[0].bit_generator.state,rngs[1].bit_generator.state)
+
     def test_critic_learns_without_changing_actor_and_memories_are_independent(self):
         model, trainer, batch, _ = self.setup_model()
         self.assertFalse({id(v) for v in model.actor.variables} & {id(v) for v in model.critic.variables})

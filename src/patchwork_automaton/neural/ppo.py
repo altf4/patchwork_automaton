@@ -48,7 +48,8 @@ def value_prediction_diagnostics(returns, values, mask):
 class PPOTrainer:
     def __init__(self, model, *, learning_rate=0.0003, epochs=4, batch_size=48,
                  clip_ratio=0.2, target_kl=0.02, value_weight=0.5,
-                 entropy_weight=0.01, clip_norm=1.0, advantage_scale_floor=0.1, trust_guard=False, max_state_kl=0.1, backtracks=6):
+                 entropy_weight=0.01, clip_norm=1.0, advantage_scale_floor=0.1, trust_guard=False, max_state_kl=0.1, backtracks=6,
+                 value_learning_rate=None, value_max_steps=None):
         if (epochs < 1 or batch_size < 1 or not 0 < clip_ratio < 1
                 or min(learning_rate, target_kl, clip_norm, advantage_scale_floor) <= 0):
             raise ValueError('Invalid PPO configuration')
@@ -59,14 +60,22 @@ class PPOTrainer:
         self.advantage_scale_floor = advantage_scale_floor
         self.trust_guard, self.max_state_kl, self.backtracks = trust_guard, max_state_kl, backtracks
         self.learning_rate = learning_rate
+        self.separate_value = bool(getattr(model, 'separate_value', False))
+        if value_learning_rate is not None and (not np.isfinite(value_learning_rate) or value_learning_rate <= 0):
+            raise ValueError('Value learning rate must be finite and positive')
+        if value_max_steps is not None and (type(value_max_steps) is not int or value_max_steps < 1):
+            raise ValueError('Value step limit must be a positive integer')
+        if not self.separate_value and (value_learning_rate is not None or value_max_steps is not None):
+            raise ValueError('Independent value settings require separate policy and value networks')
+        self.value_learning_rate = learning_rate if value_learning_rate is None else value_learning_rate
+        self.value_max_steps = value_max_steps
         if max_state_kl <= 0 or backtracks < 0:
             raise ValueError('Invalid trust-region limits')
         self.optimizer = keras.optimizers.Adam(learning_rate)
-        self.separate_value = bool(getattr(model, 'separate_value', False))
         self.actor_variables = tuple(model.actor.trainable_variables if self.separate_value else model.trainable_variables)
         self.optimizer.build(self.actor_variables)
         if self.separate_value:
-            self.critic_optimizer = keras.optimizers.Adam(learning_rate)
+            self.critic_optimizer = keras.optimizers.Adam(self.value_learning_rate)
             self.critic_optimizer.build(model.critic.trainable_variables)
         signature = [input_signature(example_batch(model.memory_size, getattr(model, 'feature_spec', None))),
                      tf.TensorSpec([None], tf.int32)] + [tf.TensorSpec([None], tf.float32)] * 3
@@ -175,7 +184,11 @@ class PPOTrainer:
         return norm
 
     def fit_critic(self, batches):
-        """Independent MSE epochs; actor trust-region rejection cannot undo these."""
+        """Fit terminal returns, optionally capping value steps across all epochs.
+
+        The cap resets for each rollout update. It never repeats a short rollout
+        beyond the configured epochs merely to exhaust the budget.
+        """
         if not self.separate_value: return {}
         steps = 0; norm = 0.
         for _ in range(self.epochs):
@@ -183,13 +196,19 @@ class PPOTrainer:
             try:
                 for inputs, returns in stream:
                     norm = float(self.critic_step(inputs, returns)); steps += 1
+                    if self.value_max_steps is not None and steps >= self.value_max_steps:
+                        break
             finally:
                 # A prefetched stream owns background readers. Join them even
                 # if the optimizer fails, before shared rollout files close.
                 close = getattr(stream,'close',None)
                 if close is not None: close()
+            if self.value_max_steps is not None and steps >= self.value_max_steps:
+                break
         return dict(critic_steps=steps, critic_optimizer_steps=int(self.critic_optimizer.iterations),
-                    critic_gradient_norm=norm)
+                    critic_gradient_norm=norm, value_max_steps=self.value_max_steps,
+                    value_step_limit_reached=self.value_max_steps is not None and steps >= self.value_max_steps,
+                    value_learning_rate=float(self.critic_optimizer.learning_rate.numpy()))
 
     def update(self, inputs, actions, returns, old_logp, old_values, *, rng, old_log_probs=None):
         """Optimize one frozen rollout; returns must come from its task outcome.
@@ -229,8 +248,11 @@ class PPOTrainer:
         largest_exact = np.zeros(2)
         metrics = np.asarray(self.measure(inputs, actions, returns, old_logp, advantages))
         value_loss_before = float(metrics[2])
+        # Reserve all value permutations even when fitting stops early, so the
+        # value budget cannot change the policy's minibatch RNG sequence.
+        critic_orders = iter([rng.permutation(count) for _ in range(self.epochs)]) if self.separate_value else None
         def critic_batches():
-            order = rng.permutation(count)
+            order = next(critic_orders)
             for start in range(0, count, self.batch_size):
                 ix = order[start:start + self.batch_size]
                 yield {k: np.asarray(v)[ix] for k, v in inputs.items()}, returns[ix]

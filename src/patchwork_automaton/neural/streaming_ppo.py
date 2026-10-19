@@ -165,7 +165,9 @@ class StreamingPPOTrainer(PPOTrainer):
         metrics, exact = measure()
         value_loss_before = float(metrics[2])
         # Draw the same critic permutations, in the same order, before the
-        # actor consumes RNG. Only the calling thread ever touches self.rng.
+        # actor consumes RNG, including unused epochs when value fitting is
+        # capped. Changing the value budget must not reshuffle policy batches.
+        # Only the calling thread ever touches self.rng.
         critic_orders = iter([self.rng.permutation(count) for _ in range(self.epochs)]) if self.separate_value else None
         def critic_batches():
             order = next(critic_orders) if critic_orders is not None else self.rng.permutation(count)
