@@ -1,0 +1,3042 @@
+{
+  "status": "authorization_window_complete_cleanup_verified_results_recovered",
+  "authorization_started_utc": "2026-10-25T06:12:28Z",
+  "deadline_utc": "2026-10-25T14:12:28Z",
+  "deadline_local": "2026-10-25 07:12:28 America/Phoenix",
+  "training_admission_cutoff_utc": "2026-10-25T13:27:28Z",
+  "watchdog": {
+    "interrupt_utc": "2026-10-25T14:07:28Z",
+    "terminate_utc": "2026-10-25T14:09:28Z",
+    "kill_utc": "2026-10-25T14:10:28Z",
+    "owned_process_group_only": true,
+    "identity_reuse_and_unrelated_process_safety_tested": true
+  },
+  "remote": {
+    "output": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/raytracer-learning-lab-2026-10-24",
+    "windows_task": "MTGO-RustMage-Learning-Lab-20261024",
+    "status_command": "ssh raytracer 'python3 /home/altf4/benchmarks/mtgo-cpu-gpu-20261024/mtgo-learning-lab-status.py'",
+    "shared_lock": ".local/raytracer-training-20261024.lock",
+    "supervisor_pid": 16798,
+    "process_group": 16798,
+    "coordinator_pid": 16800,
+    "watchdog_pid": 16799,
+    "metadata": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/raytracer-learning-lab-20261024-eight-hour-learning-lab-20261025T062402.407902Z-p16798-launch.json",
+    "interrupt_command": "kill -INT -- -16798"
+  },
+  "recipes": {
+    "control": {},
+    "critic_lr_low": {
+      "value_learning_rate": 0.0001
+    },
+    "critic_head": {
+      "critic_update_scope": "head"
+    },
+    "critic_sequence8": {
+      "critic_unroll": 8
+    },
+    "entropy_zero": {
+      "entropy_weight": 0.0
+    },
+    "rollout_2000": {
+      "games_per_round": 2000,
+      "value_max_steps": 628
+    }
+  },
+  "design": {
+    "screen_training_seed": 31261024,
+    "replication_training_seed": 32261024,
+    "continuation_training_seed": 33261024,
+    "screen_games_per_recipe": 2000,
+    "shortlist_challengers": 2,
+    "selection_games": 5000,
+    "selection_seed": 48261024,
+    "confirmation_games": 10000,
+    "confirmation_seed": 68261024,
+    "selection_rule": "Screen six recipes; replicate top two plus control; nominate challenger by mean of seed effects; no default promotion without independent confirmation. Extend matched control/challenger game budgets while time permits.",
+    "same_warm_actor_critic_and_adam": true,
+    "critic_lr_fork": "Only verified v1 learning-rate scalar changes in critic-optimizer.npz for lower-LR recipe; all moment arrays unchanged.",
+    "shared_settings": {
+      "advantage_baseline": "critic",
+      "target_kl": 0.02,
+      "max_state_kl": 0.5,
+      "actor_learning_rate": 0.0001,
+      "default_critic_learning_rate": 0.0003,
+      "default_entropy_weight": 0.01,
+      "ppo_epochs": 2,
+      "train_batch": 512,
+      "game_workers": 48,
+      "inference_processes": 4,
+      "learner_device": "gpu",
+      "inference_device": "cpu",
+      "validation_fraction": 0.2
+    },
+    "no_adaptive_use_of_confirmation": true,
+    "matched_checkpoint_fallback_on_partial_pair_failure": true,
+    "fresh_data_on_continuation": true,
+    "no_mcts_or_deck_changes": true
+  },
+  "verification": {
+    "critic_and_regression_tests": {
+      "passed": 20,
+      "seconds": 157.396
+    },
+    "recipe_configuration_tests": {
+      "passed": 12,
+      "seconds": 10.279
+    },
+    "real_sequence_actor_preservation_rerun": {
+      "passed": true,
+      "seconds": 23.528
+    },
+    "coordinator_exact_parser_and_low_lr_slot_tests": true,
+    "coordinator_mock_success_failure_and_partial_pair_tests": true,
+    "deadline_watchdog_real_process_signal_tests": true,
+    "supervisor_budget_complete_and_partial_interrupt_tests": true,
+    "remote_gpu_smoke": {
+      "passed": true,
+      "results": [
+        {
+          "scope": "all",
+          "unroll": 1,
+          "seconds": 8.568099186999461,
+          "gpu_placements": true,
+          "graph_traces": {
+            "step": 1,
+            "critic_step": 1,
+            "measure": 1,
+            "drift": 1,
+            "actor_state_drift": 1,
+            "measure_with_drift": 1,
+            "measure_actor_with_drift": 1,
+            "snapshot": 1,
+            "restore": 1
+          },
+          "gradient_norm": 13.084410667419434,
+          "critic_optimizer_rate_variable": "learning_rate"
+        },
+        {
+          "scope": "head",
+          "unroll": 1,
+          "seconds": 5.081756181996752,
+          "gpu_placements": true,
+          "graph_traces": {
+            "step": 1,
+            "critic_step": 1,
+            "measure": 1,
+            "drift": 1,
+            "actor_state_drift": 1,
+            "measure_with_drift": 1,
+            "measure_actor_with_drift": 1,
+            "snapshot": 1,
+            "restore": 1
+          },
+          "gradient_norm": 2.839642286300659,
+          "critic_optimizer_rate_variable": "learning_rate"
+        },
+        {
+          "scope": "all",
+          "unroll": 8,
+          "seconds": 16.19944612099789,
+          "gpu_placements": true,
+          "graph_traces": {
+            "step": 1,
+            "critic_step": 1,
+            "critic_sequence_step": 1,
+            "measure": 1,
+            "drift": 1,
+            "actor_state_drift": 1,
+            "measure_with_drift": 1,
+            "measure_actor_with_drift": 1,
+            "snapshot": 1,
+            "restore": 1
+          },
+          "gradient_norm": 13.418328285217285,
+          "critic_optimizer_rate_variable": "learning_rate"
+        }
+      ]
+    }
+  },
+  "heartbeat": {
+    "automation_id": "raytracer-eight-hour-learning-lab",
+    "cadence_minutes": 30,
+    "stop_and_delete_after_deadline": true,
+    "do_not_ask_user": true,
+    "quiet_unless_actionable_or_meaningful": true,
+    "reason": "Local frozen evaluation verified running; postdeadline heartbeat is verification/backup only.",
+    "schedule_until_utc": "2026-10-25T15:00:00Z",
+    "authorization_deadline_unchanged": true,
+    "status": "DELETED",
+    "deleted_utc": "2026-10-25T14:14:22.798061+00:00",
+    "delete_confirmed_by_app": true
+  },
+  "deployment_manifest": {
+    "examples/train_rustmage.py": {
+      "bytes": 46315,
+      "sha256": "025bde8a67aadd02ae335059278fe517c70c4de7586eff588c5a7491874c9e33"
+    },
+    "src/patchwork_automaton/neural/ppo.py": {
+      "bytes": 22091,
+      "sha256": "5b1b667de9620cc5618073a3d9c004b7a7098996fcb69857c85df33eba87a125"
+    },
+    "src/patchwork_automaton/neural/streaming_ppo.py": {
+      "bytes": 21302,
+      "sha256": "16b7326d61b73c398e50a772e09ae8b1631bfd6b699e093b070dc79016475336"
+    },
+    "src/patchwork_automaton/neural/experiment.py": {
+      "bytes": 11715,
+      "sha256": "6dc369668e70f497916da80fb91e554dabb102b9df43d327e3dd9cc3800edd6d"
+    },
+    "src/patchwork_automaton/neural/validation.py": {
+      "bytes": 10593,
+      "sha256": "bbd53a7472060568640a41bcda2e0e0b79b8e29bc31a6cdd9f75b3c16a5d6672"
+    },
+    "src/patchwork_automaton/neural/sequence_critic.py": {
+      "bytes": 6006,
+      "sha256": "8ca35b954bb10eb6deb2f6cab00e46f5142813ea5b4d915353afb84fad6d572d"
+    },
+    ".local/mtgo-learning-lab-run.py": {
+      "bytes": 22644,
+      "sha256": "41719bf8dd80a79a60eb7ad35330ea0e5e739eac84862375a422b77c392f579a"
+    },
+    ".local/mtgo-learning-lab-evaluate.py": {
+      "bytes": 2561,
+      "sha256": "e3b45a81f00f0d1f46bf3fb21e4773d9f7212640fe68f6b396cb5b8a06968167"
+    },
+    ".local/mtgo-run-learning-lab.py": {
+      "bytes": 17472,
+      "sha256": "d0953450900206a074efdaea08c488bcfea006dd40cd4e2ee7d6685b3fb15506"
+    },
+    ".local/run-raytracer-learning-lab-2026-10-24.sh": {
+      "bytes": 653,
+      "sha256": "aef00ed1ddc97a3502b7f599b55af66b3ccf5d9f8f9e920e5ab221e6f13d7db8"
+    },
+    ".local/learning-lab-deployment-20261024/windows/keep-learning-lab-awake.ps1": {
+      "bytes": 5030,
+      "sha256": "d7513c39524b5cb5b8f3666ffe15357b8b8ede950b05453ebe59f895aa159780"
+    },
+    ".local/learning-lab-deployment-20261024/windows/register-learning-lab-task.ps1": {
+      "bytes": 4373,
+      "sha256": "945384ce38b494ddf36b5b13ca603f5bcdb8d25856ac38e318ad97b006a8c940"
+    }
+  },
+  "local_evidence": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/learning-lab-20261024",
+  "limitations": [
+    "Adaptive ranking on a shared selection cohort can overfit; sealed final cohort is separate.",
+    "Two or three training seeds still give limited training-variance coverage.",
+    "The large-rollout recipe changes update frequency and scales its critic-step budget; it is a data-per-update comparison.",
+    "Critic TBPTT carries detached chunk boundaries computed immediately before previous updates; it is not exact full-prefix replay under every new weight version."
+  ],
+  "started_utc": "2026-10-25T06:24:02.509316+00:00",
+  "snapshot_utc": "2026-10-25T13:38:11.299533+00:00",
+  "progress_at_snapshot": [
+    {
+      "arm": "seed-31261024/control",
+      "status": "complete",
+      "games": 2000,
+      "rounds": 4,
+      "latest_event": "{\"stage\": \"result\", \"comparison\": {\"capped_turn_reduction\": 0.255, \"bootstrap_95_interval\": [0.12, 0.42], \"improved_attempts\": 22, \"worsened_attempts\": 2, \"tied_attempts\": 176}, \"report\": \".local/raytracer-learning-lab-2026-10-24/runs/seed-31261024/control/report.json\"}",
+      "evaluations": [
+        {
+          "round": 0,
+          "summary": {
+            "wins": 2411,
+            "attempted_games": 5000,
+            "win_rate_all_attempts": 0.4822,
+            "errors": 0,
+            "cutoffs": 0
+          }
+        },
+        {
+          "round": 4,
+          "summary": {
+            "wins": 2476,
+            "attempted_games": 5000,
+            "win_rate_all_attempts": 0.4952,
+            "errors": 0,
+            "cutoffs": 0
+          }
+        }
+      ],
+      "last_update": {
+        "value_learning_rate": 0.0003000000142492354,
+        "critic_unroll": 1,
+        "critic_update_scope": "all",
+        "rejected_epochs": 3,
+        "exact_kl": 0.0003405386634254264,
+        "critic_steps": 157,
+        "critic_value_samples": null,
+        "critic_sequence_positions": null
+      },
+      "last_update_seconds": 208.70516295400012
+    },
+    {
+      "arm": "seed-31261024/critic_head",
+      "status": "complete",
+      "games": 2000,
+      "rounds": 4,
+      "latest_event": "{\"stage\": \"result\", \"comparison\": {\"capped_turn_reduction\": 0.28, \"bootstrap_95_interval\": [0.13987500000000005, 0.455], \"improved_attempts\": 24, \"worsened_attempts\": 3, \"tied_attempts\": 173}, \"report\": \".local/raytracer-learning-lab-2026-10-24/runs/seed-31261024/critic_head/report.json\"}",
+      "evaluations": [
+        {
+          "round": 0,
+          "summary": {
+            "wins": 2411,
+            "attempted_games": 5000,
+            "win_rate_all_attempts": 0.4822,
+            "errors": 0,
+            "cutoffs": 0
+          }
+        },
+        {
+          "round": 4,
+          "summary": {
+            "wins": 2455,
+            "attempted_games": 5000,
+            "win_rate_all_attempts": 0.491,
+            "errors": 0,
+            "cutoffs": 0
+          }
+        }
+      ],
+      "last_update": {
+        "value_learning_rate": 0.0003000000142492354,
+        "critic_unroll": 1,
+        "critic_update_scope": "head",
+        "rejected_epochs": 3,
+        "exact_kl": 0.0003132234554917815,
+        "critic_steps": 157,
+        "critic_value_samples": null,
+        "critic_sequence_positions": null
+      },
+      "last_update_seconds": 194.31070575699778
+    },
+    {
+      "arm": "seed-31261024/critic_lr_low",
+      "status": "complete",
+      "games": 2000,
+      "rounds": 4,
+      "latest_event": "{\"stage\": \"result\", \"comparison\": {\"capped_turn_reduction\": 0.23, \"bootstrap_95_interval\": [0.09, 0.4], \"improved_attempts\": 20, \"worsened_attempts\": 3, \"tied_attempts\": 177}, \"report\": \".local/raytracer-learning-lab-2026-10-24/runs/seed-31261024/critic_lr_low/report.json\"}",
+      "evaluations": [
+        {
+          "round": 0,
+          "summary": {
+            "wins": 2411,
+            "attempted_games": 5000,
+            "win_rate_all_attempts": 0.4822,
+            "errors": 0,
+            "cutoffs": 0
+          }
+        },
+        {
+          "round": 4,
+          "summary": {
+            "wins": 2450,
+            "attempted_games": 5000,
+            "win_rate_all_attempts": 0.49,
+            "errors": 0,
+            "cutoffs": 0
+          }
+        }
+      ],
+      "last_update": {
+        "value_learning_rate": 9.999999747378752e-05,
+        "critic_unroll": 1,
+        "critic_update_scope": "all",
+        "rejected_epochs": 3,
+        "exact_kl": 0.00022099291428451438,
+        "critic_steps": 157,
+        "critic_value_samples": null,
+        "critic_sequence_positions": null
+      },
+      "last_update_seconds": 209.49135604799812
+    },
+    {
+      "arm": "seed-31261024/critic_sequence8",
+      "status": "complete",
+      "games": 2000,
+      "rounds": 4,
+      "latest_event": "{\"stage\": \"result\", \"comparison\": {\"capped_turn_reduction\": 0.205, \"bootstrap_95_interval\": [0.1, 0.33], \"improved_attempts\": 23, \"worsened_attempts\": 3, \"tied_attempts\": 174}, \"report\": \".local/raytracer-learning-lab-2026-10-24/runs/seed-31261024/critic_sequence8/report.json\"}",
+      "evaluations": [
+        {
+          "round": 0,
+          "summary": {
+            "wins": 2411,
+            "attempted_games": 5000,
+            "win_rate_all_attempts": 0.4822,
+            "errors": 0,
+            "cutoffs": 0
+          }
+        },
+        {
+          "round": 4,
+          "summary": {
+            "wins": 2447,
+            "attempted_games": 5000,
+            "win_rate_all_attempts": 0.4894,
+            "errors": 0,
+            "cutoffs": 0
+          }
+        }
+      ],
+      "last_update": {
+        "value_learning_rate": 0.0003000000142492354,
+        "critic_unroll": 8,
+        "critic_update_scope": "all",
+        "rejected_epochs": 2,
+        "exact_kl": 0.00033285089868689946,
+        "critic_steps": 157,
+        "critic_value_samples": 78142,
+        "critic_sequence_positions": 78142
+      },
+      "last_update_seconds": 238.69927325699973
+    },
+    {
+      "arm": "seed-31261024/entropy_zero",
+      "status": "complete",
+      "games": 2000,
+      "rounds": 4,
+      "latest_event": "{\"stage\": \"result\", \"comparison\": {\"capped_turn_reduction\": 0.225, \"bootstrap_95_interval\": [0.11, 0.36], \"improved_attempts\": 22, \"worsened_attempts\": 2, \"tied_attempts\": 176}, \"report\": \".local/raytracer-learning-lab-2026-10-24/runs/seed-31261024/entropy_zero/report.json\"}",
+      "evaluations": [
+        {
+          "round": 0,
+          "summary": {
+            "wins": 2411,
+            "attempted_games": 5000,
+            "win_rate_all_attempts": 0.4822,
+            "errors": 0,
+            "cutoffs": 0
+          }
+        },
+        {
+          "round": 4,
+          "summary": {
+            "wins": 2471,
+            "attempted_games": 5000,
+            "win_rate_all_attempts": 0.4942,
+            "errors": 0,
+            "cutoffs": 0
+          }
+        }
+      ],
+      "last_update": {
+        "value_learning_rate": 0.0003000000142492354,
+        "critic_unroll": 1,
+        "critic_update_scope": "all",
+        "rejected_epochs": 2,
+        "exact_kl": 0.00019991079972149465,
+        "critic_steps": 157,
+        "critic_value_samples": null,
+        "critic_sequence_positions": null
+      },
+      "last_update_seconds": 174.43631231799736
+    },
+    {
+      "arm": "seed-31261024/rollout_2000",
+      "status": "complete",
+      "games": 2000,
+      "rounds": 1,
+      "latest_event": "{\"stage\": \"result\", \"comparison\": {\"capped_turn_reduction\": 0.09, \"bootstrap_95_interval\": [0.025, 0.17], \"improved_attempts\": 9, \"worsened_attempts\": 1, \"tied_attempts\": 190}, \"report\": \".local/raytracer-learning-lab-2026-10-24/runs/seed-31261024/rollout_2000/report.json\"}",
+      "evaluations": [
+        {
+          "round": 0,
+          "summary": {
+            "wins": 2411,
+            "attempted_games": 5000,
+            "win_rate_all_attempts": 0.4822,
+            "errors": 0,
+            "cutoffs": 0
+          }
+        },
+        {
+          "round": 1,
+          "summary": {
+            "wins": 2411,
+            "attempted_games": 5000,
+            "win_rate_all_attempts": 0.4822,
+            "errors": 0,
+            "cutoffs": 0
+          }
+        }
+      ],
+      "last_update": {
+        "value_learning_rate": 0.0003000000142492354,
+        "critic_unroll": 1,
+        "critic_update_scope": "all",
+        "rejected_epochs": 5,
+        "exact_kl": 7.140966528216664e-05,
+        "critic_steps": 628,
+        "critic_value_samples": null,
+        "critic_sequence_positions": null
+      },
+      "last_update_seconds": 1294.4756039199965
+    },
+    {
+      "arm": "seed-32261024/control",
+      "status": "complete",
+      "games": 2000,
+      "rounds": 4,
+      "latest_event": "{\"stage\": \"result\", \"comparison\": {\"capped_turn_reduction\": 0.235, \"bootstrap_95_interval\": [0.11, 0.395], \"improved_attempts\": 23, \"worsened_attempts\": 3, \"tied_attempts\": 174}, \"report\": \".local/raytracer-learning-lab-2026-10-24/runs/seed-32261024/control/report.json\"}",
+      "evaluations": [
+        {
+          "round": 0,
+          "summary": {
+            "wins": 2411,
+            "attempted_games": 5000,
+            "win_rate_all_attempts": 0.4822,
+            "errors": 0,
+            "cutoffs": 0
+          }
+        },
+        {
+          "round": 4,
+          "summary": {
+            "wins": 2458,
+            "attempted_games": 5000,
+            "win_rate_all_attempts": 0.4916,
+            "errors": 0,
+            "cutoffs": 0
+          }
+        }
+      ],
+      "last_update": {
+        "value_learning_rate": 0.0003000000142492354,
+        "critic_unroll": 1,
+        "critic_update_scope": "all",
+        "rejected_epochs": 3,
+        "exact_kl": 0.00017975649787513152,
+        "critic_steps": 157,
+        "critic_value_samples": null,
+        "critic_sequence_positions": null
+      },
+      "last_update_seconds": 205.7256544299962
+    },
+    {
+      "arm": "seed-32261024/critic_head",
+      "status": "complete",
+      "games": 2000,
+      "rounds": 4,
+      "latest_event": "{\"stage\": \"result\", \"comparison\": {\"capped_turn_reduction\": 0.23, \"bootstrap_95_interval\": [0.135, 0.33], \"improved_attempts\": 27, \"worsened_attempts\": 3, \"tied_attempts\": 170}, \"report\": \".local/raytracer-learning-lab-2026-10-24/runs/seed-32261024/critic_head/report.json\"}",
+      "evaluations": [
+        {
+          "round": 0,
+          "summary": {
+            "wins": 2411,
+            "attempted_games": 5000,
+            "win_rate_all_attempts": 0.4822,
+            "errors": 0,
+            "cutoffs": 0
+          }
+        },
+        {
+          "round": 4,
+          "summary": {
+            "wins": 2466,
+            "attempted_games": 5000,
+            "win_rate_all_attempts": 0.4932,
+            "errors": 0,
+            "cutoffs": 0
+          }
+        }
+      ],
+      "last_update": {
+        "value_learning_rate": 0.0003000000142492354,
+        "critic_unroll": 1,
+        "critic_update_scope": "head",
+        "rejected_epochs": 4,
+        "exact_kl": 0.00016294974141334856,
+        "critic_steps": 157,
+        "critic_value_samples": null,
+        "critic_sequence_positions": null
+      },
+      "last_update_seconds": 235.866407720001
+    },
+    {
+      "arm": "seed-32261024/entropy_zero",
+      "status": "complete",
+      "games": 2000,
+      "rounds": 4,
+      "latest_event": "{\"stage\": \"result\", \"comparison\": {\"capped_turn_reduction\": 0.275, \"bootstrap_95_interval\": [0.145, 0.44], \"improved_attempts\": 27, \"worsened_attempts\": 3, \"tied_attempts\": 170}, \"report\": \".local/raytracer-learning-lab-2026-10-24/runs/seed-32261024/entropy_zero/report.json\"}",
+      "evaluations": [
+        {
+          "round": 0,
+          "summary": {
+            "wins": 2411,
+            "attempted_games": 5000,
+            "win_rate_all_attempts": 0.4822,
+            "errors": 0,
+            "cutoffs": 0
+          }
+        },
+        {
+          "round": 4,
+          "summary": {
+            "wins": 2456,
+            "attempted_games": 5000,
+            "win_rate_all_attempts": 0.4912,
+            "errors": 0,
+            "cutoffs": 0
+          }
+        }
+      ],
+      "last_update": {
+        "value_learning_rate": 0.0003000000142492354,
+        "critic_unroll": 1,
+        "critic_update_scope": "all",
+        "rejected_epochs": 5,
+        "exact_kl": 0.00011560276089585187,
+        "critic_steps": 157,
+        "critic_value_samples": null,
+        "critic_sequence_positions": null
+      },
+      "last_update_seconds": 279.6189415110057
+    }
+  ],
+  "heartbeats": [
+    {
+      "time_utc": "2026-10-25T06:50:32.875895+00:00",
+      "status": "running",
+      "active": {
+        "type": "training",
+        "arm": "31261024/control",
+        "stage": "screen",
+        "target_games": 2000,
+        "started_utc": "2026-10-25T06:24:03.029700+00:00"
+      },
+      "intervention_required": false,
+      "verified": "First control finished 2,000 self-play games; final 5,000-game evaluation in progress. GPU variable placement, 400/100 whole-game train/holdout splits, all checkpoint ZIPs and actual critic rate verified."
+    },
+    {
+      "time_utc": "2026-10-25T07:20:29.530636+00:00",
+      "status": "running",
+      "active": {
+        "type": "training",
+        "arm": "31261024/critic_head",
+        "stage": "screen",
+        "target_games": 2000,
+        "started_utc": "2026-10-25T07:17:32.230071+00:00"
+      },
+      "completed_arms": 2,
+      "failures": [],
+      "comparison": {
+        "screen_seed": 31261024,
+        "control_wins": 2476,
+        "lower_lr_wins": 2450,
+        "lower_lr_vs_control": {
+          "attempted_pairs": 5000,
+          "terminal_pairs": 5000,
+          "unresolved_pairs": 0,
+          "recorded_attempt_win_rate_change": -0.0052,
+          "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+            -0.008,
+            -0.0024
+          ],
+          "terminal_score_change_on_terminal_pairs": -0.0052,
+          "terminal_score_change_bootstrap_95_interval": [
+            -0.008,
+            -0.0024
+          ],
+          "status_transitions": {
+            "loss->loss": 2512,
+            "loss->win": 12,
+            "win->loss": 38,
+            "win->win": 2438
+          },
+          "improved_recorded_win_attempts": 12,
+          "worsened_recorded_win_attempts": 38,
+          "tied_recorded_win_attempts": 4950,
+          "bootstrap": {
+            "unit": "matched_attempt",
+            "seed": 9901,
+            "resamples": 4000
+          }
+        },
+        "control_vs_initial": {
+          "attempted_pairs": 5000,
+          "terminal_pairs": 5000,
+          "unresolved_pairs": 0,
+          "recorded_attempt_win_rate_change": 0.013,
+          "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+            0.0092,
+            0.0168
+          ],
+          "terminal_score_change_on_terminal_pairs": 0.013,
+          "terminal_score_change_bootstrap_95_interval": [
+            0.0092,
+            0.0168
+          ],
+          "status_transitions": {
+            "loss->loss": 2509,
+            "loss->win": 80,
+            "win->loss": 15,
+            "win->win": 2396
+          },
+          "improved_recorded_win_attempts": 80,
+          "worsened_recorded_win_attempts": 15,
+          "tied_recorded_win_attempts": 4905,
+          "bootstrap": {
+            "unit": "matched_attempt",
+            "seed": 9901,
+            "resamples": 4000
+          }
+        },
+        "lower_lr_vs_initial": {
+          "attempted_pairs": 5000,
+          "terminal_pairs": 5000,
+          "unresolved_pairs": 0,
+          "recorded_attempt_win_rate_change": 0.0078,
+          "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+            0.0046,
+            0.0112
+          ],
+          "terminal_score_change_on_terminal_pairs": 0.0078,
+          "terminal_score_change_bootstrap_95_interval": [
+            0.0046,
+            0.0112
+          ],
+          "status_transitions": {
+            "loss->loss": 2535,
+            "loss->win": 54,
+            "win->loss": 15,
+            "win->win": 2396
+          },
+          "improved_recorded_win_attempts": 54,
+          "worsened_recorded_win_attempts": 15,
+          "tied_recorded_win_attempts": 4931,
+          "bootstrap": {
+            "unit": "matched_attempt",
+            "seed": 9901,
+            "resamples": 4000
+          }
+        },
+        "selection_only": true
+      },
+      "intervention_required": false
+    },
+    {
+      "time_utc": "2026-10-25T07:50:30.314602+00:00",
+      "status": "running",
+      "active": {
+        "type": "training",
+        "arm": "31261024/critic_sequence8",
+        "stage": "screen",
+        "target_games": 2000,
+        "started_utc": "2026-10-25T07:42:57.000782+00:00"
+      },
+      "completed_arms": 3,
+      "failures": [],
+      "comparison": {
+        "head_vs_control": {
+          "attempted_pairs": 5000,
+          "terminal_pairs": 5000,
+          "unresolved_pairs": 0,
+          "recorded_attempt_win_rate_change": -0.0042,
+          "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+            -0.0076,
+            -0.0008
+          ],
+          "terminal_score_change_on_terminal_pairs": -0.0042,
+          "terminal_score_change_bootstrap_95_interval": [
+            -0.0076,
+            -0.0008
+          ],
+          "status_transitions": {
+            "loss->loss": 2499,
+            "loss->win": 25,
+            "win->loss": 46,
+            "win->win": 2430
+          },
+          "improved_recorded_win_attempts": 25,
+          "worsened_recorded_win_attempts": 46,
+          "tied_recorded_win_attempts": 4929,
+          "bootstrap": {
+            "unit": "matched_attempt",
+            "seed": 9901,
+            "resamples": 4000
+          }
+        },
+        "head_vs_imitation": {
+          "attempted_pairs": 5000,
+          "terminal_pairs": 5000,
+          "unresolved_pairs": 0,
+          "recorded_attempt_win_rate_change": 0.0088,
+          "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+            0.0054,
+            0.0124
+          ],
+          "terminal_score_change_on_terminal_pairs": 0.0088,
+          "terminal_score_change_bootstrap_95_interval": [
+            0.0054,
+            0.0124
+          ],
+          "status_transitions": {
+            "loss->loss": 2526,
+            "loss->win": 63,
+            "win->loss": 19,
+            "win->win": 2392
+          },
+          "improved_recorded_win_attempts": 63,
+          "worsened_recorded_win_attempts": 19,
+          "tied_recorded_win_attempts": 4918,
+          "bootstrap": {
+            "unit": "matched_attempt",
+            "seed": 9901,
+            "resamples": 4000
+          }
+        },
+        "control_wins": 2476,
+        "head_wins": 2455,
+        "selection_only": true
+      },
+      "sequence_first_update": {
+        "value_learning_rate": 0.0003000000142492354,
+        "critic_unroll": 8,
+        "critic_update_scope": "all",
+        "rejected_epochs": 5,
+        "exact_kl": 0.00011594483125903674,
+        "critic_steps": 157,
+        "critic_value_samples": 78080,
+        "critic_sequence_positions": 78080
+      },
+      "intervention_required": false,
+      "independent_head_freeze_audit": {
+        "arm": "31261024/critic_head",
+        "method": "Independent local HDF5/NumPy comparison of round-0000 through round-0004",
+        "critic_representation_tensors": 36,
+        "critic_representation_parameters": 202304,
+        "representation_bit_identical_all_rounds": true,
+        "changed_value_head_tensors": 6,
+        "value_head_parameters": 39681,
+        "all_finite": true,
+        "critic_adam_arrays": 86,
+        "critic_iterations": [
+          157,
+          785
+        ],
+        "changed_adam_arrays": [
+          "v0",
+          "v74",
+          "v75",
+          "v76",
+          "v77",
+          "v78",
+          "v79",
+          "v80",
+          "v81",
+          "v82",
+          "v83",
+          "v84",
+          "v85"
+        ],
+        "representation_adam_moments_and_learning_rate_unchanged": true,
+        "max_saved_vs_replayed_training_mse_difference": 2.3e-08,
+        "interpretation": "This arm removed representation drift but did not improve wins in the screening seed. This does not identify the remaining learning bottleneck.",
+        "sequence_first_update_padding_fraction": 0.028662420382165606
+      }
+    },
+    {
+      "time_utc": "2026-10-25T08:20:30.589366+00:00",
+      "status": "running",
+      "active": {
+        "type": "training",
+        "arm": "31261024/entropy_zero",
+        "stage": "screen",
+        "target_games": 2000,
+        "started_utc": "2026-10-25T08:11:32.388624+00:00"
+      },
+      "completed_arms": 4,
+      "failures": [],
+      "comparison": {
+        "sequence_vs_control": {
+          "attempted_pairs": 5000,
+          "terminal_pairs": 5000,
+          "unresolved_pairs": 0,
+          "recorded_attempt_win_rate_change": -0.0058,
+          "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+            -0.0084,
+            -0.0032
+          ],
+          "terminal_score_change_on_terminal_pairs": -0.0058,
+          "terminal_score_change_bootstrap_95_interval": [
+            -0.0084,
+            -0.0032
+          ],
+          "status_transitions": {
+            "loss->loss": 2515,
+            "loss->win": 9,
+            "win->loss": 38,
+            "win->win": 2438
+          },
+          "improved_recorded_win_attempts": 9,
+          "worsened_recorded_win_attempts": 38,
+          "tied_recorded_win_attempts": 4953,
+          "bootstrap": {
+            "unit": "matched_attempt",
+            "seed": 9901,
+            "resamples": 4000
+          }
+        },
+        "sequence_vs_imitation": {
+          "attempted_pairs": 5000,
+          "terminal_pairs": 5000,
+          "unresolved_pairs": 0,
+          "recorded_attempt_win_rate_change": 0.0072,
+          "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+            0.004,
+            0.0104
+          ],
+          "terminal_score_change_on_terminal_pairs": 0.0072,
+          "terminal_score_change_bootstrap_95_interval": [
+            0.004,
+            0.0104
+          ],
+          "status_transitions": {
+            "loss->loss": 2535,
+            "loss->win": 54,
+            "win->loss": 18,
+            "win->win": 2393
+          },
+          "improved_recorded_win_attempts": 54,
+          "worsened_recorded_win_attempts": 18,
+          "tied_recorded_win_attempts": 4928,
+          "bootstrap": {
+            "unit": "matched_attempt",
+            "seed": 9901,
+            "resamples": 4000
+          }
+        },
+        "control_wins": 2476,
+        "sequence_wins": 2447,
+        "selection_only": true,
+        "critic_diagnostics": [
+          {
+            "round": 1,
+            "samples": 78080,
+            "padding": 2304,
+            "saved_memory_mse": 0.6599398067452275,
+            "current_memory_train_mse": 0.663366775633493,
+            "heldout_mse": 0.687992607515717,
+            "heldout_explained_variance": 0.31042041066775783
+          },
+          {
+            "round": 2,
+            "samples": 78175,
+            "padding": 2209,
+            "saved_memory_mse": 0.6420311709140487,
+            "current_memory_train_mse": 0.6489702205333462,
+            "heldout_mse": 0.7194455377806468,
+            "heldout_explained_variance": 0.2996775704506095
+          },
+          {
+            "round": 3,
+            "samples": 78045,
+            "padding": 2339,
+            "saved_memory_mse": 0.6372885362784662,
+            "current_memory_train_mse": 0.6344884634322007,
+            "heldout_mse": 0.7002154282705931,
+            "heldout_explained_variance": 0.30034008633170983
+          },
+          {
+            "round": 4,
+            "samples": 78142,
+            "padding": 2242,
+            "saved_memory_mse": 0.6125083651482764,
+            "current_memory_train_mse": 0.6229938854477999,
+            "heldout_mse": 0.6889727751370981,
+            "heldout_explained_variance": 0.3490721155554448
+          }
+        ]
+      },
+      "intervention_required": false
+    },
+    {
+      "time_utc": "2026-10-25T08:50:30.543790+00:00",
+      "status": "running",
+      "active": {
+        "type": "training",
+        "arm": "31261024/rollout_2000",
+        "stage": "screen",
+        "target_games": 2000,
+        "started_utc": "2026-10-25T08:36:04.371595+00:00"
+      },
+      "completed_arms": 5,
+      "failures": [],
+      "comparison": {
+        "entropy0_vs_control": {
+          "attempted_pairs": 5000,
+          "terminal_pairs": 5000,
+          "unresolved_pairs": 0,
+          "recorded_attempt_win_rate_change": -0.001,
+          "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+            -0.0038,
+            0.002
+          ],
+          "terminal_score_change_on_terminal_pairs": -0.001,
+          "terminal_score_change_bootstrap_95_interval": [
+            -0.0038,
+            0.002
+          ],
+          "status_transitions": {
+            "loss->loss": 2500,
+            "loss->win": 24,
+            "win->loss": 29,
+            "win->win": 2447
+          },
+          "improved_recorded_win_attempts": 24,
+          "worsened_recorded_win_attempts": 29,
+          "tied_recorded_win_attempts": 4947,
+          "bootstrap": {
+            "unit": "matched_attempt",
+            "seed": 9901,
+            "resamples": 4000
+          }
+        },
+        "entropy0_vs_imitation": {
+          "attempted_pairs": 5000,
+          "terminal_pairs": 5000,
+          "unresolved_pairs": 0,
+          "recorded_attempt_win_rate_change": 0.012,
+          "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+            0.0084,
+            0.0156
+          ],
+          "terminal_score_change_on_terminal_pairs": 0.012,
+          "terminal_score_change_bootstrap_95_interval": [
+            0.0084,
+            0.0156
+          ],
+          "status_transitions": {
+            "loss->loss": 2515,
+            "loss->win": 74,
+            "win->loss": 14,
+            "win->win": 2397
+          },
+          "improved_recorded_win_attempts": 74,
+          "worsened_recorded_win_attempts": 14,
+          "tied_recorded_win_attempts": 4912,
+          "bootstrap": {
+            "unit": "matched_attempt",
+            "seed": 9901,
+            "resamples": 4000
+          }
+        },
+        "control_wins": 2476,
+        "entropy0_wins": 2471,
+        "selection_only": true
+      },
+      "intervention_required": false
+    },
+    {
+      "time_utc": "2026-10-25T09:20:30.091015+00:00",
+      "status": "running",
+      "active": {
+        "type": "training",
+        "arm": "32261024/control",
+        "stage": "replication",
+        "target_games": 2000,
+        "started_utc": "2026-10-25T09:08:33.845607+00:00"
+      },
+      "completed_arms": 6,
+      "failures": [],
+      "screen_ranking": [
+        {
+          "recipe": "entropy_zero",
+          "comparison": {
+            "attempted_pairs": 5000,
+            "terminal_pairs": 5000,
+            "unresolved_pairs": 0,
+            "recorded_attempt_win_rate_change": -0.001,
+            "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+              -0.0038,
+              0.002
+            ],
+            "terminal_score_change_on_terminal_pairs": -0.001,
+            "terminal_score_change_bootstrap_95_interval": [
+              -0.0038,
+              0.002
+            ],
+            "status_transitions": {
+              "loss->loss": 2500,
+              "loss->win": 24,
+              "win->loss": 29,
+              "win->win": 2447
+            },
+            "improved_recorded_win_attempts": 24,
+            "worsened_recorded_win_attempts": 29,
+            "tied_recorded_win_attempts": 4947,
+            "bootstrap": {
+              "unit": "matched_attempt",
+              "seed": 9901,
+              "resamples": 4000
+            }
+          },
+          "effect": -0.001
+        },
+        {
+          "recipe": "critic_head",
+          "comparison": {
+            "attempted_pairs": 5000,
+            "terminal_pairs": 5000,
+            "unresolved_pairs": 0,
+            "recorded_attempt_win_rate_change": -0.0042,
+            "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+              -0.0076,
+              -0.0008
+            ],
+            "terminal_score_change_on_terminal_pairs": -0.0042,
+            "terminal_score_change_bootstrap_95_interval": [
+              -0.0076,
+              -0.0008
+            ],
+            "status_transitions": {
+              "loss->loss": 2499,
+              "loss->win": 25,
+              "win->loss": 46,
+              "win->win": 2430
+            },
+            "improved_recorded_win_attempts": 25,
+            "worsened_recorded_win_attempts": 46,
+            "tied_recorded_win_attempts": 4929,
+            "bootstrap": {
+              "unit": "matched_attempt",
+              "seed": 9901,
+              "resamples": 4000
+            }
+          },
+          "effect": -0.0042
+        },
+        {
+          "recipe": "critic_lr_low",
+          "comparison": {
+            "attempted_pairs": 5000,
+            "terminal_pairs": 5000,
+            "unresolved_pairs": 0,
+            "recorded_attempt_win_rate_change": -0.0052,
+            "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+              -0.008,
+              -0.0024
+            ],
+            "terminal_score_change_on_terminal_pairs": -0.0052,
+            "terminal_score_change_bootstrap_95_interval": [
+              -0.008,
+              -0.0024
+            ],
+            "status_transitions": {
+              "loss->loss": 2512,
+              "loss->win": 12,
+              "win->loss": 38,
+              "win->win": 2438
+            },
+            "improved_recorded_win_attempts": 12,
+            "worsened_recorded_win_attempts": 38,
+            "tied_recorded_win_attempts": 4950,
+            "bootstrap": {
+              "unit": "matched_attempt",
+              "seed": 9901,
+              "resamples": 4000
+            }
+          },
+          "effect": -0.0052
+        },
+        {
+          "recipe": "critic_sequence8",
+          "comparison": {
+            "attempted_pairs": 5000,
+            "terminal_pairs": 5000,
+            "unresolved_pairs": 0,
+            "recorded_attempt_win_rate_change": -0.0058,
+            "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+              -0.0084,
+              -0.0032
+            ],
+            "terminal_score_change_on_terminal_pairs": -0.0058,
+            "terminal_score_change_bootstrap_95_interval": [
+              -0.0084,
+              -0.0032
+            ],
+            "status_transitions": {
+              "loss->loss": 2515,
+              "loss->win": 9,
+              "win->loss": 38,
+              "win->win": 2438
+            },
+            "improved_recorded_win_attempts": 9,
+            "worsened_recorded_win_attempts": 38,
+            "tied_recorded_win_attempts": 4953,
+            "bootstrap": {
+              "unit": "matched_attempt",
+              "seed": 9901,
+              "resamples": 4000
+            }
+          },
+          "effect": -0.0058
+        },
+        {
+          "recipe": "rollout_2000",
+          "comparison": {
+            "attempted_pairs": 5000,
+            "terminal_pairs": 5000,
+            "unresolved_pairs": 0,
+            "recorded_attempt_win_rate_change": -0.013,
+            "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+              -0.0168,
+              -0.009
+            ],
+            "terminal_score_change_on_terminal_pairs": -0.013,
+            "terminal_score_change_bootstrap_95_interval": [
+              -0.0168,
+              -0.009
+            ],
+            "status_transitions": {
+              "loss->loss": 2507,
+              "loss->win": 17,
+              "win->loss": 82,
+              "win->win": 2394
+            },
+            "improved_recorded_win_attempts": 17,
+            "worsened_recorded_win_attempts": 82,
+            "tied_recorded_win_attempts": 4901,
+            "bootstrap": {
+              "unit": "matched_attempt",
+              "seed": 9901,
+              "resamples": 4000
+            }
+          },
+          "effect": -0.013
+        }
+      ],
+      "shortlist": [
+        "entropy_zero",
+        "critic_head"
+      ],
+      "intervention_required": false
+    },
+    {
+      "time_utc": "2026-10-25T09:50:32.116416+00:00",
+      "status": "running",
+      "active": {
+        "type": "training",
+        "arm": "32261024/entropy_zero",
+        "stage": "replication",
+        "target_games": 2000,
+        "started_utc": "2026-10-25T09:36:07.852272+00:00"
+      },
+      "completed_arms": 7,
+      "failures": [],
+      "intervention_required": false,
+      "replication_control_vs_imitation": {
+        "attempted_pairs": 5000,
+        "terminal_pairs": 5000,
+        "unresolved_pairs": 0,
+        "recorded_attempt_win_rate_change": 0.0094,
+        "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+          0.0058,
+          0.013
+        ],
+        "terminal_score_change_on_terminal_pairs": 0.0094,
+        "terminal_score_change_bootstrap_95_interval": [
+          0.0058,
+          0.013
+        ],
+        "status_transitions": {
+          "loss->loss": 2524,
+          "loss->win": 65,
+          "win->loss": 18,
+          "win->win": 2393
+        },
+        "improved_recorded_win_attempts": 65,
+        "worsened_recorded_win_attempts": 18,
+        "tied_recorded_win_attempts": 4917,
+        "bootstrap": {
+          "unit": "matched_attempt",
+          "seed": 9901,
+          "resamples": 4000
+        }
+      },
+      "verified": {
+        "whole_game_split": "400 train/100 holdout per round, disjoint, four rounds",
+        "selection_and_confirmation_seeds_disjoint_from_training": true,
+        "confirmation_unopened": true,
+        "actual_learner_variable_placement": {
+          "gpu_tensors": 92,
+          "all_gpu0": true
+        },
+        "actual_learner_graph_traces": {
+          "step": 1,
+          "critic_step": 1,
+          "measure": 1,
+          "drift": 1,
+          "actor_state_drift": 1,
+          "measure_with_drift": 1,
+          "measure_actor_with_drift": 1,
+          "snapshot": 1,
+          "restore": 1
+        },
+        "four_live_source_hashes_match_frozen_manifest": true
+      }
+    },
+    {
+      "time_utc": "2026-10-25T10:23:28.167139+00:00",
+      "completed_arms": 9,
+      "active": null,
+      "failures": [],
+      "confirmation_unopened": true,
+      "meaningful_result": "Second-seed control49.16%, entropy49.12%, frozen critic49.32%. Equal-seed mean changes versuscontrol: entropy\u2212.07pp, head\u2212.13pp; neither repeatably beneficial.",
+      "decision": "Proceed with prepared fixed-opponent alignment phase after graceful old-lab stop.",
+      "stop_signal": "SIGINT to verified dedicated process group16798 at~10:24UTC",
+      "intervention": "Desktop became unreachable before cleanup could be verified; no new phase deployed or started."
+    },
+    {
+      "time_utc": "2026-10-25T10:35:02.083237+00:00",
+      "status": "desktop_unreachable",
+      "reachability": "Native SSH:No route to host; noverifiedrecovery aftertwoLANWoLvariants.",
+      "new_phase_deployed": false,
+      "new_phase_started": false,
+      "user_questions": false,
+      "action": "Retain5minute recoverychecks; usefulofflineanalysisunderindependentreview."
+    },
+    {
+      "time_utc": "2026-10-25T10:39:26.041742+00:00",
+      "status": "desktop_unreachable",
+      "reachability": "NativeSSHNo route to host; nochangefrompriorheartbeat.",
+      "new_phase_deployed": false,
+      "new_phase_started": false,
+      "user_questions": false,
+      "action": "Continueboundedrecoverycheck; localteacherreferencesmokesucceeded20terminalgames0.804s on4CPUworkers,pendingindependentsemanticreviewbeforefull5k."
+    },
+    {
+      "time_utc": "2026-10-25T10:55:35.455598+00:00",
+      "status": "desktop_unreachable",
+      "reachability": "Native SSH: No route to host.",
+      "new_phase_deployed": false,
+      "new_phase_started": false,
+      "user_questions": false,
+      "meaningful_result": "Local 5,000-game teacher mirror completed and independently reviewed: teacher 49.04%, original imitation 48.22%, RL controls 49.52% and 49.16%; no conclusive control-versus-teacher difference."
+    },
+    {
+      "time_utc": "2026-10-25T11:11:06.875464+00:00",
+      "status": "desktop_unreachable",
+      "reachability": "Native SSH and one TCP22 check after four targeted LAN wake packets: No route to host.",
+      "new_phase_deployed": false,
+      "new_phase_started": false,
+      "user_questions": false,
+      "wake_evidence": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/learning-lab-20261024/alignment-preparation/sleep-bridge/wake-retry-20261025T1109Z.json",
+      "action": "Preserve prepared comparison and deadline; continue bounded recovery checks."
+    },
+    {
+      "time_utc": "2026-10-25T11:26:57.255013+00:00",
+      "status": "desktop_unreachable",
+      "reachability": "Native SSH: No route to host.",
+      "new_phase_deployed": false,
+      "new_phase_started": false,
+      "user_questions": false,
+      "action": "Check existing Jellyfin LAN connection as alternative source for one known-MAC wake batch; implement reviewed training mode locally without any remote source changes.",
+      "additional_recovery_result": "Existing wired-LAN host also failed to wake Raytracer; WiFi broadcast filtering is insufficient as explanation."
+    },
+    {
+      "time_utc": "2026-10-25T11:43:02.066605+00:00",
+      "status": "desktop_unreachable",
+      "reachability": "Native SSH: No route to host.",
+      "new_phase_deployed": false,
+      "new_phase_started": false,
+      "user_questions": false,
+      "meaningful_result": "Reviewed fixed-opponent mode integrated locally; 21 tests passed. Preparing timing-bounded local independent frozen-policy evaluation as useful fallback."
+    },
+    {
+      "time_utc": "2026-10-25T12:02:02.099727+00:00",
+      "status": "local_frozen_confirmation_running_desktop_offline",
+      "reachability": "Native SSH still No route to host at11:54; remote training cutoffnowpassed.",
+      "new_remote_phase_deployed": false,
+      "new_remote_training_started": false,
+      "local_confirmation": {
+        "running": true,
+        "cohort": 70261024,
+        "policies": 4,
+        "games_each": 5000,
+        "supervisor_pid": 2895904,
+        "cpu_cores": 4,
+        "root_verified": true
+      },
+      "meaningful_result": "Independent local frozen evaluation is running; one outcome-independent replication preregistered if time permits."
+    },
+    {
+      "time_utc": "2026-10-25T12:39:23.080796+00:00",
+      "status": "local_frozen_replication_running_desktop_offline",
+      "desktop": "Native SSH No route to host at12:32; no further training admitted.",
+      "first_confirmation_complete": true,
+      "fresh_control_gains_pp": [
+        0.76,
+        0.92
+      ],
+      "fresh_control_paired95_pp": [
+        [
+          0.4,
+          1.1005
+        ],
+        [
+          0.54,
+          1.3
+        ]
+      ],
+      "all_first_attempts_terminal": true,
+      "first_backup_verified": "a7a0f2b55d6b04ea6fbbbda1a452802343266423172038a3f46547e1942e2705",
+      "optional_replication_running": true,
+      "user_questions": false
+    },
+    {
+      "time_utc": "2026-10-25T13:05:01.199716+00:00",
+      "status": "local_frozen_replication_running_desktop_offline",
+      "replication_health": {
+        "time_utc": "2026-10-25T13:05:01.199716+00:00",
+        "status": "running",
+        "active": "control-seed32261024",
+        "supervisor_status": "running",
+        "supervisor_error": null,
+        "host_group_start_ticks_match": true,
+        "cpu_affinity": [
+          0,
+          1,
+          2,
+          3
+        ],
+        "actual_neural_cpu_tensors": 92,
+        "gpu_used": false,
+        "optimizer_restored": false,
+        "guard_status": "monitoring",
+        "guard_updated_utc": "2026-10-25T13:04:48.855595+00:00",
+        "sleep_inhibitor": [
+          "RustMage frozen policy confirmation 1000 altf4 2922720 systemd-inhibit sleep:idle                                               Bounded authorized CPU evaluation; ends with verified job or 2026-10-25T14:12:28Z block"
+        ]
+      },
+      "all80_frozen_hashes_verified": true,
+      "desktop": "Native SSH still No route to host at13:02; no new remote training permitted.",
+      "intervention_required": false,
+      "user_questions": false
+    },
+    {
+      "time_utc": "2026-10-25T13:38:11.299533+00:00",
+      "status": "experiments_complete_pending_deadline_verification_remote_offline",
+      "second_confirmation_complete": true,
+      "second_backup_verified": "878e3194f7107edb619c86b083a6412d3417e2215ebf0d3345e2f8e731bcbb99",
+      "root_verified_local_cleanup": true,
+      "desktop": "NativeSSHNo route to host at13:32.",
+      "user_questions": false,
+      "new_experiments_allowed": false
+    },
+    {
+      "time_utc": "2026-10-25T14:14:22.798061+00:00",
+      "status": "authorization_window_complete_local_cleanup_verified_remote_unknown_offline",
+      "local_deadline_cleanup_pass": true,
+      "remote_native_ssh": "No route to host",
+      "new_experiment_compute": false,
+      "heartbeat_deleted": true,
+      "user_questions": false
+    }
+  ],
+  "local_backups": [
+    {
+      "path": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/learning-lab-20261024/control-screen-round4-20261025T0650Z.tar.gz",
+      "bytes": 5263742,
+      "sha256": "464fcdb154d02c08556f35b085b562b1b006510e9a9bac765af5cfb5da723dbe",
+      "round": 4,
+      "arm": "31261024/control",
+      "final_evaluation_at_backup": "pending"
+    },
+    {
+      "path": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/learning-lab-20261024/completed-screen-control-low-lr-20261025T0720Z.tar.gz",
+      "bytes": 37738222,
+      "sha256": "72fff7cc459086ae8ade221993f45063476343b9bfc4320474ad6cc218be76ae",
+      "arms": [
+        "31261024/control",
+        "31261024/critic_lr_low"
+      ],
+      "complete": true,
+      "integrity_counts": {
+        "json": 29,
+        "zip": 30
+      }
+    },
+    {
+      "path": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/learning-lab-20261024/completed-screen-head-20261025T0750Z.tar.gz",
+      "bytes": 18832090,
+      "sha256": "f7437370c53e439fe663a3f777e0f30d236522d00ab06ab5509df2fec4595e53",
+      "arms": [
+        "31261024/critic_head"
+      ],
+      "complete": true,
+      "integrity_counts": {
+        "json": 14,
+        "zip": 15
+      }
+    },
+    {
+      "path": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/learning-lab-20261024/completed-screen-sequence8-20261025T0820Z.tar.gz",
+      "bytes": 18838252,
+      "sha256": "7ccaa85947098d408cd1789d9615e61fbc8e1bc6257fd1011c777878f2c8bc75",
+      "arms": [
+        "31261024/critic_sequence8"
+      ],
+      "complete": true,
+      "integrity_counts": {
+        "json": 14,
+        "zip": 15
+      }
+    },
+    {
+      "path": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/learning-lab-20261024/completed-screen-entropy0-20261025T0850Z.tar.gz",
+      "bytes": 18841167,
+      "sha256": "82c76ed75a1f35de89d30211d40eca27b54e5829a84ba7dffa1903d9969064ba",
+      "arms": [
+        "31261024/entropy_zero"
+      ],
+      "complete": true,
+      "integrity_counts": {
+        "json": 14,
+        "zip": 15
+      }
+    },
+    {
+      "path": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/learning-lab-20261024/completed-screen-rollout2000-20261025T0920Z.tar.gz",
+      "bytes": 9760782,
+      "sha256": "8bdac1860e5cab2f87bf6acb514bd058aec95b3af82831cee99b962dc4b2b847",
+      "arms": [
+        "31261024/rollout_2000"
+      ],
+      "complete": true,
+      "integrity_counts": {
+        "json": 8,
+        "zip": 6
+      }
+    },
+    {
+      "local": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/learning-lab-20261024/completed-replication-control-20261025T0950Z.tar.gz",
+      "remote": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/learning-lab-deployment-20261024/completed-replication-control-20261025T0950Z.tar.gz",
+      "sha256": "b044de3e5c0fc657395975365268b7a15c23785c8acdd501a3c777392518334c",
+      "bytes": 18853682,
+      "integrity": {
+        "json": 14,
+        "zip": 15
+      },
+      "arms": [
+        "32261024/control"
+      ],
+      "verified": true
+    },
+    {
+      "local": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/learning-lab-20261024/recovered-late-replications-20261025.tar.gz",
+      "sha256": "290e338ece8b9658b0a8c149f66869580736a1b3fb219374b7f0e7e9007ff0a8",
+      "bytes": 39168431,
+      "verified": true,
+      "arms": [
+        "32261024/entropy_zero",
+        "32261024/critic_head"
+      ],
+      "additional_scope": "Interrupted third-seed round-0 initialization and final coordinator report; raw rollouts excluded.",
+      "independent_audit": {
+        "path": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/learning-lab-20261024/recovered-late-replications-independent-audit-20261025.json",
+        "sha256": "b703c1cebcfec64221ed9ba3875a3fd33c310272ea13553c3b2eebd2b8ee56b5"
+      }
+    }
+  ],
+  "followup_hypothesis_if_needed": {
+    "topic": "Training-opponent alignment",
+    "evidence": "Current learner collects changing neural self-play; evaluation is against fixed FoundationsAggro. Collector can play versus_baseline but saves trajectories only when mode=selfplay.",
+    "implementation_required": "Separate tested phase: allow recording the neural learner seat only, explicit training-mode config/resume compatibility; preserve terminal/cutoff and holdout semantics.",
+    "comparison_exposure": "One neural trajectory per fixed-opponent game versus two in self-play; match neural sample exposure (~4k vs2k games), report actual decisions/steps/walltime.",
+    "constraints": "Do not mutate frozen active lab modules. If a later new phase is admitted within time budget, preserve all artifacts and use a new manifest. Keep sealed confirmation unused until selection frozen; any opened confirmation cohort cannot be recycled for adaptive selection.",
+    "status": "Remote alignment comparison not run; its12:00UTC admission cutoff has passed, so no further remote training may start in this window.",
+    "isolated_preparation": "Fixed-opponent patch and separate alignment coordinator under /tmp; launcher files backed up in local ignored evidence directory.",
+    "conditional_handoff_rule": "After seed-2 replication, consider a separate fixed-opponent phase only if no challenger shows a clear repeatable improvement. Stop the original group cleanly and preserve original source/report/hash history before any new deployment. No overlapping training or reuse of opened confirmation for adaptive selection.",
+    "isolated_review": {
+      "tests_passed": 5,
+      "real_engine_both_seats": true,
+      "private_observations_preserved": true,
+      "default_selfplay_numerically_unchanged": true,
+      "evaluation_never_recorded": true,
+      "cutoff_and_error_no_training_returns": true,
+      "provenance_training_text_fix": "Fixed and five real-engine tests rerun in isolated copy; original deployed source unchanged.",
+      "shared_source_or_remote_changes": false
+    },
+    "launcher_preparation": {
+      "manifest": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/learning-lab-20261024/alignment-preparation/raytracer-alignment-lab-20261024-manifest.json",
+      "integration_cases_passed": 7,
+      "deployed": false,
+      "remote_or_windows_changes": false,
+      "independent_review": "Passed seven lifecycle tests and ownership/deadline review; native PowerShell deferred.",
+      "native_powershell_validation": "deferred until a conditional deployment is admitted"
+    },
+    "coordinator_preparation": {
+      "local": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/learning-lab-20261024/alignment-preparation/mtgo-alignment-lab-run.py",
+      "sha256": "9f770cf9567f6b62d011b3171959de445b82843daa992f361c82ef02929c54d9",
+      "mock_and_parser_cases_passed": 10,
+      "real_engine_cases_passed": 5,
+      "independent_review": "Passed10cases; rootreran10in0.739s usingprojectvenv;>=60min wholefivepolicyconfirmation reserve; bothseedpairs mandatory.",
+      "deployed": false
+    },
+    "activation_decision_utc": "2026-10-25T10:25:25.634678+00:00",
+    "activation_reason": "Both shortlisted recipe mean effects nonpositive, head effectchanges direction; more useful to test training-opponent alignment than extending an unhelpful recipe.",
+    "deployment_bundle": {
+      "local": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/learning-lab-20261024/alignment-preparation/reviewed-deployment.tar.gz",
+      "sha256": "67e35b5dd274627dd74a1abcc64aaee680d3c1b83f09d5dd1681c7a5f57d22f3",
+      "deployed": false
+    },
+    "recovery": {
+      "last_failure_utc": "2026-10-25T11:43:02.066605+00:00",
+      "native_ssh": "No route to host",
+      "lan_layer": "Cached192.168.1.200 neighbor not answering, likelysleep/offline; otherLANpeersreachable.",
+      "cached_mac": "d8:bb:c1:d8:8c:9d",
+      "wake_attempt": "Six directedsubnetbroadcastmagicpacketsports7/9sentbywindowsagent; noresponseinfirstboundedcheck.",
+      "user_input_requested": false,
+      "new_phase_deployed": false,
+      "new_phase_started": false,
+      "latest_safe_new_start_utc": "2026-10-25T12:00:00Z",
+      "old_termination": "SIGINTsenttoverifiedownedgroup; cleanupcannotyetbeverifiedoffline.",
+      "bounded_bridge": {
+        "local": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/learning-lab-20261024/alignment-preparation/raytracer-alignment-transition-20261025-keep-awake.ps1",
+        "maximum_minutes": 10,
+        "harddeadline_utc": "2026-10-25T14:12:28Z",
+        "reviewed_by_root": true,
+        "agent_authorized_to_start_on_recovery": true,
+        "configuration_changes": false
+      },
+      "wake_attempts": {
+        "utc": "2026-10-25T10:31:08.805960+00:00",
+        "destination": "255.255.255.255",
+        "ports": [
+          7,
+          9
+        ],
+        "packets": 2,
+        "tcp22": "OSError: [Errno 113] No route to host"
+      },
+      "wake_evidence": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/learning-lab-20261024/alignment-preparation/sleep-bridge/wake-evidence.json",
+      "latest_wake_retry": {
+        "time_utc": "2026-10-25T11:10:49.607622+00:00",
+        "source": "192.168.1.75",
+        "interface": "wlp0s20f3",
+        "mac": "d8:bb:c1:d8:8c:9d",
+        "sent": [
+          [
+            "192.168.1.255",
+            7
+          ],
+          [
+            "192.168.1.255",
+            9
+          ],
+          [
+            "255.255.255.255",
+            7
+          ],
+          [
+            "255.255.255.255",
+            9
+          ]
+        ],
+        "tcp22": "[Errno 113] No route to host"
+      },
+      "alternate_lan_wake": "Verified existing Jellyfin SSH host192.168.1.3 shares wired192.168.1.0/24 viaenp3s0. One6packetWoLbatch sent11:27:49UTC; remoteTCP22timeout and laterlaptopSSHNoRoute. No bridge or experiment started.",
+      "remote_training_admission_closed": true
+    },
+    "offline_analysis": {
+      "path": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/learning-lab-20261024/phase1-offline-analysis-20261025T1024Z.json",
+      "sha256": "b19958fe493afe5bf8c4fa020bf9bc8ec2994befb67ceb5ccf4da9b661778acf",
+      "coverage": "7fullsavedreports/25rounds;2latestsummariesonly",
+      "independent_review": "All7rawreporthashes/25rounds/cumulativeactor+criticcountsandcalibrationidentitiesverified; multiplicityandsurrogatecaveatsincluded.",
+      "training_or_remote_activity": false
+    },
+    "offline_baseline_reference": {
+      "status": "complete",
+      "cohort": {
+        "seed_base": 48261024,
+        "games": 5000,
+        "confirmation_unopened": true
+      },
+      "policy": "FoundationsAggro on both mono-reddecks",
+      "purpose": "Estimate teacherreference and BCimitationgap onalreadyusedselection; not amaximumstrengthceiling.",
+      "constraints": "<=4localCPUworkers;5k onlyifsmoketimingfits~10min; noNNtraining/remote/sourcechanges.",
+      "smoke_games": 20,
+      "smoke_seconds": 0.804,
+      "smoke_errors": 0,
+      "smoke_cutoffs": 0,
+      "workers": 4,
+      "games": 5000,
+      "seconds": 133.65851231705165,
+      "errors": 0,
+      "cutoffs": 0,
+      "teacher_wins": 2452,
+      "teacher_win_rate": 0.4904,
+      "comparison_report": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/learning-lab-20261024/teacher-reference-comparison.json",
+      "sha256": "804fbd1cc0e2a6f9672ad58e2ab0d2aa6de9212e8021cbadd5062d0058563322",
+      "review": "Independent semantics and statistical reconciliation passed; selected cohort only, not a strength ceiling.",
+      "public_evidence": "/home/altf4/Code/mtgo-bot/patchwork_automaton/docs/benchmarks/learning-lab-2026-10-24/teacher-reference.json",
+      "figure": "/home/altf4/Code/mtgo-bot/patchwork_automaton/docs/benchmarks/learning-lab-2026-10-24/teacher-reference.png"
+    },
+    "local_repository_implementation": {
+      "status": "complete",
+      "evidence": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/learning-lab-20261024/alignment-preparation/local-implementation-status.json",
+      "sha256": "079f22a90127f76bc53edc55a0e2c22bcda4c35f1d4039f7a2e360ca06011f0b",
+      "focused_tests": 6,
+      "existing_regression_tests": 15,
+      "independent_review": "Passed; candidate source hashes match.",
+      "remote_changes": false,
+      "remote_training_started": false
+    }
+  },
+  "screening_figure": "/home/altf4/Code/mtgo-bot/patchwork_automaton/docs/benchmarks/learning-lab-2026-10-24/screening.png",
+  "local_frozen_confirmation": {
+    "status": "complete",
+    "output": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/laptop-frozen-confirmation-20261025",
+    "targets": [
+      "original-imitation",
+      "control-seed31261024",
+      "control-seed32261024",
+      "scripted-teacher"
+    ],
+    "full_cohort_seed": 70261024,
+    "timing_smoke_seed": 80261024,
+    "initial_target_games_per_policy": 5000,
+    "timing_only_fallback_games_per_policy": 2000,
+    "full_cohort_unopened": false,
+    "remote_confirmation_cohorts_6826_and_6926_remain_sealed": true,
+    "hardware": "Laptop CPU only, at most four affinity cores; no training or optimizer updates.",
+    "whole_batch_budget_required": true,
+    "root_must_review_before_full_launch": false,
+    "hard_deadline_utc": "2026-10-25T14:12:28Z",
+    "delegated_launch_owner": "benchmark_design",
+    "conditional_full_launch_authorized": true,
+    "launch_gates": [
+      "Independent review of frozen manifest, evaluator, coordinator and local deadline supervision.",
+      "All four immutable targets and seed70261024 frozen before confirmation.",
+      "N5000 or timing-only fallback2000 selected before opening cohort; conservative whole-batch finish before14:02UTC.",
+      "At most four CPU affinity cores; no GPU, optimizer updates or training writers.",
+      "Exclusive local lock and separate owned-group watchdog at14:07/09/10, hardauthorizationdeadline14:12:28."
+    ],
+    "agent_must_publish_metadata": true,
+    "remote_training_launch_delegated": false,
+    "started_utc": "2026-10-25T11:56:35Z",
+    "cohort_opened_utc": "2026-10-25T11:56:35.667022+00:00",
+    "games_per_policy": 5000,
+    "report": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/laptop-frozen-confirmation-20261025/report.json",
+    "launch_evidence": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/laptop-frozen-confirmation-20261025/launch-evidence.json",
+    "supervisor_metadata": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/laptop-frozen-confirmation-20261025-frozen-confirmation-20261025T115635.533583Z-p2895904-launch.json",
+    "supervisor_pid": 2895904,
+    "coordinator_pid": 2895907,
+    "watchdog_pid": 2895906,
+    "manifest_sha256": "2d7f014f594af355433330e30d7bf50005a76134e127c4f7cd71b4ffb3eeadc7",
+    "targets_sha256": "eeb567bbf96c880ddb1c5178e0e756119b762046f3becce9cfbe57604d28efef",
+    "host_identity_and_four_cpu_affinity_verified_by_root": true,
+    "independent_review": "Passed evaluator/coordinator checks, 7 supervisor cases, and real owned-group signal escalation; 78 source/data/engine hashes frozen.",
+    "budget_seconds": 4481.350923190475,
+    "timing_smoke_seconds": 38.94254031695891,
+    "optional_frozen_replication": {
+      "status": "complete",
+      "seed_base": 71261024,
+      "games_per_policy": 5000,
+      "same_four_targets": true,
+      "output": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/laptop-frozen-replication-20261025",
+      "decision_before_first_full_policy_result": true,
+      "conditions": [
+        "First batch complete and validated, all owned children exit, shared lock free.",
+        "Independent review; conservative measured whole-batch fit before14:02UTC.",
+        "No model, hyperparameter, target, sample-size changes based on confirmation outcomes.",
+        "One replication only; same four-CPU cap, no GPU/training/writers, absolute deadline unchanged."
+      ],
+      "conditional_launch_delegated_to": "benchmark_design",
+      "preregistration": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/laptop-frozen-replication-20261025/preregistration.json",
+      "preregistration_sha256": "1ebb28a019d538dd18fd7ab3e1c025b4f508da0812915c049e2d5c71cbd111bd",
+      "preregistration_record": {
+        "status": "preregistered_before_first_full_results",
+        "registered_utc": "2026-10-25T12:01:54.829457+00:00",
+        "policy_labels": [
+          "original-imitation",
+          "control-seed31261024",
+          "control-seed32261024",
+          "teacher"
+        ],
+        "games_per_policy": 5000,
+        "seed_base": 71261024,
+        "seed_last": 71266023,
+        "targets_sha256": "5fe2c404abce22440f59a16ab64bc99d6ee26ce28abbc404254b3d7ad3345ddc",
+        "first_targets_sha256": "eeb567bbf96c880ddb1c5178e0e756119b762046f3becce9cfbe57604d28efef",
+        "first_manifest": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/laptop-frozen-confirmation-20261025/manifest.json",
+        "first_manifest_sha256": "2d7f014f594af355433330e30d7bf50005a76134e127c4f7cd71b4ffb3eeadc7",
+        "first_full_results_inspected_for_this_decision": false,
+        "hypothesis": "Repeat exactly the four frozen policies on an independent game cohort; assess reproducibility without selecting or adapting policies.",
+        "admission": "Launch only after first supervised study verified complete and all owned children exit, same exclusive lock free, and conservative remaining full-batch runtime fits before14:02:28UTC.",
+        "work_cutoff_utc": "2026-10-25T14:02:28Z",
+        "hard_watchdog_utc": [
+          "2026-10-25T14:07:28Z",
+          "2026-10-25T14:09:28Z",
+          "2026-10-25T14:10:28Z"
+        ],
+        "global_deadline_utc": "2026-10-25T14:12:28Z",
+        "shared_lock": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/laptop-frozen-confirmation-20261025.lock",
+        "fixed_decisions": [
+          "Same originalBC and both2k selfplay controls plus deterministicteacher",
+          "Exactly5000games per policy",
+          "No additional training or optimizer loading",
+          "No model selection from either cohort",
+          "Report both game cohorts separately; no pooling duplicate games or hiding either training seed",
+          "If the complete batch does not fit, skip without reducing N or launching a partial cohort"
+        ],
+        "sealed_remote_cohorts": [
+          68261024,
+          69261024
+        ],
+        "first_artifacts_changed": false
+      },
+      "started_utc": "2026-10-25T12:36:16Z",
+      "report": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/laptop-frozen-replication-20261025/report.json",
+      "supervisor_metadata": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/laptop-frozen-replication-20261025-frozen-replication-20261025T123616.288932Z-p2922460-launch.json",
+      "supervisor_pid": 2922460,
+      "coordinator_pid": 2922463,
+      "watchdog_pid": 2922462,
+      "guard_pid": 2922723,
+      "inhibitor_holder_pid": 2922720,
+      "session_id": 50045,
+      "guard_session_id": 54443,
+      "manifest_sha256": "dd51a3551e8ae8175656aa92eeaeae23b161edc5266c7321313181e31416d2e2",
+      "source_hashes_verified": 80,
+      "first_group_and_guard_gone": true,
+      "root_verified_utc": "2026-10-25T12:38:12.379223+00:00",
+      "independent_review": "Passed same-target, new-cohort, admission/completeness and owned supervision tests; no outcome-based changes.",
+      "launch_evidence": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/laptop-frozen-replication-20261025/launch-evidence.json",
+      "finished_utc": "2026-10-25T13:19:05.713188+00:00",
+      "results": {
+        "original-imitation": {
+          "attempted_games": 5000,
+          "terminal_games": 5000,
+          "wins": 2515,
+          "losses": 2485,
+          "draws": 0,
+          "cutoffs": 0,
+          "errors": 0,
+          "unresolved_attempts": 0,
+          "terminal_fraction": 1.0,
+          "win_rate_all_attempts": 0.503,
+          "win_rate_all_attempts_wilson_95_interval": [
+            0.4891442286550894,
+            0.5168511651332403
+          ],
+          "terminal_win_rate": 0.503,
+          "terminal_score_rate": 0.503,
+          "metric": "recorded_wins_per_scheduled_attempt",
+          "mode": "versus_baseline",
+          "win_rate_denominator": "all_attempts_including_cutoffs_and_errors",
+          "unresolved_outcomes": "unknown; no terminal score or training return assigned",
+          "seat_start_balanced": true,
+          "seat_start_strata": {
+            "seat_0_start_P0": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 701,
+              "losses": 549,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.5608,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.5331428844352527,
+                0.5880845633658146
+              ],
+              "terminal_win_rate": 0.5608,
+              "terminal_score_rate": 0.5608
+            },
+            "seat_0_start_P1": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 561,
+              "losses": 689,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.4488,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.4214263160644832,
+                0.4764874121030388
+              ],
+              "terminal_win_rate": 0.4488,
+              "terminal_score_rate": 0.4488
+            },
+            "seat_1_start_P0": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 548,
+              "losses": 702,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.4384,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.41112333182780697,
+                0.46605412237374305
+              ],
+              "terminal_win_rate": 0.4384,
+              "terminal_score_rate": 0.4384
+            },
+            "seat_1_start_P1": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 705,
+              "losses": 545,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.564,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.5363552909733265,
+                0.5912525488172709
+              ],
+              "terminal_win_rate": 0.564,
+              "terminal_score_rate": 0.564
+            }
+          }
+        },
+        "control-seed31261024": {
+          "attempted_games": 5000,
+          "terminal_games": 5000,
+          "wins": 2556,
+          "losses": 2444,
+          "draws": 0,
+          "cutoffs": 0,
+          "errors": 0,
+          "unresolved_attempts": 0,
+          "terminal_fraction": 1.0,
+          "win_rate_all_attempts": 0.5112,
+          "win_rate_all_attempts_wilson_95_interval": [
+            0.4973411577092316,
+            0.525041645767199
+          ],
+          "terminal_win_rate": 0.5112,
+          "terminal_score_rate": 0.5112,
+          "metric": "recorded_wins_per_scheduled_attempt",
+          "mode": "versus_baseline",
+          "win_rate_denominator": "all_attempts_including_cutoffs_and_errors",
+          "unresolved_outcomes": "unknown; no terminal score or training return assigned",
+          "seat_start_balanced": true,
+          "seat_start_strata": {
+            "seat_0_start_P0": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 710,
+              "losses": 540,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.568,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.5403724284853927,
+                0.5952109012921168
+              ],
+              "terminal_win_rate": 0.568,
+              "terminal_score_rate": 0.568
+            },
+            "seat_0_start_P1": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 566,
+              "losses": 684,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.4528,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.4253922358159151,
+                0.48049698233851923
+              ],
+              "terminal_win_rate": 0.4528,
+              "terminal_score_rate": 0.4528
+            },
+            "seat_1_start_P0": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 562,
+              "losses": 688,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.4496,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.4222193566446312,
+                0.47728946952027324
+              ],
+              "terminal_win_rate": 0.4496,
+              "terminal_score_rate": 0.4496
+            },
+            "seat_1_start_P1": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 718,
+              "losses": 532,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.5744,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.5468036280084962,
+                0.6015404857480733
+              ],
+              "terminal_win_rate": 0.5744,
+              "terminal_score_rate": 0.5744
+            }
+          }
+        },
+        "control-seed32261024": {
+          "attempted_games": 5000,
+          "terminal_games": 5000,
+          "wins": 2553,
+          "losses": 2447,
+          "draws": 0,
+          "cutoffs": 0,
+          "errors": 0,
+          "unresolved_attempts": 0,
+          "terminal_fraction": 1.0,
+          "win_rate_all_attempts": 0.5106,
+          "win_rate_all_attempts_wilson_95_interval": [
+            0.4967412561092962,
+            0.5244424686094687
+          ],
+          "terminal_win_rate": 0.5106,
+          "terminal_score_rate": 0.5106,
+          "metric": "recorded_wins_per_scheduled_attempt",
+          "mode": "versus_baseline",
+          "win_rate_denominator": "all_attempts_including_cutoffs_and_errors",
+          "unresolved_outcomes": "unknown; no terminal score or training return assigned",
+          "seat_start_balanced": true,
+          "seat_start_strata": {
+            "seat_0_start_P0": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 712,
+              "losses": 538,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.5696,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.5419797915844514,
+                0.5967937341878232
+              ],
+              "terminal_win_rate": 0.5696,
+              "terminal_score_rate": 0.5696
+            },
+            "seat_0_start_P1": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 569,
+              "losses": 681,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.4552,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.4277726469497104,
+                0.4829018651968713
+              ],
+              "terminal_win_rate": 0.4552,
+              "terminal_score_rate": 0.4552
+            },
+            "seat_1_start_P0": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 558,
+              "losses": 692,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.4464,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.41904762499598025,
+                0.47408080917939444
+              ],
+              "terminal_win_rate": 0.4464,
+              "terminal_score_rate": 0.4464
+            },
+            "seat_1_start_P1": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 714,
+              "losses": 536,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.5712,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.5435874456028408,
+                0.5983762761641988
+              ],
+              "terminal_win_rate": 0.5712,
+              "terminal_score_rate": 0.5712
+            }
+          }
+        },
+        "teacher": {
+          "attempted_games": 5000,
+          "terminal_games": 5000,
+          "wins": 2530,
+          "losses": 2470,
+          "draws": 0,
+          "cutoffs": 0,
+          "errors": 0,
+          "unresolved_attempts": 0,
+          "terminal_fraction": 1.0,
+          "win_rate_all_attempts": 0.506,
+          "win_rate_all_attempts_wilson_95_interval": [
+            0.4921426731092918,
+            0.5198481144673677
+          ],
+          "terminal_win_rate": 0.506,
+          "terminal_score_rate": 0.506,
+          "metric": "recorded_wins_per_scheduled_attempt",
+          "mode": "versus_baseline",
+          "win_rate_denominator": "all_attempts_including_cutoffs_and_errors",
+          "unresolved_outcomes": "unknown; no terminal score or training return assigned",
+          "seat_start_balanced": true,
+          "seat_start_strata": {
+            "seat_0_start_P0": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 708,
+              "losses": 542,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.5664,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.5387653559154355,
+                0.5936277778673094
+              ],
+              "terminal_win_rate": 0.5664,
+              "terminal_score_rate": 0.5664
+            },
+            "seat_0_start_P1": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 563,
+              "losses": 687,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.4504,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.4230124689442149,
+                0.4780914552180721
+              ],
+              "terminal_win_rate": 0.4504,
+              "terminal_score_rate": 0.4504
+            },
+            "seat_1_start_P0": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 546,
+              "losses": 704,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.4368,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.4095393390582134,
+                0.46444791914857164
+              ],
+              "terminal_win_rate": 0.4368,
+              "terminal_score_rate": 0.4368
+            },
+            "seat_1_start_P1": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 713,
+              "losses": 537,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.5704,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.5427835822039513,
+                0.5975850415657058
+              ],
+              "terminal_win_rate": 0.5704,
+              "terminal_score_rate": 0.5704
+            }
+          }
+        }
+      },
+      "comparisons": {
+        "control-seed31261024-minus-original-imitation": {
+          "attempted_pairs": 5000,
+          "terminal_pairs": 5000,
+          "unresolved_pairs": 0,
+          "recorded_attempt_win_rate_change": 0.0082,
+          "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+            0.0046,
+            0.0118
+          ],
+          "terminal_score_change_on_terminal_pairs": 0.0082,
+          "terminal_score_change_bootstrap_95_interval": [
+            0.0046,
+            0.0118
+          ],
+          "status_transitions": {
+            "loss->loss": 2422,
+            "loss->win": 63,
+            "win->loss": 22,
+            "win->win": 2493
+          },
+          "improved_recorded_win_attempts": 63,
+          "worsened_recorded_win_attempts": 22,
+          "tied_recorded_win_attempts": 4915,
+          "bootstrap": {
+            "unit": "matched_attempt",
+            "seed": 9901,
+            "resamples": 4000
+          }
+        },
+        "control-seed32261024-minus-original-imitation": {
+          "attempted_pairs": 5000,
+          "terminal_pairs": 5000,
+          "unresolved_pairs": 0,
+          "recorded_attempt_win_rate_change": 0.0076,
+          "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+            0.0044,
+            0.011
+          ],
+          "terminal_score_change_on_terminal_pairs": 0.0076,
+          "terminal_score_change_bootstrap_95_interval": [
+            0.0044,
+            0.011
+          ],
+          "status_transitions": {
+            "loss->loss": 2431,
+            "loss->win": 54,
+            "win->loss": 16,
+            "win->win": 2499
+          },
+          "improved_recorded_win_attempts": 54,
+          "worsened_recorded_win_attempts": 16,
+          "tied_recorded_win_attempts": 4930,
+          "bootstrap": {
+            "unit": "matched_attempt",
+            "seed": 9901,
+            "resamples": 4000
+          }
+        },
+        "teacher-minus-original-imitation": {
+          "attempted_pairs": 5000,
+          "terminal_pairs": 5000,
+          "unresolved_pairs": 0,
+          "recorded_attempt_win_rate_change": 0.003,
+          "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+            -0.0012,
+            0.0074
+          ],
+          "terminal_score_change_on_terminal_pairs": 0.003,
+          "terminal_score_change_bootstrap_95_interval": [
+            -0.0012,
+            0.0074
+          ],
+          "status_transitions": {
+            "loss->loss": 2420,
+            "loss->win": 65,
+            "win->loss": 50,
+            "win->win": 2465
+          },
+          "improved_recorded_win_attempts": 65,
+          "worsened_recorded_win_attempts": 50,
+          "tied_recorded_win_attempts": 4885,
+          "bootstrap": {
+            "unit": "matched_attempt",
+            "seed": 9901,
+            "resamples": 4000
+          }
+        },
+        "teacher-minus-control-seed31261024": {
+          "attempted_pairs": 5000,
+          "terminal_pairs": 5000,
+          "unresolved_pairs": 0,
+          "recorded_attempt_win_rate_change": -0.0052,
+          "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+            -0.01,
+            -0.0004
+          ],
+          "terminal_score_change_on_terminal_pairs": -0.0052,
+          "terminal_score_change_bootstrap_95_interval": [
+            -0.01,
+            -0.0004
+          ],
+          "status_transitions": {
+            "loss->loss": 2383,
+            "loss->win": 61,
+            "win->loss": 87,
+            "win->win": 2469
+          },
+          "improved_recorded_win_attempts": 61,
+          "worsened_recorded_win_attempts": 87,
+          "tied_recorded_win_attempts": 4852,
+          "bootstrap": {
+            "unit": "matched_attempt",
+            "seed": 9901,
+            "resamples": 4000
+          }
+        },
+        "teacher-minus-control-seed32261024": {
+          "attempted_pairs": 5000,
+          "terminal_pairs": 5000,
+          "unresolved_pairs": 0,
+          "recorded_attempt_win_rate_change": -0.0046,
+          "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+            -0.0086,
+            -0.0004
+          ],
+          "terminal_score_change_on_terminal_pairs": -0.0046,
+          "terminal_score_change_bootstrap_95_interval": [
+            -0.0086,
+            -0.0004
+          ],
+          "status_transitions": {
+            "loss->loss": 2407,
+            "loss->win": 40,
+            "win->loss": 63,
+            "win->win": 2490
+          },
+          "improved_recorded_win_attempts": 40,
+          "worsened_recorded_win_attempts": 63,
+          "tied_recorded_win_attempts": 4897,
+          "bootstrap": {
+            "unit": "matched_attempt",
+            "seed": 9901,
+            "resamples": 4000
+          }
+        }
+      },
+      "all_targets_verified": true,
+      "all_attempts_terminal": true,
+      "backup": {
+        "path": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/learning-lab-20261024/laptop-replication-complete-20261025.tar.gz",
+        "sha256": "878e3194f7107edb619c86b083a6412d3417e2215ebf0d3345e2f8e731bcbb99",
+        "bytes": 10048770,
+        "integrity": {
+          "json": 23,
+          "zip": 3
+        },
+        "verified_utc": "2026-10-25T13:34:19.847513+00:00",
+        "source_files": 80
+      },
+      "independent_final_audit": {
+        "status": "passed",
+        "path": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/learning-lab-20261024/frozen-replication-independent-audit-20261025.json",
+        "sha256": "29cf0ae62b0c9e7b5391492379495b01d1f4c351c9eee5012e73c128a8d213bd"
+      }
+    },
+    "sleep_inhibitor": {
+      "started_utc": "2026-10-25T12:04:07Z",
+      "guard_pid": 2900652,
+      "holder_pid": 2900649,
+      "guard_pgid": 2900633,
+      "session_id": 80236,
+      "mode": "login1 sleep:idle block",
+      "verified": true,
+      "owner_pid": 2895904,
+      "state": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/learning-lab-20261024/laptop-frozen-supervision/sleep-guards/guard-job2895904-20261025T120407.786912Z-p2900652.json",
+      "stop_file": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/learning-lab-20261024/laptop-frozen-supervision/sleep-guards/guard-job2895904-20261025T120407.786912Z-p2900652.stop",
+      "exits_when": "Verified owned job group is gone, stop file, signal, or14:12:28 deadline.",
+      "persistent_power_settings_changed": false,
+      "replication_may_use_same_reviewed_guard": true
+    },
+    "finished_utc": "2026-10-25T12:35:40.946054+00:00",
+    "results": {
+      "original-imitation": {
+        "attempted_games": 5000,
+        "terminal_games": 5000,
+        "wins": 2503,
+        "losses": 2497,
+        "draws": 0,
+        "cutoffs": 0,
+        "errors": 0,
+        "unresolved_attempts": 0,
+        "terminal_fraction": 1.0,
+        "win_rate_all_attempts": 0.5006,
+        "win_rate_all_attempts_wilson_95_interval": [
+          0.48674583192906523,
+          0.5144532468286009
+        ],
+        "terminal_win_rate": 0.5006,
+        "terminal_score_rate": 0.5006,
+        "metric": "recorded_wins_per_scheduled_attempt",
+        "mode": "versus_baseline",
+        "win_rate_denominator": "all_attempts_including_cutoffs_and_errors",
+        "unresolved_outcomes": "unknown; no terminal score or training return assigned",
+        "seat_start_balanced": true,
+        "seat_start_strata": {
+          "seat_0_start_P0": {
+            "attempted_games": 1250,
+            "terminal_games": 1250,
+            "wins": 697,
+            "losses": 553,
+            "draws": 0,
+            "cutoffs": 0,
+            "errors": 0,
+            "unresolved_attempts": 0,
+            "terminal_fraction": 1.0,
+            "win_rate_all_attempts": 0.5576,
+            "win_rate_all_attempts_wilson_95_interval": [
+              0.5299316334864699,
+              0.5849154223250677
+            ],
+            "terminal_win_rate": 0.5576,
+            "terminal_score_rate": 0.5576
+          },
+          "seat_0_start_P1": {
+            "attempted_games": 1250,
+            "terminal_games": 1250,
+            "wins": 539,
+            "losses": 711,
+            "draws": 0,
+            "cutoffs": 0,
+            "errors": 0,
+            "unresolved_attempts": 0,
+            "terminal_fraction": 1.0,
+            "win_rate_all_attempts": 0.4312,
+            "win_rate_all_attempts_wilson_95_interval": [
+              0.403997645919736,
+              0.4588239263053718
+            ],
+            "terminal_win_rate": 0.4312,
+            "terminal_score_rate": 0.4312
+          },
+          "seat_1_start_P0": {
+            "attempted_games": 1250,
+            "terminal_games": 1250,
+            "wins": 533,
+            "losses": 717,
+            "draws": 0,
+            "cutoffs": 0,
+            "errors": 0,
+            "unresolved_attempts": 0,
+            "terminal_fraction": 1.0,
+            "win_rate_all_attempts": 0.4264,
+            "win_rate_all_attempts_wilson_95_interval": [
+              0.39925045722318675,
+              0.45400052701762617
+            ],
+            "terminal_win_rate": 0.4264,
+            "terminal_score_rate": 0.4264
+          },
+          "seat_1_start_P1": {
+            "attempted_games": 1250,
+            "terminal_games": 1250,
+            "wins": 734,
+            "losses": 516,
+            "draws": 0,
+            "cutoffs": 0,
+            "errors": 0,
+            "unresolved_attempts": 0,
+            "terminal_fraction": 1.0,
+            "win_rate_all_attempts": 0.5872,
+            "win_rate_all_attempts_wilson_95_interval": [
+              0.5596800794237303,
+              0.6141856022909588
+            ],
+            "terminal_win_rate": 0.5872,
+            "terminal_score_rate": 0.5872
+          }
+        }
+      },
+      "control-seed31261024": {
+        "attempted_games": 5000,
+        "terminal_games": 5000,
+        "wins": 2541,
+        "losses": 2459,
+        "draws": 0,
+        "cutoffs": 0,
+        "errors": 0,
+        "unresolved_attempts": 0,
+        "terminal_fraction": 1.0,
+        "win_rate_all_attempts": 0.5082,
+        "win_rate_all_attempts_wilson_95_interval": [
+          0.4943418491700087,
+          0.5220455605180923
+        ],
+        "terminal_win_rate": 0.5082,
+        "terminal_score_rate": 0.5082,
+        "metric": "recorded_wins_per_scheduled_attempt",
+        "mode": "versus_baseline",
+        "win_rate_denominator": "all_attempts_including_cutoffs_and_errors",
+        "unresolved_outcomes": "unknown; no terminal score or training return assigned",
+        "seat_start_balanced": true,
+        "seat_start_strata": {
+          "seat_0_start_P0": {
+            "attempted_games": 1250,
+            "terminal_games": 1250,
+            "wins": 704,
+            "losses": 546,
+            "draws": 0,
+            "cutoffs": 0,
+            "errors": 0,
+            "unresolved_attempts": 0,
+            "terminal_fraction": 1.0,
+            "win_rate_all_attempts": 0.5632,
+            "win_rate_all_attempts_wilson_95_interval": [
+              0.5355520808514282,
+              0.5904606609417866
+            ],
+            "terminal_win_rate": 0.5632,
+            "terminal_score_rate": 0.5632
+          },
+          "seat_0_start_P1": {
+            "attempted_games": 1250,
+            "terminal_games": 1250,
+            "wins": 547,
+            "losses": 703,
+            "draws": 0,
+            "cutoffs": 0,
+            "errors": 0,
+            "unresolved_attempts": 0,
+            "terminal_fraction": 1.0,
+            "win_rate_all_attempts": 0.4376,
+            "win_rate_all_attempts_wilson_95_interval": [
+              0.41033129928796225,
+              0.4652510569162052
+            ],
+            "terminal_win_rate": 0.4376,
+            "terminal_score_rate": 0.4376
+          },
+          "seat_1_start_P0": {
+            "attempted_games": 1250,
+            "terminal_games": 1250,
+            "wins": 542,
+            "losses": 708,
+            "draws": 0,
+            "cutoffs": 0,
+            "errors": 0,
+            "unresolved_attempts": 0,
+            "terminal_fraction": 1.0,
+            "win_rate_all_attempts": 0.4336,
+            "win_rate_all_attempts_wilson_95_interval": [
+              0.40637222213269064,
+              0.4612346440845645
+            ],
+            "terminal_win_rate": 0.4336,
+            "terminal_score_rate": 0.4336
+          },
+          "seat_1_start_P1": {
+            "attempted_games": 1250,
+            "terminal_games": 1250,
+            "wins": 748,
+            "losses": 502,
+            "draws": 0,
+            "cutoffs": 0,
+            "errors": 0,
+            "unresolved_attempts": 0,
+            "terminal_fraction": 1.0,
+            "win_rate_all_attempts": 0.5984,
+            "win_rate_all_attempts_wilson_95_interval": [
+              0.5709625021482886,
+              0.6252345515297549
+            ],
+            "terminal_win_rate": 0.5984,
+            "terminal_score_rate": 0.5984
+          }
+        }
+      },
+      "control-seed32261024": {
+        "attempted_games": 5000,
+        "terminal_games": 5000,
+        "wins": 2549,
+        "losses": 2451,
+        "draws": 0,
+        "cutoffs": 0,
+        "errors": 0,
+        "unresolved_attempts": 0,
+        "terminal_fraction": 1.0,
+        "win_rate_all_attempts": 0.5098,
+        "win_rate_all_attempts_wilson_95_interval": [
+          0.49594141833853905,
+          0.5236435347033379
+        ],
+        "terminal_win_rate": 0.5098,
+        "terminal_score_rate": 0.5098,
+        "metric": "recorded_wins_per_scheduled_attempt",
+        "mode": "versus_baseline",
+        "win_rate_denominator": "all_attempts_including_cutoffs_and_errors",
+        "unresolved_outcomes": "unknown; no terminal score or training return assigned",
+        "seat_start_balanced": true,
+        "seat_start_strata": {
+          "seat_0_start_P0": {
+            "attempted_games": 1250,
+            "terminal_games": 1250,
+            "wins": 707,
+            "losses": 543,
+            "draws": 0,
+            "cutoffs": 0,
+            "errors": 0,
+            "unresolved_attempts": 0,
+            "terminal_fraction": 1.0,
+            "win_rate_all_attempts": 0.5656,
+            "win_rate_all_attempts_wilson_95_interval": [
+              0.5379619284596363,
+              0.5928361073257259
+            ],
+            "terminal_win_rate": 0.5656,
+            "terminal_score_rate": 0.5656
+          },
+          "seat_0_start_P1": {
+            "attempted_games": 1250,
+            "terminal_games": 1250,
+            "wins": 550,
+            "losses": 700,
+            "draws": 0,
+            "cutoffs": 0,
+            "errors": 0,
+            "unresolved_attempts": 0,
+            "terminal_fraction": 1.0,
+            "win_rate_all_attempts": 0.44,
+            "win_rate_all_attempts_wilson_95_interval": [
+              0.4127076136641403,
+              0.4676600365321746
+            ],
+            "terminal_win_rate": 0.44,
+            "terminal_score_rate": 0.44
+          },
+          "seat_1_start_P0": {
+            "attempted_games": 1250,
+            "terminal_games": 1250,
+            "wins": 544,
+            "losses": 706,
+            "draws": 0,
+            "cutoffs": 0,
+            "errors": 0,
+            "unresolved_attempts": 0,
+            "terminal_fraction": 1.0,
+            "win_rate_all_attempts": 0.4352,
+            "win_rate_all_attempts_wilson_95_interval": [
+              0.4079556357062868,
+              0.46284142650573323
+            ],
+            "terminal_win_rate": 0.4352,
+            "terminal_score_rate": 0.4352
+          },
+          "seat_1_start_P1": {
+            "attempted_games": 1250,
+            "terminal_games": 1250,
+            "wins": 748,
+            "losses": 502,
+            "draws": 0,
+            "cutoffs": 0,
+            "errors": 0,
+            "unresolved_attempts": 0,
+            "terminal_fraction": 1.0,
+            "win_rate_all_attempts": 0.5984,
+            "win_rate_all_attempts_wilson_95_interval": [
+              0.5709625021482886,
+              0.6252345515297549
+            ],
+            "terminal_win_rate": 0.5984,
+            "terminal_score_rate": 0.5984
+          }
+        }
+      },
+      "teacher": {
+        "attempted_games": 5000,
+        "terminal_games": 5000,
+        "wins": 2527,
+        "losses": 2473,
+        "draws": 0,
+        "cutoffs": 0,
+        "errors": 0,
+        "unresolved_attempts": 0,
+        "terminal_fraction": 1.0,
+        "win_rate_all_attempts": 0.5054,
+        "win_rate_all_attempts_wilson_95_interval": [
+          0.49154294434476714,
+          0.5192487644742262
+        ],
+        "terminal_win_rate": 0.5054,
+        "terminal_score_rate": 0.5054,
+        "metric": "recorded_wins_per_scheduled_attempt",
+        "mode": "versus_baseline",
+        "win_rate_denominator": "all_attempts_including_cutoffs_and_errors",
+        "unresolved_outcomes": "unknown; no terminal score or training return assigned",
+        "seat_start_balanced": true,
+        "seat_start_strata": {
+          "seat_0_start_P0": {
+            "attempted_games": 1250,
+            "terminal_games": 1250,
+            "wins": 704,
+            "losses": 546,
+            "draws": 0,
+            "cutoffs": 0,
+            "errors": 0,
+            "unresolved_attempts": 0,
+            "terminal_fraction": 1.0,
+            "win_rate_all_attempts": 0.5632,
+            "win_rate_all_attempts_wilson_95_interval": [
+              0.5355520808514282,
+              0.5904606609417866
+            ],
+            "terminal_win_rate": 0.5632,
+            "terminal_score_rate": 0.5632
+          },
+          "seat_0_start_P1": {
+            "attempted_games": 1250,
+            "terminal_games": 1250,
+            "wins": 538,
+            "losses": 712,
+            "draws": 0,
+            "cutoffs": 0,
+            "errors": 0,
+            "unresolved_attempts": 0,
+            "terminal_fraction": 1.0,
+            "win_rate_all_attempts": 0.4304,
+            "win_rate_all_attempts_wilson_95_interval": [
+              0.40320626581217667,
+              0.4580202084155486
+            ],
+            "terminal_win_rate": 0.4304,
+            "terminal_score_rate": 0.4304
+          },
+          "seat_1_start_P0": {
+            "attempted_games": 1250,
+            "terminal_games": 1250,
+            "wins": 542,
+            "losses": 708,
+            "draws": 0,
+            "cutoffs": 0,
+            "errors": 0,
+            "unresolved_attempts": 0,
+            "terminal_fraction": 1.0,
+            "win_rate_all_attempts": 0.4336,
+            "win_rate_all_attempts_wilson_95_interval": [
+              0.40637222213269064,
+              0.4612346440845645
+            ],
+            "terminal_win_rate": 0.4336,
+            "terminal_score_rate": 0.4336
+          },
+          "seat_1_start_P1": {
+            "attempted_games": 1250,
+            "terminal_games": 1250,
+            "wins": 743,
+            "losses": 507,
+            "draws": 0,
+            "cutoffs": 0,
+            "errors": 0,
+            "unresolved_attempts": 0,
+            "terminal_fraction": 1.0,
+            "win_rate_all_attempts": 0.5944,
+            "win_rate_all_attempts_wilson_95_interval": [
+              0.5669313896089501,
+              0.621290174082181
+            ],
+            "terminal_win_rate": 0.5944,
+            "terminal_score_rate": 0.5944
+          }
+        }
+      }
+    },
+    "comparisons": {
+      "control-seed31261024-minus-original-imitation": {
+        "attempted_pairs": 5000,
+        "terminal_pairs": 5000,
+        "unresolved_pairs": 0,
+        "recorded_attempt_win_rate_change": 0.0076,
+        "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+          0.004,
+          0.011005000000000018
+        ],
+        "terminal_score_change_on_terminal_pairs": 0.0076,
+        "terminal_score_change_bootstrap_95_interval": [
+          0.004,
+          0.011005000000000018
+        ],
+        "status_transitions": {
+          "loss->loss": 2435,
+          "loss->win": 62,
+          "win->loss": 24,
+          "win->win": 2479
+        },
+        "improved_recorded_win_attempts": 62,
+        "worsened_recorded_win_attempts": 24,
+        "tied_recorded_win_attempts": 4914,
+        "bootstrap": {
+          "unit": "matched_attempt",
+          "seed": 9901,
+          "resamples": 4000
+        }
+      },
+      "control-seed32261024-minus-original-imitation": {
+        "attempted_pairs": 5000,
+        "terminal_pairs": 5000,
+        "unresolved_pairs": 0,
+        "recorded_attempt_win_rate_change": 0.0092,
+        "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+          0.0054,
+          0.013
+        ],
+        "terminal_score_change_on_terminal_pairs": 0.0092,
+        "terminal_score_change_bootstrap_95_interval": [
+          0.0054,
+          0.013
+        ],
+        "status_transitions": {
+          "loss->loss": 2426,
+          "loss->win": 71,
+          "win->loss": 25,
+          "win->win": 2478
+        },
+        "improved_recorded_win_attempts": 71,
+        "worsened_recorded_win_attempts": 25,
+        "tied_recorded_win_attempts": 4904,
+        "bootstrap": {
+          "unit": "matched_attempt",
+          "seed": 9901,
+          "resamples": 4000
+        }
+      },
+      "teacher-minus-original-imitation": {
+        "attempted_pairs": 5000,
+        "terminal_pairs": 5000,
+        "unresolved_pairs": 0,
+        "recorded_attempt_win_rate_change": 0.0048,
+        "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+          0.0002,
+          0.0096
+        ],
+        "terminal_score_change_on_terminal_pairs": 0.0048,
+        "terminal_score_change_bootstrap_95_interval": [
+          0.0002,
+          0.0096
+        ],
+        "status_transitions": {
+          "loss->loss": 2418,
+          "loss->win": 79,
+          "win->loss": 55,
+          "win->win": 2448
+        },
+        "improved_recorded_win_attempts": 79,
+        "worsened_recorded_win_attempts": 55,
+        "tied_recorded_win_attempts": 4866,
+        "bootstrap": {
+          "unit": "matched_attempt",
+          "seed": 9901,
+          "resamples": 4000
+        }
+      },
+      "teacher-minus-control-seed31261024": {
+        "attempted_pairs": 5000,
+        "terminal_pairs": 5000,
+        "unresolved_pairs": 0,
+        "recorded_attempt_win_rate_change": -0.0028,
+        "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+          -0.0076,
+          0.002
+        ],
+        "terminal_score_change_on_terminal_pairs": -0.0028,
+        "terminal_score_change_bootstrap_95_interval": [
+          -0.0076,
+          0.002
+        ],
+        "status_transitions": {
+          "loss->loss": 2387,
+          "loss->win": 72,
+          "win->loss": 86,
+          "win->win": 2455
+        },
+        "improved_recorded_win_attempts": 72,
+        "worsened_recorded_win_attempts": 86,
+        "tied_recorded_win_attempts": 4842,
+        "bootstrap": {
+          "unit": "matched_attempt",
+          "seed": 9901,
+          "resamples": 4000
+        }
+      },
+      "teacher-minus-control-seed32261024": {
+        "attempted_pairs": 5000,
+        "terminal_pairs": 5000,
+        "unresolved_pairs": 0,
+        "recorded_attempt_win_rate_change": -0.0044,
+        "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+          -0.0082,
+          -0.0006
+        ],
+        "terminal_score_change_on_terminal_pairs": -0.0044,
+        "terminal_score_change_bootstrap_95_interval": [
+          -0.0082,
+          -0.0006
+        ],
+        "status_transitions": {
+          "loss->loss": 2412,
+          "loss->win": 39,
+          "win->loss": 61,
+          "win->win": 2488
+        },
+        "improved_recorded_win_attempts": 39,
+        "worsened_recorded_win_attempts": 61,
+        "tied_recorded_win_attempts": 4900,
+        "bootstrap": {
+          "unit": "matched_attempt",
+          "seed": 9901,
+          "resamples": 4000
+        }
+      }
+    },
+    "all_targets_verified": true,
+    "all_attempts_terminal": true,
+    "backup": {
+      "path": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/learning-lab-20261024/laptop-confirmation-complete-20261025.tar.gz",
+      "sha256": "a7a0f2b55d6b04ea6fbbbda1a452802343266423172038a3f46547e1942e2705",
+      "bytes": 10073158,
+      "integrity": {
+        "json": 22,
+        "zip": 3
+      },
+      "verified_utc": "2026-10-25T12:36:04.696083+00:00",
+      "source_files": 78
+    },
+    "public_evidence": "/home/altf4/Code/mtgo-bot/patchwork_automaton/docs/benchmarks/learning-lab-2026-10-24/frozen-confirmation.json",
+    "figure": "/home/altf4/Code/mtgo-bot/patchwork_automaton/docs/benchmarks/learning-lab-2026-10-24/frozen-confirmation.png",
+    "independent_final_audit": {
+      "status": "passed",
+      "path": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/learning-lab-20261024/frozen-confirmation-independent-audit-20261025.json",
+      "sha256": "3d799518459cd260afd7f0ca335871adef749958e7ef75ec1603dba7b1dc02ef",
+      "public": "/home/altf4/Code/mtgo-bot/patchwork_automaton/docs/benchmarks/learning-lab-2026-10-24/frozen-confirmation-audit.json",
+      "verified": "All20kterminal,all78frozenhashes,archivecheckpointbytes, CPU-only placements,nooptimizer/writers,all5exactpairedcomparisons.",
+      "caveat": "Nominal unadjusted intervals conditional on fixed policies; not training-seed variance."
+    }
+  },
+  "local_compute_finished_utc": "2026-10-25T13:19:05.713188+00:00",
+  "local_cleanup": {
+    "verified_utc": "2026-10-25T13:36:02.841319+00:00",
+    "local_cleanup_pass": true,
+    "owned_job_and_guard_pids_absent": {
+      "2895904": true,
+      "2895906": true,
+      "2895907": true,
+      "2900652": true,
+      "2900649": true,
+      "2922460": true,
+      "2922462": true,
+      "2922463": true,
+      "2922723": true,
+      "2922720": true
+    },
+    "shared_lock_free": true,
+    "temporary_inhibitors_released": true,
+    "remote_cleanup": "PASS_VERIFIED_AFTER_RECOVERY",
+    "deadline_verified_utc": "2026-10-25T14:13:13.092+00:00",
+    "deadline_local_cleanup_pass": true,
+    "remote_verified_utc": "2026-10-25T14:31:31.391107+00:00"
+  },
+  "deadline_verification_pending": false,
+  "final_inventory": {
+    "local": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/learning-lab-20261024/final-inventory-20261025.json",
+    "public": "/home/altf4/Code/mtgo-bot/patchwork_automaton/docs/benchmarks/learning-lab-2026-10-24/inventory.json",
+    "sha256": "cdb0f5f0565aaa69d601bce46772bf4232cba3e490391d81a9a96303b26d981a",
+    "independent_review": "Original results audited; recovery addendum independently audited."
+  },
+  "final_findings": {
+    "collected_selfplay_games_across_nine_arms": 18000,
+    "new_recipe_winner": null,
+    "fresh_evaluation_games": 40000,
+    "unique_fresh_schedules": 10000,
+    "all_fresh_attempts_terminal": true,
+    "fresh_gains_vs_imitation_pp": {
+      "cohort70261024": [
+        0.76,
+        0.92
+      ],
+      "cohort71261024": [
+        0.82,
+        0.76
+      ]
+    },
+    "fixed_opponent_mode": "Implemented locally;21tests passed; specific training comparison unrun.",
+    "desktop_session_walltime": "About4hours; actual GPU-active time not measured.",
+    "remote_limits": "Cleanup independently verified after recovery. All nine completed arm reports/checkpoints now backed up locally; raw rollouts preserved remotely. Fixed-opponent comparison remains unrun."
+  },
+  "finalized_utc": "2026-10-25T14:14:22.798061+00:00",
+  "final_deadline_verification": {
+    "path": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/learning-lab-20261024/deadline-closeout-verification-20261025.json",
+    "sha256": "12fcd6eadf70550819277df92615041990dce5b32d68bb87a8f40306e5c5de4e",
+    "local_cleanup": "PASS",
+    "remote_cleanup": "UNKNOWN_OFFLINE",
+    "no_postdeadline_experiment_compute": true
+  },
+  "final_closeout_backup": {
+    "archive": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/learning-lab-20261024/final-closeout-20261025.tar.gz",
+    "manifest": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/learning-lab-20261024/final-closeout-20261025.manifest.json",
+    "checksum_sidecar": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/learning-lab-20261024/final-closeout-20261025.tar.gz.sha256",
+    "scope": "Final records, graphs, audits and local fixed-opponent implementation sources; complete study archives remain separately preserved."
+  },
+  "updated_utc": "2026-10-25T14:35:06.441948+00:00",
+  "post_window_recovery": {
+    "verified_utc": "2026-10-25T14:35:06.441948+00:00",
+    "desktop_reachable_again_utc_approx": "2026-10-25T14:27Z",
+    "compute_authorization_extended": false,
+    "new_training_games_or_updates": 0,
+    "remote_cleanup": "PASS_INDEPENDENTLY_VERIFIED",
+    "remote_verification": {
+      "path": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/learning-lab-20261024/remote-cleanup-reconnected-20261025.json",
+      "sha256": "c5822c344d8c51158062a80a04460a667db9ed591c237e60712025cd8df999e2"
+    },
+    "recovered_archive": {
+      "path": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/learning-lab-20261024/recovered-late-replications-20261025.tar.gz",
+      "sha256": "290e338ece8b9658b0a8c149f66869580736a1b3fb219374b7f0e7e9007ff0a8",
+      "bytes": 39168431,
+      "verification": {
+        "path": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/learning-lab-20261024/recovered-late-replications-20261025.verification.json",
+        "sha256": "dc688493cf5c0f1d2ee3666e79bec62ad94ea14ba56dd0a73e602023d376bdd7"
+      }
+    },
+    "independent_recovery_audit": {
+      "path": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/learning-lab-20261024/recovered-late-replications-independent-audit-20261025.json",
+      "sha256": "b703c1cebcfec64221ed9ba3875a3fd33c310272ea13553c3b2eebd2b8ee56b5"
+    },
+    "recovered_completed_arms": [
+      "32261024/entropy_zero",
+      "32261024/critic_head"
+    ],
+    "all_nine_completed_reports_and_checkpoints_locally_backed_up": true,
+    "raw_rollout_scope": "Excluded from laptop archives; preserved remotely.",
+    "interrupted_third_seed": {
+      "seed": 33261024,
+      "recipe": "entropy_zero",
+      "new_games": 0,
+      "new_actor_or_critic_updates": 0,
+      "state": "Only copied round-0 bootstrap; interrupted during collector.start. Inherited critic warmup steps and reused initial evaluation are not new experiment work."
+    },
+    "scientific_conclusions_changed": false,
+    "fixed_opponent_comparison": "UNRUN"
+  },
+  "post_window_recovery_closeout_archive": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/learning-lab-20261024/post-recovery-closeout-20261025.tar.gz"
+}

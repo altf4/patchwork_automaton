@@ -1,0 +1,693 @@
+{
+  "title": "CPU-only full-session rollout cache and indexed-storage experiments",
+  "date": "2026-10-20",
+  "cache_sweep": {
+    "status": "complete",
+    "started_utc": "2026-10-20T23:38:01.334568+00:00",
+    "methodology": "Sequential CPU-only full-session cache/storage comparisons.\n\nOne frozen-policy collection round keeps the self-play workload identical.\nFull wall time includes imports, startup, evaluation, collection, PPO updates,\nvalidation, checkpointing and process shutdown. Do not run competing benchmarks.\n",
+    "config": {
+      "games": 64,
+      "seed": 721,
+      "cases": [
+        "256:pickle",
+        "512:pickle",
+        "1024:pickle",
+        "1024:pickle",
+        "512:pickle",
+        "256:pickle"
+      ]
+    },
+    "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.43",
+    "cpu": "Architecture:                            x86_64\nCPU op-mode(s):                          32-bit, 64-bit\nAddress sizes:                           46 bits physical, 48 bits virtual\nByte Order:                              Little Endian\nCPU(s):                                  8\nOn-line CPU(s) list:                     0-7\nVendor ID:                               GenuineIntel\nModel name:                              Intel(R) Core(TM) Ultra 5 335\nCPU family:                              6\nModel:                                   204\nThread(s) per core:                      1\nCore(s) per socket:                      8\nSocket(s):                               1\nStepping:                                3\nCPU(s) scaling MHz:                      76%\nCPU max MHz:                             4700.0000\nCPU min MHz:                             400.0000\nBogoMIPS:                                6374.40\nFlags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb ssbd ibrs ibpb stibp ibrs_enhanced tpr_shadow flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid rdt_a rdseed adx smap clflushopt clwb intel_pt sha_ni xsaveopt xsavec xgetbv1 xsaves split_lock_detect user_shstk avx_vnni lam wbnoinvd dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp hwp_pkg_req hfi vnmi umip pku ospke waitpkg gfni vaes vpclmulqdq rdpid bus_lock_detect movdiri movdir64b fsrm md_clear serialize pconfig arch_lbr ibt flush_l1d arch_capabilities\nVirtualization:                          VT-x\nL1d cache:                               320 KiB (8 instances)\nL1i cache:                               512 KiB (8 instances)\nL2 cache:                                16 MiB (5 instances)\nL3 cache:                                12 MiB (1 instance)\nNUMA node(s):                            1\nNUMA node0 CPU(s):                       0-7\nVulnerability Gather data sampling:      Not affected\nVulnerability Ghostwrite:                Not affected\nVulnerability Indirect target selection: Not affected\nVulnerability Itlb multihit:             Not affected\nVulnerability L1tf:                      Not affected\nVulnerability Mds:                       Not affected\nVulnerability Meltdown:                  Not affected\nVulnerability Mmio stale data:           Not affected\nVulnerability Old microcode:             Not affected\nVulnerability Reg file data sampling:    Not affected\nVulnerability Retbleed:                  Not affected\nVulnerability Spec rstack overflow:      Not affected\nVulnerability Spec store bypass:         Mitigation; Speculative Store Bypass disabled via prctl\nVulnerability Spectre v1:                Mitigation; usercopy/swapgs barriers and __user pointer sanitization\nVulnerability Spectre v2:                Mitigation; Enhanced / Automatic IBRS; IBPB conditional; PBRSB-eIBRS Not affected; BHI BHI_DIS_S\nVulnerability Srbds:                     Not affected\nVulnerability Tsa:                       Not affected\nVulnerability Tsx async abort:           Not affected\nVulnerability Vmscape:                   Not affected\n",
+    "packages": {
+      "tensorflow-cpu": "2.21.0",
+      "keras": "3.15.1",
+      "numpy": "2.5.4",
+      "orjson": "3.13.0"
+    },
+    "runtime": {
+      "CUDA_VISIBLE_DEVICES": "-1",
+      "TF_NUM_INTRAOP_THREADS": "1",
+      "TF_NUM_INTEROP_THREADS": "4",
+      "TF_ENABLE_ONEDNN_OPTS": "0"
+    },
+    "source_sha256": {
+      "src/patchwork_automaton/neural/augmentation.py": "215ef801da040da9db1821b419209a3d49a5a22a0fde2aff6f83c6cdb7690a07",
+      "src/patchwork_automaton/neural/calibration.py": "a867ec3615f74c2cb812171d3bd5b2bce5c25e733196b924cac137eeddbbb802",
+      "src/patchwork_automaton/neural/inference_processes.py": "7c4a880efaf689544692c28756a462249afc24f211a07cb26840ab51e2761777",
+      "src/patchwork_automaton/neural/validation.py": "c9fb62daaf783a2ac68a2ab883be0c5317fcb968baa52bd4dff4702b4c278c31",
+      "src/patchwork_automaton/neural/history.py": "76bb00cf3589898e8cde5ef0ae8fd306b0a7d48198102b81275b7a713342fc26",
+      "src/patchwork_automaton/neural/rustmage_features.py": "a5d92d813ae342138ef27f5c076b04eca9bfc098533d2b8e53a43337e583556a",
+      "src/patchwork_automaton/neural/batching.py": "15f6c90848482936c35d51d9bbd8899b527270b844b190befce7c7a8915a24a3",
+      "src/patchwork_automaton/neural/__init__.py": "83a1588922dcdf47a7dbbcc41d76f5edf3934b3100e55582f5c814d155c7532a",
+      "src/patchwork_automaton/neural/training.py": "7ea5b47c5621d54515ffd77aab0b20f15d67eedadf44604fec76d724e8a22f96",
+      "src/patchwork_automaton/neural/ppo.py": "08cad6a8f397355d67290a6ebfce1b61f867c1bd30a5c39bfaa15eb44d0a5d28",
+      "src/patchwork_automaton/neural/native_pipeline.py": "b60c65e79534853dddf3780cd7a5a65cdc7d1d012aa36522e373d99aaff7bfeb",
+      "src/patchwork_automaton/neural/ordered_jobs.py": "b9010c47f8fb2bf6e8497c105eed48d4177efc30d084ebc06b099c6e2fc3fb2d",
+      "src/patchwork_automaton/neural/rustmage_observation.py": "773cbaff36e036b330c3bf1071228663eb918d9a74c4cdb0646576605e2141be",
+      "src/patchwork_automaton/neural/imitation.py": "8a67868dbdcbfe531d7c8e4eaa74e923a69ce71573d6b1daf637520c4a5eaaae",
+      "src/patchwork_automaton/neural/native_layout.py": "e5cb94f329a4621a92fa9e6e2210c3694e2fbd6e4977e3790656bb206ef1dc91",
+      "src/patchwork_automaton/neural/payment_scenarios.py": "011be640915449167ce429d80cb1bd8586a37d527454cf0161b95f2c86e9c243",
+      "src/patchwork_automaton/neural/demonstrations.py": "fa528d1d09013f0e294285fdec2c2180813a1bd0da887dba949df39adcff5da2",
+      "src/patchwork_automaton/neural/curriculum.py": "0b04a9667acd622c09717f4efb5b49e842558c2abc84f14919c199eaa7f9f853",
+      "src/patchwork_automaton/neural/experiment.py": "cd517ffe2d90c3a391598f20d749e7e5eef130d0923edad73afe75dc1a431d76",
+      "src/patchwork_automaton/neural/rollout_cache.py": "5b61d797e6df9a814a064c55bff4c640ba34a4302223ea04b2af382fc7382ff4",
+      "src/patchwork_automaton/neural/episodes.py": "c519dc6dd780d02ea23a8f2fe73dab522a6b612bebada15610874918b65ab62b",
+      "src/patchwork_automaton/neural/model.py": "09741d1f396980effd972c26bd9da901a5cdd085f20c9d5184e83879b131892e",
+      "src/patchwork_automaton/neural/policy.py": "fe226a1e8b6ed50184c948eebd750fa2d9d3c56d569a9abab7ffd60a0ad556b1",
+      "src/patchwork_automaton/neural/scenarios.py": "6b36460767475498b7130c52a2fbbeab98d36310a843c747200f6bff4da480c2",
+      "src/patchwork_automaton/neural/features.py": "48df788ba954b94de76c935b32839a20c7c748974e96ef4f2208b1d79bcbd7ca",
+      "src/patchwork_automaton/neural/streaming_ppo.py": "b4b6bfa6bea45075efbab0c5eb46c22631447d03cee02e1d567c2cdf292b19ba",
+      "src/patchwork_automaton/neural/rustmage_policy.py": "d1c8b6c9d61fd58a389e8fc379df9a64751ad96eb468ce7c4ae1ead6f25d57f5",
+      "src/patchwork_automaton/rl/rustmage_processes.py": "0b0ab08f2fcd5aeb00b8e995775b1145e18616672e3b69c1d6a00658dc5b47a8",
+      "src/patchwork_automaton/rl/rustmage_experiment.py": "fcad506a2d78585d7ac8d49a18d1066ba945dc7022e37ee0b4e5d8c21820b7b3",
+      "src/patchwork_automaton/rl/rustmage.py": "3d347ff0deee35bb0a84d7dbf9ff8bb7ba8af19d86a67ae242c072ff110459ab",
+      "src/patchwork_automaton/backends/rustmage.py": "ea707d31558009b16bd7f703591925411ffcfba097318974231de73664f0272a",
+      "examples/train_rustmage.py": "dce67c00dc4e6d47df53e4226a344c1f20afaea7ce3e590d64c8ac7fa68579ba",
+      "examples/benchmark_rollout_pipeline.py": "db8805ec6e9552ca3633559883b13406014d02891d5b955213073d2a2f609065"
+    },
+    "engine_sha256": "b0994769ed13210bb924e3673541ba87cecc1b832f1c5d8d5d423d473074cd20",
+    "memory_metric": "1-second sampled sum of process-tree RSS; shared pages counted repeatedly",
+    "trials": [
+      {
+        "trial": 1,
+        "case": "256:pickle",
+        "cache_mib": 256,
+        "storage": "pickle",
+        "full_wall_seconds": 120.92731735699999,
+        "training_loop_seconds": 112.29203983299885,
+        "collection_seconds": 34.62938301900067,
+        "update_seconds": 53.44951649599898,
+        "validation_seconds": 17.20850925400009,
+        "process_tree_cpu_seconds": 444.153163,
+        "peak_sum_rss_bytes": 7437389824,
+        "initial_weights_sha256": "b7e2ba186f19d4b22ee4a46e8b845be5195dfdcdbb9641aa4a04c09f0008cf24",
+        "game_records_sha256": "776eec21c761b0a74c5857433cf8e3620f8782c126bb39fbccaba486513a4571",
+        "decisions": 77845,
+        "neural_choices": 29467,
+        "updates": [
+          {
+            "samples": 23543,
+            "accepted_steps": 1472,
+            "critic_steps": 500,
+            "rejected_epochs": 0,
+            "exact_kl": 0.004653658427156292,
+            "max_state_kl": 0.025140583515167236,
+            "cache": {
+              "budget_bytes": 268435456,
+              "retained_bytes": 265026467,
+              "trajectories": 11,
+              "trajectory_hits": 15486,
+              "batches": 26,
+              "batch_hits": 78,
+              "spill_bytes": 1244251893
+            },
+            "storage": null
+          }
+        ],
+        "report": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/cache-sweep-2026-10-20/01-256-pickle/report.json",
+        "report_sha256": "7da8b6279115326f3d00bcefc91bbde6d782d522405c3d86bd6f6b38ab827e8e",
+        "primary_rollout_bytes": 80355802,
+        "primary_plus_temporary_spill_bytes": 1324607695
+      },
+      {
+        "trial": 2,
+        "case": "512:pickle",
+        "cache_mib": 512,
+        "storage": "pickle",
+        "full_wall_seconds": 119.90949040699707,
+        "training_loop_seconds": 111.10662239299927,
+        "collection_seconds": 34.90174858500177,
+        "update_seconds": 52.309447903000546,
+        "validation_seconds": 16.640335545998823,
+        "process_tree_cpu_seconds": 442.73713599999996,
+        "peak_sum_rss_bytes": 7592935424,
+        "initial_weights_sha256": "b7e2ba186f19d4b22ee4a46e8b845be5195dfdcdbb9641aa4a04c09f0008cf24",
+        "game_records_sha256": "776eec21c761b0a74c5857433cf8e3620f8782c126bb39fbccaba486513a4571",
+        "decisions": 77845,
+        "neural_choices": 29467,
+        "updates": [
+          {
+            "samples": 23543,
+            "accepted_steps": 1472,
+            "critic_steps": 500,
+            "rejected_epochs": 0,
+            "exact_kl": 0.0054289432963978155,
+            "max_state_kl": 0.020554877817630768,
+            "cache": {
+              "budget_bytes": 536870912,
+              "retained_bytes": 532221475,
+              "trajectories": 20,
+              "trajectory_hits": 32103,
+              "batches": 47,
+              "batch_hits": 141,
+              "spill_bytes": 1067553086
+            },
+            "storage": null
+          }
+        ],
+        "report": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/cache-sweep-2026-10-20/02-512-pickle/report.json",
+        "report_sha256": "4925678f304f5b7907e89dd214068ed95fe093a6d13b373e29e6d98db20c34c3",
+        "primary_rollout_bytes": 80356756,
+        "primary_plus_temporary_spill_bytes": 1147909842
+      },
+      {
+        "trial": 3,
+        "case": "1024:pickle",
+        "cache_mib": 1024,
+        "storage": "pickle",
+        "full_wall_seconds": 118.50990850499875,
+        "training_loop_seconds": 109.85840110300342,
+        "collection_seconds": 34.917494412999076,
+        "update_seconds": 50.69544057799794,
+        "validation_seconds": 16.947175086999778,
+        "process_tree_cpu_seconds": 439.2960580000001,
+        "peak_sum_rss_bytes": 7913857024,
+        "initial_weights_sha256": "b7e2ba186f19d4b22ee4a46e8b845be5195dfdcdbb9641aa4a04c09f0008cf24",
+        "game_records_sha256": "776eec21c761b0a74c5857433cf8e3620f8782c126bb39fbccaba486513a4571",
+        "decisions": 77845,
+        "neural_choices": 29467,
+        "updates": [
+          {
+            "samples": 23543,
+            "accepted_steps": 1472,
+            "critic_steps": 500,
+            "rejected_epochs": 0,
+            "exact_kl": 0.003859459158674453,
+            "max_state_kl": 0.021720409393310547,
+            "cache": {
+              "budget_bytes": 1073741824,
+              "retained_bytes": 1071125198,
+              "trajectories": 56,
+              "trajectory_hits": 72122,
+              "batches": 96,
+              "batch_hits": 288,
+              "spill_bytes": 721303513
+            },
+            "storage": null
+          }
+        ],
+        "report": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/cache-sweep-2026-10-20/03-1024-pickle/report.json",
+        "report_sha256": "270870d8f65dcbc20e99236c29004a0bdf513ea99a515bbc82fb50952996ed5e",
+        "primary_rollout_bytes": 80356326,
+        "primary_plus_temporary_spill_bytes": 801659839
+      },
+      {
+        "trial": 4,
+        "case": "1024:pickle",
+        "cache_mib": 1024,
+        "storage": "pickle",
+        "full_wall_seconds": 121.79319827200015,
+        "training_loop_seconds": 113.01849339199907,
+        "collection_seconds": 35.62429115299892,
+        "update_seconds": 52.87211597299756,
+        "validation_seconds": 17.13273529399885,
+        "process_tree_cpu_seconds": 447.2760629999998,
+        "peak_sum_rss_bytes": 7922835456,
+        "initial_weights_sha256": "b7e2ba186f19d4b22ee4a46e8b845be5195dfdcdbb9641aa4a04c09f0008cf24",
+        "game_records_sha256": "776eec21c761b0a74c5857433cf8e3620f8782c126bb39fbccaba486513a4571",
+        "decisions": 77845,
+        "neural_choices": 29467,
+        "updates": [
+          {
+            "samples": 23543,
+            "accepted_steps": 1472,
+            "critic_steps": 500,
+            "rejected_epochs": 0,
+            "exact_kl": 0.0042108231838975324,
+            "max_state_kl": 0.025320731103420258,
+            "cache": {
+              "budget_bytes": 1073741824,
+              "retained_bytes": 1071125198,
+              "trajectories": 56,
+              "trajectory_hits": 72122,
+              "batches": 96,
+              "batch_hits": 288,
+              "spill_bytes": 721303513
+            },
+            "storage": null
+          }
+        ],
+        "report": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/cache-sweep-2026-10-20/04-1024-pickle/report.json",
+        "report_sha256": "f8ba9e03aed12e19ea3d05716d2e78cc54194b491a7eaf0463dee438eb70e3f2",
+        "primary_rollout_bytes": 80355123,
+        "primary_plus_temporary_spill_bytes": 801658636
+      },
+      {
+        "trial": 5,
+        "case": "512:pickle",
+        "cache_mib": 512,
+        "storage": "pickle",
+        "full_wall_seconds": 123.98934998700133,
+        "training_loop_seconds": 114.9800460789993,
+        "collection_seconds": 36.44102773100167,
+        "update_seconds": 54.07737208799881,
+        "validation_seconds": 17.083908139000414,
+        "process_tree_cpu_seconds": 453.4672029999998,
+        "peak_sum_rss_bytes": 7443345408,
+        "initial_weights_sha256": "b7e2ba186f19d4b22ee4a46e8b845be5195dfdcdbb9641aa4a04c09f0008cf24",
+        "game_records_sha256": "776eec21c761b0a74c5857433cf8e3620f8782c126bb39fbccaba486513a4571",
+        "decisions": 77845,
+        "neural_choices": 29467,
+        "updates": [
+          {
+            "samples": 23543,
+            "accepted_steps": 1472,
+            "critic_steps": 500,
+            "rejected_epochs": 0,
+            "exact_kl": 0.005495143035309722,
+            "max_state_kl": 0.024831101298332214,
+            "cache": {
+              "budget_bytes": 536870912,
+              "retained_bytes": 532221475,
+              "trajectories": 20,
+              "trajectory_hits": 32103,
+              "batches": 47,
+              "batch_hits": 141,
+              "spill_bytes": 1067553086
+            },
+            "storage": null
+          }
+        ],
+        "report": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/cache-sweep-2026-10-20/05-512-pickle/report.json",
+        "report_sha256": "cf914d54b5569f2b8cd94bd1b4f5318facaf54b2910a04a991f8a9332ec9dd50",
+        "primary_rollout_bytes": 80354963,
+        "primary_plus_temporary_spill_bytes": 1147908049
+      },
+      {
+        "trial": 6,
+        "case": "256:pickle",
+        "cache_mib": 256,
+        "storage": "pickle",
+        "full_wall_seconds": 123.77301290099786,
+        "training_loop_seconds": 114.78967433100115,
+        "collection_seconds": 35.968426800998714,
+        "update_seconds": 54.0442486000029,
+        "validation_seconds": 17.278518324001197,
+        "process_tree_cpu_seconds": 452.7130820000001,
+        "peak_sum_rss_bytes": 7438815232,
+        "initial_weights_sha256": "b7e2ba186f19d4b22ee4a46e8b845be5195dfdcdbb9641aa4a04c09f0008cf24",
+        "game_records_sha256": "776eec21c761b0a74c5857433cf8e3620f8782c126bb39fbccaba486513a4571",
+        "decisions": 77845,
+        "neural_choices": 29467,
+        "updates": [
+          {
+            "samples": 23543,
+            "accepted_steps": 1472,
+            "critic_steps": 500,
+            "rejected_epochs": 0,
+            "exact_kl": 0.004568487555881191,
+            "max_state_kl": 0.023555658757686615,
+            "cache": {
+              "budget_bytes": 268435456,
+              "retained_bytes": 265026467,
+              "trajectories": 11,
+              "trajectory_hits": 15486,
+              "batches": 26,
+              "batch_hits": 78,
+              "spill_bytes": 1244251893
+            },
+            "storage": null
+          }
+        ],
+        "report": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/cache-sweep-2026-10-20/06-256-pickle/report.json",
+        "report_sha256": "780657e7cb534d3c35d59e882bfdc445e9e16861d57992bb17aa6f4a764f19d0",
+        "primary_rollout_bytes": 80355688,
+        "primary_plus_temporary_spill_bytes": 1324607581
+      }
+    ],
+    "medians": {
+      "256:pickle": {
+        "full_wall_seconds": 122.35016512899892,
+        "training_loop_seconds": 113.540857082,
+        "collection_seconds": 35.29890490999969,
+        "update_seconds": 53.74688254800094,
+        "validation_seconds": 17.243513789000644,
+        "process_tree_cpu_seconds": 448.4331225000001,
+        "peak_sum_rss_bytes": 7438102528.0,
+        "primary_rollout_bytes": 80355745.0,
+        "primary_plus_temporary_spill_bytes": 1324607638.0,
+        "cache_retained_bytes": 265026467.0,
+        "temporary_spill_bytes": 1244251893.0
+      },
+      "512:pickle": {
+        "full_wall_seconds": 121.9494201969992,
+        "training_loop_seconds": 113.04333423599928,
+        "collection_seconds": 35.67138815800172,
+        "update_seconds": 53.19340999549968,
+        "validation_seconds": 16.86212184249962,
+        "process_tree_cpu_seconds": 448.1021694999999,
+        "peak_sum_rss_bytes": 7518140416.0,
+        "primary_rollout_bytes": 80355859.5,
+        "primary_plus_temporary_spill_bytes": 1147908945.5,
+        "cache_retained_bytes": 532221475.0,
+        "temporary_spill_bytes": 1067553086.0
+      },
+      "1024:pickle": {
+        "full_wall_seconds": 120.15155338849945,
+        "training_loop_seconds": 111.43844724750124,
+        "collection_seconds": 35.270892782999,
+        "update_seconds": 51.78377827549775,
+        "validation_seconds": 17.039955190499313,
+        "process_tree_cpu_seconds": 443.28606049999996,
+        "peak_sum_rss_bytes": 7918346240.0,
+        "primary_rollout_bytes": 80355724.5,
+        "primary_plus_temporary_spill_bytes": 801659237.5,
+        "cache_retained_bytes": 1071125198.0,
+        "temporary_spill_bytes": 721303513.0
+      }
+    },
+    "time_reduction_percent": {
+      "256:pickle": {
+        "full_wall_seconds": 0.0,
+        "update_seconds": 0.0
+      },
+      "512:pickle": {
+        "full_wall_seconds": 0.3275393470676624,
+        "update_seconds": 1.0297761028408625
+      },
+      "1024:pickle": {
+        "full_wall_seconds": 1.7969830593864589,
+        "update_seconds": 3.652498860282649
+      }
+    },
+    "identical_workload": true,
+    "finished_utc": "2026-10-20T23:50:10.282275+00:00"
+  },
+  "indexed_storage": {
+    "status": "complete",
+    "started_utc": "2026-10-20T23:52:49.906317+00:00",
+    "methodology": "Sequential CPU-only full-session cache/storage comparisons.\n\nOne frozen-policy collection round keeps the self-play workload identical.\nFull wall time includes imports, startup, evaluation, collection, PPO updates,\nvalidation, checkpointing and process shutdown. Do not run competing benchmarks.\n",
+    "config": {
+      "games": 64,
+      "seed": 721,
+      "cases": [
+        "256:pickle",
+        "256:indexed",
+        "256:indexed",
+        "256:pickle"
+      ]
+    },
+    "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.43",
+    "cpu": "Architecture:                            x86_64\nCPU op-mode(s):                          32-bit, 64-bit\nAddress sizes:                           46 bits physical, 48 bits virtual\nByte Order:                              Little Endian\nCPU(s):                                  8\nOn-line CPU(s) list:                     0-7\nVendor ID:                               GenuineIntel\nModel name:                              Intel(R) Core(TM) Ultra 5 335\nCPU family:                              6\nModel:                                   204\nThread(s) per core:                      1\nCore(s) per socket:                      8\nSocket(s):                               1\nStepping:                                3\nCPU(s) scaling MHz:                      83%\nCPU max MHz:                             4700.0000\nCPU min MHz:                             400.0000\nBogoMIPS:                                6374.40\nFlags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb ssbd ibrs ibpb stibp ibrs_enhanced tpr_shadow flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid rdt_a rdseed adx smap clflushopt clwb intel_pt sha_ni xsaveopt xsavec xgetbv1 xsaves split_lock_detect user_shstk avx_vnni lam wbnoinvd dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp hwp_pkg_req hfi vnmi umip pku ospke waitpkg gfni vaes vpclmulqdq rdpid bus_lock_detect movdiri movdir64b fsrm md_clear serialize pconfig arch_lbr ibt flush_l1d arch_capabilities\nVirtualization:                          VT-x\nL1d cache:                               320 KiB (8 instances)\nL1i cache:                               512 KiB (8 instances)\nL2 cache:                                16 MiB (5 instances)\nL3 cache:                                12 MiB (1 instance)\nNUMA node(s):                            1\nNUMA node0 CPU(s):                       0-7\nVulnerability Gather data sampling:      Not affected\nVulnerability Ghostwrite:                Not affected\nVulnerability Indirect target selection: Not affected\nVulnerability Itlb multihit:             Not affected\nVulnerability L1tf:                      Not affected\nVulnerability Mds:                       Not affected\nVulnerability Meltdown:                  Not affected\nVulnerability Mmio stale data:           Not affected\nVulnerability Old microcode:             Not affected\nVulnerability Reg file data sampling:    Not affected\nVulnerability Retbleed:                  Not affected\nVulnerability Spec rstack overflow:      Not affected\nVulnerability Spec store bypass:         Mitigation; Speculative Store Bypass disabled via prctl\nVulnerability Spectre v1:                Mitigation; usercopy/swapgs barriers and __user pointer sanitization\nVulnerability Spectre v2:                Mitigation; Enhanced / Automatic IBRS; IBPB conditional; PBRSB-eIBRS Not affected; BHI BHI_DIS_S\nVulnerability Srbds:                     Not affected\nVulnerability Tsa:                       Not affected\nVulnerability Tsx async abort:           Not affected\nVulnerability Vmscape:                   Not affected\n",
+    "packages": {
+      "tensorflow-cpu": "2.21.0",
+      "keras": "3.15.1",
+      "numpy": "2.5.4",
+      "orjson": "3.13.0"
+    },
+    "runtime": {
+      "CUDA_VISIBLE_DEVICES": "-1",
+      "TF_NUM_INTRAOP_THREADS": "1",
+      "TF_NUM_INTEROP_THREADS": "4",
+      "TF_ENABLE_ONEDNN_OPTS": "0"
+    },
+    "source_sha256": {
+      "src/patchwork_automaton/neural/indexed_rollouts.py": "a4e3beaaf8ada6c0319396a4318fd0eba49b6f630adba2b917cac8132022d204",
+      "src/patchwork_automaton/neural/augmentation.py": "215ef801da040da9db1821b419209a3d49a5a22a0fde2aff6f83c6cdb7690a07",
+      "src/patchwork_automaton/neural/calibration.py": "a867ec3615f74c2cb812171d3bd5b2bce5c25e733196b924cac137eeddbbb802",
+      "src/patchwork_automaton/neural/inference_processes.py": "7c4a880efaf689544692c28756a462249afc24f211a07cb26840ab51e2761777",
+      "src/patchwork_automaton/neural/validation.py": "c9fb62daaf783a2ac68a2ab883be0c5317fcb968baa52bd4dff4702b4c278c31",
+      "src/patchwork_automaton/neural/history.py": "76bb00cf3589898e8cde5ef0ae8fd306b0a7d48198102b81275b7a713342fc26",
+      "src/patchwork_automaton/neural/rustmage_features.py": "a5d92d813ae342138ef27f5c076b04eca9bfc098533d2b8e53a43337e583556a",
+      "src/patchwork_automaton/neural/batching.py": "15f6c90848482936c35d51d9bbd8899b527270b844b190befce7c7a8915a24a3",
+      "src/patchwork_automaton/neural/__init__.py": "83a1588922dcdf47a7dbbcc41d76f5edf3934b3100e55582f5c814d155c7532a",
+      "src/patchwork_automaton/neural/training.py": "7ea5b47c5621d54515ffd77aab0b20f15d67eedadf44604fec76d724e8a22f96",
+      "src/patchwork_automaton/neural/ppo.py": "08cad6a8f397355d67290a6ebfce1b61f867c1bd30a5c39bfaa15eb44d0a5d28",
+      "src/patchwork_automaton/neural/native_pipeline.py": "b60c65e79534853dddf3780cd7a5a65cdc7d1d012aa36522e373d99aaff7bfeb",
+      "src/patchwork_automaton/neural/ordered_jobs.py": "b9010c47f8fb2bf6e8497c105eed48d4177efc30d084ebc06b099c6e2fc3fb2d",
+      "src/patchwork_automaton/neural/rustmage_observation.py": "773cbaff36e036b330c3bf1071228663eb918d9a74c4cdb0646576605e2141be",
+      "src/patchwork_automaton/neural/imitation.py": "8a67868dbdcbfe531d7c8e4eaa74e923a69ce71573d6b1daf637520c4a5eaaae",
+      "src/patchwork_automaton/neural/native_layout.py": "e5cb94f329a4621a92fa9e6e2210c3694e2fbd6e4977e3790656bb206ef1dc91",
+      "src/patchwork_automaton/neural/payment_scenarios.py": "011be640915449167ce429d80cb1bd8586a37d527454cf0161b95f2c86e9c243",
+      "src/patchwork_automaton/neural/demonstrations.py": "fa528d1d09013f0e294285fdec2c2180813a1bd0da887dba949df39adcff5da2",
+      "src/patchwork_automaton/neural/curriculum.py": "0b04a9667acd622c09717f4efb5b49e842558c2abc84f14919c199eaa7f9f853",
+      "src/patchwork_automaton/neural/experiment.py": "d09e557afc233ee76dfb1da1688c79e519ea76d3ddce4bdebe17e76a6b4b4efe",
+      "src/patchwork_automaton/neural/rollout_cache.py": "fadf0eaf2077ca13f0ddd8f8810a9019d524ccd615f0c814d16aab248bfcd21f",
+      "src/patchwork_automaton/neural/episodes.py": "c519dc6dd780d02ea23a8f2fe73dab522a6b612bebada15610874918b65ab62b",
+      "src/patchwork_automaton/neural/model.py": "09741d1f396980effd972c26bd9da901a5cdd085f20c9d5184e83879b131892e",
+      "src/patchwork_automaton/neural/policy.py": "fe226a1e8b6ed50184c948eebd750fa2d9d3c56d569a9abab7ffd60a0ad556b1",
+      "src/patchwork_automaton/neural/scenarios.py": "6b36460767475498b7130c52a2fbbeab98d36310a843c747200f6bff4da480c2",
+      "src/patchwork_automaton/neural/features.py": "48df788ba954b94de76c935b32839a20c7c748974e96ef4f2208b1d79bcbd7ca",
+      "src/patchwork_automaton/neural/streaming_ppo.py": "9398c18491388293c93dc913cc5d139056ed63459b568b9292fffbd63f4bcc93",
+      "src/patchwork_automaton/neural/rustmage_policy.py": "d1c8b6c9d61fd58a389e8fc379df9a64751ad96eb468ce7c4ae1ead6f25d57f5",
+      "src/patchwork_automaton/rl/rustmage_processes.py": "0b0ab08f2fcd5aeb00b8e995775b1145e18616672e3b69c1d6a00658dc5b47a8",
+      "src/patchwork_automaton/rl/rustmage_experiment.py": "fcad506a2d78585d7ac8d49a18d1066ba945dc7022e37ee0b4e5d8c21820b7b3",
+      "src/patchwork_automaton/rl/rustmage.py": "3d347ff0deee35bb0a84d7dbf9ff8bb7ba8af19d86a67ae242c072ff110459ab",
+      "src/patchwork_automaton/backends/rustmage.py": "ea707d31558009b16bd7f703591925411ffcfba097318974231de73664f0272a",
+      "examples/train_rustmage.py": "20b295942bb9ebd6f870d094e140ffa90da0eed9d3df17b300b4daf2f91767f3",
+      "examples/benchmark_rollout_pipeline.py": "c783f045ac3aea5cf8345bb17e7d7a44e4273faff2a5ed091ceaebea3c94ecff"
+    },
+    "engine_sha256": "b0994769ed13210bb924e3673541ba87cecc1b832f1c5d8d5d423d473074cd20",
+    "memory_metric": "1-second sampled sum of process-tree RSS; shared pages counted repeatedly",
+    "trials": [
+      {
+        "trial": 1,
+        "case": "256:pickle",
+        "cache_mib": 256,
+        "storage": "pickle",
+        "full_wall_seconds": 124.71726330599995,
+        "training_loop_seconds": 115.8148954390017,
+        "collection_seconds": 36.221699618003186,
+        "update_seconds": 54.647199397000804,
+        "validation_seconds": 17.36194820899982,
+        "process_tree_cpu_seconds": 454.28317000000004,
+        "peak_sum_rss_bytes": 7401832448,
+        "initial_weights_sha256": "b7e2ba186f19d4b22ee4a46e8b845be5195dfdcdbb9641aa4a04c09f0008cf24",
+        "primary_rollout_bytes": 80355274,
+        "game_records_sha256": "776eec21c761b0a74c5857433cf8e3620f8782c126bb39fbccaba486513a4571",
+        "decisions": 77845,
+        "neural_choices": 29467,
+        "updates": [
+          {
+            "samples": 23543,
+            "accepted_steps": 1472,
+            "critic_steps": 500,
+            "rejected_epochs": 0,
+            "exact_kl": 0.004816926735846636,
+            "max_state_kl": 0.024163872003555298,
+            "cache": {
+              "budget_bytes": 268435456,
+              "retained_bytes": 265026467,
+              "trajectories": 11,
+              "trajectory_hits": 15486,
+              "batches": 26,
+              "batch_hits": 78,
+              "spill_bytes": 1244251893
+            },
+            "storage": {
+              "numeric_reader_opens": 0,
+              "indexed_trajectories": 0
+            }
+          }
+        ],
+        "report": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/indexed-storage-sessions-2026-10-20/01-256-pickle/report.json",
+        "report_sha256": "62e5e38ba7ef26c2679319c1c834dc4c52579a805a673d6aa1afb706fd3d8069",
+        "primary_plus_temporary_spill_bytes": 1324607167
+      },
+      {
+        "trial": 2,
+        "case": "256:indexed",
+        "cache_mib": 256,
+        "storage": "indexed",
+        "full_wall_seconds": 119.87015044500004,
+        "training_loop_seconds": 110.85917303899987,
+        "collection_seconds": 35.84156561399868,
+        "update_seconds": 52.5591098219993,
+        "validation_seconds": 15.697544126000139,
+        "process_tree_cpu_seconds": 447.25642000000005,
+        "peak_sum_rss_bytes": 7400587264,
+        "initial_weights_sha256": "b7e2ba186f19d4b22ee4a46e8b845be5195dfdcdbb9641aa4a04c09f0008cf24",
+        "primary_rollout_bytes": 1758276949,
+        "game_records_sha256": "776eec21c761b0a74c5857433cf8e3620f8782c126bb39fbccaba486513a4571",
+        "decisions": 77845,
+        "neural_choices": 29467,
+        "updates": [
+          {
+            "samples": 23543,
+            "accepted_steps": 1472,
+            "critic_steps": 500,
+            "rejected_epochs": 0,
+            "exact_kl": 0.005013299281177034,
+            "max_state_kl": 0.023987673223018646,
+            "cache": {
+              "budget_bytes": 268435456,
+              "retained_bytes": 264635461,
+              "trajectories": 11,
+              "trajectory_hits": 16465,
+              "batches": 26,
+              "batch_hits": 78,
+              "spill_bytes": 0
+            },
+            "storage": {
+              "numeric_reader_opens": 13694,
+              "indexed_trajectories": 102
+            }
+          }
+        ],
+        "report": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/indexed-storage-sessions-2026-10-20/02-256-indexed/report.json",
+        "report_sha256": "b4e5a36a86fb9d98b448d18d4eeaa3f333c8d7a6e157306f4910754229fab41d",
+        "primary_plus_temporary_spill_bytes": 1758276949
+      },
+      {
+        "trial": 3,
+        "case": "256:indexed",
+        "cache_mib": 256,
+        "storage": "indexed",
+        "full_wall_seconds": 120.09694348599805,
+        "training_loop_seconds": 111.178055897999,
+        "collection_seconds": 36.38607004599908,
+        "update_seconds": 52.54494682900258,
+        "validation_seconds": 15.464324403001228,
+        "process_tree_cpu_seconds": 450.206579,
+        "peak_sum_rss_bytes": 7403278336,
+        "initial_weights_sha256": "b7e2ba186f19d4b22ee4a46e8b845be5195dfdcdbb9641aa4a04c09f0008cf24",
+        "primary_rollout_bytes": 1758276949,
+        "game_records_sha256": "776eec21c761b0a74c5857433cf8e3620f8782c126bb39fbccaba486513a4571",
+        "decisions": 77845,
+        "neural_choices": 29467,
+        "updates": [
+          {
+            "samples": 23543,
+            "accepted_steps": 1472,
+            "critic_steps": 500,
+            "rejected_epochs": 0,
+            "exact_kl": 0.004901797895606202,
+            "max_state_kl": 0.025389276444911957,
+            "cache": {
+              "budget_bytes": 268435456,
+              "retained_bytes": 264635461,
+              "trajectories": 11,
+              "trajectory_hits": 16465,
+              "batches": 26,
+              "batch_hits": 78,
+              "spill_bytes": 0
+            },
+            "storage": {
+              "numeric_reader_opens": 13745,
+              "indexed_trajectories": 102
+            }
+          }
+        ],
+        "report": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/indexed-storage-sessions-2026-10-20/03-256-indexed/report.json",
+        "report_sha256": "c6ece94319d73002f9df385b243c18acc9e50969903273d1c24667aaaeadddda",
+        "primary_plus_temporary_spill_bytes": 1758276949
+      },
+      {
+        "trial": 4,
+        "case": "256:pickle",
+        "cache_mib": 256,
+        "storage": "pickle",
+        "full_wall_seconds": 125.09224210500179,
+        "training_loop_seconds": 116.00648938000086,
+        "collection_seconds": 36.47928732699802,
+        "update_seconds": 54.76138832799916,
+        "validation_seconds": 17.194385587998113,
+        "process_tree_cpu_seconds": 458.214073,
+        "peak_sum_rss_bytes": 7446626304,
+        "initial_weights_sha256": "b7e2ba186f19d4b22ee4a46e8b845be5195dfdcdbb9641aa4a04c09f0008cf24",
+        "primary_rollout_bytes": 80355233,
+        "game_records_sha256": "776eec21c761b0a74c5857433cf8e3620f8782c126bb39fbccaba486513a4571",
+        "decisions": 77845,
+        "neural_choices": 29467,
+        "updates": [
+          {
+            "samples": 23543,
+            "accepted_steps": 1472,
+            "critic_steps": 500,
+            "rejected_epochs": 0,
+            "exact_kl": 0.005013917411872918,
+            "max_state_kl": 0.02608688920736313,
+            "cache": {
+              "budget_bytes": 268435456,
+              "retained_bytes": 265026467,
+              "trajectories": 11,
+              "trajectory_hits": 15486,
+              "batches": 26,
+              "batch_hits": 78,
+              "spill_bytes": 1244251893
+            },
+            "storage": {
+              "numeric_reader_opens": 0,
+              "indexed_trajectories": 0
+            }
+          }
+        ],
+        "report": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/indexed-storage-sessions-2026-10-20/04-256-pickle/report.json",
+        "report_sha256": "9282212161d9a028afa3ef3b0ca192fecccbefaa2b535e7e48c85fb18d9ddc4c",
+        "primary_plus_temporary_spill_bytes": 1324607126
+      }
+    ],
+    "medians": {
+      "256:pickle": {
+        "full_wall_seconds": 124.90475270550087,
+        "training_loop_seconds": 115.91069240950128,
+        "collection_seconds": 36.3504934725006,
+        "update_seconds": 54.70429386249998,
+        "validation_seconds": 17.278166898498966,
+        "process_tree_cpu_seconds": 456.2486215,
+        "peak_sum_rss_bytes": 7424229376.0,
+        "primary_rollout_bytes": 80355253.5,
+        "primary_plus_temporary_spill_bytes": 1324607146.5,
+        "cache_retained_bytes": 265026467.0,
+        "temporary_spill_bytes": 1244251893.0
+      },
+      "256:indexed": {
+        "full_wall_seconds": 119.98354696549904,
+        "training_loop_seconds": 111.01861446849944,
+        "collection_seconds": 36.11381782999888,
+        "update_seconds": 52.55202832550094,
+        "validation_seconds": 15.580934264500684,
+        "process_tree_cpu_seconds": 448.73149950000004,
+        "peak_sum_rss_bytes": 7401932800.0,
+        "primary_rollout_bytes": 1758276949.0,
+        "primary_plus_temporary_spill_bytes": 1758276949.0,
+        "cache_retained_bytes": 264635461.0,
+        "temporary_spill_bytes": 0.0
+      }
+    },
+    "time_reduction_percent": {
+      "256:pickle": {
+        "full_wall_seconds": 0.0,
+        "update_seconds": 0.0
+      },
+      "256:indexed": {
+        "full_wall_seconds": 3.9399667613969735,
+        "update_seconds": 3.934363072867353
+      }
+    },
+    "identical_workload": true,
+    "finished_utc": "2026-10-21T00:00:59.721666+00:00"
+  },
+  "conclusions": {
+    "cache_1gib_time_reduction_percent": 1.7969830593864589,
+    "indexed_storage_time_reduction_percent": 3.9399667613969735,
+    "indexed_primary_disk_ratio": 21.881294282768955,
+    "defaults": "256 MiB cache and compressed pickle retained; both experimental settings are explicit CLI options."
+  },
+  "notes": [
+    "Each case has two sequential complete sessions with one 64-game round, 8 engine workers, 2 frozen inference replicas, an 80/20 whole-game holdout, batch 32, 2 PPO epochs and a 500-step critic cap.",
+    "CUDA_VISIBLE_DEVICES=-1; tensorflow-cpu 2.21.0; oneDNN disabled; intra/inter-op threads 1/4. No simultaneous test, build or other benchmark job.",
+    "Cache order: 256/512/1024/1024/512/256 MiB. Storage order: pickle/indexed/indexed/pickle, always 256 MiB. Each stage uses its own contemporaneous reference.",
+    "Both formats preserve shapes, dtypes, numerical values, scalar behavior fields, global shuffle, terminal rewards, private observations, recurrent semantics and whole-game holdouts. Updated weights/evaluation outcomes can vary with concurrent TensorFlow inference; workload and optimizer-step counts match.",
+    "The cache split remains 75% decoded records and 25% prepared minibatches. Owned ndarray outputs use the same conservative retained-buffer accounting in both formats. Numeric index entries are read on demand and at most 64 numeric readers are open.",
+    "Indexed files are versioned, uncompressed, seekable numeric payloads with shape/offset tables. They avoid temporary pickle spill. This is a primary storage-format change, not merely a larger cache or different sample order.",
+    "Primary rollout bytes persist after training. Primary-plus-temporary-spill bytes is a logical-size estimate of simultaneously required rollout storage during updates, not a sampled whole-filesystem peak.",
+    "Memory is the 1-second sampled sum of process-tree RSS; shared pages are counted in each process and filesystem page cache is excluded. The configured rollout budget bounds retained cache data, not total process memory.",
+    "Two local repeats per setting are not a confidence interval. Cache effects are modest relative to run variation. No extrapolation to 5,000-game rounds, cold storage, other machines or GPUs; combined 1 GiB plus indexed storage was not timed.",
+    "The unused indexed module and tests were prepared during cache runs; integration and all storage tests began only after the cache sweep completed. All consumed cache code stayed fixed. All storage-stage source/library hashes stayed fixed."
+  ],
+  "validation": {
+    "new_storage_tests": 5,
+    "regression_tests": 16,
+    "total_distinct_tests_passed": 21,
+    "checks": [
+      "Exact tensor/scalar and dtype roundtrip; varied shapes and absent behavior probabilities",
+      "Records survive reader closure; truncation, uncommitted headers, schema changes and empty files",
+      "Direct random access bypasses pickle spill; open-reader bound and eviction cleanup",
+      "Identical normalization, validation outputs and read-only inference",
+      "Equivalent concurrent PPO/model/optimizer/RNG and forced backtracking",
+      "Existing cache budgets, checkpoints, pipeline failures, shuffle and game holdout checks"
+    ]
+  }
+}

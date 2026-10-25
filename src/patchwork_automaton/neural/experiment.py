@@ -4,6 +4,7 @@ import itertools
 import json
 from pathlib import Path
 import pickle
+import os
 import shutil
 import numpy as np
 import tensorflow as tf
@@ -16,18 +17,35 @@ from .training import TerminalActorCritic
 
 class TrajectoryWriter:
     def __init__(self,path):
+        storage = os.environ.get('PATCHWORK_ROLLOUT_STORAGE','pickle')
+        if storage not in ('pickle','indexed'): raise ValueError('Unknown rollout storage')
+        self.numeric = None
+        if storage == 'indexed':
+            from .indexed_rollouts import IndexedTrajectoryWriter
+            self.numeric = IndexedTrajectoryWriter(path)
+            self.path, self.file, self.count = self.numeric.path, self.numeric.file, 0
+            return
         self.path = Path(path)
         self.path.parent.mkdir(parents=True,exist_ok=True)
         self.file = gzip.open(self.path,'wb',compresslevel=1)
         self.count = 0
     def write(self,sample):
         # Only locally generated trusted rollouts are read back by this module.
+        if self.numeric is not None:
+            self.numeric.write(sample); self.count = self.numeric.count
+            return
         pickle.dump(sample,self.file,protocol=5)
         self.count += 1
-    def close(self): self.file.close()
+    def close(self):
+        if self.numeric is not None: self.numeric.close()
+        else: self.file.close()
 
 
 def read_trajectory(path):
+    if Path(path).suffix == '.rlt':
+        from .indexed_rollouts import IndexedTrajectoryReader
+        with IndexedTrajectoryReader(path) as reader: yield from reader
+        return
     with gzip.open(path,'rb') as stream:
         while True:
             try: yield pickle.load(stream)
@@ -90,10 +108,32 @@ class StreamingTrainer(TerminalActorCritic):
                     samples=total,gradient_norm=float(norm),optimizer_steps=int(self.optimizer.iterations))
 
 
+def _fsync_directory(directory):
+    # Python does not expose a portable Windows directory flush. File fsync is
+    # still used there; on POSIX, directory errors must propagate rather than
+    # publishing a checkpoint whose rename may not be durable.
+    if os.name == 'nt':
+        return
+    descriptor = os.open(directory, os.O_RDONLY | getattr(os, 'O_DIRECTORY', 0))
+    try:
+        os.fsync(descriptor)
+    finally:
+        os.close(descriptor)
+
+
+def _fsync_file(path):
+    with Path(path).open('rb') as stream:
+        os.fsync(stream.fileno())
+
+
 def atomic_json(path,value):
     path=Path(path); temporary=path.with_suffix(path.suffix+'.tmp')
-    temporary.write_text(json.dumps(value,indent=2)+'\n')
+    with temporary.open('w') as stream:
+        stream.write(json.dumps(value,indent=2)+'\n')
+        stream.flush()
+        os.fsync(stream.fileno())
     temporary.replace(path)
+    _fsync_directory(path.parent)
 
 
 def save_checkpoint(directory,model,trainer,state,*,policy_type=NeuralPolicy):
@@ -112,7 +152,15 @@ def save_checkpoint(directory,model,trainer,state,*,policy_type=NeuralPolicy):
         saved_state['critic_optimizer_steps'] = int(trainer.critic_optimizer.iterations)
     if hasattr(trainer,'rng'):saved_state['trainer_rng_state']=trainer.rng.bit_generator.state
     atomic_json(temporary/'state.json',saved_state)
+    # Closing Keras/NumPy files and atomically renaming the directory alone do
+    # not force their data to storage. Persist every artifact before publishing
+    # the directory, then persist that rename before advancing latest.json.
+    for artifact in sorted(temporary.iterdir()):
+        if artifact.is_file():
+            _fsync_file(artifact)
+    _fsync_directory(temporary)
     temporary.rename(destination)
+    _fsync_directory(directory)
     atomic_json(directory/'latest.json',{'checkpoint':name})
     return destination
 
@@ -154,16 +202,27 @@ def load_checkpoint(directory):
 
 
 def make_trainer(model,config):
+    if config.get('algorithm') == 'imitation':
+        from .imitation import ImitationTrainer
+        return ImitationTrainer(model, learning_rate=config['learning_rate'],
+            batch_size=config['train_batch'], epochs=config['epochs'],
+            unroll=config['unroll'], seed=config['seed'] + 5000)
     if config.get('algorithm','actor-critic')=='ppo':
         from .streaming_ppo import StreamingPPOTrainer
         return StreamingPPOTrainer(model,learning_rate=config['learning_rate'],batch_size=config['train_batch'],
             seed=config.get('seed',0)+5000,epochs=config.get('ppo_epochs',2),clip_ratio=config.get('ppo_clip',.2),
             target_kl=config.get('target_kl',.01),max_state_kl=config.get('max_state_kl',.05),
             advantage_scale_floor=config.get('advantage_scale_floor',1.),trust_guard=True,
+            advantage_baseline=config.get('advantage_baseline','critic'),
+            entropy_weight=config.get('entropy_weight',.01),
+            critic_update_scope=config.get('critic_update_scope','all'),
+            critic_unroll=config.get('critic_unroll',1),
             concurrent_updates=config.get('concurrent_updates',False),
             value_learning_rate=config.get('value_learning_rate'),
             value_max_steps=config.get('value_max_steps'),
             prefetch_batches=config.get('prefetch_batches',0),
-            measurement_workers=config.get('measurement_workers',1))
+            measurement_workers=config.get('measurement_workers',1),
+            guard_audit=config.get('guard_audit',False),
+            cache_bytes=config.get('rollout_cache_mib',256)*1024**2)
     if config.get('algorithm','actor-critic')!='actor-critic':raise ValueError('Unknown training algorithm')
     return StreamingTrainer(model,learning_rate=config['learning_rate'],batch_size=config['train_batch'])

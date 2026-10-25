@@ -1,8 +1,8 @@
 """PPO updates for frozen numeric rollouts; reward construction stays external.
 
-Inputs include detached behavior recurrent states. This does not implement
-sequence replay/BPTT or simulator search. Never refresh old probabilities or
-advantages between optimization epochs of the same rollout.
+Actor inputs include detached behavior recurrent states; optional ordered
+critic TBPTT is independent. This does not implement simulator search. Never
+refresh old probabilities or advantages between epochs of the same rollout.
 """
 import numpy as np
 import tensorflow as tf
@@ -49,18 +49,29 @@ class PPOTrainer:
     def __init__(self, model, *, learning_rate=0.0003, epochs=4, batch_size=48,
                  clip_ratio=0.2, target_kl=0.02, value_weight=0.5,
                  entropy_weight=0.01, clip_norm=1.0, advantage_scale_floor=0.1, trust_guard=False, max_state_kl=0.1, backtracks=6,
-                 value_learning_rate=None, value_max_steps=None):
+                 value_learning_rate=None, value_max_steps=None, advantage_baseline='critic',
+                 critic_update_scope='all', critic_unroll=1):
         if (epochs < 1 or batch_size < 1 or not 0 < clip_ratio < 1
                 or min(learning_rate, target_kl, clip_norm, advantage_scale_floor) <= 0):
             raise ValueError('Invalid PPO configuration')
+        if advantage_baseline not in ('critic', 'zero'):
+            raise ValueError('Actor advantage baseline must be critic or zero')
+        if critic_update_scope not in ('all', 'head'):
+            raise ValueError('Critic update scope must be all or head')
+        if type(critic_unroll) is not int or critic_unroll < 1:
+            raise ValueError('Critic unroll must be a positive integer')
         self.model, self.epochs, self.batch_size = model, epochs, batch_size
         self.clip_ratio, self.target_kl = clip_ratio, target_kl
         self.value_weight, self.entropy_weight = value_weight, entropy_weight
         self.clip_norm = clip_norm
         self.advantage_scale_floor = advantage_scale_floor
+        self.advantage_baseline = advantage_baseline
         self.trust_guard, self.max_state_kl, self.backtracks = trust_guard, max_state_kl, backtracks
         self.learning_rate = learning_rate
         self.separate_value = bool(getattr(model, 'separate_value', False))
+        if not self.separate_value and (critic_update_scope != 'all' or critic_unroll != 1):
+            raise ValueError('Critic update controls require separate actor and critic networks')
+        self.critic_update_scope, self.critic_unroll = critic_update_scope, critic_unroll
         if value_learning_rate is not None and (not np.isfinite(value_learning_rate) or value_learning_rate <= 0):
             raise ValueError('Value learning rate must be finite and positive')
         if value_max_steps is not None and (type(value_max_steps) is not int or value_max_steps < 1):
@@ -83,6 +94,14 @@ class PPOTrainer:
         if self.separate_value:
             self.critic_step = tf.function(self._critic_step,
                 input_signature=[signature[0], tf.TensorSpec([None], tf.float32)], autograph=False)
+            if critic_unroll > 1:
+                from .sequence_critic import sequence_step
+                sequence_signature = {k:v for k,v in signature[0].items() if k != 'memory_in'}
+                self.critic_sequence_step = tf.function(lambda *args: sequence_step(self, *args),
+                    input_signature=[tuple(sequence_signature for _ in range(critic_unroll)),
+                        tf.TensorSpec([None, model.critic.memory_size], tf.float32),
+                        tf.TensorSpec([None], tf.float32),
+                        tf.TensorSpec([critic_unroll, None], tf.float32)], autograph=False)
         self.measure = tf.function(self._measure, input_signature=signature, autograph=False)
         self.drift = tf.function(self._drift, input_signature=[signature[0], tf.TensorSpec([None, None], tf.float32)], autograph=False)
         self.measure_with_drift = tf.function(self._measure_with_drift,
@@ -90,6 +109,9 @@ class PPOTrainer:
         if self.separate_value:
             self.measure_actor_with_drift = tf.function(self._measure_actor_with_drift,
                 input_signature=signature + [tf.TensorSpec([None, None], tf.float32)], autograph=False)
+        self.actor_state_drift = tf.function(self._actor_state_drift,
+            input_signature=[signature[0], tf.TensorSpec([None, None], tf.float32), signature[1]],
+            autograph=False)
         self.guard_variables = tuple(model.actor.variables if self.separate_value else model.variables) + tuple(self.optimizer.variables)
         self.snapshot = tf.function(lambda: tuple(tf.identity(v) for v in self.guard_variables), autograph=False)
         self.restore = tf.function(self._restore,
@@ -129,6 +151,16 @@ class PPOTrainer:
         kl = tf.maximum(tf.reduce_sum(tf.exp(old_log_probs) * (old_log_probs - new), axis=1), 0.)
         choices = tf.cast(tf.reduce_sum(tf.cast(inputs['candidate_mask'], tf.int32), axis=1) > 1, tf.float32)
         return tf.stack([tf.math.divide_no_nan(tf.reduce_sum(kl * choices), tf.reduce_sum(choices)), tf.reduce_max(kl * choices)])
+
+    def _actor_state_drift(self, inputs, old_log_probs, actions):
+        """Read-only per-state KL and chosen probabilities; never read a separate critic."""
+        output = (self.model.actor_output(inputs, training=False) if self.separate_value
+                  else self.model(inputs, training=False))
+        new = tf.nn.log_softmax(output['logits'])
+        kl = tf.maximum(tf.reduce_sum(tf.exp(old_log_probs) * (old_log_probs - new), axis=1), 0.)
+        choices = tf.reduce_sum(tf.cast(inputs['candidate_mask'], tf.int32), axis=1) > 1
+        return (kl, choices, tf.exp(tf.gather(old_log_probs, actions, axis=1, batch_dims=1)),
+                tf.exp(tf.gather(new, actions, axis=1, batch_dims=1)))
 
     def _measure_with_drift(self, inputs, actions, returns, old_logp, advantages, old_log_probs):
         if not getattr(self.model, 'deterministic_forward', False):
@@ -175,7 +207,8 @@ class PPOTrainer:
             value = self.model.value_output(inputs, training=True)['value'][:, 0]
             mask = inputs['advance_memory'][:, 0]
             loss = tf.math.divide_no_nan(tf.reduce_sum(tf.square(value - returns) * mask), tf.reduce_sum(mask))
-        variables = self.model.critic.trainable_variables
+        variables = (self.model.critic.value_head.trainable_variables if self.critic_update_scope == 'head'
+                     else self.model.critic.trainable_variables)
         gradients = tape.gradient(loss, variables)
         gradients = [tf.zeros_like(v) if g is None else tf.convert_to_tensor(g) for g, v in zip(gradients, variables)]
         for gradient in gradients: tf.debugging.assert_all_finite(gradient, 'Nonfinite critic gradient')
@@ -208,7 +241,8 @@ class PPOTrainer:
         return dict(critic_steps=steps, critic_optimizer_steps=int(self.critic_optimizer.iterations),
                     critic_gradient_norm=norm, value_max_steps=self.value_max_steps,
                     value_step_limit_reached=self.value_max_steps is not None and steps >= self.value_max_steps,
-                    value_learning_rate=float(self.critic_optimizer.learning_rate.numpy()))
+                    value_learning_rate=float(self.critic_optimizer.learning_rate.numpy()),
+                    critic_update_scope=self.critic_update_scope, critic_unroll=self.critic_unroll)
 
     def update(self, inputs, actions, returns, old_logp, old_values, *, rng, old_log_probs=None):
         """Optimize one frozen rollout; returns must come from its task outcome.
@@ -216,6 +250,8 @@ class PPOTrainer:
         For real games use undiscounted terminal win/loss/draw returns. The
         caller must collect all samples before updating the behavior model.
         """
+        if self.critic_unroll > 1:
+            raise ValueError('Sequence critic training requires ordered trajectories through update_files')
         actions = np.asarray(actions, np.int32)
         returns, old_logp, old_values = [np.asarray(x, np.float32).copy() for x in (returns, old_logp, old_values)]
         count = len(actions)
@@ -228,7 +264,8 @@ class PPOTrainer:
         mask = np.asarray(inputs['candidate_mask'])
         if np.any(actions < 0) or np.any(actions >= mask.shape[1]) or not mask[np.arange(count), actions].all():
             raise ValueError('Rollout action is not legal')
-        advantages = normalized_advantages(returns, old_values, mask.sum(axis=1) > 1,
+        actor_values = old_values if self.advantage_baseline == 'critic' else np.zeros_like(old_values)
+        advantages = normalized_advantages(returns, actor_values, mask.sum(axis=1) > 1,
                                            self.advantage_scale_floor)
         if self.trust_guard:
             if old_log_probs is None:
@@ -301,8 +338,10 @@ class PPOTrainer:
         return dict(zip(('loss', 'policy_loss', 'value_loss', 'entropy', 'approx_kl', 'clip_fraction'), map(float, metrics)),
                     gradient_norm=norm, epochs=epoch + 1, steps=steps, early_stop=stopped,
                     rejected_epochs=rejected, exact_kl=float(exact[0]), max_state_kl=float(exact[1]),
-                    reward_std=float(returns.std()), raw_advantage_std=float((returns-old_values).std()),
+                    reward_std=float(returns.std()), raw_advantage_std=float((returns-actor_values).std()),
                     normalized_advantage_std=float(advantages.std()),
+                    advantage_baseline=self.advantage_baseline,
+                    behavior_critic=value_prediction_diagnostics(returns, old_values, np.asarray(inputs['advance_memory'])[:, 0]),
                     largest_accepted_kl=float(largest_exact[0]), largest_accepted_state_kl=float(largest_exact[1]),
                     learning_rate=float(self.optimizer.learning_rate.numpy()),
                     value_loss_before=value_loss_before, **critic_stats)

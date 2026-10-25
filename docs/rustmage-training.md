@@ -1,11 +1,144 @@
 # Foundations mono-red CPU PPO
 
+## Budgeted learning-recipe investigation, October 25, 2026
+
+The overnight protocol compares six recipes from the **same warmed imitation
+checkpoint zero**, retaining its actor, critic and Adam moments. All use the
+learned critic baseline, actor learning rate 0.0001, minibatch 512, two PPO
+epochs, mean KL limit 0.02 and maximum-state KL limit 0.5. Each replicate gets a
+fresh, declared trainer RNG shared across its recipe arms. The source checkpoint
+remains immutable; the low-learning-rate fork changes only the saved critic
+Adam learning-rate variable in addition to its configuration.
+
+| Recipe | Change from control |
+| --- | --- |
+| Control | 500 collected games per round; critic LR 0.0003; 157 critic steps per round; entropy coefficient 0.01 |
+| Lower critic LR | Critic LR 0.0001 |
+| Critic head only | Freeze critic encoder/recurrent variables; update only its value head |
+| Critic sequence 8 | Ordered eight-step critic TBPTT, at most 64 streams / 512 positions per step |
+| Zero entropy bonus | Actor entropy coefficient 0 |
+| Larger rollout | 2,000 games per round and 628 critic steps, scaling the per-round value budget by four |
+
+Screening gives each admitted recipe 2,000 collected games on training seed
+31261024. The top two challengers and control then receive independent
+2,000-game runs on seed 32261024. Ranking uses equal-weight mean effects over
+the two available seeds on a common 5,000-game active-baseline selection cohort
+starting at seed **48261024**. The challenger choice is frozen before a fresh
+third training replicate on seed 33261024. If time permits, challenger and
+control continue in matched 2,000-game increments. These are collected attempts;
+80% enter the training partition and 20% remain whole-game holdouts before
+terminal-outcome filtering. Admission estimates can shorten the planned stages.
+
+The selection score nominates a challenger for testing; it is **not a finding
+that the recipe wins**. A positive first-seed effect and negative second-seed
+effect must both remain visible. Screening rank is affected by multiple recipe
+comparisons and reuse of the selection cohort, so a small or inconsistent mean
+effect does not justify changing the default. A time-limited single-seed
+selection has weaker replication evidence and must be labelled accordingly.
+
+Only after selection and checkpoint targets are fixed does the protocol open
+the independent **10,000-game confirmation cohort starting at seed 68261024**.
+It evaluates the completed matched challenger/control checkpoints and the
+original cloned actor. Confirmation never controls promotion or further
+training. Failed one-sided continuations retain the previous completed matched
+pair for comparison. Primary inference compares challenger directly with
+control on matched game attempts; comparisons with imitation are secondary.
+Intervals describe evaluation uncertainty for fixed checkpoints, not the full
+variation across training seeds or opponents. Shared evaluation games across
+replicates must not be pooled as independent observations.
+
+The hard compute deadline is **2026-10-25 14:12:28 UTC**. Training admission stops
+45 minutes earlier to reserve confirmation and persistence time; an external
+watchdog enforces the deadline. Interrupted arms retain their last durable
+checkpoint and do not count as completed comparisons. The results below record
+completion and deviations from this plan.
+
+### Completed results and outage
+
+Nine arms completed **18,000 collected self-play games**: six recipes on the
+first training seed, then control, zero entropy and critic-head-only on the
+second. Collection counts include the whole-game holdout; they do not mean
+every game entered an optimizer. No recipe showed a consistent improvement
+over control. The shortlisted challengers' equal-seed mean effects were
+−0.07 percentage points for zero entropy and −0.13 for critic-head-only.
+
+After freezing the original imitation actor, both 2,000-game control
+checkpoints and the scripted teacher, two fresh cohorts each evaluated all four
+policies on 5,000 matched schedules. This produced **40,000 actual evaluation
+games over 10,000 unique seed/seat/start schedules**, with no errors or cutoffs.
+Control gains over imitation were:
+
+| Training seed | Fresh cohort 70261024: gain, paired 95% interval (pp) | Fresh cohort 71261024: gain, paired 95% interval (pp) |
+| --- | --- | --- |
+| 31261024 | +0.76 [+0.40, +1.10] | +0.82 [+0.46, +1.18] |
+| 32261024 | +0.92 [+0.54, +1.30] | +0.76 [+0.44, +1.10] |
+
+These are modest replicated gains for the frozen controls, not evidence of a
+winning recipe. Only two training seeds were tested; intervals are nominal and
+condition on fixed checkpoints. Policies share schedules within each cohort,
+so their repeated games must not be pooled as independent observations. The
+teacher mirror is a reference, not a strength ceiling. See the
+[results inventory](benchmarks/learning-lab-2026-10-24/inventory.json) and
+[fresh-cohort comparison](benchmarks/learning-lab-2026-10-24/frozen-confirmation.png).
+
+The desktop experiment ran for roughly four wall-clock hours before becoming
+unreachable after the handoff around 10:24 UTC. Sleep was suspected but remains
+unconfirmed. Access returned after the compute window, around 14:27 UTC;
+independent checks then verified remote job cleanup, a free job lock and the
+Windows task in Ready state. All nine completed arms now have full reports and
+checkpoints backed up locally, including the last two replicates; independent
+integrity and holdout checks passed. Raw rollouts were
+excluded from these archives and remain preserved remotely. An initialized
+third-seed continuation was also recovered, not a completed comparison. Local
+CPU evaluation and its cleanup completed separately; this was not eight hours
+of measured GPU use.
+
+Fixed active-opponent training is implemented locally, with six focused tests
+and fifteen existing regression tests passing. The proposed fixed-opponent
+versus self-play training comparison **was not run during that window**.
+
+### Fixed-opponent follow-up
+
+A separately authorized follow-up completed in about 30 minutes on October 25.
+It trained one fixed-opponent arm on seed 31261024 from the same warmed actor,
+critic, both Adam states and initial trainer RNG as the saved self-play control.
+Four updates collected 4,000 fixed-opponent games: 3,200 training games and
+800 whole-game holdouts. The reused control had collected 2,000 self-play games
+over four updates. Each update retained the 157-step critic budget. One neural
+seat per fixed-opponent game versus two per self-play game approximately
+matches learner trajectory exposure, not exact decision counts or compute.
+
+All three frozen policies then played the same fresh 5,000 schedules starting
+at seed **91261024**, against active `FoundationsAggro` on the mono-red mirror.
+All 15,000 evaluation games terminated, with no errors or cutoffs.
+
+| Frozen policy | Wins / 5,000 | Win rate |
+| --- | --- | --- |
+| Original imitation | 2,421 | 48.42% |
+| Self-play control | 2,492 | 49.84% |
+| Fixed-opponent training | 2,523 | 50.46% |
+
+The primary fixed-opponent-minus-self-play gain was **+0.62 percentage points**,
+with a paired 95% bootstrap interval of **[+0.26, +0.98]**: 58 matched outcomes
+improved and 27 worsened. This supports a modest advantage for this tested
+checkpoint in the fixed-baseline matchup. It is one training seed; the interval
+conditions on the frozen policies and excludes training-run variability.
+It does not establish improvement against other opponents or general playing
+strength. See the [comparison figure](benchmarks/alignment-pilot-2026-10-25/comparison.png)
+and [exact results and provenance](benchmarks/alignment-pilot-2026-10-25/comparison.json).
+
+Complete follow-up reports, checkpoints and evaluations were backed up and
+verified; after the desktop became unreachable again, final live process,
+task, lock and guard cleanup could not be verified.
+
+## Training setup
+
 This experiment uses the 60-card **Foundations Red Aggro** list: **22 lands,
 19 creatures and 19 instants**. It contains 22 Mountains; four each of Fanatical
 Firebrand, Ghitu Lavarunner, Firebrand Archer and Viashino Pyromancer plus three
 Firespitter Whelps; and four each of Burst Lightning, Kindled Fury, Sure Strike
 and Scorching Dragonfire plus three Fiery Annihilations. Training games are mono-red mirrors under normal
-RustMage rules. Both seats use the same frozen behavior checkpoint within a
+RustMage rules. By default, both seats use the same frozen behavior checkpoint within a
 collection round and sample their own actions independently.
 
 The original shared-encoder experiments below used the previous **24-land,
@@ -16,8 +149,10 @@ fingerprint: start a fresh run in a new output directory. Existing checkpoints
 are rejected rather than interpreting their card IDs as the new cards. To
 reproduce the old reports, use their recorded source revision and deck manifest.
 
-There is **no imitation warm-up and no intermediate reward**. A verified natural
-win gives +1, a loss −1, and a draw 0. Every recorded decision in a seat's game
+Default PPO runs use **no imitation warm-up and no intermediate reward**. An
+optional [imitation-to-PPO transfer](rustmage-imitation.md#transfer-the-cloned-policy-to-ppo)
+can initialize existing policy weights and fit the critic before actor updates.
+A verified natural win gives +1, a loss −1, and a draw 0. Every recorded decision in a seat's game
 receives that terminal return, undiscounted. Turns, life totals, damage, lands,
 and spell casts are observation features, never reward bonuses. Errors and
 compute-limit cutoffs are excluded from PPO and reported explicitly. They are
@@ -41,6 +176,56 @@ Historical `training_games` fields retain their original collected-attempt
 meaning for compatibility. `--validation-fraction` is saved and checked on
 resume; **resuming older runs requires explicit `--validation-fraction 0`**.
 Historical experiments below predate this split unless stated otherwise.
+
+Actor advantages default to the terminal return minus the frozen behavior
+critic prediction (`--advantage-baseline critic`). The experimental
+`--advantage-baseline zero` arm uses the terminal return alone, with the same
+training-only centering and scaling. It changes actor advantages only: critic
+targets, training, saved predictions and value-error diagnostics remain intact.
+Held-out policy surrogate gains use the selected baseline and the training
+partition's matching normalization; these gains remain proxies, not win rates.
+The baseline choice is checkpointed. Legacy checkpoints default to `critic`,
+and an ordinary resume rejects switching it; comparison arms need independent
+output directories with their intended configuration recorded explicitly.
+
+`--baseline-eval-seed` optionally fixes the active-opponent evaluation cohort
+independently of the collection seed, allowing multiple training seeds to share
+matched evaluation games. Omitting it retains `training seed + 20,000,000`.
+Keep that cohort outside every training seed range. When averaging results over
+training replicates that share a cohort, retain all replicates of one evaluation
+game together when resampling; repeated games are not independent observations.
+
+## Fixed active-opponent training
+
+`--train-mode selfplay` remains the default. `--train-mode versus_baseline`
+instead trains the neural learner against the active `FoundationsAggro` policy,
+with both players using the same mono-red deck. The learner alternates seats
+(`index % 2`), and each policy receives only its own private view. Only the
+neural learner's trajectory enters PPO; the scripted opponent supplies no
+training records. Natural terminal returns, concession masking, whole-game
+holdouts and cutoff/error exclusions retain their existing behavior.
+
+For example, a new four-round fixed-opponent run collects 4,000 games:
+
+```sh
+uv run --no-sync python -m examples.train_rustmage \
+  --output .local/red-fixed-opponent --train-mode versus_baseline \
+  --rounds 4 --games-per-round 1000 --validation-fraction 0.2
+```
+
+One fixed-opponent game records one neural seat; self-play records two. Thus
+4,000 fixed-opponent games versus 2,000 self-play games, each over four updates,
+approximately match learner trajectory exposure. Match the initial checkpoint,
+optimizer settings and per-update critic budget, and report actual sample
+counts: game lengths and opponent distributions can differ, so this is not an
+exact data or compute match. The 20% holdout remains separate in either mode.
+
+The mode is saved in checkpoints and checked on resume. Legacy checkpoints
+default to self-play; changing the opponent requires an independent experiment
+directory. Reports identify the training opponent and recorded seats, including
+when resuming a prepared fork. Optional critic warm-up remains **self-play** and
+is counted separately from subsequent fixed-opponent PPO games. Evaluations
+with `output=None` never write training trajectories.
 
 ## Run and resume
 
@@ -77,6 +262,46 @@ For a separate actor/critic, `--concurrent-updates` overlaps their independent
 optimizer work. It is opt-in and recorded in the experiment configuration;
 resuming requires the original setting. Older checkpoints default to sequential
 updates. The shared architecture cannot enable this option.
+For separate policy/value networks, `--value-learning-rate` sets the value
+optimizer's learning rate independently (omitting it uses `--learning-rate`).
+`--value-max-steps N` caps value optimizer steps **per collection-round update**,
+across all `--ppo-epochs`; it does not cap policy steps. Omitting it preserves
+the previous full-epoch fit. A short rollout still stops after its configured
+epochs rather than repeating samples until the cap is reached. For example,
+`--ppo-epochs 2 --train-batch 32 --value-max-steps 250` fits at most 8,000
+decision samples for value while policy still traverses both shuffled epochs.
+The value fit uses the prefix of a global shuffle of training decisions, never
+validation decisions. All value permutations are reserved before policy
+shuffling, so changing this cap does not change the policy's minibatch RNG.
+Both settings are saved and checked on resume; old checkpoints retain their
+uncapped budget and inherited learning rate. They require separate networks.
+Reports include the effective value learning rate, cap, actual step count, and
+whether the cap was reached. Validation remains read-only; this option adds
+neither early stopping nor intermediate rewards.
+
+Experimental critic recipes retain the same actor objective and legal actions.
+`--critic-update-scope head` updates only the critic's value-head variables;
+the critic encoder and recurrent weights remain frozen. Its Adam optimizer
+still reserves every critic slot, allowing existing checkpoints to load without
+changing optimizer shapes. The default scope is `all`.
+`--critic-unroll 8` instead trains the critic on ordered trajectory chunks with
+eight-step truncated backpropagation. Each trajectory starts with zero memory;
+memory carries between chunks and is detached there. Boundary memory was
+computed before the preceding parameter update, so this is not exact replay of
+the full prefix under the latest weights. With `--train-batch 512`, at most 64
+trajectory streams contribute eight positions per critic step; the report
+records actual positions, advancing value samples and padding. The default
+unroll of 1 retains detached behavior-memory training. These options require a
+separate critic and are saved and checked on resume.
+
+`--entropy-weight` sets the actor entropy bonus coefficient; its default remains
+0.01 and `--entropy-weight 0` disables that bonus. It does not mask legal moves
+or change game rewards. Recipe comparisons use independent output directories,
+keep all other settings fixed where possible, select on a declared screening
+cohort, and reserve separate evaluation seeds for final confirmation. When
+forking saved Adam state to test a different learning rate, update the fork's
+learning-rate variable explicitly as well as its configuration; loading restores
+the saved optimizer variables, including that rate.
 `--prefetch-batches N` prepares up to N queued minibatches per optimizer stream;
 the default 0 prepares them synchronously. `--measurement-workers N` runs loss
 and KL batches concurrently while the measured weights are frozen; its default
@@ -1672,3 +1897,217 @@ four-test validation rerun after adding forced-action-only coverage. The
 [integration audit](benchmarks/foundations-red-policy-value-generalization-2026-10-18-audit.json)
 records partition/sample counts, unchanged source and smoke checkpoint hashes,
 and the measured validation overhead. The figures were visually inspected.
+
+## Fresh 1,000-game run with whole-game validation, October 18, 2026
+
+The first full run of the new methodology started from fresh seed-721 weights
+at source revision `e3e31bf`. It collected **1,000 natural self-play games**,
+with **800 games used for optimization and 200 held out**. Each round assigns
+80/20 whole games before minibatches are constructed; both seats stay together,
+and training decisions are then shuffled globally. There were no self-play
+errors or cutoffs, no evaluation errors, and no rejected PPO epochs. Rewards
+remain undiscounted terminal win/loss/draw only.
+
+The configuration retains the independent policy/value networks, 24 total game
+engines, two inference processes, concurrent updates, two prefetched batches,
+four measurement workers, two PPO epochs, batch size 32, learning rate 0.0003,
+and TensorFlow intra/inter thread limits 1/4. The fixed 40-game goldfish suite
+ran at initialization and every 100 collected games. Another 40 games measured
+the scripted baseline; evaluation games never entered optimization.
+
+| Collected games | Games used for optimization | Completed kills | Mean kill turn, wins only | Failure-adjusted turns |
+| ---: | ---: | ---: | ---: | ---: |
+| 0 | 0 | 30/40 | 17.00 | 19.250 |
+| 100 | 80 | 34/40 | 17.65 | 18.900 |
+| 200 | 160 | 30/40 | 17.27 | 19.450 |
+| 300 | 240 | 32/40 | 16.81 | 18.650 |
+| 400 | 320 | 34/40 | 16.09 | 17.575 |
+| 500 | 400 | 35/40 | 15.66 | 16.950 |
+| 600 | 480 | 36/40 | 16.06 | 17.050 |
+| 700 | 560 | 37/40 | 15.49 | 16.275 |
+| 800 | 640 | 37/40 | 16.30 | 17.025 |
+| 900 | 720 | 38/40 | 15.79 | 16.300 |
+| 1,000 | 800 | 39/40 | 15.18 | 15.450 |
+
+The final checkpoint is also the best observed checkpoint by failure-adjusted
+turns. Final evaluation had 39 wins and one 25-turn cutoff, with no losses or
+draws. The descriptive score assigns each failed attempt 26 turns; it is never
+used as a reward. Improvement from initialization is **3.80 turns**, with a
+paired 95% bootstrap interval of **[2.275, 5.475]** over the 40 matched evaluation
+games: 30 improved, six worsened and four tied. This supports improvement at
+goldfish play within this run, not a head-to-head strength claim or uncertainty
+across independently trained models. The scripted baseline remains much faster
+at 6.45 turns, with all 40 games completed.
+
+![Fresh 80/20 learning curve](benchmarks/foundations-red-validation-1000-2026-10-18.png)
+
+The validation curve confirms persistent value overfitting. At the final
+update, replaying current recurrent state gives training MSE **0.0913** versus
+held-out MSE **1.3924**, with the zero-prediction baseline at 1.0. The ordinary
+fitted loss using saved behavior states is lower still, 0.0406. Held-out value
+MSE varies by round, including 0.9951 at 700 games, but generally stays near or
+above the zero baseline while training error declines. Each validation point
+has only 20 independent game outcomes; the graph retains whole-game bootstrap
+bands instead of treating thousands of decisions as independent labels.
+
+Policy surrogate gains are noisier and do not consistently favor training in
+this run. At the final update, training gain is +0.000706 and held-out gain is
++0.002112. These local outcome-based gains are not action accuracy or win rates;
+the separate goldfish curve provides the behavioral measurement. Validation
+remained monitoring only: there was no early stopping or parameter adjustment.
+
+![Training and validation](benchmarks/foundations-red-validation-1000-2026-10-18-validation.png)
+
+Compared with the previous 1,000-game checkpoint, the new failure-adjusted
+score is 1.575 turns slower (paired interval for new-minus-old: [0.275, 2.85]).
+The previous model trained on all 1,000 games; this model trained on 800. This
+single-seed comparison cannot isolate the effect of the validation methodology
+from the smaller optimization data budget and resulting different trajectories.
+
+Total wall time, including startup, plots and shutdown, was **23:58.39**.
+Recorded phases took 372.69 seconds collecting self-play, 728.23 updating the
+networks, 230.35 validating both partitions, and 73.84 running goldfish/baseline
+evaluations. Validation therefore adds about 3 minutes 50 seconds of direct
+measurement time. No performance or training source changes were made during
+the run.
+
+The [audit](benchmarks/foundations-red-validation-1000-2026-10-18-audit.json)
+checks all ten 80/20 partitions, disjoint trajectory paths, optimizer sample
+counts, training-only normalization, terminal rewards, unique self-play seeds,
+separate evaluation seeds, checkpoint hashes, and unchanged source/library and
+initial checkpoint files. The [full report](benchmarks/foundations-red-validation-1000-2026-10-18.json),
+[loss graph](benchmarks/foundations-red-validation-1000-2026-10-18-losses.png),
+and [value diagnostics](benchmarks/foundations-red-validation-1000-2026-10-18-critic.png)
+are saved alongside PNG/SVG/CSV versions of every graph. Figures were visually
+inspected. The final local model is
+`.local/red-validation-1000-2026-10-18/checkpoints/round-0010/policy.keras`.
+
+```sh
+UV_CACHE_DIR=.local/uv-cache KERAS_HOME=.local/keras MPLCONFIGDIR=.local/matplotlib \
+KERAS_BACKEND=tensorflow CUDA_VISIBLE_DEVICES=-1 TF_ENABLE_ONEDNN_OPTS=0 \
+TF_NUM_INTRAOP_THREADS=1 TF_NUM_INTEROP_THREADS=4 TF_CPP_MIN_LOG_LEVEL=3 \
+.local/uv/uv run --no-sync python -m examples.train_rustmage \
+  --output .local/red-validation-1000-repeat --rounds 10 --games-per-round 100 \
+  --validation-fraction 0.2 --eval-every-games 100 --eval-games 40 \
+  --eval-horizon 25 --train-horizon 60 --workers 24 --collector processes \
+  --architecture separate --inference-processes 2 --inference-wait-ms 0 \
+  --train-batch 32 --learning-rate 0.0003 --ppo-epochs 2 \
+  --concurrent-updates --prefetch-batches 2 --measurement-workers 4 --seed 721 --plot
+```
+
+## Independent value budget: 250 steps per update, October 18, 2026
+
+This fresh run changes only the configured value-update budget relative to the
+preceding 80/20 experiment: **at most 250 value optimizer steps per round**,
+instead of two complete epochs. Both learning rates remain **0.0003**. The
+policy retains two epochs, batch size 32, PPO clipping, KL guards, and its
+original minibatch random-number sequence. The new `--value-learning-rate`
+option is implemented but intentionally left unset in this experiment, so the
+step-count change is evaluated without also changing the learning rate.
+
+The run collected **1,000 natural self-play games**, assigning **800 to training
+and 200 to validation** before constructing minibatches. There were no self-play
+errors or cutoffs, no evaluation errors, and no rejected policy epochs. All ten
+value updates reached exactly 250 steps: **2,500 total**, compared with **21,418**
+in the previous run, an 88.3% reduction. Validation remained read-only; there was
+no early stopping, regularization change, or intermediate reward.
+
+| Collected games | Completed kills | Mean kill turn, wins only | Failure-adjusted turns | Training value MSE | Held-out value MSE |
+| ---: | ---: | ---: | ---: | ---: | ---: |
+| 0 | 30/40 | 17.00 | 19.250 | — | — |
+| 100 | 34/40 | 17.76 | 19.000 | 1.0079 | 1.0130 |
+| 200 | 33/40 | 16.88 | 18.475 | 0.9983 | 0.9977 |
+| 300 | 36/40 | 17.28 | 18.150 | 0.9985 | 0.9974 |
+| 400 | 34/40 | 16.09 | 17.575 | 0.9985 | 0.9992 |
+| 500 | 37/40 | 15.24 | 16.050 | 1.0015 | 1.0020 |
+| 600 | 38/40 | 15.76 | 16.275 | 0.8158 | 0.8040 |
+| 700 | 36/40 | 15.53 | 16.575 | 0.6691 | 0.9755 |
+| 800 | 38/40 | 15.13 | 15.675 | 0.8312 | 1.1332 |
+| 900 | 39/40 | 15.69 | 15.950 | 0.7783 | 0.6923 |
+| 1,000 | 39/40 | 14.28 | 14.575 | 0.7708 | 0.9267 |
+
+![Value budget comparison](benchmarks/foundations-red-value250-1000-2026-10-18-comparison.png)
+
+The value network initially stayed near the zero-prediction baseline, then
+began making useful held-out predictions around 600 games. Final replayed
+training/validation MSE is **0.7708 / 0.9267**, compared with **0.0913 / 1.3924**
+previously. The final fitting gap shrank from 1.3011 to 0.1559, while held-out
+explained variance changed from approximately −37.7% to **+8.3%**. This is a
+substantial reduction in the observed overfitting problem, but it is not a
+complete or consistently stable solution: held-out MSE rose above the zero
+baseline at 800 games, and each checkpoint has only 20 independent validation
+games. The final held-out MSE interval is **[0.6679, 1.1909]**, which includes 1.0.
+The final update's change in held-out MSE is +0.0167, with interval
+[−0.1518, 0.1651], so that update alone does not establish improvement.
+
+Training MSE is measured on the **entire training partition**, including
+decisions not sampled by the capped value update; those positions still belong
+to training games. Value fitting uses the first 250 minibatches from a global
+shuffle of training decisions, while policy fitting visits both full epochs.
+Across the ten successive validation partitions, decision-weighted held-out
+MSE is 0.9599 versus 1.2589 previously. That aggregate describes the learning
+procedure across checkpoints; it is not the final model's error on 200 games.
+
+Final goldfish evaluation had **39 wins and one 25-turn cutoff**, with no
+defeats or draws. The failure-adjusted score counts the cutoff as 26 turns and
+improved by **4.675 turns** from initialization, with paired interval
+**[3.10, 6.35]**. Compared with the previous final checkpoint, it improved by
+**0.875 turns**, with paired interval **[−0.70, 2.40]**: 19 matched evaluation
+attempts improved, 12 worsened, and nine tied. Thus the policy learned within
+this run, but these 40 evaluations do not establish that the smaller value
+budget improves playing strength over the old setting. The final checkpoint
+has the best observed failure-adjusted score in this run; the scripted baseline
+still completes all 40 games at a much faster mean of 6.45 turns.
+
+The final policy surrogate gains were +0.001221 on training games (interval
+[0.000768, 0.001674]) and +0.000108 on validation games (interval
+[−0.000786, 0.001115]). These remain local outcome-based diagnostics, not
+head-to-head win rates. The experiment tests one budget and one training seed;
+it does not establish 250 steps as optimal.
+
+Both runs use identical initial weight tensors, the same seed-721 configuration,
+the same whole-game partitions and evaluation seeds, and the same native engine.
+Live batched inference is not bitwise reproducible between runs: in one matched
+first-round game, all 909 decisions and encoded observations matched, but saved
+memories and probabilities differed at roughly 1e-7 precision. The first policy
+update consequently was not bitwise identical, even though the sampler RNG
+states matched before and after it. Later on-policy trajectories differ as well.
+The numerical regression tests separately verify that, with **identical frozen
+rollouts**, changing the value budget preserves policy weights, optimizer state,
+and sampler state exactly, including concurrent execution. Bootstrap intervals
+cover evaluation games, not variation across independent training runs.
+
+Total wall time was **22:53.89**, versus 23:58.39 previously, approximately 4.5%
+shorter. Collection took 357.53 seconds, updates 686.39 seconds, and validation
+223.91 seconds. The large reduction in value steps therefore produced only a
+modest overall runtime improvement with the full policy updates and diagnostics
+still enabled. No source changes were made during training.
+
+**31 targeted tests passed**, covering PPO, streaming updates, game partitioning,
+independent value budgets/rates, capped stream cleanup, unchanged policy updates,
+serial/concurrent equivalence, and checkpoint resume. The
+[audit](benchmarks/foundations-red-value250-1000-2026-10-18-audit.json) verifies
+every 80/20 partition, optimizer sample/step counts, terminal rewards,
+training-only normalization, evaluation/checkpoint hashes, unchanged training
+sources, and preservation of the preceding run's report and checkpoints.
+
+The [full report](benchmarks/foundations-red-value250-1000-2026-10-18.json),
+[learning curve](benchmarks/foundations-red-value250-1000-2026-10-18.png),
+[loss graphs](benchmarks/foundations-red-value250-1000-2026-10-18-losses.png),
+[value diagnostics](benchmarks/foundations-red-value250-1000-2026-10-18-critic.png),
+and [validation graphs](benchmarks/foundations-red-value250-1000-2026-10-18-validation.png)
+are saved with SVG and CSV versions. The final local model is
+`.local/red-value250-1000-2026-10-18/checkpoints/round-0010/policy.keras`.
+
+```sh
+UV_CACHE_DIR=.local/uv-cache KERAS_HOME=.local/keras MPLCONFIGDIR=.local/matplotlib \
+KERAS_BACKEND=tensorflow CUDA_VISIBLE_DEVICES=-1 TF_ENABLE_ONEDNN_OPTS=0 \
+TF_NUM_INTRAOP_THREADS=1 TF_NUM_INTEROP_THREADS=4 TF_CPP_MIN_LOG_LEVEL=3 \
+.local/uv/uv run --no-sync python -m examples.train_rustmage \
+  --output .local/red-value250-1000-repeat --rounds 10 --games-per-round 100 \
+  --validation-fraction 0.2 --eval-every-games 100 --eval-games 40 \
+  --eval-horizon 25 --train-horizon 60 --workers 24 --collector processes \
+  --architecture separate --inference-processes 2 --inference-wait-ms 0 \
+  --train-batch 32 --learning-rate 0.0003 --ppo-epochs 2 --value-max-steps 250 \
+  --concurrent-updates --prefetch-batches 2 --measurement-workers 4 --seed 721 --plot
+```

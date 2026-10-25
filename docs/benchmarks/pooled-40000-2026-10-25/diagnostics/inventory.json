@@ -1,0 +1,30 @@
+{
+  "created_utc": "2026-10-25T22:50:50.873107+00:00",
+  "source_report_sha256": "592f3c9cb5090d99eaa61c45ea24e161b1b807ee453c30fd50141626910aba16",
+  "files": {
+    "policy-updates.png": {
+      "bytes": 236736,
+      "sha256": "732d4cbc97c2a76194013a432bd6c2e85516cf910486a72ecbe91ef688b217fd"
+    },
+    "policy-updates.svg": {
+      "bytes": 129260,
+      "sha256": "ba7678c1b61b0897f429590d05aa9d38eda25b3fa6b07db56822de6e61e36343"
+    },
+    "round-metrics.csv": {
+      "bytes": 10555,
+      "sha256": "c22f88e470263a2bc690f9a13c870d7628dbf5c8449102bd576673d5c9ff4f64"
+    },
+    "round-metrics.json": {
+      "bytes": 37190,
+      "sha256": "30deff5b1c0d7b6a171da39fe32424c6af85f429cf0a4c8d12b1f4eb0736c830"
+    },
+    "training-pipeline.png": {
+      "bytes": 226841,
+      "sha256": "5908a68e0d281ea455b57ad9a80bbe6cda10b0ff2c14597aa9eb459e32453f3c"
+    },
+    "training-pipeline.svg": {
+      "bytes": 169308,
+      "sha256": "c3c8cc471008fa9113e315f9ca9f12dad149874cbef1dce021bfafca0f7446d7"
+    }
+  }
+}

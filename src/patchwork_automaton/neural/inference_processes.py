@@ -47,20 +47,26 @@ def bridge_requests(connection, batcher, stopping):
             return
 
 
-def _replica_main(control, connections, config, weights, version, wait_ms):
+def _replica_main(control, connections, config, weights, version, wait_ms, device):
     async def serve():
         import keras
         from . import model as registered_models  # noqa: F401
         from .batching import InferenceBatcher, example_batch
-        network = keras.saving.deserialize_keras_object(config)
-        network(example_batch(network.memory_size,network.feature_spec),training=False)
-        network.set_weights(weights)
-        batcher = InferenceBatcher(network,max_batch=len(connections),wait_ms=wait_ms)
+        from .devices import device_scope, assert_model_device
+        import tensorflow as tf
+        with device_scope(device):
+            network = keras.saving.deserialize_keras_object(config)
+            network(example_batch(network.memory_size,network.feature_spec),training=False)
+            network.set_weights(weights)
+        assert_model_device(network, device)
+        batcher = InferenceBatcher(network,max_batch=len(connections),wait_ms=wait_ms,device=device)
         bridges = None
         stopping = Event()
         def state():
             return dict(pid=os.getpid(),engines=len(connections),version=batcher.version,
                 weights_sha256=weights_digest(network.get_weights()),
+                visible_gpus=[gpu.name for gpu in tf.config.get_visible_devices('GPU')],
+                cuda_visible_devices=os.environ.get('CUDA_VISIBLE_DEVICES'),
                 process_cpu_seconds=time.process_time(),**batcher.stats())
         try:
             await batcher.start()
@@ -75,7 +81,8 @@ def _replica_main(control, connections, config, weights, version, wait_ms):
                 if command == 'sync':
                     new_version,new_weights = payload
                     batcher.set_version(new_version)
-                    network.set_weights(new_weights)
+                    with device_scope(device):
+                        network.set_weights(new_weights)
                 elif command != 'stats':
                     raise ValueError(f'Unknown inference command: {command}')
                 control.send((True,state()))
@@ -84,6 +91,8 @@ def _replica_main(control, connections, config, weights, version, wait_ms):
             if bridges: await asyncio.to_thread(bridges.shutdown,wait=True)
             await batcher.close()
     try:
+        from .devices import configure_runtime, canonical_device
+        configure_runtime(device, hide_gpu=canonical_device(device) == '/CPU:0')
         asyncio.run(serve())
     except BaseException:
         try: control.send((False,traceback.format_exc()))
@@ -94,13 +103,15 @@ def _replica_main(control, connections, config, weights, version, wait_ms):
 
 
 class InferenceProcessGroup:
-    def __init__(self, connections, *, replicas=2, wait_ms=0, timeout=120):
+    def __init__(self, connections, *, replicas=2, wait_ms=0, timeout=120, device='cpu'):
         if type(replicas) is not int or not 1 <= replicas <= len(connections):
             raise ValueError('Inference processes must be between one and the game-engine count')
         if not 0 <= wait_ms < float('inf') or not 0 < timeout < float('inf'):
             raise ValueError('Invalid inference wait or control timeout')
         self.connections,self.replicas = connections,replicas
         self.wait_ms,self.timeout = wait_ms,timeout
+        from .devices import canonical_device
+        self.device = canonical_device(device)
         self.handles = []
         self.states = []
         self.started = self.closed = self.broken = self.busy = False
@@ -130,6 +141,8 @@ class InferenceProcessGroup:
     def _verify(self, states, version, digest):
         if any(s['version'] != version or s['weights_sha256'] != digest for s in states):
             raise RuntimeError('Inference replicas disagree on frozen policy weights or version')
+        if any(s['device'] != self.device for s in states):
+            raise RuntimeError('Inference replicas disagree on requested neural device')
         self.states,self.version,self.digest = states,version,digest
 
     async def start(self, model, *, version=0):
@@ -145,7 +158,7 @@ class InferenceProcessGroup:
                 parent,child = context.Pipe()
                 assigned = self.connections[i::self.replicas]
                 process = context.Process(target=_replica_main,
-                    args=(child,assigned,config,weights,version,self.wait_ms),name=f'inference-replica-{i}')
+                    args=(child,assigned,config,weights,version,self.wait_ms,self.device),name=f'inference-replica-{i}')
                 try: process.start()
                 except BaseException:
                     parent.close();child.close()
@@ -201,7 +214,7 @@ class InferenceProcessGroup:
             mean_queue_ms=sum(s['mean_queue_ms']*s['requests'] for s in self.states)/max(requests,1),
             graph_traces=[s['graph_traces'] for s in self.states],
             replica_cpu_seconds=sum(s['process_cpu_seconds'] for s in self.states),
-            version=self.version,weights_sha256=self.digest,replicas=list(self.states))
+            version=self.version,weights_sha256=self.digest,device=self.device,replicas=list(self.states))
 
     async def close(self):
         if self.closed: return

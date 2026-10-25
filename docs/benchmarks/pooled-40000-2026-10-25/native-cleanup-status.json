@@ -1,0 +1,17 @@
+{
+  "utc": "2026-10-25T22:40:02.632097+00:00",
+  "native_cleanup_wrapper_exit": 1,
+  "native_cleanup_wrapper_error": "Bounded final verification timed out after 30 seconds; temporary request released by finally.",
+  "readback_ssh_exit": 255,
+  "readback_error": "Connection timed out",
+  "wake_packets": 3,
+  "known_mac": "d8:bb:c1:d8:8c:9d",
+  "broadcast": "192.168.1.255",
+  "new_experiments_started": false,
+  "remote_compute_cleanup_previously_verified": true,
+  "native_final_state": "unverified while unreachable",
+  "caution": "Sleep after guardian release is plausible, not confirmed. Child may have completed native proof before blocked stdout; not established without readback.",
+  "resolved_utc": "2026-10-25T22:45:12.786123+00:00",
+  "resolution": "After user wake, exact guardian absent, taskReady/result0/noinstances, state released/exit0; previous native release proof verified true. All SYSTEM sleep requests None. Original stop succeeded; outer wrapper timeout prevented receipt collection until wake.",
+  "final_proof": "final-native-cleanup.json"
+}

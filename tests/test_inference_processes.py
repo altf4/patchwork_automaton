@@ -40,10 +40,19 @@ class InferenceReplicaTests(unittest.TestCase):
             async def predict(client,version):
                 return await asyncio.to_thread(client.predict,batch,version=version,identity=('test','game'))
             try:
-                await group.start(model)
+                # A GPU-enabled learner must not leak its CUDA visibility or
+                # default device into independently spawned CPU replicas.
+                with patch.dict(os.environ, CUDA_VISIBLE_DEVICES='0'):
+                    await group.start(model)
                 pids = {s['pid'] for s in group.stats()['replicas']}
                 self.assertEqual(len(pids),2)
                 self.assertNotIn(os.getpid(),pids)
+                for state in group.stats()['replicas']:
+                    self.assertEqual(state['device'], '/CPU:0')
+                    self.assertEqual(state['cuda_visible_devices'], '-1')
+                    self.assertEqual(state['visible_gpus'], [])
+                    self.assertTrue(all(value.endswith('/device:CPU:0') for value in state['model_variable_devices']))
+                    self.assertTrue(all(value.endswith('/device:CPU:0') for value in state['output_placements'].values()))
                 weights = model.get_weights()
                 weights[-1] = weights[-1]+.5
                 model.set_weights(weights)

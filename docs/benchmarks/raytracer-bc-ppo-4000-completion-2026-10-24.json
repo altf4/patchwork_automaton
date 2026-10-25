@@ -1,0 +1,304 @@
+{
+  "status": "complete_and_verified",
+  "started_utc": "2026-10-24T23:47:48.938412+00:00",
+  "finished_utc": "2026-10-25T00:49:52.082977+00:00",
+  "ppo_games": 4000,
+  "ppo_optimization_games": 3200,
+  "ppo_validation_games": 800,
+  "critic_warmup_games": 1000,
+  "runtime_minutes": 61.63633364691667,
+  "active_baseline_results": [
+    {
+      "ppo_games": 0,
+      "wins": 499,
+      "attempts": 1000,
+      "win_rate": 0.499,
+      "comparison_to_imitation": null
+    },
+    {
+      "ppo_games": 1000,
+      "wins": 507,
+      "attempts": 1000,
+      "win_rate": 0.507,
+      "comparison_to_imitation": {
+        "attempted_pairs": 1000,
+        "terminal_pairs": 1000,
+        "unresolved_pairs": 0,
+        "recorded_attempt_win_rate_change": 0.008,
+        "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+          0.001,
+          0.016
+        ],
+        "terminal_score_change_on_terminal_pairs": 0.008,
+        "terminal_score_change_bootstrap_95_interval": [
+          0.001,
+          0.016
+        ],
+        "status_transitions": {
+          "loss->loss": 490,
+          "loss->win": 11,
+          "win->loss": 3,
+          "win->win": 496
+        },
+        "improved_recorded_win_attempts": 11,
+        "worsened_recorded_win_attempts": 3,
+        "tied_recorded_win_attempts": 986,
+        "bootstrap": {
+          "unit": "matched_attempt",
+          "seed": 9901,
+          "resamples": 4000
+        }
+      }
+    },
+    {
+      "ppo_games": 2000,
+      "wins": 509,
+      "attempts": 1000,
+      "win_rate": 0.509,
+      "comparison_to_imitation": {
+        "attempted_pairs": 1000,
+        "terminal_pairs": 1000,
+        "unresolved_pairs": 0,
+        "recorded_attempt_win_rate_change": 0.01,
+        "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+          0.003,
+          0.018
+        ],
+        "terminal_score_change_on_terminal_pairs": 0.01,
+        "terminal_score_change_bootstrap_95_interval": [
+          0.003,
+          0.018
+        ],
+        "status_transitions": {
+          "loss->loss": 488,
+          "loss->win": 13,
+          "win->loss": 3,
+          "win->win": 496
+        },
+        "improved_recorded_win_attempts": 13,
+        "worsened_recorded_win_attempts": 3,
+        "tied_recorded_win_attempts": 984,
+        "bootstrap": {
+          "unit": "matched_attempt",
+          "seed": 9901,
+          "resamples": 4000
+        }
+      }
+    },
+    {
+      "ppo_games": 3000,
+      "wins": 513,
+      "attempts": 1000,
+      "win_rate": 0.513,
+      "comparison_to_imitation": {
+        "attempted_pairs": 1000,
+        "terminal_pairs": 1000,
+        "unresolved_pairs": 0,
+        "recorded_attempt_win_rate_change": 0.014,
+        "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+          0.007,
+          0.022
+        ],
+        "terminal_score_change_on_terminal_pairs": 0.014,
+        "terminal_score_change_bootstrap_95_interval": [
+          0.007,
+          0.022
+        ],
+        "status_transitions": {
+          "loss->loss": 486,
+          "loss->win": 15,
+          "win->loss": 1,
+          "win->win": 498
+        },
+        "improved_recorded_win_attempts": 15,
+        "worsened_recorded_win_attempts": 1,
+        "tied_recorded_win_attempts": 984,
+        "bootstrap": {
+          "unit": "matched_attempt",
+          "seed": 9901,
+          "resamples": 4000
+        }
+      }
+    },
+    {
+      "ppo_games": 4000,
+      "wins": 514,
+      "attempts": 1000,
+      "win_rate": 0.514,
+      "comparison_to_imitation": {
+        "attempted_pairs": 1000,
+        "terminal_pairs": 1000,
+        "unresolved_pairs": 0,
+        "recorded_attempt_win_rate_change": 0.015,
+        "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+          0.007,
+          0.024
+        ],
+        "terminal_score_change_on_terminal_pairs": 0.015,
+        "terminal_score_change_bootstrap_95_interval": [
+          0.007,
+          0.024
+        ],
+        "status_transitions": {
+          "loss->loss": 484,
+          "loss->win": 17,
+          "win->loss": 2,
+          "win->win": 497
+        },
+        "improved_recorded_win_attempts": 17,
+        "worsened_recorded_win_attempts": 2,
+        "tied_recorded_win_attempts": 981,
+        "bootstrap": {
+          "unit": "matched_attempt",
+          "seed": 9901,
+          "resamples": 4000
+        }
+      }
+    }
+  ],
+  "passive_opponent_before": {
+    "games": 200,
+    "win": 200,
+    "loss": 0,
+    "draw": 0,
+    "cutoff": 0,
+    "error": 0,
+    "win_rate": 1.0,
+    "failed_attempts": 0,
+    "failure_rate": 0.0,
+    "mean_own_turns_to_win": 6.375,
+    "median_own_turns_to_win": 6.0,
+    "p90_own_turns_to_win": 8,
+    "fastest_win": 5,
+    "slowest_win": 14,
+    "wins_by_own_turn": {
+      "4": 0.0,
+      "5": 0.265,
+      "6": 0.68,
+      "10": 0.975
+    },
+    "win_turn_histogram": {
+      "5": 53,
+      "6": 83,
+      "7": 35,
+      "8": 14,
+      "9": 5,
+      "10": 5,
+      "11": 3,
+      "13": 1,
+      "14": 1
+    },
+    "turn_horizon": 25,
+    "capped_turns_mean": 6.375,
+    "capped_turns_failure_value": 26
+  },
+  "passive_opponent_after": {
+    "games": 200,
+    "win": 200,
+    "loss": 0,
+    "draw": 0,
+    "cutoff": 0,
+    "error": 0,
+    "win_rate": 1.0,
+    "failed_attempts": 0,
+    "failure_rate": 0.0,
+    "mean_own_turns_to_win": 6.205,
+    "median_own_turns_to_win": 6.0,
+    "p90_own_turns_to_win": 7,
+    "fastest_win": 5,
+    "slowest_win": 13,
+    "wins_by_own_turn": {
+      "4": 0.0,
+      "5": 0.26,
+      "6": 0.71,
+      "10": 0.99
+    },
+    "win_turn_histogram": {
+      "5": 52,
+      "6": 90,
+      "7": 39,
+      "8": 11,
+      "9": 4,
+      "10": 2,
+      "11": 1,
+      "13": 1
+    },
+    "turn_horizon": 25,
+    "capped_turns_mean": 6.205,
+    "capped_turns_failure_value": 26
+  },
+  "passive_paired_improvement": {
+    "capped_turn_reduction": 0.17,
+    "bootstrap_95_interval": [
+      0.075,
+      0.285
+    ],
+    "improved_attempts": 20,
+    "worsened_attempts": 4,
+    "tied_attempts": 176
+  },
+  "final_critic_heldout": {
+    "samples": 23793,
+    "mse": 0.8831372509908073,
+    "zero_baseline_mse": 1.0,
+    "constant_baseline_mse": 0.9995241869967202,
+    "target_mean": 0.021813138317992687,
+    "prediction_mean": 0.39352922187740375,
+    "prediction_std": 0.6552526318680918,
+    "explained_variance": 0.2546809632966843
+  },
+  "final_critic_training": {
+    "samples": 87247,
+    "mse": 0.7024544565112909,
+    "zero_baseline_mse": 1.0,
+    "constant_baseline_mse": 0.9982756093361476,
+    "target_mean": 0.04152578312148269,
+    "prediction_mean": 0.389191564006389,
+    "prediction_std": 0.689617702975669,
+    "explained_variance": 0.4174124301206442
+  },
+  "interpretation": "Modest monotonic gain on the fixed held-out active-baseline cohort: +1.5 percentage points (paired bootstrap 95% +0.7 to +2.4); 17 prior losses became wins and 2 prior wins became losses. One training seed and one repeatedly evaluated deal cohort; no direct PPO-versus-imitation head-to-head evaluation.",
+  "critic_limitations": "Current-memory held-out critic loss remains noisy (0.594 to 0.970 across rounds); final MSE0.883 and EV0.255. This does not measure playing strength.",
+  "optimization_observation": "52 rejected actor attempts with lower-rate retries across eight rounds; all rounds accepted both actor epochs. Accepted mean KL2.1e-5 to1.04e-4 while max-state KL0.049 to0.096 is consistent with the per-state guard constraining updates. Per-rejection causes are not logged, so this is an inference.",
+  "backup": {
+    "path": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/bc-ppo-4000-20261024/completed-pilot-backup.tar.gz",
+    "bytes": 29725117,
+    "sha256": "04dfcfe85f3daa59ab497d99d4108e61e6a99c6a62fdbaae221f5bf91755af64",
+    "checkpoint_rounds": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "all_checkpoint_zip_json_checked": true,
+    "final_file_hashes_match_supervisor": true
+  },
+  "final_checkpoint_integrity": {
+    "policy.keras": {
+      "bytes": 1638315,
+      "sha256": "a090028c1eb98c57bfd273e15e6f0fad629315d97a599801f659cb06f01e97e2"
+    },
+    "policy.manifest.json": {
+      "bytes": 13626,
+      "sha256": "db77c61067b1879667e5e0d6e05198fdf4240b267819e80355297f8ea34564e6"
+    },
+    "optimizer.npz": {
+      "bytes": 1027266,
+      "sha256": "9a3eaadea2015abc1a88515e5e3088ef44ba724c1aab23bf1c2d18cfc6d43856"
+    },
+    "critic-optimizer.npz": {
+      "bytes": 1956362,
+      "sha256": "52b49a03d89442756ae0868133442df610f9641ffea9aa1ee221bd342ae56270"
+    },
+    "state.json": {
+      "bytes": 1229605,
+      "sha256": "afe540f1e4b3935b2e983536f4854cc8bfacf467069012d24129dcb06960be5d"
+    }
+  },
+  "source_policy_immutable": true
+}

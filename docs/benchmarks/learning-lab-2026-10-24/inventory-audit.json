@@ -1,0 +1,41 @@
+{
+  "status": "PASS",
+  "reviewed_utc": "2026-10-25T13:26:18.275381+00:00",
+  "inventory": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/learning-lab-20261024/final-inventory-20261025.json",
+  "inventory_sha256": "35b87bd1a57d842842fec55f6aaee229d6e76609e2369db809b22aeff440023a",
+  "evidence_hashes_verified": 11,
+  "two_cohort_counts_effects_intervals_transition_counters_match_independent_audits": true,
+  "original_training_scope": {
+    "arms": 9,
+    "attempts": 18000,
+    "reported_rounds": 33,
+    "fully_backed_reports": 7,
+    "fully_backed_rounds": 25,
+    "summary_only_arms": 2
+  },
+  "fresh_scope": {
+    "disjoint_cohorts": 2,
+    "fixed_policies": 4,
+    "games_per_policy_per_cohort": 5000,
+    "total_attempts": 40000,
+    "all_terminal": true,
+    "errors": 0,
+    "cutoffs": 0
+  },
+  "scientific_scope_review": {
+    "recipe_winner_not_claimed": true,
+    "selected_controls_not_new_recipe_winners": true,
+    "training_seed_uncertainty_not_covered_by_game_intervals": true,
+    "nominal_multiple_comparisons_disclosed": true,
+    "no_duplicate_control_seed_pooling": true,
+    "teacher_reference_not_strength_ceiling": true,
+    "unrun_fixed_opponent_training_disclosed": true,
+    "remote_cleanup_and_late_backup_gaps_disclosed": true
+  },
+  "independent_audits": {
+    "frozen-confirmation-independent-audit-20261025.json": "3d799518459cd260afd7f0ca335871adef749958e7ef75ec1603dba7b1dc02ef",
+    "frozen-replication-independent-audit-20261025.json": "29cf0ae62b0c9e7b5391492379495b01d1f4c351c9eee5012e73c128a8d213bd"
+  },
+  "blockers": [],
+  "note": "Owner may add this review reference/status afterward; this review pins the preceding exact-results revision. No games, TensorFlow imports, remote calls, or active source edits."
+}

@@ -1,0 +1,678 @@
+{
+  "status": "inventory_final_with_independently_audited_recovery_addendum",
+  "updated_utc": "2026-10-25T14:35:06.441948+00:00",
+  "purpose": "Compact inventory of this authorized investigation; separate from root-owned public record and final answer.",
+  "authorization": {
+    "started_utc": "2026-10-25T06:12:28Z",
+    "global_deadline_utc": "2026-10-25T14:12:28Z",
+    "note": "Authorization window, not measured GPU-active time."
+  },
+  "conclusions": [
+    "No tested recipe demonstrated a repeatable advantage over the unchanged control; no recipe winner is declared.",
+    "Both default 2k self-play controls show modest positive gains over the frozen imitation actor on each of two fresh cohorts; this is separate from recipe ranking.",
+    "The preregistered second cohort fully completed with the same four fixed policies; 10,000 evaluated games per policy across two disjoint cohorts, reported separately.",
+    "Fixed active-opponent training is implemented and tested locally but UNRUN in this window.",
+    "Desktop outage prevented planned follow-up training. After-window recovery verified remote cleanup and backed up the remaining completed reports/checkpoints; no new experiment compute was run."
+  ],
+  "phase1_training": {
+    "status": "nine_arms_reported_complete_before_outage",
+    "training_mode": "selfplay",
+    "arms_completed": 9,
+    "additional_selfplay_attempts": 18000,
+    "reported_ppo_rounds": 33,
+    "starting_policy": "Same warmed imitation checkpoint0; fresh declared per-seed trainer RNG matched within recipe arms.",
+    "selection_cohort": {
+      "seed_base": 48261024,
+      "games": 5000,
+      "adaptive_reuse": true
+    },
+    "arms": [
+      {
+        "seed": 31261024,
+        "recipe": "control",
+        "status": "complete",
+        "selfplay_attempts": 2000,
+        "ppo_rounds": 4,
+        "selection_games": 5000,
+        "selection_wins": 2476,
+        "selection_win_rate": 0.4952,
+        "difference_vs_same_seed_control_percentage_points": 0.0,
+        "local_evidence_coverage": "full_saved_report",
+        "archive": "completed-screen-control-low-lr-20261025T0720Z.tar.gz"
+      },
+      {
+        "seed": 31261024,
+        "recipe": "critic_head",
+        "status": "complete",
+        "selfplay_attempts": 2000,
+        "ppo_rounds": 4,
+        "selection_games": 5000,
+        "selection_wins": 2455,
+        "selection_win_rate": 0.491,
+        "difference_vs_same_seed_control_percentage_points": -0.42,
+        "local_evidence_coverage": "full_saved_report",
+        "archive": "completed-screen-head-20261025T0750Z.tar.gz"
+      },
+      {
+        "seed": 31261024,
+        "recipe": "critic_lr_low",
+        "status": "complete",
+        "selfplay_attempts": 2000,
+        "ppo_rounds": 4,
+        "selection_games": 5000,
+        "selection_wins": 2450,
+        "selection_win_rate": 0.49,
+        "difference_vs_same_seed_control_percentage_points": -0.52,
+        "local_evidence_coverage": "full_saved_report",
+        "archive": "completed-screen-control-low-lr-20261025T0720Z.tar.gz"
+      },
+      {
+        "seed": 31261024,
+        "recipe": "critic_sequence8",
+        "status": "complete",
+        "selfplay_attempts": 2000,
+        "ppo_rounds": 4,
+        "selection_games": 5000,
+        "selection_wins": 2447,
+        "selection_win_rate": 0.4894,
+        "difference_vs_same_seed_control_percentage_points": -0.58,
+        "local_evidence_coverage": "full_saved_report",
+        "archive": "completed-screen-sequence8-20261025T0820Z.tar.gz"
+      },
+      {
+        "seed": 31261024,
+        "recipe": "entropy_zero",
+        "status": "complete",
+        "selfplay_attempts": 2000,
+        "ppo_rounds": 4,
+        "selection_games": 5000,
+        "selection_wins": 2471,
+        "selection_win_rate": 0.4942,
+        "difference_vs_same_seed_control_percentage_points": -0.1,
+        "local_evidence_coverage": "full_saved_report",
+        "archive": "completed-screen-entropy0-20261025T0850Z.tar.gz"
+      },
+      {
+        "seed": 31261024,
+        "recipe": "rollout_2000",
+        "status": "complete",
+        "selfplay_attempts": 2000,
+        "ppo_rounds": 1,
+        "selection_games": 5000,
+        "selection_wins": 2411,
+        "selection_win_rate": 0.4822,
+        "difference_vs_same_seed_control_percentage_points": -1.3,
+        "local_evidence_coverage": "full_saved_report",
+        "archive": "completed-screen-rollout2000-20261025T0920Z.tar.gz"
+      },
+      {
+        "seed": 32261024,
+        "recipe": "control",
+        "status": "complete",
+        "selfplay_attempts": 2000,
+        "ppo_rounds": 4,
+        "selection_games": 5000,
+        "selection_wins": 2458,
+        "selection_win_rate": 0.4916,
+        "difference_vs_same_seed_control_percentage_points": 0.0,
+        "local_evidence_coverage": "full_saved_report",
+        "archive": "completed-replication-control-20261025T0950Z.tar.gz"
+      },
+      {
+        "seed": 32261024,
+        "recipe": "critic_head",
+        "status": "complete",
+        "selfplay_attempts": 2000,
+        "ppo_rounds": 4,
+        "selection_games": 5000,
+        "selection_wins": 2466,
+        "selection_win_rate": 0.4932,
+        "difference_vs_same_seed_control_percentage_points": 0.16,
+        "local_evidence_coverage": "full_report_checkpoint_and_log_recovered_independently_audited"
+      },
+      {
+        "seed": 32261024,
+        "recipe": "entropy_zero",
+        "status": "complete",
+        "selfplay_attempts": 2000,
+        "ppo_rounds": 4,
+        "selection_games": 5000,
+        "selection_wins": 2456,
+        "selection_win_rate": 0.4912,
+        "difference_vs_same_seed_control_percentage_points": -0.04,
+        "local_evidence_coverage": "full_report_checkpoint_and_log_recovered_independently_audited"
+      }
+    ],
+    "screen_seed": 31261024,
+    "replication_seed": 32261024,
+    "screen_recipe_effects": [
+      {
+        "recipe": "entropy_zero",
+        "effect_percentage_points": -0.1,
+        "paired_95_interval_percentage_points": [
+          -0.38,
+          0.2
+        ]
+      },
+      {
+        "recipe": "critic_head",
+        "effect_percentage_points": -0.42,
+        "paired_95_interval_percentage_points": [
+          -0.76,
+          -0.08
+        ]
+      },
+      {
+        "recipe": "critic_lr_low",
+        "effect_percentage_points": -0.52,
+        "paired_95_interval_percentage_points": [
+          -0.8,
+          -0.24
+        ]
+      },
+      {
+        "recipe": "critic_sequence8",
+        "effect_percentage_points": -0.58,
+        "paired_95_interval_percentage_points": [
+          -0.84,
+          -0.32
+        ]
+      },
+      {
+        "recipe": "rollout_2000",
+        "effect_percentage_points": -1.3,
+        "paired_95_interval_percentage_points": [
+          -1.68,
+          -0.8999999999999999
+        ]
+      }
+    ],
+    "shortlisted_replication": [
+      {
+        "recipe": "entropy_zero",
+        "seed31261024_effect_pp": -0.1,
+        "seed32261024_effect_pp": -0.04,
+        "equal_seed_mean_pp": -0.07,
+        "second_seed_paired_interval": null,
+        "uncertainty": "No stable positive effect is established across the two training seeds. The frozen coordinator retains its second-seed paired interval; the recovery audit did not recompute it. Equal-seed mean is descriptive, not a training-seed confidence interval."
+      },
+      {
+        "recipe": "critic_head",
+        "seed31261024_effect_pp": -0.42,
+        "seed32261024_effect_pp": 0.16,
+        "equal_seed_mean_pp": -0.13,
+        "second_seed_paired_interval": null,
+        "uncertainty": "No stable positive effect is established across the two training seeds. The frozen coordinator retains its second-seed paired interval; the recovery audit did not recompute it. Equal-seed mean is descriptive, not a training-seed confidence interval."
+      }
+    ],
+    "inference": "Selection-only comparisons with nominal unadjusted intervals; lowLR,sequence8,large-rollout each tested on one training seed. No independent challenger-versus-control confirmation was performed.",
+    "evidence": {
+      "path": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/learning-lab-20261024/heartbeat-20261025T102328Z.json",
+      "sha256": "1d7e7f95ee2b49cbd892167a1847b9343ebb19bd1ceda63c823bce7370e4409a"
+    },
+    "common_control_configuration": {
+      "actor_learning_rate": 0.0001,
+      "critic_learning_rate": 0.0003,
+      "train_minibatch": 512,
+      "ppo_epochs": 2,
+      "critic_steps_per_round": 157,
+      "entropy_weight": 0.01,
+      "target_mean_kl": 0.02,
+      "max_state_kl": 0.5,
+      "advantage_baseline": "critic",
+      "concurrent_actor_critic": true,
+      "game_workers": 48,
+      "inference_processes": 4,
+      "learner_device": "gpu",
+      "inference_device": "cpu",
+      "validation_device": "cpu"
+    },
+    "recipe_changes": {
+      "control": {},
+      "critic_lr_low": {
+        "critic_learning_rate": 0.0001
+      },
+      "critic_head": {
+        "critic_update_scope": "head"
+      },
+      "critic_sequence8": {
+        "critic_unroll": 8
+      },
+      "entropy_zero": {
+        "entropy_weight": 0.0
+      },
+      "rollout_2000": {
+        "games_per_round": 2000,
+        "critic_steps_per_round": 628
+      }
+    }
+  },
+  "backup_scope": {
+    "full_local_reports": 9,
+    "completed_archives": 7,
+    "latest_summary_only_arms": [],
+    "full_report_audited_rounds": 33,
+    "summary_only_rounds": 0,
+    "caveat": "All nine completed reports/checkpoints are locally backed up. Earlier detailed mechanism analysis still covers 25 rounds; eight recovered rounds additionally passed integrity and whole-game holdout checks. Raw rollout files are excluded from laptop archives and remain remote.",
+    "fully_backed_rounds": 33,
+    "full_report_integrity_and_holdout_audited_rounds": 33,
+    "mechanism_audited_rounds": 25
+  },
+  "offline_mechanism_audit": {
+    "evidence": {
+      "path": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/learning-lab-20261024/phase1-offline-analysis-20261025T1024Z.json",
+      "sha256": "b19958fe493afe5bf8c4fa020bf9bc8ec2994befb67ceb5ccf4da9b661778acf"
+    },
+    "scope": "Seven full saved reports,25rounds only; not all33reported rounds.",
+    "totals": {
+      "full_report_rounds": 25,
+      "accepted_minibatch_updates": 9828,
+      "rejected_guard_proposals": 97,
+      "critic_steps": 4396,
+      "early_stops": 0,
+      "mean_kl_range": [
+        7.140966528216664e-05,
+        0.0004771207141367868
+      ],
+      "holdout_mse_decreased_rounds": 17,
+      "training_mse_decreased_rounds": 22,
+      "holdout_mse_significantly_increased_rounds": 2,
+      "all_actor_epochs_completed": true,
+      "clip_fraction_range": [
+        0.0006982779476126592,
+        0.0037688163699647506
+      ],
+      "holdout_mse_significantly_decreased_rounds": 12,
+      "heldout_policy_significantly_positive_rounds": 0,
+      "heldout_policy_significantly_negative_rounds": 1
+    },
+    "illustrative_control_round4": {
+      "frozen_behavior_memory_postfit_mse": 0.5523686580594024,
+      "current_memory_train_mse": 1.0565895780771892,
+      "current_memory_holdout_mse": 1.160287585746228,
+      "holdout_explained_variance": 0.14236287157955396
+    },
+    "interpretation": [
+      "Actor is updating: both epochs completed in all25audited rounds, with consistent optimizer counters and nonzero policyKL.",
+      "Frozen-memory versus current-memory training MSE is a state-input mismatch, distinct from the holdout-minus-training gap.",
+      "LowerLR/head/sequence8 reduce that mismatch in this screen but do not improve selection strength; it is not established as the main bottleneck.",
+      "A uniform critic prediction offset cancels under advantage centering; residual variance/explained variance is more relevant than mean calibration alone.",
+      "Actor advantages freeze collection-time values before critic fitting, so same-update postfit critic improvement cannot revise those actor advantages.",
+      "No concrete PPO sign/objective bug was established; aggregate reject counts cannot identify rejection causes or learning-rate histories without proposal telemetry."
+    ],
+    "limitations": [
+      "Round-level significant counts use nominal unadjusted95%bootstrap intervals across multiple rounds/arms.",
+      "No significantly positive heldout surrogate interval does not establish zero playing-strength improvement.",
+      "Sequence8 frozen-memory value_loss is not the optimized sequence objective."
+    ]
+  },
+  "teacher_reference": {
+    "status": "complete_selection_only",
+    "cohort_seed_base": 48261024,
+    "games": 5000,
+    "wins": 2452,
+    "win_rate": 0.4904,
+    "errors": 0,
+    "cutoffs": 0,
+    "seconds": 133.65851231705165,
+    "cpu_workers": 4,
+    "evidence": {
+      "path": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/learning-lab-20261024/teacher-reference-comparison.json",
+      "sha256": "804fbd1cc0e2a6f9672ad58e2ab0d2aa6de9212e8021cbadd5062d0058563322"
+    },
+    "teacher_minus_initial_bc_pp": 0.82,
+    "paired_95_interval_pp": [
+      0.38,
+      1.26
+    ],
+    "limitation": "Deterministic teacher mirrors are an empirical reference, not maximum attainable strength or a guarantee of50%wins; neural policy samples actions."
+  },
+  "fresh_confirmation": {
+    "status": "complete_independently_audited",
+    "cohort_seed_base": 70261024,
+    "games_per_policy": 5000,
+    "attempts_total": 20000,
+    "all_terminal": true,
+    "errors": 0,
+    "cutoffs": 0,
+    "policies": {
+      "original-imitation": {
+        "wins": 2503,
+        "games": 5000,
+        "win_rate": 0.5006
+      },
+      "control-seed31261024": {
+        "wins": 2541,
+        "games": 5000,
+        "win_rate": 0.5082
+      },
+      "control-seed32261024": {
+        "wins": 2549,
+        "games": 5000,
+        "win_rate": 0.5098
+      },
+      "teacher": {
+        "wins": 2527,
+        "games": 5000,
+        "win_rate": 0.5054
+      }
+    },
+    "comparisons": {
+      "control-seed31261024-minus-original-imitation": {
+        "effect_percentage_points": 0.76,
+        "paired_95_interval_percentage_points": [
+          0.4,
+          1.1005000000000018
+        ],
+        "matched_attempts": 5000,
+        "improved": 62,
+        "worsened": 24
+      },
+      "control-seed32261024-minus-original-imitation": {
+        "effect_percentage_points": 0.9199999999999999,
+        "paired_95_interval_percentage_points": [
+          0.54,
+          1.3
+        ],
+        "matched_attempts": 5000,
+        "improved": 71,
+        "worsened": 25
+      },
+      "teacher-minus-original-imitation": {
+        "effect_percentage_points": 0.48,
+        "paired_95_interval_percentage_points": [
+          0.02,
+          0.96
+        ],
+        "matched_attempts": 5000,
+        "improved": 79,
+        "worsened": 55
+      },
+      "teacher-minus-control-seed31261024": {
+        "effect_percentage_points": -0.27999999999999997,
+        "paired_95_interval_percentage_points": [
+          -0.76,
+          0.2
+        ],
+        "matched_attempts": 5000,
+        "improved": 72,
+        "worsened": 86
+      },
+      "teacher-minus-control-seed32261024": {
+        "effect_percentage_points": -0.44,
+        "paired_95_interval_percentage_points": [
+          -0.8200000000000001,
+          -0.06
+        ],
+        "matched_attempts": 5000,
+        "improved": 39,
+        "worsened": 61
+      }
+    },
+    "started_utc": "2026-10-25T11:56:35.666970+00:00",
+    "finished_utc": "2026-10-25T12:35:40.946054+00:00",
+    "report": {
+      "path": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/laptop-frozen-confirmation-20261025/report.json",
+      "sha256": "423f839ce455c4773a5423712a1beb62f7dd2266c6b820797dbfb78d1a029d8f"
+    },
+    "independent_audit": {
+      "path": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/learning-lab-20261024/frozen-confirmation-independent-audit-20261025.json",
+      "sha256": "3d799518459cd260afd7f0ca335871adef749958e7ef75ec1603dba7b1dc02ef"
+    }
+  },
+  "fresh_replication": {
+    "status": "complete_independently_audited",
+    "games_per_policy": 5000,
+    "targets_fixed": 4,
+    "preregistered_utc": "2026-10-25T12:01:54.829457+00:00",
+    "preregistration": {
+      "path": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/laptop-frozen-replication-20261025/preregistration.json",
+      "sha256": "1ebb28a019d538dd18fd7ab3e1c025b4f508da0812915c049e2d5c71cbd111bd"
+    },
+    "protocol": "Exact same four frozen policies and N, registered before first full results; independent cohort, time-only admission, no adaptive selection.",
+    "cohort_seed_base": 71261024,
+    "attempts_total": 20000,
+    "all_terminal": true,
+    "errors": 0,
+    "cutoffs": 0,
+    "policies": {
+      "original-imitation": {
+        "wins": 2515,
+        "games": 5000,
+        "win_rate": 0.503
+      },
+      "control-seed31261024": {
+        "wins": 2556,
+        "games": 5000,
+        "win_rate": 0.5112
+      },
+      "control-seed32261024": {
+        "wins": 2553,
+        "games": 5000,
+        "win_rate": 0.5106
+      },
+      "teacher": {
+        "wins": 2530,
+        "games": 5000,
+        "win_rate": 0.506
+      }
+    },
+    "comparisons": {
+      "control-seed31261024-minus-original-imitation": {
+        "effect_percentage_points": 0.8200000000000001,
+        "paired_95_interval_percentage_points": [
+          0.45999999999999996,
+          1.18
+        ],
+        "matched_attempts": 5000,
+        "improved": 63,
+        "worsened": 22
+      },
+      "control-seed32261024-minus-original-imitation": {
+        "effect_percentage_points": 0.76,
+        "paired_95_interval_percentage_points": [
+          0.44,
+          1.0999999999999999
+        ],
+        "matched_attempts": 5000,
+        "improved": 54,
+        "worsened": 16
+      },
+      "teacher-minus-original-imitation": {
+        "effect_percentage_points": 0.3,
+        "paired_95_interval_percentage_points": [
+          -0.12,
+          0.74
+        ],
+        "matched_attempts": 5000,
+        "improved": 65,
+        "worsened": 50
+      },
+      "teacher-minus-control-seed31261024": {
+        "effect_percentage_points": -0.52,
+        "paired_95_interval_percentage_points": [
+          -1.0,
+          -0.04
+        ],
+        "matched_attempts": 5000,
+        "improved": 61,
+        "worsened": 87
+      },
+      "teacher-minus-control-seed32261024": {
+        "effect_percentage_points": -0.45999999999999996,
+        "paired_95_interval_percentage_points": [
+          -0.86,
+          -0.04
+        ],
+        "matched_attempts": 5000,
+        "improved": 40,
+        "worsened": 63
+      }
+    },
+    "started_utc": "2026-10-25T12:36:16.436284+00:00",
+    "finished_utc": "2026-10-25T13:19:05.713188+00:00",
+    "verified_utc": "2026-10-25T13:19:06.348637+00:00",
+    "report": {
+      "path": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/laptop-frozen-replication-20261025/report.json",
+      "sha256": "e6286abe8076d4264db24010e058cd23f0409310b1cab6e7d5ac7b26b86b7744"
+    },
+    "supervisor": {
+      "path": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/laptop-frozen-replication-20261025-frozen-replication-20261025T123616.288932Z-p2922460-launch.json",
+      "sha256": "3e264f7b1f00eb24f8553ebf7c9215dbdd727d2b4e815e743de25ba7e11f3e4e",
+      "status": "complete",
+      "durability": "Report/JSON/log and directories fsynced; Linux sync completed."
+    },
+    "independent_audit": {
+      "path": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/learning-lab-20261024/frozen-replication-independent-audit-20261025.json",
+      "sha256": "29cf0ae62b0c9e7b5391492379495b01d1f4c351c9eee5012e73c128a8d213bd"
+    }
+  },
+  "code_and_tests": {
+    "fixed_opponent_training": {
+      "status": "IMPLEMENTED_LOCALLY_UNRUN",
+      "flag": "--train-mode versus_baseline",
+      "behavior": "Record only neural learner seat against active FoundationsAggro; genuine terminal returns, private views, no evaluation writer, whole-game holdout and legacy selfplay resume.",
+      "approximate_exposure": "Four thousand fixed-opponent games versus two thousand selfplay games over matched update rounds; actual sample counts can differ.",
+      "focused_tests_passed": 6,
+      "existing_regressions_passed": 15,
+      "independent_review": "PASS",
+      "evidence": {
+        "path": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/learning-lab-20261024/alignment-preparation/local-implementation-status.json",
+        "sha256": "079f22a90127f76bc53edc55a0e2c22bcda4c35f1d4039f7a2e360ca06011f0b"
+      },
+      "no_new_remote_deployment": true,
+      "no_fixed_opponent_training_run": true
+    },
+    "phase1_recipe_tests": {
+      "core_critic_tests_reported": 20,
+      "recipe_configuration_tests_reported": 12,
+      "remote_gpu_smoke": {
+        "path": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/learning-lab-20261024/gpu-smoke.json",
+        "sha256": "0cf17c8595934975416e12c334806874b07b64b92a43ec96018c5cb86f634332"
+      },
+      "smoke_scopes": [
+        "all/unroll1",
+        "head/unroll1",
+        "all/unroll8"
+      ],
+      "reported_test_count_source": "docs/benchmarks/raytracer-learning-lab-2026-10-24.json:verification (root-owned live record)"
+    },
+    "frozen_evaluation": "CPU-only compile=False checkpoint loading; no optimizer state, training writers or neural weight updates. Exclusive job lock with four-CPU affinity, reviewed deadline watchdog and bounded temporary sleep inhibition."
+  },
+  "outage_and_timing": {
+    "remote_training_started_utc": "2026-10-25T06:24:02.509316+00:00",
+    "nine_arm_complete_snapshot_utc": "2026-10-25T10:23:28.167139+00:00",
+    "root_reported_SIGINT_utc_approx": "2026-10-25T10:24Z",
+    "outage": "Desktop became LAN/SSH unreachable around handoff; recorded wake attempts did not restore access. Sleep/power transition is plausible but unverified.",
+    "wake_evidence": {
+      "path": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/learning-lab-20261024/alignment-preparation/sleep-bridge/wake-evidence.json",
+      "sha256": "d6cf9d9891f986c546cb52b250f2758060f3e09b705b8261b23e33bfb45d07df"
+    },
+    "latest_exact_network_failure_recorded_utc": "2026-10-25T11:43:02.066605+00:00",
+    "remote_alignment_latest_start_utc": "2026-10-25T12:00:00Z",
+    "remote_alignment_started": false,
+    "remote_cleanup_verified": true,
+    "remote_windows_task_final_state": "Ready",
+    "GPU_active_duration": "NOT_MEASURED; do not equate walltime or authorization with GPU utilization.",
+    "sealed_remote_confirmation_seed_bases": [
+      68261024,
+      69261024
+    ],
+    "local_cleanup": {
+      "status": "PASS_INDEPENDENTLY_VERIFIED",
+      "evidence": {
+        "path": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/learning-lab-20261024/laptop-frozen-supervision/final-cleanup-20261025.json",
+        "sha256": "adc3f4c188d4915c3fedea0eb4a513002a05594da35e807f08619e1eb27637d4"
+      },
+      "scope": "Both local owned groups, watchdogs, temporary sleepguards and inhibitor holders ended; shared job lock free. This does not verify remote shutdown."
+    },
+    "recovery_utc_approx": "2026-10-25T14:27Z",
+    "post_window_remote_cleanup_verification": {
+      "path": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/learning-lab-20261024/remote-cleanup-reconnected-20261025.json",
+      "sha256": "c5822c344d8c51158062a80a04460a667db9ed591c237e60712025cd8df999e2"
+    },
+    "last_offline_native_ssh_check_utc": "2026-10-25T14:12:37Z"
+  },
+  "limitations": [
+    "Recipe effects use a shared adaptively reused selection cohort and few training seeds.",
+    "Fresh paired intervals condition on these frozen checkpoints; they do not quantify training-seed variance.",
+    "Five nominal comparisons per fresh cohort are not multiplicity-adjusted.",
+    "Do not pool repeated evaluation games across the two control training seeds as independent observations.",
+    "Keep the two disjoint fresh cohorts separate in reporting; no policy selection or new training uses them.",
+    "Raw rollout files are preserved on the desktop but excluded from laptop archives. The fixed-opponent training comparison remains unrun."
+  ],
+  "independent_inventory_review": {
+    "status": "PASS",
+    "reviewer": "gpu_environment",
+    "reviewed_inventory_sha256": "35b87bd1a57d842842fec55f6aaee229d6e76609e2369db809b22aeff440023a",
+    "audit": {
+      "path": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/learning-lab-20261024/final-inventory-independent-audit-20261025.json",
+      "sha256": "b7407d4c54c55c20e2a421ba56d6b92e2343b8304b9251eb7552898f5e9c0cec"
+    },
+    "scope": "Eleven original evidence hashes; 9 arm/18k attempt/33 round totals; 25 fully backed rounds; both complete fresh cohorts, exact effects/intervals/transition counters; scientific caveats and unrun/unknown qualifications.",
+    "metadata_only_after_review": "Added independent audit references/PASS statuses and separately audited local cleanup reference; no result or conclusion changed.",
+    "original_pre_recovery_snapshot_preserved": {
+      "path": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/learning-lab-20261024/final-inventory-before-recovery-20261025.json",
+      "sha256": "87e37a457767ba172d1ed13d6d5fe27a1c6090cb231a69eba388e2d17b0fc7b5"
+    },
+    "post_window_recovery_review": {
+      "path": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/learning-lab-20261024/recovered-late-replications-independent-audit-20261025.json",
+      "sha256": "b703c1cebcfec64221ed9ba3875a3fd33c310272ea13553c3b2eebd2b8ee56b5"
+    }
+  },
+  "fresh_evaluation_scope": {
+    "complete_cohorts": 2,
+    "cohort_seed_bases": [
+      70261024,
+      71261024
+    ],
+    "games_per_policy_per_cohort": 5000,
+    "games_per_policy_total": 10000,
+    "fixed_policies": 4,
+    "attempts_total": 40000,
+    "terminal_attempts_total": 40000,
+    "errors_total": 0,
+    "cutoffs_total": 0,
+    "training_or_new_model_selection": false,
+    "inference": "Positive control-versus-imitation effects replicate across both independent game cohorts for each fixed control checkpoint. Cohort variation does not measure training-seed uncertainty; no challenger-versus-control independent confirmation was run."
+  },
+  "post_window_recovery": {
+    "verified_utc": "2026-10-25T14:35:06.441948+00:00",
+    "desktop_reachable_again_utc_approx": "2026-10-25T14:27Z",
+    "compute_authorization_extended": false,
+    "new_training_games_or_updates": 0,
+    "remote_cleanup": "PASS_INDEPENDENTLY_VERIFIED",
+    "remote_verification": {
+      "path": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/learning-lab-20261024/remote-cleanup-reconnected-20261025.json",
+      "sha256": "c5822c344d8c51158062a80a04460a667db9ed591c237e60712025cd8df999e2"
+    },
+    "recovered_archive": {
+      "path": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/learning-lab-20261024/recovered-late-replications-20261025.tar.gz",
+      "sha256": "290e338ece8b9658b0a8c149f66869580736a1b3fb219374b7f0e7e9007ff0a8",
+      "bytes": 39168431,
+      "verification": {
+        "path": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/learning-lab-20261024/recovered-late-replications-20261025.verification.json",
+        "sha256": "dc688493cf5c0f1d2ee3666e79bec62ad94ea14ba56dd0a73e602023d376bdd7"
+      }
+    },
+    "independent_recovery_audit": {
+      "path": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/learning-lab-20261024/recovered-late-replications-independent-audit-20261025.json",
+      "sha256": "b703c1cebcfec64221ed9ba3875a3fd33c310272ea13553c3b2eebd2b8ee56b5"
+    },
+    "recovered_completed_arms": [
+      "32261024/entropy_zero",
+      "32261024/critic_head"
+    ],
+    "all_nine_completed_reports_and_checkpoints_locally_backed_up": true,
+    "raw_rollout_scope": "Excluded from laptop archives; preserved remotely.",
+    "interrupted_third_seed": {
+      "seed": 33261024,
+      "recipe": "entropy_zero",
+      "new_games": 0,
+      "new_actor_or_critic_updates": 0,
+      "state": "Only copied round-0 bootstrap; interrupted during collector.start. Inherited critic warmup steps and reused initial evaluation are not new experiment work."
+    },
+    "scientific_conclusions_changed": false,
+    "fixed_opponent_comparison": "UNRUN"
+  }
+}

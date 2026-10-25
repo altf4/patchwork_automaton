@@ -19,6 +19,8 @@ class RustMagePolicy(NeuralPolicy):
         if model.feature_spec != self.encoder.feature_spec:
             raise ValueError('Model feature schema does not match RustMage')
         self.batcher, self.version, self.sink, self.greedy = batcher, version, sink, greedy
+        from .native_pipeline import enabled, NativeHistory
+        if enabled(): self.history = NativeHistory(self.encoder.registry)
 
     def act(self, obs):
         if obs.backend != 'rustmage' or obs.decision is None:
@@ -27,7 +29,8 @@ class RustMagePolicy(NeuralPolicy):
         key = (token.session, token.game, token.actor)
         if self.previous.get(key) == token: raise StaleDecision('Already answered')
         self.observe(obs)
-        choices = expand_options(obs.decision, allow_concede=self.encoder.allow_concede)
+        choices = (obs.native.native_choices(self.encoder.allow_concede) if hasattr(obs.native, 'native_choices')
+                   else expand_options(obs.decision, allow_concede=self.encoder.allow_concede))
         # Forced rules choices need no inference. Their visible changes are kept
         # in History and consumed at the next genuine choice, including changes
         # during opponent actions. There is no strategy fallback here.

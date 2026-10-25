@@ -128,6 +128,9 @@ class RustMageMatch:
             raise
 
     def _initialize(self, native):
+        if os.environ.get('PATCHWORK_OBSERVATION_PIPELINE') == 'rust':
+            from ..neural.native_pipeline import enable_native_observations
+            enable_native_observations(native)
         self.native_game = native
         self.session = uuid.uuid4().hex
         self.handle = Handle('rustmage', 'game', uuid.uuid4().hex)

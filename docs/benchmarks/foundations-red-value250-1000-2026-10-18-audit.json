@@ -1,0 +1,368 @@
+{
+  "status": "passed",
+  "source_files_unchanged": 29,
+  "prior_artifacts_unchanged": 11,
+  "initial_files_unchanged": 5,
+  "identical_initial_weight_tensors": 86,
+  "first_update_policy_max_abs_difference": 0.06125316023826599,
+  "initial_and_first_update_sampler_rng_identical": true,
+  "first_rollout_numerical_comparison": {
+    "first_game_records": 909,
+    "different_actions": 0,
+    "different_observations": 0,
+    "max_abs_prediction_differences": {
+      "memory": 5.066394805908203e-07,
+      "value": 6.146728992462158e-08,
+      "log_probs": 2.384185791015625e-07
+    },
+    "note": "Read-only comparison of one matched game before the first update. Live batched inference is not bitwise reproducible across separate runs."
+  },
+  "config_difference": {
+    "value_max_steps": {
+      "old": null,
+      "new": 250
+    }
+  },
+  "round_checks": [
+    {
+      "round": 1,
+      "training_games": 80,
+      "validation_games": 20,
+      "optimizer_samples": 36458,
+      "value_steps": 250,
+      "policy_steps": 2280,
+      "value_training_mse": 1.007858706658338,
+      "value_validation_mse": 1.0130340303164045,
+      "value_validation_mse_interval": [
+        1.001302587165942,
+        1.0244905962961188
+      ],
+      "policy_training_gain": 0.00014011452410532548,
+      "policy_validation_gain": -0.0002504760618235006
+    },
+    {
+      "round": 2,
+      "training_games": 80,
+      "validation_games": 20,
+      "optimizer_samples": 36757,
+      "value_steps": 250,
+      "policy_steps": 2298,
+      "value_training_mse": 0.998331271061527,
+      "value_validation_mse": 0.9976680345258185,
+      "value_validation_mse_interval": [
+        0.9957431730757578,
+        0.9998538163836805
+      ],
+      "policy_training_gain": 0.000680976962618213,
+      "policy_validation_gain": 0.00017956280616105498
+    },
+    {
+      "round": 3,
+      "training_games": 80,
+      "validation_games": 20,
+      "optimizer_samples": 36085,
+      "value_steps": 250,
+      "policy_steps": 2256,
+      "value_training_mse": 0.9985387537900378,
+      "value_validation_mse": 0.9974103485517338,
+      "value_validation_mse_interval": [
+        0.9955203087018436,
+        0.9992487629516414
+      ],
+      "policy_training_gain": 0.001129132013461201,
+      "policy_validation_gain": -4.814730378344731e-05
+    },
+    {
+      "round": 4,
+      "training_games": 80,
+      "validation_games": 20,
+      "optimizer_samples": 34645,
+      "value_steps": 250,
+      "policy_steps": 2166,
+      "value_training_mse": 0.9984659133049446,
+      "value_validation_mse": 0.9992078873509127,
+      "value_validation_mse_interval": [
+        0.9883232343792523,
+        1.0096601670555758
+      ],
+      "policy_training_gain": 0.0009311814377825433,
+      "policy_validation_gain": 0.0002558208326256086
+    },
+    {
+      "round": 5,
+      "training_games": 80,
+      "validation_games": 20,
+      "optimizer_samples": 33230,
+      "value_steps": 250,
+      "policy_steps": 2078,
+      "value_training_mse": 1.0015359388138187,
+      "value_validation_mse": 1.0020014820349878,
+      "value_validation_mse_interval": [
+        0.991215137045127,
+        1.0141702109873616
+      ],
+      "policy_training_gain": 0.0012174661501234956,
+      "policy_validation_gain": 0.0009493847678937458
+    },
+    {
+      "round": 6,
+      "training_games": 80,
+      "validation_games": 20,
+      "optimizer_samples": 31350,
+      "value_steps": 250,
+      "policy_steps": 1960,
+      "value_training_mse": 0.8158010074656554,
+      "value_validation_mse": 0.8039893082441002,
+      "value_validation_mse_interval": [
+        0.6437959190298401,
+        0.9718546785989033
+      ],
+      "policy_training_gain": 0.0010805525164687276,
+      "policy_validation_gain": 1.4831337653903443e-05
+    },
+    {
+      "round": 7,
+      "training_games": 80,
+      "validation_games": 20,
+      "optimizer_samples": 31882,
+      "value_steps": 250,
+      "policy_steps": 1994,
+      "value_training_mse": 0.66913265545169,
+      "value_validation_mse": 0.9754807029975298,
+      "value_validation_mse_interval": [
+        0.660784691073954,
+        1.3149148496129708
+      ],
+      "policy_training_gain": 0.0012715071099924696,
+      "policy_validation_gain": 0.0005094429064572215
+    },
+    {
+      "round": 8,
+      "training_games": 80,
+      "validation_games": 20,
+      "optimizer_samples": 31222,
+      "value_steps": 250,
+      "policy_steps": 1952,
+      "value_training_mse": 0.8311682477799376,
+      "value_validation_mse": 1.133241991076932,
+      "value_validation_mse_interval": [
+        0.8529713581333686,
+        1.3957699691551675
+      ],
+      "policy_training_gain": 0.002158928689119149,
+      "policy_validation_gain": 0.00020993575110678166
+    },
+    {
+      "round": 9,
+      "training_games": 80,
+      "validation_games": 20,
+      "optimizer_samples": 29949,
+      "value_steps": 250,
+      "policy_steps": 1872,
+      "value_training_mse": 0.7782601272771323,
+      "value_validation_mse": 0.6923157657845626,
+      "value_validation_mse_interval": [
+        0.5997977159530737,
+        0.7908801181066513
+      ],
+      "policy_training_gain": 0.0010971459492045723,
+      "policy_validation_gain": 0.00013425987178358756
+    },
+    {
+      "round": 10,
+      "training_games": 80,
+      "validation_games": 20,
+      "optimizer_samples": 32424,
+      "value_steps": 250,
+      "policy_steps": 2028,
+      "value_training_mse": 0.7708264790402342,
+      "value_validation_mse": 0.9267182872428559,
+      "value_validation_mse_interval": [
+        0.6678816504526096,
+        1.1909370999413238
+      ],
+      "policy_training_gain": 0.0012212954825156534,
+      "policy_validation_gain": 0.00010751720543489176
+    }
+  ],
+  "collected_games": 1000,
+  "optimization_games": 800,
+  "validation_games": 200,
+  "training_trajectory_files": 1600,
+  "validation_trajectory_files": 400,
+  "training_errors": 0,
+  "training_cutoffs": 0,
+  "evaluation_errors": 0,
+  "value_steps": {
+    "prior": 21418,
+    "current": 2500
+  },
+  "before": {
+    "games": 40,
+    "win": 30,
+    "loss": 0,
+    "draw": 0,
+    "cutoff": 10,
+    "error": 0,
+    "win_rate": 0.75,
+    "failed_attempts": 10,
+    "failure_rate": 0.25,
+    "mean_own_turns_to_win": 17,
+    "median_own_turns_to_win": 17.0,
+    "p90_own_turns_to_win": 23,
+    "fastest_win": 9,
+    "slowest_win": 25,
+    "wins_by_own_turn": {
+      "4": 0.0,
+      "5": 0.0,
+      "6": 0.0,
+      "10": 0.1
+    },
+    "win_turn_histogram": {
+      "9": 1,
+      "10": 3,
+      "12": 2,
+      "13": 2,
+      "14": 4,
+      "15": 2,
+      "17": 2,
+      "18": 1,
+      "19": 2,
+      "20": 3,
+      "22": 3,
+      "23": 2,
+      "24": 2,
+      "25": 1
+    },
+    "turn_horizon": 25,
+    "capped_turns_mean": 19.25,
+    "capped_turns_failure_value": 26
+  },
+  "after": {
+    "games": 40,
+    "win": 39,
+    "loss": 0,
+    "draw": 0,
+    "cutoff": 1,
+    "error": 0,
+    "win_rate": 0.975,
+    "failed_attempts": 1,
+    "failure_rate": 0.025,
+    "mean_own_turns_to_win": 14.282051282051283,
+    "median_own_turns_to_win": 14,
+    "p90_own_turns_to_win": 23,
+    "fastest_win": 6,
+    "slowest_win": 24,
+    "wins_by_own_turn": {
+      "4": 0.0,
+      "5": 0.0,
+      "6": 0.05,
+      "10": 0.275
+    },
+    "win_turn_histogram": {
+      "6": 2,
+      "7": 2,
+      "8": 1,
+      "9": 2,
+      "10": 4,
+      "11": 3,
+      "12": 2,
+      "13": 2,
+      "14": 6,
+      "15": 1,
+      "16": 1,
+      "17": 3,
+      "19": 2,
+      "20": 1,
+      "21": 2,
+      "23": 4,
+      "24": 1
+    },
+    "turn_horizon": 25,
+    "capped_turns_mean": 14.575,
+    "capped_turns_failure_value": 26
+  },
+  "prior_after": {
+    "games": 40,
+    "win": 39,
+    "loss": 0,
+    "draw": 0,
+    "cutoff": 1,
+    "error": 0,
+    "win_rate": 0.975,
+    "failed_attempts": 1,
+    "failure_rate": 0.025,
+    "mean_own_turns_to_win": 15.179487179487179,
+    "median_own_turns_to_win": 15,
+    "p90_own_turns_to_win": 23,
+    "fastest_win": 8,
+    "slowest_win": 25,
+    "wins_by_own_turn": {
+      "4": 0.0,
+      "5": 0.0,
+      "6": 0.0,
+      "10": 0.2
+    },
+    "win_turn_histogram": {
+      "8": 5,
+      "9": 1,
+      "10": 2,
+      "11": 4,
+      "12": 1,
+      "13": 3,
+      "14": 3,
+      "15": 3,
+      "16": 3,
+      "17": 2,
+      "18": 1,
+      "19": 2,
+      "20": 2,
+      "21": 1,
+      "22": 1,
+      "23": 2,
+      "24": 1,
+      "25": 2
+    },
+    "turn_horizon": 25,
+    "capped_turns_mean": 15.45,
+    "capped_turns_failure_value": 26
+  },
+  "improvement_from_fresh": {
+    "capped_turn_reduction": 4.675,
+    "bootstrap_95_interval": [
+      3.1,
+      6.35
+    ],
+    "improved_attempts": 32,
+    "worsened_attempts": 6,
+    "tied_attempts": 2
+  },
+  "prior_comparison": {
+    "paired_capped_turn_reduction": 0.875,
+    "bootstrap_95_interval": [
+      -0.7,
+      2.4
+    ],
+    "improved": 19,
+    "worsened": 12,
+    "tied": 9,
+    "pooled_heldout_mse": {
+      "prior": 1.2589180320909303,
+      "current": 0.9598653471529457
+    },
+    "caveat": "Single training seed, matched initialization and evaluation seeds. Later on-policy training/validation trajectories differ. Bootstrap covers evaluation games, not training seeds."
+  },
+  "phase_seconds": {
+    "collection_seconds": 357.52697402599733,
+    "update_seconds": 686.3872402420238,
+    "validation_seconds": 223.90947271800542
+  },
+  "prior_phase_seconds": {
+    "collection_seconds": 372.68785611295607,
+    "update_seconds": 728.2332945159578,
+    "validation_seconds": 230.34820737800328
+  },
+  "training_invocation_seconds": 1363.1556299499935,
+  "prior_training_invocation_seconds": 1427.534510922007,
+  "outer_time_log": "\tCommand being timed: \"env UV_CACHE_DIR=.local/uv-cache KERAS_HOME=.local/keras MPLCONFIGDIR=.local/matplotlib KERAS_BACKEND=tensorflow CUDA_VISIBLE_DEVICES=-1 TF_ENABLE_ONEDNN_OPTS=0 TF_NUM_INTRAOP_THREADS=1 TF_NUM_INTEROP_THREADS=4 TF_CPP_MIN_LOG_LEVEL=3 .local/uv/uv run --no-sync python -m examples.train_rustmage --output .local/red-value250-1000-2026-10-18 --rounds 10 --games-per-round 100 --validation-fraction 0.2 --eval-every-games 100 --eval-games 40 --eval-horizon 25 --train-horizon 60 --workers 24 --collector processes --architecture separate --inference-processes 2 --inference-wait-ms 0 --train-batch 32 --learning-rate 0.0003 --ppo-epochs 2 --value-max-steps 250 --concurrent-updates --prefetch-batches 2 --measurement-workers 4 --seed 721 --plot\"\n\tUser time (seconds): 5072.54\n\tSystem time (seconds): 128.61\n\tPercent of CPU this job got: 378%\n\tElapsed (wall clock) time (h:mm:ss or m:ss): 22:53.89\n\tAverage shared text size (kbytes): 0\n\tAverage unshared data size (kbytes): 0\n\tAverage stack size (kbytes): 0\n\tAverage total size (kbytes): 0\n\tMaximum resident set size (kbytes): 5596832\n\tAverage resident set size (kbytes): 0\n\tMajor (requiring I/O) page faults: 0\n\tMinor (reclaiming a frame) page faults: 6012092\n\tVoluntary context switches: 15230888\n\tInvoluntary context switches: 1649573\n\tSwaps: 0\n\tFile system inputs: 64\n\tFile system outputs: 2378584\n\tSocket messages sent: 0\n\tSocket messages received: 0\n\tSignals delivered: 0\n\tPage size (bytes): 4096\n\tExit status: 0\n"
+}

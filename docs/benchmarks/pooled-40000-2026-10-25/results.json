@@ -1,0 +1,230 @@
+{
+  "status": "complete",
+  "run_id": "raytracer-pooled-40000-2026-10-25",
+  "finished_utc": "2026-10-25T22:28:14.814008+00:00",
+  "confirmation_cohort": 330261025,
+  "evaluation_type": "Each checkpoint versus the same active FoundationsAggro baseline; not a head-to-head match.",
+  "confirmation": {
+    "imitation": {
+      "wins": 2474,
+      "attempts": 5000,
+      "rate": 0.4948,
+      "checkpoint_sha256": "3438e3837ca7f86c498a60bf29d2503c12b80f3f693b732423b5dca65a39c682"
+    },
+    "round-4": {
+      "wins": 2511,
+      "attempts": 5000,
+      "rate": 0.5022,
+      "checkpoint_sha256": "ea287f0fa1ac98fa59615b29890615ed68d6d269912236d89ef38b5d6965b6c5"
+    },
+    "round-40": {
+      "wins": 2777,
+      "attempts": 5000,
+      "rate": 0.5554,
+      "checkpoint_sha256": "6e8919de5af6f9ec651b88da228745d9fc525d4286c7393958c9f188dd203ce2"
+    }
+  },
+  "paired_comparisons": {
+    "primary-40k-minus-4k": {
+      "difference": 0.0532,
+      "ci95": [
+        0.046,
+        0.0602
+      ],
+      "improved": 295,
+      "worsened": 29,
+      "tied": 4676,
+      "unit": "matched_schedule",
+      "resamples": 4000,
+      "seed": 9901
+    },
+    "40k-minus-imitation": {
+      "difference": 0.0606,
+      "ci95": [
+        0.053,
+        0.068
+      ],
+      "improved": 341,
+      "worsened": 38,
+      "tied": 4621,
+      "unit": "matched_schedule",
+      "resamples": 4000,
+      "seed": 9901
+    },
+    "4k-minus-imitation": {
+      "difference": 0.0074,
+      "ci95": [
+        0.0042,
+        0.0108
+      ],
+      "improved": 53,
+      "worsened": 16,
+      "tied": 4931,
+      "unit": "matched_schedule",
+      "resamples": 4000,
+      "seed": 9901
+    }
+  },
+  "training": {
+    "unique_committed_games": 40000,
+    "optimization_games": 32000,
+    "heldout_games": 8000,
+    "hosts": {
+      "laptop": 4672,
+      "raytracer": 35328
+    },
+    "fallback_games": 448,
+    "source_files_checked": 140,
+    "last_actor_steps": 13289,
+    "last_critic_steps": 6437
+  },
+  "monitoring": [
+    {
+      "round": 0,
+      "collected_games": 0,
+      "win_rate": 0.508,
+      "ci95_low": 0.48609541136198264,
+      "ci95_high": 0.5298739158815173,
+      "attempted_games": 2000,
+      "errors": 0,
+      "cutoffs": 0,
+      "checkpoint": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/pooled-40000-20261025-runtime/initialization/imitation/policy.keras",
+      "checkpoint_sha256": "3438e3837ca7f86c498a60bf29d2503c12b80f3f693b732423b5dca65a39c682",
+      "cohort_seed": 320261025,
+      "source": "monitor-imitation.json"
+    },
+    {
+      "round": 4,
+      "collected_games": 4000,
+      "win_rate": 0.515,
+      "ci95_low": 0.4930890297875422,
+      "ci95_high": 0.5368534587940202,
+      "attempted_games": 2000,
+      "errors": 0,
+      "cutoffs": 0,
+      "checkpoint": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/raytracer-pooled-40000-2026-10-25/training/checkpoints/round-0004/policy.keras",
+      "checkpoint_sha256": "ea287f0fa1ac98fa59615b29890615ed68d6d269912236d89ef38b5d6965b6c5",
+      "cohort_seed": 320261025,
+      "source": "monitor-0004.json"
+    },
+    {
+      "round": 10,
+      "collected_games": 10000,
+      "win_rate": 0.5225,
+      "ci95_low": 0.5005869515842244,
+      "ci95_high": 0.5443267812881191,
+      "attempted_games": 2000,
+      "errors": 0,
+      "cutoffs": 0,
+      "checkpoint": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/raytracer-pooled-40000-2026-10-25/training/checkpoints/round-0010/policy.keras",
+      "checkpoint_sha256": "b5ec59f1ef6ec3e3a9ae28039b1d5352057ecc5931000142fb0e6223fa683184",
+      "cohort_seed": 320261025,
+      "source": "monitor-0010.json"
+    },
+    {
+      "round": 20,
+      "collected_games": 20000,
+      "win_rate": 0.5395,
+      "ci95_low": 0.517600517072657,
+      "ci95_high": 0.5612480361921239,
+      "attempted_games": 2000,
+      "errors": 0,
+      "cutoffs": 0,
+      "checkpoint": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/raytracer-pooled-40000-2026-10-25/training/checkpoints/round-0020/policy.keras",
+      "checkpoint_sha256": "a6f07e8b8d008a54445d4017f82ee96dcc4cfc913f7c3b33cc80ec2423c41f90",
+      "cohort_seed": 320261025,
+      "source": "monitor-0020.json"
+    },
+    {
+      "round": 40,
+      "collected_games": 40000,
+      "win_rate": 0.5645,
+      "ci95_low": 0.5426668660351888,
+      "ci95_high": 0.5860858348655296,
+      "attempted_games": 2000,
+      "errors": 0,
+      "cutoffs": 0,
+      "checkpoint": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/raytracer-pooled-40000-2026-10-25/training/checkpoints/round-0040/policy.keras",
+      "checkpoint_sha256": "6e8919de5af6f9ec651b88da228745d9fc525d4286c7393958c9f188dd203ce2",
+      "cohort_seed": 320261025,
+      "source": "monitor-0040.json"
+    }
+  ],
+  "limitations": [
+    "One training seed; paired game intervals do not measure training-seed variability.",
+    "Strength is measured against the fixed training opponent on this deck.",
+    "Physical executions exceed unique committed attempts due interrupted round 8 recollection and late/fallback work.",
+    "40k vs 4k compares two checkpoints from one trajectory with more rounds and optimizer steps; it does not isolate larger dataset size from additional optimization.",
+    "Comparisons are each policy versus the same baseline, not 40k-versus-4k head-to-head."
+  ],
+  "interpretation": [
+    "This trajectory continued improving beyond 4000 games; the fresh final cohort confirms the direction seen in monitoring.",
+    "The study supports longer training with more fresh games under this recipe. It does not isolate additional data from additional optimizer steps, compare minibatches 512 versus 1024, or establish a general sample requirement."
+  ],
+  "recovery_disclosure": {
+    "remote_restarts": 1,
+    "resume_checkpoint": 7,
+    "uncommitted_round8_raw_files_preserved": 870,
+    "recorded_completions_before_recollection": 822,
+    "committed_unique_attempt_target": 40000,
+    "physical_executions_exceed_target": true,
+    "desktop_fallback_attempts": 448,
+    "fallback_rule": "Same scheduled IDs/seeds/seats and frozen behavior policy; late/unaccepted laptop work excluded from optimization.",
+    "native_liveness_original_failure_cause": "Not recorded; original coordinator stopped on a failed native check and Windows subsequently idle-slept.",
+    "infrastructure_only_recovery": "Critic/model/Adam/PCG checkpoint continuity preserved; immutable 140-file ML runtime unchanged."
+  },
+  "backup": {
+    "started_utc": "2026-10-25T22:29:39.783525+00:00",
+    "after_round": 40,
+    "partial_archive": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/pooled-40000-20261025/live-backup-recovery2/archives/20261025T222939.783372Z-p3353973.tar.gz.part",
+    "stderr": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/pooled-40000-20261025/live-backup-recovery2/logs/backup-20261025T222939.783372Z-p3353973.stderr.log",
+    "status": "verified",
+    "finished_utc": "2026-10-25T22:29:57.162884+00:00",
+    "archive": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/pooled-40000-20261025/live-backup-recovery2/archives/20261025T222939.783372Z-p3353973.tar.gz",
+    "archive_sha256": "0ee9b2ba036364ef4c6f5ca618644400a1f7b181331eb09c551f98b055bebfd0",
+    "snapshot": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/pooled-40000-20261025/live-backup-recovery2/snapshots/20261025T222939.783372Z-p3353973",
+    "latest_round": 40,
+    "included_checkpoint_rounds": [],
+    "member_count": 51,
+    "uncompressed_bytes": 147041710,
+    "terminal_cleanup_verified": true
+  },
+  "plots": {
+    "learning": "learning-curve.png",
+    "final_confirmation": "final-confirmation.png",
+    "policy_updates": "diagnostics/policy-updates.png",
+    "training_pipeline": "diagnostics/training-pipeline.png",
+    "scalar_data": "diagnostics/round-metrics.csv"
+  },
+  "local_raw_reports": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/pooled-40000-20261025/live-backup-recovery2/current",
+  "audit": "final-independent-audit.json",
+  "cleanup": {
+    "remote": "final-remote-cleanup.json",
+    "local": "final-local-cleanup.json",
+    "native": {
+      "status": "verified",
+      "proof": "final-native-cleanup.json",
+      "task_state": "Ready",
+      "last_task_result": 0,
+      "original_guardian_pid_absent": true,
+      "temporary_cleanup_wrapper_exited": true
+    }
+  },
+  "updated_utc": "2026-10-25T22:50:51.110551+00:00",
+  "shutdown": {
+    "utc": "2026-10-25T22:44:37.3200522Z",
+    "computer": "RAYTRACER",
+    "authorization": "Human asked to shut down raytracer when done",
+    "study_status": "complete",
+    "guardian_status": "released",
+    "task_state": "Ready",
+    "command": "shutdown.exe /s /t 0",
+    "force_application_close": false,
+    "status": "accepted",
+    "exit_code": 0
+  },
+  "oversight": {
+    "status": "deleted",
+    "proof": "automation-deletion-proof.json"
+  }
+}

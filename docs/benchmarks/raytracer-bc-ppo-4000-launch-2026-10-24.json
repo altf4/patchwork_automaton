@@ -1,0 +1,491 @@
+{
+  "status": "complete_and_verified",
+  "snapshot_utc": "2026-10-25T00:53:23.145432+00:00",
+  "description": "Existing 10,000-game imitation-trained actor, 1,000 fresh frozen-actor critic warm-up games, then 4,000 additional PPO self-play attempts on raytracer. Warm-up attempts are outside the PPO budget.",
+  "configuration": {
+    "games_per_round": 500,
+    "validation_fraction": 0.2,
+    "eval_games": 200,
+    "eval_every_games": 1000,
+    "eval_horizon": 25,
+    "train_horizon": 60,
+    "workers": 48,
+    "inference_processes": 4,
+    "inference_wait_ms": 0.0,
+    "collector": "processes",
+    "observation_pipeline": "python",
+    "architecture": "separate",
+    "learner_device": "gpu",
+    "inference_device": "cpu",
+    "validation_device": "cpu",
+    "validation_batch": 32,
+    "baseline_eval_games": 1000,
+    "train_batch": 512,
+    "learning_rate": 0.0001,
+    "ppo_epochs": 2,
+    "value_learning_rate": 0.0003,
+    "value_max_steps": 157,
+    "critic_warmup_games": 1000,
+    "critic_warmup_max_steps": 157,
+    "concurrent_updates": true,
+    "prefetch_batches": 2,
+    "measurement_workers": 4,
+    "rollout_cache_mib": 512,
+    "rollout_storage": "pickle",
+    "seed": 21261024,
+    "algorithm": "ppo",
+    "target_kl": 0.02,
+    "max_state_kl": 0.1,
+    "advantage_scale_floor": 1.0,
+    "ppo_clip": 0.2
+  },
+  "initialization": {
+    "method": "checkpoint weights; fresh optimizers and trainer RNG",
+    "checkpoint": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/red-imitation-10000-2026-10-19/training/checkpoints/round-0040/policy.keras",
+    "checkpoint_sha256": "3438e3837ca7f86c498a60bf29d2503c12b80f3f693b732423b5dca65a39c682",
+    "source_round": 40,
+    "source_algorithm": "imitation",
+    "source_collected_games": 10000,
+    "source_optimization_games": 8000,
+    "source_validation_games": 2000,
+    "source_report": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/red-imitation-10000-2026-10-19/training/report.json",
+    "source_report_sha256": "055cce733fc0937138656266a32e0115c02c8e2f0a52e1f749fb94ebc222ef60"
+  },
+  "critic_warmup_games": 1000,
+  "new_ppo_games": 4000,
+  "expected_ppo_optimization_games_before_cutoffs": 3200,
+  "expected_ppo_holdout_games": 800,
+  "primary_evaluation": "1,000 fixed seat/start-balanced attempts against active FoundationsAggro at 0/1,000/2,000/3,000/4,000 PPO games, sampled temperature 1; same disjoint seeds across checkpoints.",
+  "training_job": {
+    "started_utc": "2026-10-24T23:47:48.938412+00:00",
+    "hostname": "raytracer",
+    "supervisor_pid": 3758,
+    "process_group": 3758,
+    "learner_pid": 3760,
+    "windows_task": "MTGO-RustMage-BC-PPO-4000-20261024",
+    "remote_output": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/raytracer-bc-ppo-4000-2026-10-24",
+    "remote_log": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/raytracer-bc-ppo-4000-20261024.log"
+  },
+  "durability": "Every checkpoint file and parent directory fsynced before latest publication; dedicated Windows task holds system-awake request through learner exit, final finite/checksum verification and Linux sync. Source imitation checkpoint remains immutable.",
+  "checks": {
+    "runner": {
+      "tests": 6,
+      "seconds": 4.885,
+      "passed": true
+    },
+    "critic_and_ppo_regressions": {
+      "tests": 17,
+      "seconds": 73.6,
+      "passed": true
+    },
+    "checkpoint_durability": {
+      "tests": 6,
+      "passed": true,
+      "note": "Previously run this session before pilot changes; unchanged durability module."
+    },
+    "gpu_integration": {
+      "passed": true,
+      "warmup_games": 4,
+      "ppo_games": 4,
+      "actor_frozen_during_warmup": true,
+      "actor_steps_after_warmup": 24,
+      "learner_device": "GPU:0",
+      "report": "gpu-smoke-report.json"
+    },
+    "supervisor": {
+      "syntax_passed": true,
+      "safe_import": true,
+      "resume_selection": true,
+      "finite_validation": true,
+      "actual_source_actor_dataset_count": 44
+    }
+  },
+  "command": [
+    "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/venv/bin/python",
+    "-u",
+    "-m",
+    "examples.train_rustmage",
+    "--output",
+    ".local/raytracer-bc-ppo-4000-2026-10-24",
+    "--initialize-from",
+    ".local/red-imitation-10000-2026-10-19/training/checkpoints/round-0040",
+    "--rounds",
+    "8",
+    "--games-per-round",
+    "500",
+    "--validation-fraction",
+    "0.2",
+    "--eval-games",
+    "200",
+    "--baseline-eval-games",
+    "1000",
+    "--eval-every-games",
+    "1000",
+    "--eval-horizon",
+    "25",
+    "--train-horizon",
+    "60",
+    "--workers",
+    "48",
+    "--inference-processes",
+    "4",
+    "--inference-wait-ms",
+    "0",
+    "--collector",
+    "processes",
+    "--observation-pipeline",
+    "python",
+    "--architecture",
+    "separate",
+    "--learner-device",
+    "gpu",
+    "--inference-device",
+    "cpu",
+    "--validation-device",
+    "cpu",
+    "--validation-batch",
+    "32",
+    "--train-batch",
+    "512",
+    "--learning-rate",
+    "0.0001",
+    "--value-learning-rate",
+    "0.0003",
+    "--value-max-steps",
+    "157",
+    "--critic-warmup-games",
+    "1000",
+    "--critic-warmup-max-steps",
+    "157",
+    "--ppo-epochs",
+    "2",
+    "--concurrent-updates",
+    "--prefetch-batches",
+    "2",
+    "--measurement-workers",
+    "4",
+    "--rollout-cache-mib",
+    "512",
+    "--rollout-storage",
+    "pickle",
+    "--seed",
+    "21261024"
+  ],
+  "warmup_result": {
+    "status": "complete",
+    "seconds": 301.77168271400024,
+    "collection_seconds": 84.25334263500008,
+    "update_seconds": 91.39406045700025,
+    "actor_unchanged": true,
+    "actor_optimizer_unchanged": true,
+    "actor_sha256": "0ec43951e645a772ae42de50eac0613c885c017e5ecc51b19c0dda808e8ba3da",
+    "actor_optimizer_sha256": "1e7f27cb96f600592109e4037e2438d4efd825f00a6fad3ae65c48311dd5a762",
+    "critic_optimizer_steps": 157,
+    "training_value_before": {
+      "samples": 175192,
+      "mse": 1.0020963736251263,
+      "zero_baseline_mse": 1.0,
+      "constant_baseline_mse": 0.997418057069247,
+      "target_mean": 0.05081282250331065,
+      "prediction_mean": -0.014877967142389495,
+      "prediction_std": 0.002519670381414523,
+      "explained_variance": -0.00036397647809827127
+    },
+    "training_value_after": {
+      "samples": 175192,
+      "mse": 0.9344596252764497,
+      "zero_baseline_mse": 1.0,
+      "constant_baseline_mse": 0.997418057069247,
+      "target_mean": 0.05081282250331065,
+      "prediction_mean": -0.36969531517361187,
+      "prediction_std": 0.47008867481324496,
+      "explained_variance": 0.24040624083935513
+    },
+    "heldout_value_before": {
+      "samples": 46421,
+      "mse": 1.0017946690792319,
+      "zero_baseline_mse": 1.0,
+      "constant_baseline_mse": 0.9981195639598633,
+      "target_mean": 0.04336399474375821,
+      "prediction_mean": -0.01491930018669868,
+      "prediction_std": 0.002515396189958212,
+      "explained_variance": -0.0002786867039397123
+    },
+    "heldout_value_after": {
+      "samples": 46421,
+      "mse": 0.9988536805903303,
+      "zero_baseline_mse": 1.0,
+      "constant_baseline_mse": 0.9981195639598633,
+      "target_mean": 0.04336399474375821,
+      "prediction_mean": -0.39994887742813473,
+      "prediction_std": 0.44654319215438093,
+      "explained_variance": 0.19616105431903863
+    },
+    "interpretation": "Held-out explained variance improved to 0.196, but substantial negative prediction bias leaves MSE 0.999, close to the zero baseline 1.0. Treat critic calibration as an unresolved pilot measurement, not a solved limitation."
+  },
+  "initial_passive_opponent_performance": {
+    "games": 200,
+    "win": 200,
+    "loss": 0,
+    "draw": 0,
+    "cutoff": 0,
+    "error": 0,
+    "win_rate": 1.0,
+    "failed_attempts": 0,
+    "failure_rate": 0.0,
+    "mean_own_turns_to_win": 6.375,
+    "median_own_turns_to_win": 6.0,
+    "p90_own_turns_to_win": 8,
+    "fastest_win": 5,
+    "slowest_win": 14,
+    "wins_by_own_turn": {
+      "4": 0.0,
+      "5": 0.265,
+      "6": 0.68,
+      "10": 0.975
+    },
+    "win_turn_histogram": {
+      "5": 53,
+      "6": 83,
+      "7": 35,
+      "8": 14,
+      "9": 5,
+      "10": 5,
+      "11": 3,
+      "13": 1,
+      "14": 1
+    },
+    "turn_horizon": 25,
+    "capped_turns_mean": 6.375,
+    "capped_turns_failure_value": 26
+  },
+  "ppo_rounds_completed": 8,
+  "ppo_games_checkpointed": 4000,
+  "initial_active_baseline_performance": {
+    "attempted_games": 1000,
+    "terminal_games": 1000,
+    "wins": 499,
+    "losses": 501,
+    "draws": 0,
+    "cutoffs": 0,
+    "errors": 0,
+    "unresolved_attempts": 0,
+    "terminal_fraction": 1.0,
+    "win_rate_all_attempts": 0.499,
+    "win_rate_all_attempts_wilson_95_interval": [
+      0.468073488750724,
+      0.529934164766247
+    ],
+    "terminal_win_rate": 0.499,
+    "terminal_score_rate": 0.499,
+    "metric": "recorded_wins_per_scheduled_attempt",
+    "mode": "versus_baseline",
+    "win_rate_denominator": "all_attempts_including_cutoffs_and_errors",
+    "unresolved_outcomes": "unknown; no terminal score or training return assigned",
+    "seat_start_balanced": true,
+    "seat_start_strata": {
+      "seat_0_start_P0": {
+        "attempted_games": 250,
+        "terminal_games": 250,
+        "wins": 146,
+        "losses": 104,
+        "draws": 0,
+        "cutoffs": 0,
+        "errors": 0,
+        "unresolved_attempts": 0,
+        "terminal_fraction": 1.0,
+        "win_rate_all_attempts": 0.584,
+        "win_rate_all_attempts_wilson_95_interval": [
+          0.5220809648361122,
+          0.643376640848653
+        ],
+        "terminal_win_rate": 0.584,
+        "terminal_score_rate": 0.584
+      },
+      "seat_0_start_P1": {
+        "attempted_games": 250,
+        "terminal_games": 250,
+        "wins": 102,
+        "losses": 148,
+        "draws": 0,
+        "cutoffs": 0,
+        "errors": 0,
+        "unresolved_attempts": 0,
+        "terminal_fraction": 1.0,
+        "win_rate_all_attempts": 0.408,
+        "win_rate_all_attempts_wilson_95_interval": [
+          0.34891768191191647,
+          0.4698668451952452
+        ],
+        "terminal_win_rate": 0.408,
+        "terminal_score_rate": 0.408
+      },
+      "seat_1_start_P0": {
+        "attempted_games": 250,
+        "terminal_games": 250,
+        "wins": 117,
+        "losses": 133,
+        "draws": 0,
+        "cutoffs": 0,
+        "errors": 0,
+        "unresolved_attempts": 0,
+        "terminal_fraction": 1.0,
+        "win_rate_all_attempts": 0.468,
+        "win_rate_all_attempts_wilson_95_interval": [
+          0.40709971631994324,
+          0.5298688148477652
+        ],
+        "terminal_win_rate": 0.468,
+        "terminal_score_rate": 0.468
+      },
+      "seat_1_start_P1": {
+        "attempted_games": 250,
+        "terminal_games": 250,
+        "wins": 134,
+        "losses": 116,
+        "draws": 0,
+        "cutoffs": 0,
+        "errors": 0,
+        "unresolved_attempts": 0,
+        "terminal_fraction": 1.0,
+        "win_rate_all_attempts": 0.536,
+        "win_rate_all_attempts_wilson_95_interval": [
+          0.47410368189363766,
+          0.5968067205426905
+        ],
+        "terminal_win_rate": 0.536,
+        "terminal_score_rate": 0.536
+      }
+    }
+  },
+  "first_ppo_round": {
+    "round": 1,
+    "collection_seconds": 39.53817720200004,
+    "update_seconds": 372.1502151300001,
+    "validation_seconds": 29.322264909000296,
+    "collection_resources": {
+      "aggregate_cpu_seconds": 636.6543370889998,
+      "mean_logical_cpus": 16.102268292145613,
+      "available_logical_cpus": 24,
+      "games_per_minute": 758.7603203539298,
+      "inference_calls": 19977,
+      "inference_requests": 112299,
+      "mean_inference_batch": 5.621414626820844,
+      "inference_processes": 4,
+      "game_workers": 48
+    },
+    "update": {
+      "samples": 89526,
+      "accepted_steps": 350,
+      "optimizer_steps": 350,
+      "critic_steps": 157,
+      "critic_optimizer_steps": 314,
+      "rejected_epochs": 8,
+      "early_stop": false,
+      "exact_kl": 4.864300605460576e-05,
+      "max_state_kl": 0.09372852742671967
+    },
+    "heldout_critic": {
+      "samples": 22773,
+      "mse": 0.6690268227220091,
+      "zero_baseline_mse": 1.0,
+      "constant_baseline_mse": 0.9974098412680729,
+      "target_mean": 0.05089360207262987,
+      "prediction_mean": 0.02583132682325055,
+      "prediction_std": 0.6072990358108838,
+      "explained_variance": 0.32986554029629966
+    },
+    "interpretation": "Both actor epochs accepted after eight rejected attempts and lower-rate retries. Max per-state KL (0.0937) constrains the update much more strongly than mean KL (0.0000486); retain this observation when interpreting pilot learning speed. Held-out critic calibration improved after the first ordinary PPO update (MSE 0.669). Playing-strength change has not yet been evaluated."
+  },
+  "checkpoint_verification": {
+    "verified_utc": "2026-10-25T00:02:22.862792+00:00",
+    "warm_actor_and_adam_unchanged": true,
+    "fresh_actor_and_critic_optimizers": true,
+    "source_policy_immutable": true,
+    "warm_critic_steps": 157,
+    "first_ppo_actor_steps": 350,
+    "first_ppo_critic_optimizer_steps": 314,
+    "checkpoint_integrity": {
+      ".local/raytracer-bc-ppo-4000-2026-10-24/prewarm-checkpoints/round-0000": {
+        "policy.keras": {
+          "bytes": 1638315,
+          "sha256": "c1b6c74114332193ea7be1644e2f207876552bdf8d44a08accdc9b35c936cbd5"
+        },
+        "policy.manifest.json": {
+          "bytes": 13626,
+          "sha256": "db77c61067b1879667e5e0d6e05198fdf4240b267819e80355297f8ea34564e6"
+        },
+        "optimizer.npz": {
+          "bytes": 1027266,
+          "sha256": "67bdf1ed32e1caf20e1daf28a4860b51ecb2b78303b60987483f0a071e43ade4"
+        },
+        "critic-optimizer.npz": {
+          "bytes": 1956362,
+          "sha256": "d73e4538222d43f37e829164e9a212e5b8955fa19afee1d08afa7407f937e88b"
+        },
+        "state.json": {
+          "bytes": 25745,
+          "sha256": "4c780c53ee4cef0db6140023738bcff7ad39956ab2b9d610d7f11601402f975d"
+        }
+      },
+      ".local/raytracer-bc-ppo-4000-2026-10-24/checkpoints/round-0000": {
+        "policy.keras": {
+          "bytes": 1638315,
+          "sha256": "a2668b1f35874d3421f4a4445d131955b0916598e36f6eb9d23bb05d60d6a2e0"
+        },
+        "policy.manifest.json": {
+          "bytes": 13626,
+          "sha256": "db77c61067b1879667e5e0d6e05198fdf4240b267819e80355297f8ea34564e6"
+        },
+        "optimizer.npz": {
+          "bytes": 1027266,
+          "sha256": "67bdf1ed32e1caf20e1daf28a4860b51ecb2b78303b60987483f0a071e43ade4"
+        },
+        "critic-optimizer.npz": {
+          "bytes": 1956362,
+          "sha256": "219cc42502c10bf61793e8246150fb75f8d275664aaad0d6ffc72cc7dfe02384"
+        },
+        "state.json": {
+          "bytes": 3065167,
+          "sha256": "6a55f1ab47c474b039ea8ff158951c86d7eb559e2de569bc54ff3dd22da64feb"
+        }
+      },
+      ".local/raytracer-bc-ppo-4000-2026-10-24/checkpoints/round-0001": {
+        "policy.keras": {
+          "bytes": 1638315,
+          "sha256": "f7d1169f494bd9cd880acafee8871293734334e9ba2b2f5568c170dcaf6f9c84"
+        },
+        "policy.manifest.json": {
+          "bytes": 13626,
+          "sha256": "db77c61067b1879667e5e0d6e05198fdf4240b267819e80355297f8ea34564e6"
+        },
+        "optimizer.npz": {
+          "bytes": 1027266,
+          "sha256": "82b6ee7745185823ef3bb220e87b0095e93c245c066286a4adb67d9c76da6f3f"
+        },
+        "critic-optimizer.npz": {
+          "bytes": 1956362,
+          "sha256": "0a552e5f80ffb1b28034a02ddd33eaf5df1837c57ac8e1bed8cd6e7c4266e6c6"
+        },
+        "state.json": {
+          "bytes": 1227832,
+          "sha256": "1023414cfc6dd6ed11f378a32a33539a10a5ebdc4987b88d8c13855f5df8e767"
+        }
+      }
+    }
+  },
+  "local_backup": {
+    "path": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/bc-ppo-4000-20261024/first-checkpoint-backup.tar.gz",
+    "bytes": 7973406,
+    "sha256": "a53de6dcc4b404a925530954eb7fb840f5f1ab5b825a98731f53b0f287d1ac1a",
+    "all_checkpoint_file_hashes_verified_after_transfer": true
+  },
+  "windows_power_request_verified": {
+    "utc": "2026-10-24T23:54:16.7767240Z",
+    "task_state": "Running",
+    "system_request": "WindowsPowerShell process",
+    "execution_time_limit": "PT0S",
+    "trigger_count": 0
+  },
+  "completion_record": "raytracer-bc-ppo-4000-completion-2026-10-24.json"
+}

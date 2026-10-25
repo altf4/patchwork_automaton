@@ -355,6 +355,12 @@ def candidate_row(kind, role, constraints=None, *, coverage=Coverage.UNKNOWN, ab
 
 
 def collate(items):
+    # NumPy already copies/pads in native code. Constructing 14 ctypes input
+    # descriptors per example costs more than the Rust padding saves here.
+    return python_collate(items)
+
+
+def python_collate(items):
     """Pad variable entity, semantic and candidate axes without truncation."""
     if not items: raise ValueError('Cannot collate an empty batch')
     n = max(len(x['entities']) for x in items)

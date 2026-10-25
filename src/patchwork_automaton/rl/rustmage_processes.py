@@ -57,7 +57,8 @@ def _run_game(options):
 
 
 class ProcessGameCollector:
-    def __init__(self, model, batcher=None, *, workers=4, inference_processes=2, wait_ms=0):
+    def __init__(self, model, batcher=None, *, workers=4, inference_processes=2, wait_ms=0,
+                 inference_device='cpu'):
         if workers < 1: raise ValueError('Positive worker count required')
         if batcher is None and (type(inference_processes) is not int or not 1 <= inference_processes <= workers):
             raise ValueError('Inference processes must be between one and the game-engine count')
@@ -67,7 +68,8 @@ class ProcessGameCollector:
         pairs = [context.Pipe() for _ in range(workers)]
         self.connections = [p[0] for p in pairs]
         self.worker_connections = [p[1] for p in pairs]
-        self.replicas = (InferenceProcessGroup(self.connections,replicas=inference_processes,wait_ms=wait_ms)
+        self.replicas = (InferenceProcessGroup(self.connections,replicas=inference_processes,wait_ms=wait_ms,
+                                               device=inference_device)
                          if batcher is None else None)
         self.bridges = None
         if batcher is not None:

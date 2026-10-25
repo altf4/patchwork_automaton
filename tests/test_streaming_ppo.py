@@ -51,7 +51,9 @@ class StreamingPPOTests(unittest.TestCase):
             choices = np.array([expected[i][0].arrays['candidate_mask'].sum()>1 for i in range(192)])
             advantages = normalized_advantages(returns, values, choices, 1.)
             orders = []
-            for cache_bytes in (0, 16*1024**2):
+            # Protocol-5 NumPy arrays can retain memoryview-backed buffers.
+            # The cached case must fit their actual bytes, not just view headers.
+            for cache_bytes in (0, 64*1024**2):
                 trainer = StreamingPPOTrainer(model, seed=21, epochs=2, batch_size=16,
                     cache_bytes=cache_bytes, target_kl=100., max_state_kl=100., advantage_scale_floor=1.)
                 seen = {'critic': [], 'actor': []}; pure = []
@@ -125,6 +127,8 @@ class StreamingPPOTests(unittest.TestCase):
         from patchwork_automaton.neural.rollout_cache import RolloutCache, retained_bytes
         array = np.ones(1000, np.float32)
         self.assertGreaterEqual(retained_bytes(array[:1]), array.nbytes)
+        external = np.frombuffer(bytearray(10000), dtype=np.uint8)
+        self.assertGreaterEqual(retained_bytes(external[:1]), 10000)
         cache = RolloutCache(1024)
         self.assertFalse(cache.put('too_big', array))
         self.assertEqual(cache.bytes, 0)

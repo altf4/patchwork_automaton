@@ -1,0 +1,160 @@
+{
+  "status": "complete",
+  "cohort_seed_base": 91261024,
+  "games_per_policy": 5000,
+  "actual_evaluation_games": 15000,
+  "unique_schedules": 5000,
+  "training_seed": 31261024,
+  "started_utc": "2026-10-25T14:55:27.526237+00:00",
+  "finished_utc": "2026-10-25T15:25:23.840523+00:00",
+  "source_archive": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/alignment-pilot-20261025/completed-or-interrupted-pilot-20261025.tar.gz",
+  "source_archive_sha256": "122eb960acad4c1cc2edf46175135b836ad3dab3f0be13d755c553102fe16762",
+  "coordinator_report_sha256": "38fca043b4ba329eed92e84123ee04328feb03c3057cd83ad3a28fdc306709b9",
+  "training_report_sha256": "0e9ab912bd123b5c59802bb949e0177bf32820d59888aa623708f0849807b62d",
+  "training_collected_games": 4000,
+  "training_rounds": 4,
+  "training_partition_games": 3200,
+  "heldout_games": 800,
+  "critic_steps": 628,
+  "actor_minibatch_updates": 1384,
+  "policies": [
+    {
+      "policy": "original-imitation",
+      "label": "Original imitation",
+      "wins": 2421,
+      "attempts": 5000,
+      "win_rate_percent": 48.42,
+      "lower95_percent": 47.03653255728095,
+      "upper95_percent": 49.80589338086544,
+      "terminal_games": 5000,
+      "errors": 0,
+      "cutoffs": 0,
+      "checkpoint_sha256": "a2668b1f35874d3421f4a4445d131955b0916598e36f6eb9d23bb05d60d6a2e0",
+      "source_report_sha256": "1db85e3a1197947a3e1ed3e337354174679b80712d957a48f246af8f9ef9f432"
+    },
+    {
+      "policy": "selfplay-control",
+      "label": "Self-play: 2,000 games",
+      "wins": 2492,
+      "attempts": 5000,
+      "win_rate_percent": 49.84,
+      "lower95_percent": 48.45475817830824,
+      "upper95_percent": 51.225487486314194,
+      "terminal_games": 5000,
+      "errors": 0,
+      "cutoffs": 0,
+      "checkpoint_sha256": "85d5a346bd4e13feb13f34c8017f9e1e039cab7d1fde4198a9d65cfd42d31f5c",
+      "source_report_sha256": "dd4570213d2b8842fa088fa5b5af6ac44b4445f6ba5819711e35dffe6a892d57"
+    },
+    {
+      "policy": "fixed-opponent",
+      "label": "Fixed opponent: 4,000 games",
+      "wins": 2523,
+      "attempts": 5000,
+      "win_rate_percent": 50.46000000000001,
+      "lower95_percent": 49.074333700587545,
+      "upper95_percent": 51.84496001362302,
+      "terminal_games": 5000,
+      "errors": 0,
+      "cutoffs": 0,
+      "checkpoint_sha256": "603ebcd7e90d1278df9d0ed8fdd64f8219c48963445755b6c9b62d6fb23d80ca",
+      "source_report_sha256": "c3fe485a9baa982b0c90e8a38d616ba6416329bea63c94adf708667297a2f725"
+    }
+  ],
+  "comparisons": {
+    "fixed-minus-control": {
+      "attempted_pairs": 5000,
+      "terminal_pairs": 5000,
+      "unresolved_pairs": 0,
+      "recorded_attempt_win_rate_change": 0.0062,
+      "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+        0.0026,
+        0.0098
+      ],
+      "terminal_score_change_on_terminal_pairs": 0.0062,
+      "terminal_score_change_bootstrap_95_interval": [
+        0.0026,
+        0.0098
+      ],
+      "status_transitions": {
+        "loss->loss": 2450,
+        "loss->win": 58,
+        "win->loss": 27,
+        "win->win": 2465
+      },
+      "improved_recorded_win_attempts": 58,
+      "worsened_recorded_win_attempts": 27,
+      "tied_recorded_win_attempts": 4915,
+      "bootstrap": {
+        "unit": "matched_attempt",
+        "seed": 9901,
+        "resamples": 4000
+      }
+    },
+    "control-minus-imitation": {
+      "attempted_pairs": 5000,
+      "terminal_pairs": 5000,
+      "unresolved_pairs": 0,
+      "recorded_attempt_win_rate_change": 0.0142,
+      "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+        0.0104,
+        0.0182
+      ],
+      "terminal_score_change_on_terminal_pairs": 0.0142,
+      "terminal_score_change_bootstrap_95_interval": [
+        0.0104,
+        0.0182
+      ],
+      "status_transitions": {
+        "loss->loss": 2494,
+        "loss->win": 85,
+        "win->loss": 14,
+        "win->win": 2407
+      },
+      "improved_recorded_win_attempts": 85,
+      "worsened_recorded_win_attempts": 14,
+      "tied_recorded_win_attempts": 4901,
+      "bootstrap": {
+        "unit": "matched_attempt",
+        "seed": 9901,
+        "resamples": 4000
+      }
+    },
+    "fixed-minus-imitation": {
+      "attempted_pairs": 5000,
+      "terminal_pairs": 5000,
+      "unresolved_pairs": 0,
+      "recorded_attempt_win_rate_change": 0.0204,
+      "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+        0.0162,
+        0.0248
+      ],
+      "terminal_score_change_on_terminal_pairs": 0.0204,
+      "terminal_score_change_bootstrap_95_interval": [
+        0.0162,
+        0.0248
+      ],
+      "status_transitions": {
+        "loss->loss": 2469,
+        "loss->win": 110,
+        "win->loss": 8,
+        "win->win": 2413
+      },
+      "improved_recorded_win_attempts": 110,
+      "worsened_recorded_win_attempts": 8,
+      "tied_recorded_win_attempts": 4882,
+      "bootstrap": {
+        "unit": "matched_attempt",
+        "seed": 9901,
+        "resamples": 4000
+      }
+    }
+  },
+  "primary_comparison": "fixed-minus-control",
+  "limitations": [
+    "One training seed; reused selfplay control was fixed before this fresh cohort.",
+    "Approximate learner trajectory exposure; decision counts, opponent distribution and compute are not exact matches.",
+    "Intervals condition on fixed policies and do not measure training-seed variability.",
+    "Playing strength is measured only against FoundationsAggro on this mono-red matchup; not general strength."
+  ]
+}

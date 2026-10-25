@@ -1,0 +1,902 @@
+{
+  "status": "complete",
+  "snapshot_utc": "2026-10-25T06:11:06.101013+00:00",
+  "started_utc": "2026-10-25T04:14:07.621212+00:00",
+  "purpose": "Test whether subtracting the learned critic helps or harms actor learning from the original warmed imitation policy.",
+  "configuration": {
+    "ppo_games_per_arm": 2000,
+    "total_ppo_games": 8000,
+    "training_seeds": [
+      23261024,
+      24261024
+    ],
+    "arms_per_seed": [
+      "critic",
+      "zero"
+    ],
+    "rounds": 4,
+    "games_per_round": 500,
+    "mean_kl_limit": 0.02,
+    "max_state_kl": 0.5,
+    "fresh_evaluation_games": 5000,
+    "evaluation_seed_base": 45261024,
+    "changed_within_pair": [
+      "advantage_baseline"
+    ],
+    "seed_variation": "Collection/whole-game split seed and trainer PCG64 shuffle seed; warmed weights and both Adam states shared.",
+    "unchanged": "Architecture, warmed starting actor/critic weights, both Adam states, normalization rules, batch512, actorLR.0001, criticLR.0003, critic157-step budget, two epochs, terminal rewards, red deck, workers and inference settings.",
+    "order": [
+      "23261024/critic",
+      "23261024/zero",
+      "24261024/zero",
+      "24261024/critic"
+    ],
+    "inference": "Per-seed matched-game intervals are conditional on fixed checkpoints. Shared 5,000-game cohort is not 10,000 independent games; two training seeds give limited training-variance coverage."
+  },
+  "starting_checkpoint": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/raytracer-bc-ppo-4000-2026-10-24/checkpoints/round-0000",
+  "starting_checkpoint_sha256": {
+    "policy.keras": "a2668b1f35874d3421f4a4445d131955b0916598e36f6eb9d23bb05d60d6a2e0",
+    "policy.manifest.json": "db77c61067b1879667e5e0d6e05198fdf4240b267819e80355297f8ea34564e6",
+    "optimizer.npz": "67bdf1ed32e1caf20e1daf28a4860b51ecb2b78303b60987483f0a071e43ade4",
+    "critic-optimizer.npz": "219cc42502c10bf61793e8246150fb75f8d275664aaad0d6ffc72cc7dfe02384",
+    "state.json": "6a55f1ab47c474b039ea8ff158951c86d7eb559e2de569bc54ff3dd22da64feb"
+  },
+  "source_sha256": {
+    "examples/train_rustmage.py": "de5a92aa0d08c787b686081a09237683d828e8a8177dacecf0b184e3e414d924",
+    "src/patchwork_automaton/neural/ppo.py": "40b157d71cb3df066cfc5cd4d244c41a2f9a7ccc35785708327799483b6dca9b",
+    "src/patchwork_automaton/neural/streaming_ppo.py": "fca8b76a1710701334c27536fb09606f8735597530b613ffe0e7883d9418572d",
+    "src/patchwork_automaton/neural/experiment.py": "10913fb6f54927d978e56d3aab111e2258f164b2750402643492b9046a5e0149",
+    "src/patchwork_automaton/neural/validation.py": "bbd53a7472060568640a41bcda2e0e0b79b8e29bc31a6cdd9f75b3c16a5d6672",
+    ".local/mtgo-critic-ablation-run.py": "ef3381f1bb63bcfa257c39b87cecb9e726db939f25efa02aa3e6927a77dd0a82"
+  },
+  "remote": {
+    "output": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/raytracer-critic-ablation-2026-10-24",
+    "supervisor_pid": 12626,
+    "process_group": 12626,
+    "coordinator_pid": 12627,
+    "log": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/raytracer-critic-ablation-20261024-two-seed-baseline-ablation-20261025T041407.621111Z-p12626.log",
+    "windows_task": "MTGO-RustMage-Critic-Ablation-20261024",
+    "interrupt_command": "kill -INT -- -12626",
+    "status_command": "ssh raytracer 'python3 /home/altf4/benchmarks/mtgo-cpu-gpu-20261024/mtgo-critic-ablation-status.py'"
+  },
+  "training": {
+    "collected_games_total": 8000,
+    "optimization_games_target_before_cutoffs": 6400,
+    "whole_game_holdout_target": 1600,
+    "game_workers": 48,
+    "inference_replicas": 4,
+    "inference_device": "cpu",
+    "learner_device": "gpu",
+    "gpu": "NVIDIA RTX 4090",
+    "train_batch": 512,
+    "ppo_epochs": 2,
+    "critic_steps_per_round": 157,
+    "critic_continues_training_in_both_arms": true,
+    "new_critic_warmup_games": 0,
+    "actor_advantage": "critic: normalize(R - V_behavior); zero: normalize(R). Same training-only centering/scale-floor rules; behavior V remains real in critic diagnostics."
+  },
+  "verification": {
+    "core_baseline_tests": {
+      "passed": 3,
+      "seconds": 60.911
+    },
+    "ppo_streaming_guard_regressions": {
+      "passed": 19,
+      "seconds": 39.59
+    },
+    "stronger_nonuniform_value_perturbation": {
+      "passed": true,
+      "seconds": 30.999,
+      "checks": "Zero actor/all Adam/RNG invariant to arbitrary behavior V changes; real value diagnostics change and critic updates remain identical."
+    },
+    "runner_checkpoint_validation": {
+      "passed": 13,
+      "seconds": 11.4
+    },
+    "coordinator": {
+      "actual_parser_and_fork_config_match": true,
+      "source_and_warm_weights_optimizers_preserved": true,
+      "per_seed_rng_matched_and_fresh": true,
+      "staged_prepare_resume_and_interrupt_cleanup_reviewed": true,
+      "active_initial_evaluation_reused_once": true,
+      "passive_initial_evaluation_reused_only_within_seed": true,
+      "no_pooled_10000_game_interval": true
+    },
+    "remote_import_cli_syntax": true,
+    "learner_gpu_device_and_graph_traces_verified": true
+  },
+  "progress_at_snapshot": {
+    "arms_complete": 4,
+    "selfplay_games_complete": 8000,
+    "final_evaluation_games_per_arm": 5000
+  },
+  "eta_minutes_total": [
+    90,
+    140
+  ],
+  "limitations": [
+    "Only two training seeds from one fixed warmed policy.",
+    "Matched game intervals condition on trained checkpoints and fixed FoundationsAggro opponent.",
+    "Per-seed comparisons remain separate because all arms share the same 5,000 evaluation attempts."
+  ],
+  "finished_utc": "2026-10-25T05:46:25.942582+00:00",
+  "elapsed_minutes": 92.3,
+  "results": {
+    "status": "complete",
+    "started_utc": "2026-10-25T04:14:07.696293+00:00",
+    "configuration": {
+      "ppo_games_per_arm": 2000,
+      "total_ppo_games": 8000,
+      "training_seeds": [
+        23261024,
+        24261024
+      ],
+      "arms_per_seed": [
+        "critic",
+        "zero"
+      ],
+      "rounds": 4,
+      "games_per_round": 500,
+      "mean_kl_limit": 0.02,
+      "max_state_kl": 0.5,
+      "fresh_evaluation_games": 5000,
+      "evaluation_seed_base": 45261024,
+      "changed_within_pair": [
+        "advantage_baseline"
+      ],
+      "seed_variation": "Collection/whole-game split seed and trainer PCG64 shuffle seed; warmed weights and both Adam states shared.",
+      "unchanged": "Architecture, warmed starting actor/critic weights, both Adam states, normalization rules, batch512, actorLR.0001, criticLR.0003, critic157-step budget, two epochs, terminal rewards, red deck, workers and inference settings.",
+      "order": [
+        "23261024/critic",
+        "23261024/zero",
+        "24261024/zero",
+        "24261024/critic"
+      ],
+      "inference": "Per-seed matched-game intervals are conditional on fixed checkpoints. Shared 5,000-game cohort is not 10,000 independent games; two training seeds give limited training-variance coverage."
+    },
+    "source_sha256": {
+      "examples/train_rustmage.py": "de5a92aa0d08c787b686081a09237683d828e8a8177dacecf0b184e3e414d924",
+      "src/patchwork_automaton/neural/ppo.py": "40b157d71cb3df066cfc5cd4d244c41a2f9a7ccc35785708327799483b6dca9b",
+      "src/patchwork_automaton/neural/streaming_ppo.py": "fca8b76a1710701334c27536fb09606f8735597530b613ffe0e7883d9418572d",
+      "src/patchwork_automaton/neural/experiment.py": "10913fb6f54927d978e56d3aab111e2258f164b2750402643492b9046a5e0149",
+      "src/patchwork_automaton/neural/validation.py": "bbd53a7472060568640a41bcda2e0e0b79b8e29bc31a6cdd9f75b3c16a5d6672",
+      ".local/mtgo-critic-ablation-run.py": "ef3381f1bb63bcfa257c39b87cecb9e726db939f25efa02aa3e6927a77dd0a82"
+    },
+    "source_checkpoint_sha256": {
+      "policy.keras": "a2668b1f35874d3421f4a4445d131955b0916598e36f6eb9d23bb05d60d6a2e0",
+      "policy.manifest.json": "db77c61067b1879667e5e0d6e05198fdf4240b267819e80355297f8ea34564e6",
+      "optimizer.npz": "67bdf1ed32e1caf20e1daf28a4860b51ecb2b78303b60987483f0a071e43ade4",
+      "critic-optimizer.npz": "219cc42502c10bf61793e8246150fb75f8d275664aaad0d6ffc72cc7dfe02384",
+      "state.json": "6a55f1ab47c474b039ea8ff158951c86d7eb559e2de569bc54ff3dd22da64feb"
+    },
+    "arms": {
+      "23261024/critic": {
+        "status": "complete",
+        "report": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/raytracer-critic-ablation-2026-10-24/seed-23261024/critic/report.json"
+      },
+      "23261024/zero": {
+        "status": "complete",
+        "report": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/raytracer-critic-ablation-2026-10-24/seed-23261024/zero/report.json"
+      },
+      "24261024/zero": {
+        "status": "complete",
+        "report": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/raytracer-critic-ablation-2026-10-24/seed-24261024/zero/report.json"
+      },
+      "24261024/critic": {
+        "status": "complete",
+        "report": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/raytracer-critic-ablation-2026-10-24/seed-24261024/critic/report.json"
+      }
+    },
+    "seed_comparisons": {
+      "23261024": {
+        "critic_evaluation": {
+          "attempted_games": 5000,
+          "terminal_games": 5000,
+          "wins": 2496,
+          "losses": 2504,
+          "draws": 0,
+          "cutoffs": 0,
+          "errors": 0,
+          "unresolved_attempts": 0,
+          "terminal_fraction": 1.0,
+          "win_rate_all_attempts": 0.4992,
+          "win_rate_all_attempts_wilson_95_interval": [
+            0.48534691446392186,
+            0.5130543138591903
+          ],
+          "terminal_win_rate": 0.4992,
+          "terminal_score_rate": 0.4992,
+          "metric": "recorded_wins_per_scheduled_attempt",
+          "mode": "versus_baseline",
+          "win_rate_denominator": "all_attempts_including_cutoffs_and_errors",
+          "unresolved_outcomes": "unknown; no terminal score or training return assigned",
+          "seat_start_balanced": true,
+          "seat_start_strata": {
+            "seat_0_start_P0": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 700,
+              "losses": 550,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.56,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.5323399634678254,
+                0.5872923863358597
+              ],
+              "terminal_win_rate": 0.56,
+              "terminal_score_rate": 0.56
+            },
+            "seat_0_start_P1": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 549,
+              "losses": 701,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.4392,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.4119154366341853,
+                0.46685711556474707
+              ],
+              "terminal_win_rate": 0.4392,
+              "terminal_score_rate": 0.4392
+            },
+            "seat_1_start_P0": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 544,
+              "losses": 706,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.4352,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.4079556357062868,
+                0.46284142650573323
+              ],
+              "terminal_win_rate": 0.4352,
+              "terminal_score_rate": 0.4352
+            },
+            "seat_1_start_P1": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 703,
+              "losses": 547,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.5624,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.5347489430837947,
+                0.5896687007120377
+              ],
+              "terminal_win_rate": 0.5624,
+              "terminal_score_rate": 0.5624
+            }
+          }
+        },
+        "zero_evaluation": {
+          "attempted_games": 5000,
+          "terminal_games": 5000,
+          "wins": 2499,
+          "losses": 2501,
+          "draws": 0,
+          "cutoffs": 0,
+          "errors": 0,
+          "unresolved_attempts": 0,
+          "terminal_fraction": 1.0,
+          "win_rate_all_attempts": 0.4998,
+          "win_rate_all_attempts_wilson_95_interval": [
+            0.48594643723104525,
+            0.5136538698497328
+          ],
+          "terminal_win_rate": 0.4998,
+          "terminal_score_rate": 0.4998,
+          "metric": "recorded_wins_per_scheduled_attempt",
+          "mode": "versus_baseline",
+          "win_rate_denominator": "all_attempts_including_cutoffs_and_errors",
+          "unresolved_outcomes": "unknown; no terminal score or training return assigned",
+          "seat_start_balanced": true,
+          "seat_start_strata": {
+            "seat_0_start_P0": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 699,
+              "losses": 551,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.5592,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.5315371146816207,
+                0.586500137124682
+              ],
+              "terminal_win_rate": 0.5592,
+              "terminal_score_rate": 0.5592
+            },
+            "seat_0_start_P1": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 550,
+              "losses": 700,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.44,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.4127076136641403,
+                0.4676600365321746
+              ],
+              "terminal_win_rate": 0.44,
+              "terminal_score_rate": 0.44
+            },
+            "seat_1_start_P0": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 545,
+              "losses": 705,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.436,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.40874745118272915,
+                0.46364470902667343
+              ],
+              "terminal_win_rate": 0.436,
+              "terminal_score_rate": 0.436
+            },
+            "seat_1_start_P1": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 705,
+              "losses": 545,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.564,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.5363552909733265,
+                0.5912525488172709
+              ],
+              "terminal_win_rate": 0.564,
+              "terminal_score_rate": 0.564
+            }
+          }
+        },
+        "zero_vs_critic": {
+          "attempted_pairs": 5000,
+          "terminal_pairs": 5000,
+          "unresolved_pairs": 0,
+          "recorded_attempt_win_rate_change": 0.0006,
+          "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+            -0.003,
+            0.0042
+          ],
+          "terminal_score_change_on_terminal_pairs": 0.0006,
+          "terminal_score_change_bootstrap_95_interval": [
+            -0.003,
+            0.0042
+          ],
+          "status_transitions": {
+            "loss->loss": 2460,
+            "loss->win": 44,
+            "win->loss": 41,
+            "win->win": 2455
+          },
+          "improved_recorded_win_attempts": 44,
+          "worsened_recorded_win_attempts": 41,
+          "tied_recorded_win_attempts": 4915,
+          "bootstrap": {
+            "unit": "matched_attempt",
+            "seed": 9901,
+            "resamples": 4000
+          }
+        },
+        "critic_vs_imitation": {
+          "attempted_pairs": 5000,
+          "terminal_pairs": 5000,
+          "unresolved_pairs": 0,
+          "recorded_attempt_win_rate_change": 0.006,
+          "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+            0.0028,
+            0.0092
+          ],
+          "terminal_score_change_on_terminal_pairs": 0.006,
+          "terminal_score_change_bootstrap_95_interval": [
+            0.0028,
+            0.0092
+          ],
+          "status_transitions": {
+            "loss->loss": 2486,
+            "loss->win": 48,
+            "win->loss": 18,
+            "win->win": 2448
+          },
+          "improved_recorded_win_attempts": 48,
+          "worsened_recorded_win_attempts": 18,
+          "tied_recorded_win_attempts": 4934,
+          "bootstrap": {
+            "unit": "matched_attempt",
+            "seed": 9901,
+            "resamples": 4000
+          }
+        },
+        "zero_vs_imitation": {
+          "attempted_pairs": 5000,
+          "terminal_pairs": 5000,
+          "unresolved_pairs": 0,
+          "recorded_attempt_win_rate_change": 0.0066,
+          "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+            0.0024,
+            0.0106
+          ],
+          "terminal_score_change_on_terminal_pairs": 0.0066,
+          "terminal_score_change_bootstrap_95_interval": [
+            0.0024,
+            0.0106
+          ],
+          "status_transitions": {
+            "loss->loss": 2463,
+            "loss->win": 71,
+            "win->loss": 38,
+            "win->win": 2428
+          },
+          "improved_recorded_win_attempts": 71,
+          "worsened_recorded_win_attempts": 38,
+          "tied_recorded_win_attempts": 4891,
+          "bootstrap": {
+            "unit": "matched_attempt",
+            "seed": 9901,
+            "resamples": 4000
+          }
+        }
+      },
+      "24261024": {
+        "critic_evaluation": {
+          "attempted_games": 5000,
+          "terminal_games": 5000,
+          "wins": 2550,
+          "losses": 2450,
+          "draws": 0,
+          "cutoffs": 0,
+          "errors": 0,
+          "unresolved_attempts": 0,
+          "terminal_fraction": 1.0,
+          "win_rate_all_attempts": 0.51,
+          "win_rate_all_attempts_wilson_95_interval": [
+            0.49614137445684164,
+            0.5238432715042572
+          ],
+          "terminal_win_rate": 0.51,
+          "terminal_score_rate": 0.51,
+          "metric": "recorded_wins_per_scheduled_attempt",
+          "mode": "versus_baseline",
+          "win_rate_denominator": "all_attempts_including_cutoffs_and_errors",
+          "unresolved_outcomes": "unknown; no terminal score or training return assigned",
+          "seat_start_balanced": true,
+          "seat_start_strata": {
+            "seat_0_start_P0": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 716,
+              "losses": 534,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.5728,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.5451953909407706,
+                0.5999585268210338
+              ],
+              "terminal_win_rate": 0.5728,
+              "terminal_score_rate": 0.5728
+            },
+            "seat_0_start_P1": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 562,
+              "losses": 688,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.4496,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.4222193566446312,
+                0.47728946952027324
+              ],
+              "terminal_win_rate": 0.4496,
+              "terminal_score_rate": 0.4496
+            },
+            "seat_1_start_P0": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 555,
+              "losses": 695,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.444,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.41666958070619786,
+                0.4716735594770294
+              ],
+              "terminal_win_rate": 0.444,
+              "terminal_score_rate": 0.444
+            },
+            "seat_1_start_P1": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 717,
+              "losses": 533,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.5736,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.5459994729823737,
+                0.6007495427768131
+              ],
+              "terminal_win_rate": 0.5736,
+              "terminal_score_rate": 0.5736
+            }
+          }
+        },
+        "zero_evaluation": {
+          "attempted_games": 5000,
+          "terminal_games": 5000,
+          "wins": 2496,
+          "losses": 2504,
+          "draws": 0,
+          "cutoffs": 0,
+          "errors": 0,
+          "unresolved_attempts": 0,
+          "terminal_fraction": 1.0,
+          "win_rate_all_attempts": 0.4992,
+          "win_rate_all_attempts_wilson_95_interval": [
+            0.48534691446392186,
+            0.5130543138591903
+          ],
+          "terminal_win_rate": 0.4992,
+          "terminal_score_rate": 0.4992,
+          "metric": "recorded_wins_per_scheduled_attempt",
+          "mode": "versus_baseline",
+          "win_rate_denominator": "all_attempts_including_cutoffs_and_errors",
+          "unresolved_outcomes": "unknown; no terminal score or training return assigned",
+          "seat_start_balanced": true,
+          "seat_start_strata": {
+            "seat_0_start_P0": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 703,
+              "losses": 547,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.5624,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.5347489430837947,
+                0.5896687007120377
+              ],
+              "terminal_win_rate": 0.5624,
+              "terminal_score_rate": 0.5624
+            },
+            "seat_0_start_P1": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 551,
+              "losses": 699,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.4408,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.41349986287531804,
+                0.4684628853183793
+              ],
+              "terminal_win_rate": 0.4408,
+              "terminal_score_rate": 0.4408
+            },
+            "seat_1_start_P0": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 540,
+              "losses": 710,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.432,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.40478909870788304,
+                0.4596275715146072
+              ],
+              "terminal_win_rate": 0.432,
+              "terminal_score_rate": 0.432
+            },
+            "seat_1_start_P1": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 702,
+              "losses": 548,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.5616,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.5339458776262569,
+                0.5888766681721931
+              ],
+              "terminal_win_rate": 0.5616,
+              "terminal_score_rate": 0.5616
+            }
+          }
+        },
+        "zero_vs_critic": {
+          "attempted_pairs": 5000,
+          "terminal_pairs": 5000,
+          "unresolved_pairs": 0,
+          "recorded_attempt_win_rate_change": -0.0108,
+          "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+            -0.014404999999999998,
+            -0.007
+          ],
+          "terminal_score_change_on_terminal_pairs": -0.0108,
+          "terminal_score_change_bootstrap_95_interval": [
+            -0.014404999999999998,
+            -0.007
+          ],
+          "status_transitions": {
+            "loss->loss": 2434,
+            "loss->win": 16,
+            "win->loss": 70,
+            "win->win": 2480
+          },
+          "improved_recorded_win_attempts": 16,
+          "worsened_recorded_win_attempts": 70,
+          "tied_recorded_win_attempts": 4914,
+          "bootstrap": {
+            "unit": "matched_attempt",
+            "seed": 9901,
+            "resamples": 4000
+          }
+        },
+        "critic_vs_imitation": {
+          "attempted_pairs": 5000,
+          "terminal_pairs": 5000,
+          "unresolved_pairs": 0,
+          "recorded_attempt_win_rate_change": 0.0168,
+          "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+            0.0128,
+            0.0208
+          ],
+          "terminal_score_change_on_terminal_pairs": 0.0168,
+          "terminal_score_change_bootstrap_95_interval": [
+            0.0128,
+            0.0208
+          ],
+          "status_transitions": {
+            "loss->loss": 2440,
+            "loss->win": 94,
+            "win->loss": 10,
+            "win->win": 2456
+          },
+          "improved_recorded_win_attempts": 94,
+          "worsened_recorded_win_attempts": 10,
+          "tied_recorded_win_attempts": 4896,
+          "bootstrap": {
+            "unit": "matched_attempt",
+            "seed": 9901,
+            "resamples": 4000
+          }
+        },
+        "zero_vs_imitation": {
+          "attempted_pairs": 5000,
+          "terminal_pairs": 5000,
+          "unresolved_pairs": 0,
+          "recorded_attempt_win_rate_change": 0.006,
+          "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+            0.0026,
+            0.0096
+          ],
+          "terminal_score_change_on_terminal_pairs": 0.006,
+          "terminal_score_change_bootstrap_95_interval": [
+            0.0026,
+            0.0096
+          ],
+          "status_transitions": {
+            "loss->loss": 2478,
+            "loss->win": 56,
+            "win->loss": 26,
+            "win->win": 2440
+          },
+          "improved_recorded_win_attempts": 56,
+          "worsened_recorded_win_attempts": 26,
+          "tied_recorded_win_attempts": 4918,
+          "bootstrap": {
+            "unit": "matched_attempt",
+            "seed": 9901,
+            "resamples": 4000
+          }
+        }
+      }
+    },
+    "initial_imitation_evaluation": {
+      "attempted_games": 5000,
+      "terminal_games": 5000,
+      "wins": 2466,
+      "losses": 2534,
+      "draws": 0,
+      "cutoffs": 0,
+      "errors": 0,
+      "unresolved_attempts": 0,
+      "terminal_fraction": 1.0,
+      "win_rate_all_attempts": 0.4932,
+      "win_rate_all_attempts_wilson_95_interval": [
+        0.4793527832238062,
+        0.5070576575226466
+      ],
+      "terminal_win_rate": 0.4932,
+      "terminal_score_rate": 0.4932,
+      "metric": "recorded_wins_per_scheduled_attempt",
+      "mode": "versus_baseline",
+      "win_rate_denominator": "all_attempts_including_cutoffs_and_errors",
+      "unresolved_outcomes": "unknown; no terminal score or training return assigned",
+      "seat_start_balanced": true,
+      "seat_start_strata": {
+        "seat_0_start_P0": {
+          "attempted_games": 1250,
+          "terminal_games": 1250,
+          "wins": 696,
+          "losses": 554,
+          "draws": 0,
+          "cutoffs": 0,
+          "errors": 0,
+          "unresolved_attempts": 0,
+          "terminal_fraction": 1.0,
+          "win_rate_all_attempts": 0.5568,
+          "win_rate_all_attempts_wilson_95_interval": [
+            0.5291290009958172,
+            0.5841229568183379
+          ],
+          "terminal_win_rate": 0.5568,
+          "terminal_score_rate": 0.5568
+        },
+        "seat_0_start_P1": {
+          "attempted_games": 1250,
+          "terminal_games": 1250,
+          "wins": 544,
+          "losses": 706,
+          "draws": 0,
+          "cutoffs": 0,
+          "errors": 0,
+          "unresolved_attempts": 0,
+          "terminal_fraction": 1.0,
+          "win_rate_all_attempts": 0.4352,
+          "win_rate_all_attempts_wilson_95_interval": [
+            0.4079556357062868,
+            0.46284142650573323
+          ],
+          "terminal_win_rate": 0.4352,
+          "terminal_score_rate": 0.4352
+        },
+        "seat_1_start_P0": {
+          "attempted_games": 1250,
+          "terminal_games": 1250,
+          "wins": 532,
+          "losses": 718,
+          "draws": 0,
+          "cutoffs": 0,
+          "errors": 0,
+          "unresolved_attempts": 0,
+          "terminal_fraction": 1.0,
+          "win_rate_all_attempts": 0.4256,
+          "win_rate_all_attempts_wilson_95_interval": [
+            0.39845951425192677,
+            0.4531963719915037
+          ],
+          "terminal_win_rate": 0.4256,
+          "terminal_score_rate": 0.4256
+        },
+        "seat_1_start_P1": {
+          "attempted_games": 1250,
+          "terminal_games": 1250,
+          "wins": 694,
+          "losses": 556,
+          "draws": 0,
+          "cutoffs": 0,
+          "errors": 0,
+          "unresolved_attempts": 0,
+          "terminal_fraction": 1.0,
+          "win_rate_all_attempts": 0.5552,
+          "win_rate_all_attempts_wilson_95_interval": [
+            0.5275239520285673,
+            0.5825378097908229
+          ],
+          "terminal_win_rate": 0.5552,
+          "terminal_score_rate": 0.5552
+        }
+      }
+    },
+    "finished_utc": "2026-10-25T05:46:25.942582+00:00",
+    "aggregate": {
+      "mean_zero_vs_critic_win_rate_change": -0.0051,
+      "training_seed_effects": [
+        0.0006,
+        -0.0108
+      ],
+      "minimum": -0.0108,
+      "maximum": 0.0006,
+      "uncertainty": "No pooled 10,000-game interval; see per-seed paired intervals. Two seeds do not establish training-seed robustness."
+    }
+  },
+  "completion_verification": {
+    "status": "complete",
+    "returncode": 0,
+    "verified_utc": "2026-10-25T05:46:27.560851+00:00",
+    "durability": "Report/JSON/log and directories fsynced; Linux sync completed."
+  },
+  "interpretation": "Removing the learned value baseline did not consistently improve wins: seed 1 zero-minus-critic +0.06 percentage points (95% matched interval -0.30 to +0.42), seed 2 -1.08 (-1.4405 to -0.70). Retain current critic baseline; results do not establish critic correctness or identify remaining learning bottleneck. Two seeds and a common fixed opponent/cohort limit generalization.",
+  "local_backup": {
+    "path": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/critic-ablation-20261024/verified-results-backup-20261025T054627Z.tar.gz",
+    "bytes": 73636199,
+    "sha256": "d3ff417ba8de2e22f158c57dbd6917ab5b66aee1fa76a43907716d389045872d",
+    "all_json_and_zip_integrity_verified": true,
+    "checks": {
+      "json": 58,
+      "zip": 60
+    },
+    "independent_paired_recounts": {
+      "23261024": {
+        "improved": 44,
+        "worsened": 41,
+        "matched_games": 5000
+      },
+      "24261024": {
+        "improved": 16,
+        "worsened": 70,
+        "matched_games": 5000
+      }
+    }
+  },
+  "windows_task": {
+    "status": "Ready",
+    "last_result": 0,
+    "automatic_triggers": 0,
+    "experiment_power_request_released": true
+  }
+}

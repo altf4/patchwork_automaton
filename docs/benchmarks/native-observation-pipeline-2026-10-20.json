@@ -1,0 +1,1025 @@
+{
+  "title": "Rust observation pipeline with unchanged TensorFlow CPU training",
+  "date": "2026-10-20",
+  "conclusion": "No measured full-session speedup. Rust took 2.45% longer; retain Python as the default and Rust as an explicit experiment.",
+  "percent_more_wall_time": 2.4481889128775913,
+  "comparisons": {
+    "final_matched_collection": {
+      "status": "complete",
+      "started_utc": "2026-10-20T23:03:39.461302+00:00",
+      "methodology": "Run matched complete CPU training sessions in an alternating pipeline order.\n\nIncludes startup, baseline/before/after evaluation, self-play, held-out validation,\nPPO updates, checkpoint writing, model synchronization and shutdown in wall time.\nRuns are sequential; do not compile or run other benchmarks alongside them.\n",
+      "config": {
+        "order": [
+          "python",
+          "rust",
+          "rust",
+          "python"
+        ],
+        "rounds": 1,
+        "games_per_round": 64,
+        "eval_games": 8,
+        "workers": 8,
+        "inference_processes": 2,
+        "seed": 721
+      },
+      "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.43",
+      "cpu": "Architecture:                            x86_64\nCPU op-mode(s):                          32-bit, 64-bit\nAddress sizes:                           46 bits physical, 48 bits virtual\nByte Order:                              Little Endian\nCPU(s):                                  8\nOn-line CPU(s) list:                     0-7\nVendor ID:                               GenuineIntel\nModel name:                              Intel(R) Core(TM) Ultra 5 335\nCPU family:                              6\nModel:                                   204\nThread(s) per core:                      1\nCore(s) per socket:                      8\nSocket(s):                               1\nStepping:                                3\nCPU(s) scaling MHz:                      82%\nCPU max MHz:                             4700.0000\nCPU min MHz:                             400.0000\nBogoMIPS:                                6374.40\nFlags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb ssbd ibrs ibpb stibp ibrs_enhanced tpr_shadow flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid rdt_a rdseed adx smap clflushopt clwb intel_pt sha_ni xsaveopt xsavec xgetbv1 xsaves split_lock_detect user_shstk avx_vnni lam wbnoinvd dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp hwp_pkg_req hfi vnmi umip pku ospke waitpkg gfni vaes vpclmulqdq rdpid bus_lock_detect movdiri movdir64b fsrm md_clear serialize pconfig arch_lbr ibt flush_l1d arch_capabilities\nVirtualization:                          VT-x\nL1d cache:                               320 KiB (8 instances)\nL1i cache:                               512 KiB (8 instances)\nL2 cache:                                16 MiB (5 instances)\nL3 cache:                                12 MiB (1 instance)\nNUMA node(s):                            1\nNUMA node0 CPU(s):                       0-7\nVulnerability Gather data sampling:      Not affected\nVulnerability Ghostwrite:                Not affected\nVulnerability Indirect target selection: Not affected\nVulnerability Itlb multihit:             Not affected\nVulnerability L1tf:                      Not affected\nVulnerability Mds:                       Not affected\nVulnerability Meltdown:                  Not affected\nVulnerability Mmio stale data:           Not affected\nVulnerability Old microcode:             Not affected\nVulnerability Reg file data sampling:    Not affected\nVulnerability Retbleed:                  Not affected\nVulnerability Spec rstack overflow:      Not affected\nVulnerability Spec store bypass:         Mitigation; Speculative Store Bypass disabled via prctl\nVulnerability Spectre v1:                Mitigation; usercopy/swapgs barriers and __user pointer sanitization\nVulnerability Spectre v2:                Mitigation; Enhanced / Automatic IBRS; IBPB conditional; PBRSB-eIBRS Not affected; BHI BHI_DIS_S\nVulnerability Srbds:                     Not affected\nVulnerability Tsa:                       Not affected\nVulnerability Tsx async abort:           Not affected\nVulnerability Vmscape:                   Not affected\n",
+      "packages": {
+        "numpy": "2.5.4",
+        "keras": "3.15.1",
+        "tensorflow-cpu": "2.21.0",
+        "orjson": "3.13.0"
+      },
+      "source_sha256": {
+        "native/observation-pipeline/src/encode.rs": "7eb2ad19b94f61a96558be13f7c36fd47bced7a909ef7bad783a77b3313e9b28",
+        "native/observation-pipeline/src/arrays.rs": "8ae1a8d7c5577b6ff4879376fdab4ef3df2f60d2939ffb063ccddfb4c089254f",
+        "native/observation-pipeline/src/lib.rs": "ea4451c5b25cc756ed0cd36276d772df9cdbf11a72dcfc64cc19d176c8f8d418",
+        "native/observation-pipeline/src/history.rs": "6c6b82696b2f6f0f66395f097c37eb39ccad5393004aeb0d7c90b378ccb52bb8",
+        "src/patchwork_automaton/neural/augmentation.py": "215ef801da040da9db1821b419209a3d49a5a22a0fde2aff6f83c6cdb7690a07",
+        "src/patchwork_automaton/neural/calibration.py": "a867ec3615f74c2cb812171d3bd5b2bce5c25e733196b924cac137eeddbbb802",
+        "src/patchwork_automaton/neural/inference_processes.py": "7c4a880efaf689544692c28756a462249afc24f211a07cb26840ab51e2761777",
+        "src/patchwork_automaton/neural/validation.py": "c9fb62daaf783a2ac68a2ab883be0c5317fcb968baa52bd4dff4702b4c278c31",
+        "src/patchwork_automaton/neural/history.py": "76bb00cf3589898e8cde5ef0ae8fd306b0a7d48198102b81275b7a713342fc26",
+        "src/patchwork_automaton/neural/rustmage_features.py": "a5d92d813ae342138ef27f5c076b04eca9bfc098533d2b8e53a43337e583556a",
+        "src/patchwork_automaton/neural/batching.py": "15f6c90848482936c35d51d9bbd8899b527270b844b190befce7c7a8915a24a3",
+        "src/patchwork_automaton/neural/__init__.py": "83a1588922dcdf47a7dbbcc41d76f5edf3934b3100e55582f5c814d155c7532a",
+        "src/patchwork_automaton/neural/training.py": "7ea5b47c5621d54515ffd77aab0b20f15d67eedadf44604fec76d724e8a22f96",
+        "src/patchwork_automaton/neural/ppo.py": "08cad6a8f397355d67290a6ebfce1b61f867c1bd30a5c39bfaa15eb44d0a5d28",
+        "src/patchwork_automaton/neural/native_pipeline.py": "66feefe50fc85071624be53d1c2254ad9867fb16141c0225eccc21e96d4f640d",
+        "src/patchwork_automaton/neural/ordered_jobs.py": "b9010c47f8fb2bf6e8497c105eed48d4177efc30d084ebc06b099c6e2fc3fb2d",
+        "src/patchwork_automaton/neural/rustmage_observation.py": "773cbaff36e036b330c3bf1071228663eb918d9a74c4cdb0646576605e2141be",
+        "src/patchwork_automaton/neural/imitation.py": "8a67868dbdcbfe531d7c8e4eaa74e923a69ce71573d6b1daf637520c4a5eaaae",
+        "src/patchwork_automaton/neural/native_layout.py": "e5cb94f329a4621a92fa9e6e2210c3694e2fbd6e4977e3790656bb206ef1dc91",
+        "src/patchwork_automaton/neural/payment_scenarios.py": "011be640915449167ce429d80cb1bd8586a37d527454cf0161b95f2c86e9c243",
+        "src/patchwork_automaton/neural/demonstrations.py": "fa528d1d09013f0e294285fdec2c2180813a1bd0da887dba949df39adcff5da2",
+        "src/patchwork_automaton/neural/curriculum.py": "0b04a9667acd622c09717f4efb5b49e842558c2abc84f14919c199eaa7f9f853",
+        "src/patchwork_automaton/neural/experiment.py": "bca796b99048a1ea70b0b5292c5c8ede0742892f858f48b0ddf43be268e10ea7",
+        "src/patchwork_automaton/neural/rollout_cache.py": "5b61d797e6df9a814a064c55bff4c640ba34a4302223ea04b2af382fc7382ff4",
+        "src/patchwork_automaton/neural/episodes.py": "c519dc6dd780d02ea23a8f2fe73dab522a6b612bebada15610874918b65ab62b",
+        "src/patchwork_automaton/neural/model.py": "09741d1f396980effd972c26bd9da901a5cdd085f20c9d5184e83879b131892e",
+        "src/patchwork_automaton/neural/policy.py": "fe226a1e8b6ed50184c948eebd750fa2d9d3c56d569a9abab7ffd60a0ad556b1",
+        "src/patchwork_automaton/neural/scenarios.py": "6b36460767475498b7130c52a2fbbeab98d36310a843c747200f6bff4da480c2",
+        "src/patchwork_automaton/neural/features.py": "48df788ba954b94de76c935b32839a20c7c748974e96ef4f2208b1d79bcbd7ca",
+        "src/patchwork_automaton/neural/streaming_ppo.py": "b4b6bfa6bea45075efbab0c5eb46c22631447d03cee02e1d567c2cdf292b19ba",
+        "src/patchwork_automaton/neural/rustmage_policy.py": "d1c8b6c9d61fd58a389e8fc379df9a64751ad96eb468ce7c4ae1ead6f25d57f5",
+        "src/patchwork_automaton/rl/rustmage_processes.py": "0b0ab08f2fcd5aeb00b8e995775b1145e18616672e3b69c1d6a00658dc5b47a8",
+        "src/patchwork_automaton/rl/rustmage_experiment.py": "fcad506a2d78585d7ac8d49a18d1066ba945dc7022e37ee0b4e5d8c21820b7b3",
+        "src/patchwork_automaton/rl/rustmage.py": "3d347ff0deee35bb0a84d7dbf9ff8bb7ba8af19d86a67ae242c072ff110459ab",
+        "src/patchwork_automaton/backends/rustmage.py": "ea707d31558009b16bd7f703591925411ffcfba097318974231de73664f0272a",
+        "examples/train_rustmage.py": "bb5159ca5a7910fe6857ef51be9b7740c7e4c5dd45615bbae38e4ed21daf6377",
+        "examples/benchmark_native_pipeline.py": "ee21848c8566982e677a3e31f3c4218d10c7686d867648bf92dd265d730b7d88",
+        "native/observation-pipeline/Cargo.toml": "f36be89a1ca6d872567e23563b26425a9fcea5d72ceda62767fd018c61cfa68b",
+        "native/observation-pipeline/Cargo.lock": "6f923c993293ad2529a73658f9ba30919364bb654ab33de74a43cae15a7342d7"
+      },
+      "library_sha256": {
+        ".local/rustmage/target/release/librustmage.so": "b0994769ed13210bb924e3673541ba87cecc1b832f1c5d8d5d423d473074cd20",
+        ".local/observation-target/release/libpatchwork_observation_pipeline.so": "b0ebb1233b3d262a6348264c0becf305ecce9dd55eab12248de8a11279d7293d"
+      },
+      "runtime": {
+        "CUDA_VISIBLE_DEVICES": "-1",
+        "TF_NUM_INTRAOP_THREADS": "1",
+        "TF_NUM_INTEROP_THREADS": "4",
+        "TF_ENABLE_ONEDNN_OPTS": "0"
+      },
+      "trials": [
+        {
+          "pipeline": "python",
+          "trial": 1,
+          "full_wall_seconds": 120.71654967299764,
+          "process_tree_cpu_seconds": 444.625298,
+          "initial_weights_sha256": "b7e2ba186f19d4b22ee4a46e8b845be5195dfdcdbb9641aa4a04c09f0008cf24",
+          "game_records_sha256": "776eec21c761b0a74c5857433cf8e3620f8782c126bb39fbccaba486513a4571",
+          "report": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/native-pipeline-matched-2026-10-20/01-python/report.json",
+          "training_loop_seconds": 112.1011979640025,
+          "collection_seconds": 34.86249671100086,
+          "update_seconds": 53.12013527599993,
+          "validation_seconds": 16.84591412699956,
+          "collection_worker_cpu_seconds": 109.406010193,
+          "outcomes": {
+            "win": 44,
+            "loss": 20,
+            "draw": 0,
+            "cutoff": 0,
+            "error": 0
+          },
+          "decisions": 77845,
+          "neural_choices": 29467,
+          "updates": [
+            {
+              "samples": 23543,
+              "accepted_steps": 1472,
+              "critic_steps": 500,
+              "rejected_epochs": 0,
+              "exact_kl": 0.004126901971008143,
+              "max_state_kl": 0.021499067544937134
+            }
+          ],
+          "throughput": {
+            "timed_selfplay_games": 64,
+            "collection_seconds": 34.86249671100086,
+            "update_seconds": 53.12013527599993,
+            "validation_seconds": 16.84591412699956,
+            "collection_games_per_minute": 110.1470164868682,
+            "collection_and_updates_games_per_minute": 43.64497757429387,
+            "collection_updates_validation_games_per_minute": 36.63124351475814
+          },
+          "report_sha256": "6e30a3fe9636716be2324ca6d1c24202640f81443940fed84ab14759ed4deef9",
+          "rollout_cache": [
+            {
+              "budget_bytes": 268435456,
+              "retained_bytes": 265026467,
+              "trajectories": 11,
+              "trajectory_hits": 15486,
+              "batches": 26,
+              "batch_hits": 78,
+              "spill_bytes": 1244251893
+            }
+          ],
+          "full_training_config": {
+            "games_per_round": 64,
+            "validation_fraction": 0.2,
+            "eval_games": 8,
+            "eval_every_games": 0,
+            "eval_horizon": 20,
+            "train_horizon": 60,
+            "workers": 8,
+            "inference_processes": 2,
+            "inference_wait_ms": 0,
+            "collector": "processes",
+            "observation_pipeline": "python",
+            "architecture": "separate",
+            "train_batch": 32,
+            "learning_rate": 0.0003,
+            "ppo_epochs": 2,
+            "value_learning_rate": null,
+            "value_max_steps": 500,
+            "concurrent_updates": true,
+            "prefetch_batches": 2,
+            "measurement_workers": 4,
+            "seed": 721,
+            "algorithm": "ppo",
+            "target_kl": 0.02,
+            "max_state_kl": 0.1,
+            "advantage_scale_floor": 1.0,
+            "ppo_clip": 0.2
+          },
+          "game_counts": {
+            "training_games_completed": 64,
+            "collected_games_completed": 64,
+            "optimization_games_completed": 51,
+            "validation_games_completed": 13
+          }
+        },
+        {
+          "pipeline": "rust",
+          "trial": 2,
+          "full_wall_seconds": 123.43884767399868,
+          "process_tree_cpu_seconds": 454.8999340000001,
+          "initial_weights_sha256": "b7e2ba186f19d4b22ee4a46e8b845be5195dfdcdbb9641aa4a04c09f0008cf24",
+          "game_records_sha256": "776eec21c761b0a74c5857433cf8e3620f8782c126bb39fbccaba486513a4571",
+          "report": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/native-pipeline-matched-2026-10-20/02-rust/report.json",
+          "training_loop_seconds": 114.74321671299913,
+          "collection_seconds": 35.3723728119985,
+          "update_seconds": 54.09196924099888,
+          "validation_seconds": 17.56184013500024,
+          "collection_worker_cpu_seconds": 112.25854221000002,
+          "outcomes": {
+            "win": 44,
+            "loss": 20,
+            "draw": 0,
+            "cutoff": 0,
+            "error": 0
+          },
+          "decisions": 77845,
+          "neural_choices": 29467,
+          "updates": [
+            {
+              "samples": 23543,
+              "accepted_steps": 1472,
+              "critic_steps": 500,
+              "rejected_epochs": 0,
+              "exact_kl": 0.005194800043807655,
+              "max_state_kl": 0.023511797189712524
+            }
+          ],
+          "throughput": {
+            "timed_selfplay_games": 64,
+            "collection_seconds": 35.3723728119985,
+            "update_seconds": 54.09196924099888,
+            "validation_seconds": 17.56184013500024,
+            "collection_games_per_minute": 108.55929910072221,
+            "collection_and_updates_games_per_minute": 42.92212865909459,
+            "collection_updates_validation_games_per_minute": 35.87907109733972
+          },
+          "report_sha256": "832e3c74eca5e3d519eb84f240eb1e51294cb7a5d2cdab3f4db64e034931f468",
+          "rollout_cache": [
+            {
+              "budget_bytes": 268435456,
+              "retained_bytes": 265026467,
+              "trajectories": 11,
+              "trajectory_hits": 15486,
+              "batches": 26,
+              "batch_hits": 78,
+              "spill_bytes": 1250633865
+            }
+          ],
+          "full_training_config": {
+            "games_per_round": 64,
+            "validation_fraction": 0.2,
+            "eval_games": 8,
+            "eval_every_games": 0,
+            "eval_horizon": 20,
+            "train_horizon": 60,
+            "workers": 8,
+            "inference_processes": 2,
+            "inference_wait_ms": 0,
+            "collector": "processes",
+            "observation_pipeline": "rust",
+            "architecture": "separate",
+            "train_batch": 32,
+            "learning_rate": 0.0003,
+            "ppo_epochs": 2,
+            "value_learning_rate": null,
+            "value_max_steps": 500,
+            "concurrent_updates": true,
+            "prefetch_batches": 2,
+            "measurement_workers": 4,
+            "seed": 721,
+            "algorithm": "ppo",
+            "target_kl": 0.02,
+            "max_state_kl": 0.1,
+            "advantage_scale_floor": 1.0,
+            "ppo_clip": 0.2
+          },
+          "game_counts": {
+            "training_games_completed": 64,
+            "collected_games_completed": 64,
+            "optimization_games_completed": 51,
+            "validation_games_completed": 13
+          }
+        },
+        {
+          "pipeline": "rust",
+          "trial": 3,
+          "full_wall_seconds": 123.4689326709995,
+          "process_tree_cpu_seconds": 455.26660999999984,
+          "initial_weights_sha256": "b7e2ba186f19d4b22ee4a46e8b845be5195dfdcdbb9641aa4a04c09f0008cf24",
+          "game_records_sha256": "776eec21c761b0a74c5857433cf8e3620f8782c126bb39fbccaba486513a4571",
+          "report": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/native-pipeline-matched-2026-10-20/03-rust/report.json",
+          "training_loop_seconds": 114.68779189800262,
+          "collection_seconds": 35.47136992200103,
+          "update_seconds": 54.109362408999004,
+          "validation_seconds": 17.53542931699849,
+          "collection_worker_cpu_seconds": 112.54268693,
+          "outcomes": {
+            "win": 44,
+            "loss": 20,
+            "draw": 0,
+            "cutoff": 0,
+            "error": 0
+          },
+          "decisions": 77845,
+          "neural_choices": 29467,
+          "updates": [
+            {
+              "samples": 23543,
+              "accepted_steps": 1472,
+              "critic_steps": 500,
+              "rejected_epochs": 0,
+              "exact_kl": 0.005712235432436385,
+              "max_state_kl": 0.01914534717798233
+            }
+          ],
+          "throughput": {
+            "timed_selfplay_games": 64,
+            "collection_seconds": 35.47136992200103,
+            "update_seconds": 54.109362408999004,
+            "validation_seconds": 17.53542931699849,
+            "collection_games_per_minute": 108.25632075794877,
+            "collection_and_updates_games_per_minute": 42.86636088005212,
+            "collection_updates_validation_games_per_minute": 35.84893204649058
+          },
+          "report_sha256": "72550c649f14df0fc5d0755dbd2b13a4d56bf81956ed7873aedbf292b70ca609",
+          "rollout_cache": [
+            {
+              "budget_bytes": 268435456,
+              "retained_bytes": 265026467,
+              "trajectories": 11,
+              "trajectory_hits": 15486,
+              "batches": 26,
+              "batch_hits": 78,
+              "spill_bytes": 1250633865
+            }
+          ],
+          "full_training_config": {
+            "games_per_round": 64,
+            "validation_fraction": 0.2,
+            "eval_games": 8,
+            "eval_every_games": 0,
+            "eval_horizon": 20,
+            "train_horizon": 60,
+            "workers": 8,
+            "inference_processes": 2,
+            "inference_wait_ms": 0,
+            "collector": "processes",
+            "observation_pipeline": "rust",
+            "architecture": "separate",
+            "train_batch": 32,
+            "learning_rate": 0.0003,
+            "ppo_epochs": 2,
+            "value_learning_rate": null,
+            "value_max_steps": 500,
+            "concurrent_updates": true,
+            "prefetch_batches": 2,
+            "measurement_workers": 4,
+            "seed": 721,
+            "algorithm": "ppo",
+            "target_kl": 0.02,
+            "max_state_kl": 0.1,
+            "advantage_scale_floor": 1.0,
+            "ppo_clip": 0.2
+          },
+          "game_counts": {
+            "training_games_completed": 64,
+            "collected_games_completed": 64,
+            "optimization_games_completed": 51,
+            "validation_games_completed": 13
+          }
+        },
+        {
+          "pipeline": "python",
+          "trial": 4,
+          "full_wall_seconds": 120.29091269900164,
+          "process_tree_cpu_seconds": 444.9584100000002,
+          "initial_weights_sha256": "b7e2ba186f19d4b22ee4a46e8b845be5195dfdcdbb9641aa4a04c09f0008cf24",
+          "game_records_sha256": "776eec21c761b0a74c5857433cf8e3620f8782c126bb39fbccaba486513a4571",
+          "report": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/native-pipeline-matched-2026-10-20/04-python/report.json",
+          "training_loop_seconds": 111.50232385199706,
+          "collection_seconds": 34.61072927100031,
+          "update_seconds": 52.82724619500004,
+          "validation_seconds": 17.014095601000008,
+          "collection_worker_cpu_seconds": 109.48946902,
+          "outcomes": {
+            "win": 44,
+            "loss": 20,
+            "draw": 0,
+            "cutoff": 0,
+            "error": 0
+          },
+          "decisions": 77845,
+          "neural_choices": 29467,
+          "updates": [
+            {
+              "samples": 23543,
+              "accepted_steps": 1472,
+              "critic_steps": 500,
+              "rejected_epochs": 0,
+              "exact_kl": 0.0048057737940473706,
+              "max_state_kl": 0.014620326459407806
+            }
+          ],
+          "throughput": {
+            "timed_selfplay_games": 64,
+            "collection_seconds": 34.61072927100031,
+            "update_seconds": 52.82724619500004,
+            "validation_seconds": 17.014095601000008,
+            "collection_games_per_minute": 110.94825451185928,
+            "collection_and_updates_games_per_minute": 43.916844820968635,
+            "collection_updates_validation_games_per_minute": 36.763272961211534
+          },
+          "report_sha256": "7a5a70b6a3253b3ca7c8bb1e3c2703b90986fd09265638427a55eeb677a27ca5",
+          "rollout_cache": [
+            {
+              "budget_bytes": 268435456,
+              "retained_bytes": 265026467,
+              "trajectories": 11,
+              "trajectory_hits": 15486,
+              "batches": 26,
+              "batch_hits": 78,
+              "spill_bytes": 1244251893
+            }
+          ],
+          "full_training_config": {
+            "games_per_round": 64,
+            "validation_fraction": 0.2,
+            "eval_games": 8,
+            "eval_every_games": 0,
+            "eval_horizon": 20,
+            "train_horizon": 60,
+            "workers": 8,
+            "inference_processes": 2,
+            "inference_wait_ms": 0,
+            "collector": "processes",
+            "observation_pipeline": "python",
+            "architecture": "separate",
+            "train_batch": 32,
+            "learning_rate": 0.0003,
+            "ppo_epochs": 2,
+            "value_learning_rate": null,
+            "value_max_steps": 500,
+            "concurrent_updates": true,
+            "prefetch_batches": 2,
+            "measurement_workers": 4,
+            "seed": 721,
+            "algorithm": "ppo",
+            "target_kl": 0.02,
+            "max_state_kl": 0.1,
+            "advantage_scale_floor": 1.0,
+            "ppo_clip": 0.2
+          },
+          "game_counts": {
+            "training_games_completed": 64,
+            "collected_games_completed": 64,
+            "optimization_games_completed": 51,
+            "validation_games_completed": 13
+          }
+        }
+      ],
+      "identical_game_records": true,
+      "medians": {
+        "rust": {
+          "full_wall_seconds": 123.45389017249909,
+          "training_loop_seconds": 114.71550430550087,
+          "collection_seconds": 35.42187136699977,
+          "update_seconds": 54.10066582499894,
+          "validation_seconds": 17.548634725999364,
+          "process_tree_cpu_seconds": 455.08327199999997,
+          "collection_worker_cpu_seconds": 112.40061457000002
+        },
+        "python": {
+          "full_wall_seconds": 120.50373118599964,
+          "training_loop_seconds": 111.80176090799978,
+          "collection_seconds": 34.736612991000584,
+          "update_seconds": 52.973690735499986,
+          "validation_seconds": 16.930004863999784,
+          "process_tree_cpu_seconds": 444.79185400000006,
+          "collection_worker_cpu_seconds": 109.4477396065
+        }
+      },
+      "speedups": {
+        "full_wall_seconds": 0.9761031508818615,
+        "training_loop_seconds": 0.9746002651067858,
+        "collection_seconds": 0.9806543711680464,
+        "update_seconds": 0.979168923851244,
+        "validation_seconds": 0.9647476928172057,
+        "process_tree_cpu_seconds": 0.9773856376773175,
+        "collection_worker_cpu_seconds": 0.9737290140734858
+      },
+      "finished_utc": "2026-10-20T23:11:47.436024+00:00"
+    },
+    "earlier_two_round_prototype": {
+      "status": "complete",
+      "started_utc": "2026-10-20T22:50:45.770607+00:00",
+      "methodology": "Run matched complete CPU training sessions in an alternating pipeline order.\n\nIncludes startup, baseline/before/after evaluation, self-play, held-out validation,\nPPO updates, checkpoint writing, model synchronization and shutdown in wall time.\nRuns are sequential; do not compile or run other benchmarks alongside them.\n",
+      "config": {
+        "order": [
+          "python",
+          "rust",
+          "rust",
+          "python"
+        ],
+        "rounds": 2,
+        "games_per_round": 32,
+        "eval_games": 8,
+        "workers": 8,
+        "inference_processes": 2,
+        "seed": 721
+      },
+      "platform": "Linux-7.0.0-38-generic-x86_64-with-glibc2.43",
+      "cpu": "Architecture:                            x86_64\nCPU op-mode(s):                          32-bit, 64-bit\nAddress sizes:                           46 bits physical, 48 bits virtual\nByte Order:                              Little Endian\nCPU(s):                                  8\nOn-line CPU(s) list:                     0-7\nVendor ID:                               GenuineIntel\nModel name:                              Intel(R) Core(TM) Ultra 5 335\nCPU family:                              6\nModel:                                   204\nThread(s) per core:                      1\nCore(s) per socket:                      8\nSocket(s):                               1\nStepping:                                3\nCPU(s) scaling MHz:                      59%\nCPU max MHz:                             4700.0000\nCPU min MHz:                             400.0000\nBogoMIPS:                                6374.40\nFlags:                                   fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc art arch_perfmon bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf tsc_known_freq pni pclmulqdq dtes64 monitor ds_cpl vmx smx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm 3dnowprefetch cpuid_fault epb ssbd ibrs ibpb stibp ibrs_enhanced tpr_shadow flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid rdt_a rdseed adx smap clflushopt clwb intel_pt sha_ni xsaveopt xsavec xgetbv1 xsaves split_lock_detect user_shstk avx_vnni lam wbnoinvd dtherm ida arat pln pts hwp hwp_notify hwp_act_window hwp_epp hwp_pkg_req hfi vnmi umip pku ospke waitpkg gfni vaes vpclmulqdq rdpid bus_lock_detect movdiri movdir64b fsrm md_clear serialize pconfig arch_lbr ibt flush_l1d arch_capabilities\nVirtualization:                          VT-x\nL1d cache:                               320 KiB (8 instances)\nL1i cache:                               512 KiB (8 instances)\nL2 cache:                                16 MiB (5 instances)\nL3 cache:                                12 MiB (1 instance)\nNUMA node(s):                            1\nNUMA node0 CPU(s):                       0-7\nVulnerability Gather data sampling:      Not affected\nVulnerability Ghostwrite:                Not affected\nVulnerability Indirect target selection: Not affected\nVulnerability Itlb multihit:             Not affected\nVulnerability L1tf:                      Not affected\nVulnerability Mds:                       Not affected\nVulnerability Meltdown:                  Not affected\nVulnerability Mmio stale data:           Not affected\nVulnerability Old microcode:             Not affected\nVulnerability Reg file data sampling:    Not affected\nVulnerability Retbleed:                  Not affected\nVulnerability Spec rstack overflow:      Not affected\nVulnerability Spec store bypass:         Mitigation; Speculative Store Bypass disabled via prctl\nVulnerability Spectre v1:                Mitigation; usercopy/swapgs barriers and __user pointer sanitization\nVulnerability Spectre v2:                Mitigation; Enhanced / Automatic IBRS; IBPB conditional; PBRSB-eIBRS Not affected; BHI BHI_DIS_S\nVulnerability Srbds:                     Not affected\nVulnerability Tsa:                       Not affected\nVulnerability Tsx async abort:           Not affected\nVulnerability Vmscape:                   Not affected\n",
+      "source_sha256": {
+        "native/observation-pipeline/src/encode.rs": "553832dfadf4188e4be4d34b588d6083a46743ddd04bd8d5464c97de9d6c4907",
+        "native/observation-pipeline/src/arrays.rs": "8ae1a8d7c5577b6ff4879376fdab4ef3df2f60d2939ffb063ccddfb4c089254f",
+        "native/observation-pipeline/src/lib.rs": "9f10e6492f66cfd7bc4941b7c6ddeafec5d3501ea0b91b44f61391ac420643e7",
+        "native/observation-pipeline/src/history.rs": "6c6b82696b2f6f0f66395f097c37eb39ccad5393004aeb0d7c90b378ccb52bb8",
+        "src/patchwork_automaton/neural/augmentation.py": "215ef801da040da9db1821b419209a3d49a5a22a0fde2aff6f83c6cdb7690a07",
+        "src/patchwork_automaton/neural/calibration.py": "a867ec3615f74c2cb812171d3bd5b2bce5c25e733196b924cac137eeddbbb802",
+        "src/patchwork_automaton/neural/inference_processes.py": "7c4a880efaf689544692c28756a462249afc24f211a07cb26840ab51e2761777",
+        "src/patchwork_automaton/neural/validation.py": "c9fb62daaf783a2ac68a2ab883be0c5317fcb968baa52bd4dff4702b4c278c31",
+        "src/patchwork_automaton/neural/history.py": "76bb00cf3589898e8cde5ef0ae8fd306b0a7d48198102b81275b7a713342fc26",
+        "src/patchwork_automaton/neural/rustmage_features.py": "a5d92d813ae342138ef27f5c076b04eca9bfc098533d2b8e53a43337e583556a",
+        "src/patchwork_automaton/neural/batching.py": "15f6c90848482936c35d51d9bbd8899b527270b844b190befce7c7a8915a24a3",
+        "src/patchwork_automaton/neural/__init__.py": "83a1588922dcdf47a7dbbcc41d76f5edf3934b3100e55582f5c814d155c7532a",
+        "src/patchwork_automaton/neural/training.py": "7ea5b47c5621d54515ffd77aab0b20f15d67eedadf44604fec76d724e8a22f96",
+        "src/patchwork_automaton/neural/ppo.py": "08cad6a8f397355d67290a6ebfce1b61f867c1bd30a5c39bfaa15eb44d0a5d28",
+        "src/patchwork_automaton/neural/native_pipeline.py": "66feefe50fc85071624be53d1c2254ad9867fb16141c0225eccc21e96d4f640d",
+        "src/patchwork_automaton/neural/ordered_jobs.py": "b9010c47f8fb2bf6e8497c105eed48d4177efc30d084ebc06b099c6e2fc3fb2d",
+        "src/patchwork_automaton/neural/rustmage_observation.py": "773cbaff36e036b330c3bf1071228663eb918d9a74c4cdb0646576605e2141be",
+        "src/patchwork_automaton/neural/imitation.py": "8a67868dbdcbfe531d7c8e4eaa74e923a69ce71573d6b1daf637520c4a5eaaae",
+        "src/patchwork_automaton/neural/native_layout.py": "e5cb94f329a4621a92fa9e6e2210c3694e2fbd6e4977e3790656bb206ef1dc91",
+        "src/patchwork_automaton/neural/payment_scenarios.py": "011be640915449167ce429d80cb1bd8586a37d527454cf0161b95f2c86e9c243",
+        "src/patchwork_automaton/neural/demonstrations.py": "fa528d1d09013f0e294285fdec2c2180813a1bd0da887dba949df39adcff5da2",
+        "src/patchwork_automaton/neural/curriculum.py": "0b04a9667acd622c09717f4efb5b49e842558c2abc84f14919c199eaa7f9f853",
+        "src/patchwork_automaton/neural/experiment.py": "bca796b99048a1ea70b0b5292c5c8ede0742892f858f48b0ddf43be268e10ea7",
+        "src/patchwork_automaton/neural/rollout_cache.py": "5b61d797e6df9a814a064c55bff4c640ba34a4302223ea04b2af382fc7382ff4",
+        "src/patchwork_automaton/neural/episodes.py": "c519dc6dd780d02ea23a8f2fe73dab522a6b612bebada15610874918b65ab62b",
+        "src/patchwork_automaton/neural/model.py": "09741d1f396980effd972c26bd9da901a5cdd085f20c9d5184e83879b131892e",
+        "src/patchwork_automaton/neural/policy.py": "fe226a1e8b6ed50184c948eebd750fa2d9d3c56d569a9abab7ffd60a0ad556b1",
+        "src/patchwork_automaton/neural/scenarios.py": "6b36460767475498b7130c52a2fbbeab98d36310a843c747200f6bff4da480c2",
+        "src/patchwork_automaton/neural/features.py": "eafdbb63f435eddf47bb8df8232fae23c4d00b23a3525bdba6af757d69ddbdd5",
+        "src/patchwork_automaton/neural/streaming_ppo.py": "b4b6bfa6bea45075efbab0c5eb46c22631447d03cee02e1d567c2cdf292b19ba",
+        "src/patchwork_automaton/neural/rustmage_policy.py": "d1c8b6c9d61fd58a389e8fc379df9a64751ad96eb468ce7c4ae1ead6f25d57f5",
+        "src/patchwork_automaton/rl/rustmage_processes.py": "0b0ab08f2fcd5aeb00b8e995775b1145e18616672e3b69c1d6a00658dc5b47a8",
+        "src/patchwork_automaton/rl/rustmage_experiment.py": "fcad506a2d78585d7ac8d49a18d1066ba945dc7022e37ee0b4e5d8c21820b7b3",
+        "src/patchwork_automaton/rl/rustmage.py": "3d347ff0deee35bb0a84d7dbf9ff8bb7ba8af19d86a67ae242c072ff110459ab",
+        "src/patchwork_automaton/backends/rustmage.py": "ea707d31558009b16bd7f703591925411ffcfba097318974231de73664f0272a",
+        "examples/train_rustmage.py": "bb5159ca5a7910fe6857ef51be9b7740c7e4c5dd45615bbae38e4ed21daf6377",
+        "examples/benchmark_native_pipeline.py": "614637a22be51ab2ca89ee08ee61d03b4dd313974cc4c5ce0c2b900db16cfa7a",
+        "native/observation-pipeline/Cargo.toml": "f36be89a1ca6d872567e23563b26425a9fcea5d72ceda62767fd018c61cfa68b",
+        "native/observation-pipeline/Cargo.lock": "6f923c993293ad2529a73658f9ba30919364bb654ab33de74a43cae15a7342d7"
+      },
+      "library_sha256": {
+        ".local/rustmage/target/release/librustmage.so": "b0994769ed13210bb924e3673541ba87cecc1b832f1c5d8d5d423d473074cd20",
+        ".local/observation-target/release/libpatchwork_observation_pipeline.so": "e0093ea6bded384826000315c382e43694531a253ea5facd300c1a162446c013"
+      },
+      "runtime": {
+        "CUDA_VISIBLE_DEVICES": "-1",
+        "TF_NUM_INTRAOP_THREADS": "1",
+        "TF_NUM_INTEROP_THREADS": "4",
+        "TF_ENABLE_ONEDNN_OPTS": "0"
+      },
+      "trials": [
+        {
+          "pipeline": "python",
+          "trial": 1,
+          "full_wall_seconds": 130.92148595400067,
+          "process_tree_cpu_seconds": 481.163632,
+          "initial_weights_sha256": "b7e2ba186f19d4b22ee4a46e8b845be5195dfdcdbb9641aa4a04c09f0008cf24",
+          "game_records_sha256": "d4103f75164d21c29a4e286de14c0b5f727c7f9bccd053815df127a8132922f9",
+          "report": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/native-pipeline-sessions-final-2026-10-20/01-python/report.json",
+          "training_loop_seconds": 122.25981925800079,
+          "collection_seconds": 42.11614674600423,
+          "update_seconds": 53.34074184700148,
+          "validation_seconds": 19.19893058800153,
+          "collection_worker_cpu_seconds": 116.486425893,
+          "outcomes": {
+            "win": 33,
+            "loss": 31,
+            "draw": 0,
+            "cutoff": 0,
+            "error": 0
+          },
+          "decisions": 82112,
+          "neural_choices": 31586,
+          "updates": [
+            {
+              "samples": 12177,
+              "accepted_steps": 762,
+              "critic_steps": 500,
+              "rejected_epochs": 0,
+              "exact_kl": 0.0012070840073705369,
+              "max_state_kl": 0.00363168865442276
+            },
+            {
+              "samples": 11806,
+              "accepted_steps": 738,
+              "critic_steps": 500,
+              "rejected_epochs": 0,
+              "exact_kl": 0.004076191532994663,
+              "max_state_kl": 0.00921177864074707
+            }
+          ],
+          "throughput": {
+            "timed_selfplay_games": 64,
+            "collection_seconds": 42.11614674600423,
+            "update_seconds": 53.34074184700148,
+            "validation_seconds": 19.19893058800153,
+            "collection_games_per_minute": 91.17643224007239,
+            "collection_and_updates_games_per_minute": 40.227583955437694,
+            "collection_updates_validation_games_per_minute": 33.49154039829229
+          },
+          "report_sha256": "9af3a7c032e5706066ba762324ce03c61918dda061fb2ed3dc058d3764f57d26",
+          "rollout_cache": [
+            {
+              "budget_bytes": 268435456,
+              "retained_bytes": 265163951,
+              "trajectories": 12,
+              "trajectory_hits": 18316,
+              "batches": 27,
+              "batch_hits": 81,
+              "spill_bytes": 590452969
+            },
+            {
+              "budget_bytes": 268435456,
+              "retained_bytes": 264863376,
+              "trajectories": 12,
+              "trajectory_hits": 19200,
+              "batches": 28,
+              "batch_hits": 84,
+              "spill_bytes": 506509344
+            }
+          ],
+          "full_training_config": {
+            "games_per_round": 32,
+            "validation_fraction": 0.2,
+            "eval_games": 8,
+            "eval_every_games": 0,
+            "eval_horizon": 20,
+            "train_horizon": 60,
+            "workers": 8,
+            "inference_processes": 2,
+            "inference_wait_ms": 0,
+            "collector": "processes",
+            "observation_pipeline": "python",
+            "architecture": "separate",
+            "train_batch": 32,
+            "learning_rate": 0.0003,
+            "ppo_epochs": 2,
+            "value_learning_rate": null,
+            "value_max_steps": 500,
+            "concurrent_updates": true,
+            "prefetch_batches": 2,
+            "measurement_workers": 4,
+            "seed": 721,
+            "algorithm": "ppo",
+            "target_kl": 0.02,
+            "max_state_kl": 0.1,
+            "advantage_scale_floor": 1.0,
+            "ppo_clip": 0.2
+          },
+          "game_counts": {
+            "training_games_completed": 64,
+            "collected_games_completed": 64,
+            "optimization_games_completed": 50,
+            "validation_games_completed": 14
+          }
+        },
+        {
+          "pipeline": "rust",
+          "trial": 2,
+          "full_wall_seconds": 136.19744639400233,
+          "process_tree_cpu_seconds": 517.4300890000001,
+          "initial_weights_sha256": "b7e2ba186f19d4b22ee4a46e8b845be5195dfdcdbb9641aa4a04c09f0008cf24",
+          "game_records_sha256": "8362713dea211e90820ef30f6a139d8a45df2840944b27dd90f3f1139668f5b4",
+          "report": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/native-pipeline-sessions-final-2026-10-20/02-rust/report.json",
+          "training_loop_seconds": 127.2128691809994,
+          "collection_seconds": 42.575347744998,
+          "update_seconds": 56.12929957900269,
+          "validation_seconds": 20.2474994050026,
+          "collection_worker_cpu_seconds": 131.473795328,
+          "outcomes": {
+            "win": 33,
+            "loss": 31,
+            "draw": 0,
+            "cutoff": 0,
+            "error": 0
+          },
+          "decisions": 81898,
+          "neural_choices": 31543,
+          "updates": [
+            {
+              "samples": 12177,
+              "accepted_steps": 762,
+              "critic_steps": 500,
+              "rejected_epochs": 0,
+              "exact_kl": 0.0014846759909367601,
+              "max_state_kl": 0.005049530416727066
+            },
+            {
+              "samples": 11604,
+              "accepted_steps": 726,
+              "critic_steps": 500,
+              "rejected_epochs": 0,
+              "exact_kl": 0.0029830682449047932,
+              "max_state_kl": 0.014883406460285187
+            }
+          ],
+          "throughput": {
+            "timed_selfplay_games": 64,
+            "collection_seconds": 42.575347744998,
+            "update_seconds": 56.12929957900269,
+            "validation_seconds": 20.2474994050026,
+            "collection_games_per_minute": 90.19303900932073,
+            "collection_and_updates_games_per_minute": 38.90394327022005,
+            "collection_updates_validation_games_per_minute": 32.28188902507397
+          },
+          "report_sha256": "b9e4549596d88b57dcb6c00869a0ec5c810e2c151b346aba26528c8f57542763",
+          "rollout_cache": [
+            {
+              "budget_bytes": 268435456,
+              "retained_bytes": 265399391,
+              "trajectories": 12,
+              "trajectory_hits": 18316,
+              "batches": 27,
+              "batch_hits": 81,
+              "spill_bytes": 593304700
+            },
+            {
+              "budget_bytes": 268435456,
+              "retained_bytes": 265929682,
+              "trajectories": 11,
+              "trajectory_hits": 17701,
+              "batches": 31,
+              "batch_hits": 93,
+              "spill_bytes": 496651510
+            }
+          ],
+          "full_training_config": {
+            "games_per_round": 32,
+            "validation_fraction": 0.2,
+            "eval_games": 8,
+            "eval_every_games": 0,
+            "eval_horizon": 20,
+            "train_horizon": 60,
+            "workers": 8,
+            "inference_processes": 2,
+            "inference_wait_ms": 0,
+            "collector": "processes",
+            "observation_pipeline": "rust",
+            "architecture": "separate",
+            "train_batch": 32,
+            "learning_rate": 0.0003,
+            "ppo_epochs": 2,
+            "value_learning_rate": null,
+            "value_max_steps": 500,
+            "concurrent_updates": true,
+            "prefetch_batches": 2,
+            "measurement_workers": 4,
+            "seed": 721,
+            "algorithm": "ppo",
+            "target_kl": 0.02,
+            "max_state_kl": 0.1,
+            "advantage_scale_floor": 1.0,
+            "ppo_clip": 0.2
+          },
+          "game_counts": {
+            "training_games_completed": 64,
+            "collected_games_completed": 64,
+            "optimization_games_completed": 50,
+            "validation_games_completed": 14
+          }
+        },
+        {
+          "pipeline": "rust",
+          "trial": 3,
+          "full_wall_seconds": 136.7747570140018,
+          "process_tree_cpu_seconds": 512.1145079999999,
+          "initial_weights_sha256": "b7e2ba186f19d4b22ee4a46e8b845be5195dfdcdbb9641aa4a04c09f0008cf24",
+          "game_records_sha256": "8712efdd1f1a8902fec1cc080fcf03a9d6e7fee2a63584808369ff655c95cb58",
+          "report": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/native-pipeline-sessions-final-2026-10-20/03-rust/report.json",
+          "training_loop_seconds": 128.01278369899956,
+          "collection_seconds": 44.134942610995495,
+          "update_seconds": 55.72504337999999,
+          "validation_seconds": 19.890322383998864,
+          "collection_worker_cpu_seconds": 129.48415362199998,
+          "outcomes": {
+            "win": 33,
+            "loss": 31,
+            "draw": 0,
+            "cutoff": 0,
+            "error": 0
+          },
+          "decisions": 81690,
+          "neural_choices": 31392,
+          "updates": [
+            {
+              "samples": 12177,
+              "accepted_steps": 762,
+              "critic_steps": 500,
+              "rejected_epochs": 0,
+              "exact_kl": 0.0012867672588311241,
+              "max_state_kl": 0.004188850522041321
+            },
+            {
+              "samples": 11781,
+              "accepted_steps": 738,
+              "critic_steps": 500,
+              "rejected_epochs": 0,
+              "exact_kl": 0.005208039324693954,
+              "max_state_kl": 0.024931959807872772
+            }
+          ],
+          "throughput": {
+            "timed_selfplay_games": 64,
+            "collection_seconds": 44.134942610995495,
+            "update_seconds": 55.72504337999999,
+            "validation_seconds": 19.890322383998864,
+            "collection_games_per_minute": 87.00589086170754,
+            "collection_and_updates_games_per_minute": 38.45384076406999,
+            "collection_updates_validation_games_per_minute": 32.066723268679695
+          },
+          "report_sha256": "0fded30cae112023cfd944922241f1d57c3d9554cec8d2ea068f76af20e86ea5",
+          "rollout_cache": [
+            {
+              "budget_bytes": 268435456,
+              "retained_bytes": 265399391,
+              "trajectories": 12,
+              "trajectory_hits": 18316,
+              "batches": 27,
+              "batch_hits": 81,
+              "spill_bytes": 593304700
+            },
+            {
+              "budget_bytes": 268435456,
+              "retained_bytes": 266676937,
+              "trajectories": 13,
+              "trajectory_hits": 19583,
+              "batches": 28,
+              "batch_hits": 84,
+              "spill_bytes": 507281354
+            }
+          ],
+          "full_training_config": {
+            "games_per_round": 32,
+            "validation_fraction": 0.2,
+            "eval_games": 8,
+            "eval_every_games": 0,
+            "eval_horizon": 20,
+            "train_horizon": 60,
+            "workers": 8,
+            "inference_processes": 2,
+            "inference_wait_ms": 0,
+            "collector": "processes",
+            "observation_pipeline": "rust",
+            "architecture": "separate",
+            "train_batch": 32,
+            "learning_rate": 0.0003,
+            "ppo_epochs": 2,
+            "value_learning_rate": null,
+            "value_max_steps": 500,
+            "concurrent_updates": true,
+            "prefetch_batches": 2,
+            "measurement_workers": 4,
+            "seed": 721,
+            "algorithm": "ppo",
+            "target_kl": 0.02,
+            "max_state_kl": 0.1,
+            "advantage_scale_floor": 1.0,
+            "ppo_clip": 0.2
+          },
+          "game_counts": {
+            "training_games_completed": 64,
+            "collected_games_completed": 64,
+            "optimization_games_completed": 50,
+            "validation_games_completed": 14
+          }
+        },
+        {
+          "pipeline": "python",
+          "trial": 4,
+          "full_wall_seconds": 125.62212698400253,
+          "process_tree_cpu_seconds": 474.70336199999986,
+          "initial_weights_sha256": "b7e2ba186f19d4b22ee4a46e8b845be5195dfdcdbb9641aa4a04c09f0008cf24",
+          "game_records_sha256": "ace2cfb506504141af1128ffe0d8a34ded3d63028540f3d7e4d3da897e4fa715",
+          "report": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/native-pipeline-sessions-final-2026-10-20/04-python/report.json",
+          "training_loop_seconds": 116.85022199800005,
+          "collection_seconds": 37.93414362099793,
+          "update_seconds": 53.033408680999855,
+          "validation_seconds": 18.304725038997276,
+          "collection_worker_cpu_seconds": 113.143155058,
+          "outcomes": {
+            "win": 34,
+            "loss": 30,
+            "draw": 0,
+            "cutoff": 0,
+            "error": 0
+          },
+          "decisions": 80667,
+          "neural_choices": 30827,
+          "updates": [
+            {
+              "samples": 12177,
+              "accepted_steps": 762,
+              "critic_steps": 500,
+              "rejected_epochs": 0,
+              "exact_kl": 0.0012118269105268178,
+              "max_state_kl": 0.004738364368677139
+            },
+            {
+              "samples": 11536,
+              "accepted_steps": 722,
+              "critic_steps": 500,
+              "rejected_epochs": 0,
+              "exact_kl": 0.004665231106133715,
+              "max_state_kl": 0.014519914984703064
+            }
+          ],
+          "throughput": {
+            "timed_selfplay_games": 64,
+            "collection_seconds": 37.93414362099793,
+            "update_seconds": 53.033408680999855,
+            "validation_seconds": 18.304725038997276,
+            "collection_games_per_minute": 101.22806615500923,
+            "collection_and_updates_games_per_minute": 42.21285395535115,
+            "collection_updates_validation_games_per_minute": 35.14157564426791
+          },
+          "report_sha256": "04fda79888bbff5462b7dfc7d4e11885d119f80f09ed86b34c871624a3312226",
+          "rollout_cache": [
+            {
+              "budget_bytes": 268435456,
+              "retained_bytes": 265163951,
+              "trajectories": 12,
+              "trajectory_hits": 18316,
+              "batches": 27,
+              "batch_hits": 81,
+              "spill_bytes": 590452969
+            },
+            {
+              "budget_bytes": 268435456,
+              "retained_bytes": 267063716,
+              "trajectories": 12,
+              "trajectory_hits": 17792,
+              "batches": 34,
+              "batch_hits": 102,
+              "spill_bytes": 482871263
+            }
+          ],
+          "full_training_config": {
+            "games_per_round": 32,
+            "validation_fraction": 0.2,
+            "eval_games": 8,
+            "eval_every_games": 0,
+            "eval_horizon": 20,
+            "train_horizon": 60,
+            "workers": 8,
+            "inference_processes": 2,
+            "inference_wait_ms": 0,
+            "collector": "processes",
+            "observation_pipeline": "python",
+            "architecture": "separate",
+            "train_batch": 32,
+            "learning_rate": 0.0003,
+            "ppo_epochs": 2,
+            "value_learning_rate": null,
+            "value_max_steps": 500,
+            "concurrent_updates": true,
+            "prefetch_batches": 2,
+            "measurement_workers": 4,
+            "seed": 721,
+            "algorithm": "ppo",
+            "target_kl": 0.02,
+            "max_state_kl": 0.1,
+            "advantage_scale_floor": 1.0,
+            "ppo_clip": 0.2
+          },
+          "game_counts": {
+            "training_games_completed": 64,
+            "collected_games_completed": 64,
+            "optimization_games_completed": 50,
+            "validation_games_completed": 14
+          }
+        }
+      ],
+      "identical_game_records": false,
+      "medians": {
+        "python": {
+          "full_wall_seconds": 128.2718064690016,
+          "training_loop_seconds": 119.55502062800042,
+          "collection_seconds": 40.02514518350108,
+          "update_seconds": 53.18707526400067,
+          "validation_seconds": 18.751827813499403,
+          "process_tree_cpu_seconds": 477.93349699999993,
+          "collection_worker_cpu_seconds": 114.8147904755
+        },
+        "rust": {
+          "full_wall_seconds": 136.48610170400207,
+          "training_loop_seconds": 127.61282643999948,
+          "collection_seconds": 43.35514517799675,
+          "update_seconds": 55.92717147950134,
+          "validation_seconds": 20.068910894500732,
+          "process_tree_cpu_seconds": 514.7722985,
+          "collection_worker_cpu_seconds": 130.47897447499997
+        }
+      },
+      "speedups": {
+        "full_wall_seconds": 0.9398158850428974,
+        "training_loop_seconds": 0.9368573987679236,
+        "collection_seconds": 0.9231925073523758,
+        "update_seconds": 0.9510059932763633,
+        "validation_seconds": 0.9343719702616132,
+        "process_tree_cpu_seconds": 0.9284367056903702,
+        "collection_worker_cpu_seconds": 0.8799485966031925
+      },
+      "finished_utc": "2026-10-20T22:59:35.317158+00:00"
+    }
+  },
+  "notes": [
+    "Both modes use the same corrected memory accounting and 256 MiB rollout cache; these results are not a comparison against the earlier undercounting cache.",
+    "Each final trial has one 64-game self-play round, 8 baseline and before/after evaluation games, 8 engine workers, 2 inference replicas, an 80/20 whole-game holdout, batch 32, 2 PPO epochs and 500 critic steps.",
+    "Final self-play game records, initial weights, sample counts and optimizer step counts match across all four trials. Dynamic TensorFlow batching produces small floating-point differences; post-update weights and evaluation outcomes need not be identical.",
+    "A separately inspected 392-sample first-round trajectory pair from the prototype had all 14 feature arrays bit-identical; maximum differences were 3.32e-7 in recurrent state, 2.39e-7 in log probabilities and 3.92e-8 in value estimates.",
+    "The earlier prototype used Rust padding and cloned the full observation for its canonical fingerprint. Final production batching uses NumPy and fingerprints borrow the JSON values.",
+    "Two sequential repeats per mode on this CPU are local evidence, not a confidence interval or a forecast for larger workloads or GPUs.",
+    "No external GPU, model architecture, feature vocabulary, game engine pin, rewards or PPO objective was changed.",
+    "After the timed jobs ended, only the CLI default/help and an additional native-observation reader lock were changed. The timings do not include this additional lock; the native binary is unchanged."
+  ],
+  "post_timing_source_changes": {
+    "src/patchwork_automaton/neural/native_pipeline.py": {
+      "measured_sha256": "66feefe50fc85071624be53d1c2254ad9867fb16141c0225eccc21e96d4f640d",
+      "current_sha256": "b60c65e79534853dddf3780cd7a5a65cdc7d1d012aa36522e373d99aaff7bfeb"
+    },
+    "examples/train_rustmage.py": {
+      "measured_sha256": "bb5159ca5a7910fe6857ef51be9b7740c7e4c5dd45615bbae38e4ed21daf6377",
+      "current_sha256": "aa6d85ee91334d30ac9a0e3b2bd1e96f047a7f24533035e9c1a475f6f28c1739"
+    }
+  },
+  "correctness": {
+    "exact_parity": "Four complete games, both private views, all 14 arrays, history, canonical fingerprints, legal-action ordering, plus a 1,000-decision stochastic walk.",
+    "ownership": "Views and slices survive game/observation destruction; cache accounting charges their retained Rust allocation.",
+    "integration": "Backend fork/restore/privacy/errors, neural checkpoints, spawned collectors, PPO cache/spill and concurrent update integration checks passed."
+  },
+  "raw_outputs": {
+    "final": ".local/native-pipeline-matched-2026-10-20",
+    "prototype": ".local/native-pipeline-sessions-final-2026-10-20"
+  }
+}

@@ -1,0 +1,1151 @@
+{
+  "reports": {
+    "Fresh cohort 1": {
+      "report": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/laptop-frozen-confirmation-20261025/report.json",
+      "status": "complete",
+      "finished_utc": "2026-10-25T12:35:40.946054+00:00",
+      "manifest_sha256": "2d7f014f594af355433330e30d7bf50005a76134e127c4f7cd71b4ffb3eeadc7",
+      "results": {
+        "original-imitation": {
+          "attempted_games": 5000,
+          "terminal_games": 5000,
+          "wins": 2503,
+          "losses": 2497,
+          "draws": 0,
+          "cutoffs": 0,
+          "errors": 0,
+          "unresolved_attempts": 0,
+          "terminal_fraction": 1.0,
+          "win_rate_all_attempts": 0.5006,
+          "win_rate_all_attempts_wilson_95_interval": [
+            0.48674583192906523,
+            0.5144532468286009
+          ],
+          "terminal_win_rate": 0.5006,
+          "terminal_score_rate": 0.5006,
+          "metric": "recorded_wins_per_scheduled_attempt",
+          "mode": "versus_baseline",
+          "win_rate_denominator": "all_attempts_including_cutoffs_and_errors",
+          "unresolved_outcomes": "unknown; no terminal score or training return assigned",
+          "seat_start_balanced": true,
+          "seat_start_strata": {
+            "seat_0_start_P0": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 697,
+              "losses": 553,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.5576,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.5299316334864699,
+                0.5849154223250677
+              ],
+              "terminal_win_rate": 0.5576,
+              "terminal_score_rate": 0.5576
+            },
+            "seat_0_start_P1": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 539,
+              "losses": 711,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.4312,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.403997645919736,
+                0.4588239263053718
+              ],
+              "terminal_win_rate": 0.4312,
+              "terminal_score_rate": 0.4312
+            },
+            "seat_1_start_P0": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 533,
+              "losses": 717,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.4264,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.39925045722318675,
+                0.45400052701762617
+              ],
+              "terminal_win_rate": 0.4264,
+              "terminal_score_rate": 0.4264
+            },
+            "seat_1_start_P1": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 734,
+              "losses": 516,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.5872,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.5596800794237303,
+                0.6141856022909588
+              ],
+              "terminal_win_rate": 0.5872,
+              "terminal_score_rate": 0.5872
+            }
+          }
+        },
+        "control-seed31261024": {
+          "attempted_games": 5000,
+          "terminal_games": 5000,
+          "wins": 2541,
+          "losses": 2459,
+          "draws": 0,
+          "cutoffs": 0,
+          "errors": 0,
+          "unresolved_attempts": 0,
+          "terminal_fraction": 1.0,
+          "win_rate_all_attempts": 0.5082,
+          "win_rate_all_attempts_wilson_95_interval": [
+            0.4943418491700087,
+            0.5220455605180923
+          ],
+          "terminal_win_rate": 0.5082,
+          "terminal_score_rate": 0.5082,
+          "metric": "recorded_wins_per_scheduled_attempt",
+          "mode": "versus_baseline",
+          "win_rate_denominator": "all_attempts_including_cutoffs_and_errors",
+          "unresolved_outcomes": "unknown; no terminal score or training return assigned",
+          "seat_start_balanced": true,
+          "seat_start_strata": {
+            "seat_0_start_P0": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 704,
+              "losses": 546,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.5632,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.5355520808514282,
+                0.5904606609417866
+              ],
+              "terminal_win_rate": 0.5632,
+              "terminal_score_rate": 0.5632
+            },
+            "seat_0_start_P1": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 547,
+              "losses": 703,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.4376,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.41033129928796225,
+                0.4652510569162052
+              ],
+              "terminal_win_rate": 0.4376,
+              "terminal_score_rate": 0.4376
+            },
+            "seat_1_start_P0": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 542,
+              "losses": 708,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.4336,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.40637222213269064,
+                0.4612346440845645
+              ],
+              "terminal_win_rate": 0.4336,
+              "terminal_score_rate": 0.4336
+            },
+            "seat_1_start_P1": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 748,
+              "losses": 502,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.5984,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.5709625021482886,
+                0.6252345515297549
+              ],
+              "terminal_win_rate": 0.5984,
+              "terminal_score_rate": 0.5984
+            }
+          }
+        },
+        "control-seed32261024": {
+          "attempted_games": 5000,
+          "terminal_games": 5000,
+          "wins": 2549,
+          "losses": 2451,
+          "draws": 0,
+          "cutoffs": 0,
+          "errors": 0,
+          "unresolved_attempts": 0,
+          "terminal_fraction": 1.0,
+          "win_rate_all_attempts": 0.5098,
+          "win_rate_all_attempts_wilson_95_interval": [
+            0.49594141833853905,
+            0.5236435347033379
+          ],
+          "terminal_win_rate": 0.5098,
+          "terminal_score_rate": 0.5098,
+          "metric": "recorded_wins_per_scheduled_attempt",
+          "mode": "versus_baseline",
+          "win_rate_denominator": "all_attempts_including_cutoffs_and_errors",
+          "unresolved_outcomes": "unknown; no terminal score or training return assigned",
+          "seat_start_balanced": true,
+          "seat_start_strata": {
+            "seat_0_start_P0": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 707,
+              "losses": 543,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.5656,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.5379619284596363,
+                0.5928361073257259
+              ],
+              "terminal_win_rate": 0.5656,
+              "terminal_score_rate": 0.5656
+            },
+            "seat_0_start_P1": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 550,
+              "losses": 700,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.44,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.4127076136641403,
+                0.4676600365321746
+              ],
+              "terminal_win_rate": 0.44,
+              "terminal_score_rate": 0.44
+            },
+            "seat_1_start_P0": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 544,
+              "losses": 706,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.4352,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.4079556357062868,
+                0.46284142650573323
+              ],
+              "terminal_win_rate": 0.4352,
+              "terminal_score_rate": 0.4352
+            },
+            "seat_1_start_P1": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 748,
+              "losses": 502,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.5984,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.5709625021482886,
+                0.6252345515297549
+              ],
+              "terminal_win_rate": 0.5984,
+              "terminal_score_rate": 0.5984
+            }
+          }
+        },
+        "teacher": {
+          "attempted_games": 5000,
+          "terminal_games": 5000,
+          "wins": 2527,
+          "losses": 2473,
+          "draws": 0,
+          "cutoffs": 0,
+          "errors": 0,
+          "unresolved_attempts": 0,
+          "terminal_fraction": 1.0,
+          "win_rate_all_attempts": 0.5054,
+          "win_rate_all_attempts_wilson_95_interval": [
+            0.49154294434476714,
+            0.5192487644742262
+          ],
+          "terminal_win_rate": 0.5054,
+          "terminal_score_rate": 0.5054,
+          "metric": "recorded_wins_per_scheduled_attempt",
+          "mode": "versus_baseline",
+          "win_rate_denominator": "all_attempts_including_cutoffs_and_errors",
+          "unresolved_outcomes": "unknown; no terminal score or training return assigned",
+          "seat_start_balanced": true,
+          "seat_start_strata": {
+            "seat_0_start_P0": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 704,
+              "losses": 546,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.5632,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.5355520808514282,
+                0.5904606609417866
+              ],
+              "terminal_win_rate": 0.5632,
+              "terminal_score_rate": 0.5632
+            },
+            "seat_0_start_P1": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 538,
+              "losses": 712,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.4304,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.40320626581217667,
+                0.4580202084155486
+              ],
+              "terminal_win_rate": 0.4304,
+              "terminal_score_rate": 0.4304
+            },
+            "seat_1_start_P0": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 542,
+              "losses": 708,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.4336,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.40637222213269064,
+                0.4612346440845645
+              ],
+              "terminal_win_rate": 0.4336,
+              "terminal_score_rate": 0.4336
+            },
+            "seat_1_start_P1": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 743,
+              "losses": 507,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.5944,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.5669313896089501,
+                0.621290174082181
+              ],
+              "terminal_win_rate": 0.5944,
+              "terminal_score_rate": 0.5944
+            }
+          }
+        }
+      },
+      "comparisons": {
+        "control-seed31261024-minus-original-imitation": {
+          "attempted_pairs": 5000,
+          "terminal_pairs": 5000,
+          "unresolved_pairs": 0,
+          "recorded_attempt_win_rate_change": 0.0076,
+          "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+            0.004,
+            0.011005000000000018
+          ],
+          "terminal_score_change_on_terminal_pairs": 0.0076,
+          "terminal_score_change_bootstrap_95_interval": [
+            0.004,
+            0.011005000000000018
+          ],
+          "status_transitions": {
+            "loss->loss": 2435,
+            "loss->win": 62,
+            "win->loss": 24,
+            "win->win": 2479
+          },
+          "improved_recorded_win_attempts": 62,
+          "worsened_recorded_win_attempts": 24,
+          "tied_recorded_win_attempts": 4914,
+          "bootstrap": {
+            "unit": "matched_attempt",
+            "seed": 9901,
+            "resamples": 4000
+          }
+        },
+        "control-seed32261024-minus-original-imitation": {
+          "attempted_pairs": 5000,
+          "terminal_pairs": 5000,
+          "unresolved_pairs": 0,
+          "recorded_attempt_win_rate_change": 0.0092,
+          "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+            0.0054,
+            0.013
+          ],
+          "terminal_score_change_on_terminal_pairs": 0.0092,
+          "terminal_score_change_bootstrap_95_interval": [
+            0.0054,
+            0.013
+          ],
+          "status_transitions": {
+            "loss->loss": 2426,
+            "loss->win": 71,
+            "win->loss": 25,
+            "win->win": 2478
+          },
+          "improved_recorded_win_attempts": 71,
+          "worsened_recorded_win_attempts": 25,
+          "tied_recorded_win_attempts": 4904,
+          "bootstrap": {
+            "unit": "matched_attempt",
+            "seed": 9901,
+            "resamples": 4000
+          }
+        },
+        "teacher-minus-original-imitation": {
+          "attempted_pairs": 5000,
+          "terminal_pairs": 5000,
+          "unresolved_pairs": 0,
+          "recorded_attempt_win_rate_change": 0.0048,
+          "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+            0.0002,
+            0.0096
+          ],
+          "terminal_score_change_on_terminal_pairs": 0.0048,
+          "terminal_score_change_bootstrap_95_interval": [
+            0.0002,
+            0.0096
+          ],
+          "status_transitions": {
+            "loss->loss": 2418,
+            "loss->win": 79,
+            "win->loss": 55,
+            "win->win": 2448
+          },
+          "improved_recorded_win_attempts": 79,
+          "worsened_recorded_win_attempts": 55,
+          "tied_recorded_win_attempts": 4866,
+          "bootstrap": {
+            "unit": "matched_attempt",
+            "seed": 9901,
+            "resamples": 4000
+          }
+        },
+        "teacher-minus-control-seed31261024": {
+          "attempted_pairs": 5000,
+          "terminal_pairs": 5000,
+          "unresolved_pairs": 0,
+          "recorded_attempt_win_rate_change": -0.0028,
+          "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+            -0.0076,
+            0.002
+          ],
+          "terminal_score_change_on_terminal_pairs": -0.0028,
+          "terminal_score_change_bootstrap_95_interval": [
+            -0.0076,
+            0.002
+          ],
+          "status_transitions": {
+            "loss->loss": 2387,
+            "loss->win": 72,
+            "win->loss": 86,
+            "win->win": 2455
+          },
+          "improved_recorded_win_attempts": 72,
+          "worsened_recorded_win_attempts": 86,
+          "tied_recorded_win_attempts": 4842,
+          "bootstrap": {
+            "unit": "matched_attempt",
+            "seed": 9901,
+            "resamples": 4000
+          }
+        },
+        "teacher-minus-control-seed32261024": {
+          "attempted_pairs": 5000,
+          "terminal_pairs": 5000,
+          "unresolved_pairs": 0,
+          "recorded_attempt_win_rate_change": -0.0044,
+          "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+            -0.0082,
+            -0.0006
+          ],
+          "terminal_score_change_on_terminal_pairs": -0.0044,
+          "terminal_score_change_bootstrap_95_interval": [
+            -0.0082,
+            -0.0006
+          ],
+          "status_transitions": {
+            "loss->loss": 2412,
+            "loss->win": 39,
+            "win->loss": 61,
+            "win->win": 2488
+          },
+          "improved_recorded_win_attempts": 39,
+          "worsened_recorded_win_attempts": 61,
+          "tied_recorded_win_attempts": 4900,
+          "bootstrap": {
+            "unit": "matched_attempt",
+            "seed": 9901,
+            "resamples": 4000
+          }
+        }
+      },
+      "limitations": [
+        "Fixed policies on one fresh shared cohort; paired intervals do not cover training-seed variance.",
+        "Two control training seeds retained separately; no selection or further training uses confirmation.",
+        "Teacher reference is not maximum attainable strength."
+      ]
+    },
+    "Fresh cohort 2": {
+      "report": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/laptop-frozen-replication-20261025/report.json",
+      "status": "complete",
+      "finished_utc": "2026-10-25T13:19:05.713188+00:00",
+      "manifest_sha256": "dd51a3551e8ae8175656aa92eeaeae23b161edc5266c7321313181e31416d2e2",
+      "results": {
+        "original-imitation": {
+          "attempted_games": 5000,
+          "terminal_games": 5000,
+          "wins": 2515,
+          "losses": 2485,
+          "draws": 0,
+          "cutoffs": 0,
+          "errors": 0,
+          "unresolved_attempts": 0,
+          "terminal_fraction": 1.0,
+          "win_rate_all_attempts": 0.503,
+          "win_rate_all_attempts_wilson_95_interval": [
+            0.4891442286550894,
+            0.5168511651332403
+          ],
+          "terminal_win_rate": 0.503,
+          "terminal_score_rate": 0.503,
+          "metric": "recorded_wins_per_scheduled_attempt",
+          "mode": "versus_baseline",
+          "win_rate_denominator": "all_attempts_including_cutoffs_and_errors",
+          "unresolved_outcomes": "unknown; no terminal score or training return assigned",
+          "seat_start_balanced": true,
+          "seat_start_strata": {
+            "seat_0_start_P0": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 701,
+              "losses": 549,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.5608,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.5331428844352527,
+                0.5880845633658146
+              ],
+              "terminal_win_rate": 0.5608,
+              "terminal_score_rate": 0.5608
+            },
+            "seat_0_start_P1": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 561,
+              "losses": 689,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.4488,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.4214263160644832,
+                0.4764874121030388
+              ],
+              "terminal_win_rate": 0.4488,
+              "terminal_score_rate": 0.4488
+            },
+            "seat_1_start_P0": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 548,
+              "losses": 702,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.4384,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.41112333182780697,
+                0.46605412237374305
+              ],
+              "terminal_win_rate": 0.4384,
+              "terminal_score_rate": 0.4384
+            },
+            "seat_1_start_P1": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 705,
+              "losses": 545,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.564,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.5363552909733265,
+                0.5912525488172709
+              ],
+              "terminal_win_rate": 0.564,
+              "terminal_score_rate": 0.564
+            }
+          }
+        },
+        "control-seed31261024": {
+          "attempted_games": 5000,
+          "terminal_games": 5000,
+          "wins": 2556,
+          "losses": 2444,
+          "draws": 0,
+          "cutoffs": 0,
+          "errors": 0,
+          "unresolved_attempts": 0,
+          "terminal_fraction": 1.0,
+          "win_rate_all_attempts": 0.5112,
+          "win_rate_all_attempts_wilson_95_interval": [
+            0.4973411577092316,
+            0.525041645767199
+          ],
+          "terminal_win_rate": 0.5112,
+          "terminal_score_rate": 0.5112,
+          "metric": "recorded_wins_per_scheduled_attempt",
+          "mode": "versus_baseline",
+          "win_rate_denominator": "all_attempts_including_cutoffs_and_errors",
+          "unresolved_outcomes": "unknown; no terminal score or training return assigned",
+          "seat_start_balanced": true,
+          "seat_start_strata": {
+            "seat_0_start_P0": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 710,
+              "losses": 540,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.568,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.5403724284853927,
+                0.5952109012921168
+              ],
+              "terminal_win_rate": 0.568,
+              "terminal_score_rate": 0.568
+            },
+            "seat_0_start_P1": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 566,
+              "losses": 684,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.4528,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.4253922358159151,
+                0.48049698233851923
+              ],
+              "terminal_win_rate": 0.4528,
+              "terminal_score_rate": 0.4528
+            },
+            "seat_1_start_P0": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 562,
+              "losses": 688,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.4496,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.4222193566446312,
+                0.47728946952027324
+              ],
+              "terminal_win_rate": 0.4496,
+              "terminal_score_rate": 0.4496
+            },
+            "seat_1_start_P1": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 718,
+              "losses": 532,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.5744,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.5468036280084962,
+                0.6015404857480733
+              ],
+              "terminal_win_rate": 0.5744,
+              "terminal_score_rate": 0.5744
+            }
+          }
+        },
+        "control-seed32261024": {
+          "attempted_games": 5000,
+          "terminal_games": 5000,
+          "wins": 2553,
+          "losses": 2447,
+          "draws": 0,
+          "cutoffs": 0,
+          "errors": 0,
+          "unresolved_attempts": 0,
+          "terminal_fraction": 1.0,
+          "win_rate_all_attempts": 0.5106,
+          "win_rate_all_attempts_wilson_95_interval": [
+            0.4967412561092962,
+            0.5244424686094687
+          ],
+          "terminal_win_rate": 0.5106,
+          "terminal_score_rate": 0.5106,
+          "metric": "recorded_wins_per_scheduled_attempt",
+          "mode": "versus_baseline",
+          "win_rate_denominator": "all_attempts_including_cutoffs_and_errors",
+          "unresolved_outcomes": "unknown; no terminal score or training return assigned",
+          "seat_start_balanced": true,
+          "seat_start_strata": {
+            "seat_0_start_P0": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 712,
+              "losses": 538,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.5696,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.5419797915844514,
+                0.5967937341878232
+              ],
+              "terminal_win_rate": 0.5696,
+              "terminal_score_rate": 0.5696
+            },
+            "seat_0_start_P1": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 569,
+              "losses": 681,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.4552,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.4277726469497104,
+                0.4829018651968713
+              ],
+              "terminal_win_rate": 0.4552,
+              "terminal_score_rate": 0.4552
+            },
+            "seat_1_start_P0": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 558,
+              "losses": 692,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.4464,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.41904762499598025,
+                0.47408080917939444
+              ],
+              "terminal_win_rate": 0.4464,
+              "terminal_score_rate": 0.4464
+            },
+            "seat_1_start_P1": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 714,
+              "losses": 536,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.5712,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.5435874456028408,
+                0.5983762761641988
+              ],
+              "terminal_win_rate": 0.5712,
+              "terminal_score_rate": 0.5712
+            }
+          }
+        },
+        "teacher": {
+          "attempted_games": 5000,
+          "terminal_games": 5000,
+          "wins": 2530,
+          "losses": 2470,
+          "draws": 0,
+          "cutoffs": 0,
+          "errors": 0,
+          "unresolved_attempts": 0,
+          "terminal_fraction": 1.0,
+          "win_rate_all_attempts": 0.506,
+          "win_rate_all_attempts_wilson_95_interval": [
+            0.4921426731092918,
+            0.5198481144673677
+          ],
+          "terminal_win_rate": 0.506,
+          "terminal_score_rate": 0.506,
+          "metric": "recorded_wins_per_scheduled_attempt",
+          "mode": "versus_baseline",
+          "win_rate_denominator": "all_attempts_including_cutoffs_and_errors",
+          "unresolved_outcomes": "unknown; no terminal score or training return assigned",
+          "seat_start_balanced": true,
+          "seat_start_strata": {
+            "seat_0_start_P0": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 708,
+              "losses": 542,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.5664,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.5387653559154355,
+                0.5936277778673094
+              ],
+              "terminal_win_rate": 0.5664,
+              "terminal_score_rate": 0.5664
+            },
+            "seat_0_start_P1": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 563,
+              "losses": 687,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.4504,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.4230124689442149,
+                0.4780914552180721
+              ],
+              "terminal_win_rate": 0.4504,
+              "terminal_score_rate": 0.4504
+            },
+            "seat_1_start_P0": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 546,
+              "losses": 704,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.4368,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.4095393390582134,
+                0.46444791914857164
+              ],
+              "terminal_win_rate": 0.4368,
+              "terminal_score_rate": 0.4368
+            },
+            "seat_1_start_P1": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 713,
+              "losses": 537,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.5704,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.5427835822039513,
+                0.5975850415657058
+              ],
+              "terminal_win_rate": 0.5704,
+              "terminal_score_rate": 0.5704
+            }
+          }
+        }
+      },
+      "comparisons": {
+        "control-seed31261024-minus-original-imitation": {
+          "attempted_pairs": 5000,
+          "terminal_pairs": 5000,
+          "unresolved_pairs": 0,
+          "recorded_attempt_win_rate_change": 0.0082,
+          "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+            0.0046,
+            0.0118
+          ],
+          "terminal_score_change_on_terminal_pairs": 0.0082,
+          "terminal_score_change_bootstrap_95_interval": [
+            0.0046,
+            0.0118
+          ],
+          "status_transitions": {
+            "loss->loss": 2422,
+            "loss->win": 63,
+            "win->loss": 22,
+            "win->win": 2493
+          },
+          "improved_recorded_win_attempts": 63,
+          "worsened_recorded_win_attempts": 22,
+          "tied_recorded_win_attempts": 4915,
+          "bootstrap": {
+            "unit": "matched_attempt",
+            "seed": 9901,
+            "resamples": 4000
+          }
+        },
+        "control-seed32261024-minus-original-imitation": {
+          "attempted_pairs": 5000,
+          "terminal_pairs": 5000,
+          "unresolved_pairs": 0,
+          "recorded_attempt_win_rate_change": 0.0076,
+          "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+            0.0044,
+            0.011
+          ],
+          "terminal_score_change_on_terminal_pairs": 0.0076,
+          "terminal_score_change_bootstrap_95_interval": [
+            0.0044,
+            0.011
+          ],
+          "status_transitions": {
+            "loss->loss": 2431,
+            "loss->win": 54,
+            "win->loss": 16,
+            "win->win": 2499
+          },
+          "improved_recorded_win_attempts": 54,
+          "worsened_recorded_win_attempts": 16,
+          "tied_recorded_win_attempts": 4930,
+          "bootstrap": {
+            "unit": "matched_attempt",
+            "seed": 9901,
+            "resamples": 4000
+          }
+        },
+        "teacher-minus-original-imitation": {
+          "attempted_pairs": 5000,
+          "terminal_pairs": 5000,
+          "unresolved_pairs": 0,
+          "recorded_attempt_win_rate_change": 0.003,
+          "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+            -0.0012,
+            0.0074
+          ],
+          "terminal_score_change_on_terminal_pairs": 0.003,
+          "terminal_score_change_bootstrap_95_interval": [
+            -0.0012,
+            0.0074
+          ],
+          "status_transitions": {
+            "loss->loss": 2420,
+            "loss->win": 65,
+            "win->loss": 50,
+            "win->win": 2465
+          },
+          "improved_recorded_win_attempts": 65,
+          "worsened_recorded_win_attempts": 50,
+          "tied_recorded_win_attempts": 4885,
+          "bootstrap": {
+            "unit": "matched_attempt",
+            "seed": 9901,
+            "resamples": 4000
+          }
+        },
+        "teacher-minus-control-seed31261024": {
+          "attempted_pairs": 5000,
+          "terminal_pairs": 5000,
+          "unresolved_pairs": 0,
+          "recorded_attempt_win_rate_change": -0.0052,
+          "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+            -0.01,
+            -0.0004
+          ],
+          "terminal_score_change_on_terminal_pairs": -0.0052,
+          "terminal_score_change_bootstrap_95_interval": [
+            -0.01,
+            -0.0004
+          ],
+          "status_transitions": {
+            "loss->loss": 2383,
+            "loss->win": 61,
+            "win->loss": 87,
+            "win->win": 2469
+          },
+          "improved_recorded_win_attempts": 61,
+          "worsened_recorded_win_attempts": 87,
+          "tied_recorded_win_attempts": 4852,
+          "bootstrap": {
+            "unit": "matched_attempt",
+            "seed": 9901,
+            "resamples": 4000
+          }
+        },
+        "teacher-minus-control-seed32261024": {
+          "attempted_pairs": 5000,
+          "terminal_pairs": 5000,
+          "unresolved_pairs": 0,
+          "recorded_attempt_win_rate_change": -0.0046,
+          "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+            -0.0086,
+            -0.0004
+          ],
+          "terminal_score_change_on_terminal_pairs": -0.0046,
+          "terminal_score_change_bootstrap_95_interval": [
+            -0.0086,
+            -0.0004
+          ],
+          "status_transitions": {
+            "loss->loss": 2407,
+            "loss->win": 40,
+            "win->loss": 63,
+            "win->win": 2490
+          },
+          "improved_recorded_win_attempts": 40,
+          "worsened_recorded_win_attempts": 63,
+          "tied_recorded_win_attempts": 4897,
+          "bootstrap": {
+            "unit": "matched_attempt",
+            "seed": 9901,
+            "resamples": 4000
+          }
+        }
+      },
+      "limitations": [
+        "Fixed policies on one fresh shared cohort; paired intervals do not cover training-seed variance.",
+        "Two control training seeds retained separately; no selection or further training uses confirmation.",
+        "Teacher reference is not maximum attainable strength."
+      ]
+    }
+  },
+  "effect_rows": [
+    {
+      "cohort": "Selection",
+      "training_seed": 31261024,
+      "paired_attempts": 5000,
+      "gain_pp": 1.3,
+      "lower95_pp": 0.9199999999999999,
+      "upper95_pp": 1.68
+    },
+    {
+      "cohort": "Selection",
+      "training_seed": 32261024,
+      "paired_attempts": 5000,
+      "gain_pp": 0.9400000000000001,
+      "lower95_pp": 0.58,
+      "upper95_pp": 1.3
+    },
+    {
+      "cohort": "Fresh cohort 1",
+      "training_seed": 31261024,
+      "paired_attempts": 5000,
+      "gain_pp": 0.76,
+      "lower95_pp": 0.4,
+      "upper95_pp": 1.1005000000000018
+    },
+    {
+      "cohort": "Fresh cohort 1",
+      "training_seed": 32261024,
+      "paired_attempts": 5000,
+      "gain_pp": 0.9199999999999999,
+      "lower95_pp": 0.54,
+      "upper95_pp": 1.3
+    },
+    {
+      "cohort": "Fresh cohort 2",
+      "training_seed": 31261024,
+      "paired_attempts": 5000,
+      "gain_pp": 0.8200000000000001,
+      "lower95_pp": 0.45999999999999996,
+      "upper95_pp": 1.18
+    },
+    {
+      "cohort": "Fresh cohort 2",
+      "training_seed": 32261024,
+      "paired_attempts": 5000,
+      "gain_pp": 0.76,
+      "lower95_pp": 0.44,
+      "upper95_pp": 1.0999999999999999
+    }
+  ],
+  "interpretation": "Fresh cohorts evaluate the same frozen policies; selection remains exploratory. Training seeds are reported separately."
+}

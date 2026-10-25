@@ -177,6 +177,10 @@ class RustMageEncoder:
         if obs.backend != 'rustmage' or obs.decision is None:
             raise UnsupportedInteraction('RustMage decision required')
         raw = obs.native
+        if hasattr(raw, 'native_choices'):
+            native_choices = raw.native_choices(self.allow_concede)
+            if choices is None or choices == native_choices:
+                return raw.encoded(obs.decision.token, self.allow_concede)
         if raw['schema'] != OBSERVATION_SCHEMA or raw['decision'] not in DECISIONS:
             raise UnsupportedInteraction('Unsupported RustMage schema/decision: ' + str(raw['decision']))
         if raw['step'] not in STEPS: raise UnsupportedInteraction('Unsupported step')

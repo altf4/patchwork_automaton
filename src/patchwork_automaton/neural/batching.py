@@ -1,6 +1,7 @@
-"""One compiled CPU inference service shared by independent game workers."""
+"""One compiled inference service shared by independent game workers."""
 import asyncio
 from concurrent.futures import ThreadPoolExecutor
+from contextlib import nullcontext
 from dataclasses import dataclass
 import time
 import numpy as np
@@ -11,6 +12,7 @@ from .features import (collate, ENTITY_WIDTH, SEMANTIC_WIDTH, CANDIDATE_WIDTH,
 from .history import HISTORY_WIDTH
 from .policy import NeuralPolicy
 from .training import Sample
+from .devices import canonical_device, device_scope, assert_model_device, assert_output_device
 
 
 def example_batch(memory_size, feature_spec=None):
@@ -60,9 +62,11 @@ def pack_requests(requests):
 
 
 class InferenceBatcher:
-    def __init__(self, model, *, max_batch=16, wait_ms=5):
+    def __init__(self, model, *, max_batch=16, wait_ms=5, device=None):
         if max_batch < 1 or wait_ms < 0: raise ValueError('Invalid inference batching limits')
         self.model, self.max_batch, self.wait_seconds = model, max_batch, wait_ms / 1000
+        self.device = canonical_device(device) if device is not None else None
+        self.variable_placements = self.output_placements = None
         self.queue = asyncio.Queue(maxsize=256)
         self.executor = ThreadPoolExecutor(max_workers=1, thread_name_prefix='inference')
         self.version = 0
@@ -77,9 +81,13 @@ class InferenceBatcher:
         self.loop = asyncio.get_running_loop()
         def warm():
             batch = example_batch(self.model.memory_size, getattr(self.model, 'feature_spec', None))
-            self.model(batch, training=False)
-            self.compiled = tf.function(self.model.call, input_signature=[input_signature(batch)], autograph=False)
-            self.compiled(batch)
+            with device_scope(self.device) if self.device else nullcontext():
+                self.model(batch, training=False)
+                self.compiled = tf.function(self.model.call, input_signature=[input_signature(batch)], autograph=False)
+                outputs = self.compiled(batch)
+            if self.device:
+                self.variable_placements = assert_model_device(self.model, self.device)
+                self.output_placements = assert_output_device(outputs, self.device)
         await self.loop.run_in_executor(self.executor, warm)
         self.task = asyncio.create_task(self._serve())
         return self
@@ -106,7 +114,9 @@ class InferenceBatcher:
         return dict(calls=self.calls, requests=self.requests, mean_batch=self.requests/max(self.calls,1),
                     batch_histogram=self.batch_histogram.copy(), inference_seconds=self.inference_seconds,
                     mean_queue_ms=1000*self.queue_seconds/max(self.requests,1),
-                    graph_traces=self.compiled.experimental_get_tracing_count())
+                    graph_traces=self.compiled.experimental_get_tracing_count(), device=self.device,
+                    model_variable_devices=sorted(set(self.variable_placements.values())) if self.variable_placements else None,
+                    output_placements=self.output_placements)
 
     def restore_stats(self, stats):
         self.calls, self.requests = stats['calls'], stats['requests']
@@ -116,7 +126,11 @@ class InferenceBatcher:
 
     def _infer(self, requests):
         items, batch = pack_requests(requests)
-        output = {k: np.asarray(v) for k,v in self.compiled(batch).items()}
+        with device_scope(self.device) if self.device else nullcontext():
+            outputs = self.compiled(batch)
+        if self.device:
+            self.output_placements = assert_output_device(outputs, self.device)
+        output = {k: np.asarray(v) for k,v in outputs.items()}
         return [{k: (v[i:i+1, :len(items[i]['candidates'])] if k == 'logits' else v[i:i+1])
                  for k,v in output.items()} for i in range(len(requests))]
 

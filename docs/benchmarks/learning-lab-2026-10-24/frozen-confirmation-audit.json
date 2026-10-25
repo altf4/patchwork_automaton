@@ -1,0 +1,253 @@
+{
+  "status": "pass",
+  "created_utc": "2026-10-25T12:39:02.904742+00:00",
+  "report": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/laptop-frozen-confirmation-20261025/report.json",
+  "report_sha256": "423f839ce455c4773a5423712a1beb62f7dd2266c6b820797dbfb78d1a029d8f",
+  "manifest_sha256": "2d7f014f594af355433330e30d7bf50005a76134e127c4f7cd71b4ffb3eeadc7",
+  "targets_sha256": "eeb567bbf96c880ddb1c5178e0e756119b762046f3becce9cfbe57604d28efef",
+  "audit_source_sha256": "d45bf61ce83ac42edfd7dfc43ab641ae07bf2105dc4fb925ca382490fbd03b6f",
+  "all_source_hashes_verified": 78,
+  "games_per_policy": 5000,
+  "unique_matched_attempt_keys": 5000,
+  "cohort_seed_base": 70261024,
+  "attempts_total": 20000,
+  "all_terminal": true,
+  "errors": 0,
+  "cutoffs": 0,
+  "archive_checkpoint_manifest_report_bytes_verified": true,
+  "all_policy_zips_crc_valid": true,
+  "exact_paired_bootstrap_recomputed": true,
+  "policies": {
+    "original-imitation": {
+      "status_counts": {
+        "win": 2503,
+        "loss": 2497
+      },
+      "wins": 2503,
+      "attempted_games": 5000,
+      "win_rate": 0.5006,
+      "seconds": 707.350511769997,
+      "result_sha256": "e42eb1fa723fbe598dd6e969fc7677ca13b9661cccf8ba22a0e5c6ba1c191cdd",
+      "checkpoint_sha256": "a2668b1f35874d3421f4a4445d131955b0916598e36f6eb9d23bb05d60d6a2e0",
+      "cpu_only": true,
+      "optimizer_restored": false,
+      "rollout_descriptors": 0
+    },
+    "control-seed31261024": {
+      "status_counts": {
+        "win": 2541,
+        "loss": 2459
+      },
+      "wins": 2541,
+      "attempted_games": 5000,
+      "win_rate": 0.5082,
+      "seconds": 734.6547520990134,
+      "result_sha256": "f186fe4efd119d6ef8a183cf1563794f99ff9ae90bbe72069fa887b3bd0e6a6a",
+      "checkpoint_sha256": "85d5a346bd4e13feb13f34c8017f9e1e039cab7d1fde4198a9d65cfd42d31f5c",
+      "cpu_only": true,
+      "optimizer_restored": false,
+      "rollout_descriptors": 0
+    },
+    "control-seed32261024": {
+      "status_counts": {
+        "win": 2549,
+        "loss": 2451
+      },
+      "wins": 2549,
+      "attempted_games": 5000,
+      "win_rate": 0.5098,
+      "seconds": 730.4093910160009,
+      "result_sha256": "570f0fc45a8bf2a108509d6c6d7fa1314a89e3fcca577a45b5568c43838d75a5",
+      "checkpoint_sha256": "e4b63d501b87ec3bef6825f82981c51dc826406fc473fb613409745797dcff81",
+      "cpu_only": true,
+      "optimizer_restored": false,
+      "rollout_descriptors": 0
+    },
+    "teacher": {
+      "status_counts": {
+        "win": 2527,
+        "loss": 2473
+      },
+      "wins": 2527,
+      "attempted_games": 5000,
+      "win_rate": 0.5054,
+      "seconds": 136.9703845430049,
+      "result_sha256": "113f235912f8089979e4a112286a6fc83551443ebcdf4d9aa17dcc875e9a4f7d",
+      "checkpoint_sha256": null,
+      "cpu_only": true,
+      "optimizer_restored": false,
+      "rollout_descriptors": 0
+    }
+  },
+  "comparisons": {
+    "control-seed31261024-minus-original-imitation": {
+      "attempted_pairs": 5000,
+      "terminal_pairs": 5000,
+      "unresolved_pairs": 0,
+      "recorded_attempt_win_rate_change": 0.0076,
+      "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+        0.004,
+        0.011005000000000018
+      ],
+      "terminal_score_change_on_terminal_pairs": 0.0076,
+      "terminal_score_change_bootstrap_95_interval": [
+        0.004,
+        0.011005000000000018
+      ],
+      "status_transitions": {
+        "loss->loss": 2435,
+        "loss->win": 62,
+        "win->loss": 24,
+        "win->win": 2479
+      },
+      "improved_recorded_win_attempts": 62,
+      "worsened_recorded_win_attempts": 24,
+      "tied_recorded_win_attempts": 4914,
+      "bootstrap": {
+        "unit": "matched_attempt",
+        "seed": 9901,
+        "resamples": 4000
+      }
+    },
+    "control-seed32261024-minus-original-imitation": {
+      "attempted_pairs": 5000,
+      "terminal_pairs": 5000,
+      "unresolved_pairs": 0,
+      "recorded_attempt_win_rate_change": 0.0092,
+      "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+        0.0054,
+        0.013
+      ],
+      "terminal_score_change_on_terminal_pairs": 0.0092,
+      "terminal_score_change_bootstrap_95_interval": [
+        0.0054,
+        0.013
+      ],
+      "status_transitions": {
+        "loss->loss": 2426,
+        "loss->win": 71,
+        "win->loss": 25,
+        "win->win": 2478
+      },
+      "improved_recorded_win_attempts": 71,
+      "worsened_recorded_win_attempts": 25,
+      "tied_recorded_win_attempts": 4904,
+      "bootstrap": {
+        "unit": "matched_attempt",
+        "seed": 9901,
+        "resamples": 4000
+      }
+    },
+    "teacher-minus-original-imitation": {
+      "attempted_pairs": 5000,
+      "terminal_pairs": 5000,
+      "unresolved_pairs": 0,
+      "recorded_attempt_win_rate_change": 0.0048,
+      "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+        0.0002,
+        0.0096
+      ],
+      "terminal_score_change_on_terminal_pairs": 0.0048,
+      "terminal_score_change_bootstrap_95_interval": [
+        0.0002,
+        0.0096
+      ],
+      "status_transitions": {
+        "loss->loss": 2418,
+        "loss->win": 79,
+        "win->loss": 55,
+        "win->win": 2448
+      },
+      "improved_recorded_win_attempts": 79,
+      "worsened_recorded_win_attempts": 55,
+      "tied_recorded_win_attempts": 4866,
+      "bootstrap": {
+        "unit": "matched_attempt",
+        "seed": 9901,
+        "resamples": 4000
+      }
+    },
+    "teacher-minus-control-seed31261024": {
+      "attempted_pairs": 5000,
+      "terminal_pairs": 5000,
+      "unresolved_pairs": 0,
+      "recorded_attempt_win_rate_change": -0.0028,
+      "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+        -0.0076,
+        0.002
+      ],
+      "terminal_score_change_on_terminal_pairs": -0.0028,
+      "terminal_score_change_bootstrap_95_interval": [
+        -0.0076,
+        0.002
+      ],
+      "status_transitions": {
+        "loss->loss": 2387,
+        "loss->win": 72,
+        "win->loss": 86,
+        "win->win": 2455
+      },
+      "improved_recorded_win_attempts": 72,
+      "worsened_recorded_win_attempts": 86,
+      "tied_recorded_win_attempts": 4842,
+      "bootstrap": {
+        "unit": "matched_attempt",
+        "seed": 9901,
+        "resamples": 4000
+      }
+    },
+    "teacher-minus-control-seed32261024": {
+      "attempted_pairs": 5000,
+      "terminal_pairs": 5000,
+      "unresolved_pairs": 0,
+      "recorded_attempt_win_rate_change": -0.0044,
+      "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+        -0.0082,
+        -0.0006
+      ],
+      "terminal_score_change_on_terminal_pairs": -0.0044,
+      "terminal_score_change_bootstrap_95_interval": [
+        -0.0082,
+        -0.0006
+      ],
+      "status_transitions": {
+        "loss->loss": 2412,
+        "loss->win": 39,
+        "win->loss": 61,
+        "win->win": 2488
+      },
+      "improved_recorded_win_attempts": 39,
+      "worsened_recorded_win_attempts": 61,
+      "tied_recorded_win_attempts": 4900,
+      "bootstrap": {
+        "unit": "matched_attempt",
+        "seed": 9901,
+        "resamples": 4000
+      }
+    }
+  },
+  "supervisor": {
+    "path": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/laptop-frozen-confirmation-20261025-frozen-confirmation-20261025T115635.533583Z-p2895904-launch.json",
+    "sha256": "7a7d75106b16e8f473b7dd5257db2a93dc03e4f2bd11293c8f4084138462af84",
+    "status": "complete",
+    "verified_utc": "2026-10-25T12:35:41.232576+00:00"
+  },
+  "replication_preregistration_unchanged": {
+    "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/laptop-frozen-replication-20261025/manifest.json": "dd51a3551e8ae8175656aa92eeaeae23b161edc5266c7321313181e31416d2e2",
+    "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/laptop-frozen-replication-20261025/preregistration.json": "1ebb28a019d538dd18fd7ab3e1c025b4f508da0812915c049e2d5c71cbd111bd",
+    "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/laptop-frozen-replication-20261025/targets.json": "5fe2c404abce22440f59a16ab64bc99d6ee26ce28abbc404254b3d7ad3345ddc"
+  },
+  "audit_resources": {
+    "cpu_affinity": [
+      0
+    ],
+    "tensorflow_loaded": false,
+    "games_run": 0
+  },
+  "seconds": 23.218745679943822,
+  "limitations": [
+    "Paired intervals condition on these frozen policies and this cohort, not training-seed variance.",
+    "Five reported comparisons have nominal unadjusted 95% intervals.",
+    "Neural policies sample actions; deterministic teacher mirror is a reference, not a strength ceiling."
+  ]
+}

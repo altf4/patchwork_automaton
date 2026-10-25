@@ -1,0 +1,373 @@
+{
+  "status": "complete_independently_audited_and_backed_up_live_cleanup_recheck_unavailable",
+  "created_utc": "2026-10-25T15:02:44.981115+00:00",
+  "authorization": "Human authorized starting the fixed-opponent comparison, kept to about one hour including evaluation. No extensions or extra experiments.",
+  "authorized_window_started_utc": "2026-10-25T14:55:00Z",
+  "started_utc": "2026-10-25T14:55:27.214776+00:00",
+  "deadline_utc": null,
+  "deadline_local": null,
+  "watchdog": {
+    "interrupt_utc": "2026-10-25T15:50:00+00:00",
+    "term_utc": "2026-10-25T15:52:00+00:00",
+    "kill_utc": "2026-10-25T15:53:00+00:00",
+    "separate_session": true,
+    "native_absolute_deadline_enforced": false,
+    "removed_on_user_request": true,
+    "active": false,
+    "note": "Verified watchdog terminated; zombie /proc entry may remain until parent reaps it. No process-group signal was sent."
+  },
+  "remote": {
+    "project": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project",
+    "output": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/raytracer-alignment-pilot-2026-10-25",
+    "deployment": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/alignment-pilot-deployment-20261025",
+    "task": "MTGO-RustMage-Alignment-Pilot-20261025",
+    "supervisor_pid": 30581,
+    "coordinator_pid": 30583,
+    "watchdog_pid": 30582,
+    "owner_identity": {
+      "pid": 30581,
+      "pgid": 30581,
+      "sid": 30581,
+      "start_ticks": 4021528,
+      "uid": 1000
+    },
+    "metadata": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/raytracer-alignment-pilot-20261025-fixed-opponent-one-hour-pilot-20261025T145527.214700Z-p30581-launch.json",
+    "shared_lock": ".local/raytracer-training-20261024.lock",
+    "status_command": "ssh raytracer 'cd /home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project && python3 .local/mtgo-alignment-pilot-status.py'"
+  },
+  "design": {
+    "training_seed": 31261024,
+    "fixed_opponent_games": 4000,
+    "fixed_rounds": 4,
+    "games_per_round": 1000,
+    "reused_selfplay_control_games": 2000,
+    "same_initial_actor_critic_both_adam_and_pcg": true,
+    "approximate_neural_trajectory_exposure_match": true,
+    "exact_compute_or_optimizer_step_match": false,
+    "game_workers": 48,
+    "train_batch": 512,
+    "learner_device": "gpu",
+    "inference_device": "cpu",
+    "validation_device": "cpu",
+    "validation_fraction": 0.2,
+    "critic_steps_per_round": 157,
+    "active_in_training_evaluations": false,
+    "existing_200_passive_evaluation_config_preserved": true,
+    "frozen_final_policies": [
+      "original-imitation",
+      "selfplay-control",
+      "fixed-opponent"
+    ],
+    "games_per_final_policy": 5000,
+    "fresh_confirmation_seed": 91261024,
+    "primary_comparison": "fixed-minus-control",
+    "no_selection_no_extensions": true,
+    "limitations": [
+      "One training seed; fixed-policy paired intervals do not measure training-seed variation.",
+      "Opponent and state distributions differ; game counts approximately match neural trajectories, not exact decisions or updates.",
+      "A gain against the training opponent does not establish broader opponent generalization."
+    ]
+  },
+  "deployment": {
+    "deployed": true,
+    "deployed_utc": "2026-10-25T14:53:57.657825+00:00",
+    "bundle_sha256": "3251c1b348b77ed7a2ab9b493028bb350815a84a0c907609dfadfce7b7b6679f",
+    "old_job_stopped": true,
+    "exclusive_lock_checked": true,
+    "source_files": 83,
+    "native_engine": [
+      "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/rustmage/target/release/librustmage.so"
+    ],
+    "pilot_manifest": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/alignment-pilot-deployment-20261025/pilot-manifest.json",
+    "pilot_manifest_sha256": "68796b04612b8e1883a34eee3f7902c9926869fe95f60449f3ee48ba31adac68",
+    "command_sha256": "08be8589cfd2bcab0f6df3c8c38856f4d75a626aa0cef5e9a30def454fc0ad58",
+    "deadline_utc": "2026-10-25T15:55:00Z",
+    "shared_sources_preserved": true,
+    "metadata_correction": "Corrected a variable-shadowing error in the deployment summary only; bundle hash had already been verified before source writes."
+  },
+  "pilot_manifest_sha256": "68796b04612b8e1883a34eee3f7902c9926869fe95f60449f3ee48ba31adac68",
+  "pinned_runtime_source_engine_data_files": 83,
+  "verification": {
+    "fixed_opponent_local_tests_passed": 21,
+    "new_coordinator_tests_passed": 6,
+    "new_coordinator_test_seconds": 19.256,
+    "independent_reviews_passed": true,
+    "native_uploaded_files_verified": 9,
+    "native_powershell_syntax_verified": true,
+    "windows_ready_s4u_limited_zero_triggers": true,
+    "live_windows_task_running": true,
+    "live_system_sleep_request": true,
+    "first_round_completed_games": 1000,
+    "first_round_accepted_actor_steps": 342,
+    "first_round_critic_steps": 157,
+    "gpu_utilization_observed_percent": 24,
+    "gpu_memory_observed_mib": 2023,
+    "source_asserts_gpu_learner_tensors": true
+  },
+  "prelaunch_repairs": [
+    "Native engine library discovery corrected to the binding default path before the manifest was finalized.",
+    "A deployment-summary variable-shadowing field was corrected; the bundle was verified before source writes and runtime manifest bytes were unchanged.",
+    "PowerShell checks/start invoked uploaded files to preserve PSScriptRoot and avoid command-line limits; failed attempts did not start training."
+  ],
+  "launch_evidence": {
+    "path": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/alignment-pilot-20261025/launch-evidence.tar.gz",
+    "sha256": "230b6a334453cf42675d384faaddcb68d99c6aed12ace58f035654d3fb8a37a3"
+  },
+  "automatic_backup": {
+    "state": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/alignment-pilot-20261025/automatic-backup-state.json",
+    "session_id": 7881,
+    "local_wrapper": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/alignment-pilot-20261025/mtgo-watch-alignment-pilot-backup-20261025.py",
+    "remote_helper": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/alignment-pilot-deployment-20261025/stream-backup.py",
+    "scope": "Reports, checkpoints, optimizers, logs and deployment provenance; bulky raw rollouts excluded.",
+    "status": "complete_verified",
+    "archive": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/alignment-pilot-20261025/completed-or-interrupted-pilot-20261025.tar.gz",
+    "bytes": 18512555,
+    "sha256": "122eb960acad4c1cc2edf46175135b836ad3dab3f0be13d755c553102fe16762",
+    "json_files": 23,
+    "zip_files": 15,
+    "updated_utc": "2026-10-25T15:25:27.814744+00:00",
+    "session_exit_code": 0
+  },
+  "heartbeat": {
+    "status": "DELETED",
+    "automation_id": "raytracer-one-hour-alignment-pilot",
+    "cadence_minutes": 10,
+    "quiet_unless_meaningful": true,
+    "delete_on_completion_or_deadline_verification": false,
+    "name": "Raytracer alignment pilot",
+    "schedule_has_time_end": false,
+    "delete_on_full_completion": true,
+    "deleted_utc": "2026-10-25T15:33:34.010236+00:00",
+    "delete_confirmed_by_app": true
+  },
+  "last_progress": {
+    "checked_utc": "2026-10-25T15:31:01.967951+00:00",
+    "status": "complete",
+    "committed_rounds": 4,
+    "committed_games": 4000,
+    "completed_final_policies": [
+      "original-imitation",
+      "selfplay-control",
+      "fixed-opponent"
+    ],
+    "completed_final_evaluation_games": 15000,
+    "unique_fresh_schedules": 5000,
+    "all_evaluations_terminal": true,
+    "errors": 0,
+    "cutoffs": 0
+  },
+  "local_evidence": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/alignment-pilot-20261025",
+  "original_deadline_utc": "2026-10-25T15:55:00Z",
+  "deadline_removal": {
+    "authorized_utc": "2026-10-25T15:12:33.549427+00:00",
+    "authorization_text": "you can remove the hard stop, let's let it finish",
+    "scope": "Finish the already fixed 4k arm and 3x5k frozen comparison; no additional experiments.",
+    "watchdog_removed": true,
+    "removed_watchdog_pid": 30582,
+    "verified_start_ticks": 4021531,
+    "training_coordinator_supervisor_not_signalled": true,
+    "native_task_limit_update": "VERIFIED_PT0S_UNLIMITED",
+    "original_manifest_unchanged": true,
+    "remaining_old_coordinator_gate": "Only post-training evaluation admission remains; if it declines, completion-only continuation uses the verified trained checkpoint and exact same frozen evaluation plan without retraining.",
+    "native_verified_utc": "2026-10-25T15:14:00Z",
+    "native_running_instance_preserved": true,
+    "native_verification": {
+      "path": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/alignment-pilot-20261025/windows/runtime-continue/native-limit-removal-20261025.json",
+      "sha256": "cbbe6b5e3b3daea4ebadffd384cebf20d259ef7383f4c05771b37cf70bad1377"
+    },
+    "authorized_utc_approx": "2026-10-25T15:07Z",
+    "recorded_utc": "2026-10-25T15:16:02.387840+00:00",
+    "fallback_completion_helper": {
+      "path": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/alignment-pilot-20261025/mtgo-alignment-pilot-complete.py",
+      "sha256": "a656e1715a147657528ddaba680782e40cfbd309e94c49d75acbe91783785593",
+      "focused_tests_passed": 6,
+      "independent_review": "PASS",
+      "deployed": false,
+      "use_only_if_original_coordinator_declines_evaluation": true
+    }
+  },
+  "finished_utc": "2026-10-25T15:25:23.840523+00:00",
+  "wall_clock_seconds": 1796.314286,
+  "training_seconds": 1089.1871982919984,
+  "final_results": {
+    "policies": {
+      "original-imitation": {
+        "wins": 2421,
+        "losses": 2579,
+        "attempted_games": 5000,
+        "terminal_games": 5000,
+        "win_rate_all_attempts": 0.4842,
+        "errors": 0,
+        "cutoffs": 0
+      },
+      "selfplay-control": {
+        "wins": 2492,
+        "losses": 2508,
+        "attempted_games": 5000,
+        "terminal_games": 5000,
+        "win_rate_all_attempts": 0.4984,
+        "errors": 0,
+        "cutoffs": 0
+      },
+      "fixed-opponent": {
+        "wins": 2523,
+        "losses": 2477,
+        "attempted_games": 5000,
+        "terminal_games": 5000,
+        "win_rate_all_attempts": 0.5046,
+        "errors": 0,
+        "cutoffs": 0
+      }
+    },
+    "comparisons": {
+      "fixed-minus-control": {
+        "attempted_pairs": 5000,
+        "terminal_pairs": 5000,
+        "unresolved_pairs": 0,
+        "recorded_attempt_win_rate_change": 0.0062,
+        "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+          0.0026,
+          0.0098
+        ],
+        "terminal_score_change_on_terminal_pairs": 0.0062,
+        "terminal_score_change_bootstrap_95_interval": [
+          0.0026,
+          0.0098
+        ],
+        "status_transitions": {
+          "loss->loss": 2450,
+          "loss->win": 58,
+          "win->loss": 27,
+          "win->win": 2465
+        },
+        "improved_recorded_win_attempts": 58,
+        "worsened_recorded_win_attempts": 27,
+        "tied_recorded_win_attempts": 4915,
+        "bootstrap": {
+          "unit": "matched_attempt",
+          "seed": 9901,
+          "resamples": 4000
+        }
+      },
+      "control-minus-imitation": {
+        "attempted_pairs": 5000,
+        "terminal_pairs": 5000,
+        "unresolved_pairs": 0,
+        "recorded_attempt_win_rate_change": 0.0142,
+        "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+          0.0104,
+          0.0182
+        ],
+        "terminal_score_change_on_terminal_pairs": 0.0142,
+        "terminal_score_change_bootstrap_95_interval": [
+          0.0104,
+          0.0182
+        ],
+        "status_transitions": {
+          "loss->loss": 2494,
+          "loss->win": 85,
+          "win->loss": 14,
+          "win->win": 2407
+        },
+        "improved_recorded_win_attempts": 85,
+        "worsened_recorded_win_attempts": 14,
+        "tied_recorded_win_attempts": 4901,
+        "bootstrap": {
+          "unit": "matched_attempt",
+          "seed": 9901,
+          "resamples": 4000
+        }
+      },
+      "fixed-minus-imitation": {
+        "attempted_pairs": 5000,
+        "terminal_pairs": 5000,
+        "unresolved_pairs": 0,
+        "recorded_attempt_win_rate_change": 0.0204,
+        "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+          0.0162,
+          0.0248
+        ],
+        "terminal_score_change_on_terminal_pairs": 0.0204,
+        "terminal_score_change_bootstrap_95_interval": [
+          0.0162,
+          0.0248
+        ],
+        "status_transitions": {
+          "loss->loss": 2469,
+          "loss->win": 110,
+          "win->loss": 8,
+          "win->win": 2413
+        },
+        "improved_recorded_win_attempts": 110,
+        "worsened_recorded_win_attempts": 8,
+        "tied_recorded_win_attempts": 4882,
+        "bootstrap": {
+          "unit": "matched_attempt",
+          "seed": 9901,
+          "resamples": 4000
+        }
+      }
+    },
+    "primary_comparison": "fixed-minus-control",
+    "interpretation": "Modest positive fixed-opponent-minus-control effect for this frozen checkpoint against FoundationsAggro: +0.62 percentage points, nominal paired95%CI[+0.26,+0.98]. One training seed and approximate exposure matching limit generalization."
+  },
+  "final_live_cleanup": {
+    "status": "UNKNOWN_HOST_UNREACHABLE",
+    "evidence": {
+      "path": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/alignment-pilot-20261025/pilot-final-cleanup-attempt-20261025.json",
+      "sha256": "8abc2f9051c40f6c2c27aa6a0e460b83169a6a9b5d61646ebc7ebc2e7de3e55e"
+    },
+    "scope": "Archived supervisor confirms normal completion, return0, all owned child processes finished and reports fsynced. Subsequent live queries for Windows task, final supervisor exit/lock and sleep-request release failed because the host became unreachable.",
+    "root_final_supervisor_archive_attempt": "SSH No route to host, exit255; empty failed transfer preserved, not a verified artifact.",
+    "cause": "Unknown; no power-state cause inferred.",
+    "archived_normal_completion_available": true
+  },
+  "public_artifacts": {
+    "figure": "/home/altf4/Code/mtgo-bot/patchwork_automaton/docs/benchmarks/alignment-pilot-2026-10-25/comparison.png",
+    "data": "/home/altf4/Code/mtgo-bot/patchwork_automaton/docs/benchmarks/alignment-pilot-2026-10-25/comparison.json",
+    "narrative": "/home/altf4/Code/mtgo-bot/patchwork_automaton/docs/rustmage-training.md"
+  },
+  "finalized_utc": "2026-10-25T15:33:34.010236+00:00",
+  "independent_audit": {
+    "result": "PASS",
+    "training_and_paired_results": {
+      "path": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/alignment-pilot-20261025/completed-pilot-independent-audit-20261025.json",
+      "sha256": "4c2492b92b16a7df9c722f0f2a1ae2a7615a8e74bcd2b31a75c4e5f600c0b977"
+    },
+    "public_results_and_doc_reconciliation": {
+      "path": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/alignment-pilot-20261025/public-comparison-independent-review-20261025.json",
+      "sha256": "604032c03aa8ebb020cb39f42c6392a58bc0a5c5a7e82723e0d316d6a98c9dca"
+    },
+    "runtime_source_hash_recheck_scope": "81/83 runtime pins independently rehashed; unarchived env.sh and command template checked by producer at runtime."
+  },
+  "archived_supervisor_completion": {
+    "status": "complete",
+    "returncode": 0,
+    "verified_utc": "2026-10-25T15:25:24.484344+00:00",
+    "interrupted": false,
+    "reported_status": "complete",
+    "report_sha256": "38fca043b4ba329eed92e84123ee04328feb03c3057cd83ad3a28fdc306709b9",
+    "all_owned_children_gone_before_verification": true,
+    "durability": "Report/JSON/log and directories fsynced; Linux sync completed.",
+    "scope": "Verified archived normal Linux supervisor completion; later live Windows/process/lock/guard recheck remained unavailable."
+  },
+  "exposure_comparison": {
+    "fixed_train_decisions": 352857,
+    "selfplay_train_decisions": 356941,
+    "fixed_actor_minibatch_steps": 1384,
+    "selfplay_actor_minibatch_steps": 1398,
+    "critic_steps_each": 628
+  },
+  "fallback_used": false,
+  "public_artifact_hashes": {
+    "comparison.csv": "f2a944367be44a5fc02587fa8e4452963735ad7355b473a883c7368e8ece1d96",
+    "comparison.json": "8e0ff498703f34f04423efe333b4e01028d860e4b5427c6ec7b876275e00f2dc",
+    "comparison.png": "ba7e149989820efdeed5fa365d811a98ab6fdcb49c05509b6239be3f8cbee708",
+    "comparison.svg": "ef646d21d80386bd69be6fcf1f3f1e3599d14434e40a614f5ace756909245f9e"
+  },
+  "final_closeout_backup": {
+    "path": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/alignment-pilot-20261025/final-closeout-20261025.tar.gz",
+    "checksum_sidecar": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/alignment-pilot-20261025/final-closeout-20261025.tar.gz.sha256",
+    "scope": "Final records, audited public plots/data/docs, verification evidence; complete models/results remain in separately verified18.5MB archive."
+  }
+}

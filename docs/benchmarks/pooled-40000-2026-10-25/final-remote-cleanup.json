@@ -1,0 +1,291 @@
+{
+  "utc": "2026-10-25T22:34:48.228753+00:00",
+  "cleanup": {
+    "finished_utc": "2026-10-25T22:28:15.963484+00:00",
+    "coordinator_pid": 80187,
+    "shared_lock_released": true,
+    "status": "complete"
+  },
+  "launch_completion": {
+    "owner": {
+      "pid": 80187,
+      "uid": 1000,
+      "pgid": 80187,
+      "sid": 80187,
+      "start_ticks": 4961608
+    },
+    "exit_code": 0,
+    "finished_utc": "2026-10-25T22:28:16.713559+00:00",
+    "still_same_identity": null
+  },
+  "receipt": {
+    "schema_version": 1,
+    "run_id": "raytracer-pooled-40000-2026-10-25",
+    "recovery_epoch": 1,
+    "native_manifest_sha256": "a14046c1371c1cb7706be1211e5a05d90713df7794cdf059728960c3971d614b",
+    "recovery_coordinator_sha256": "65639b994efbc043eba05443b9a97f14d6da1f364818f566131746281d0ba946",
+    "status": "complete",
+    "coordinator": {
+      "pid": 80187,
+      "pgid": 80187,
+      "sid": 80187,
+      "start_ticks": 4961608,
+      "uid": 1000
+    },
+    "native_owner": {
+      "windows_pid": 45492,
+      "creation_utc": "2026-10-25T18:52:57.8077558Z"
+    },
+    "cleanup": {
+      "finished_utc": "2026-10-25T22:28:15.963484+00:00",
+      "coordinator_pid": 80187,
+      "shared_lock_released": true,
+      "status": "complete",
+      "owned_children_remaining": 0,
+      "cleanup_verified": true,
+      "owned_process_records_checked": 13
+    },
+    "cleanup_sha256": "540ae2c1910245397daab1e0f6df0536f1a369d6d3e0c8782af001127b066c94",
+    "owned_process_records": [
+      {
+        "path": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/raytracer-pooled-40000-2026-10-25/confirmation-imitation.process.json",
+        "sha256": "dadce79c6eb415818f9b9d221845c6cbb507c79090172402a3e52a6972eb4a95",
+        "owner": {
+          "pid": 288749,
+          "pgid": 288749,
+          "sid": 288749,
+          "start_ticks": 6162251,
+          "uid": 1000
+        },
+        "current_invocation": true,
+        "cleanup_sha256": "82a9fb77c2e2bc0f040d0e35cce440ba759bc3408442fa931a52ff78f0a66e38"
+      },
+      {
+        "path": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/raytracer-pooled-40000-2026-10-25/confirmation-round-4.process.json",
+        "sha256": "9dde67e8ca5f5732ce57c1b18ac4bcba8410c156aeb605e4a93f3813a37d1874",
+        "owner": {
+          "pid": 293504,
+          "pgid": 293504,
+          "sid": 293504,
+          "start_ticks": 6185162,
+          "uid": 1000
+        },
+        "current_invocation": true,
+        "cleanup_sha256": "7326ac1ff9c5bbadca7c81c581596210bb4971518a5efb43709a989752ded557"
+      },
+      {
+        "path": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/raytracer-pooled-40000-2026-10-25/confirmation-round-40.process.json",
+        "sha256": "bec7a02355bf88fc7d3b1a066ee8d830050bb579437cb034173ceb8472623cea",
+        "owner": {
+          "pid": 298675,
+          "pgid": 298675,
+          "sid": 298675,
+          "start_ticks": 6207977,
+          "uid": 1000
+        },
+        "current_invocation": true,
+        "cleanup_sha256": "0211ebf28ce48403bc60a5df7d5c48f533e6a2c8f58b210c7b6dd11809d58925"
+      },
+      {
+        "path": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/raytracer-pooled-40000-2026-10-25/monitor-0004.process.json",
+        "sha256": "8c7d2621fe10248a06c7396bfcddad03f12654f8eefe5c469ab55dd65008ba5c",
+        "owner": {
+          "pid": 63416,
+          "pgid": 63416,
+          "sid": 63416,
+          "start_ticks": 4662547,
+          "uid": 1000
+        },
+        "current_invocation": false,
+        "cleanup_sha256": "dc8e47a4eee8f6ff42b962a6526def932cdf86b654acb770392778b083293ba6"
+      },
+      {
+        "path": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/raytracer-pooled-40000-2026-10-25/monitor-0010.process.json",
+        "sha256": "e4c5858afdc47ec2a1179abad4a9b0f99a2857dfc142cea189b4ee0de2c80c39",
+        "owner": {
+          "pid": 99088,
+          "pgid": 99088,
+          "sid": 99088,
+          "start_ticks": 5050907,
+          "uid": 1000
+        },
+        "current_invocation": true,
+        "cleanup_sha256": "f923a012b9be2e84c95c06216b74b33406cdb0e3acda1718e0eb67b21f876741"
+      },
+      {
+        "path": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/raytracer-pooled-40000-2026-10-25/monitor-0020.process.json",
+        "sha256": "1b68e77616255d64eaf72267e475cf9173acf0108e1827c8c44e7b2fc66fef39",
+        "owner": {
+          "pid": 163691,
+          "pgid": 163691,
+          "sid": 163691,
+          "start_ticks": 5388608,
+          "uid": 1000
+        },
+        "current_invocation": true,
+        "cleanup_sha256": "c3a8a0da7a127f6a6ec7c0bad7e037882bd18a79967925006b6c801736b4ed3d"
+      },
+      {
+        "path": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/raytracer-pooled-40000-2026-10-25/monitor-0040.process.json",
+        "sha256": "accfbef8832145b244724f84fe9e91820abf5ca7b81dceee77791fb8636eecc3",
+        "owner": {
+          "pid": 285844,
+          "pgid": 285844,
+          "sid": 285844,
+          "start_ticks": 6152074,
+          "uid": 1000
+        },
+        "current_invocation": true,
+        "cleanup_sha256": "d37a079e6594f5b9d685eaea05fc8617fbb4681918186eca19e030f1b1be5af1"
+      },
+      {
+        "path": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/raytracer-pooled-40000-2026-10-25/monitor-imitation.process.json",
+        "sha256": "33ecda9ffad3c3f0f1b4f2cc6cabc7bf0f164ce622c4fc0220d19f663e5d4a5c",
+        "owner": {
+          "pid": 35281,
+          "pgid": 35281,
+          "sid": 35281,
+          "start_ticks": 4535736,
+          "uid": 1000
+        },
+        "current_invocation": false,
+        "cleanup_sha256": "78bf9e302fc3bde4f98f2ea9a941ee284c4b78523c3d5d94a3be1e40b2524238"
+      },
+      {
+        "path": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/raytracer-pooled-40000-2026-10-25/plot.process.json",
+        "sha256": "40e5bbf8ba93c11c574f32befa93e5911ec41c2c205c9ee7a62f7f431b5efb4b",
+        "owner": {
+          "pid": 303478,
+          "pgid": 303478,
+          "sid": 303478,
+          "start_ticks": 6232283,
+          "uid": 1000
+        },
+        "current_invocation": true,
+        "cleanup_sha256": "fb1f63f45631994d07eeb8eb29ebe345d1628a19f30cbba3f49be1e54e801281"
+      },
+      {
+        "path": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/raytracer-pooled-40000-2026-10-25/train-through-0004.process.json",
+        "sha256": "010537ffe78a90c406af0cf03a2318eda252e9f7d9f2eacaddaa3f81ec150fa3",
+        "owner": {
+          "pid": 37267,
+          "pgid": 37267,
+          "sid": 37267,
+          "start_ticks": 4545282,
+          "uid": 1000
+        },
+        "current_invocation": false,
+        "cleanup_sha256": "fac9a80bd1dc4b334398170cd01aaeb6ad8903dcf6875b585c1d29dd09acf301"
+      },
+      {
+        "path": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/raytracer-pooled-40000-2026-10-25/train-through-0010.process.json",
+        "sha256": "c9dd790c1255f42fe45cfbc451db032b3be9182bd81a37c403a606ca253fc44b",
+        "owner": {
+          "pid": 80217,
+          "pgid": 80217,
+          "sid": 80217,
+          "start_ticks": 4961643,
+          "uid": 1000
+        },
+        "current_invocation": true,
+        "cleanup_sha256": "740ed76b5a77bf3d4e7deb6c2c391d100640f35780d0e61a189f93639d559ce1"
+      },
+      {
+        "path": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/raytracer-pooled-40000-2026-10-25/train-through-0020.process.json",
+        "sha256": "c4515ce9b2d9005e6a545774dc8bdc20281df6d805ae977bac9fb1e0a30de47d",
+        "owner": {
+          "pid": 102484,
+          "pgid": 102484,
+          "sid": 102484,
+          "start_ticks": 5061050,
+          "uid": 1000
+        },
+        "current_invocation": true,
+        "cleanup_sha256": "662a273c438a7751f37eed9411c4f1f3a7a8b7057243d9f2c7378c12c9fec54b"
+      },
+      {
+        "path": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/raytracer-pooled-40000-2026-10-25/train-through-0040.process.json",
+        "sha256": "b6e3d88c0750d3cbe16d5fc777f2f0853cca970c867e5475e185b6f8c7c5c735",
+        "owner": {
+          "pid": 166398,
+          "pgid": 166398,
+          "sid": 166398,
+          "start_ticks": 5398663,
+          "uid": 1000
+        },
+        "current_invocation": true,
+        "cleanup_sha256": "1ac9f93ab983eb61de31dd3be37bede4dff0314be9f21d5a184441859e0a7eac"
+      }
+    ],
+    "started_utc": "2026-10-25T18:56:35.710702+00:00",
+    "finished_utc": "2026-10-25T22:28:15.963484+00:00",
+    "published_utc": "2026-10-25T22:28:16.654281+00:00",
+    "run_error": null
+  },
+  "native_state": {
+    "schema_version": 1,
+    "mode": "external_linux_coordinator",
+    "run_id": "raytracer-pooled-40000-2026-10-25",
+    "recovery_epoch": 1,
+    "finite_game_budget": 40000,
+    "manifest_sha256": "a14046c1371c1cb7706be1211e5a05d90713df7794cdf059728960c3971d614b",
+    "recovery_coordinator_sha256": "65639b994efbc043eba05443b9a97f14d6da1f364818f566131746281d0ba946",
+    "windows_pid": 45492,
+    "creation_utc": "2026-10-25T18:52:57.8077558Z",
+    "started_utc": "2026-10-25T18:52:58.2412927Z",
+    "hard_deadline_utc": null,
+    "post_terminal_grace_seconds": 1200,
+    "receipt_file": "C:\\Users\\altf4\\mtgo-training\\pooled-40000-20261025\\recovery1\\linux-terminal.json",
+    "grace_stop_file": "C:\\Users\\altf4\\mtgo-training\\pooled-40000-20261025\\recovery1\\grace-stop-20261025T185258241Z-p45492.stop",
+    "state_history": "C:\\Users\\altf4\\mtgo-training\\pooled-40000-20261025\\recovery1\\pooled-40000-20261025T185258241Z-p45492-state.json",
+    "status": "holding",
+    "phase": "post_terminal_grace",
+    "terminal_received": true,
+    "heartbeat_error": null,
+    "receipt_rejection": null,
+    "utc": "2026-10-25T22:34:46.4597590Z",
+    "terminal_status": "complete",
+    "terminal_receipt_sha256": "41cf04e5c5b4ccdf8d42b98ee16e1cf06de9660be58a43b7bcb8e437e9f54d47",
+    "terminal_coordinator": {
+      "pid": 80187,
+      "pgid": 80187,
+      "sid": 80187,
+      "uid": 1000,
+      "start_ticks": 4961608
+    },
+    "terminal_cleanup": {
+      "coordinator_pid": 80187,
+      "shared_lock_released": true,
+      "cleanup_verified": true,
+      "owned_children_remaining": 0,
+      "owned_process_records_checked": 13,
+      "status": "complete",
+      "cleanup_sha256": "540ae2c1910245397daab1e0f6df0536f1a369d6d3e0c8782af001127b066c94"
+    },
+    "terminal_published_utc": "2026-10-25T22:28:16.6542810Z",
+    "grace_started_utc": "2026-10-25T22:28:18.2066048Z",
+    "grace_until_utc": "2026-10-25T22:48:18.2066048Z"
+  },
+  "owned_process_groups_checked": [
+    35281,
+    37267,
+    63416,
+    80186,
+    80187,
+    80217,
+    99088,
+    102484,
+    163691,
+    166398,
+    285844,
+    288749,
+    293504,
+    298675,
+    303478
+  ],
+  "remaining_owned_processes": [],
+  "shared_lock_free": true,
+  "receipt_cleanup_sha_matches": true,
+  "frozen_source_files_checked": 140,
+  "source_mismatches": []
+}

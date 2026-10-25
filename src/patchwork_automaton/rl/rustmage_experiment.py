@@ -14,9 +14,6 @@ import orjson
 from ..backends.rustmage import RustMageMatch, domain_action
 from ..baselines.foundations import foundations_deck, FoundationsAggro
 from ..baselines.passive import passive_deck, PassivePolicy
-from ..neural.experiment import TrajectoryWriter
-from ..neural.rustmage_policy import RustMagePolicy
-from ..neural.training import terminal_reward
 from ..neural.rustmage_observation import learning_observation
 from ..core import Handle
 from .goldfish import OwnTurnCounter, summarize
@@ -44,6 +41,7 @@ def visible_state_fingerprint(raw):
     Sorting retains the original guard's independence from mapping insertion
     order. Native schema integers fit in 64 bits; no fields are projected away.
     """
+    if hasattr(raw, 'fingerprint'): return raw.fingerprint()
     state = dict(raw)
     state.pop('revision', None)
     return hashlib.sha256(orjson.dumps(state, option=orjson.OPT_SORT_KEYS)).digest()
@@ -54,29 +52,40 @@ def play_game(*, seed, index, mode, model=None, batcher=None, version=0,
               greedy=False, compact_views=True):
     """One worker owns one match; the inference service owns TensorFlow.
 
-    Self-play uses terminal returns only. Cutoffs/errors have no reward and no
-    training trajectories. Evaluation attempts are never replaced by retries.
+    Recorded neural play uses terminal returns only. Cutoffs/errors have no
+    reward or training trajectories. Evaluation with output=None records none.
     """
-    if mode not in ('selfplay','goldfish','baseline','versus_baseline','versus_uniform'):
+    if mode not in ('selfplay','goldfish','baseline','versus_baseline','versus_uniform','demonstrations'):
         raise ValueError('Unknown RustMage experiment mode')
+    # Expert collection needs no TensorFlow, model weights, or inference service.
+    if mode == 'demonstrations':
+        if output is None: raise ValueError('Demonstration output is required')
+        from ..neural.demonstrations import RecordingExpert, DemonstrationWriter
+    elif mode != 'baseline':
+        from ..neural.experiment import TrajectoryWriter
+        from ..neural.rustmage_policy import RustMagePolicy
     async def play():
         started = time.monotonic()
         seat = index % 2
         start = f'P{(index//2)%2}'
         decks = [foundations_deck('red'), foundations_deck('red')]
         if mode in ('goldfish','baseline'): decks[1-seat] = passive_deck()
-        writers, policies, visits = {}, {}, Counter()
+        writers, policies, visits, neural_players = {}, {}, Counter(), set()
         row = dict(seed=seed, index=index, mode=mode, seat=seat, starting_player=start,
                    max_own_turns=max_own_turns, decisions=0, neural_choices=0,
                    status='error', own_turns_to_win=None, trajectories=[])
         try:
             for player in range(2):
-                if mode == 'versus_baseline' and player != seat: policies[player] = FoundationsAggro()
+                if mode == 'demonstrations':
+                    writers[player] = DemonstrationWriter(Path(output)/f'game-{index:05d}-p{player}.pkl.gz')
+                    policies[player] = RecordingExpert(writers[player])
+                elif mode == 'versus_baseline' and player != seat: policies[player] = FoundationsAggro()
                 elif mode == 'versus_uniform' and player != seat: policies[player] = UniformLegalPolicy(seed*2+player)
                 elif mode in ('goldfish','baseline') and player != seat: policies[player] = PassivePolicy()
                 elif mode == 'baseline': policies[player] = FoundationsAggro()
                 else:
-                    if output and mode == 'selfplay':
+                    neural_players.add(player)
+                    if output and mode in ('selfplay','versus_baseline'):
                         writers[player] = TrajectoryWriter(Path(output)/f'game-{index:05d}-p{player}.pkl.gz')
                     policies[player] = RustMagePolicy(model, batcher=batcher, version=version,
                         seed=seed*2+player, sink=writers.get(player), greedy=greedy)
@@ -90,22 +99,27 @@ def play_game(*, seed, index, mode, model=None, batcher=None, version=0,
                              else [await g.snapshot() for g in handles])
                     for p, view in enumerate(views):
                         turns[p].observe(view)
-                        if isinstance(policies[p], RustMagePolicy): policies[p].observe(view)
+                        observer = getattr(policies[p], 'observe', None)
+                        if observer is not None: observer(view)
                     if views[0].terminal:
                         outcome = views[seat].outcome
                         row['status'] = 'draw' if outcome.draw else 'win' if outcome.won else 'loss'
                         row['winner'] = None if outcome.draw else seat if outcome.won else 1-seat
                         row['own_turns_to_win'] = turns[seat].turns if row['status'] == 'win' else None
-                        row['terminal_rewards'] = [terminal_reward(v.outcome) for v in views]
+                        if mode != 'demonstrations':
+                            from ..neural.training import terminal_reward
+                            row['terminal_rewards'] = [terminal_reward(v.outcome) for v in views]
                         for p, writer in writers.items():
                             if writer.count:
-                                row['trajectories'].append(dict(path=str(writer.path), samples=writer.count,
-                                    reward=terminal_reward(views[p].outcome)))
+                                descriptor = dict(path=str(writer.path), samples=writer.count)
+                                if mode != 'demonstrations': descriptor['reward'] = row['terminal_rewards'][p]
+                                if mode == 'versus_baseline': descriptor['player'] = p
+                                row['trajectories'].append(descriptor)
                         break
                     # A horizon is an evaluation/compute cutoff, never a fabricated
                     # loss or draw and never a turn-based training reward.
                     if step == max_decisions or (min(t.turns for t in turns) > max_own_turns
-                            if mode in ('selfplay','versus_baseline','versus_uniform') else turns[seat].turns > max_own_turns):
+                            if mode in ('selfplay','versus_baseline','versus_uniform','demonstrations') else turns[seat].turns > max_own_turns):
                         row.update(status='cutoff', reason='decision_or_turn_limit')
                         break
                     p = next(p for p, v in enumerate(views) if v.decision is not None)
@@ -119,7 +133,7 @@ def play_game(*, seed, index, mode, model=None, batcher=None, version=0,
                         if visits[(p,key)] > repeat_limit:
                             row.update(status='cutoff', reason='repeated_visible_state'); break
                     policy = policies[p]
-                    if isinstance(policy, RustMagePolicy):
+                    if p in neural_players:
                         action = policy.act(view)
                         row['neural_choices'] += bool(action.selections)
                         response = action.response

@@ -35,22 +35,26 @@ def split_games(games, *, fraction=.2, seed=0, round_id=0):
         training=counts(train), validation=counts(heldout))
 
 
-def training_normalization(games, scale_floor):
+def training_normalization(games, scale_floor, *, advantage_baseline='critic'):
     """Exactly the PPO normalization, using training decisions exclusively."""
+    if advantage_baseline not in ('critic','zero'):
+        raise ValueError('Unknown actor advantage baseline')
     from .experiment import read_trajectory
     selected = []
     for game in games:
         for trajectory in game.get('trajectories', ()):
             for sample in read_trajectory(trajectory['path']):
                 if np.count_nonzero(sample.arrays['candidate_mask']) > 1:
-                    selected.append(trajectory['reward']-sample.value)
+                    selected.append(trajectory['reward']-(sample.value if advantage_baseline == 'critic' else 0.))
     values = np.asarray(selected, np.float32)
     if not len(values):
-        return dict(center=0., scale=1., training_choices=0, source='training_partition_only')
+        return dict(center=0., scale=1., training_choices=0, source='training_partition_only',
+                    advantage_baseline=advantage_baseline)
     std = float(values.std())
     return dict(center=float(values.mean()) if std > 1e-8 else 0.,
                 scale=max(std, scale_floor) if std > 1e-8 else 1.,
-                training_choices=len(values), source='training_partition_only')
+                training_choices=len(values), source='training_partition_only',
+                advantage_baseline=advantage_baseline)
 
 
 def bootstrap_mean(rows, numerator, denominator, *, seed=1701, resamples=4000):
@@ -67,12 +71,15 @@ def bootstrap_mean(rows, numerator, denominator, *, seed=1701, resamples=4000):
 
 
 class GameValidator:
-    def __init__(self, model, *, batch_size=32, clip_ratio=.2):
+    def __init__(self, model, *, batch_size=32, clip_ratio=.2, advantage_baseline='critic'):
         import tensorflow as tf
         from .batching import example_batch, input_signature
         if batch_size < 1 or not 0 < clip_ratio < 1:
             raise ValueError('Invalid validation batch size or clipping ratio')
+        if advantage_baseline not in ('critic','zero'):
+            raise ValueError('Unknown actor advantage baseline')
         self.model, self.batch_size, self.clip_ratio = model, batch_size, clip_ratio
+        self.advantage_baseline = advantage_baseline
         @tf.function(input_signature=[input_signature(example_batch(model.memory_size, model.feature_spec))], autograph=False)
         def forward(inputs):
             output = model(inputs, training=False)
@@ -85,6 +92,8 @@ class GameValidator:
         from .ppo import value_prediction_diagnostics
         if normalization['scale'] <= 0:
             raise ValueError('Positive normalization scale required')
+        if normalization.get('advantage_baseline', self.advantage_baseline) != self.advantage_baseline:
+            raise ValueError('Validation and normalization advantage baselines must match')
         rows = {g['index']:dict(index=g['index'], seed=g['seed'], samples=0, choices=0,
             value_samples=0, value_squared_error=0., behavior_value_squared_error=0.,
             value_error_change=0., policy_surrogate_gain=0., return_surrogate_gain=0.,
@@ -134,7 +143,8 @@ class GameValidator:
                     if np.count_nonzero(mask) > 1:
                         new = logp[j,:len(old)].astype(np.float64)
                         ratio = float(np.exp(new[record.action]-old[record.action]))
-                        advantage = (reward-record.value-normalization['center'])/normalization['scale']
+                        baseline = record.value if self.advantage_baseline == 'critic' else 0.
+                        advantage = (reward-baseline-normalization['center'])/normalization['scale']
                         clipped = np.clip(ratio,1-self.clip_ratio,1+self.clip_ratio)
                         gain = min(ratio*advantage,clipped*advantage)-advantage
                         kl = max(0., float(np.sum(np.exp(old)*(old-new))))
@@ -149,6 +159,7 @@ class GameValidator:
         return dict(scope='Frozen recorded observations/actions; terminal targets only. Policy surrogate gains are not win rates.',
             recurrent_states='replayed from zero with current weights' if replay else 'frozen behavior states',
             attempted_games=len(games), terminal_games=len(rows), normalization=normalization,
+            advantage_baseline=self.advantage_baseline,
             value_before=value_prediction_diagnostics(targets,before,valid),
             value_after=value_prediction_diagnostics(targets,after,valid),
             value_mse=bootstrap_mean(rows,'value_squared_error','value_samples'),
