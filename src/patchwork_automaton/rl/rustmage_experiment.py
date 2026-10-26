@@ -48,6 +48,7 @@ def visible_state_fingerprint(raw):
 
 
 def play_game(*, seed, index, mode, model=None, batcher=None, version=0,
+              opponent_model=None, opponent_batcher=None, opponent_version=0,
               output=None, max_decisions=6000, max_own_turns=60, repeat_limit=20,
               greedy=False, compact_views=True):
     """One worker owns one match; the inference service owns TensorFlow.
@@ -55,8 +56,13 @@ def play_game(*, seed, index, mode, model=None, batcher=None, version=0,
     Recorded neural play uses terminal returns only. Cutoffs/errors have no
     reward or training trajectories. Evaluation with output=None records none.
     """
-    if mode not in ('selfplay','goldfish','baseline','versus_baseline','versus_uniform','demonstrations'):
+    if mode not in ('selfplay','goldfish','baseline','versus_baseline','versus_uniform','demonstrations','versus_neural'):
         raise ValueError('Unknown RustMage experiment mode')
+    if mode == 'versus_neural':
+        if opponent_model is None or opponent_batcher is None:
+            raise ValueError('Head-to-head evaluation requires a separate frozen opponent')
+        if output is not None:
+            raise ValueError('Head-to-head evaluation cannot write training trajectories')
     # Expert collection needs no TensorFlow, model weights, or inference service.
     if mode == 'demonstrations':
         if output is None: raise ValueError('Demonstration output is required')
@@ -87,7 +93,10 @@ def play_game(*, seed, index, mode, model=None, batcher=None, version=0,
                     neural_players.add(player)
                     if output and mode in ('selfplay','versus_baseline'):
                         writers[player] = TrajectoryWriter(Path(output)/f'game-{index:05d}-p{player}.pkl.gz')
-                    policies[player] = RustMagePolicy(model, batcher=batcher, version=version,
+                    opponent = mode == 'versus_neural' and player != seat
+                    policies[player] = RustMagePolicy(opponent_model if opponent else model,
+                        batcher=opponent_batcher if opponent else batcher,
+                        version=opponent_version if opponent else version,
                         seed=seed*2+player, sink=writers.get(player), greedy=greedy)
             with RustMageMatch(*decks, seed=seed, starting_player=start) as match:
                 handles = [match.games[f'player_{p}'] for p in range(2)]
@@ -119,7 +128,7 @@ def play_game(*, seed, index, mode, model=None, batcher=None, version=0,
                     # A horizon is an evaluation/compute cutoff, never a fabricated
                     # loss or draw and never a turn-based training reward.
                     if step == max_decisions or (min(t.turns for t in turns) > max_own_turns
-                            if mode in ('selfplay','versus_baseline','versus_uniform','demonstrations') else turns[seat].turns > max_own_turns):
+                            if mode in ('selfplay','versus_baseline','versus_uniform','demonstrations','versus_neural') else turns[seat].turns > max_own_turns):
                         row.update(status='cutoff', reason='decision_or_turn_limit')
                         break
                     p = next(p for p, v in enumerate(views) if v.decision is not None)

@@ -1,0 +1,287 @@
+{
+  "run_id": "raytracer-continuation-100000-2026-10-26",
+  "status": "running",
+  "created_utc": "2026-10-26T18:32:46.533669+00:00",
+  "authorization": {
+    "starting_games": 40000,
+    "target_games": 100000,
+    "additional_training_attempts": 60000,
+    "all_game_generation": "Raytracer",
+    "laptop_producer": false,
+    "elapsed_time_hard_stop": false,
+    "original_source_preserved": true,
+    "model_and_rl_settings_unchanged": true,
+    "older_checkpoint_head_to_head_requested": true
+  },
+  "source": {
+    "optimization_commit": "6c3f5be",
+    "source_training": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/raytracer-pooled-40000-2026-10-25/training",
+    "source_round": 40,
+    "policy_sha256": "6e8919de5af6f9ec651b88da228745d9fc525d4286c7393958c9f188dd203ce2",
+    "actor_optimizer_steps": 13289,
+    "critic_optimizer_steps": 6437,
+    "continuation": "Resume model, both Adam states, PCG64 and complete training history; do not initialize or repeat critic warm-up",
+    "only_learning_config_migration": "pooled_collector_config becomes null on a separate copied training tree"
+  },
+  "design": {
+    "seed": 300261025,
+    "one_continued_training_seed": true,
+    "rounds": 100,
+    "additional_rounds": 60,
+    "attempts_per_round": 1000,
+    "workers": 48,
+    "inference_processes": 4,
+    "learner_device": "gpu",
+    "inference_device": "cpu",
+    "validation_device": "cpu",
+    "train_batch": 512,
+    "optimization_games_per_round": 800,
+    "whole_game_holdout_per_round": 200,
+    "runtime_options": {
+      "learner_gru_backend": "cudnn-memory",
+      "update_pipeline": "gpu",
+      "policy_cache_mib": 8192,
+      "actor_epoch_cache_mib": 8192
+    },
+    "monitoring": {
+      "rounds": [
+        50,
+        60,
+        70,
+        80,
+        90,
+        100
+      ],
+      "seed": 320261025,
+      "games_each": 2000,
+      "purpose": "Shared open monitoring cohort; no checkpoint selection or hyperparameter changes"
+    },
+    "confirmation": {
+      "policies": [
+        "round-40",
+        "round-100"
+      ],
+      "seed": 450261026,
+      "games_each": 10000,
+      "primary": "100k minus 40k recorded wins against active baseline on matched schedules"
+    },
+    "head_to_head": {
+      "focal": "round-100",
+      "opponents": [
+        "imitation",
+        "round-10",
+        "round-20",
+        "round-40",
+        "round-60",
+        "round-80"
+      ],
+      "seed": 460261026,
+      "games_each": 5000,
+      "actual_neural_opponents": true,
+      "sampled_temperature": 1,
+      "balanced_seats_and_starting_player": true
+    },
+    "preflight": {
+      "games": 8,
+      "seed": 470261026,
+      "focal": "round-40",
+      "opponent": "round-10",
+      "all_games_on_raytracer": true,
+      "before_training": true
+    },
+    "passive_cli_endpoint_evaluations": {
+      "games_each": 200,
+      "segments": 7,
+      "total": 1400
+    },
+    "finite_new_physical_game_inventory_without_retries": 123408,
+    "finite_new_training_game_inventory": 60000,
+    "final_cohorts_sealed_until_100k": true
+  },
+  "paths": {
+    "local_evidence": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/continuation-100000-20261026",
+    "remote_runtime": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/continuation-100000-20261026-runtime",
+    "remote_output": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/raytracer-continuation-100000-2026-10-26",
+    "remote_deployment": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/continuation-100000-20261026-deployment",
+    "remote_shared_lock": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/raytracer-training-20261024.lock",
+    "local_backup": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/continuation-100000-20261026/live-backup",
+    "graphs": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/continuation-100000-20261026/graphs"
+  },
+  "limitations": [
+    "One continued training seed; game-level confidence intervals do not measure training-seed variability.",
+    "More games also mean more update rounds and optimizer steps, so this does not isolate sample count from optimization exposure.",
+    "Baseline training and confirmation retain the fixed deck/opponent setting.",
+    "Head-to-head opponents share schedules but are different comparisons; do not pool them as independent cohorts.",
+    "Report all scheduled attempts, draws, cutoffs and errors; unresolved outcomes are unknown rather than invented losses or draws.",
+    "Validated fused/cache arithmetic need not produce bitwise-identical future training trajectories."
+  ],
+  "updated_utc": "2026-10-26T18:40:23.862702+00:00",
+  "pins": {
+    "source_manifest_sha256": "fea0d4d3224c2a6d6cb78a9d38b6665d350289939f2d245d95a346c5910995e8",
+    "runtime_files": 150,
+    "study_manifest_sha256": "a7fb63c4957193ed6cfac1b7be1dbe5ce30dbc315790c7149187b54d68307ce5",
+    "deployment_sha256": "b056ecc386f65fd8fc9f6e70434c6ac59ab38a681e6b33194b8a1302db5868d1",
+    "coordinator_sha256": "d57b0351f68543ae4e1a34c897ec7b0a30f909a7e738f2355b23b66624dcf5a7",
+    "native_manifest_sha256": "4ba184bc00658c9f9a68306a16c452a29a374aefcc9cf4813ad537dbb1825046"
+  },
+  "native_guardian": {
+    "task": "MTGO-RustMage-Continuation-100000-20261026",
+    "owner": {
+      "windows_pid": 16496,
+      "creation_utc": "2026-10-26T18:28:00.1804135Z"
+    },
+    "elapsed_time_limit": "unlimited",
+    "terminal_receipt_required": true,
+    "post_terminal_awake_grace_seconds": 1200,
+    "independent_day_guard_untouched": true,
+    "shutdown_on_completion": false
+  },
+  "review_evidence": {
+    "source-checkpoint-review.json": "91bdc3542b6f02920a3453ac5a11064ecf5400c839804c791004f1d0ae5b6525",
+    "cohort-freshness-review.json": "6af207b15ca2bdae68dbb0431c6e682407aa98d2af12b778c779a71c4acbb616",
+    "coordinator-independent-review.json": "23ec902b5e65a4128fa7985d1e6808dc53814dc21ba6f0376cec7dd342280b26",
+    "duel-independent-review.json": "a7c2b8f525eedf47a10a1cbd7763dce130e3df8be05d1a05d0de6522a80c50b2",
+    "predeployment-review.json": "b02eb8ba7ccf18a9f5c17cb2baf8002a76da3e82fdc732cfcb146b5c5319d7c7",
+    "final-handoff-review.json": "0790a596def71a9bef9ed99fb91f8f9c5927563654279abbe7cef849afbdcd10",
+    "final-bound-handoff-review.json": "378d1b75a4729f99d92577f032af7230c6801281661c5ed8a25f0579800e0f49",
+    "backup-only-independent-review.json": "1d8c8262fda3670b9d82137b50f216e81fc6986f38d368d4460a6e16998ccc4e",
+    "initial-backup-independent-audit.json": "a00af9b10df61715e24dd64f254d8b7abebc3106b175b104c1e4ab36465f84cb",
+    "canary-backup-independent-audit.json": "efb0aeeec19122379e7124831923b5e732a7ce1f5cf9d2fa4e3f7d9c1a7c34cf",
+    "first-round-independent-audit.json": "cea9bf21c75ccc6917347d3189f91701a192c87c1ad1782ff0f8083095768b4d"
+  },
+  "deployment_proof": {
+    "status": "deployed_not_started",
+    "runtime": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/continuation-100000-20261026-runtime",
+    "deployment": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/continuation-100000-20261026-deployment",
+    "source_files": 150,
+    "source_manifest_sha256": "fea0d4d3224c2a6d6cb78a9d38b6665d350289939f2d245d95a346c5910995e8",
+    "archive_sha256": "4aa45e104aafb0244fdfccfc786e3806d30c6d6481c70a7c7fec98082962520b"
+  },
+  "handoff_proof": {
+    "status": "handoff_bound_not_started",
+    "native_owner": {
+      "windows_pid": 16496,
+      "creation_utc": "2026-10-26T18:28:00.1804135Z"
+    },
+    "study_manifest_sha256": "a7fb63c4957193ed6cfac1b7be1dbe5ce30dbc315790c7149187b54d68307ce5",
+    "deployment_sha256": "b056ecc386f65fd8fc9f6e70434c6ac59ab38a681e6b33194b8a1302db5868d1",
+    "files_verified": 6,
+    "runtime_files_verified": 150,
+    "native_age_seconds": 2.0228071212768555
+  },
+  "launch": {
+    "started_utc": "2026-10-26T18:32:26.466948+00:00",
+    "owner": {
+      "pid": 34090,
+      "uid": 1000,
+      "pgid": 34090,
+      "sid": 34090,
+      "start_ticks": 2579537
+    },
+    "native_owner": {
+      "windows_pid": 16496,
+      "creation_utc": "2026-10-26T18:28:00.1804135Z"
+    },
+    "native_manifest_sha256": "4ba184bc00658c9f9a68306a16c452a29a374aefcc9cf4813ad537dbb1825046",
+    "study_manifest_sha256": "a7fb63c4957193ed6cfac1b7be1dbe5ce30dbc315790c7149187b54d68307ce5",
+    "deployment_sha256": "b056ecc386f65fd8fc9f6e70434c6ac59ab38a681e6b33194b8a1302db5868d1",
+    "source_round": 40,
+    "target_round": 100,
+    "additional_training_games": 60000,
+    "laptop_game_generation": false,
+    "stdout": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/continuation-100000-20261026-deployment/coordinator.log",
+    "detached": true
+  },
+  "latest_oversight_evidence": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/continuation-100000-20261026/oversight-20261026T1840Z.json",
+  "progress": {
+    "utc": "2026-10-26T18:39:51.836801+00:00",
+    "study_status": "running",
+    "committed_checkpoint": {
+      "checkpoint": "round-0042"
+    },
+    "coordinator_exact": true,
+    "lock_free": false,
+    "milestones": {
+      "41": {
+        "completed_utc": "2026-10-26T18:36:25.507130+00:00",
+        "games": 41000,
+        "added_games": 1000,
+        "continuation_raytracer_games": 1000,
+        "continuation_laptop_games": 0,
+        "actor_optimizer_steps": 13627,
+        "critic_optimizer_steps": 6594,
+        "monitoring_summary": null
+      }
+    },
+    "native": {
+      "utc": "2026-10-26T18:39:51.3648695Z",
+      "windows_pid": 16496,
+      "creation_utc": "2026-10-26T18:28:00.1804135Z",
+      "status": "holding",
+      "phase": "awaiting_terminal_receipt",
+      "terminal_received": false,
+      "heartbeat_error": null,
+      "receipt_rejection": null
+    }
+  },
+  "laptop_backup_observer": {
+    "owner": {
+      "pid": 3739344,
+      "start_ticks": 52906808,
+      "uid": 1000,
+      "pgid": 3739344,
+      "sid": 3739344
+    },
+    "started_utc": "2026-10-26T18:33:01.109640+00:00",
+    "supervisor_sha256": "0689ac37a7aa641845269b3f25e1ed7cafdb4b4c75718afd3b31cc0539080217",
+    "config_sha256": "dbf0f57fd3718ed5e1b52243971fb688ee2ef90236937ed12f4b6b5bed0efbb0",
+    "tooling_manifest_sha256": "f7543dbc1f0c0ef6c492a69298b4018cf194fe99c6911c17a0a978c091fd5af5",
+    "log": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/continuation-100000-20261026/backup-only-20261026T183301.108660Z.log",
+    "role": "backup_and_plots_only",
+    "no_game_producer": true,
+    "remote_training_dependency": false,
+    "temporary_laptop_sleep_guard": false
+  },
+  "backup_status": {
+    "status": "running",
+    "highest_verified_round": 42,
+    "failure_count_consecutive": 0,
+    "last_error": null,
+    "verified_archive_count": 3,
+    "last_verified_backup": {
+      "finished_utc": "2026-10-26T18:39:58.914794+00:00",
+      "archive": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/continuation-100000-20261026/live-backup/archives/20261026T183949.399185Z-p3739344.tar.gz",
+      "archive_sha256": "38096948cdbc55bae08514c4c97c7d9ac2b6c10a1ecad150c46233f83591c2f2",
+      "latest_round": 42,
+      "included_checkpoint_rounds": [
+        42
+      ],
+      "receipt": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/continuation-100000-20261026/live-backup/receipts/20261026T183949.399185Z-p3739344.json"
+    }
+  },
+  "first_production_round": {
+    "round": 41,
+    "total_games": 41000,
+    "all_new_games_on_raytracer": true,
+    "outcomes": {
+      "win": 567,
+      "loss": 433
+    },
+    "collection_seconds": 50.507889958000305,
+    "update_seconds": 90.91138560599939,
+    "validation_seconds": 36.04342856299991,
+    "actor_optimizer_steps": 13627,
+    "critic_optimizer_steps": 6594,
+    "independent_checks": 435,
+    "audit_sha256": "cea9bf21c75ccc6917347d3189f91701a192c87c1ad1782ff0f8083095768b4d",
+    "resource_samples_sha256": "27bc11ddac744e85b0378607fc24a822e9fbb10980d482eeb7a00d52f2533a03",
+    "max_sampled_physical_vram_mib": 22215,
+    "memory_note": "Transient paging during the first update; pressure decayed and available guest RAM returned to about 14 GiB after the trainer exited. Continue monitoring subsequent segments."
+  },
+  "oversight": {
+    "automation_id": "oversee-raytracer-100k-continuation",
+    "cadence_minutes": 15,
+    "notification_policy": "Meaningful failure, recovery or completion only",
+    "no_time_based_training_stop": true
+  }
+}
