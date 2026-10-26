@@ -11,6 +11,22 @@ import keras
 from .batching import example_batch, input_signature
 
 
+def _assert_finite_gradients(gradients, message):
+    """Reduce on-device and transfer one validity flag, never gradient arrays.
+
+    The returned token must guard the *whole* optimizer call: Adam's slot and
+    iteration writes must wait even when they do not consume a gradient value.
+    Empty gradients are finite, matching assert_all_finite's behavior.
+    """
+    flags = [tf.reduce_all(tf.math.is_finite(gradient)) for gradient in gradients]
+    finite = tf.reduce_all(tf.stack(flags)) if flags else tf.constant(True)
+    assertion = tf.raw_ops.Assert(condition=finite, data=[message], summarize=1)
+    # Eager assertions execute immediately and return None; graph assertions
+    # need an explicit edge so none of the optimizer writes can race failure.
+    with tf.control_dependencies([] if assertion is None else [assertion]):
+        return tf.identity(finite)
+
+
 def clipped_surrogate(log_probability, old_log_probability, advantage, clip_ratio):
     ratio = tf.exp(log_probability - old_log_probability)
     return tf.minimum(ratio * advantage,
@@ -196,10 +212,9 @@ class PPOTrainer:
         gradients = tape.gradient(loss, self.actor_variables)
         gradients = [tf.zeros_like(v) if g is None else tf.convert_to_tensor(g)
                      for g, v in zip(gradients, self.actor_variables)]
-        for gradient in gradients:
-            tf.debugging.assert_all_finite(gradient, 'Nonfinite PPO gradient')
-        gradients, norm = tf.clip_by_global_norm(gradients, self.clip_norm)
-        self.optimizer.apply_gradients(zip(gradients, self.actor_variables))
+        with tf.control_dependencies([_assert_finite_gradients(gradients, 'Nonfinite PPO gradient')]):
+            gradients, norm = tf.clip_by_global_norm(gradients, self.clip_norm)
+            self.optimizer.apply_gradients(zip(gradients, self.actor_variables))
         return norm
 
     def _critic_step(self, inputs, returns):
@@ -211,9 +226,9 @@ class PPOTrainer:
                      else self.model.critic.trainable_variables)
         gradients = tape.gradient(loss, variables)
         gradients = [tf.zeros_like(v) if g is None else tf.convert_to_tensor(g) for g, v in zip(gradients, variables)]
-        for gradient in gradients: tf.debugging.assert_all_finite(gradient, 'Nonfinite critic gradient')
-        gradients, norm = tf.clip_by_global_norm(gradients, self.clip_norm)
-        self.critic_optimizer.apply_gradients(zip(gradients, variables))
+        with tf.control_dependencies([_assert_finite_gradients(gradients, 'Nonfinite critic gradient')]):
+            gradients, norm = tf.clip_by_global_norm(gradients, self.clip_norm)
+            self.critic_optimizer.apply_gradients(zip(gradients, variables))
         return norm
 
     def fit_critic(self, batches):

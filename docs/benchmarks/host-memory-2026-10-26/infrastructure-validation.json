@@ -1,0 +1,51 @@
+{
+  "status": "passed",
+  "frozen": true,
+  "frozen_utc": "2026-10-26T17:18:43.368303+00:00",
+  "no_deploy_or_launch_performed": true,
+  "compile_passed": true,
+  "local_infrastructure_fixture_tests_passed": 6,
+  "fixture_log_sha256": "e1724a9e2915dc40b5bd3411a5153e8f6f1ebc82a147b7cd97a78cd2af1f682a",
+  "script_sha256": {
+    "coordinator.py": "ba6880594325fd550c64d030860ab731e0ebbd6d5c38a2413dbd43ce2906daac",
+    "remote_tools.py": "edced2948c5bf791d90d5697e1a9a691cafc6a6ed561366227911fe2ca6a09f0",
+    "deploy.py": "a40b7976b5005f7d87ed421713036585225d268373f8ce513fc3b6bb98553682",
+    "start.py": "49420598ca4086e5b1005cb653bcba52126fd05a315e62e13af07ec8d038affd",
+    "status.py": "2f863e4f335298a3df0c4c7cc50d946cae72c64784dea3d289c9c24485f0683a",
+    "pull.py": "673b545bac19171001c00b89e68866449dfd653880c271dd97bafd87e9ad7df8",
+    "cleanup-linux.py": "6b61dc6fa4f000a66f179dc6b57e8a384b1a55a8e71f30ecfc20dcaf6be058fa",
+    "audit-cleanup.py": "9a8e7c9a30bb528a6869d98aeadd1b04448793309fbfc030e3f0dff0a70ba183",
+    "infrastructure-fixtures.py": "3dc22cc7d8aa97ccf81e259757edea2e41c709b10f3bfba1f57b01781314693f"
+  },
+  "case": {
+    "run_id": "host-memory-20261026",
+    "runtime": "runtime-host-memory",
+    "wrapper": "examples/benchmark_host_memory.py",
+    "arguments": [
+      "--source",
+      "--output"
+    ],
+    "output": "results/host-memory",
+    "rounds": [
+      36,
+      37,
+      38,
+      39,
+      40
+    ],
+    "checkpoint_round": 35,
+    "timeout_seconds": 2700
+  },
+  "validation_coverage": [
+    "Exact process identities reject reused PIDs and include descendants after leader exits",
+    "One inherited exclusive same-inode flock remains held after launcher exits and through cleanup/hash checks",
+    "Finite driver emits five state NPZs, immutable original140/base139/source205 hashes protected",
+    "Unrelated GPU occupancy refuses new child without signaling it",
+    "Backup validates five NPZ ZIP CRCs, gzip CRC, all JSON, JSONL lines and XML",
+    "Invalid XML, malformed JSONL, truncated gzip and traversal archive rejected; partial bytes preserved"
+  ],
+  "notes": [
+    "Root owns prepare/manifest/local inhibitor; independent reviewer must bind final manifest and driver hash before launch",
+    "No ML source, SSH, services, persistent power settings, old sources or outputs changed"
+  ]
+}

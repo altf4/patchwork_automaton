@@ -1,0 +1,1075 @@
+{
+  "status": "complete",
+  "scope": "Fused cuDNN GRUs only; same architecture, weights, FP32, batch512 and complete PPO configuration. No new games or checkpoint promotion.",
+  "source_study": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/raytracer-pooled-40000-2026-10-25",
+  "source_round": 40,
+  "source_checkpoint": 39,
+  "training_games": 800,
+  "heldout_games_excluded": 200,
+  "settings_overrides": {},
+  "plan": [
+    "GPU output/gradient parity at batch512 on three real frozen training batches and empty-row edge case",
+    "unfused,cuDNN,cuDNN,unfused full update replays from checkpoint39 on original round40 training partition"
+  ],
+  "tolerances": {
+    "outputs": {
+      "atol": 2e-05,
+      "rtol": 0.0002
+    },
+    "gradients": {
+      "atol": 2e-05,
+      "rtol": 0.002
+    },
+    "gradient_global_relative_l2": 0.001
+  },
+  "local_base": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/fused-gru-20261025",
+  "remote_phase": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/fused-gru-20261025-v2",
+  "manifest_sha256": "9a1ac79be3369fab0fe0be19fdf97572053aef3481316f8c65c01a2d55236622",
+  "initial_diagnostic": {
+    "status": "failed",
+    "full_updates_started": 0,
+    "cause": "Persistent-tape repeated backward traversals from one cuDNN forward produced incorrect derivative diagnostics. Tiny reproduction retained; fixed diagnostic collects every derivative in one backward traversal.",
+    "path": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/fused-gru-20261025/first-parity-status.txt"
+  },
+  "candidate_default": "Opt-in runtime backend; existing checkpoints and default CPU/unfused loading preserved.",
+  "started_utc": "2026-10-26T03:49:38.530489+00:00",
+  "parity_result": {
+    "status": "passed",
+    "sources_unchanged": true,
+    "weights_unchanged": true,
+    "cases": [
+      {
+        "label": "real-0",
+        "outputs_max_abs": {
+          "logits": 8.58306884765625e-06,
+          "probabilities": 8.940696716308594e-07,
+          "actor_memory": 2.980232238769531e-07,
+          "value": 2.5331974029541016e-07,
+          "critic_memory": 3.427267074584961e-07,
+          "actor_loss": 2.9802322387695312e-08,
+          "critic_loss": 0.0
+        },
+        "gradient_global_relative_l2": {
+          "actor_weights": 9.161444327798158e-06,
+          "critic_weights": 1.1974737721666315e-07,
+          "actor_inputs": 3.0914983214190334e-07,
+          "critic_inputs": 1.9853559054180322e-07
+        },
+        "gradient_max_abs": {
+          "actor_weights": 3.993045538663864e-08,
+          "critic_weights": 1.7881393432617188e-07,
+          "actor_inputs": 4.190951585769653e-09,
+          "critic_inputs": 9.313225746154785e-09
+        }
+      },
+      {
+        "label": "real-266",
+        "outputs_max_abs": {
+          "logits": 1.2874603271484375e-05,
+          "probabilities": 1.3113021850585938e-06,
+          "actor_memory": 3.2782554626464844e-07,
+          "value": 3.5762786865234375e-07,
+          "critic_memory": 4.6193599700927734e-07,
+          "actor_loss": 2.9802322387695312e-08,
+          "critic_loss": 0.0
+        },
+        "gradient_global_relative_l2": {
+          "actor_weights": 3.859497651631378e-06,
+          "critic_weights": 1.3475145799187294e-07,
+          "actor_inputs": 3.7108723234428267e-07,
+          "critic_inputs": 2.490596212242983e-07
+        },
+        "gradient_max_abs": {
+          "actor_weights": 1.280568540096283e-08,
+          "critic_weights": 4.76837158203125e-07,
+          "actor_inputs": 5.587935447692871e-09,
+          "critic_inputs": 2.0489096641540527e-08
+        }
+      },
+      {
+        "label": "real-533",
+        "outputs_max_abs": {
+          "logits": 1.33514404296875e-05,
+          "probabilities": 9.5367431640625e-07,
+          "actor_memory": 2.980232238769531e-07,
+          "value": 4.023313522338867e-07,
+          "critic_memory": 3.5762786865234375e-07,
+          "actor_loss": 0.0,
+          "critic_loss": 0.0
+        },
+        "gradient_global_relative_l2": {
+          "actor_weights": 1.099776042304327e-06,
+          "critic_weights": 1.087798855902268e-07,
+          "actor_inputs": 7.587128722140516e-07,
+          "critic_inputs": 2.474602147067165e-07
+        },
+        "gradient_max_abs": {
+          "actor_weights": 2.6106135919690132e-08,
+          "critic_weights": 2.5331974029541016e-07,
+          "actor_inputs": 2.9802322387695312e-08,
+          "critic_inputs": 2.0489096641540527e-08
+        }
+      },
+      {
+        "label": "all-empty-mixed-advance",
+        "outputs_max_abs": {
+          "logits": 4.0531158447265625e-06,
+          "probabilities": 9.5367431640625e-07,
+          "actor_memory": 2.086162567138672e-07,
+          "value": 1.7881393432617188e-07,
+          "critic_memory": 1.7881393432617188e-07,
+          "actor_loss": 1.4901161193847656e-08,
+          "critic_loss": 5.960464477539063e-08
+        },
+        "gradient_global_relative_l2": {
+          "actor_weights": 4.068803984471722e-07,
+          "critic_weights": 1.2939305829683772e-07,
+          "actor_inputs": 3.557228919415e-07,
+          "critic_inputs": 1.124954511366135e-07
+        },
+        "gradient_max_abs": {
+          "actor_weights": 8.614733815193176e-09,
+          "critic_weights": 1.7881393432617188e-07,
+          "actor_inputs": 6.51925802230835e-09,
+          "critic_inputs": 9.313225746154785e-09
+        }
+      }
+    ]
+  },
+  "progress": {
+    "status": "complete",
+    "replays": 6,
+    "gpu_parity_cases": 8,
+    "layer_timing_cases": 48,
+    "no_new_games": true
+  },
+  "versions": {
+    "tensorflow": "2.21.0",
+    "keras": "3.15.1",
+    "numpy": "2.5.4",
+    "python": "3.12.14",
+    "kernel": "6.18.54.1-microsoft-standard-WSL2"
+  },
+  "local_validation": {
+    "neural_tests": 11,
+    "update_pipeline_tests": 4,
+    "fused_mask_and_checkpoint_tests": 2,
+    "prompt_memory_tests": 7,
+    "total_passed": 24,
+    "py_compile": "passed",
+    "diff_check": "passed"
+  },
+  "source_files": {
+    "src/patchwork_automaton/neural/model.py": "2e53f68f5c0988a796d84f60ac3cdea7eeb546fb178f0cce3cfaa34c8bc56142",
+    "src/patchwork_automaton/neural/recurrent.py": "2a0bb56f55a8c9b977f40e29cf73c15d8cd6690b947bd50864aacf475f097b21",
+    "examples/benchmark_fused_gru.py": "b0af040c043df638e9fce55d179f41b941ae26bb6882c4608fe0e394ce0cc9b2",
+    "examples/benchmark_fused_gru_update.py": "3847ad5f84d1b99aa58e6a687d6c9cc14d21124b11c4cfeadc6531dde35b852e",
+    "examples/benchmark_gru_layers.py": "6d4727b4b8064e8a1dcd17e10d8d61d4e86ef346253ebf84973c982f7438fafd",
+    "tests/test_fused_gru.py": "9d1d4ebd2efb6d604bc5296fe9fa5050e6e5bda63fc8a1d941302fa0b7683fae"
+  },
+  "all_gru_results": {
+    "status": "complete",
+    "scope": "One frozen full update; 2 replays per backend, ABBA order. No new games or policy promotion.",
+    "cases": [
+      {
+        "label": "1-unfused",
+        "backend": "unfused",
+        "update_seconds": 378.429584816,
+        "process_cpu_seconds": 644.531091165,
+        "gpu_activity_mean_percent": 33.297476759628154,
+        "counters": {
+          "samples": 85199,
+          "accepted_steps": 334,
+          "rejected_epochs": 9,
+          "critic_steps": 157,
+          "optimizer_steps": 13289,
+          "critic_optimizer_steps": 6437
+        },
+        "metrics": {
+          "loss": 0.20096289800957634,
+          "exact_kl": 3.641025888086691e-05,
+          "max_state_kl": 0.4925704002380371,
+          "value_loss": 0.4044965896215677,
+          "entropy": 0.11952337519365064,
+          "gradient_norm": 0.14247773587703705,
+          "critic_gradient_norm": 4.949487209320068
+        }
+      },
+      {
+        "label": "2-cudnn",
+        "backend": "cudnn",
+        "update_seconds": 421.42482150500007,
+        "process_cpu_seconds": 368.293794685,
+        "gpu_activity_mean_percent": 65.41120381406436,
+        "counters": {
+          "samples": 85199,
+          "accepted_steps": 334,
+          "rejected_epochs": 8,
+          "critic_steps": 157,
+          "optimizer_steps": 13289,
+          "critic_optimizer_steps": 6437
+        },
+        "metrics": {
+          "loss": 0.20090368086118923,
+          "exact_kl": 4.273751197123908e-05,
+          "max_state_kl": 0.4765707850456238,
+          "value_loss": 0.40440917205561805,
+          "entropy": 0.11963317181482302,
+          "gradient_norm": 0.14381961524486542,
+          "critic_gradient_norm": 4.935375213623047
+        }
+      },
+      {
+        "label": "3-cudnn",
+        "backend": "cudnn",
+        "update_seconds": 459.604092561,
+        "process_cpu_seconds": 399.914008495,
+        "gpu_activity_mean_percent": 65.08424507658643,
+        "counters": {
+          "samples": 85199,
+          "accepted_steps": 334,
+          "rejected_epochs": 9,
+          "critic_steps": 157,
+          "optimizer_steps": 13289,
+          "critic_optimizer_steps": 6437
+        },
+        "metrics": {
+          "loss": 0.20090152764616495,
+          "exact_kl": 3.640936041944745e-05,
+          "max_state_kl": 0.49254000186920166,
+          "value_loss": 0.4043738529545046,
+          "entropy": 0.11952338234034543,
+          "gradient_norm": 0.14247794449329376,
+          "critic_gradient_norm": 4.933717250823975
+        }
+      },
+      {
+        "label": "4-unfused",
+        "backend": "unfused",
+        "update_seconds": 370.8837966419999,
+        "process_cpu_seconds": 633.4093958440001,
+        "gpu_activity_mean_percent": 32.61788617886179,
+        "counters": {
+          "samples": 85199,
+          "accepted_steps": 334,
+          "rejected_epochs": 9,
+          "critic_steps": 157,
+          "optimizer_steps": 13289,
+          "critic_optimizer_steps": 6437
+        },
+        "metrics": {
+          "loss": 0.2009059119221868,
+          "exact_kl": 3.6418065423165775e-05,
+          "max_state_kl": 0.4926507771015167,
+          "value_loss": 0.4043826247370557,
+          "entropy": 0.1195236060169208,
+          "gradient_norm": 0.14246731996536255,
+          "critic_gradient_norm": 4.9334797859191895
+        }
+      }
+    ],
+    "mean_update_seconds": {
+      "unfused": 374.65669072899993,
+      "cudnn": 440.51445703300004
+    },
+    "speedup": 0.850498059138462,
+    "time_reduction_percent": -17.578163671881942,
+    "counter_values": {
+      "samples": [
+        85199,
+        85199,
+        85199,
+        85199
+      ],
+      "accepted_steps": [
+        334,
+        334,
+        334,
+        334
+      ],
+      "rejected_epochs": [
+        9,
+        8,
+        9,
+        9
+      ],
+      "critic_steps": [
+        157,
+        157,
+        157,
+        157
+      ],
+      "optimizer_steps": [
+        13289,
+        13289,
+        13289,
+        13289
+      ],
+      "critic_optimizer_steps": [
+        6437,
+        6437,
+        6437,
+        6437
+      ]
+    },
+    "same_work_counters": false,
+    "final_rng_equal": true,
+    "parity": [
+      {
+        "label": "real-0",
+        "outputs_max_absolute": {
+          "logits": 8.58306884765625e-06,
+          "probabilities": 8.940696716308594e-07,
+          "actor_memory": 2.980232238769531e-07,
+          "value": 2.5331974029541016e-07,
+          "critic_memory": 3.427267074584961e-07,
+          "actor_loss": 2.9802322387695312e-08,
+          "critic_loss": 0.0
+        },
+        "gradient_max_absolute": {
+          "actor_weights": 3.993045538663864e-08,
+          "critic_weights": 1.7881393432617188e-07,
+          "actor_inputs": 4.190951585769653e-09,
+          "critic_inputs": 9.313225746154785e-09
+        },
+        "gradient_relative_l2": {
+          "actor_weights": 9.161444327798158e-06,
+          "critic_weights": 1.1974737721666315e-07,
+          "actor_inputs": 3.0914983214190334e-07,
+          "critic_inputs": 1.9853559054180322e-07
+        },
+        "cudnn_graph_ops": {
+          "CudnnRNNBackpropV3": 6,
+          "CudnnRNNV3": 6
+        }
+      },
+      {
+        "label": "real-266",
+        "outputs_max_absolute": {
+          "logits": 1.2874603271484375e-05,
+          "probabilities": 1.3113021850585938e-06,
+          "actor_memory": 3.2782554626464844e-07,
+          "value": 3.5762786865234375e-07,
+          "critic_memory": 4.6193599700927734e-07,
+          "actor_loss": 2.9802322387695312e-08,
+          "critic_loss": 0.0
+        },
+        "gradient_max_absolute": {
+          "actor_weights": 1.280568540096283e-08,
+          "critic_weights": 4.76837158203125e-07,
+          "actor_inputs": 5.587935447692871e-09,
+          "critic_inputs": 2.0489096641540527e-08
+        },
+        "gradient_relative_l2": {
+          "actor_weights": 3.859497651631378e-06,
+          "critic_weights": 1.3475145799187294e-07,
+          "actor_inputs": 3.7108723234428267e-07,
+          "critic_inputs": 2.490596212242983e-07
+        },
+        "cudnn_graph_ops": {
+          "CudnnRNNBackpropV3": 6,
+          "CudnnRNNV3": 6
+        }
+      },
+      {
+        "label": "real-533",
+        "outputs_max_absolute": {
+          "logits": 1.33514404296875e-05,
+          "probabilities": 9.5367431640625e-07,
+          "actor_memory": 2.980232238769531e-07,
+          "value": 4.023313522338867e-07,
+          "critic_memory": 3.5762786865234375e-07,
+          "actor_loss": 0.0,
+          "critic_loss": 0.0
+        },
+        "gradient_max_absolute": {
+          "actor_weights": 2.6106135919690132e-08,
+          "critic_weights": 2.5331974029541016e-07,
+          "actor_inputs": 2.9802322387695312e-08,
+          "critic_inputs": 2.0489096641540527e-08
+        },
+        "gradient_relative_l2": {
+          "actor_weights": 1.099776042304327e-06,
+          "critic_weights": 1.087798855902268e-07,
+          "actor_inputs": 7.587128722140516e-07,
+          "critic_inputs": 2.474602147067165e-07
+        },
+        "cudnn_graph_ops": {
+          "CudnnRNNBackpropV3": 6,
+          "CudnnRNNV3": 6
+        }
+      },
+      {
+        "label": "all-empty-mixed-advance",
+        "outputs_max_absolute": {
+          "logits": 4.0531158447265625e-06,
+          "probabilities": 9.5367431640625e-07,
+          "actor_memory": 2.086162567138672e-07,
+          "value": 1.7881393432617188e-07,
+          "critic_memory": 1.7881393432617188e-07,
+          "actor_loss": 1.4901161193847656e-08,
+          "critic_loss": 5.960464477539063e-08
+        },
+        "gradient_max_absolute": {
+          "actor_weights": 8.614733815193176e-09,
+          "critic_weights": 1.7881393432617188e-07,
+          "actor_inputs": 6.51925802230835e-09,
+          "critic_inputs": 9.313225746154785e-09
+        },
+        "gradient_relative_l2": {
+          "actor_weights": 4.068803984471722e-07,
+          "critic_weights": 1.2939305829683772e-07,
+          "actor_inputs": 3.557228919415e-07,
+          "critic_inputs": 1.124954511366135e-07
+        },
+        "cudnn_graph_ops": {
+          "CudnnRNNBackpropV3": 6,
+          "CudnnRNNV3": 6
+        }
+      }
+    ],
+    "matched_work_pairs": [
+      {
+        "unfused": "1-unfused",
+        "cudnn": "3-cudnn",
+        "unfused_seconds": 378.429584816,
+        "cudnn_seconds": 459.604092561,
+        "cudnn_more_time_percent": 21.45035985610604
+      },
+      {
+        "unfused": "4-unfused",
+        "cudnn": "3-cudnn",
+        "unfused_seconds": 370.8837966419999,
+        "cudnn_seconds": 459.604092561,
+        "cudnn_more_time_percent": 23.92131894741103
+      }
+    ],
+    "final_array_comparisons": {
+      "1-unfused versus 2-cudnn": {
+        "model": {
+          "max_absolute": 0.00025391392409801483,
+          "relative_l2": 0.00010652465484782401
+        },
+        "actor_optimizer": {
+          "max_absolute": 0.001299712574109435,
+          "relative_l2": 8.138237107103704e-07
+        },
+        "critic_optimizer": {
+          "max_absolute": 0.0006539858877658844,
+          "relative_l2": 4.660745361146915e-07
+        }
+      },
+      "1-unfused versus 3-cudnn": {
+        "model": {
+          "max_absolute": 0.0002579297870397568,
+          "relative_l2": 2.584966898009348e-05
+        },
+        "actor_optimizer": {
+          "max_absolute": 3.5432822187431157e-07,
+          "relative_l2": 1.2955617786635353e-10
+        },
+        "critic_optimizer": {
+          "max_absolute": 0.0006327163428068161,
+          "relative_l2": 4.6513961917072615e-07
+        }
+      },
+      "1-unfused versus 4-unfused": {
+        "model": {
+          "max_absolute": 0.00025425292551517487,
+          "relative_l2": 2.4799000453691268e-05
+        },
+        "actor_optimizer": {
+          "max_absolute": 6.789341568946838e-06,
+          "relative_l2": 2.6993652272815814e-09
+        },
+        "critic_optimizer": {
+          "max_absolute": 0.000649893656373024,
+          "relative_l2": 4.719829953137508e-07
+        }
+      },
+      "2-cudnn versus 3-cudnn": {
+        "model": {
+          "max_absolute": 0.0001827925443649292,
+          "relative_l2": 0.00010603941403650902
+        },
+        "actor_optimizer": {
+          "max_absolute": 0.0012996834702789783,
+          "relative_l2": 8.138579677034359e-07
+        },
+        "critic_optimizer": {
+          "max_absolute": 0.00011300016194581985,
+          "relative_l2": 8.903273204818688e-08
+        }
+      },
+      "2-cudnn versus 4-unfused": {
+        "model": {
+          "max_absolute": 0.00018018484115600586,
+          "relative_l2": 0.00010575111389844371
+        },
+        "actor_optimizer": {
+          "max_absolute": 0.0012947145150974393,
+          "relative_l2": 8.12649969233024e-07
+        },
+        "critic_optimizer": {
+          "max_absolute": 7.902822108007967e-05,
+          "relative_l2": 5.431847962679971e-08
+        }
+      },
+      "3-cudnn versus 4-unfused": {
+        "model": {
+          "max_absolute": 0.0001816786825656891,
+          "relative_l2": 6.849587264432507e-06
+        },
+        "actor_optimizer": {
+          "max_absolute": 6.789894541725516e-06,
+          "relative_l2": 2.711532101325868e-09
+        },
+        "critic_optimizer": {
+          "max_absolute": 0.00014695432037115097,
+          "relative_l2": 7.926274641359468e-08
+        }
+      }
+    },
+    "source_checkpoint_files_unchanged": 205,
+    "original_runtime_unchanged": true,
+    "limitations": [
+      "Single hardware/configuration and one saved round; timings are repeated measurements, not independent training trials.",
+      "FP32 kernels need not produce bitwise-identical derivatives or final Adam/model states; equivalence is checked at identical starting weights.",
+      "GPU activity is nvidia-smi sampling, not a measure of fraction of peak compute throughput.",
+      "Policy-guard retry counts can differ with GPU rounding; report all raw timings and the matching-work subset rather than claiming all four performed identical work.",
+      "An initial persistent-tape diagnostic failed and was replaced only after a tiny reproduction isolated repeated backward traversal; original failed evidence preserved."
+    ]
+  },
+  "finished_utc": "2026-10-26T04:33:18.603337+00:00",
+  "results": {
+    "status": "complete",
+    "scope": "Six frozen round-40 update replays: two per backend. Selective fusion was chosen after all-GRU ABBA and a read-only layer diagnostic. No new games or policy promotion.",
+    "cases": [
+      {
+        "label": "1-unfused",
+        "backend": "unfused",
+        "update_seconds": 378.429584816,
+        "process_cpu_seconds": 644.531091165,
+        "gpu_activity_mean_percent": 33.297476759628154,
+        "counters": {
+          "samples": 85199,
+          "accepted_steps": 334,
+          "rejected_epochs": 9,
+          "critic_steps": 157,
+          "optimizer_steps": 13289,
+          "critic_optimizer_steps": 6437
+        },
+        "metrics": {
+          "loss": 0.20096289800957634,
+          "exact_kl": 3.641025888086691e-05,
+          "max_state_kl": 0.4925704002380371,
+          "value_loss": 0.4044965896215677,
+          "entropy": 0.11952337519365064,
+          "gradient_norm": 0.14247773587703705,
+          "critic_gradient_norm": 4.949487209320068
+        }
+      },
+      {
+        "label": "2-cudnn",
+        "backend": "cudnn",
+        "update_seconds": 421.42482150500007,
+        "process_cpu_seconds": 368.293794685,
+        "gpu_activity_mean_percent": 65.41120381406436,
+        "counters": {
+          "samples": 85199,
+          "accepted_steps": 334,
+          "rejected_epochs": 8,
+          "critic_steps": 157,
+          "optimizer_steps": 13289,
+          "critic_optimizer_steps": 6437
+        },
+        "metrics": {
+          "loss": 0.20090368086118923,
+          "exact_kl": 4.273751197123908e-05,
+          "max_state_kl": 0.4765707850456238,
+          "value_loss": 0.40440917205561805,
+          "entropy": 0.11963317181482302,
+          "gradient_norm": 0.14381961524486542,
+          "critic_gradient_norm": 4.935375213623047
+        }
+      },
+      {
+        "label": "3-cudnn",
+        "backend": "cudnn",
+        "update_seconds": 459.604092561,
+        "process_cpu_seconds": 399.914008495,
+        "gpu_activity_mean_percent": 65.08424507658643,
+        "counters": {
+          "samples": 85199,
+          "accepted_steps": 334,
+          "rejected_epochs": 9,
+          "critic_steps": 157,
+          "optimizer_steps": 13289,
+          "critic_optimizer_steps": 6437
+        },
+        "metrics": {
+          "loss": 0.20090152764616495,
+          "exact_kl": 3.640936041944745e-05,
+          "max_state_kl": 0.49254000186920166,
+          "value_loss": 0.4043738529545046,
+          "entropy": 0.11952338234034543,
+          "gradient_norm": 0.14247794449329376,
+          "critic_gradient_norm": 4.933717250823975
+        }
+      },
+      {
+        "label": "4-unfused",
+        "backend": "unfused",
+        "update_seconds": 370.8837966419999,
+        "process_cpu_seconds": 633.4093958440001,
+        "gpu_activity_mean_percent": 32.61788617886179,
+        "counters": {
+          "samples": 85199,
+          "accepted_steps": 334,
+          "rejected_epochs": 9,
+          "critic_steps": 157,
+          "optimizer_steps": 13289,
+          "critic_optimizer_steps": 6437
+        },
+        "metrics": {
+          "loss": 0.2009059119221868,
+          "exact_kl": 3.6418065423165775e-05,
+          "max_state_kl": 0.4926507771015167,
+          "value_loss": 0.4043826247370557,
+          "entropy": 0.1195236060169208,
+          "gradient_norm": 0.14246731996536255,
+          "critic_gradient_norm": 4.9334797859191895
+        }
+      },
+      {
+        "label": "1-cudnn-memory",
+        "backend": "cudnn-memory",
+        "update_seconds": 238.38613934500017,
+        "process_cpu_seconds": 356.21342475800003,
+        "gpu_activity_mean_percent": 28.566315789473684,
+        "counters": {
+          "samples": 85199,
+          "accepted_steps": 334,
+          "rejected_epochs": 8,
+          "critic_steps": 157,
+          "optimizer_steps": 13289,
+          "critic_optimizer_steps": 6437
+        }
+      },
+      {
+        "label": "2-cudnn-memory",
+        "backend": "cudnn-memory",
+        "update_seconds": 254.719180564,
+        "process_cpu_seconds": 380.55098322,
+        "gpu_activity_mean_percent": 27.996055226824456,
+        "counters": {
+          "samples": 85199,
+          "accepted_steps": 334,
+          "rejected_epochs": 9,
+          "critic_steps": 157,
+          "optimizer_steps": 13289,
+          "critic_optimizer_steps": 6437
+        }
+      }
+    ],
+    "mean_update_seconds": {
+      "unfused": 374.65669072899993,
+      "cudnn": 440.51445703300004,
+      "cudnn-memory": 246.5526599545001
+    },
+    "speedup": 1.5195808100311743,
+    "time_reduction_percent": 34.19237770056567,
+    "counter_values": {
+      "samples": [
+        85199,
+        85199,
+        85199,
+        85199,
+        85199,
+        85199
+      ],
+      "accepted_steps": [
+        334,
+        334,
+        334,
+        334,
+        334,
+        334
+      ],
+      "rejected_epochs": [
+        9,
+        8,
+        9,
+        9,
+        8,
+        9
+      ],
+      "critic_steps": [
+        157,
+        157,
+        157,
+        157,
+        157,
+        157
+      ],
+      "optimizer_steps": [
+        13289,
+        13289,
+        13289,
+        13289,
+        13289,
+        13289
+      ],
+      "critic_optimizer_steps": [
+        6437,
+        6437,
+        6437,
+        6437,
+        6437,
+        6437
+      ]
+    },
+    "same_work_counters": false,
+    "final_rng_equal": true,
+    "parity": [
+      {
+        "label": "real-0",
+        "outputs_max_absolute": {
+          "logits": 8.58306884765625e-06,
+          "probabilities": 8.940696716308594e-07,
+          "actor_memory": 2.980232238769531e-07,
+          "value": 2.5331974029541016e-07,
+          "critic_memory": 3.427267074584961e-07,
+          "actor_loss": 2.9802322387695312e-08,
+          "critic_loss": 0.0
+        },
+        "gradient_max_absolute": {
+          "actor_weights": 3.993045538663864e-08,
+          "critic_weights": 1.7881393432617188e-07,
+          "actor_inputs": 4.190951585769653e-09,
+          "critic_inputs": 9.313225746154785e-09
+        },
+        "gradient_relative_l2": {
+          "actor_weights": 9.161444327798158e-06,
+          "critic_weights": 1.1974737721666315e-07,
+          "actor_inputs": 3.0914983214190334e-07,
+          "critic_inputs": 1.9853559054180322e-07
+        },
+        "cudnn_graph_ops": {
+          "CudnnRNNBackpropV3": 6,
+          "CudnnRNNV3": 6
+        }
+      },
+      {
+        "label": "real-266",
+        "outputs_max_absolute": {
+          "logits": 1.2874603271484375e-05,
+          "probabilities": 1.3113021850585938e-06,
+          "actor_memory": 3.2782554626464844e-07,
+          "value": 3.5762786865234375e-07,
+          "critic_memory": 4.6193599700927734e-07,
+          "actor_loss": 2.9802322387695312e-08,
+          "critic_loss": 0.0
+        },
+        "gradient_max_absolute": {
+          "actor_weights": 1.280568540096283e-08,
+          "critic_weights": 4.76837158203125e-07,
+          "actor_inputs": 5.587935447692871e-09,
+          "critic_inputs": 2.0489096641540527e-08
+        },
+        "gradient_relative_l2": {
+          "actor_weights": 3.859497651631378e-06,
+          "critic_weights": 1.3475145799187294e-07,
+          "actor_inputs": 3.7108723234428267e-07,
+          "critic_inputs": 2.490596212242983e-07
+        },
+        "cudnn_graph_ops": {
+          "CudnnRNNBackpropV3": 6,
+          "CudnnRNNV3": 6
+        }
+      },
+      {
+        "label": "real-533",
+        "outputs_max_absolute": {
+          "logits": 1.33514404296875e-05,
+          "probabilities": 9.5367431640625e-07,
+          "actor_memory": 2.980232238769531e-07,
+          "value": 4.023313522338867e-07,
+          "critic_memory": 3.5762786865234375e-07,
+          "actor_loss": 0.0,
+          "critic_loss": 0.0
+        },
+        "gradient_max_absolute": {
+          "actor_weights": 2.6106135919690132e-08,
+          "critic_weights": 2.5331974029541016e-07,
+          "actor_inputs": 2.9802322387695312e-08,
+          "critic_inputs": 2.0489096641540527e-08
+        },
+        "gradient_relative_l2": {
+          "actor_weights": 1.099776042304327e-06,
+          "critic_weights": 1.087798855902268e-07,
+          "actor_inputs": 7.587128722140516e-07,
+          "critic_inputs": 2.474602147067165e-07
+        },
+        "cudnn_graph_ops": {
+          "CudnnRNNBackpropV3": 6,
+          "CudnnRNNV3": 6
+        }
+      },
+      {
+        "label": "all-empty-mixed-advance",
+        "outputs_max_absolute": {
+          "logits": 4.0531158447265625e-06,
+          "probabilities": 9.5367431640625e-07,
+          "actor_memory": 2.086162567138672e-07,
+          "value": 1.7881393432617188e-07,
+          "critic_memory": 1.7881393432617188e-07,
+          "actor_loss": 1.4901161193847656e-08,
+          "critic_loss": 5.960464477539063e-08
+        },
+        "gradient_max_absolute": {
+          "actor_weights": 8.614733815193176e-09,
+          "critic_weights": 1.7881393432617188e-07,
+          "actor_inputs": 6.51925802230835e-09,
+          "critic_inputs": 9.313225746154785e-09
+        },
+        "gradient_relative_l2": {
+          "actor_weights": 4.068803984471722e-07,
+          "critic_weights": 1.2939305829683772e-07,
+          "actor_inputs": 3.557228919415e-07,
+          "critic_inputs": 1.124954511366135e-07
+        },
+        "cudnn_graph_ops": {
+          "CudnnRNNBackpropV3": 6,
+          "CudnnRNNV3": 6
+        }
+      }
+    ],
+    "matched_work_pairs": [
+      {
+        "unfused": "1-unfused",
+        "cudnn": "3-cudnn",
+        "unfused_seconds": 378.429584816,
+        "cudnn_seconds": 459.604092561,
+        "cudnn_more_time_percent": 21.45035985610604
+      },
+      {
+        "unfused": "4-unfused",
+        "cudnn": "3-cudnn",
+        "unfused_seconds": 370.8837966419999,
+        "cudnn_seconds": 459.604092561,
+        "cudnn_more_time_percent": 23.92131894741103
+      }
+    ],
+    "final_array_comparisons": {
+      "1-unfused versus 2-cudnn": {
+        "model": {
+          "max_absolute": 0.00025391392409801483,
+          "relative_l2": 0.00010652465484782401
+        },
+        "actor_optimizer": {
+          "max_absolute": 0.001299712574109435,
+          "relative_l2": 8.138237107103704e-07
+        },
+        "critic_optimizer": {
+          "max_absolute": 0.0006539858877658844,
+          "relative_l2": 4.660745361146915e-07
+        }
+      },
+      "1-unfused versus 3-cudnn": {
+        "model": {
+          "max_absolute": 0.0002579297870397568,
+          "relative_l2": 2.584966898009348e-05
+        },
+        "actor_optimizer": {
+          "max_absolute": 3.5432822187431157e-07,
+          "relative_l2": 1.2955617786635353e-10
+        },
+        "critic_optimizer": {
+          "max_absolute": 0.0006327163428068161,
+          "relative_l2": 4.6513961917072615e-07
+        }
+      },
+      "1-unfused versus 4-unfused": {
+        "model": {
+          "max_absolute": 0.00025425292551517487,
+          "relative_l2": 2.4799000453691268e-05
+        },
+        "actor_optimizer": {
+          "max_absolute": 6.789341568946838e-06,
+          "relative_l2": 2.6993652272815814e-09
+        },
+        "critic_optimizer": {
+          "max_absolute": 0.000649893656373024,
+          "relative_l2": 4.719829953137508e-07
+        }
+      },
+      "2-cudnn versus 3-cudnn": {
+        "model": {
+          "max_absolute": 0.0001827925443649292,
+          "relative_l2": 0.00010603941403650902
+        },
+        "actor_optimizer": {
+          "max_absolute": 0.0012996834702789783,
+          "relative_l2": 8.138579677034359e-07
+        },
+        "critic_optimizer": {
+          "max_absolute": 0.00011300016194581985,
+          "relative_l2": 8.903273204818688e-08
+        }
+      },
+      "2-cudnn versus 4-unfused": {
+        "model": {
+          "max_absolute": 0.00018018484115600586,
+          "relative_l2": 0.00010575111389844371
+        },
+        "actor_optimizer": {
+          "max_absolute": 0.0012947145150974393,
+          "relative_l2": 8.12649969233024e-07
+        },
+        "critic_optimizer": {
+          "max_absolute": 7.902822108007967e-05,
+          "relative_l2": 5.431847962679971e-08
+        }
+      },
+      "3-cudnn versus 4-unfused": {
+        "model": {
+          "max_absolute": 0.0001816786825656891,
+          "relative_l2": 6.849587264432507e-06
+        },
+        "actor_optimizer": {
+          "max_absolute": 6.789894541725516e-06,
+          "relative_l2": 2.711532101325868e-09
+        },
+        "critic_optimizer": {
+          "max_absolute": 0.00014695432037115097,
+          "relative_l2": 7.926274641359468e-08
+        }
+      }
+    },
+    "source_checkpoint_files_unchanged": 205,
+    "original_runtime_unchanged": true,
+    "limitations": [
+      "Single hardware/configuration and one saved round; timings are repeated measurements, not independent training trials.",
+      "FP32 kernels need not produce bitwise-identical derivatives or final Adam/model states; equivalence is checked at identical starting weights.",
+      "GPU activity is nvidia-smi sampling, not a measure of fraction of peak compute throughput.",
+      "Policy-guard retry counts can differ with GPU rounding; report all raw timings and the matching-work subset rather than claiming all four performed identical work.",
+      "An initial persistent-tape diagnostic failed and was replaced only after a tiny reproduction isolated repeated backward traversal; original failed evidence preserved.",
+      "Selective mode was chosen after the layer diagnostic and compared with the preceding unfused controls; no confidence interval or long-run speed guarantee."
+    ],
+    "selective": {
+      "speedup": 1.5195808100311743,
+      "time_reduction_percent": 34.19237770056567,
+      "mean_update_seconds": 246.5526599545001,
+      "recommended_backend": "cudnn-memory",
+      "selection": "Exploratory follow-up after per-layer timings; original controls retained without selection.",
+      "source_checkpoint_files_unchanged": 205,
+      "parity_status": "passed",
+      "parity_max_probability_difference": 9.5367431640625e-07,
+      "parity_max_gradient_relative_l2": 4.397645801672526e-06,
+      "parity_max_gradient_absolute": 2.384185791015625e-07
+    },
+    "matched_work_selective": [
+      {
+        "unfused": "1-unfused",
+        "selective": "2-cudnn-memory",
+        "unfused_seconds": 378.429584816,
+        "selective_seconds": 254.719180564,
+        "time_reduction_percent": 32.690468508732074
+      },
+      {
+        "unfused": "4-unfused",
+        "selective": "2-cudnn-memory",
+        "unfused_seconds": 370.8837966419999,
+        "selective_seconds": 254.719180564,
+        "time_reduction_percent": 31.321027537401214
+      }
+    ],
+    "all_gru_comparison": {
+      "speedup": 0.850498059138462,
+      "time_reduction_percent": -17.578163671881942,
+      "same_work_counters": false
+    },
+    "recommended_backend": "cudnn-memory"
+  },
+  "cleanup": {
+    "final-linux-cleanup.json": {
+      "verified": true,
+      "utc": "2026-10-26T04:30:59.238210+00:00",
+      "issues": [],
+      "remaining": [],
+      "shared_lock_free": true,
+      "gpu_compute_processes": "",
+      "original_runtime_unchanged": true
+    },
+    "final-native-cleanup.json": {
+      "utc": "2026-10-26T04:31:34.9529827Z",
+      "verified": true,
+      "guard_state": {
+        "manifest_sha256": "70ff2ea6e084ff9506ef0c80423f3025870993bfb49c0fc52dabdaef9e02c91c",
+        "status": "released",
+        "reason": "explicit_stop_file",
+        "utc": "2026-10-26T04:31:33.6601354Z",
+        "started_utc": "2026-10-26T03:42:09.7663296Z",
+        "expires_utc": "2026-10-26T04:42:09.7663296Z",
+        "maximum_seconds": 3600,
+        "windows_pid": 4376,
+        "creation_utc": "2026-10-26T03:42:09.4389092Z"
+      },
+      "original_guardian_pid_absent": true,
+      "last_task_result": 0,
+      "task_removed": true,
+      "persistent_settings_changed": false,
+      "temporary_verification_request": "bounded30s, reset by finally before helper exit"
+    },
+    "final-local-cleanup.json": {
+      "verified": true,
+      "utc": "2026-10-26T04:32:29.076320+00:00",
+      "remaining_owners": [],
+      "remaining_owned_inhibitors": [],
+      "supervisors_complete": true
+    },
+    "final-backup-verification.json": {
+      "verified": true,
+      "gzip_crc": true,
+      "npz_zip_crc": true,
+      "npz_finite": true,
+      "case_npz_files": [
+        {
+          "path": "backup/fused-gru-selective-20261025/results/2-cudnn-memory/result-state.npz",
+          "sha256": "b7d15aa58815189a4d77386088a85ff33ed4d651469daa5466bc5287a5c1c935"
+        },
+        {
+          "path": "backup/fused-gru-selective-20261025/results/1-cudnn-memory/result-state.npz",
+          "sha256": "1511ee598299fc4394933ad3b846cbf8338ce177486215470ba431bd1dbf9b2e"
+        },
+        {
+          "path": "backup/fused-gru-20261025-v2/results/3-cudnn/result-state.npz",
+          "sha256": "b4f371766c7d379099867f9b33bc3163dfe8151818eed62a8da74ac35d14077e"
+        },
+        {
+          "path": "backup/fused-gru-20261025-v2/results/2-cudnn/result-state.npz",
+          "sha256": "b0f6f2db42b96f83adde84e27d998dde04abb0e2e154ebbf9db4fd33c6f01bf8"
+        },
+        {
+          "path": "backup/fused-gru-20261025-v2/results/1-unfused/result-state.npz",
+          "sha256": "96bd0dc62eedb422abbda7ab08d48be6b323eba279d556e8944022b42aaee7e4"
+        },
+        {
+          "path": "backup/fused-gru-20261025-v2/results/4-unfused/result-state.npz",
+          "sha256": "e66c97f003d8cac7ca6e50392f11efceb9cd48712304b475789679a66b284a3d"
+        }
+      ],
+      "archive_sha256": "82e98fddecfa54fcea36267e837bfdfb3ed85f104e50b8fa159351887c82408d"
+    }
+  },
+  "recommended_backend": "cudnn-memory",
+  "findings": "/home/altf4/Code/mtgo-bot/patchwork_automaton/docs/benchmarks/fused-gru-2026-10-25/README.md",
+  "graph": "/home/altf4/Code/mtgo-bot/patchwork_automaton/docs/benchmarks/fused-gru-2026-10-25/update-speed.png",
+  "backup": {
+    "archive_sha256": "82e98fddecfa54fcea36267e837bfdfb3ed85f104e50b8fa159351887c82408d",
+    "bytes": 18341653,
+    "files": 81
+  },
+  "source_checkpoint_files_unchanged": 205
+}

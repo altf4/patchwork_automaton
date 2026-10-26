@@ -1,0 +1,279 @@
+{
+  "sampled_points": 30,
+  "samples": [
+    {
+      "utc": "2026-10-26T16:20:46.472567+00:00",
+      "elapsed_seconds": 5.0005790010000055,
+      "state": "S",
+      "cpu_ticks": 569,
+      "rss_kib": 1329136,
+      "swap_kib": 0,
+      "memory_pressure": "some avg10=0.00 avg60=0.00 avg300=0.64 total=61388058\nfull avg10=0.00 avg60=0.00 avg300=0.64 total=61312315\n"
+    },
+    {
+      "utc": "2026-10-26T16:20:51.474675+00:00",
+      "elapsed_seconds": 10.002685806000954,
+      "state": "R",
+      "cpu_ticks": 1059,
+      "rss_kib": 1530864,
+      "swap_kib": 0,
+      "memory_pressure": "some avg10=0.00 avg60=0.00 avg300=0.63 total=61388058\nfull avg10=0.00 avg60=0.00 avg300=0.63 total=61312315\n"
+    },
+    {
+      "utc": "2026-10-26T16:20:56.476854+00:00",
+      "elapsed_seconds": 15.004865695998888,
+      "state": "R",
+      "cpu_ticks": 1539,
+      "rss_kib": 1602280,
+      "swap_kib": 0,
+      "memory_pressure": "some avg10=0.00 avg60=0.00 avg300=0.62 total=61388058\nfull avg10=0.00 avg60=0.00 avg300=0.62 total=61312315\n"
+    },
+    {
+      "utc": "2026-10-26T16:21:00.211976+00:00",
+      "elapsed_seconds": 20.00734706300136,
+      "state": "R",
+      "cpu_ticks": 2008,
+      "rss_kib": 2135244,
+      "swap_kib": 0,
+      "memory_pressure": "some avg10=0.00 avg60=0.00 avg300=0.61 total=61388058\nfull avg10=0.00 avg60=0.00 avg300=0.61 total=61312315\n"
+    },
+    {
+      "utc": "2026-10-26T16:21:05.224635+00:00",
+      "elapsed_seconds": 25.02000394499919,
+      "state": "R",
+      "cpu_ticks": 2474,
+      "rss_kib": 2512064,
+      "swap_kib": 0,
+      "memory_pressure": "some avg10=0.00 avg60=0.00 avg300=0.60 total=61388058\nfull avg10=0.00 avg60=0.00 avg300=0.60 total=61312315\n"
+    },
+    {
+      "utc": "2026-10-26T16:21:10.227012+00:00",
+      "elapsed_seconds": 30.022381999999197,
+      "state": "R",
+      "cpu_ticks": 2941,
+      "rss_kib": 2910196,
+      "swap_kib": 0,
+      "memory_pressure": "some avg10=0.00 avg60=0.00 avg300=0.59 total=61388058\nfull avg10=0.00 avg60=0.00 avg300=0.59 total=61312315\n"
+    },
+    {
+      "utc": "2026-10-26T16:21:15.229343+00:00",
+      "elapsed_seconds": 35.02470958599952,
+      "state": "R",
+      "cpu_ticks": 3410,
+      "rss_kib": 3264712,
+      "swap_kib": 0,
+      "memory_pressure": "some avg10=0.00 avg60=0.00 avg300=0.58 total=61388058\nfull avg10=0.00 avg60=0.00 avg300=0.58 total=61312315\n"
+    },
+    {
+      "utc": "2026-10-26T16:21:20.231836+00:00",
+      "elapsed_seconds": 40.02720961399973,
+      "state": "R",
+      "cpu_ticks": 3879,
+      "rss_kib": 3669380,
+      "swap_kib": 0,
+      "memory_pressure": "some avg10=0.00 avg60=0.00 avg300=0.57 total=61388058\nfull avg10=0.00 avg60=0.00 avg300=0.57 total=61312315\n"
+    },
+    {
+      "utc": "2026-10-26T16:21:25.234232+00:00",
+      "elapsed_seconds": 45.029600009002024,
+      "state": "S",
+      "cpu_ticks": 4343,
+      "rss_kib": 4143028,
+      "swap_kib": 0,
+      "memory_pressure": "some avg10=0.00 avg60=0.00 avg300=0.56 total=61388058\nfull avg10=0.00 avg60=0.00 avg300=0.56 total=61312315\n"
+    },
+    {
+      "utc": "2026-10-26T16:21:28.971511+00:00",
+      "elapsed_seconds": 50.03215178400205,
+      "state": "R",
+      "cpu_ticks": 4812,
+      "rss_kib": 4452908,
+      "swap_kib": 0,
+      "memory_pressure": "some avg10=0.00 avg60=0.00 avg300=0.55 total=61388058\nfull avg10=0.00 avg60=0.00 avg300=0.55 total=61312315\n"
+    },
+    {
+      "utc": "2026-10-26T16:21:33.972314+00:00",
+      "elapsed_seconds": 55.03294692599957,
+      "state": "R",
+      "cpu_ticks": 5285,
+      "rss_kib": 4665720,
+      "swap_kib": 0,
+      "memory_pressure": "some avg10=0.00 avg60=0.00 avg300=0.54 total=61388058\nfull avg10=0.00 avg60=0.00 avg300=0.54 total=61312315\n"
+    },
+    {
+      "utc": "2026-10-26T16:21:38.973512+00:00",
+      "elapsed_seconds": 60.03414399599933,
+      "state": "R",
+      "cpu_ticks": 6648,
+      "rss_kib": 4879732,
+      "swap_kib": 0,
+      "memory_pressure": "some avg10=0.00 avg60=0.00 avg300=0.53 total=61388058\nfull avg10=0.00 avg60=0.00 avg300=0.53 total=61312315\n"
+    },
+    {
+      "utc": "2026-10-26T16:21:43.974569+00:00",
+      "elapsed_seconds": 65.03520458300045,
+      "state": "R",
+      "cpu_ticks": 7123,
+      "rss_kib": 4917812,
+      "swap_kib": 0,
+      "memory_pressure": "some avg10=0.00 avg60=0.00 avg300=0.52 total=61388058\nfull avg10=0.00 avg60=0.00 avg300=0.52 total=61312315\n"
+    },
+    {
+      "utc": "2026-10-26T16:21:48.976422+00:00",
+      "elapsed_seconds": 70.03706275500008,
+      "state": "R",
+      "cpu_ticks": 7594,
+      "rss_kib": 4919012,
+      "swap_kib": 0,
+      "memory_pressure": "some avg10=0.00 avg60=0.00 avg300=0.51 total=61388058\nfull avg10=0.00 avg60=0.00 avg300=0.51 total=61312315\n"
+    },
+    {
+      "utc": "2026-10-26T16:21:53.988425+00:00",
+      "elapsed_seconds": 75.04905852500087,
+      "state": "R",
+      "cpu_ticks": 8063,
+      "rss_kib": 5186056,
+      "swap_kib": 0,
+      "memory_pressure": "some avg10=0.00 avg60=0.00 avg300=0.50 total=61388058\nfull avg10=0.00 avg60=0.00 avg300=0.50 total=61312315\n"
+    },
+    {
+      "utc": "2026-10-26T16:21:58.990808+00:00",
+      "elapsed_seconds": 80.05145132699909,
+      "state": "R",
+      "cpu_ticks": 8542,
+      "rss_kib": 5202872,
+      "swap_kib": 0,
+      "memory_pressure": "some avg10=0.00 avg60=0.00 avg300=0.49 total=61388058\nfull avg10=0.00 avg60=0.00 avg300=0.49 total=61312315\n"
+    },
+    {
+      "utc": "2026-10-26T16:22:02.716834+00:00",
+      "elapsed_seconds": 85.06213894300163,
+      "state": "R",
+      "cpu_ticks": 9014,
+      "rss_kib": 5195976,
+      "swap_kib": 0,
+      "memory_pressure": "some avg10=0.00 avg60=0.00 avg300=0.49 total=61388058\nfull avg10=0.00 avg60=0.00 avg300=0.48 total=61312315\n"
+    },
+    {
+      "utc": "2026-10-26T16:22:07.728364+00:00",
+      "elapsed_seconds": 90.07367121300194,
+      "state": "R",
+      "cpu_ticks": 10122,
+      "rss_kib": 5194624,
+      "swap_kib": 0,
+      "memory_pressure": "some avg10=0.00 avg60=0.00 avg300=0.47 total=61388058\nfull avg10=0.00 avg60=0.00 avg300=0.47 total=61312315\n"
+    },
+    {
+      "utc": "2026-10-26T16:22:12.732454+00:00",
+      "elapsed_seconds": 95.07775924300222,
+      "state": "R",
+      "cpu_ticks": 10593,
+      "rss_kib": 5142400,
+      "swap_kib": 0,
+      "memory_pressure": "some avg10=0.00 avg60=0.00 avg300=0.47 total=61388058\nfull avg10=0.00 avg60=0.00 avg300=0.47 total=61312315\n"
+    },
+    {
+      "utc": "2026-10-26T16:22:17.743236+00:00",
+      "elapsed_seconds": 100.08854240000073,
+      "state": "R",
+      "cpu_ticks": 11064,
+      "rss_kib": 5210008,
+      "swap_kib": 0,
+      "memory_pressure": "some avg10=0.00 avg60=0.00 avg300=0.46 total=61388058\nfull avg10=0.00 avg60=0.00 avg300=0.46 total=61312315\n"
+    },
+    {
+      "utc": "2026-10-26T16:22:22.746663+00:00",
+      "elapsed_seconds": 105.09197320699968,
+      "state": "R",
+      "cpu_ticks": 11531,
+      "rss_kib": 5164312,
+      "swap_kib": 0,
+      "memory_pressure": "some avg10=0.00 avg60=0.00 avg300=0.45 total=61388058\nfull avg10=0.00 avg60=0.00 avg300=0.45 total=61312315\n"
+    },
+    {
+      "utc": "2026-10-26T16:22:27.747400+00:00",
+      "elapsed_seconds": 110.09270805900087,
+      "state": "R",
+      "cpu_ticks": 12005,
+      "rss_kib": 5161008,
+      "swap_kib": 0,
+      "memory_pressure": "some avg10=0.00 avg60=0.00 avg300=0.44 total=61388058\nfull avg10=0.00 avg60=0.00 avg300=0.44 total=61312315\n"
+    },
+    {
+      "utc": "2026-10-26T16:22:31.433183+00:00",
+      "elapsed_seconds": 115.0942117750019,
+      "state": "R",
+      "cpu_ticks": 12476,
+      "rss_kib": 5157796,
+      "swap_kib": 0,
+      "memory_pressure": "some avg10=0.00 avg60=0.00 avg300=0.43 total=61388058\nfull avg10=0.00 avg60=0.00 avg300=0.43 total=61312315\n"
+    },
+    {
+      "utc": "2026-10-26T16:22:36.434874+00:00",
+      "elapsed_seconds": 120.09589509899888,
+      "state": "R",
+      "cpu_ticks": 12952,
+      "rss_kib": 5151656,
+      "swap_kib": 0,
+      "memory_pressure": "some avg10=0.00 avg60=0.00 avg300=0.43 total=61388058\nfull avg10=0.00 avg60=0.00 avg300=0.43 total=61312315\n"
+    },
+    {
+      "utc": "2026-10-26T16:22:41.435871+00:00",
+      "elapsed_seconds": 125.09689621900179,
+      "state": "R",
+      "cpu_ticks": 13423,
+      "rss_kib": 5197688,
+      "swap_kib": 0,
+      "memory_pressure": "some avg10=0.00 avg60=0.00 avg300=0.42 total=61388058\nfull avg10=0.00 avg60=0.00 avg300=0.42 total=61312315\n"
+    },
+    {
+      "utc": "2026-10-26T16:22:46.436780+00:00",
+      "elapsed_seconds": 130.0978038840003,
+      "state": "R",
+      "cpu_ticks": 13888,
+      "rss_kib": 5263320,
+      "swap_kib": 0,
+      "memory_pressure": "some avg10=0.00 avg60=0.00 avg300=0.41 total=61388058\nfull avg10=0.00 avg60=0.00 avg300=0.41 total=61312315\n"
+    },
+    {
+      "utc": "2026-10-26T16:22:51.438227+00:00",
+      "elapsed_seconds": 135.09925048199875,
+      "state": "S",
+      "cpu_ticks": 14356,
+      "rss_kib": 5195720,
+      "swap_kib": 0,
+      "memory_pressure": "some avg10=0.00 avg60=0.00 avg300=0.41 total=61388058\nfull avg10=0.00 avg60=0.00 avg300=0.41 total=61312315\n"
+    },
+    {
+      "utc": "2026-10-26T16:22:56.440974+00:00",
+      "elapsed_seconds": 140.10199541700058,
+      "state": "R",
+      "cpu_ticks": 14827,
+      "rss_kib": 5286196,
+      "swap_kib": 0,
+      "memory_pressure": "some avg10=0.00 avg60=0.00 avg300=0.40 total=61388058\nfull avg10=0.00 avg60=0.00 avg300=0.40 total=61312315\n"
+    },
+    {
+      "utc": "2026-10-26T16:23:01.443826+00:00",
+      "elapsed_seconds": 145.1048501860023,
+      "state": "R",
+      "cpu_ticks": 15299,
+      "rss_kib": 5241032,
+      "swap_kib": 0,
+      "memory_pressure": "some avg10=0.00 avg60=0.00 avg300=0.39 total=61388058\nfull avg10=0.00 avg60=0.00 avg300=0.39 total=61312315\n"
+    },
+    {
+      "utc": "2026-10-26T16:23:05.139348+00:00",
+      "elapsed_seconds": 150.10709066900017,
+      "state": "R",
+      "cpu_ticks": 15771,
+      "rss_kib": 5241040,
+      "swap_kib": 0,
+      "memory_pressure": "some avg10=0.00 avg60=0.00 avg300=0.38 total=61388058\nfull avg10=0.00 avg60=0.00 avg300=0.38 total=61312315\n"
+    }
+  ],
+  "sampled_peak_rss_mib": 5162.30078125,
+  "sampled_peak_swap_mib": 0.0,
+  "maximum_observed_elapsed_seconds": 150.10709066900017,
+  "interpretation": "Five-second process snapshots during correctness validation only. This is extra reference reconstruction/full-value comparison work, not a timed-update memory benchmark; snapshots may miss short peaks. Windows paging is not measured."
+}

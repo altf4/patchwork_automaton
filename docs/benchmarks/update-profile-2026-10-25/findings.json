@@ -1,0 +1,131 @@
+{
+  "status": "complete_with_replay_parity_warning",
+  "cases": {
+    "control": {
+      "seconds": 328.3391541169999,
+      "actor_steps_kept": 334,
+      "critic_steps": 157,
+      "rejected_full_passes": 8,
+      "gpu_activity_mean_percent": 31.654434250764528,
+      "gpu_activity_median_percent": 34.0,
+      "final_model_sha256": "ea3bb82f30877058a3e38655b6487c87c29e9941a3f0a27110ef927e51e1bf02",
+      "source_unchanged": true,
+      "report_sha256": "9481af108f7a6c6fb0de3df799b9bf39c6a8622678fc125ddc7725b6dabeca2a"
+    },
+    "profile": {
+      "seconds": 371.17112928200004,
+      "actor_steps_kept": 334,
+      "critic_steps": 157,
+      "rejected_full_passes": 9,
+      "gpu_activity_mean_percent": 31.949932341001354,
+      "gpu_activity_median_percent": 37.0,
+      "final_model_sha256": "faeb3664808de945dcef4b4063b185c690e909ae6482a9abc581885ff32e0d64",
+      "source_unchanged": true,
+      "report_sha256": "2608e930f8fe6a72cc4e74005cc77ec4e33b2e152801b9b9d7dda33b75baa88f"
+    },
+    "control-repeat": {
+      "seconds": 335.2250090480002,
+      "actor_steps_kept": 334,
+      "critic_steps": 157,
+      "rejected_full_passes": 8,
+      "gpu_activity_mean_percent": 32.80359820089955,
+      "gpu_activity_median_percent": 38.0,
+      "final_model_sha256": "5e931d806e8c53b34ba336a0fa154b30d45d2845e37ea115339c61719e5305f9",
+      "source_unchanged": true,
+      "report_sha256": "f9b8281b3872206da8a5dc90dd433068eefcf3c0dca39984ec7d7456fa2e80b1"
+    }
+  },
+  "fidelity": {
+    "starting_model_matches_preserved_checkpoint39": true,
+    "initial_model_sha256": "e0544b90b1458da14fce65fc5e65d0c1db22045abc3609c2d385e57536fb787c",
+    "same_input_hashes": true,
+    "training_games": 800,
+    "heldout_games_excluded": 200,
+    "same_configuration": true,
+    "same_initial_and_final_rng": true,
+    "source_checkpoint_files_unchanged": 205,
+    "gpu_bitwise_parity": false,
+    "original_strict_gate": "failed: profiled pass9 rejects versus controls8; preserve original coordinator error",
+    "array_comparisons": {
+      "control versus control-repeat": {
+        "bitwise_equal": false,
+        "max_abs_difference_by_group": {
+          "model": 0.0001829303801059723,
+          "actor_optimizer": 4.0745362639427185e-09,
+          "critic_optimizer": 0.00029074307531118393
+        }
+      },
+      "control versus profile": {
+        "bitwise_equal": false,
+        "max_abs_difference_by_group": {
+          "model": 0.0003422200679779053,
+          "actor_optimizer": 0.0012996827717870474,
+          "critic_optimizer": 0.0004196707159280777
+        }
+      },
+      "control-repeat versus profile": {
+        "bitwise_equal": false,
+        "max_abs_difference_by_group": {
+          "model": 0.0003451704978942871,
+          "actor_optimizer": 0.0012996820732951164,
+          "critic_optimizer": 0.0004304107278585434
+        }
+      }
+    },
+    "interpretation": "A/A controls also differ numerically, predominantly in critic/model arrays. Both controls used8 retries; profile and original production used9. This does not prove the probes leave GPU execution numerically identical. Do not interpret elapsed-time differences as an optimization or a clean estimate of profiler overhead."
+  },
+  "primary_observations": {
+    "mean_control_gpu_activity_percent": 32.22901622583204,
+    "trace_gpu_active_fraction": 0.21885382334391276,
+    "trace_seconds": 30.0,
+    "kernel_launches_in_trace": 570624,
+    "median_kernel_us": 2.496,
+    "small_grid_kernel_fraction": 0.8159085492373261,
+    "device_to_host_copies_in_trace": 91423,
+    "device_to_host_copies_at_most_16_bytes": 90906,
+    "tiny_device_to_host_fraction": 0.9943449678964812,
+    "actor_prefetch_wait_seconds": 0.64782369,
+    "critic_prefetch_wait_seconds": 0.042401853,
+    "explicit_actor_result_readback_seconds": 0.428295631,
+    "explicit_critic_result_readback_seconds": 0.080696169,
+    "record_gather_wall_union_seconds": 174.142762459,
+    "array_assembly_wall_union_seconds": 51.522274505,
+    "guard_scan_wall_seconds": 120.74677442
+  },
+  "interpretation": [
+    "Prefetch queues were generally ready; simply adding prefetch depth is not the leading target.",
+    "GPU execution is fragmented into many very short kernels and internal device-to-host control transfers. Raw trace operation names include GRU while-loop predicates, GRU gradient TensorList bookkeeping and Dense/Tensordot shape transfers.",
+    "Unfused recurrent execution and graph control/shape placement are strong optimization candidates. These observations are not a measured counterfactual speedup.",
+    "Record gathering, collation and serialized packing are also expensive, especially for repeated full-data guard scans. Their timings overlap other work.",
+    "The explicit one-result-per-minibatch Python synchronization is small in this profile; it should not be assumed to explain the idle time."
+  ],
+  "next_experiment": {
+    "priority": "Benchmark a compatible fused recurrent execution path or reduce graph-internal shape/control round trips, retaining the architecture, initial weights, batch512 and RL recipe.",
+    "secondary": "Reduce repeated decoding/packing for guard scans using numerical indexed/prepacked data.",
+    "validation": "Use frozen-data microbenchmarks and report numerical/guard trajectory differences explicitly; no speedup inferred from these profiling/control timings."
+  },
+  "cleanup": {
+    "linux": "verified: no owned processes, shared lock free, no GPU compute contexts",
+    "windows": "verified: temporary awake request released, exact process exited, profiling task removed",
+    "local_oversight": "verified: supervisor exited and temporary laptop inhibitor released"
+  },
+  "artifacts": {
+    "summary": "summary.json",
+    "pipeline_plot": "pipeline-profile.png",
+    "trace_plot": "gpu-waits.png",
+    "raw_trace_local": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/update-profile-20261025/backup/results/profile/tf-trace/plugins/profile/2026_10_25_17_00_07/raytracer.xplane.pb",
+    "raw_backup_sha256": "16177d0fc6e2ec3a79f557c81c17e4b386f9e5b085183a02dac9e0ca75206193"
+  },
+  "tests": {
+    "timing_probe_tests": 4,
+    "analysis_tests": 3,
+    "scope": "CPU parity, cached and spilled concurrent updates; GPU clock alignment/raw-stream exclusion and interval accounting. Strict GPU replay parity did not pass."
+  },
+  "limitations": [
+    "One frozen round and one30s trace during concurrent actor/critic work; activity fraction is not whole-run utilization or peak FLOPS.",
+    "GPU sampling is global device activity; raw CUDA trace belongs to the replay.",
+    "Overlapping host spans are not additive shares of total wall time.",
+    "Isolated update replays omit the original resident game-generation/validation processes; absolute times are not an optimization comparison to the production run."
+  ],
+  "updated_utc": "2026-10-26T00:36:42.013456+00:00"
+}

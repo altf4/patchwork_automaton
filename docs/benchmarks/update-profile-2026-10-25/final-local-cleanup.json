@@ -1,0 +1,10 @@
+{
+  "utc": "2026-10-26T00:36:42.013456+00:00",
+  "verified": true,
+  "former_owner": null,
+  "owned_supervisor_exited": true,
+  "supervisor_status": "complete",
+  "local_awake_inhibitor_gone": true,
+  "raw_remote_gate_status": "error",
+  "note": "Remote strict parity gate failure remains preserved; supervision completed and all artifacts were verified/backed up."
+}

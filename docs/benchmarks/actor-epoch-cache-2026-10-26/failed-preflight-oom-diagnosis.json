@@ -1,0 +1,1 @@
+{"utc": "2026-10-26T16:11:52.098737+00:00", "oom_kill": 1, "kernel_log_status": 1, "kernel_oom_lines": [], "kernel_log_error": "sudo: a password is required\n", "memory_pressure": "some avg10=0.00 avg60=0.35 avg300=4.19 total=61387888\nfull avg10=0.00 avg60=0.35 avg300=4.19 total=61312145\n"}

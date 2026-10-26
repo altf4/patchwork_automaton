@@ -1,0 +1,949 @@
+{
+  "status": "complete",
+  "scope": "Host-only timing probes and one unchanged control replay on the optimized GPU-resident policy-input updater.",
+  "no_model_or_rl_changes": true,
+  "source_checks": {
+    "original_runtime_unchanged": true,
+    "base_runtime_unchanged": true,
+    "pinned_runtimes_unchanged": true,
+    "checkpoint_files_unchanged": 205,
+    "report_inputs_implementations_unchanged": true
+  },
+  "training_games": 800,
+  "heldout_games_excluded": 200,
+  "samples": 85199,
+  "initial_equality_checks": {
+    "config": true,
+    "source_hashes": true,
+    "input_hashes": true,
+    "initial_model_sha256": true,
+    "initial_rng": true,
+    "initial_state_sha256": true,
+    "initial_actor_optimizer_steps": true,
+    "initial_critic_optimizer_steps": true,
+    "training_games": true,
+    "heldout_games_excluded": true,
+    "source_round": true,
+    "mode": true,
+    "packing_variant": true
+  },
+  "tolerances": {
+    "packed_arrays": "bitwise identical including shapes, dtypes and order",
+    "outputs_atol": 2e-05,
+    "outputs_rtol": 0.0002,
+    "gradients_atol": 2e-05,
+    "gradients_rtol": 0.002,
+    "gradient_relative_l2": 0.001,
+    "full_model_max_abs": 0.001,
+    "full_model_relative_l2": 0.0005,
+    "full_adam_max_abs": 0.002,
+    "full_adam_relative_l2": 1e-05,
+    "rng": "exact",
+    "optimizer_steps": "exact",
+    "guard_decisions": "exact for adoption; otherwise diagnose and leave opt-in"
+  },
+  "cases": [
+    {
+      "label": "1-profile",
+      "instrumented": true,
+      "seconds": 160.40978391099998,
+      "process_cpu_seconds": 241.899271782,
+      "work": {
+        "samples": 85199,
+        "accepted_steps": 334,
+        "rejected_epochs": 9,
+        "critic_steps": 157,
+        "optimizer_steps": 13289,
+        "critic_optimizer_steps": 6437
+      },
+      "guard_decisions": [
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.0019901887970553396,
+          "max_state_kl": 16.028749465942383
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.0008248413977918471,
+          "max_state_kl": 8.43303394317627
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.0001983288755058766,
+          "max_state_kl": 2.948005199432373
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 9.282645570651504e-05,
+          "max_state_kl": 1.2585806846618652
+        },
+        {
+          "accepted": true,
+          "reasons": [],
+          "mean_kl": 3.492388438209909e-05,
+          "max_state_kl": 0.4655769467353821
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.0005719874738679899,
+          "max_state_kl": 3.0661072731018066
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.00032398829430208996,
+          "max_state_kl": 1.4053528308868408
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.00013902613659114114,
+          "max_state_kl": 0.8879072666168213
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 7.724092990241928e-05,
+          "max_state_kl": 0.7471315860748291
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 5.225482885069005e-05,
+          "max_state_kl": 0.7161251306533813
+        },
+        {
+          "accepted": true,
+          "reasons": [],
+          "mean_kl": 3.6409187079080786e-05,
+          "max_state_kl": 0.4925374686717987
+        }
+      ],
+      "final_rng": {
+        "bit_generator": "PCG64",
+        "state": {
+          "state": 83830324702233720868068283841167165539,
+          "inc": 177872769690368037813286698154648419643
+        },
+        "has_uint32": 1,
+        "uinteger": 3687717065
+      },
+      "pipeline": {
+        "prefetch_batches": 2,
+        "measurement_workers": 4,
+        "numerical_prepacking": true,
+        "cache_policy_batches": true,
+        "numerical_disk_bytes": 2458834760,
+        "numerical_gathers": 2163,
+        "policy_cache_disk_bytes": 0,
+        "policy_cache_hits": 0,
+        "policy_cache_device": "/GPU:0",
+        "policy_cache_device_budget_bytes": 8589934592,
+        "policy_cache_device_bytes": 6229903445,
+        "policy_cache_device_uploads": 167,
+        "policy_cache_device_tensors": 3507,
+        "policy_cache_device_hits": 2004,
+        "policy_cache_device_fallback_batches": 0,
+        "policy_cache_device_fallback_bytes": 0
+      },
+      "passive_memory": {
+        "boundary_seconds": 160.401368201,
+        "sampled_points_during_update": 159,
+        "sampler_errors": [],
+        "process_major_faults": 17,
+        "process_minor_faults": 1465538,
+        "process_user_seconds": 176.25326600000002,
+        "process_system_seconds": 65.637994,
+        "linux_system_swapout_pages": 0,
+        "linux_system_swapin_pages": 17,
+        "lifetime_peak_rss_mib": 5882.94140625,
+        "sampled_process_rss_peak_mib": 5860.7421875,
+        "sampled_process_swap_peak_mib": 0.0,
+        "sampled_system_available_min_mib": 11994.71484375,
+        "sampled_system_swap_used_peak_mib": 78.265625,
+        "process_io_available": false,
+        "linux_system_memory_psi_some_microseconds": 0,
+        "linux_system_memory_psi_some_percent": 0.0,
+        "linux_system_memory_psi_full_microseconds": 0,
+        "linux_system_memory_psi_full_percent": 0.0,
+        "linux_system_io_psi_some_microseconds": 42074,
+        "linux_system_io_psi_some_percent": 0.026230449572772218,
+        "linux_system_io_psi_full_microseconds": 41314,
+        "linux_system_io_psi_full_percent": 0.025756638153004503,
+        "process_io_unavailable": "[Errno 2] No such file or directory: '/proc/self/io'",
+        "interpretation": "Linux passive counters. Swap and PSI are system-wide and may include unrelated work; Windows host paging is not measured. Peak RSS is a process lifetime high-water mark that includes model loading/compilation and mapped pages, not incremental cache RAM. Sampled update RSS is also total resident process memory, not additional cache RAM."
+      },
+      "passive_gpu": {
+        "samples_during_update": 307,
+        "timestamp_timezone": "America/Phoenix",
+        "interpretation": "Sampled busy/activity percentage, not FLOPS, occupancy or available compute capacity. VRAM includes TensorFlow allocator retention and other GPU users, not just logical input payloads.",
+        "gpu_activity_percent": {
+          "mean": 30.925081433224754,
+          "minimum": 0.0,
+          "maximum": 67.0,
+          "p10": 21.0,
+          "p90": 38.400000000000034
+        },
+        "memory_activity_percent": {
+          "mean": 8.04885993485342,
+          "minimum": 0.0,
+          "maximum": 56.0,
+          "p10": 3.0,
+          "p90": 13.0
+        },
+        "vram_used_mib": {
+          "mean": 8248.7003257329,
+          "minimum": 743.0,
+          "maximum": 8961.0,
+          "p10": 8919.0,
+          "p90": 8961.0
+        },
+        "vram_total_mib": {
+          "mean": 24564.0,
+          "minimum": 24564.0,
+          "maximum": 24564.0,
+          "p10": 24564.0,
+          "p90": 24564.0
+        },
+        "power_watts": {
+          "mean": 56.086416938110744,
+          "minimum": 14.36,
+          "maximum": 83.36,
+          "p10": 50.186,
+          "p90": 69.44400000000002
+        },
+        "sm_clock_mhz": {
+          "mean": 1150.4071661237786,
+          "minimum": 210.0,
+          "maximum": 2535.0,
+          "p10": 759.0,
+          "p90": 1890.0
+        },
+        "memory_clock_mhz": {
+          "mean": 5230.983713355049,
+          "minimum": 405.0,
+          "maximum": 10251.0,
+          "p10": 810.0,
+          "p90": 10251.0
+        }
+      }
+    },
+    {
+      "label": "2-control",
+      "instrumented": false,
+      "seconds": 153.60332945499977,
+      "process_cpu_seconds": 227.522976949,
+      "work": {
+        "samples": 85199,
+        "accepted_steps": 334,
+        "rejected_epochs": 8,
+        "critic_steps": 157,
+        "optimizer_steps": 13289,
+        "critic_optimizer_steps": 6437
+      },
+      "guard_decisions": [
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.0019901920842854905,
+          "max_state_kl": 16.02872657775879
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.0008248421569297674,
+          "max_state_kl": 8.433032989501953
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.00019832860847765997,
+          "max_state_kl": 2.947995185852051
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 9.282639311170764e-05,
+          "max_state_kl": 1.2585790157318115
+        },
+        {
+          "accepted": true,
+          "reasons": [],
+          "mean_kl": 3.489853426377035e-05,
+          "max_state_kl": 0.4655936360359192
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.0005698119034619293,
+          "max_state_kl": 2.9529290199279785
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.00032316255372084716,
+          "max_state_kl": 1.3988534212112427
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.00013392238383172993,
+          "max_state_kl": 1.03068208694458
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 7.710752160976628e-05,
+          "max_state_kl": 0.7449610233306885
+        },
+        {
+          "accepted": true,
+          "reasons": [],
+          "mean_kl": 4.2737616067417323e-05,
+          "max_state_kl": 0.4765738248825073
+        }
+      ],
+      "final_rng": {
+        "bit_generator": "PCG64",
+        "state": {
+          "state": 83830324702233720868068283841167165539,
+          "inc": 177872769690368037813286698154648419643
+        },
+        "has_uint32": 1,
+        "uinteger": 3687717065
+      },
+      "pipeline": {
+        "prefetch_batches": 2,
+        "measurement_workers": 4,
+        "numerical_prepacking": true,
+        "cache_policy_batches": true,
+        "numerical_disk_bytes": 2458834760,
+        "numerical_gathers": 1996,
+        "policy_cache_disk_bytes": 0,
+        "policy_cache_hits": 0,
+        "policy_cache_device": "/GPU:0",
+        "policy_cache_device_budget_bytes": 8589934592,
+        "policy_cache_device_bytes": 6229903445,
+        "policy_cache_device_uploads": 167,
+        "policy_cache_device_tensors": 3507,
+        "policy_cache_device_hits": 1837,
+        "policy_cache_device_fallback_batches": 0,
+        "policy_cache_device_fallback_bytes": 0
+      },
+      "passive_memory": {
+        "boundary_seconds": 153.592990446,
+        "sampled_points_during_update": 151,
+        "sampler_errors": [],
+        "process_major_faults": 1,
+        "process_minor_faults": 1902382,
+        "process_user_seconds": 169.102921,
+        "process_system_seconds": 58.410267,
+        "linux_system_swapout_pages": 0,
+        "linux_system_swapin_pages": 23,
+        "lifetime_peak_rss_mib": 5850.37890625,
+        "sampled_process_rss_peak_mib": 5800.015625,
+        "sampled_process_swap_peak_mib": 0.0,
+        "sampled_system_available_min_mib": 12021.06640625,
+        "sampled_system_swap_used_peak_mib": 78.1953125,
+        "process_io_available": false,
+        "linux_system_memory_psi_some_microseconds": 0,
+        "linux_system_memory_psi_some_percent": 0.0,
+        "linux_system_memory_psi_full_microseconds": 0,
+        "linux_system_memory_psi_full_percent": 0.0,
+        "linux_system_io_psi_some_microseconds": 36559,
+        "linux_system_io_psi_some_percent": 0.023802518522388797,
+        "linux_system_io_psi_full_microseconds": 35404,
+        "linux_system_io_psi_full_percent": 0.023050531080353754,
+        "process_io_unavailable": "[Errno 2] No such file or directory: '/proc/self/io'",
+        "interpretation": "Linux passive counters. Swap and PSI are system-wide and may include unrelated work; Windows host paging is not measured. Peak RSS is a process lifetime high-water mark that includes model loading/compilation and mapped pages, not incremental cache RAM. Sampled update RSS is also total resident process memory, not additional cache RAM."
+      },
+      "passive_gpu": {
+        "samples_during_update": 294,
+        "timestamp_timezone": "America/Phoenix",
+        "interpretation": "Sampled busy/activity percentage, not FLOPS, occupancy or available compute capacity. VRAM includes TensorFlow allocator retention and other GPU users, not just logical input payloads.",
+        "gpu_activity_percent": {
+          "mean": 30.85034013605442,
+          "minimum": 0.0,
+          "maximum": 69.0,
+          "p10": 19.0,
+          "p90": 45.69999999999999
+        },
+        "memory_activity_percent": {
+          "mean": 9.173469387755102,
+          "minimum": 0.0,
+          "maximum": 51.0,
+          "p10": 3.0,
+          "p90": 24.0
+        },
+        "vram_used_mib": {
+          "mean": 8252.068027210884,
+          "minimum": 743.0,
+          "maximum": 8961.0,
+          "p10": 8919.0,
+          "p90": 8961.0
+        },
+        "vram_total_mib": {
+          "mean": 24564.0,
+          "minimum": 24564.0,
+          "maximum": 24564.0,
+          "p10": 24564.0,
+          "p90": 24564.0
+        },
+        "power_watts": {
+          "mean": 57.563877551020404,
+          "minimum": 16.33,
+          "maximum": 109.97,
+          "p10": 46.876,
+          "p90": 70.976
+        },
+        "sm_clock_mhz": {
+          "mean": 1197.8061224489795,
+          "minimum": 210.0,
+          "maximum": 2715.0,
+          "p10": 780.0,
+          "p90": 1936.4999999999995
+        },
+        "memory_clock_mhz": {
+          "mean": 5070.775510204082,
+          "minimum": 405.0,
+          "maximum": 10251.0,
+          "p10": 810.0,
+          "p90": 10251.0
+        }
+      }
+    }
+  ],
+  "comparison": {
+    "same_initial_states": true,
+    "same_work": false,
+    "same_guard_sequence": false,
+    "same_final_rng": true,
+    "array_groups": {
+      "model": {
+        "array_count": 86,
+        "elements": 367714,
+        "max_absolute": 0.00018278881907463074,
+        "largest_difference_array": "model_50",
+        "relative_l2": 0.0001063235945393805,
+        "bitwise_equal": false,
+        "within_declared_envelope": true
+      },
+      "actor_optimizer": {
+        "array_count": 90,
+        "elements": 251460,
+        "max_absolute": 0.0012996800942346454,
+        "largest_difference_array": "actor_optimizer_14",
+        "relative_l2": 8.138566430280348e-07,
+        "bitwise_equal": false,
+        "within_declared_envelope": true
+      },
+      "critic_optimizer": {
+        "array_count": 86,
+        "elements": 483972,
+        "max_absolute": 0.0002854272024706006,
+        "largest_difference_array": "critic_optimizer_14",
+        "relative_l2": 3.0300938107909815e-07,
+        "bitwise_equal": false,
+        "within_declared_envelope": true
+      }
+    },
+    "all_final_arrays_within_declared_envelope": true,
+    "timing_comparable": false
+  },
+  "host_profile": {
+    "raw_events": 205768,
+    "raw_events_sha256": "f85eadd877a89973423e3dce4520f48eb408ba6f461a11f4ac6fd5e86b09402d",
+    "summaries_recomputed": true,
+    "spans": {
+      "checkpoint_restore_and_compile": {
+        "calls": 1,
+        "thread_wall_seconds": 7.69471023,
+        "wall_union_seconds": 7.69471023,
+        "thread_cpu_seconds": 6.446934604
+      },
+      "trajectory_decode_next": {
+        "calls": 85999,
+        "thread_wall_seconds": 4.69888336,
+        "wall_union_seconds": 4.69888336,
+        "thread_cpu_seconds": 4.504319845
+      },
+      "numeric_append": {
+        "calls": 85199,
+        "thread_wall_seconds": 3.709362332,
+        "wall_union_seconds": 3.709362332,
+        "thread_cpu_seconds": 3.540645236
+      },
+      "trajectory_reader_close": {
+        "calls": 800,
+        "thread_wall_seconds": 0.000559744,
+        "wall_union_seconds": 0.000559744,
+        "thread_cpu_seconds": 0.000502116
+      },
+      "numeric_finish": {
+        "calls": 1,
+        "thread_wall_seconds": 0.11955164,
+        "wall_union_seconds": 0.11955164,
+        "thread_cpu_seconds": 0.11474798
+      },
+      "initial_rollout_scan": {
+        "calls": 1,
+        "thread_wall_seconds": 11.096927888,
+        "wall_union_seconds": 11.096927888,
+        "thread_cpu_seconds": 10.622448864
+      },
+      "packing_lock_wait": {
+        "calls": 4167,
+        "thread_wall_seconds": 8.493966592,
+        "wall_union_seconds": 8.493654521,
+        "thread_cpu_seconds": 0.008811852
+      },
+      "device_policy_cache_get": {
+        "calls": 2171,
+        "thread_wall_seconds": 0.014163062,
+        "wall_union_seconds": 0.014163062,
+        "thread_cpu_seconds": 0.013566463
+      },
+      "host_policy_cache_get": {
+        "calls": 167,
+        "thread_wall_seconds": 0.000155766,
+        "wall_union_seconds": 0.000155766,
+        "thread_cpu_seconds": 0.000148598
+      },
+      "numeric_gather": {
+        "calls": 2163,
+        "thread_wall_seconds": 83.551592796,
+        "wall_union_seconds": 83.551592796,
+        "thread_cpu_seconds": 56.643356898
+      },
+      "device_policy_cache_put": {
+        "calls": 167,
+        "thread_wall_seconds": 2.649257408,
+        "wall_union_seconds": 2.649257408,
+        "thread_cpu_seconds": 2.100969094
+      },
+      "policy_cache_admission": {
+        "calls": 167,
+        "thread_wall_seconds": 2.652202394,
+        "wall_union_seconds": 2.652202394,
+        "thread_cpu_seconds": 2.103590593
+      },
+      "packing_lock_held": {
+        "calls": 4167,
+        "thread_wall_seconds": 86.563663269,
+        "wall_union_seconds": 86.563663269,
+        "thread_cpu_seconds": 59.051670964
+      },
+      "batch_pack": {
+        "calls": 4167,
+        "thread_wall_seconds": 95.138916384,
+        "wall_union_seconds": 86.66681352,
+        "thread_cpu_seconds": 59.136397703
+      },
+      "measure_with_drift_call": {
+        "calls": 334,
+        "thread_wall_seconds": 17.321800178,
+        "wall_union_seconds": 7.467088598,
+        "thread_cpu_seconds": 0.312798113
+      },
+      "measure_with_drift_result_sync": {
+        "calls": 334,
+        "thread_wall_seconds": 0.243925701,
+        "wall_union_seconds": 0.234474506,
+        "thread_cpu_seconds": 0.074565131
+      },
+      "policy_batch_evaluate": {
+        "calls": 2171,
+        "thread_wall_seconds": 108.623408817,
+        "wall_union_seconds": 30.932760092,
+        "thread_cpu_seconds": 2.082064841
+      },
+      "policy_result_wait": {
+        "calls": 2184,
+        "thread_wall_seconds": 32.423632793,
+        "wall_union_seconds": 32.423632793,
+        "thread_cpu_seconds": 5.062770559
+      },
+      "guard_scan": {
+        "calls": 13,
+        "thread_wall_seconds": 32.807178134,
+        "wall_union_seconds": 32.807178134,
+        "thread_cpu_seconds": 5.346152166
+      },
+      "host_policy_cache_finish": {
+        "calls": 1,
+        "thread_wall_seconds": 6.646e-06,
+        "wall_union_seconds": 6.646e-06,
+        "thread_cpu_seconds": 6.34e-06
+      },
+      "device_policy_cache_finish": {
+        "calls": 1,
+        "thread_wall_seconds": 2.933e-06,
+        "wall_union_seconds": 2.933e-06,
+        "thread_cpu_seconds": 2.789e-06
+      },
+      "critic_batch_wait": {
+        "calls": 157,
+        "thread_wall_seconds": 0.039680448,
+        "wall_union_seconds": 0.039680448,
+        "thread_cpu_seconds": 0.011042176
+      },
+      "snapshot_call": {
+        "calls": 2,
+        "thread_wall_seconds": 0.054028557,
+        "wall_union_seconds": 0.054028557,
+        "thread_cpu_seconds": 0.051202488
+      },
+      "actor_batch_wait": {
+        "calls": 1848,
+        "thread_wall_seconds": 0.405936841,
+        "wall_union_seconds": 0.405936841,
+        "thread_cpu_seconds": 0.114365149
+      },
+      "critic_step_call": {
+        "calls": 157,
+        "thread_wall_seconds": 19.660769311,
+        "wall_union_seconds": 19.660769311,
+        "thread_cpu_seconds": 4.264426487
+      },
+      "step_call": {
+        "calls": 1837,
+        "thread_wall_seconds": 113.12426951,
+        "wall_union_seconds": 113.12426951,
+        "thread_cpu_seconds": 32.823404606
+      },
+      "critic_step_result_sync": {
+        "calls": 157,
+        "thread_wall_seconds": 0.090105998,
+        "wall_union_seconds": 0.090105998,
+        "thread_cpu_seconds": 0.043019588
+      },
+      "step_result_sync": {
+        "calls": 1837,
+        "thread_wall_seconds": 2.458040721,
+        "wall_union_seconds": 2.458040721,
+        "thread_cpu_seconds": 2.205332078
+      },
+      "optimizer_pass": {
+        "calls": 12,
+        "thread_wall_seconds": 136.016226602,
+        "wall_union_seconds": 116.243869248,
+        "thread_cpu_seconds": 39.654464674
+      },
+      "critic_fit": {
+        "calls": 1,
+        "thread_wall_seconds": 19.828134048,
+        "wall_union_seconds": 19.828134048,
+        "thread_cpu_seconds": 4.337835451
+      },
+      "critic_future_wait": {
+        "calls": 1687,
+        "thread_wall_seconds": 0.002806475,
+        "wall_union_seconds": 0.002806475,
+        "thread_cpu_seconds": 0.002598197
+      },
+      "measure_actor_with_drift_call": {
+        "calls": 1837,
+        "thread_wall_seconds": 89.425344147,
+        "wall_union_seconds": 23.306886812,
+        "thread_cpu_seconds": 1.172231041
+      },
+      "measure_actor_with_drift_result_sync": {
+        "calls": 1837,
+        "thread_wall_seconds": 1.500161957,
+        "wall_union_seconds": 1.255630472,
+        "thread_cpu_seconds": 0.412947322
+      },
+      "guard_predicate": {
+        "calls": 11,
+        "thread_wall_seconds": 0.000171106,
+        "wall_union_seconds": 0.000171106,
+        "thread_cpu_seconds": 0.000163871
+      },
+      "restore_call": {
+        "calls": 9,
+        "thread_wall_seconds": 0.06663134,
+        "wall_union_seconds": 0.06663134,
+        "thread_cpu_seconds": 0.061159582
+      },
+      "device_policy_cache_close": {
+        "calls": 1,
+        "thread_wall_seconds": 0.003262995,
+        "wall_union_seconds": 0.003262995,
+        "thread_cpu_seconds": 0.003118429
+      },
+      "host_policy_cache_close": {
+        "calls": 1,
+        "thread_wall_seconds": 4.5032e-05,
+        "wall_union_seconds": 4.5032e-05,
+        "thread_cpu_seconds": 4.3006e-05
+      },
+      "numeric_close": {
+        "calls": 1,
+        "thread_wall_seconds": 0.1287692,
+        "wall_union_seconds": 0.1287692,
+        "thread_cpu_seconds": 0.122468782
+      },
+      "full_update": {
+        "calls": 1,
+        "thread_wall_seconds": 160.395311985,
+        "wall_union_seconds": 160.395311985,
+        "thread_cpu_seconds": 51.570754057
+      }
+    },
+    "full_update_scope_seconds": 160.395311985,
+    "main_thread_phase_partition": [
+      {
+        "key": "initial_rollout_scan",
+        "label": "Initial rollout scan + numerical store",
+        "seconds": 11.096927888,
+        "intervals": 1,
+        "thread_id": 123581318474624
+      },
+      {
+        "key": "optimizer_pass",
+        "label": "Actor optimizer passes",
+        "seconds": 116.189329289,
+        "intervals": 11,
+        "thread_id": 123581318474624
+      },
+      {
+        "key": "guard_scan",
+        "label": "Policy-check scans",
+        "seconds": 32.807178134,
+        "intervals": 13,
+        "thread_id": 123581318474624
+      },
+      {
+        "key": "critic_future_wait",
+        "label": "Final critic completion wait",
+        "seconds": 5.02e-06,
+        "intervals": 1,
+        "thread_id": 123581318474624
+      },
+      {
+        "key": "other",
+        "label": "Other setup, guards, snapshots and cleanup",
+        "seconds": 0.3018716539999957
+      }
+    ],
+    "observed_gather_overlap_with_actor_passes_seconds": 80.237991777,
+    "observed_gather_outside_actor_passes_seconds": 3.3136010189999894,
+    "accounting": "Main-thread outer phase partition is exclusive. All lower-level/threaded span unions overlap and must not be added to phases or each other. Host intervals do not establish GPU idle time or kernel causation."
+  },
+  "control_boundaries": {
+    "raw_events": 2,
+    "raw_events_sha256": "932b5c1edc1a19fc469822bdfff4c8e3e823e8a331fc2b582ca429e348ed4dca",
+    "summaries_recomputed": true,
+    "spans": {
+      "checkpoint_restore_and_compile": {
+        "calls": 1,
+        "thread_wall_seconds": 7.738692864,
+        "wall_union_seconds": 7.738692864,
+        "thread_cpu_seconds": 6.560301995
+      },
+      "full_update": {
+        "calls": 1,
+        "thread_wall_seconds": 153.58591487,
+        "wall_union_seconds": 153.58591487,
+        "thread_cpu_seconds": 55.240501982
+      }
+    },
+    "full_update_scope_seconds": 153.58591487,
+    "main_thread_phase_partition": [
+      {
+        "key": "initial_rollout_scan",
+        "label": "Initial rollout scan + numerical store",
+        "seconds": 0.0,
+        "intervals": 0,
+        "thread_id": 131640271457152
+      },
+      {
+        "key": "optimizer_pass",
+        "label": "Actor optimizer passes",
+        "seconds": 0.0,
+        "intervals": 0,
+        "thread_id": 131640271457152
+      },
+      {
+        "key": "guard_scan",
+        "label": "Policy-check scans",
+        "seconds": 0.0,
+        "intervals": 0,
+        "thread_id": 131640271457152
+      },
+      {
+        "key": "critic_future_wait",
+        "label": "Final critic completion wait",
+        "seconds": 0.0,
+        "intervals": 0,
+        "thread_id": 131640271457152
+      },
+      {
+        "key": "other",
+        "label": "Other setup, guards, snapshots and cleanup",
+        "seconds": 153.58591487
+      }
+    ],
+    "observed_gather_overlap_with_actor_passes_seconds": 0.0,
+    "observed_gather_outside_actor_passes_seconds": 0.0,
+    "accounting": "Main-thread outer phase partition is exclusive. All lower-level/threaded span unions overlap and must not be added to phases or each other. Host intervals do not establish GPU idle time or kernel causation."
+  },
+  "backup_verification": {
+    "sha256": "f295f959081ad4d7f3ba7cff9ff0546e0d7e9264288d3f78ec0194d78a50d4ae",
+    "bytes": 9290387,
+    "files": 23,
+    "npz_crc_passed": 2,
+    "gzip_crc_passed": true
+  },
+  "linux_cleanup": {
+    "verified": true,
+    "utc": "2026-10-26T15:57:39.800406+00:00",
+    "issues": [],
+    "phases": [
+      {
+        "phase": "device-cache-profile-20261026",
+        "status": "complete",
+        "runtime_files": 138,
+        "pinned_runtime_unchanged": true,
+        "checkpoints_unchanged": 205
+      }
+    ],
+    "remaining": [],
+    "owned_group_members": [],
+    "shared_lock_free": true,
+    "gpu_compute_processes": ""
+  },
+  "separately_authorized_native_day_guard": {
+    "verified_utc": "2026-10-26T15:57:40.9693100Z",
+    "task_state": "Running",
+    "state": {
+      "schema_version": 1,
+      "run_id": "day-awake-20261026",
+      "task_name": "MTGO-RustMage-Day-Awake-20261026",
+      "manifest_sha256": "ceccfe15c230d7b7af0982cca997695989d4c4887e121bc58f12573dcef093c1",
+      "status": "holding",
+      "reason": "user_requested_rest_of_day",
+      "utc": "2026-10-26T15:57:35.2905048Z",
+      "started_utc": "2026-10-26T15:05:05.5365902Z",
+      "expires_utc": "2026-10-27T07:00:00.0000000Z",
+      "maximum_seconds": 64800,
+      "windows_pid": 17460,
+      "creation_utc": "2026-10-26T15:05:04.7271020Z"
+    },
+    "leave_active": "Separately authorized until midnight Arizona; benchmark cleanup does not release this request."
+  },
+  "local_cleanup": {
+    "verified": true,
+    "utc": "2026-10-26T15:58:45.889639+00:00",
+    "released_owner": {
+      "pid": 3643134,
+      "pgid": 3643134,
+      "sid": 3643134,
+      "start_ticks": 51937715,
+      "uid": 1000
+    },
+    "remaining_owned_group_members": [],
+    "temporary_laptop_inhibitor_gone": true,
+    "day_awake_windows_guard_left_running": true
+  },
+  "artifacts": {
+    "1-profile/report.json": {
+      "bytes": 214796,
+      "sha256": "1c8608b121c703b34bf9f2d13c964cf5fda9802a2a24fa28cceea267320a2416"
+    },
+    "1-profile/result-state.npz": {
+      "bytes": 4481222,
+      "sha256": "5d754ecbe22fdea785c63fe49173eb891b945f82cec727729cf27879b90d1ff1"
+    },
+    "1-profile/os-samples.json": {
+      "bytes": 1779004,
+      "sha256": "75361606615600e931f7c61851e51988f516d88cd2f68c1b3b874225f812efc1"
+    },
+    "1-profile/nvidia-smi.csv": {
+      "bytes": 19229,
+      "sha256": "b7c0f93264cd55eecc36f4500d20f545e85f4200c949b5034fe9dda40e37c7cc"
+    },
+    "1-profile/host-spans.json.gz": {
+      "bytes": 3069474,
+      "sha256": "f85eadd877a89973423e3dce4520f48eb408ba6f461a11f4ac6fd5e86b09402d"
+    },
+    "2-control/report.json": {
+      "bytes": 205567,
+      "sha256": "f04e8e5429cb6063311bc570b089e39ce267b9d0fa2c146f773897b60b510efe"
+    },
+    "2-control/result-state.npz": {
+      "bytes": 4481222,
+      "sha256": "d3144c445bb4856500f62c0a4ed780d751afed00a7ee1a3bcb9d176b75b186a8"
+    },
+    "2-control/os-samples.json": {
+      "bytes": 1705026,
+      "sha256": "0cecaab190c109131105ccbfd000518959fd2c874734ac54150dd2bb37b8de4d"
+    },
+    "2-control/nvidia-smi.csv": {
+      "bytes": 18454,
+      "sha256": "c7fb776ec53417346b5a641d29fa99c8f3e8d6d71a9ebab57f413b76745471c6"
+    },
+    "2-control/host-spans.json.gz": {
+      "bytes": 262,
+      "sha256": "932b5c1edc1a19fc469822bdfff4c8e3e823e8a331fc2b582ca429e348ed4dca"
+    }
+  },
+  "analysis_sources_sha256": {
+    "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/device-cache-profile-20261026/analyze.py": "a270b32db7d040c9f6fe03a280b692af7752acfe10236edfc3a8ff84d97551e3",
+    "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/device-policy-cache-20261026/analyze.py": "4186428f72016b0b0889bed2f4526d43bfdaa63fd6c03e38260f79e13fa1ae0e"
+  },
+  "interpretation": {
+    "timing": "The profile and control have unequal work or guard/RNG outcomes. Preserve both timings; their difference cannot estimate profiling overhead or optimization speedup.",
+    "phase_partition": "Largest exclusive caller phase identifies where wall time is spent; nested spans refine that phase without being additive savings.",
+    "gather": "Numerical gather can overlap TF calls. Input-queue wait is the direct observed caller stall; gather duration alone is not removable wall time.",
+    "norm_sync": "Explicit scalar norm result synchronization is measured separately from the TF function call. Deferring norms can only target the observed explicit boundary; internal TF synchronization remains inside calls.",
+    "next_candidate": "Actor order is fixed across backtracking attempts. Epoch-local immutable GPU input caching can remove repeated numerical gather and CPU-to-GPU preparation while preserving every optimizer pass; benchmark required."
+  },
+  "limitations": [
+    "One frozen round and one profile/control pair; no speedup confidence interval or learning-strength conclusion.",
+    "No GPU kernel trace or transfer-time attribution. Host TF-call wall time includes dispatch, execution and internal synchronization; it is not pure backprop time.",
+    "Thread wall sums and interval unions overlap across nested scopes, critic/actor and preparation workers. Only the explicitly exclusive caller-phase partition is additive.",
+    "Linux memory/PSI and NVIDIA samples are passive; system-wide noise and wall-clock sample adjustments are possible. Windows paging is unmeasured.",
+    "Resident game-generation workers are absent; production memory pressure and end-to-end training performance remain unmeasured.",
+    "Device cache limits count logical inputs, not allocator retention, activations, weights or total VRAM."
+  ]
+}

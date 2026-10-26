@@ -1,0 +1,86 @@
+{
+  "status": "passed",
+  "gpu_devices": [
+    "/job:localhost/replica:0/task:0/device:GPU:0",
+    "/job:localhost/replica:0/task:0/device:GPU:0"
+  ],
+  "aggregate_assertions": 1,
+  "per_gradient_checknumerics": 0,
+  "mutation_ops_guarded": 7,
+  "validation_graph_placements": [
+    {
+      "name": "IsFinite",
+      "op": "IsFinite",
+      "device": ""
+    },
+    {
+      "name": "All",
+      "op": "All",
+      "device": ""
+    },
+    {
+      "name": "IsFinite_1",
+      "op": "IsFinite",
+      "device": ""
+    },
+    {
+      "name": "All_1",
+      "op": "All",
+      "device": ""
+    },
+    {
+      "name": "stack",
+      "op": "Pack",
+      "device": ""
+    },
+    {
+      "name": "All_2",
+      "op": "All",
+      "device": ""
+    },
+    {
+      "name": "Assert",
+      "op": "Assert",
+      "device": ""
+    },
+    {
+      "name": "global_norm/stack",
+      "op": "Pack",
+      "device": ""
+    }
+  ],
+  "invalid_cases": [
+    {
+      "position": 0,
+      "invalid": "nan",
+      "rejected_before_mutation": true
+    },
+    {
+      "position": 0,
+      "invalid": "inf",
+      "rejected_before_mutation": true
+    },
+    {
+      "position": 0,
+      "invalid": "-inf",
+      "rejected_before_mutation": true
+    },
+    {
+      "position": 1,
+      "invalid": "nan",
+      "rejected_before_mutation": true
+    },
+    {
+      "position": 1,
+      "invalid": "inf",
+      "rejected_before_mutation": true
+    },
+    {
+      "position": 1,
+      "invalid": "-inf",
+      "rejected_before_mutation": true
+    }
+  ],
+  "finite_steps": 12,
+  "finite_model_and_Adam_max_abs_difference": 0.0
+}

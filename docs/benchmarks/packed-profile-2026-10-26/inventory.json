@@ -1,0 +1,89 @@
+{
+  "utc": "2026-10-26T14:00:08.380742+00:00",
+  "files": {
+    "backup-proof.json": {
+      "sha256": "6bbca99fc90ce80b4ac570fa530f11b54941515cb3530729de6170b32a872edc",
+      "bytes": 169
+    },
+    "host-backup-proof.json": {
+      "sha256": "8a7694ceade8209418670a6b952b36e3aa340e9ab885e6af884d3d9dd1d6158f",
+      "bytes": 168
+    },
+    "host-manifest.json": {
+      "sha256": "31a78cbf799f4f02f740b6f89bb7c059838c6a16efbb47847233dfa25bfc95e2",
+      "bytes": 34106
+    },
+    "host-native-cleanup.json": {
+      "sha256": "7a19922ac80f55e4aa4a665235675a255b6bf126e41eab67b50f3886b0056ba8",
+      "bytes": 502
+    },
+    "independent-audit.json": {
+      "sha256": "ba988da6ee53e28a4bfe0d4dc57cdfde06853f1c71cde22beec4ae39d97df007",
+      "bytes": 967
+    },
+    "initial-manifest.json": {
+      "sha256": "33ca8247ea499d810f1453f0524f547f84d204fbc57054ea0c011a95406d03ed",
+      "bytes": 34146
+    },
+    "linux-cleanup.json": {
+      "sha256": "3f3d90357f68b4bd8c5dfb95a7cd04ba2437158d7261cbb54aa55e0f8b7ea31d",
+      "bytes": 772
+    },
+    "local-cleanup.json": {
+      "sha256": "525491a40f90ba5e157e76883794abdce70745426191e16f6e56643c0742386a",
+      "bytes": 305
+    },
+    "memory-storage.png": {
+      "sha256": "ef271c3458bb9cc2e809e712c22c39b6533e2c4fe8ef3894ba644f032be162cc",
+      "bytes": 192984
+    },
+    "memory-storage.svg": {
+      "sha256": "3ac6d03caf8eed9e38aec19d1bed2d9e78bde4c80c1f4ee10f9d920107ed1d01",
+      "bytes": 121061
+    },
+    "optimized-pipeline.png": {
+      "sha256": "09f82247d37f2011b2f4caf8de5b011fc067bbf16d1766f7228c1c972dbbf2f1",
+      "bytes": 316915
+    },
+    "optimized-pipeline.svg": {
+      "sha256": "1bc5f43a4d1b22e1008faaf0c654d093c27c6a8968aff1b97b93fc9e86fc9ff6",
+      "bytes": 139858
+    },
+    "results.json": {
+      "sha256": "e69602e43a612aca224673926e86c494e6a2f030d621392df68b58eb72934a4f",
+      "bytes": 44774
+    },
+    "trace-analysis/gpu-waits.png": {
+      "sha256": "a8b82346619982162c5ac01fb2d8062cf03af2a309f6d7922419138714c2f965",
+      "bytes": 106401
+    },
+    "trace-analysis/gpu-waits.svg": {
+      "sha256": "e892980f670a29fad2719b99b2feea3b1d778d05522394744f0936250ba7eb05",
+      "bytes": 230408
+    },
+    "trace-analysis/pipeline-profile.png": {
+      "sha256": "425930f4a4c256b91820166f3aa943282af283e4879996d17e2739920927bf7a",
+      "bytes": 255737
+    },
+    "trace-analysis/pipeline-profile.svg": {
+      "sha256": "f8946ab9df56cbc573e2e459dbdcf8ffd6b47fc43df73627c76f269e94642839",
+      "bytes": 125524
+    },
+    "trace-analysis/summary.json": {
+      "sha256": "4fc0ed98511f1b9ec62439d23a4fd19a54148b4bd42fa5c92b48ad8f372e5a11",
+      "bytes": 22905
+    },
+    "trace-manifest.json": {
+      "sha256": "6051ea93ca0717ffe6645bfcb640a2091497fe643e55757126339436c5e0db56",
+      "bytes": 34410
+    },
+    "trace-native-cleanup.json": {
+      "sha256": "80765cef05402e2fc1076417bd9fc9cfd65a920d841eac633010651ed51c4aa1",
+      "bytes": 502
+    },
+    "validation.json": {
+      "sha256": "7e08fac6d0cf7cf1c20e2fe65c679607c80562d1819801e90bc3abad208dbd91",
+      "bytes": 862
+    }
+  }
+}

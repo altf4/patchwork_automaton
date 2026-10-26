@@ -1,0 +1,8111 @@
+{
+  "status": "passed",
+  "reviewer": "/root/device_cache_review",
+  "reviewed_utc": "2026-10-26T17:08:33.989818+00:00",
+  "manifest_sha256": "e929303c60ef418d7b9724c2d62002c6ecad99cd3bc89dd801d3de6fb1a5ed61",
+  "checks_passed": 1984,
+  "checks": [
+    {
+      "check": "reviewed manifest unchanged",
+      "passed": true
+    },
+    {
+      "check": "backup manifest exact",
+      "passed": true
+    },
+    {
+      "check": "backup manifest SHA exact",
+      "passed": true
+    },
+    {
+      "check": "independent predeployment review bound",
+      "passed": true
+    },
+    {
+      "check": "frozen deployment coordinator.py",
+      "passed": true
+    },
+    {
+      "check": "frozen deployment benchmark_actor_cache_soak.py",
+      "passed": true
+    },
+    {
+      "check": "terminal successful reports",
+      "passed": true
+    },
+    {
+      "check": "coordinator manifest binding",
+      "passed": true
+    },
+    {
+      "check": "terminal child cleanup and lock receipt",
+      "passed": true
+    },
+    {
+      "check": "exactly one finite driver",
+      "passed": true
+    },
+    {
+      "check": "fixed consecutive update plan",
+      "passed": true
+    },
+    {
+      "check": "diagnostic claims bounded",
+      "passed": true
+    },
+    {
+      "check": "no_new_games",
+      "passed": true
+    },
+    {
+      "check": "source_checkpoints_read_only",
+      "passed": true
+    },
+    {
+      "check": "no_state_resets",
+      "passed": true
+    },
+    {
+      "check": "no_clear_session",
+      "passed": true
+    },
+    {
+      "check": "no_forced_gc_between_updates",
+      "passed": true
+    },
+    {
+      "check": "allocator_peak_reset_only",
+      "passed": true
+    },
+    {
+      "check": "no trace or optional final forced GC used",
+      "passed": true
+    },
+    {
+      "check": "driver rehashed all protected inputs and implementation",
+      "passed": true
+    },
+    {
+      "check": "coordinator source_report_unchanged",
+      "passed": true
+    },
+    {
+      "check": "coordinator original_runtime_unchanged",
+      "passed": true
+    },
+    {
+      "check": "coordinator base_runtime_unchanged",
+      "passed": true
+    },
+    {
+      "check": "coordinator pinned_runtimes_unchanged",
+      "passed": true
+    },
+    {
+      "check": "205 source checkpoint files intact",
+      "passed": true
+    },
+    {
+      "check": "205 checkpoint hash-manifest entries",
+      "passed": true
+    },
+    {
+      "check": "checkpoint hash-manifest bound",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected critic-optimizer.npz round-0039",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected state.json round-0039",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.manifest.json round-0039",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected optimizer.npz round-0039",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.keras round-0039",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected critic-optimizer.npz round-0002",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected state.json round-0002",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.manifest.json round-0002",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected optimizer.npz round-0002",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.keras round-0002",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected critic-optimizer.npz round-0024",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected state.json round-0024",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.manifest.json round-0024",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected optimizer.npz round-0024",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.keras round-0024",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected critic-optimizer.npz round-0011",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected state.json round-0011",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.manifest.json round-0011",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected optimizer.npz round-0011",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.keras round-0011",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected critic-optimizer.npz round-0014",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected state.json round-0014",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.manifest.json round-0014",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected optimizer.npz round-0014",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.keras round-0014",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected critic-optimizer.npz round-0026",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected state.json round-0026",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.manifest.json round-0026",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected optimizer.npz round-0026",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.keras round-0026",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected critic-optimizer.npz round-0035",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected state.json round-0035",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.manifest.json round-0035",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected optimizer.npz round-0035",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.keras round-0035",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected critic-optimizer.npz round-0040",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected state.json round-0040",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.manifest.json round-0040",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected optimizer.npz round-0040",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.keras round-0040",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected critic-optimizer.npz round-0021",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected state.json round-0021",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.manifest.json round-0021",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected optimizer.npz round-0021",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.keras round-0021",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected critic-optimizer.npz round-0000",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected state.json round-0000",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.manifest.json round-0000",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected optimizer.npz round-0000",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.keras round-0000",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected critic-optimizer.npz round-0012",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected state.json round-0012",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.manifest.json round-0012",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected optimizer.npz round-0012",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.keras round-0012",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected critic-optimizer.npz round-0019",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected state.json round-0019",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.manifest.json round-0019",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected optimizer.npz round-0019",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.keras round-0019",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected critic-optimizer.npz round-0029",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected state.json round-0029",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.manifest.json round-0029",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected optimizer.npz round-0029",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.keras round-0029",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected critic-optimizer.npz round-0006",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected state.json round-0006",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.manifest.json round-0006",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected optimizer.npz round-0006",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.keras round-0006",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected critic-optimizer.npz round-0007",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected state.json round-0007",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.manifest.json round-0007",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected optimizer.npz round-0007",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.keras round-0007",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected critic-optimizer.npz round-0015",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected state.json round-0015",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.manifest.json round-0015",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected optimizer.npz round-0015",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.keras round-0015",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected critic-optimizer.npz round-0028",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected state.json round-0028",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.manifest.json round-0028",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected optimizer.npz round-0028",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.keras round-0028",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected critic-optimizer.npz round-0010",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected state.json round-0010",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.manifest.json round-0010",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected optimizer.npz round-0010",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.keras round-0010",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected critic-optimizer.npz round-0018",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected state.json round-0018",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.manifest.json round-0018",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected optimizer.npz round-0018",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.keras round-0018",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected critic-optimizer.npz round-0013",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected state.json round-0013",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.manifest.json round-0013",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected optimizer.npz round-0013",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.keras round-0013",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected critic-optimizer.npz round-0038",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected state.json round-0038",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.manifest.json round-0038",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected optimizer.npz round-0038",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.keras round-0038",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected critic-optimizer.npz round-0027",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected state.json round-0027",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.manifest.json round-0027",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected optimizer.npz round-0027",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.keras round-0027",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected critic-optimizer.npz round-0025",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected state.json round-0025",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.manifest.json round-0025",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected optimizer.npz round-0025",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.keras round-0025",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected critic-optimizer.npz round-0016",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected state.json round-0016",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.manifest.json round-0016",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected optimizer.npz round-0016",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.keras round-0016",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected critic-optimizer.npz round-0001",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected state.json round-0001",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.manifest.json round-0001",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected optimizer.npz round-0001",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.keras round-0001",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected critic-optimizer.npz round-0031",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected state.json round-0031",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.manifest.json round-0031",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected optimizer.npz round-0031",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.keras round-0031",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected critic-optimizer.npz round-0033",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected state.json round-0033",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.manifest.json round-0033",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected optimizer.npz round-0033",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.keras round-0033",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected critic-optimizer.npz round-0008",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected state.json round-0008",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.manifest.json round-0008",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected optimizer.npz round-0008",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.keras round-0008",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected critic-optimizer.npz round-0004",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected state.json round-0004",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.manifest.json round-0004",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected optimizer.npz round-0004",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.keras round-0004",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected critic-optimizer.npz round-0017",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected state.json round-0017",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.manifest.json round-0017",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected optimizer.npz round-0017",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.keras round-0017",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected critic-optimizer.npz round-0034",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected state.json round-0034",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.manifest.json round-0034",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected optimizer.npz round-0034",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.keras round-0034",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected critic-optimizer.npz round-0020",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected state.json round-0020",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.manifest.json round-0020",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected optimizer.npz round-0020",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.keras round-0020",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected critic-optimizer.npz round-0032",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected state.json round-0032",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.manifest.json round-0032",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected optimizer.npz round-0032",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.keras round-0032",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected critic-optimizer.npz round-0023",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected state.json round-0023",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.manifest.json round-0023",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected optimizer.npz round-0023",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.keras round-0023",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected critic-optimizer.npz round-0003",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected state.json round-0003",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.manifest.json round-0003",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected optimizer.npz round-0003",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.keras round-0003",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected critic-optimizer.npz round-0005",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected state.json round-0005",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.manifest.json round-0005",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected optimizer.npz round-0005",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.keras round-0005",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected critic-optimizer.npz round-0030",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected state.json round-0030",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.manifest.json round-0030",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected optimizer.npz round-0030",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.keras round-0030",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected critic-optimizer.npz round-0009",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected state.json round-0009",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.manifest.json round-0009",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected optimizer.npz round-0009",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.keras round-0009",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected critic-optimizer.npz round-0036",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected state.json round-0036",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.manifest.json round-0036",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected optimizer.npz round-0036",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.keras round-0036",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected critic-optimizer.npz round-0022",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected state.json round-0022",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.manifest.json round-0022",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected optimizer.npz round-0022",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.keras round-0022",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected critic-optimizer.npz round-0037",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected state.json round-0037",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.manifest.json round-0037",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected optimizer.npz round-0037",
+      "passed": true
+    },
+    {
+      "check": "local checkpoint matches remote protected policy.keras round-0037",
+      "passed": true
+    },
+    {
+      "check": "local original complete training report exact",
+      "passed": true
+    },
+    {
+      "check": "original exact RL config",
+      "passed": true
+    },
+    {
+      "check": "checkpoint35 initial PCG",
+      "passed": true
+    },
+    {
+      "check": "checkpoint35 initial Adam steps",
+      "passed": true
+    },
+    {
+      "check": "checkpoint35 initial actor_adam exact values",
+      "passed": true
+    },
+    {
+      "check": "checkpoint35 initial critic_adam exact values",
+      "passed": true
+    },
+    {
+      "check": "two unchanged 8GiB logical caps",
+      "passed": true
+    },
+    {
+      "check": "139 frozen runtime files equal exact base plus diagnostic driver only",
+      "passed": true
+    },
+    {
+      "check": "driver implementation hash src/patchwork_automaton/neural/calibration.py",
+      "passed": true
+    },
+    {
+      "check": "driver implementation hash src/patchwork_automaton/neural/batching.py",
+      "passed": true
+    },
+    {
+      "check": "driver implementation hash src/patchwork_automaton/neural/experiment.py",
+      "passed": true
+    },
+    {
+      "check": "driver implementation hash src/patchwork_automaton/neural/rollout_cache.py",
+      "passed": true
+    },
+    {
+      "check": "driver implementation hash src/patchwork_automaton/neural/curriculum.py",
+      "passed": true
+    },
+    {
+      "check": "driver implementation hash src/patchwork_automaton/neural/native_layout.py",
+      "passed": true
+    },
+    {
+      "check": "driver implementation hash src/patchwork_automaton/neural/model.py",
+      "passed": true
+    },
+    {
+      "check": "driver implementation hash src/patchwork_automaton/neural/payment_scenarios.py",
+      "passed": true
+    },
+    {
+      "check": "driver implementation hash src/patchwork_automaton/neural/ppo.py",
+      "passed": true
+    },
+    {
+      "check": "driver implementation hash src/patchwork_automaton/neural/demonstrations.py",
+      "passed": true
+    },
+    {
+      "check": "driver implementation hash src/patchwork_automaton/neural/devices.py",
+      "passed": true
+    },
+    {
+      "check": "driver implementation hash src/patchwork_automaton/neural/packed_rollouts.py",
+      "passed": true
+    },
+    {
+      "check": "driver implementation hash src/patchwork_automaton/neural/rustmage_observation.py",
+      "passed": true
+    },
+    {
+      "check": "driver implementation hash src/patchwork_automaton/neural/rustmage_evaluation.py",
+      "passed": true
+    },
+    {
+      "check": "driver implementation hash src/patchwork_automaton/neural/native_pipeline.py",
+      "passed": true
+    },
+    {
+      "check": "driver implementation hash src/patchwork_automaton/neural/features.py",
+      "passed": true
+    },
+    {
+      "check": "driver implementation hash src/patchwork_automaton/neural/augmentation.py",
+      "passed": true
+    },
+    {
+      "check": "driver implementation hash src/patchwork_automaton/neural/rollout_exchange.py",
+      "passed": true
+    },
+    {
+      "check": "driver implementation hash src/patchwork_automaton/neural/streaming_ppo.py",
+      "passed": true
+    },
+    {
+      "check": "driver implementation hash src/patchwork_automaton/neural/rustmage_policy.py",
+      "passed": true
+    },
+    {
+      "check": "driver implementation hash src/patchwork_automaton/neural/training.py",
+      "passed": true
+    },
+    {
+      "check": "driver implementation hash src/patchwork_automaton/neural/policy.py",
+      "passed": true
+    },
+    {
+      "check": "driver implementation hash src/patchwork_automaton/neural/rustmage_features.py",
+      "passed": true
+    },
+    {
+      "check": "driver implementation hash src/patchwork_automaton/neural/pooled_collector.py",
+      "passed": true
+    },
+    {
+      "check": "driver implementation hash src/patchwork_automaton/neural/history.py",
+      "passed": true
+    },
+    {
+      "check": "driver implementation hash src/patchwork_automaton/neural/__init__.py",
+      "passed": true
+    },
+    {
+      "check": "driver implementation hash src/patchwork_automaton/neural/ordered_jobs.py",
+      "passed": true
+    },
+    {
+      "check": "driver implementation hash src/patchwork_automaton/neural/inference_processes.py",
+      "passed": true
+    },
+    {
+      "check": "driver implementation hash src/patchwork_automaton/neural/indexed_rollouts.py",
+      "passed": true
+    },
+    {
+      "check": "driver implementation hash src/patchwork_automaton/neural/validation.py",
+      "passed": true
+    },
+    {
+      "check": "driver implementation hash src/patchwork_automaton/neural/scenarios.py",
+      "passed": true
+    },
+    {
+      "check": "driver implementation hash src/patchwork_automaton/neural/sequence_critic.py",
+      "passed": true
+    },
+    {
+      "check": "driver implementation hash src/patchwork_automaton/neural/episodes.py",
+      "passed": true
+    },
+    {
+      "check": "driver implementation hash src/patchwork_automaton/neural/recurrent.py",
+      "passed": true
+    },
+    {
+      "check": "driver implementation hash src/patchwork_automaton/neural/imitation.py",
+      "passed": true
+    },
+    {
+      "check": "driver implementation hash examples/benchmark_actor_cache_soak.py",
+      "passed": true
+    },
+    {
+      "check": "round36 fixed sample count",
+      "passed": true
+    },
+    {
+      "check": "round36 exact original split",
+      "passed": true
+    },
+    {
+      "check": "round36 whole-game800/200 disjoint complete",
+      "passed": true
+    },
+    {
+      "check": "round36 selected trajectories and samples",
+      "passed": true
+    },
+    {
+      "check": "round36 exact prior state continuity",
+      "passed": true
+    },
+    {
+      "check": "round36 result samples",
+      "passed": true
+    },
+    {
+      "check": "round36 finite retained update metrics",
+      "passed": true
+    },
+    {
+      "check": "round36 unchanged order/schedule",
+      "passed": true
+    },
+    {
+      "check": "round36 actual epoch coverage",
+      "passed": true
+    },
+    {
+      "check": "round36 independently reconstructed PCG",
+      "passed": true
+    },
+    {
+      "check": "round36 epoch1 guard exists",
+      "passed": true
+    },
+    {
+      "check": "round36 epoch1 guard exists",
+      "passed": true
+    },
+    {
+      "check": "round36 epoch1 guard exists",
+      "passed": true
+    },
+    {
+      "check": "round36 epoch1 exact placement/cap",
+      "passed": true
+    },
+    {
+      "check": "round36 epoch1 bounded complete prefix/fallback",
+      "passed": true
+    },
+    {
+      "check": "round36 epoch1 exact reuse per actual guard pass",
+      "passed": true
+    },
+    {
+      "check": "round36 epoch1 payload accounting/release",
+      "passed": true
+    },
+    {
+      "check": "round36 epoch2 guard exists",
+      "passed": true
+    },
+    {
+      "check": "round36 epoch2 guard exists",
+      "passed": true
+    },
+    {
+      "check": "round36 epoch2 guard exists",
+      "passed": true
+    },
+    {
+      "check": "round36 epoch2 guard exists",
+      "passed": true
+    },
+    {
+      "check": "round36 epoch2 exact placement/cap",
+      "passed": true
+    },
+    {
+      "check": "round36 epoch2 bounded complete prefix/fallback",
+      "passed": true
+    },
+    {
+      "check": "round36 epoch2 exact reuse per actual guard pass",
+      "passed": true
+    },
+    {
+      "check": "round36 epoch2 payload accounting/release",
+      "passed": true
+    },
+    {
+      "check": "round36 complete honest guard count",
+      "passed": true
+    },
+    {
+      "check": "round36 actual accepted Adam increments",
+      "passed": true
+    },
+    {
+      "check": "round36 exact critic Adam increments",
+      "passed": true
+    },
+    {
+      "check": "round36 optimizer step report matches final",
+      "passed": true
+    },
+    {
+      "check": "round36 persistent runtime and no retracing",
+      "passed": true
+    },
+    {
+      "check": "round36 policy_cache_device",
+      "passed": true
+    },
+    {
+      "check": "round36 actor_epoch_cache_device",
+      "passed": true
+    },
+    {
+      "check": "round36 reported unchanged cache caps",
+      "passed": true
+    },
+    {
+      "check": "round36 canonical bounded complete cache",
+      "passed": true
+    },
+    {
+      "check": "round36 aggregate epoch accounting",
+      "passed": true
+    },
+    {
+      "check": "round36 no PPO workers survive",
+      "passed": true
+    },
+    {
+      "check": "round36 all cached input tensor wrappers expire",
+      "passed": true
+    },
+    {
+      "check": "round36 every cache closed once",
+      "passed": true
+    },
+    {
+      "check": "round36 actual gzip readers observed",
+      "passed": true
+    },
+    {
+      "check": "round36 resource released DevicePolicyBatchCache",
+      "passed": true
+    },
+    {
+      "check": "round36 resource released GzipFile",
+      "passed": true
+    },
+    {
+      "check": "round36 resource released IndexedTrajectories",
+      "passed": true
+    },
+    {
+      "check": "round36 resource released NumericRollout",
+      "passed": true
+    },
+    {
+      "check": "round36 resource released PolicyBatchCache",
+      "passed": true
+    },
+    {
+      "check": "round36 resource released RolloutCache",
+      "passed": true
+    },
+    {
+      "check": "round36 cache close evidence matches counters",
+      "passed": true
+    },
+    {
+      "check": "round36 cache close evidence matches counters",
+      "passed": true
+    },
+    {
+      "check": "round36 cache close evidence matches counters",
+      "passed": true
+    },
+    {
+      "check": "round36 NPZ byte hash",
+      "passed": true
+    },
+    {
+      "check": "round36 NPZ CRC",
+      "passed": true
+    },
+    {
+      "check": "round36 all262 model/Adam arrays",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_0",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_1",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_2",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_3",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_4",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_5",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_6",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_7",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_8",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_9",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_10",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_11",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_12",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_13",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_14",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_15",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_16",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_17",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_18",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_19",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_20",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_21",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_22",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_23",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_24",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_25",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_26",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_27",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_28",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_29",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_30",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_31",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_32",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_33",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_34",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_35",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_36",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_37",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_38",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_39",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_40",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_41",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_42",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_43",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_44",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_45",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_46",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_47",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_48",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_49",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_50",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_51",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_52",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_53",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_54",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_55",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_56",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_57",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_58",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_59",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_60",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_61",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_62",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_63",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_64",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_65",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_66",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_67",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_68",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_69",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_70",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_71",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_72",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_73",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_74",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_75",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_76",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_77",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_78",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_79",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_80",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_81",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_82",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_83",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_84",
+      "passed": true
+    },
+    {
+      "check": "round36 finite model_85",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_0",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_1",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_2",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_3",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_4",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_5",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_6",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_7",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_8",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_9",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_10",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_11",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_12",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_13",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_14",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_15",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_16",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_17",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_18",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_19",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_20",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_21",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_22",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_23",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_24",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_25",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_26",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_27",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_28",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_29",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_30",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_31",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_32",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_33",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_34",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_35",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_36",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_37",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_38",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_39",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_40",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_41",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_42",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_43",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_44",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_45",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_46",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_47",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_48",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_49",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_50",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_51",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_52",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_53",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_54",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_55",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_56",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_57",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_58",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_59",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_60",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_61",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_62",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_63",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_64",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_65",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_66",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_67",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_68",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_69",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_70",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_71",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_72",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_73",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_74",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_75",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_76",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_77",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_78",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_79",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_80",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_81",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_82",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_83",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_84",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_85",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_86",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_87",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_88",
+      "passed": true
+    },
+    {
+      "check": "round36 finite actor_adam_89",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_0",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_1",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_2",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_3",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_4",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_5",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_6",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_7",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_8",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_9",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_10",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_11",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_12",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_13",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_14",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_15",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_16",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_17",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_18",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_19",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_20",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_21",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_22",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_23",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_24",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_25",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_26",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_27",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_28",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_29",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_30",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_31",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_32",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_33",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_34",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_35",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_36",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_37",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_38",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_39",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_40",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_41",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_42",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_43",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_44",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_45",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_46",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_47",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_48",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_49",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_50",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_51",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_52",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_53",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_54",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_55",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_56",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_57",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_58",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_59",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_60",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_61",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_62",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_63",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_64",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_65",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_66",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_67",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_68",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_69",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_70",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_71",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_72",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_73",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_74",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_75",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_76",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_77",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_78",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_79",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_80",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_81",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_82",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_83",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_84",
+      "passed": true
+    },
+    {
+      "check": "round36 finite critic_adam_85",
+      "passed": true
+    },
+    {
+      "check": "model contiguous archive indices",
+      "passed": true
+    },
+    {
+      "check": "round36 exact NPZ model digest",
+      "passed": true
+    },
+    {
+      "check": "actor_adam contiguous archive indices",
+      "passed": true
+    },
+    {
+      "check": "round36 exact NPZ actor_adam digest",
+      "passed": true
+    },
+    {
+      "check": "round36 exact NPZ actor_adam iteration",
+      "passed": true
+    },
+    {
+      "check": "critic_adam contiguous archive indices",
+      "passed": true
+    },
+    {
+      "check": "round36 exact NPZ critic_adam digest",
+      "passed": true
+    },
+    {
+      "check": "round36 exact NPZ critic_adam iteration",
+      "passed": true
+    },
+    {
+      "check": "round36 peak statistics reset does not flush active memory",
+      "passed": true
+    },
+    {
+      "check": "round36 allocator telemetry coherent",
+      "passed": true
+    },
+    {
+      "check": "round37 fixed sample count",
+      "passed": true
+    },
+    {
+      "check": "round37 exact original split",
+      "passed": true
+    },
+    {
+      "check": "round37 whole-game800/200 disjoint complete",
+      "passed": true
+    },
+    {
+      "check": "round37 selected trajectories and samples",
+      "passed": true
+    },
+    {
+      "check": "round37 exact prior state continuity",
+      "passed": true
+    },
+    {
+      "check": "round37 result samples",
+      "passed": true
+    },
+    {
+      "check": "round37 finite retained update metrics",
+      "passed": true
+    },
+    {
+      "check": "round37 unchanged order/schedule",
+      "passed": true
+    },
+    {
+      "check": "round37 actual epoch coverage",
+      "passed": true
+    },
+    {
+      "check": "round37 independently reconstructed PCG",
+      "passed": true
+    },
+    {
+      "check": "round37 epoch1 guard exists",
+      "passed": true
+    },
+    {
+      "check": "round37 epoch1 guard exists",
+      "passed": true
+    },
+    {
+      "check": "round37 epoch1 guard exists",
+      "passed": true
+    },
+    {
+      "check": "round37 epoch1 guard exists",
+      "passed": true
+    },
+    {
+      "check": "round37 epoch1 guard exists",
+      "passed": true
+    },
+    {
+      "check": "round37 epoch1 exact placement/cap",
+      "passed": true
+    },
+    {
+      "check": "round37 epoch1 bounded complete prefix/fallback",
+      "passed": true
+    },
+    {
+      "check": "round37 epoch1 exact reuse per actual guard pass",
+      "passed": true
+    },
+    {
+      "check": "round37 epoch1 payload accounting/release",
+      "passed": true
+    },
+    {
+      "check": "round37 epoch2 guard exists",
+      "passed": true
+    },
+    {
+      "check": "round37 epoch2 guard exists",
+      "passed": true
+    },
+    {
+      "check": "round37 epoch2 guard exists",
+      "passed": true
+    },
+    {
+      "check": "round37 epoch2 guard exists",
+      "passed": true
+    },
+    {
+      "check": "round37 epoch2 exact placement/cap",
+      "passed": true
+    },
+    {
+      "check": "round37 epoch2 bounded complete prefix/fallback",
+      "passed": true
+    },
+    {
+      "check": "round37 epoch2 exact reuse per actual guard pass",
+      "passed": true
+    },
+    {
+      "check": "round37 epoch2 payload accounting/release",
+      "passed": true
+    },
+    {
+      "check": "round37 complete honest guard count",
+      "passed": true
+    },
+    {
+      "check": "round37 actual accepted Adam increments",
+      "passed": true
+    },
+    {
+      "check": "round37 exact critic Adam increments",
+      "passed": true
+    },
+    {
+      "check": "round37 optimizer step report matches final",
+      "passed": true
+    },
+    {
+      "check": "round37 persistent runtime and no retracing",
+      "passed": true
+    },
+    {
+      "check": "round37 policy_cache_device",
+      "passed": true
+    },
+    {
+      "check": "round37 actor_epoch_cache_device",
+      "passed": true
+    },
+    {
+      "check": "round37 reported unchanged cache caps",
+      "passed": true
+    },
+    {
+      "check": "round37 canonical bounded complete cache",
+      "passed": true
+    },
+    {
+      "check": "round37 aggregate epoch accounting",
+      "passed": true
+    },
+    {
+      "check": "round37 no PPO workers survive",
+      "passed": true
+    },
+    {
+      "check": "round37 all cached input tensor wrappers expire",
+      "passed": true
+    },
+    {
+      "check": "round37 every cache closed once",
+      "passed": true
+    },
+    {
+      "check": "round37 actual gzip readers observed",
+      "passed": true
+    },
+    {
+      "check": "round37 resource released DevicePolicyBatchCache",
+      "passed": true
+    },
+    {
+      "check": "round37 resource released GzipFile",
+      "passed": true
+    },
+    {
+      "check": "round37 resource released IndexedTrajectories",
+      "passed": true
+    },
+    {
+      "check": "round37 resource released NumericRollout",
+      "passed": true
+    },
+    {
+      "check": "round37 resource released PolicyBatchCache",
+      "passed": true
+    },
+    {
+      "check": "round37 resource released RolloutCache",
+      "passed": true
+    },
+    {
+      "check": "round37 cache close evidence matches counters",
+      "passed": true
+    },
+    {
+      "check": "round37 cache close evidence matches counters",
+      "passed": true
+    },
+    {
+      "check": "round37 cache close evidence matches counters",
+      "passed": true
+    },
+    {
+      "check": "round37 NPZ byte hash",
+      "passed": true
+    },
+    {
+      "check": "round37 NPZ CRC",
+      "passed": true
+    },
+    {
+      "check": "round37 all262 model/Adam arrays",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_0",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_1",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_2",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_3",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_4",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_5",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_6",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_7",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_8",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_9",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_10",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_11",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_12",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_13",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_14",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_15",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_16",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_17",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_18",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_19",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_20",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_21",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_22",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_23",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_24",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_25",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_26",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_27",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_28",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_29",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_30",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_31",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_32",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_33",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_34",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_35",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_36",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_37",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_38",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_39",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_40",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_41",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_42",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_43",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_44",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_45",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_46",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_47",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_48",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_49",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_50",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_51",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_52",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_53",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_54",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_55",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_56",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_57",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_58",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_59",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_60",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_61",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_62",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_63",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_64",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_65",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_66",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_67",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_68",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_69",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_70",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_71",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_72",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_73",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_74",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_75",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_76",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_77",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_78",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_79",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_80",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_81",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_82",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_83",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_84",
+      "passed": true
+    },
+    {
+      "check": "round37 finite model_85",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_0",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_1",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_2",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_3",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_4",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_5",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_6",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_7",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_8",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_9",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_10",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_11",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_12",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_13",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_14",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_15",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_16",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_17",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_18",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_19",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_20",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_21",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_22",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_23",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_24",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_25",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_26",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_27",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_28",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_29",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_30",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_31",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_32",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_33",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_34",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_35",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_36",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_37",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_38",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_39",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_40",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_41",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_42",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_43",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_44",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_45",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_46",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_47",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_48",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_49",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_50",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_51",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_52",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_53",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_54",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_55",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_56",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_57",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_58",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_59",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_60",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_61",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_62",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_63",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_64",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_65",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_66",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_67",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_68",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_69",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_70",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_71",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_72",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_73",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_74",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_75",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_76",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_77",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_78",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_79",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_80",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_81",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_82",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_83",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_84",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_85",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_86",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_87",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_88",
+      "passed": true
+    },
+    {
+      "check": "round37 finite actor_adam_89",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_0",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_1",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_2",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_3",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_4",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_5",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_6",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_7",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_8",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_9",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_10",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_11",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_12",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_13",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_14",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_15",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_16",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_17",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_18",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_19",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_20",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_21",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_22",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_23",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_24",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_25",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_26",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_27",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_28",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_29",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_30",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_31",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_32",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_33",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_34",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_35",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_36",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_37",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_38",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_39",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_40",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_41",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_42",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_43",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_44",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_45",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_46",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_47",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_48",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_49",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_50",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_51",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_52",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_53",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_54",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_55",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_56",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_57",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_58",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_59",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_60",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_61",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_62",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_63",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_64",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_65",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_66",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_67",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_68",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_69",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_70",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_71",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_72",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_73",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_74",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_75",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_76",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_77",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_78",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_79",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_80",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_81",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_82",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_83",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_84",
+      "passed": true
+    },
+    {
+      "check": "round37 finite critic_adam_85",
+      "passed": true
+    },
+    {
+      "check": "model contiguous archive indices",
+      "passed": true
+    },
+    {
+      "check": "round37 exact NPZ model digest",
+      "passed": true
+    },
+    {
+      "check": "actor_adam contiguous archive indices",
+      "passed": true
+    },
+    {
+      "check": "round37 exact NPZ actor_adam digest",
+      "passed": true
+    },
+    {
+      "check": "round37 exact NPZ actor_adam iteration",
+      "passed": true
+    },
+    {
+      "check": "critic_adam contiguous archive indices",
+      "passed": true
+    },
+    {
+      "check": "round37 exact NPZ critic_adam digest",
+      "passed": true
+    },
+    {
+      "check": "round37 exact NPZ critic_adam iteration",
+      "passed": true
+    },
+    {
+      "check": "round37 peak statistics reset does not flush active memory",
+      "passed": true
+    },
+    {
+      "check": "round37 allocator telemetry coherent",
+      "passed": true
+    },
+    {
+      "check": "round38 fixed sample count",
+      "passed": true
+    },
+    {
+      "check": "round38 exact original split",
+      "passed": true
+    },
+    {
+      "check": "round38 whole-game800/200 disjoint complete",
+      "passed": true
+    },
+    {
+      "check": "round38 selected trajectories and samples",
+      "passed": true
+    },
+    {
+      "check": "round38 exact prior state continuity",
+      "passed": true
+    },
+    {
+      "check": "round38 result samples",
+      "passed": true
+    },
+    {
+      "check": "round38 finite retained update metrics",
+      "passed": true
+    },
+    {
+      "check": "round38 unchanged order/schedule",
+      "passed": true
+    },
+    {
+      "check": "round38 actual epoch coverage",
+      "passed": true
+    },
+    {
+      "check": "round38 independently reconstructed PCG",
+      "passed": true
+    },
+    {
+      "check": "round38 epoch1 guard exists",
+      "passed": true
+    },
+    {
+      "check": "round38 epoch1 guard exists",
+      "passed": true
+    },
+    {
+      "check": "round38 epoch1 guard exists",
+      "passed": true
+    },
+    {
+      "check": "round38 epoch1 guard exists",
+      "passed": true
+    },
+    {
+      "check": "round38 epoch1 exact placement/cap",
+      "passed": true
+    },
+    {
+      "check": "round38 epoch1 bounded complete prefix/fallback",
+      "passed": true
+    },
+    {
+      "check": "round38 epoch1 exact reuse per actual guard pass",
+      "passed": true
+    },
+    {
+      "check": "round38 epoch1 payload accounting/release",
+      "passed": true
+    },
+    {
+      "check": "round38 epoch2 guard exists",
+      "passed": true
+    },
+    {
+      "check": "round38 epoch2 guard exists",
+      "passed": true
+    },
+    {
+      "check": "round38 epoch2 guard exists",
+      "passed": true
+    },
+    {
+      "check": "round38 epoch2 guard exists",
+      "passed": true
+    },
+    {
+      "check": "round38 epoch2 guard exists",
+      "passed": true
+    },
+    {
+      "check": "round38 epoch2 guard exists",
+      "passed": true
+    },
+    {
+      "check": "round38 epoch2 guard exists",
+      "passed": true
+    },
+    {
+      "check": "round38 epoch2 exact placement/cap",
+      "passed": true
+    },
+    {
+      "check": "round38 epoch2 bounded complete prefix/fallback",
+      "passed": true
+    },
+    {
+      "check": "round38 epoch2 exact reuse per actual guard pass",
+      "passed": true
+    },
+    {
+      "check": "round38 epoch2 payload accounting/release",
+      "passed": true
+    },
+    {
+      "check": "round38 complete honest guard count",
+      "passed": true
+    },
+    {
+      "check": "round38 actual accepted Adam increments",
+      "passed": true
+    },
+    {
+      "check": "round38 exact critic Adam increments",
+      "passed": true
+    },
+    {
+      "check": "round38 optimizer step report matches final",
+      "passed": true
+    },
+    {
+      "check": "round38 persistent runtime and no retracing",
+      "passed": true
+    },
+    {
+      "check": "round38 policy_cache_device",
+      "passed": true
+    },
+    {
+      "check": "round38 actor_epoch_cache_device",
+      "passed": true
+    },
+    {
+      "check": "round38 reported unchanged cache caps",
+      "passed": true
+    },
+    {
+      "check": "round38 canonical bounded complete cache",
+      "passed": true
+    },
+    {
+      "check": "round38 aggregate epoch accounting",
+      "passed": true
+    },
+    {
+      "check": "round38 no PPO workers survive",
+      "passed": true
+    },
+    {
+      "check": "round38 all cached input tensor wrappers expire",
+      "passed": true
+    },
+    {
+      "check": "round38 every cache closed once",
+      "passed": true
+    },
+    {
+      "check": "round38 actual gzip readers observed",
+      "passed": true
+    },
+    {
+      "check": "round38 resource released DevicePolicyBatchCache",
+      "passed": true
+    },
+    {
+      "check": "round38 resource released GzipFile",
+      "passed": true
+    },
+    {
+      "check": "round38 resource released IndexedTrajectories",
+      "passed": true
+    },
+    {
+      "check": "round38 resource released NumericRollout",
+      "passed": true
+    },
+    {
+      "check": "round38 resource released PolicyBatchCache",
+      "passed": true
+    },
+    {
+      "check": "round38 resource released RolloutCache",
+      "passed": true
+    },
+    {
+      "check": "round38 cache close evidence matches counters",
+      "passed": true
+    },
+    {
+      "check": "round38 cache close evidence matches counters",
+      "passed": true
+    },
+    {
+      "check": "round38 cache close evidence matches counters",
+      "passed": true
+    },
+    {
+      "check": "round38 NPZ byte hash",
+      "passed": true
+    },
+    {
+      "check": "round38 NPZ CRC",
+      "passed": true
+    },
+    {
+      "check": "round38 all262 model/Adam arrays",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_0",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_1",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_2",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_3",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_4",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_5",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_6",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_7",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_8",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_9",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_10",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_11",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_12",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_13",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_14",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_15",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_16",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_17",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_18",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_19",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_20",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_21",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_22",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_23",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_24",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_25",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_26",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_27",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_28",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_29",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_30",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_31",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_32",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_33",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_34",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_35",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_36",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_37",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_38",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_39",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_40",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_41",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_42",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_43",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_44",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_45",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_46",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_47",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_48",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_49",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_50",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_51",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_52",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_53",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_54",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_55",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_56",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_57",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_58",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_59",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_60",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_61",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_62",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_63",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_64",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_65",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_66",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_67",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_68",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_69",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_70",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_71",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_72",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_73",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_74",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_75",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_76",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_77",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_78",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_79",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_80",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_81",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_82",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_83",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_84",
+      "passed": true
+    },
+    {
+      "check": "round38 finite model_85",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_0",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_1",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_2",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_3",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_4",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_5",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_6",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_7",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_8",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_9",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_10",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_11",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_12",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_13",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_14",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_15",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_16",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_17",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_18",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_19",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_20",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_21",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_22",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_23",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_24",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_25",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_26",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_27",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_28",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_29",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_30",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_31",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_32",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_33",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_34",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_35",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_36",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_37",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_38",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_39",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_40",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_41",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_42",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_43",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_44",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_45",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_46",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_47",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_48",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_49",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_50",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_51",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_52",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_53",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_54",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_55",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_56",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_57",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_58",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_59",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_60",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_61",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_62",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_63",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_64",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_65",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_66",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_67",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_68",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_69",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_70",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_71",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_72",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_73",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_74",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_75",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_76",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_77",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_78",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_79",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_80",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_81",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_82",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_83",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_84",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_85",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_86",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_87",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_88",
+      "passed": true
+    },
+    {
+      "check": "round38 finite actor_adam_89",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_0",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_1",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_2",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_3",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_4",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_5",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_6",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_7",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_8",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_9",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_10",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_11",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_12",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_13",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_14",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_15",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_16",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_17",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_18",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_19",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_20",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_21",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_22",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_23",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_24",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_25",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_26",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_27",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_28",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_29",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_30",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_31",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_32",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_33",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_34",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_35",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_36",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_37",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_38",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_39",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_40",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_41",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_42",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_43",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_44",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_45",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_46",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_47",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_48",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_49",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_50",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_51",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_52",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_53",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_54",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_55",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_56",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_57",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_58",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_59",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_60",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_61",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_62",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_63",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_64",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_65",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_66",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_67",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_68",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_69",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_70",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_71",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_72",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_73",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_74",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_75",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_76",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_77",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_78",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_79",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_80",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_81",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_82",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_83",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_84",
+      "passed": true
+    },
+    {
+      "check": "round38 finite critic_adam_85",
+      "passed": true
+    },
+    {
+      "check": "model contiguous archive indices",
+      "passed": true
+    },
+    {
+      "check": "round38 exact NPZ model digest",
+      "passed": true
+    },
+    {
+      "check": "actor_adam contiguous archive indices",
+      "passed": true
+    },
+    {
+      "check": "round38 exact NPZ actor_adam digest",
+      "passed": true
+    },
+    {
+      "check": "round38 exact NPZ actor_adam iteration",
+      "passed": true
+    },
+    {
+      "check": "critic_adam contiguous archive indices",
+      "passed": true
+    },
+    {
+      "check": "round38 exact NPZ critic_adam digest",
+      "passed": true
+    },
+    {
+      "check": "round38 exact NPZ critic_adam iteration",
+      "passed": true
+    },
+    {
+      "check": "round38 peak statistics reset does not flush active memory",
+      "passed": true
+    },
+    {
+      "check": "round38 allocator telemetry coherent",
+      "passed": true
+    },
+    {
+      "check": "round39 fixed sample count",
+      "passed": true
+    },
+    {
+      "check": "round39 exact original split",
+      "passed": true
+    },
+    {
+      "check": "round39 whole-game800/200 disjoint complete",
+      "passed": true
+    },
+    {
+      "check": "round39 selected trajectories and samples",
+      "passed": true
+    },
+    {
+      "check": "round39 exact prior state continuity",
+      "passed": true
+    },
+    {
+      "check": "round39 result samples",
+      "passed": true
+    },
+    {
+      "check": "round39 finite retained update metrics",
+      "passed": true
+    },
+    {
+      "check": "round39 unchanged order/schedule",
+      "passed": true
+    },
+    {
+      "check": "round39 actual epoch coverage",
+      "passed": true
+    },
+    {
+      "check": "round39 independently reconstructed PCG",
+      "passed": true
+    },
+    {
+      "check": "round39 epoch1 guard exists",
+      "passed": true
+    },
+    {
+      "check": "round39 epoch1 guard exists",
+      "passed": true
+    },
+    {
+      "check": "round39 epoch1 guard exists",
+      "passed": true
+    },
+    {
+      "check": "round39 epoch1 guard exists",
+      "passed": true
+    },
+    {
+      "check": "round39 epoch1 exact placement/cap",
+      "passed": true
+    },
+    {
+      "check": "round39 epoch1 bounded complete prefix/fallback",
+      "passed": true
+    },
+    {
+      "check": "round39 epoch1 exact reuse per actual guard pass",
+      "passed": true
+    },
+    {
+      "check": "round39 epoch1 payload accounting/release",
+      "passed": true
+    },
+    {
+      "check": "round39 epoch2 guard exists",
+      "passed": true
+    },
+    {
+      "check": "round39 epoch2 guard exists",
+      "passed": true
+    },
+    {
+      "check": "round39 epoch2 guard exists",
+      "passed": true
+    },
+    {
+      "check": "round39 epoch2 exact placement/cap",
+      "passed": true
+    },
+    {
+      "check": "round39 epoch2 bounded complete prefix/fallback",
+      "passed": true
+    },
+    {
+      "check": "round39 epoch2 exact reuse per actual guard pass",
+      "passed": true
+    },
+    {
+      "check": "round39 epoch2 payload accounting/release",
+      "passed": true
+    },
+    {
+      "check": "round39 complete honest guard count",
+      "passed": true
+    },
+    {
+      "check": "round39 actual accepted Adam increments",
+      "passed": true
+    },
+    {
+      "check": "round39 exact critic Adam increments",
+      "passed": true
+    },
+    {
+      "check": "round39 optimizer step report matches final",
+      "passed": true
+    },
+    {
+      "check": "round39 persistent runtime and no retracing",
+      "passed": true
+    },
+    {
+      "check": "round39 policy_cache_device",
+      "passed": true
+    },
+    {
+      "check": "round39 actor_epoch_cache_device",
+      "passed": true
+    },
+    {
+      "check": "round39 reported unchanged cache caps",
+      "passed": true
+    },
+    {
+      "check": "round39 canonical bounded complete cache",
+      "passed": true
+    },
+    {
+      "check": "round39 aggregate epoch accounting",
+      "passed": true
+    },
+    {
+      "check": "round39 no PPO workers survive",
+      "passed": true
+    },
+    {
+      "check": "round39 all cached input tensor wrappers expire",
+      "passed": true
+    },
+    {
+      "check": "round39 every cache closed once",
+      "passed": true
+    },
+    {
+      "check": "round39 actual gzip readers observed",
+      "passed": true
+    },
+    {
+      "check": "round39 resource released DevicePolicyBatchCache",
+      "passed": true
+    },
+    {
+      "check": "round39 resource released GzipFile",
+      "passed": true
+    },
+    {
+      "check": "round39 resource released IndexedTrajectories",
+      "passed": true
+    },
+    {
+      "check": "round39 resource released NumericRollout",
+      "passed": true
+    },
+    {
+      "check": "round39 resource released PolicyBatchCache",
+      "passed": true
+    },
+    {
+      "check": "round39 resource released RolloutCache",
+      "passed": true
+    },
+    {
+      "check": "round39 cache close evidence matches counters",
+      "passed": true
+    },
+    {
+      "check": "round39 cache close evidence matches counters",
+      "passed": true
+    },
+    {
+      "check": "round39 cache close evidence matches counters",
+      "passed": true
+    },
+    {
+      "check": "round39 NPZ byte hash",
+      "passed": true
+    },
+    {
+      "check": "round39 NPZ CRC",
+      "passed": true
+    },
+    {
+      "check": "round39 all262 model/Adam arrays",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_0",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_1",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_2",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_3",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_4",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_5",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_6",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_7",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_8",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_9",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_10",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_11",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_12",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_13",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_14",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_15",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_16",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_17",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_18",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_19",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_20",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_21",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_22",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_23",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_24",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_25",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_26",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_27",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_28",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_29",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_30",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_31",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_32",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_33",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_34",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_35",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_36",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_37",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_38",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_39",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_40",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_41",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_42",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_43",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_44",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_45",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_46",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_47",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_48",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_49",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_50",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_51",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_52",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_53",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_54",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_55",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_56",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_57",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_58",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_59",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_60",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_61",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_62",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_63",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_64",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_65",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_66",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_67",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_68",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_69",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_70",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_71",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_72",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_73",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_74",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_75",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_76",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_77",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_78",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_79",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_80",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_81",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_82",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_83",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_84",
+      "passed": true
+    },
+    {
+      "check": "round39 finite model_85",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_0",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_1",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_2",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_3",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_4",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_5",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_6",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_7",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_8",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_9",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_10",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_11",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_12",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_13",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_14",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_15",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_16",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_17",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_18",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_19",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_20",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_21",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_22",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_23",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_24",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_25",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_26",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_27",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_28",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_29",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_30",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_31",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_32",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_33",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_34",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_35",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_36",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_37",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_38",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_39",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_40",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_41",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_42",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_43",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_44",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_45",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_46",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_47",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_48",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_49",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_50",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_51",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_52",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_53",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_54",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_55",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_56",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_57",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_58",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_59",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_60",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_61",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_62",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_63",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_64",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_65",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_66",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_67",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_68",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_69",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_70",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_71",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_72",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_73",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_74",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_75",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_76",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_77",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_78",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_79",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_80",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_81",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_82",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_83",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_84",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_85",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_86",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_87",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_88",
+      "passed": true
+    },
+    {
+      "check": "round39 finite actor_adam_89",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_0",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_1",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_2",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_3",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_4",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_5",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_6",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_7",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_8",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_9",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_10",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_11",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_12",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_13",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_14",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_15",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_16",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_17",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_18",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_19",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_20",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_21",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_22",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_23",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_24",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_25",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_26",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_27",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_28",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_29",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_30",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_31",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_32",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_33",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_34",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_35",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_36",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_37",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_38",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_39",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_40",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_41",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_42",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_43",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_44",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_45",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_46",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_47",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_48",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_49",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_50",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_51",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_52",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_53",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_54",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_55",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_56",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_57",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_58",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_59",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_60",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_61",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_62",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_63",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_64",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_65",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_66",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_67",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_68",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_69",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_70",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_71",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_72",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_73",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_74",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_75",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_76",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_77",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_78",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_79",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_80",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_81",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_82",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_83",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_84",
+      "passed": true
+    },
+    {
+      "check": "round39 finite critic_adam_85",
+      "passed": true
+    },
+    {
+      "check": "model contiguous archive indices",
+      "passed": true
+    },
+    {
+      "check": "round39 exact NPZ model digest",
+      "passed": true
+    },
+    {
+      "check": "actor_adam contiguous archive indices",
+      "passed": true
+    },
+    {
+      "check": "round39 exact NPZ actor_adam digest",
+      "passed": true
+    },
+    {
+      "check": "round39 exact NPZ actor_adam iteration",
+      "passed": true
+    },
+    {
+      "check": "critic_adam contiguous archive indices",
+      "passed": true
+    },
+    {
+      "check": "round39 exact NPZ critic_adam digest",
+      "passed": true
+    },
+    {
+      "check": "round39 exact NPZ critic_adam iteration",
+      "passed": true
+    },
+    {
+      "check": "round39 peak statistics reset does not flush active memory",
+      "passed": true
+    },
+    {
+      "check": "round39 allocator telemetry coherent",
+      "passed": true
+    },
+    {
+      "check": "round40 fixed sample count",
+      "passed": true
+    },
+    {
+      "check": "round40 exact original split",
+      "passed": true
+    },
+    {
+      "check": "round40 whole-game800/200 disjoint complete",
+      "passed": true
+    },
+    {
+      "check": "round40 selected trajectories and samples",
+      "passed": true
+    },
+    {
+      "check": "round40 exact prior state continuity",
+      "passed": true
+    },
+    {
+      "check": "round40 result samples",
+      "passed": true
+    },
+    {
+      "check": "round40 finite retained update metrics",
+      "passed": true
+    },
+    {
+      "check": "round40 unchanged order/schedule",
+      "passed": true
+    },
+    {
+      "check": "round40 actual epoch coverage",
+      "passed": true
+    },
+    {
+      "check": "round40 independently reconstructed PCG",
+      "passed": true
+    },
+    {
+      "check": "round40 epoch1 guard exists",
+      "passed": true
+    },
+    {
+      "check": "round40 epoch1 guard exists",
+      "passed": true
+    },
+    {
+      "check": "round40 epoch1 guard exists",
+      "passed": true
+    },
+    {
+      "check": "round40 epoch1 guard exists",
+      "passed": true
+    },
+    {
+      "check": "round40 epoch1 guard exists",
+      "passed": true
+    },
+    {
+      "check": "round40 epoch1 exact placement/cap",
+      "passed": true
+    },
+    {
+      "check": "round40 epoch1 bounded complete prefix/fallback",
+      "passed": true
+    },
+    {
+      "check": "round40 epoch1 exact reuse per actual guard pass",
+      "passed": true
+    },
+    {
+      "check": "round40 epoch1 payload accounting/release",
+      "passed": true
+    },
+    {
+      "check": "round40 epoch2 guard exists",
+      "passed": true
+    },
+    {
+      "check": "round40 epoch2 guard exists",
+      "passed": true
+    },
+    {
+      "check": "round40 epoch2 guard exists",
+      "passed": true
+    },
+    {
+      "check": "round40 epoch2 guard exists",
+      "passed": true
+    },
+    {
+      "check": "round40 epoch2 guard exists",
+      "passed": true
+    },
+    {
+      "check": "round40 epoch2 guard exists",
+      "passed": true
+    },
+    {
+      "check": "round40 epoch2 exact placement/cap",
+      "passed": true
+    },
+    {
+      "check": "round40 epoch2 bounded complete prefix/fallback",
+      "passed": true
+    },
+    {
+      "check": "round40 epoch2 exact reuse per actual guard pass",
+      "passed": true
+    },
+    {
+      "check": "round40 epoch2 payload accounting/release",
+      "passed": true
+    },
+    {
+      "check": "round40 complete honest guard count",
+      "passed": true
+    },
+    {
+      "check": "round40 actual accepted Adam increments",
+      "passed": true
+    },
+    {
+      "check": "round40 exact critic Adam increments",
+      "passed": true
+    },
+    {
+      "check": "round40 optimizer step report matches final",
+      "passed": true
+    },
+    {
+      "check": "round40 persistent runtime and no retracing",
+      "passed": true
+    },
+    {
+      "check": "round40 policy_cache_device",
+      "passed": true
+    },
+    {
+      "check": "round40 actor_epoch_cache_device",
+      "passed": true
+    },
+    {
+      "check": "round40 reported unchanged cache caps",
+      "passed": true
+    },
+    {
+      "check": "round40 canonical bounded complete cache",
+      "passed": true
+    },
+    {
+      "check": "round40 aggregate epoch accounting",
+      "passed": true
+    },
+    {
+      "check": "round40 no PPO workers survive",
+      "passed": true
+    },
+    {
+      "check": "round40 all cached input tensor wrappers expire",
+      "passed": true
+    },
+    {
+      "check": "round40 every cache closed once",
+      "passed": true
+    },
+    {
+      "check": "round40 actual gzip readers observed",
+      "passed": true
+    },
+    {
+      "check": "round40 resource released DevicePolicyBatchCache",
+      "passed": true
+    },
+    {
+      "check": "round40 resource released GzipFile",
+      "passed": true
+    },
+    {
+      "check": "round40 resource released IndexedTrajectories",
+      "passed": true
+    },
+    {
+      "check": "round40 resource released NumericRollout",
+      "passed": true
+    },
+    {
+      "check": "round40 resource released PolicyBatchCache",
+      "passed": true
+    },
+    {
+      "check": "round40 resource released RolloutCache",
+      "passed": true
+    },
+    {
+      "check": "round40 cache close evidence matches counters",
+      "passed": true
+    },
+    {
+      "check": "round40 cache close evidence matches counters",
+      "passed": true
+    },
+    {
+      "check": "round40 cache close evidence matches counters",
+      "passed": true
+    },
+    {
+      "check": "round40 NPZ byte hash",
+      "passed": true
+    },
+    {
+      "check": "round40 NPZ CRC",
+      "passed": true
+    },
+    {
+      "check": "round40 all262 model/Adam arrays",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_0",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_1",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_2",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_3",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_4",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_5",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_6",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_7",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_8",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_9",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_10",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_11",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_12",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_13",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_14",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_15",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_16",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_17",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_18",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_19",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_20",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_21",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_22",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_23",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_24",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_25",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_26",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_27",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_28",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_29",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_30",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_31",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_32",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_33",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_34",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_35",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_36",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_37",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_38",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_39",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_40",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_41",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_42",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_43",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_44",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_45",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_46",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_47",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_48",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_49",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_50",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_51",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_52",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_53",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_54",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_55",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_56",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_57",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_58",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_59",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_60",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_61",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_62",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_63",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_64",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_65",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_66",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_67",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_68",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_69",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_70",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_71",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_72",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_73",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_74",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_75",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_76",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_77",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_78",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_79",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_80",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_81",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_82",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_83",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_84",
+      "passed": true
+    },
+    {
+      "check": "round40 finite model_85",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_0",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_1",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_2",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_3",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_4",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_5",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_6",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_7",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_8",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_9",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_10",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_11",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_12",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_13",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_14",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_15",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_16",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_17",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_18",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_19",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_20",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_21",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_22",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_23",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_24",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_25",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_26",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_27",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_28",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_29",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_30",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_31",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_32",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_33",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_34",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_35",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_36",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_37",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_38",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_39",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_40",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_41",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_42",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_43",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_44",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_45",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_46",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_47",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_48",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_49",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_50",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_51",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_52",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_53",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_54",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_55",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_56",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_57",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_58",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_59",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_60",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_61",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_62",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_63",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_64",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_65",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_66",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_67",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_68",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_69",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_70",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_71",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_72",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_73",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_74",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_75",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_76",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_77",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_78",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_79",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_80",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_81",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_82",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_83",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_84",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_85",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_86",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_87",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_88",
+      "passed": true
+    },
+    {
+      "check": "round40 finite actor_adam_89",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_0",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_1",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_2",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_3",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_4",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_5",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_6",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_7",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_8",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_9",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_10",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_11",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_12",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_13",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_14",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_15",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_16",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_17",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_18",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_19",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_20",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_21",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_22",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_23",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_24",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_25",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_26",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_27",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_28",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_29",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_30",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_31",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_32",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_33",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_34",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_35",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_36",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_37",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_38",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_39",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_40",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_41",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_42",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_43",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_44",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_45",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_46",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_47",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_48",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_49",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_50",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_51",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_52",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_53",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_54",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_55",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_56",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_57",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_58",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_59",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_60",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_61",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_62",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_63",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_64",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_65",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_66",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_67",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_68",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_69",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_70",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_71",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_72",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_73",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_74",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_75",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_76",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_77",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_78",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_79",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_80",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_81",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_82",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_83",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_84",
+      "passed": true
+    },
+    {
+      "check": "round40 finite critic_adam_85",
+      "passed": true
+    },
+    {
+      "check": "model contiguous archive indices",
+      "passed": true
+    },
+    {
+      "check": "round40 exact NPZ model digest",
+      "passed": true
+    },
+    {
+      "check": "actor_adam contiguous archive indices",
+      "passed": true
+    },
+    {
+      "check": "round40 exact NPZ actor_adam digest",
+      "passed": true
+    },
+    {
+      "check": "round40 exact NPZ actor_adam iteration",
+      "passed": true
+    },
+    {
+      "check": "critic_adam contiguous archive indices",
+      "passed": true
+    },
+    {
+      "check": "round40 exact NPZ critic_adam digest",
+      "passed": true
+    },
+    {
+      "check": "round40 exact NPZ critic_adam iteration",
+      "passed": true
+    },
+    {
+      "check": "round40 peak statistics reset does not flush active memory",
+      "passed": true
+    },
+    {
+      "check": "round40 allocator telemetry coherent",
+      "passed": true
+    },
+    {
+      "check": "exactly five complete updates",
+      "passed": true
+    },
+    {
+      "check": "4000 unique exact training-only source paths",
+      "passed": true
+    },
+    {
+      "check": "driver protected report exact",
+      "passed": true
+    },
+    {
+      "check": "driver checkpoint35 source critic-optimizer.npz",
+      "passed": true
+    },
+    {
+      "check": "driver checkpoint35 source state.json",
+      "passed": true
+    },
+    {
+      "check": "driver checkpoint35 source policy.manifest.json",
+      "passed": true
+    },
+    {
+      "check": "driver checkpoint35 source optimizer.npz",
+      "passed": true
+    },
+    {
+      "check": "driver checkpoint35 source policy.keras",
+      "passed": true
+    },
+    {
+      "check": "independently recomputed active-memory tail",
+      "passed": true
+    },
+    {
+      "check": "active memory passes preregistered256MiB tail range",
+      "passed": true
+    },
+    {
+      "check": "all lifecycle gates passed",
+      "passed": true
+    },
+    {
+      "check": "all final PPO threads gone",
+      "passed": true
+    },
+    {
+      "check": "raw NVML telemetry available",
+      "passed": true
+    },
+    {
+      "check": "independent NVML headroom calculation and separate gate",
+      "passed": true
+    },
+    {
+      "check": "system OOM counter available and monotonic; attribution reported separately",
+      "passed": true
+    },
+    {
+      "check": "terminal archive byte proof",
+      "passed": true
+    },
+    {
+      "check": "archive exact member count",
+      "passed": true
+    },
+    {
+      "check": "safe archive member actor-cache-soak-20261026/benchmark_actor_cache_soak.py",
+      "passed": true
+    },
+    {
+      "check": "independent archived hash actor-cache-soak-20261026/benchmark_actor_cache_soak.py",
+      "passed": true
+    },
+    {
+      "check": "installed backup bytes actor-cache-soak-20261026/benchmark_actor_cache_soak.py",
+      "passed": true
+    },
+    {
+      "check": "safe archive member actor-cache-soak-20261026/coordinator.log",
+      "passed": true
+    },
+    {
+      "check": "independent archived hash actor-cache-soak-20261026/coordinator.log",
+      "passed": true
+    },
+    {
+      "check": "installed backup bytes actor-cache-soak-20261026/coordinator.log",
+      "passed": true
+    },
+    {
+      "check": "safe archive member actor-cache-soak-20261026/coordinator.py",
+      "passed": true
+    },
+    {
+      "check": "independent archived hash actor-cache-soak-20261026/coordinator.py",
+      "passed": true
+    },
+    {
+      "check": "installed backup bytes actor-cache-soak-20261026/coordinator.py",
+      "passed": true
+    },
+    {
+      "check": "safe archive member actor-cache-soak-20261026/launch.json",
+      "passed": true
+    },
+    {
+      "check": "independent archived hash actor-cache-soak-20261026/launch.json",
+      "passed": true
+    },
+    {
+      "check": "installed backup bytes actor-cache-soak-20261026/launch.json",
+      "passed": true
+    },
+    {
+      "check": "safe archive member actor-cache-soak-20261026/launch.sh",
+      "passed": true
+    },
+    {
+      "check": "independent archived hash actor-cache-soak-20261026/launch.sh",
+      "passed": true
+    },
+    {
+      "check": "installed backup bytes actor-cache-soak-20261026/launch.sh",
+      "passed": true
+    },
+    {
+      "check": "safe archive member actor-cache-soak-20261026/manifest.json",
+      "passed": true
+    },
+    {
+      "check": "independent archived hash actor-cache-soak-20261026/manifest.json",
+      "passed": true
+    },
+    {
+      "check": "installed backup bytes actor-cache-soak-20261026/manifest.json",
+      "passed": true
+    },
+    {
+      "check": "safe archive member actor-cache-soak-20261026/results/soak/host-spans.json.gz",
+      "passed": true
+    },
+    {
+      "check": "independent archived hash actor-cache-soak-20261026/results/soak/host-spans.json.gz",
+      "passed": true
+    },
+    {
+      "check": "installed backup bytes actor-cache-soak-20261026/results/soak/host-spans.json.gz",
+      "passed": true
+    },
+    {
+      "check": "safe archive member actor-cache-soak-20261026/results/soak/nvidia-smi.csv",
+      "passed": true
+    },
+    {
+      "check": "independent archived hash actor-cache-soak-20261026/results/soak/nvidia-smi.csv",
+      "passed": true
+    },
+    {
+      "check": "installed backup bytes actor-cache-soak-20261026/results/soak/nvidia-smi.csv",
+      "passed": true
+    },
+    {
+      "check": "safe archive member actor-cache-soak-20261026/results/soak/nvidia-smi.stderr.log",
+      "passed": true
+    },
+    {
+      "check": "independent archived hash actor-cache-soak-20261026/results/soak/nvidia-smi.stderr.log",
+      "passed": true
+    },
+    {
+      "check": "installed backup bytes actor-cache-soak-20261026/results/soak/nvidia-smi.stderr.log",
+      "passed": true
+    },
+    {
+      "check": "safe archive member actor-cache-soak-20261026/results/soak/os-samples.json",
+      "passed": true
+    },
+    {
+      "check": "independent archived hash actor-cache-soak-20261026/results/soak/os-samples.json",
+      "passed": true
+    },
+    {
+      "check": "installed backup bytes actor-cache-soak-20261026/results/soak/os-samples.json",
+      "passed": true
+    },
+    {
+      "check": "safe archive member actor-cache-soak-20261026/results/soak/report.json",
+      "passed": true
+    },
+    {
+      "check": "independent archived hash actor-cache-soak-20261026/results/soak/report.json",
+      "passed": true
+    },
+    {
+      "check": "installed backup bytes actor-cache-soak-20261026/results/soak/report.json",
+      "passed": true
+    },
+    {
+      "check": "safe archive member actor-cache-soak-20261026/results/soak/round-0036-state.npz",
+      "passed": true
+    },
+    {
+      "check": "independent archived hash actor-cache-soak-20261026/results/soak/round-0036-state.npz",
+      "passed": true
+    },
+    {
+      "check": "installed backup bytes actor-cache-soak-20261026/results/soak/round-0036-state.npz",
+      "passed": true
+    },
+    {
+      "check": "safe archive member actor-cache-soak-20261026/results/soak/round-0037-state.npz",
+      "passed": true
+    },
+    {
+      "check": "independent archived hash actor-cache-soak-20261026/results/soak/round-0037-state.npz",
+      "passed": true
+    },
+    {
+      "check": "installed backup bytes actor-cache-soak-20261026/results/soak/round-0037-state.npz",
+      "passed": true
+    },
+    {
+      "check": "safe archive member actor-cache-soak-20261026/results/soak/round-0038-state.npz",
+      "passed": true
+    },
+    {
+      "check": "independent archived hash actor-cache-soak-20261026/results/soak/round-0038-state.npz",
+      "passed": true
+    },
+    {
+      "check": "installed backup bytes actor-cache-soak-20261026/results/soak/round-0038-state.npz",
+      "passed": true
+    },
+    {
+      "check": "safe archive member actor-cache-soak-20261026/results/soak/round-0039-state.npz",
+      "passed": true
+    },
+    {
+      "check": "independent archived hash actor-cache-soak-20261026/results/soak/round-0039-state.npz",
+      "passed": true
+    },
+    {
+      "check": "installed backup bytes actor-cache-soak-20261026/results/soak/round-0039-state.npz",
+      "passed": true
+    },
+    {
+      "check": "safe archive member actor-cache-soak-20261026/results/soak/round-0040-state.npz",
+      "passed": true
+    },
+    {
+      "check": "independent archived hash actor-cache-soak-20261026/results/soak/round-0040-state.npz",
+      "passed": true
+    },
+    {
+      "check": "installed backup bytes actor-cache-soak-20261026/results/soak/round-0040-state.npz",
+      "passed": true
+    },
+    {
+      "check": "safe archive member actor-cache-soak-20261026/results/soak.log",
+      "passed": true
+    },
+    {
+      "check": "independent archived hash actor-cache-soak-20261026/results/soak.log",
+      "passed": true
+    },
+    {
+      "check": "installed backup bytes actor-cache-soak-20261026/results/soak.log",
+      "passed": true
+    },
+    {
+      "check": "safe archive member actor-cache-soak-20261026/results/study.json",
+      "passed": true
+    },
+    {
+      "check": "independent archived hash actor-cache-soak-20261026/results/study.json",
+      "passed": true
+    },
+    {
+      "check": "installed backup bytes actor-cache-soak-20261026/results/study.json",
+      "passed": true
+    },
+    {
+      "check": "safe archive member actor-cache-soak-20261026/runtime-hashes.json",
+      "passed": true
+    },
+    {
+      "check": "independent archived hash actor-cache-soak-20261026/runtime-hashes.json",
+      "passed": true
+    },
+    {
+      "check": "installed backup bytes actor-cache-soak-20261026/runtime-hashes.json",
+      "passed": true
+    },
+    {
+      "check": "safe archive member actor-cache-soak-20261026/source-checkpoint-hashes.json",
+      "passed": true
+    },
+    {
+      "check": "independent archived hash actor-cache-soak-20261026/source-checkpoint-hashes.json",
+      "passed": true
+    },
+    {
+      "check": "installed backup bytes actor-cache-soak-20261026/source-checkpoint-hashes.json",
+      "passed": true
+    },
+    {
+      "check": "gzip and five NPZ CRC proof",
+      "passed": true
+    },
+    {
+      "check": "independent remote cleanup evidence",
+      "passed": true
+    },
+    {
+      "check": "cleanup count and source integrity evidence",
+      "passed": true
+    },
+    {
+      "check": "separate authorized native day-awake guard intentionally holding",
+      "passed": true
+    },
+    {
+      "check": "temporary laptop guard and inhibitor released",
+      "passed": true
+    },
+    {
+      "check": "laptop cleanup exact launch owner binding",
+      "passed": true
+    }
+  ],
+  "update_summaries": [
+    {
+      "round": 36,
+      "seconds": 91.22676282499742,
+      "samples": 87283,
+      "guard_passes": [
+        3,
+        4
+      ],
+      "rejected": 5,
+      "accepted_actor_steps": 342,
+      "critic_steps": 157,
+      "actor_gpu_uploads": 297,
+      "actor_gpu_reuses": 742,
+      "canonical_gpu_bytes": 6375356781,
+      "tf_current_bytes": 5273088,
+      "tf_peak_bytes": 17551568896,
+      "post_update_host_rss_kib": 3562664,
+      "pressure": {
+        "oom_kill_delta": 0,
+        "swapout_pages_delta": 0,
+        "memory_full_psi_microseconds": 0,
+        "memory_full_psi_percent": 0.0,
+        "final_process_swap_kib": 0
+      }
+    },
+    {
+      "round": 37,
+      "seconds": 107.92708972000037,
+      "samples": 85957,
+      "guard_passes": [
+        5,
+        4
+      ],
+      "rejected": 7,
+      "accepted_actor_steps": 336,
+      "critic_steps": 157,
+      "actor_gpu_uploads": 286,
+      "actor_gpu_reuses": 1002,
+      "canonical_gpu_bytes": 6407800439,
+      "tf_current_bytes": 5251584,
+      "tf_peak_bytes": 17611283712,
+      "post_update_host_rss_kib": 3893308,
+      "pressure": {
+        "oom_kill_delta": 0,
+        "swapout_pages_delta": 0,
+        "memory_full_psi_microseconds": 233,
+        "memory_full_psi_percent": 0.0002158606541403042,
+        "final_process_swap_kib": 0
+      }
+    },
+    {
+      "round": 38,
+      "seconds": 114.8707286429999,
+      "samples": 87154,
+      "guard_passes": [
+        4,
+        7
+      ],
+      "rejected": 10,
+      "accepted_actor_steps": 171,
+      "critic_steps": 157,
+      "actor_gpu_uploads": 289,
+      "actor_gpu_reuses": 1299,
+      "canonical_gpu_bytes": 6356371468,
+      "tf_current_bytes": 5543168,
+      "tf_peak_bytes": 18018289920,
+      "post_update_host_rss_kib": 4144164,
+      "pressure": {
+        "oom_kill_delta": 0,
+        "swapout_pages_delta": 0,
+        "memory_full_psi_microseconds": 0,
+        "memory_full_psi_percent": 0.0,
+        "final_process_swap_kib": 0
+      }
+    },
+    {
+      "round": 39,
+      "seconds": 85.37213392599733,
+      "samples": 87500,
+      "guard_passes": [
+        4,
+        3
+      ],
+      "rejected": 5,
+      "accepted_actor_steps": 342,
+      "critic_steps": 157,
+      "actor_gpu_uploads": 305,
+      "actor_gpu_reuses": 763,
+      "canonical_gpu_bytes": 6464789264,
+      "tf_current_bytes": 5337344,
+      "tf_peak_bytes": 17541222656,
+      "post_update_host_rss_kib": 4376812,
+      "pressure": {
+        "oom_kill_delta": 0,
+        "swapout_pages_delta": 0,
+        "memory_full_psi_microseconds": 0,
+        "memory_full_psi_percent": 0.0,
+        "final_process_swap_kib": 0
+      }
+    },
+    {
+      "round": 40,
+      "seconds": 110.82849153400093,
+      "samples": 85199,
+      "guard_passes": [
+        5,
+        6
+      ],
+      "rejected": 9,
+      "accepted_actor_steps": 334,
+      "critic_steps": 157,
+      "actor_gpu_uploads": 306,
+      "actor_gpu_reuses": 1377,
+      "canonical_gpu_bytes": 6229903445,
+      "tf_current_bytes": 5339392,
+      "tf_peak_bytes": 17864996352,
+      "post_update_host_rss_kib": 4503172,
+      "pressure": {
+        "oom_kill_delta": 0,
+        "swapout_pages_delta": 0,
+        "memory_full_psi_microseconds": 0,
+        "memory_full_psi_percent": 0.0,
+        "final_process_swap_kib": 0
+      }
+    }
+  ],
+  "post_update_tf_current_bytes": [
+    5273088,
+    5251584,
+    5543168,
+    5337344,
+    5339392
+  ],
+  "final_three_tf_current_range_bytes": 205824,
+  "post_update_host_rss_kib": [
+    3562664,
+    3893308,
+    4144164,
+    4376812,
+    4503172
+  ],
+  "peak_sampled_host_rss_kib": 7119584,
+  "host_rss_plateau_established": false,
+  "minimum_sampled_vram_headroom_bytes": 2463105024,
+  "headroom_gate_passed": true,
+  "peak_sampled_vram_mib": 22215.0,
+  "overall_linux_pressure": {
+    "oom_kill_delta": 0,
+    "swapout_pages_delta": 0,
+    "memory_full_psi_microseconds": 233,
+    "memory_full_psi_percent": 4.5577802288526095e-05,
+    "final_process_swap_kib": 0
+  },
+  "backup_sha256": "94d9aa4214db43adc718d4b04cf658a07445caff27f901c10ee2f9063ef50368",
+  "backup_files": 20,
+  "backup_npz_crc_passed": 5,
+  "limits": [
+    "Five saved historical rounds constitute finite lifecycle replay, not fresh on-policy learning or strength evidence.",
+    "No new workers or games were launched; production worker coexistence remains untested.",
+    "Post-update host RSS rose across all five observations; this run did not establish a host-memory plateau. Dead cache tensor wrappers/readers and flat active GPU bytes do not identify the cause of retained host RSS.",
+    "Dead Python tensor wrappers and a flat active TF-current tail do not prove universal absence of C++ allocator retention.",
+    "NVML reservation can remain high after tensor release; sampled headroom can miss shorter peaks and Windows clock adjustments do not affect monotonic durations.",
+    "System OOM/swap/PSI counters can include unrelated Linux activity; Windows paging is unmeasured.",
+    "Remote source/cleanup integrity is supported by checksummed coordinator and root read-only proofs; this independent audit ran no remote command or TensorFlow."
+  ]
+}

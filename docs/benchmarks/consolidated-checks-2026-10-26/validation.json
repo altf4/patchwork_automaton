@@ -1,0 +1,25 @@
+{
+  "status": "passed",
+  "focused_tests": 3,
+  "regression_tests": 24,
+  "total_local_tests": 27,
+  "gpu_invalid_cases": 6,
+  "gpu_finite_steps": 12,
+  "gpu_finite_model_and_Adam_max_abs_difference": 0.0,
+  "gpu_eager_placement": true,
+  "full_replays": 4,
+  "pairwise_array_comparisons": 6,
+  "arrays_per_comparison": 262,
+  "root_independent_numeric_reduction": "All6pairs recomputed with concatenated arrays; metrics match analyzer to1e-12relative.",
+  "matching_work_guard_sequences": "exact",
+  "matching_work_rng": "exact",
+  "model_and_both_Adam_arrays": "within predeclared envelopes; GPU values are not bitwise identical",
+  "compile": "passed",
+  "git_diff_check": "passed",
+  "source_sha256": "4b98184a9e9b836763c3fc6a99656f2f288a470698519985a81370e4164f4342",
+  "test_sha256": "52221fbad03ecffecb468e9c8865b63c47a89456c4230e6ef403b4d0e53ddadb",
+  "logs": {
+    ".local/benchmarks/consolidated-checks-20261026/focused-tests.log": "5608cafeb9f60caf0b749b093afec55c48463b603056358c84697682ce2cf4c6",
+    ".local/benchmarks/consolidated-checks-20261026/regression-tests.log": "acfe3d513c1c3ba8197fa0f4a5ffac0d2e6e198b19792c0590780291f6302288"
+  }
+}

@@ -165,7 +165,8 @@ def save_checkpoint(directory,model,trainer,state,*,policy_type=NeuralPolicy):
     return destination
 
 
-def load_checkpoint(directory):
+def load_checkpoint(directory, *, gru_backend=None):
+    """Restore model, Adam and PCG; optionally select GRU execution before tracing."""
     directory=Path(directory)
     name=json.loads((directory/'latest.json').read_text())['checkpoint']
     if Path(name).name!=name:raise ValueError('Invalid checkpoint path')
@@ -177,6 +178,11 @@ def load_checkpoint(directory):
         model=RustMagePolicy.load(root/'policy.keras').model
     else:
         model=NeuralPolicy.load(root/'policy.keras').model
+    # Runtime-only selection must precede trainer construction/compilation.
+    # Callers that do not opt in retain portable, unfused checkpoint loading.
+    if gru_backend is not None:
+        from .recurrent import configure_gru_backend
+        configure_gru_backend(model, gru_backend)
     config=state['config']
     trainer=make_trainer(model,config)
     trainer.compile()

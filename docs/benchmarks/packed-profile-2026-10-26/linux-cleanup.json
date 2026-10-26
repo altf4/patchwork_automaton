@@ -1,0 +1,32 @@
+{
+  "verified": true,
+  "utc": "2026-10-26T13:54:35.809740+00:00",
+  "issues": [],
+  "phases": [
+    {
+      "phase": "packed-profile-20261026",
+      "status": "error",
+      "runtime_files": 135,
+      "pinned_runtime_unchanged": true,
+      "checkpoints_unchanged": 205
+    },
+    {
+      "phase": "packed-profile-v2-20261026",
+      "status": "complete",
+      "runtime_files": 135,
+      "pinned_runtime_unchanged": true,
+      "checkpoints_unchanged": 205
+    },
+    {
+      "phase": "packed-host-profile-20261026",
+      "status": "complete",
+      "runtime_files": 135,
+      "pinned_runtime_unchanged": true,
+      "checkpoints_unchanged": 205
+    }
+  ],
+  "remaining": [],
+  "owned_group_members": [],
+  "shared_lock_free": true,
+  "gpu_compute_processes": ""
+}

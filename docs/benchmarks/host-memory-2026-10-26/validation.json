@@ -1,0 +1,19 @@
+{
+  "status": "passed",
+  "local_driver_fixture_tests": 5,
+  "local_infrastructure_fixture_tests": 6,
+  "independent_audit_sha256": "04522f9065ec30b1aa9094375cb86273ce669c5ca2ee4dc4713efdb429beb430",
+  "root_raw_intervention_recompute": true,
+  "source_model_and_rl_unchanged": true,
+  "full_state_archives": 5,
+  "arrays_per_archive": 262,
+  "whole_game_training_per_update": 800,
+  "whole_game_holdout_excluded_per_update": 200,
+  "normal_boundaries_before_interventions": 11,
+  "all_snapshots": 18,
+  "all_arena_xml": 18,
+  "intervention_model_both_adams_and_pcg": "exact",
+  "production_allocator_policy_changed": false,
+  "git_diff_check": "passed",
+  "compile": "passed"
+}

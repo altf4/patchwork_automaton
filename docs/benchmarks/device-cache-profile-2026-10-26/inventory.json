@@ -1,0 +1,58 @@
+{
+  "status": "verified",
+  "files": {
+    "README.md": {
+      "bytes": 1477,
+      "sha256": "9be070112123872dec18d6abc4a161cd524f220a4891df3d05b75a714ba5842c"
+    },
+    "backup-proof.json": {
+      "bytes": 168,
+      "sha256": "543829f801952a45c9d21751c43868d85dfbff90771ca058911301a7e646f2ee"
+    },
+    "cpu-phases.png": {
+      "bytes": 184678,
+      "sha256": "3e9c95076a53674ba3acc166b9dbc74e0b2da463e8fd7cd95f843ba23e1b467b"
+    },
+    "cpu-phases.svg": {
+      "bytes": 124370,
+      "sha256": "0fead97ad12c3aacd6ff85b242fb692d49103bd417487b65e82d01e233859395"
+    },
+    "linux-cleanup.json": {
+      "bytes": 401,
+      "sha256": "ebcb1d9ff8860c2ec8a78aca71491c561f39a318c181a93752ade9fbbd1d9cf1"
+    },
+    "local-cleanup.json": {
+      "bytes": 331,
+      "sha256": "5e9a7614e24d3f89ea5eccafbd24f0e447bdd028df606df911af943597b419c9"
+    },
+    "manifest.json": {
+      "bytes": 34700,
+      "sha256": "b27342e30864cab54edca180205f2d3f1a29cb2262497b9e38cb2ddc0b124342"
+    },
+    "native-day-awake.json": {
+      "bytes": 11540,
+      "sha256": "ba3f7d7cde20005789b5142c4a117738dff492867fafb3401319cc666c164d4f"
+    },
+    "profile-fixture-test.log": {
+      "bytes": 1387,
+      "sha256": "4060f8ae327f44582aeea1c54dadc31ca99b8535334307497405a5cfc271ac69"
+    },
+    "profile-fixture-test.py": {
+      "bytes": 2997,
+      "sha256": "4cdada4a4d16934a64720fd2aacffbf1ec21de59d82cf8bd0f1af8a5e2e067cf"
+    },
+    "results.json": {
+      "bytes": 32475,
+      "sha256": "dd53f70d33c08996d99bbed5b0c7eedd4c3d6d6c5c5444d37ef1775cc12fe6e8"
+    },
+    "source-review.json": {
+      "bytes": 2219,
+      "sha256": "4381d97cb96da53c8aec71f8ca9a415df0da8eef1dbb077fb10a43c558a73ae8"
+    },
+    "validation.json": {
+      "bytes": 2682,
+      "sha256": "b190f4172d4160a9e4803afeca74a636de993dd7562a1bd710a49d9a460e269c"
+    }
+  },
+  "note": "Inventory excludes itself to avoid a recursive digest."
+}

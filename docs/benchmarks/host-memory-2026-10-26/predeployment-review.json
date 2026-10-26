@@ -1,0 +1,53 @@
+{
+  "status": "passed",
+  "reviewer": "/root/host_memory_design",
+  "reviewed_utc": "2026-10-26T17:21:17.739121+00:00",
+  "manifest_sha256": "81b55d29a4dc1faef98bae7bed7177e9767ce349d2b2b4ec4ff1b7f8ba91cdba",
+  "deployment_sha256": {
+    "coordinator.py": "ba6880594325fd550c64d030860ab731e0ebbd6d5c38a2413dbd43ce2906daac",
+    "benchmark_host_memory.py": "d70868923d627adb67ea52271129795842eb8a145cab2b0a799e738e4f604bcc"
+  },
+  "driver_source_sha256": "d70868923d627adb67ea52271129795842eb8a145cab2b0a799e738e4f604bcc",
+  "driver_test_sha256": "414e0289fa27ff43b0a650e429ade6462301bb4e6a45bad2df166e474ae09d70",
+  "driver_fixture_log_sha256": "7d82ccabe013bdbdf04e0cb1ffdae322076ea7815602527f30d887290899cd6d",
+  "infrastructure_validation_sha256": "d4f46902e4e9bfd3fe6f156dfa4bcaa9306002fc3d077a4aa757fd55d05c5211",
+  "infrastructure_script_sha256": {
+    "coordinator.py": "ba6880594325fd550c64d030860ab731e0ebbd6d5c38a2413dbd43ce2906daac",
+    "remote_tools.py": "edced2948c5bf791d90d5697e1a9a691cafc6a6ed561366227911fe2ca6a09f0",
+    "deploy.py": "a40b7976b5005f7d87ed421713036585225d268373f8ce513fc3b6bb98553682",
+    "start.py": "49420598ca4086e5b1005cb653bcba52126fd05a315e62e13af07ec8d038affd",
+    "status.py": "2f863e4f335298a3df0c4c7cc50d946cae72c64784dea3d289c9c24485f0683a",
+    "pull.py": "673b545bac19171001c00b89e68866449dfd653880c271dd97bafd87e9ad7df8",
+    "cleanup-linux.py": "6b61dc6fa4f000a66f179dc6b57e8a384b1a55a8e71f30ecfc20dcaf6be058fa",
+    "audit-cleanup.py": "9a8e7c9a30bb528a6869d98aeadd1b04448793309fbfc030e3f0dff0a70ba183",
+    "infrastructure-fixtures.py": "3dc22cc7d8aa97ccf81e259757edea2e41c709b10f3bfba1f57b01781314693f"
+  },
+  "independent_local_fixture_reruns": {
+    "driver": 5,
+    "infrastructure": 6,
+    "passed": true
+  },
+  "base_runtime_files": 139,
+  "original_runtime_files": 140,
+  "no_remote_compute_or_deploy_by_reviewer": true,
+  "checks": [
+    "Exact frozen manifest and both deployment hashes verified; driver copy equals reviewed source; fixture hashes verified.",
+    "Mallinfo2 ten size_t fields/order match local glibc malloc.h; all ctypes argtypes/restypes explicit; FILE pointer closed in finally before XML parsing.",
+    "malloc_info root totals used once, not added to per-heap totals; glibc malloc metrics explicitly not complete process or TensorFlow/CUDA allocation accounting.",
+    "Original five-round soak driver called directly from unchanged base139 runtime; current local ML Python hashes equal frozen base runtime; no hyperparameter overrides or new games.",
+    "Normal boundary hooks observe11 before-series/per-round boundaries before any intervention; post-series idle2s, GC, trim ordered once, no per-update flush/reset.",
+    "Model/trainer weakrefs must remain alive; model/bothAdam/PCG exact state hashes checked around every probe; globals restored in finally.",
+    "Metadata traverses explicit scalar/container histories and weakref shells without following tensor targets; raw smaps and XML streamed to separate files.",
+    "Same-inode exclusive lock inherited across launcher and coordinator, held through descendant cleanup and source integrity; finite2700-second diagnostic only.",
+    "Exact ownership/pidfd signaling protects reused PIDs; unrelated GPU occupancy refuses launch without signaling unrelated work.",
+    "Output created exclusively; original source/checkpoints preserved; one-shot final backup validates gzip,JSON,JSONL,XML and five NPZ CRCs, partial bytes preserved.",
+    "Linux and laptop guard cleanup is exact-owner bound; separate authorized Windows day-awake guard remains active."
+  ],
+  "limitations": [
+    "RSS growth alone does not establish a leak; decreasing increments do not establish a plateau.",
+    "Observation, JSON serialization and state hashing can themselves allocate. Before/after diagnostic snapshots and idle control expose some, not every byte, of this overhead.",
+    "malloc_trim return value is not bytes reclaimed. Only measured RSS before/after quantifies resident return; lack of trim response is inconclusive for custom/native allocators.",
+    "A post-final trim response cannot justify per-update production trimming or prove natural long-run memory stability.",
+    "Saved historical trajectories are a runtime lifecycle diagnostic, not fresh on-policy learning or a learning-strength/throughput claim."
+  ]
+}

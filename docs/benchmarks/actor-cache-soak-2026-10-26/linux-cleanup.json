@@ -1,0 +1,19 @@
+{
+  "verified": true,
+  "utc": "2026-10-26T17:06:40.620605+00:00",
+  "issues": [],
+  "status": "complete",
+  "remaining": [],
+  "shared_lock_free": true,
+  "gpu_compute_processes": "",
+  "checks": {
+    "source_checkpoint_files_unchanged": true,
+    "source_report_unchanged": true,
+    "original_runtime_unchanged": true,
+    "base_runtime_unchanged": true,
+    "pinned_runtimes_unchanged": true,
+    "deployment_unchanged": true
+  },
+  "source_checkpoint_files_unchanged": 205,
+  "runtime_files": 139
+}

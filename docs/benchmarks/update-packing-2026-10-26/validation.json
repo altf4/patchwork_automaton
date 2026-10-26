@@ -1,0 +1,38 @@
+{
+  "status": "passed",
+  "utc": "2026-10-26T06:00:50.880628+00:00",
+  "distinct_local_tests": 19,
+  "packing_tests_repeated_after_revision": true,
+  "packing_tests_seconds": [
+    98.78,
+    79.666
+  ],
+  "regression_tests": 12,
+  "trace_analysis_tests": 3,
+  "whole_training_records": 85199,
+  "whole_game_train_holdout": [
+    800,
+    200
+  ],
+  "canonical_batches_per_revision": 167,
+  "shuffled_batches_per_revision": 6,
+  "gpu_parity_cases_per_revision": 3,
+  "max_output_absolute_difference": 0.0,
+  "max_gradient_absolute_difference": 5.960464477539062e-07,
+  "all_final_arrays_within_declared_envelope": true,
+  "all_final_rng_equal": true,
+  "selected_vs_matching_controls_all_work_and_guard_sequences_equal": true,
+  "original_checkpoint_files_unchanged": 205,
+  "py_compile": "passed",
+  "diff_check": "passed",
+  "no_new_games": true,
+  "no_promoted_checkpoints": true,
+  "packing_defaults_enabled": false,
+  "source_files": {
+    "src/patchwork_automaton/neural/packed_rollouts.py": "256331ee972462b1064e903fc71451c9ab2c415a75822c67ed8673659f760291",
+    "src/patchwork_automaton/neural/streaming_ppo.py": "e60f2b3e4f2578798522d31f4f8adcc5a8e5ca27f744b36edf638e84b40b2d0b",
+    "examples/benchmark_update_packing.py": "67de67ea9be0d8aa2daf639c43a23980bb0ee65ec9d8e8ac149097ec9e79f543",
+    "examples/benchmark_packed_update.py": "adc6792cd08ba754bdc1b9c9b426c65adb86c9694e4072a55a07f192847f27e3",
+    "tests/test_packed_rollouts.py": "85e741916bf7fb5ac8b3933c8001e6bfd25ca5ac6eb845447ade62113d2966a9"
+  }
+}

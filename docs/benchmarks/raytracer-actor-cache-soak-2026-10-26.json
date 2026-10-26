@@ -1,0 +1,93 @@
+{
+  "status": "complete",
+  "manifest_sha256": "e929303c60ef418d7b9724c2d62002c6ecad99cd3bc89dd801d3de6fb1a5ed61",
+  "plan": [
+    "Five consecutive chronological saved-round updates36..40 from exact checkpoint35, one persistent GPU model/trainer/compiled graphs. Model/both Adam/PCG carry between updates; no resets, forced GC, clear_session or allocator flush between calls.",
+    "Same model, selective cuDNN, RL settings, batch512, both GPU cache payload caps8GiB, prepacking and canonical cache. No new games, source checkpoint writes or promoted weights.",
+    "Runtime/lifecycle diagnostic only: later saved behavior policies may differ from evolving diagnostic policy. Preserve guard decisions and full work counts; do not claim fresh on-policy learning strength or compare unequal-work speed.",
+    "Passive NVML/Linux sampling plus TensorFlow allocator current/peak and cache-lifetime observations. Distinguish allocator reserved high-water from live tensor bytes. No GPU trace.",
+    "All five complete finite with unchanged hashes/splits, uninterrupted optimizer/RNG states, bounded and released caches, no PPO worker/readers/cache-owned tensor references at boundaries. Last three post-update TF-current range<=256MiB; observed peak headroom>=2GiB is a separate operational gate, not a universal allocation guarantee.",
+    "No new game-generation workers: production worker coexistence and larger minibatches/rounds remain outside the test scope."
+  ],
+  "criteria": {
+    "post_warm_tf_current_range_bytes": 268435456,
+    "minimum_observed_vram_headroom_bytes": 2147483648,
+    "source_and_rl_unchanged": true,
+    "whole_game_training": 800,
+    "whole_game_holdout_excluded": 200,
+    "diagnostic_only": true
+  },
+  "local_evidence": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/actor-cache-soak-20261026",
+  "output": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/actor-cache-soak-20261026",
+  "hyperparameter_overrides": {},
+  "no_new_games": true,
+  "no_promoted_checkpoints": true,
+  "started_utc": "2026-10-26T16:57:06.852891+00:00",
+  "launch": {
+    "pid": 30542,
+    "pgid": 30542,
+    "sid": 30542,
+    "start_ticks": 1985023,
+    "uid": 1000,
+    "state": "R"
+  },
+  "local_guard": {
+    "pid": 3684722,
+    "pgid": 3684722,
+    "sid": 3684722,
+    "start_ticks": 52330066,
+    "uid": 1000,
+    "maximum_seconds": 3600
+  },
+  "review_sha256": "2c3f78a391968be26983fd07a15442f6cfa77c54e95964ababf9cd8d99de7f01",
+  "deployment": {
+    "status": "deployed_not_started",
+    "path": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/actor-cache-soak-20261026",
+    "runtime_files": 139,
+    "deployment_sha256": "81b7bf0bf8a08bb07d1636d60f08a59c1fe79be1182cbae25265d25bf88595e6"
+  },
+  "finished_utc": "2026-10-26T17:11:31.284800+00:00",
+  "results": "docs/benchmarks/actor-cache-soak-2026-10-26/results.json",
+  "lifecycle_passed": true,
+  "production_readiness_headroom_passed": true,
+  "production_worker_coexistence_measured": false,
+  "post_update_tf_current_bytes": [
+    5273088,
+    5251584,
+    5543168,
+    5337344,
+    5339392
+  ],
+  "last_three_tf_current_range_bytes": 205824,
+  "maximum_sampled_vram_mib": 22215.0,
+  "minimum_sampled_vram_headroom_bytes": 2463105024,
+  "all_source_checkpoint_files_unchanged": 205,
+  "independent_audit_sha256": "cbd8fd887e655e22dd6301c4d8e7875b9aa5a91c2ac1bbd327eb4422aa7a0ce3",
+  "backup": {
+    "files": 20,
+    "json_validated": 7,
+    "npz_crc_passed": 5,
+    "gzip_crc_passed": true,
+    "remote_study_status": "complete",
+    "sha256": "94d9aa4214db43adc718d4b04cf658a07445caff27f901c10ee2f9063ef50368",
+    "bytes": 15364886,
+    "verified_utc": "2026-10-26T17:06:39.854862+00:00",
+    "transfer_attempt": "20261026T170637-de902d1e"
+  },
+  "cleanup": {
+    "remote_owned_groups_gone": true,
+    "shared_lock_free": true,
+    "gpu_compute_contexts_gone": true,
+    "laptop_inhibitor_released": true,
+    "day_awake_left_active": true
+  },
+  "host_rss_after_update_mib": [
+    3479.1640625,
+    3802.05859375,
+    4047.03515625,
+    4274.23046875,
+    4397.62890625
+  ],
+  "host_rss_plateau_established": false,
+  "overall_long_run_stability_established": false
+}

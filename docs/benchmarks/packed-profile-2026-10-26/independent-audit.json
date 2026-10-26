@@ -1,0 +1,18 @@
+{
+  "status": "passed",
+  "reviewer": "/root/profile_audit",
+  "utc": "2026-10-26T14:00:08.377061+00:00",
+  "checks": [
+    "Independently recomputed6paired comparisons across262arrays each: finite arrays and all maxabs/relativeL2 values exactly match reported values.",
+    "Rechecked all initial config/source/input/model/RNG/Adam iteration equalities.",
+    "Recomputed fault/PSI/swapout/minimumavailableRAM from raw OS snapshots.",
+    "800traininggames/inputhashes and200wholegame exclusions; GPU0placements consistent across4successful replays.",
+    "Matching8rejection replay pairs retain identical work/guard decisions/final PCG;9rejection control remains visible."
+  ],
+  "limitations": [
+    "Spans overlap; no gather-time savings claim.",
+    "GPU tracing caused paging.",
+    "No all-RAM, cold-cache, production resident worker or Windows paging measurement.",
+    "Copy counts identify optimization candidates; isolated benefit not yet measured."
+  ]
+}

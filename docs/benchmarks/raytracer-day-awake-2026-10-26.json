@@ -1,0 +1,69 @@
+{
+  "status": "active",
+  "verified_utc": "2026-10-26T15:05:16.6710066Z",
+  "scope": "Keep Raytracer awake for rest of October26Arizona, as explicitly authorized by user; independent of any benchmark lifetime.",
+  "task_name": "MTGO-RustMage-Day-Awake-20261026",
+  "native_root": "C:\\Users\\altf4\\mtgo-training\\day-awake-20261026",
+  "native_state": "/mnt/c/Users/altf4/mtgo-training/day-awake-20261026/state.json",
+  "manifest_sha256": "ceccfe15c230d7b7af0982cca997695989d4c4887e121bc58f12573dcef093c1",
+  "expires_utc": "2026-10-27T07:00:00Z",
+  "expires_local": "2026-10-27T00:00:00-07:00",
+  "maximum_monotonic_seconds": 64800,
+  "task_execution_limit": "PT18H2M",
+  "windows_pid": 17460,
+  "creation_utc": "2026-10-26T15:05:04.7271020Z",
+  "instance_guid": "{E27444D2-5579-4FCE-91B6-186CFE61B375}",
+  "temporary_system_required_verified": true,
+  "persistent_power_settings_unchanged": true,
+  "source_sha256": {
+    "keep-day-awake.ps1": "60a522dec92001fe46c8d6b9aaa77abf00c8a0b4473fd8f23c1e6a89db9b3bce",
+    "start-day-awake.ps1": "7cd78596f7180bebc38d53b51631ce66e1e76808fa07904e347b8e2c57a49909",
+    "status-day-awake.ps1": "481f8a05f27e25e307c3564ccc319e90e4b4c4e8cfaad75842bd1bb0e25fa4b7"
+  },
+  "independent_review": {
+    "status": "passed",
+    "reviewer": "device_cache_review",
+    "reviewed_before_deployment": true,
+    "manifest_sha256": "ceccfe15c230d7b7af0982cca997695989d4c4887e121bc58f12573dcef093c1",
+    "review_scope": [
+      "Absolute UTC deadline plus independent18h monotonic maximum",
+      "SYSTEM_REQUIRED acquired/released on same native thread",
+      "Exact task action/principal and terminal PID/creation binding before self-unregister",
+      "Allowlisted exclusive upload and pinned source/manifest identity",
+      "No WSL/training/services/SSH or persistent power changes"
+    ]
+  },
+  "cleanup": {
+    "request_release": "Configured for UTC expiry,18h monotonic bound,explicit stop receipt or guard exception; process exit also clears its thread request.",
+    "task_unregistration": "Configured after release, bound to exact terminal process/action/principal/manifest. Natural expiry has not yet occurred.",
+    "leave_running_after_benchmarks": true
+  },
+  "backup": {
+    "status": "verified",
+    "utc": "2026-10-26T15:06:00.639860+00:00",
+    "files": {
+      "keep-day-awake.ps1": "60a522dec92001fe46c8d6b9aaa77abf00c8a0b4473fd8f23c1e6a89db9b3bce",
+      "start-day-awake.ps1": "7cd78596f7180bebc38d53b51631ce66e1e76808fa07904e347b8e2c57a49909",
+      "status-day-awake.ps1": "481f8a05f27e25e307c3564ccc319e90e4b4c4e8cfaad75842bd1bb0e25fa4b7",
+      "manifest.json": "ceccfe15c230d7b7af0982cca997695989d4c4887e121bc58f12573dcef093c1",
+      "invoke-start.ps1": "2b4e92311f9191ff622219d83757adf425f3aa5c44f9cb9859ab7108f07207cc",
+      "invoke-status.ps1": "444d8e0341725a18c46a05c66bd4f7e7e67e2da0137f1c36f77853d2355b572a",
+      "state.json": "6eb9687a4408c5079dc144b4d073900b80368f93b1ae9cbdb81a140d6495d1e5",
+      "task.xml": "dee4e6ebd9ec45d049f553dbf4f2d4448ab6f1cbf9eac6698a08849db05e2bae",
+      "persistent-power-before.txt": "0c2eeb0dc3f8f99c710bb04b0fdbcdcf0bee714f48ff0ab93964990db7cd249b",
+      "persistent-power-after.txt": "0c2eeb0dc3f8f99c710bb04b0fdbcdcf0bee714f48ff0ab93964990db7cd249b"
+    }
+  },
+  "evidence_local_base": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/day-awake-20261026",
+  "evidence_sha256": {
+    "start-proof.json": "2db152311d23bd9fb3128986de137732203afe0aa7ae35282e48271403b335b4",
+    "activation-proof.json": "7c8fe994c0adb0d5f543774951319428fd5f6ab8139004d68f5ad1639e9d3b5c",
+    "upload.json": "8ad980a7cf7781f7a8247dfc637ab8e2a3a544716fb7fa541ef5a91e93bfca29",
+    "independent-review.json": "6e8d21dbdb88d1c69a786f10fe1409230d6b5531a10786f6aa65ce22db8f1242",
+    "backup-proof.json": "dccb97faa1d328b2f624a4f906cdec2ee0b6c94c454b2c19cac2ea7da97c4d39"
+  },
+  "limitations": [
+    "Temporary idle-sleep inhibition does not prevent explicit shutdown/restart/hibernate or machine/network failure.",
+    "Configured automatic expiry and task cleanup have not yet occurred; activation was verified."
+  ]
+}

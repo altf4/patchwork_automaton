@@ -1,0 +1,401 @@
+{
+  "status": "passed",
+  "reviewer": "/root/device_cache_review",
+  "verified_utc": "2026-10-26T15:21:09.752153+00:00",
+  "manifest_sha256": "40821819b3227a275044ae277a17990aea68a0d160aa8844f0c263baefa0c7c1",
+  "archive_sha256": "889e556d529673cc78ffd1c5239697f54f503ad7edff482047b41551fabd9b0c",
+  "analysis_results_sha256_observed": "1497e2519949da5f1636389d3e5185f95bd571a06c135fe27610c18982a40c7f",
+  "checks_passed": 176,
+  "checks": [
+    "manifest frozen",
+    "archive sha/size",
+    "gzip CRC verified independently",
+    "42 complete backup members",
+    "safe backed-up member device-policy-cache-20261026/benchmark_device_cached_update.py",
+    "extracted bytes match archive device-policy-cache-20261026/benchmark_device_cached_update.py",
+    "safe backed-up member device-policy-cache-20261026/benchmark_device_policy_cache.py",
+    "extracted bytes match archive device-policy-cache-20261026/benchmark_device_policy_cache.py",
+    "safe backed-up member device-policy-cache-20261026/coordinator.log",
+    "extracted bytes match archive device-policy-cache-20261026/coordinator.log",
+    "safe backed-up member device-policy-cache-20261026/coordinator.py",
+    "extracted bytes match archive device-policy-cache-20261026/coordinator.py",
+    "safe backed-up member device-policy-cache-20261026/launch.json",
+    "extracted bytes match archive device-policy-cache-20261026/launch.json",
+    "safe backed-up member device-policy-cache-20261026/launch.sh",
+    "extracted bytes match archive device-policy-cache-20261026/launch.sh",
+    "safe backed-up member device-policy-cache-20261026/manifest.json",
+    "extracted bytes match archive device-policy-cache-20261026/manifest.json",
+    "safe backed-up member device-policy-cache-20261026/packed_rollouts.py",
+    "extracted bytes match archive device-policy-cache-20261026/packed_rollouts.py",
+    "safe backed-up member device-policy-cache-20261026/profile_packed_update.py",
+    "extracted bytes match archive device-policy-cache-20261026/profile_packed_update.py",
+    "safe backed-up member device-policy-cache-20261026/results/1-host/host-spans.json.gz",
+    "extracted bytes match archive device-policy-cache-20261026/results/1-host/host-spans.json.gz",
+    "safe backed-up member device-policy-cache-20261026/results/1-host/nvidia-smi.csv",
+    "extracted bytes match archive device-policy-cache-20261026/results/1-host/nvidia-smi.csv",
+    "safe backed-up member device-policy-cache-20261026/results/1-host/nvidia-smi.stderr.log",
+    "extracted bytes match archive device-policy-cache-20261026/results/1-host/nvidia-smi.stderr.log",
+    "safe backed-up member device-policy-cache-20261026/results/1-host/os-samples.json",
+    "extracted bytes match archive device-policy-cache-20261026/results/1-host/os-samples.json",
+    "safe backed-up member device-policy-cache-20261026/results/1-host/report.json",
+    "extracted bytes match archive device-policy-cache-20261026/results/1-host/report.json",
+    "safe backed-up member device-policy-cache-20261026/results/1-host/result-state.npz",
+    "extracted bytes match archive device-policy-cache-20261026/results/1-host/result-state.npz",
+    "safe backed-up member device-policy-cache-20261026/results/1-host.log",
+    "extracted bytes match archive device-policy-cache-20261026/results/1-host.log",
+    "safe backed-up member device-policy-cache-20261026/results/2-gpu/host-spans.json.gz",
+    "extracted bytes match archive device-policy-cache-20261026/results/2-gpu/host-spans.json.gz",
+    "safe backed-up member device-policy-cache-20261026/results/2-gpu/nvidia-smi.csv",
+    "extracted bytes match archive device-policy-cache-20261026/results/2-gpu/nvidia-smi.csv",
+    "safe backed-up member device-policy-cache-20261026/results/2-gpu/nvidia-smi.stderr.log",
+    "extracted bytes match archive device-policy-cache-20261026/results/2-gpu/nvidia-smi.stderr.log",
+    "safe backed-up member device-policy-cache-20261026/results/2-gpu/os-samples.json",
+    "extracted bytes match archive device-policy-cache-20261026/results/2-gpu/os-samples.json",
+    "safe backed-up member device-policy-cache-20261026/results/2-gpu/report.json",
+    "extracted bytes match archive device-policy-cache-20261026/results/2-gpu/report.json",
+    "safe backed-up member device-policy-cache-20261026/results/2-gpu/result-state.npz",
+    "extracted bytes match archive device-policy-cache-20261026/results/2-gpu/result-state.npz",
+    "safe backed-up member device-policy-cache-20261026/results/2-gpu.log",
+    "extracted bytes match archive device-policy-cache-20261026/results/2-gpu.log",
+    "safe backed-up member device-policy-cache-20261026/results/3-gpu/host-spans.json.gz",
+    "extracted bytes match archive device-policy-cache-20261026/results/3-gpu/host-spans.json.gz",
+    "safe backed-up member device-policy-cache-20261026/results/3-gpu/nvidia-smi.csv",
+    "extracted bytes match archive device-policy-cache-20261026/results/3-gpu/nvidia-smi.csv",
+    "safe backed-up member device-policy-cache-20261026/results/3-gpu/nvidia-smi.stderr.log",
+    "extracted bytes match archive device-policy-cache-20261026/results/3-gpu/nvidia-smi.stderr.log",
+    "safe backed-up member device-policy-cache-20261026/results/3-gpu/os-samples.json",
+    "extracted bytes match archive device-policy-cache-20261026/results/3-gpu/os-samples.json",
+    "safe backed-up member device-policy-cache-20261026/results/3-gpu/report.json",
+    "extracted bytes match archive device-policy-cache-20261026/results/3-gpu/report.json",
+    "safe backed-up member device-policy-cache-20261026/results/3-gpu/result-state.npz",
+    "extracted bytes match archive device-policy-cache-20261026/results/3-gpu/result-state.npz",
+    "safe backed-up member device-policy-cache-20261026/results/3-gpu.log",
+    "extracted bytes match archive device-policy-cache-20261026/results/3-gpu.log",
+    "safe backed-up member device-policy-cache-20261026/results/4-host/host-spans.json.gz",
+    "extracted bytes match archive device-policy-cache-20261026/results/4-host/host-spans.json.gz",
+    "safe backed-up member device-policy-cache-20261026/results/4-host/nvidia-smi.csv",
+    "extracted bytes match archive device-policy-cache-20261026/results/4-host/nvidia-smi.csv",
+    "safe backed-up member device-policy-cache-20261026/results/4-host/nvidia-smi.stderr.log",
+    "extracted bytes match archive device-policy-cache-20261026/results/4-host/nvidia-smi.stderr.log",
+    "safe backed-up member device-policy-cache-20261026/results/4-host/os-samples.json",
+    "extracted bytes match archive device-policy-cache-20261026/results/4-host/os-samples.json",
+    "safe backed-up member device-policy-cache-20261026/results/4-host/report.json",
+    "extracted bytes match archive device-policy-cache-20261026/results/4-host/report.json",
+    "safe backed-up member device-policy-cache-20261026/results/4-host/result-state.npz",
+    "extracted bytes match archive device-policy-cache-20261026/results/4-host/result-state.npz",
+    "safe backed-up member device-policy-cache-20261026/results/4-host.log",
+    "extracted bytes match archive device-policy-cache-20261026/results/4-host.log",
+    "safe backed-up member device-policy-cache-20261026/results/gpu-preflight/report.json",
+    "extracted bytes match archive device-policy-cache-20261026/results/gpu-preflight/report.json",
+    "safe backed-up member device-policy-cache-20261026/results/gpu-preflight.log",
+    "extracted bytes match archive device-policy-cache-20261026/results/gpu-preflight.log",
+    "safe backed-up member device-policy-cache-20261026/results/study.json",
+    "extracted bytes match archive device-policy-cache-20261026/results/study.json",
+    "safe backed-up member device-policy-cache-20261026/runtime-hashes.json",
+    "extracted bytes match archive device-policy-cache-20261026/runtime-hashes.json",
+    "safe backed-up member device-policy-cache-20261026/streaming_ppo.py",
+    "extracted bytes match archive device-policy-cache-20261026/streaming_ppo.py",
+    "preflight full canonical/shuffled cohort",
+    "preflight exact host/GPU input digest",
+    "preflight source/state untouched",
+    "preflight selective fused backward path",
+    "preflight outputs and gradients passed",
+    "1-host complete immutable source",
+    "1-host startup full equality",
+    "1-host preflight-bound startup",
+    "1-host exact work and guard/RNG",
+    "1-host no GPU trace",
+    "1-host unchanged host cache",
+    "1-host NPZ CRC",
+    "1-host 262 finite arrays",
+    "2-gpu complete immutable source",
+    "2-gpu startup full equality",
+    "2-gpu preflight-bound startup",
+    "2-gpu exact work and guard/RNG",
+    "2-gpu no GPU trace",
+    "2-gpu one upload then 11 reuses per canonical batch",
+    "2-gpu bounded full GPU admission no CPU policy mmap",
+    "2-gpu NPZ CRC",
+    "2-gpu 262 finite arrays",
+    "3-gpu complete immutable source",
+    "3-gpu startup full equality",
+    "3-gpu preflight-bound startup",
+    "3-gpu exact work and guard/RNG",
+    "3-gpu no GPU trace",
+    "3-gpu one upload then 11 reuses per canonical batch",
+    "3-gpu bounded full GPU admission no CPU policy mmap",
+    "3-gpu NPZ CRC",
+    "3-gpu 262 finite arrays",
+    "4-host complete immutable source",
+    "4-host startup full equality",
+    "4-host preflight-bound startup",
+    "4-host exact work and guard/RNG",
+    "4-host no GPU trace",
+    "4-host unchanged host cache",
+    "4-host NPZ CRC",
+    "4-host 262 finite arrays",
+    "1-host/2-gpu array schema equal",
+    "1-host/2-gpu model declared envelope",
+    "1-host/2-gpu model analyzer numeric result",
+    "1-host/2-gpu actor_optimizer declared envelope",
+    "1-host/2-gpu actor_optimizer analyzer numeric result",
+    "1-host/2-gpu critic_optimizer declared envelope",
+    "1-host/2-gpu critic_optimizer analyzer numeric result",
+    "1-host/3-gpu array schema equal",
+    "1-host/3-gpu model declared envelope",
+    "1-host/3-gpu model analyzer numeric result",
+    "1-host/3-gpu actor_optimizer declared envelope",
+    "1-host/3-gpu actor_optimizer analyzer numeric result",
+    "1-host/3-gpu critic_optimizer declared envelope",
+    "1-host/3-gpu critic_optimizer analyzer numeric result",
+    "1-host/4-host array schema equal",
+    "1-host/4-host model declared envelope",
+    "1-host/4-host model analyzer numeric result",
+    "1-host/4-host actor_optimizer declared envelope",
+    "1-host/4-host actor_optimizer analyzer numeric result",
+    "1-host/4-host critic_optimizer declared envelope",
+    "1-host/4-host critic_optimizer analyzer numeric result",
+    "2-gpu/3-gpu array schema equal",
+    "2-gpu/3-gpu model declared envelope",
+    "2-gpu/3-gpu model analyzer numeric result",
+    "2-gpu/3-gpu actor_optimizer declared envelope",
+    "2-gpu/3-gpu actor_optimizer analyzer numeric result",
+    "2-gpu/3-gpu critic_optimizer declared envelope",
+    "2-gpu/3-gpu critic_optimizer analyzer numeric result",
+    "2-gpu/4-host array schema equal",
+    "2-gpu/4-host model declared envelope",
+    "2-gpu/4-host model analyzer numeric result",
+    "2-gpu/4-host actor_optimizer declared envelope",
+    "2-gpu/4-host actor_optimizer analyzer numeric result",
+    "2-gpu/4-host critic_optimizer declared envelope",
+    "2-gpu/4-host critic_optimizer analyzer numeric result",
+    "3-gpu/4-host array schema equal",
+    "3-gpu/4-host model declared envelope",
+    "3-gpu/4-host model analyzer numeric result",
+    "3-gpu/4-host actor_optimizer declared envelope",
+    "3-gpu/4-host actor_optimizer analyzer numeric result",
+    "3-gpu/4-host critic_optimizer declared envelope",
+    "3-gpu/4-host critic_optimizer analyzer numeric result",
+    "primary all-four matching-work timing",
+    "1-host passive memory totals",
+    "2-gpu passive memory totals",
+    "3-gpu passive memory totals",
+    "4-host passive memory totals",
+    "remote diagnostic process/group/context/lock cleanup proof",
+    "separate authorized day-awake holding proof"
+  ],
+  "timing_recomputed": {
+    "host_mean_seconds": 185.4061908849999,
+    "gpu_mean_seconds": 152.4202477660001,
+    "time_reduction_percent": 17.79117674633619,
+    "speedup": 1.2164144436350788
+  },
+  "all_four_work_and_guard_sequences_and_final_pcg_exact": true,
+  "all_six_pairwise_array_groups_recomputed": [
+    {
+      "left": "1-host",
+      "right": "2-gpu",
+      "groups": {
+        "model": {
+          "arrays": 86,
+          "max_absolute": 7.360801100730896e-05,
+          "relative_l2": 7.359340116055138e-06
+        },
+        "actor_optimizer": {
+          "arrays": 90,
+          "max_absolute": 4.6566128730773926e-09,
+          "relative_l2": 3.346383086359755e-12
+        },
+        "critic_optimizer": {
+          "arrays": 86,
+          "max_absolute": 0.00030023849103599787,
+          "relative_l2": 2.4269071964625e-07
+        }
+      }
+    },
+    {
+      "left": "1-host",
+      "right": "3-gpu",
+      "groups": {
+        "model": {
+          "arrays": 86,
+          "max_absolute": 0.0001815594732761383,
+          "relative_l2": 5.942600872174386e-06
+        },
+        "actor_optimizer": {
+          "arrays": 90,
+          "max_absolute": 6.51925802230835e-09,
+          "relative_l2": 5.253077031700947e-12
+        },
+        "critic_optimizer": {
+          "arrays": 86,
+          "max_absolute": 3.4789321944117546e-05,
+          "relative_l2": 3.770939663225619e-08
+        }
+      }
+    },
+    {
+      "left": "1-host",
+      "right": "4-host",
+      "groups": {
+        "model": {
+          "arrays": 86,
+          "max_absolute": 0.00018182024359703064,
+          "relative_l2": 6.883253276658755e-06
+        },
+        "actor_optimizer": {
+          "arrays": 90,
+          "max_absolute": 7.2177499532699585e-09,
+          "relative_l2": 5.537514349976904e-12
+        },
+        "critic_optimizer": {
+          "arrays": 86,
+          "max_absolute": 0.0001466730609536171,
+          "relative_l2": 7.932355338407249e-08
+        }
+      }
+    },
+    {
+      "left": "2-gpu",
+      "right": "3-gpu",
+      "groups": {
+        "model": {
+          "arrays": 86,
+          "max_absolute": 0.00018255040049552917,
+          "relative_l2": 9.14064687979992e-06
+        },
+        "actor_optimizer": {
+          "arrays": 90,
+          "max_absolute": 4.598405212163925e-09,
+          "relative_l2": 3.950624407609399e-12
+        },
+        "critic_optimizer": {
+          "arrays": 86,
+          "max_absolute": 0.0002994999522343278,
+          "relative_l2": 2.4446434870820843e-07
+        }
+      }
+    },
+    {
+      "left": "2-gpu",
+      "right": "4-host",
+      "groups": {
+        "model": {
+          "arrays": 86,
+          "max_absolute": 0.0001828111708164215,
+          "relative_l2": 9.630293991664483e-06
+        },
+        "actor_optimizer": {
+          "arrays": 90,
+          "max_absolute": 4.423782229423523e-09,
+          "relative_l2": 4.570177327759233e-12
+        },
+        "critic_optimizer": {
+          "arrays": 86,
+          "max_absolute": 0.0002915430814027786,
+          "relative_l2": 2.3027505730402586e-07
+        }
+      }
+    },
+    {
+      "left": "3-gpu",
+      "right": "4-host",
+      "groups": {
+        "model": {
+          "arrays": 86,
+          "max_absolute": 7.903248115326278e-05,
+          "relative_l2": 3.599150431823072e-06
+        },
+        "actor_optimizer": {
+          "arrays": 90,
+          "max_absolute": 4.773028194904327e-09,
+          "relative_l2": 3.08787408300734e-12
+        },
+        "critic_optimizer": {
+          "arrays": 86,
+          "max_absolute": 0.00014857947826385498,
+          "relative_l2": 7.580938695221068e-08
+        }
+      }
+    }
+  ],
+  "preflight_max_output_absolute": 0.0,
+  "preflight_max_gradient_absolute": 4.76837158203125e-07,
+  "cache_gpu_logical_bytes": 6229903445,
+  "cache_uploads_per_gpu_replay": 167,
+  "cache_tensor_count_per_gpu_replay": 3507,
+  "cache_reuse_hits_per_gpu_replay": 1837,
+  "host_cache_file_bytes": 6229903504,
+  "passive_memory_and_gpu": [
+    {
+      "label": "1-host",
+      "major_faults": 1,
+      "memory_full_psi_percent": 0.00023997019682617425,
+      "gpu_busy_mean_percent": 30.716332378223495,
+      "gpu_peak_vram_mib": 1793.0,
+      "sampled_process_peak_rss_mib": 11489.71875,
+      "swapout_pages": 0
+    },
+    {
+      "label": "2-gpu",
+      "major_faults": 0,
+      "memory_full_psi_percent": 0.0,
+      "gpu_busy_mean_percent": 30.99,
+      "gpu_peak_vram_mib": 8961.0,
+      "sampled_process_peak_rss_mib": 5846.44140625,
+      "swapout_pages": 0
+    },
+    {
+      "label": "3-gpu",
+      "major_faults": 2,
+      "memory_full_psi_percent": 0.0,
+      "gpu_busy_mean_percent": 31.533333333333335,
+      "gpu_peak_vram_mib": 8961.0,
+      "sampled_process_peak_rss_mib": 5940.203125,
+      "swapout_pages": 0
+    },
+    {
+      "label": "4-host",
+      "major_faults": 0,
+      "memory_full_psi_percent": 0.0,
+      "gpu_busy_mean_percent": 30.196675900277008,
+      "gpu_peak_vram_mib": 1793.0,
+      "sampled_process_peak_rss_mib": 11534.73046875,
+      "swapout_pages": 0
+    }
+  ],
+  "remote_cleanup_proof_sha256": "5cae171ca9a7649e0c7c5b45a815b227aaa418bd3afd0acac14d7a7d226a7c5d",
+  "native_day_awake_proof_sha256": "44c8a2e6dc7869ebe160111e60ae8d19f78543296e167b0b4b112ad141505018",
+  "limits": [
+    "No new remote jobs or TensorFlow/GPU work were run by this audit; numerical recomputation used only four backed-up NPZ files.",
+    "Remote source/process/lock facts are verified against the fresh root ownership/hash audit proof, not a second remote probe.",
+    "Full update timings include scan, prepacking, input upload, optimizer/guard work and cache cleanup; 2+2 replays do not establish a robust speedup confidence interval.",
+    "GPU sampled busy time stayed near31%; this speedup does not establish higher GPU occupancy or peak-FLOPS saturation.",
+    "The GPU cache uses about5.80GiB logical payload and observed peak total VRAM about8.75GiB, versus1.75GiB host baseline.",
+    "Isolated one-round replay lacks resident game-generation workers; production memory pressure and end-to-end speed remain unmeasured.",
+    "Native day-awake guard intentionally remains active under separate authorization until midnight Arizona; it is not diagnostic compute.",
+    "NVIDIA sample timestamps use the Windows wall clock and show occasional backward adjustments. NVIDIA time-window filtering/curves are approximate; monotonic perf_counter full-update timings and speedup are unaffected."
+  ],
+  "nvidia_wallclock_step_observations": [
+    {
+      "label": "1-host",
+      "backward_timestamp_steps": 6,
+      "largest_backward_step_seconds": -0.65
+    },
+    {
+      "label": "2-gpu",
+      "backward_timestamp_steps": 5,
+      "largest_backward_step_seconds": -0.714
+    },
+    {
+      "label": "3-gpu",
+      "backward_timestamp_steps": 5,
+      "largest_backward_step_seconds": -0.763
+    },
+    {
+      "label": "4-host",
+      "backward_timestamp_steps": 6,
+      "largest_backward_step_seconds": -0.768
+    }
+  ]
+}

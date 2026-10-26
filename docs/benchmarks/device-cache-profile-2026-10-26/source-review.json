@@ -1,0 +1,26 @@
+{
+  "status": "passed",
+  "reviewer": "/root/device_cache_review",
+  "reviewed_utc": "2026-10-26T15:50:58.863387+00:00",
+  "manifest_sha256": "b27342e30864cab54edca180205f2d3f1a29cb2262497b9e38cb2ddc0b124342",
+  "driver_sha256": "b71cde8ada66178c394ec90ef3b8fb7a3f763c2e03754a5b6cdf4f65ebe8cf68",
+  "fixture_log_sha256": "4060f8ae327f44582aeea1c54dadc31ca99b8535334307497405a5cfc271ac69",
+  "scope": [
+    "One CPU-span-only profile and one uninstrumented control replay; no new games or promoted checkpoints.",
+    "Baseline is copied from completed device-policy-cache runtime-gpu: 137 pinned files, only profile driver overlaid. In-progress actor-cache candidate is excluded.",
+    "Same checkpoint39, round40 training-only85199samples/800games,200wholegameholdout excluded, bothAdam/PCG restored, selectivecuDNN,prepacking,consolidatedgradientchecks and8GiBcanonicalGPUinputcache.",
+    "AST and temporary wrappers preserve operations/order and move only already immediate float/NumPy result materializations into adjacent timing wrappers.",
+    "No full GPU trace or extra GPU fences; nonzero trace duration rejected.",
+    "Finite cases, lock/exact process-identity guards, prior completion/runtime/nativeawake proof and source pins retained; backup preserves runtime hash manifest.",
+    "Local CPU fixture exercises rollback/snapshot and validates exact model,bothAdams,PCG,metrics/work plus25requiredspan labels."
+  ],
+  "limits": [
+    "Spans overlap/nest across threads and are not additive wall-time shares.",
+    "policy_result_wait includes normal ordered-job source replenishment; it is not pure GPU idle.",
+    "critic_future_wait may wrap already-completed future.result calls.",
+    "Instrumented timing is not a speedup comparison; instrumentation can alter scheduling/overhead.",
+    "Sampling starts before model restore/compile, but explicit full_update boundaries keep timed-update scope clear.",
+    "This first profile intentionally does not add shuffled actor-payload counters; exact per-order budget verification remains separate before any actor-cache benchmark.",
+    "GPU execution may vary in A/A controls; final work/guard/PCG and model/optimizer envelopes must still be checked."
+  ]
+}

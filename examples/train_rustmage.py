@@ -30,8 +30,13 @@ from patchwork_automaton.neural.rustmage_features import RustMageEncoder
 from patchwork_automaton.neural.rustmage_policy import RustMagePolicy
 from patchwork_automaton.neural.validation import GameValidator, split_games, training_normalization
 from patchwork_automaton.neural.devices import configure_runtime, device_scope, assert_model_device, assert_output_device
+from patchwork_automaton.neural.update_pipeline import resolve_update_pipeline, apply_update_pipeline
 from patchwork_automaton.neural.rustmage_evaluation import baseline_evaluation_config, match_summary, paired_match_improvement
 from patchwork_automaton.rl.rustmage_experiment import run_games, goldfish_summary, paired_improvement
+
+
+RUNTIME_ARGUMENTS = frozenset(('learner_gru_backend', 'update_pipeline',
+                               'policy_cache_mib', 'actor_epoch_cache_mib'))
 
 
 def parser():
@@ -60,6 +65,14 @@ def parser():
         help='Observation encoding and history implementation (default: Python; experimental Rust requires scripts/build-observation-pipeline.py)')
     p.add_argument('--architecture', choices=('shared','separate'), default='separate')
     p.add_argument('--learner-device', choices=('cpu','gpu'), default='cpu')
+    p.add_argument('--learner-gru-backend', choices=('default','unfused','cudnn-memory'), default='default',
+        help='Runtime only: default uses selective cuDNN history/state GRUs on GPU, unfused GRUs on CPU; unfused overrides it')
+    p.add_argument('--update-pipeline', choices=('auto','host','gpu','legacy'), default='auto',
+        help='Runtime only: auto packs inputs and enables GPU caches on an idle single GPU with sufficient VRAM; host packs without GPU caches; legacy disables packing/caches')
+    p.add_argument('--policy-cache-mib', type=int, default=8192,
+        help='GPU canonical policy-input payload cap in MiB (default: 8192; 0 disables this GPU cache)')
+    p.add_argument('--actor-epoch-cache-mib', type=int, default=8192,
+        help='GPU shuffled actor-input payload cap per epoch in MiB (default: 8192; 0 disables this GPU cache)')
     p.add_argument('--inference-device', choices=('cpu','gpu'), default='cpu')
     p.add_argument('--validation-device', choices=('cpu','gpu'), default='cpu')
     p.add_argument('--validation-batch', type=int, default=32,
@@ -289,11 +302,25 @@ def initialize_model(args, encoder):
     return model, dict(method='fresh random weights', source_collected_games=0)
 
 
+def resolve_learner_gru_backend(args):
+    """Keep backend choice outside the immutable learning recipe."""
+    requested = getattr(args, 'learner_gru_backend', 'default')
+    if requested not in ('default', 'unfused', 'cudnn-memory'):
+        raise ValueError('Invalid learner GRU backend')
+    backend = ('cudnn-memory' if args.learner_device == 'gpu' else 'unfused') if requested == 'default' else requested
+    if backend == 'cudnn-memory' and args.learner_device != 'gpu':
+        raise ValueError('cuDNN memory GRUs require a GPU learner')
+    return backend
+
+
 async def run(args):
     try:
+        # Inspect free capacity before TensorFlow initializes its GPU context.
+        update_pipeline = resolve_update_pipeline(args.learner_device, args.update_pipeline,
+            policy_cache_mib=args.policy_cache_mib, actor_epoch_cache_mib=args.actor_epoch_cache_mib)
         configure_runtime(args.learner_device, hide_gpu=args.learner_device == 'cpu' and args.inference_device == 'cpu')
         with device_scope(args.learner_device):
-            return await run_experiment(args)
+            return await run_experiment(args, update_pipeline=update_pipeline)
     except BaseException as error:
         report_path = args.output/'report.json'
         if report_path.exists():
@@ -306,7 +333,11 @@ async def run(args):
         raise
 
 
-async def run_experiment(args):
+async def run_experiment(args, *, update_pipeline=None):
+    gru_backend = resolve_learner_gru_backend(args)
+    if update_pipeline is None:
+        update_pipeline = resolve_update_pipeline(args.learner_device, args.update_pipeline,
+            policy_cache_mib=args.policy_cache_mib, actor_epoch_cache_mib=args.actor_epoch_cache_mib)
     os.environ['PATCHWORK_OBSERVATION_PIPELINE'] = args.observation_pipeline
     os.environ['PATCHWORK_ROLLOUT_STORAGE'] = args.rollout_storage
     if args.observation_pipeline == 'rust':
@@ -362,14 +393,18 @@ async def run_experiment(args):
     if not 0 <= args.validation_fraction < 1 or (args.validation_fraction and args.games_per_round < 2):
         raise ValueError('Validation needs a fraction in [0,1) and at least two games per round')
     output = args.output
-    config = {k:v for k,v in vars(args).items() if k not in ('output','resume','rounds','plot','initialize_from')}
+    config = {k:v for k,v in vars(args).items()
+              if k not in RUNTIME_ARGUMENTS | {'output','resume','rounds','plot','initialize_from'}}
     config['inference_processes'] = inference_process_count(args)
     config.update(algorithm='ppo', advantage_scale_floor=1., ppo_clip=.2)
     report_path = output/'report.json'
     warmup_pending = False
     if args.resume:
-        model,trainer,state = load_checkpoint(resume_checkpoint_root(output, args.critic_warmup_games))
+        model,trainer,state = load_checkpoint(resume_checkpoint_root(output, args.critic_warmup_games),
+                                             gru_backend=gru_backend)
         saved_config = dict(state['config'])
+        for key in RUNTIME_ARGUMENTS:
+            saved_config.pop(key, None)
         saved_config.setdefault('eval_every_games', 0)
         saved_config.setdefault('collector', 'threads')
         saved_config.setdefault('architecture', 'shared')
@@ -430,6 +465,8 @@ async def run_experiment(args):
         encoder = RustMageEncoder()
         model, initialization = initialize_model(args, encoder)
         model(example_batch(model.memory_size,model.feature_spec),training=False)
+        from patchwork_automaton.neural.recurrent import configure_gru_backend
+        configure_gru_backend(model, gru_backend)
         trainer = make_trainer(model,config)
         trainer.compile()
         first_round = 1
@@ -477,11 +514,18 @@ async def run_experiment(args):
         learner_deck="foundations_deck('red')", opponent_deck="foundations_deck('red')",
         terminal_rewards_only=True, critic_warmup_mode='selfplay')
     placements = assert_model_device(model, args.learner_device)
+    # Inputs/caches do not affect checkpoint state or graph signatures. Apply
+    # the current runtime profile to both fresh and restored trainers, before
+    # warm-up or any PPO update; GRU selection above must precede compilation.
+    apply_update_pipeline(trainer, update_pipeline)
     trainer_traces = place_trainer(trainer, args.learner_device)
+    from patchwork_automaton.neural.recurrent import gru_backend_summary
     invocation=dict(first_round=first_round,requested_last_round=args.rounds,
         observation_pipeline=args.observation_pipeline,
         game_engines=args.workers,inference_processes=config['inference_processes'],
         learner_device=args.learner_device, inference_device=args.inference_device,
+        learner_gru_backend=gru_backend, learner_gru_layers=gru_backend_summary(model),
+        update_pipeline=update_pipeline,
         learner_variable_placements=placements, learner_graph_traces=trainer_traces,
         host=dict(platform=platform.platform(), available_logical_cpus=sorted(os.sched_getaffinity(0)),
             cpu_model=next((line.split(':',1)[1].strip() for line in Path('/proc/cpuinfo').read_text().splitlines()
@@ -490,7 +534,8 @@ async def run_experiment(args):
             'TF_NUM_INTEROP_THREADS', 'TF_ENABLE_ONEDNN_OPTS', 'CUDA_VISIBLE_DEVICES')},
         started_utc=datetime.now(timezone.utc).isoformat(),
         source_sha256={str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in (
-            Path(__file__),Path('src/patchwork_automaton/rl/rustmage_experiment.py'))})
+            Path(__file__),Path('src/patchwork_automaton/rl/rustmage_experiment.py'),
+            *sorted(Path('src/patchwork_automaton/neural').glob('*.py')))})
     if args.observation_pipeline == 'rust':
         from patchwork_automaton.neural.native_pipeline import library
         native_library = Path(library()._name)

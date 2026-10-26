@@ -1,0 +1,28 @@
+{
+  "status": "passed",
+  "frozen": true,
+  "utc": "2026-10-26T16:56:16.679035+00:00",
+  "fixtures": 6,
+  "fixture_log_sha256": "8e8f7eda97408973ca789cebe07908c92435b1cb8eb64cc564aaf58b8ee51393",
+  "scope": "Local process/file/lock fixtures only: no network,GPU,games,optimizers or remote mutations.",
+  "checks": [
+    "Exact PID identity/reuse and orphan session membership",
+    "Inherited exclusive flock survives launcher close",
+    "Exited leader descendants cleaned with exact identities",
+    "One finite mocked coordinator driver; lock held through child and integrity checks; mutation failure visible",
+    "Unrelated GPU context refuses child without touching other processes",
+    "Archive gzip/NPZ CRC,JSON,path confinement and partial preservation",
+    "All support Python and embedded start/status/pull syntax compiled"
+  ],
+  "files": {
+    "coordinator.py": "3cf07be66acf0f62fd97206818cf881b43ec3517443bb614250abaa7cee70a88",
+    "remote_tools.py": "a324533b8142f113a3a476ec94f48d0030c06b543fcff69a26d6bc1894ad8669",
+    "deploy.py": "7fe3aece41c60964b40cf0923db6b365bd13a7a5da11cc284c30b532f76a5ef4",
+    "start.py": "b6214cf5308eae0915e0c49c2a9b06bb9fb214765abdf61b2d3053912fe61838",
+    "status.py": "08d8132b2fd634eab87e7476e84c5224c73b1228ed3176a3590d252be795f9d6",
+    "pull.py": "ef103102c676720f8f50caa812da7cad6090199f0422b8953a56472ca9914867",
+    "cleanup-linux.py": "ad70f4c51ae202a5b0f29943b80e91b07d450557ed0d29d308221ed64844a78d",
+    "audit-cleanup.py": "9a8e7c9a30bb528a6869d98aeadd1b04448793309fbfc030e3f0dff0a70ba183",
+    "infrastructure-fixtures.py": "63dacb7f70be0686ada25c2d27e7057879a6473dcb4627930eb9e42438a55987"
+  }
+}

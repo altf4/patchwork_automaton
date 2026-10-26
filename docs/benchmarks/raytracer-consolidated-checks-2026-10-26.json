@@ -1,0 +1,189 @@
+{
+  "status": "complete",
+  "local_base": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/consolidated-checks-20261026",
+  "scope": [
+    "Four finite ABBA frozen round40 replays, legacy/consolidated/consolidated/legacy, all selective cuDNN + direct prepacking + policy-input caching. Same800training/200excluded games, checkpoint39, bothAdam+PCG, full RL config. No new games or promoted checkpoints.",
+    "No full GPU tracing: prior trace caused paging. Passive Linux/GPU telemetry only. Preserve all timings/retry counts and report matching-work comparisons.",
+    "GPU correctness preflight before timing: finite check graph structure, early/late NaN/+Inf/-Inf before all Adam mutations, finite-step parity and source integrity."
+  ],
+  "jobs": [
+    {
+      "label": "1-legacy",
+      "variant": "legacy"
+    },
+    {
+      "label": "2-consolidated",
+      "variant": "consolidated"
+    },
+    {
+      "label": "3-consolidated",
+      "variant": "consolidated"
+    },
+    {
+      "label": "4-legacy",
+      "variant": "legacy"
+    }
+  ],
+  "no_model_or_rl_changes": true,
+  "tolerances": {
+    "packed_arrays": "bitwise identical including shapes, dtypes and order",
+    "outputs_atol": 2e-05,
+    "outputs_rtol": 0.0002,
+    "gradients_atol": 2e-05,
+    "gradients_rtol": 0.002,
+    "gradient_relative_l2": 0.001,
+    "full_model_max_abs": 0.001,
+    "full_model_relative_l2": 0.0005,
+    "full_adam_max_abs": 0.002,
+    "full_adam_relative_l2": 1e-05,
+    "rng": "exact",
+    "optimizer_steps": "exact",
+    "guard_decisions": "exact for adoption; otherwise diagnose and leave opt-in"
+  },
+  "limitations": [
+    "One frozen saved round, not learning strength.",
+    "GPU A/A floating-point execution can cause8/9rejection differences even for unchanged source; retain all outcomes and separate unequal work.",
+    "Linux-only passive counters; no production worker memory-pressure or Windows paging measurements."
+  ],
+  "manifest_sha256": "52d7cf1d9cad25af7d422a18697c7f262e37405fc7ed33b261a9ad321834030b",
+  "local_validation": {
+    "focused_tests": 3,
+    "focused_log_sha256": "5608cafeb9f60caf0b749b093afec55c48463b603056358c84697682ce2cf4c6",
+    "tests_source_sha256": "52221fbad03ecffecb468e9c8865b63c47a89456c4230e6ef403b4d0e53ddadb",
+    "independent_review": "passed after retaining shared lock through child cleanup; all optimizer writes gated; numerical math unchanged",
+    "safety_diagnostic_tradeoff": "Actor/critic failure context retained; offending gradient values are no longer copied into error text."
+  },
+  "review": "passed",
+  "launch": {
+    "pid": 19623,
+    "pgid": 19623,
+    "sid": 19623,
+    "start_ticks": 1112566,
+    "uid": 1000
+  },
+  "native_guard": {
+    "manifest_sha256": "a2510986f6f82ed5eddf7e7809d6ff633641fa0b56ba6cd824b811c8aacd4805",
+    "status": "holding",
+    "reason": "setup",
+    "utc": "2026-10-26T14:15:45.8149510Z",
+    "started_utc": "2026-10-26T14:14:24.8167574Z",
+    "expires_utc": "2026-10-26T16:14:24.8167574Z",
+    "maximum_seconds": 7200,
+    "windows_pid": 16920,
+    "creation_utc": "2026-10-26T14:14:24.4704501Z"
+  },
+  "regression_tests": {
+    "passed": 24,
+    "focused_passed": 3,
+    "log_sha256": "acfe3d513c1c3ba8197fa0f4a5ffac0d2e6e198b19792c0590780291f6302288"
+  },
+  "started_utc": "2026-10-26T14:17:25.383281+00:00",
+  "finished_utc": "2026-10-26T14:38:21.104979+00:00",
+  "results": "docs/benchmarks/consolidated-checks-2026-10-26/results.json",
+  "primary_timing": {
+    "legacy_cases": [
+      "1-legacy"
+    ],
+    "consolidated_cases": [
+      "2-consolidated",
+      "3-consolidated"
+    ],
+    "legacy_replays": 1,
+    "consolidated_replays": 2,
+    "legacy_mean_seconds": 191.15644297199833,
+    "consolidated_mean_seconds": 181.21278359649932,
+    "speedup": 1.0548728361109458,
+    "time_reduction_percent": 5.20184369456781
+  },
+  "all_cases": [
+    {
+      "label": "1-legacy",
+      "seconds": 191.15644297199833,
+      "rejected_epochs": 8
+    },
+    {
+      "label": "2-consolidated",
+      "seconds": 179.32153121699957,
+      "rejected_epochs": 8
+    },
+    {
+      "label": "3-consolidated",
+      "seconds": 183.10403597599907,
+      "rejected_epochs": 8
+    },
+    {
+      "label": "4-legacy",
+      "seconds": 205.57613279100042,
+      "rejected_epochs": 9
+    }
+  ],
+  "unmatched_timing_cases": [
+    "4-legacy"
+  ],
+  "adoption": {
+    "status": "enabled_in_local_source",
+    "helper": "_assert_finite_gradients",
+    "model_and_rl_changes": false,
+    "predeployment_independent_source_review": "passed",
+    "local_tests": 27,
+    "gpu_safety_gate": "passed",
+    "eager_gpu_placement": "passed",
+    "full_update_parity": "passed within declared limits; matching-work guard decisions and PCG exact",
+    "scope": "Standard actor/critic steps; optional sequence-critic and imitation gradient checks are untouched.",
+    "diagnostic_tradeoff": "Errors retain actor/critic context but omit offending gradient values.",
+    "runtime_rule": "Never patch a running study; use a fresh deployment for future training."
+  },
+  "validation": {
+    "status": "passed",
+    "focused_tests": 3,
+    "regression_tests": 24,
+    "total_local_tests": 27,
+    "gpu_invalid_cases": 6,
+    "gpu_finite_steps": 12,
+    "gpu_finite_model_and_Adam_max_abs_difference": 0.0,
+    "gpu_eager_placement": true,
+    "full_replays": 4,
+    "pairwise_array_comparisons": 6,
+    "arrays_per_comparison": 262,
+    "root_independent_numeric_reduction": "All6pairs recomputed with concatenated arrays; metrics match analyzer to1e-12relative.",
+    "matching_work_guard_sequences": "exact",
+    "matching_work_rng": "exact",
+    "model_and_both_Adam_arrays": "within predeclared envelopes; GPU values are not bitwise identical",
+    "compile": "passed",
+    "git_diff_check": "passed",
+    "source_sha256": "4b98184a9e9b836763c3fc6a99656f2f288a470698519985a81370e4164f4342",
+    "test_sha256": "52221fbad03ecffecb468e9c8865b63c47a89456c4230e6ef403b4d0e53ddadb",
+    "logs": {
+      ".local/benchmarks/consolidated-checks-20261026/focused-tests.log": "5608cafeb9f60caf0b749b093afec55c48463b603056358c84697682ce2cf4c6",
+      ".local/benchmarks/consolidated-checks-20261026/regression-tests.log": "acfe3d513c1c3ba8197fa0f4a5ffac0d2e6e198b19792c0590780291f6302288"
+    }
+  },
+  "cleanup": {
+    "remote_owned_groups_gone": true,
+    "gpu_contexts_gone": true,
+    "shared_lock_free": true,
+    "windows_temporary_task_removed": true,
+    "laptop_request_released": true,
+    "protected_checkpoint_files_unchanged": 205,
+    "pinned_runtime_files_unchanged": 271
+  },
+  "backups": [
+    {
+      "sha256": "16b9c6ba072b3fd1c6677d2a0427986078ac95765f4386394577af0075294ad6",
+      "bytes": 12404687,
+      "files": 43,
+      "npz_crc_passed": 4,
+      "gzip_crc_passed": true
+    },
+    {
+      "sha256": "26ae08f376544e1312e29f3e33603edfabebe5d1b72dedac7031cb74e47efbcb",
+      "bytes": 3443,
+      "files": 5,
+      "npz_crc_passed": 0,
+      "gzip_crc_passed": true
+    }
+  ],
+  "no_new_games": true,
+  "no_promoted_checkpoints": true,
+  "gpu_trace_recorded": false
+}

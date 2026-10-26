@@ -1,0 +1,114 @@
+[
+  {
+    "label": "real-0",
+    "outputs_max_absolute": {
+      "logits": 8.58306884765625e-06,
+      "probabilities": 8.940696716308594e-07,
+      "actor_memory": 2.980232238769531e-07,
+      "value": 2.5331974029541016e-07,
+      "critic_memory": 3.427267074584961e-07,
+      "actor_loss": 2.9802322387695312e-08,
+      "critic_loss": 0.0
+    },
+    "gradient_max_absolute": {
+      "actor_weights": 3.993045538663864e-08,
+      "critic_weights": 1.7881393432617188e-07,
+      "actor_inputs": 4.190951585769653e-09,
+      "critic_inputs": 9.313225746154785e-09
+    },
+    "gradient_relative_l2": {
+      "actor_weights": 9.161444327798158e-06,
+      "critic_weights": 1.1974737721666315e-07,
+      "actor_inputs": 3.0914983214190334e-07,
+      "critic_inputs": 1.9853559054180322e-07
+    },
+    "cudnn_graph_ops": {
+      "CudnnRNNBackpropV3": 6,
+      "CudnnRNNV3": 6
+    }
+  },
+  {
+    "label": "real-266",
+    "outputs_max_absolute": {
+      "logits": 1.2874603271484375e-05,
+      "probabilities": 1.3113021850585938e-06,
+      "actor_memory": 3.2782554626464844e-07,
+      "value": 3.5762786865234375e-07,
+      "critic_memory": 4.6193599700927734e-07,
+      "actor_loss": 2.9802322387695312e-08,
+      "critic_loss": 0.0
+    },
+    "gradient_max_absolute": {
+      "actor_weights": 1.280568540096283e-08,
+      "critic_weights": 4.76837158203125e-07,
+      "actor_inputs": 5.587935447692871e-09,
+      "critic_inputs": 2.0489096641540527e-08
+    },
+    "gradient_relative_l2": {
+      "actor_weights": 3.859497651631378e-06,
+      "critic_weights": 1.3475145799187294e-07,
+      "actor_inputs": 3.7108723234428267e-07,
+      "critic_inputs": 2.490596212242983e-07
+    },
+    "cudnn_graph_ops": {
+      "CudnnRNNBackpropV3": 6,
+      "CudnnRNNV3": 6
+    }
+  },
+  {
+    "label": "real-533",
+    "outputs_max_absolute": {
+      "logits": 1.33514404296875e-05,
+      "probabilities": 9.5367431640625e-07,
+      "actor_memory": 2.980232238769531e-07,
+      "value": 4.023313522338867e-07,
+      "critic_memory": 3.5762786865234375e-07,
+      "actor_loss": 0.0,
+      "critic_loss": 0.0
+    },
+    "gradient_max_absolute": {
+      "actor_weights": 2.6106135919690132e-08,
+      "critic_weights": 2.5331974029541016e-07,
+      "actor_inputs": 2.9802322387695312e-08,
+      "critic_inputs": 2.0489096641540527e-08
+    },
+    "gradient_relative_l2": {
+      "actor_weights": 1.099776042304327e-06,
+      "critic_weights": 1.087798855902268e-07,
+      "actor_inputs": 7.587128722140516e-07,
+      "critic_inputs": 2.474602147067165e-07
+    },
+    "cudnn_graph_ops": {
+      "CudnnRNNBackpropV3": 6,
+      "CudnnRNNV3": 6
+    }
+  },
+  {
+    "label": "all-empty-mixed-advance",
+    "outputs_max_absolute": {
+      "logits": 4.0531158447265625e-06,
+      "probabilities": 9.5367431640625e-07,
+      "actor_memory": 2.086162567138672e-07,
+      "value": 1.7881393432617188e-07,
+      "critic_memory": 1.7881393432617188e-07,
+      "actor_loss": 1.4901161193847656e-08,
+      "critic_loss": 5.960464477539063e-08
+    },
+    "gradient_max_absolute": {
+      "actor_weights": 8.614733815193176e-09,
+      "critic_weights": 1.7881393432617188e-07,
+      "actor_inputs": 6.51925802230835e-09,
+      "critic_inputs": 9.313225746154785e-09
+    },
+    "gradient_relative_l2": {
+      "actor_weights": 4.068803984471722e-07,
+      "critic_weights": 1.2939305829683772e-07,
+      "actor_inputs": 3.557228919415e-07,
+      "critic_inputs": 1.124954511366135e-07
+    },
+    "cudnn_graph_ops": {
+      "CudnnRNNBackpropV3": 6,
+      "CudnnRNNV3": 6
+    }
+  }
+]

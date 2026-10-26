@@ -1,0 +1,33 @@
+{
+  "verified": true,
+  "gzip_crc": true,
+  "npz_zip_crc": true,
+  "npz_finite": true,
+  "case_npz_files": [
+    {
+      "path": "backup/fused-gru-selective-20261025/results/2-cudnn-memory/result-state.npz",
+      "sha256": "b7d15aa58815189a4d77386088a85ff33ed4d651469daa5466bc5287a5c1c935"
+    },
+    {
+      "path": "backup/fused-gru-selective-20261025/results/1-cudnn-memory/result-state.npz",
+      "sha256": "1511ee598299fc4394933ad3b846cbf8338ce177486215470ba431bd1dbf9b2e"
+    },
+    {
+      "path": "backup/fused-gru-20261025-v2/results/3-cudnn/result-state.npz",
+      "sha256": "b4f371766c7d379099867f9b33bc3163dfe8151818eed62a8da74ac35d14077e"
+    },
+    {
+      "path": "backup/fused-gru-20261025-v2/results/2-cudnn/result-state.npz",
+      "sha256": "b0f6f2db42b96f83adde84e27d998dde04abb0e2e154ebbf9db4fd33c6f01bf8"
+    },
+    {
+      "path": "backup/fused-gru-20261025-v2/results/1-unfused/result-state.npz",
+      "sha256": "96bd0dc62eedb422abbda7ab08d48be6b323eba279d556e8944022b42aaee7e4"
+    },
+    {
+      "path": "backup/fused-gru-20261025-v2/results/4-unfused/result-state.npz",
+      "sha256": "e66c97f003d8cac7ca6e50392f11efceb9cd48712304b475789679a66b284a3d"
+    }
+  ],
+  "archive_sha256": "82e98fddecfa54fcea36267e837bfdfb3ed85f104e50b8fa159351887c82408d"
+}

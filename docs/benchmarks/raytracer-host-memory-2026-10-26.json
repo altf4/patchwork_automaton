@@ -1,0 +1,95 @@
+{
+  "status": "complete",
+  "manifest_sha256": "81b55d29a4dc1faef98bae7bed7177e9767ce349d2b2b4ec4ff1b7f8ba91cdba",
+  "plan": [
+    "One untraced persistent replay of saved rounds36..40 from checkpoint35 through unchanged prior soak driver and immutable ML runtime. Same model, both Adam states, PCG, batch512, selective cuDNN, both8GiB input caps, guard settings and data splits. No new games or checkpoint promotion.",
+    "Measure normal before/after-update host smaps, Python GC metadata, mallinfo2 fields and malloc_info all-arena XML. No manual GC, trim, session reset, allocator flush or ML changes between the five updates.",
+    "After all natural updates and while the same model/trainer are alive, run separate no-op control, gc.collect and malloc_trim(0) probes. Exact model/bothAdam/PCG hashes must remain unchanged around each probe. Save stage timing and memory evidence; no allocation-failure retry.",
+    "First run excludes tracemalloc to avoid large allocation-tracking overhead. Quantify retained telemetry. Native allocator metrics cannot see every TensorFlow/CUDA allocator, and a failed trim does not prove live leakage.",
+    "Classify measured RSS reclaimability and in-use/free bookkeeping, preserve ambiguous results. Source/checkpoints/runtime pins and five full state archives must verify. Shared training lock is held through owned process cleanup; existing Windows day-awake request remains active.",
+    "This replays historical behavior trajectories and measures runtime memory only. No learning-strength, fresh on-policy learning, new throughput or production worker-coexistence claim."
+  ],
+  "criteria": {
+    "five_natural_updates_complete": true,
+    "source_and_rl_unchanged": true,
+    "whole_game_training": 800,
+    "whole_game_holdout_excluded": 200,
+    "all_resource_lifetimes_released": true,
+    "interventions_after_natural_updates_only": true,
+    "model_both_adams_pcg_unchanged_around_interventions": true,
+    "ctypes_abi_and_stream_ownership_verified": true,
+    "no_predetermined_allocator_cause": true
+  },
+  "local_evidence": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/host-memory-20261026",
+  "output": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/host-memory-20261026",
+  "hyperparameter_overrides": {},
+  "no_new_games": true,
+  "no_promoted_checkpoints": true,
+  "started_utc": "2026-10-26T17:22:07.382602+00:00",
+  "launch": {
+    "pid": 31995,
+    "pgid": 31995,
+    "sid": 31995,
+    "start_ticks": 2141044,
+    "uid": 1000,
+    "state": "R"
+  },
+  "local_guard": {
+    "pid": 3698051,
+    "pgid": 3698051,
+    "sid": 3698051,
+    "start_ticks": 52480087,
+    "uid": 1000,
+    "maximum_seconds": 3600
+  },
+  "review_sha256": "2d503c7c6358ea7b71509e4aa05a34ae1a5a0e380d7814e3a8b4960b79299c2f",
+  "deployment": {
+    "status": "deployed_not_started",
+    "path": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/host-memory-20261026",
+    "runtime_files": 140,
+    "deployment_sha256": "a27de8c62236d9c92655bef3e896fd821db3ad2cc8956c936c5a059e2eef5b05"
+  },
+  "finished_utc": "2026-10-26T17:35:27.589106+00:00",
+  "results": "docs/benchmarks/host-memory-2026-10-26/results.json",
+  "attribution": {
+    "classification": "material reclaimable resident heap demonstrated",
+    "trim_observed_resident_return_bytes": 1556037632,
+    "idle_control_resident_return_bytes": -16384,
+    "gc_observed_resident_return_bytes": 0,
+    "trim_reported_success": true,
+    "material_reclaimability_demonstrated": true,
+    "classification_heuristic": {
+      "material_threshold_bytes": 67108864,
+      "trim_drop_must_exceed_absolute_idle_movement_by_factor": 4,
+      "statistical_significance_claim": false
+    },
+    "all_growth_causally_apportioned": false,
+    "interpretation": "A large measured RSS drop after trim, beyond the idle control, is evidence that previously resident pages were reclaimable from glibc-managed free heap. malloc_trim return1 alone measures no byte quantity. Allocator bookkeeping and RSS are distinct; overlapping observer estimates and different boundaries cannot exactly apportion all historical growth. GC precedes trim and can create free malloc blocks without immediately reducing RSS, so compare each phase\u2019s allocated/free bookkeeping; the final trim alone cannot separate previously free retention from newly GC-freed space. Lack of a drop would not prove live leakage."
+  },
+  "normal_first_to_last_rss_growth_bytes": 702156800,
+  "natural_long_run_plateau_established": false,
+  "production_allocator_policy_changed": false,
+  "root_intervention_recompute_sha256": "0037bf7fcecbd8b6c7f9930f77ae3298395f0110d9f1a48fdd1353d3af64efad",
+  "independent_audit_sha256": "04522f9065ec30b1aa9094375cb86273ce669c5ca2ee4dc4713efdb429beb430",
+  "backup": {
+    "files": 58,
+    "json_validated": 8,
+    "npz_crc_passed": 5,
+    "gzip_crc_passed": true,
+    "jsonl_validated": 1,
+    "jsonl_rows_validated": 18,
+    "xml_validated": 18,
+    "remote_study_status": "complete",
+    "sha256": "e48f5eb337e3dc8ffca3393662f950c55441a10ed788a7c397807fc08a2b4236",
+    "bytes": 16084092,
+    "verified_utc": "2026-10-26T17:32:10.321374+00:00",
+    "transfer_attempt": "20261026T173207-9d329c92"
+  },
+  "cleanup": {
+    "remote_owned_groups_gone": true,
+    "shared_lock_free": true,
+    "gpu_compute_contexts_gone": true,
+    "laptop_inhibitor_released": true,
+    "day_awake_left_active": true
+  }
+}

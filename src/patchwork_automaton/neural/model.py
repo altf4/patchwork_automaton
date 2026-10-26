@@ -2,6 +2,7 @@
 import keras
 from keras import layers, ops
 import numpy as np
+from .recurrent import masked_gru
 
 
 @keras.saving.register_keras_serializable(package='patchwork')
@@ -98,7 +99,7 @@ class PolicyNetwork(keras.Model):
         semantic = self.semantic_projection(inputs['semantics'])
         semantic = ops.reshape(semantic, (-1, shape[2], 64))
         semantic_mask = ops.reshape(inputs['semantic_mask'], (-1, shape[2]))
-        semantic = self.semantic_gru(semantic, mask=semantic_mask, training=training)
+        semantic = masked_gru(self.semantic_gru, semantic, mask=semantic_mask, training=training)
         semantic = ops.reshape(semantic, (shape[0], shape[1], 64))
         entity = self.entity_projection(ops.concatenate([
             self.card_embedding(inputs['card_ids']), entity_features, semantic], axis=-1))
@@ -116,7 +117,7 @@ class PolicyNetwork(keras.Model):
         pooled = ops.sum(entity, axis=1) / ops.maximum(ops.sum(valid, axis=1, keepdims=True), 1.)
         history = self.history_projection(ops.concatenate([
             self.card_embedding(inputs['history_cards']), inputs['history']], axis=-1))
-        remembered = self.history_memory(history, mask=inputs['history_mask'],
+        remembered = masked_gru(self.history_memory, history, mask=inputs['history_mask'],
                                          initial_state=inputs['memory_in'], training=training)
         # An entirely masked Keras GRU returns zero output, even with a nonzero
         # initial state. Empty observation deltas must preserve decision memory.
@@ -189,7 +190,7 @@ class ValueNetwork(keras.Model):
     def call(self, inputs, training=False):
         shape = ops.shape(inputs['semantics'])
         semantic = self.semantic_projection(inputs['semantics'])
-        semantic = self.semantic_gru(ops.reshape(semantic, (-1, shape[2], 64)),
+        semantic = masked_gru(self.semantic_gru, ops.reshape(semantic, (-1, shape[2], 64)),
             mask=ops.reshape(inputs['semantic_mask'], (-1, shape[2])), training=training)
         semantic = ops.reshape(semantic, (shape[0], shape[1], 64))
         entity = self.entity_projection(ops.concatenate([
@@ -212,7 +213,7 @@ class ValueNetwork(keras.Model):
         context = self.context_projection(ops.concatenate([facts, inputs['selection']], axis=-1))
         history = self.history_projection(ops.concatenate([
             self.card_embedding(inputs['history_cards']), inputs['history']], axis=-1))
-        remembered = self.history_memory(history, mask=inputs['history_mask'],
+        remembered = masked_gru(self.history_memory, history, mask=inputs['history_mask'],
             initial_state=inputs['memory_in'], training=training)
         remembered = ops.where(ops.any(inputs['history_mask'], axis=1, keepdims=True), remembered, inputs['memory_in'])
         _, updated = self.memory(context[:, None, :], initial_state=remembered, training=training)

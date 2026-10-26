@@ -1,0 +1,30 @@
+{
+  "39": {
+    "model_array_sha256": "e0544b90b1458da14fce65fc5e65d0c1db22045abc3609c2d385e57536fb787c",
+    "actor_steps": 12955,
+    "critic_steps": 6280,
+    "trainer_rng_state": {
+      "bit_generator": "PCG64",
+      "state": {
+        "state": 238411728669563805245349954794345542224,
+        "inc": 177872769690368037813286698154648419643
+      },
+      "has_uint32": 1,
+      "uinteger": 204343059
+    }
+  },
+  "40": {
+    "model_array_sha256": "2335ae2035a031acb91db03730b7af7566b772ead520995e25efed0895e118be",
+    "actor_steps": 13289,
+    "critic_steps": 6437,
+    "trainer_rng_state": {
+      "bit_generator": "PCG64",
+      "state": {
+        "state": 83830324702233720868068283841167165539,
+        "inc": 177872769690368037813286698154648419643
+      },
+      "has_uint32": 1,
+      "uinteger": 3687717065
+    }
+  }
+}

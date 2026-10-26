@@ -1,0 +1,18 @@
+{
+  "verified": true,
+  "utc": "2026-10-26T15:57:39.800406+00:00",
+  "issues": [],
+  "phases": [
+    {
+      "phase": "device-cache-profile-20261026",
+      "status": "complete",
+      "runtime_files": 138,
+      "pinned_runtime_unchanged": true,
+      "checkpoints_unchanged": 205
+    }
+  ],
+  "remaining": [],
+  "owned_group_members": [],
+  "shared_lock_free": true,
+  "gpu_compute_processes": ""
+}

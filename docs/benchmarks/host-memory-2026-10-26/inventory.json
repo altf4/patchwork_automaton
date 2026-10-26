@@ -1,0 +1,69 @@
+{
+  "utc": "2026-10-26T17:35:27.592749+00:00",
+  "files": {
+    "README.md": {
+      "sha256": "d8e329ab45bf5e7f431c2dfb1f7192df185667fa573520294d68d73d336a3f00",
+      "bytes": 3328
+    },
+    "backup-proof.json": {
+      "sha256": "a7292b621512ed83eb427ec18c2451af1c70a66e9da94a1a0cc001c4416c984d",
+      "bytes": 11956
+    },
+    "independent-audit.json": {
+      "sha256": "04522f9065ec30b1aa9094375cb86273ce669c5ca2ee4dc4713efdb429beb430",
+      "bytes": 226221
+    },
+    "infrastructure-validation.json": {
+      "sha256": "d4f46902e4e9bfd3fe6f156dfa4bcaa9306002fc3d077a4aa757fd55d05c5211",
+      "bytes": 2343
+    },
+    "linux-cleanup.json": {
+      "sha256": "37418abbaf223d076b25190af3e23634d4f9fce0d4107ed7b358762f34220c8f",
+      "bytes": 505
+    },
+    "local-cleanup.json": {
+      "sha256": "4a62e73995eb6ee08b16081becc690227b0cf83f40d339f3639ba504d6664473",
+      "bytes": 331
+    },
+    "manifest.json": {
+      "sha256": "81b55d29a4dc1faef98bae7bed7177e9767ce349d2b2b4ec4ff1b7f8ba91cdba",
+      "bytes": 37287
+    },
+    "native-day-awake.json": {
+      "sha256": "eb6afc2132e15290bbef8f05d68d74005a8572f3504a4a04424fb7520b71143e",
+      "bytes": 11540
+    },
+    "natural-host-memory.png": {
+      "sha256": "c00efc03e101c43ded4035dfbe32ae98d8bcb6a3014ec1aacd40bda36647bfbf",
+      "bytes": 123306
+    },
+    "natural-host-memory.svg": {
+      "sha256": "50efc54ec3ceb01e91df3ab94fffabc39c187319298c064845ba7216d9814166",
+      "bytes": 63676
+    },
+    "post-series-reclaimability.png": {
+      "sha256": "1f1c739349af32adca93b836fbc391d4f961367ace3a372310bbc220f9e5146e",
+      "bytes": 95839
+    },
+    "post-series-reclaimability.svg": {
+      "sha256": "af4820e5ef2656eb64a3b3fdb4fd855d583ba37fb81b6bfd99ce1940ffb1b2db",
+      "bytes": 60696
+    },
+    "predeployment-review.json": {
+      "sha256": "2d503c7c6358ea7b71509e4aa05a34ae1a5a0e380d7814e3a8b4960b79299c2f",
+      "bytes": 4358
+    },
+    "results.json": {
+      "sha256": "3e83d496d2da51aafd27de73a38872fb09ee5383515ec203e463aed305b883f9",
+      "bytes": 225390
+    },
+    "root-intervention-recompute.json": {
+      "sha256": "0037bf7fcecbd8b6c7f9930f77ae3298395f0110d9f1a48fdd1353d3af64efad",
+      "bytes": 1286
+    },
+    "validation.json": {
+      "sha256": "2aaac26b9a4ec87049b4691cceff4dad1a22f5d8bf25bbe8db170e400b9b603a",
+      "bytes": 679
+    }
+  }
+}

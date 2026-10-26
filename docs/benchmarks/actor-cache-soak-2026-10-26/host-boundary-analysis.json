@@ -1,0 +1,85 @@
+{
+  "rows": [
+    {
+      "round": 36,
+      "mib": {
+        "Rss": 3479.164,
+        "Pss": 3471.455,
+        "Pss_Anon": 2818.445,
+        "Pss_File": 573.01,
+        "Pss_Shmem": 80.0,
+        "Shared_Clean": 13.902,
+        "Private_Clean": 566.816,
+        "Private_Dirty": 2898.445,
+        "Anonymous": 2818.445,
+        "Swap": 0.0,
+        "SwapPss": 0.0
+      }
+    },
+    {
+      "round": 37,
+      "mib": {
+        "Rss": 3802.059,
+        "Pss": 3794.363,
+        "Pss_Anon": 3141.277,
+        "Pss_File": 573.086,
+        "Pss_Shmem": 80.0,
+        "Shared_Clean": 13.902,
+        "Private_Clean": 566.879,
+        "Private_Dirty": 3221.277,
+        "Anonymous": 3141.277,
+        "Swap": 0.0,
+        "SwapPss": 0.0
+      }
+    },
+    {
+      "round": 38,
+      "mib": {
+        "Rss": 4047.035,
+        "Pss": 4039.34,
+        "Pss_Anon": 3386.254,
+        "Pss_File": 573.086,
+        "Pss_Shmem": 80.0,
+        "Shared_Clean": 13.902,
+        "Private_Clean": 566.879,
+        "Private_Dirty": 3466.254,
+        "Anonymous": 3386.254,
+        "Swap": 0.0,
+        "SwapPss": 0.0
+      }
+    },
+    {
+      "round": 39,
+      "mib": {
+        "Rss": 4274.23,
+        "Pss": 4266.535,
+        "Pss_Anon": 3613.449,
+        "Pss_File": 573.086,
+        "Pss_Shmem": 80.0,
+        "Shared_Clean": 13.902,
+        "Private_Clean": 566.879,
+        "Private_Dirty": 3693.449,
+        "Anonymous": 3613.449,
+        "Swap": 0.0,
+        "SwapPss": 0.0
+      }
+    },
+    {
+      "round": 40,
+      "mib": {
+        "Rss": 4397.629,
+        "Pss": 4389.934,
+        "Pss_Anon": 3736.785,
+        "Pss_File": 573.148,
+        "Pss_Shmem": 80.0,
+        "Shared_Clean": 13.902,
+        "Private_Clean": 566.941,
+        "Private_Dirty": 3816.785,
+        "Anonymous": 3736.785,
+        "Swap": 0.0,
+        "SwapPss": 0.0
+      }
+    }
+  ],
+  "interpretation": "Passive smaps summaries identify anonymous/private growth but cannot distinguish allocator retention from live internal allocations or prove a leak."
+}

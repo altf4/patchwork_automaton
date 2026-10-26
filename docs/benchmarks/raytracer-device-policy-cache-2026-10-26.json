@@ -1,0 +1,129 @@
+{
+  "status": "complete",
+  "manifest_sha256": "40821819b3227a275044ae277a17990aea68a0d160aa8844f0c263baefa0c7c1",
+  "plan": [
+    "GPU parity preflight: every canonical input byte/shape/dtype/order and device placement, six shuffled batches, three joint forward/backward cases, immutable source and RNG. No optimizer steps in preflight.",
+    "Finite ABBA host/GPU/GPU/host replays of same frozen round40:800train/200excluded games,85199records,checkpoint39,selectivecuDNN,prepacking,consolidatedgradientchecks,bothAdam+PCG. No model/RL changes,new games,promoted checkpoints or GPUtrace.",
+    "GPU only caches immutable canonical policy-check inputs, fresh outputs after every proposal;8GiB logical payload budget. Record all uploads/hits/fallbacks,hostmmap bytes,VRAM and hostmemory.",
+    "All four timings preserved. Compare matching accepted/rejected/critic work and exact guard decisions; retain unequal-work variation separately. Default stays disabled unless evidence supports adoption."
+  ],
+  "hyperparameter_overrides": {},
+  "local_evidence": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/device-policy-cache-20261026",
+  "output": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/device-policy-cache-20261026",
+  "jobs": [
+    {
+      "label": "1-host",
+      "variant": "host"
+    },
+    {
+      "label": "2-gpu",
+      "variant": "gpu"
+    },
+    {
+      "label": "3-gpu",
+      "variant": "gpu"
+    },
+    {
+      "label": "4-host",
+      "variant": "host"
+    }
+  ],
+  "candidate_default_enabled": false,
+  "started_utc": "2026-10-26T15:05:53.214172+00:00",
+  "day_awake_guard": "raytracer-day-awake-2026-10-26.json",
+  "finished_utc": "2026-10-26T15:23:15.710800+00:00",
+  "results": "docs/benchmarks/device-policy-cache-2026-10-26/results.json",
+  "primary_timing": {
+    "host_cases": [
+      "1-host",
+      "4-host"
+    ],
+    "gpu_cases": [
+      "2-gpu",
+      "3-gpu"
+    ],
+    "host_replays": 2,
+    "gpu_replays": 2,
+    "host_mean_seconds": 185.4061908849999,
+    "gpu_mean_seconds": 152.4202477660001,
+    "speedup": 1.2164144436350788,
+    "time_reduction_percent": 17.79117674633619
+  },
+  "all_cases": [
+    {
+      "label": "1-host",
+      "seconds": 182.11838404099944,
+      "rejected_epochs": 8
+    },
+    {
+      "label": "2-gpu",
+      "seconds": 156.42917745200066,
+      "rejected_epochs": 8
+    },
+    {
+      "label": "3-gpu",
+      "seconds": 148.41131807999955,
+      "rejected_epochs": 8
+    },
+    {
+      "label": "4-host",
+      "seconds": 188.69399772900033,
+      "rejected_epochs": 8
+    }
+  ],
+  "unmatched_timing_cases": [],
+  "adoption": {
+    "status": "available_opt_in_not_default",
+    "runtime_parameters": {
+      "policy_cache_device": "/GPU:0",
+      "policy_cache_device_bytes": 8589934592
+    },
+    "model_and_rl_changes": false,
+    "predeployment_independent_source_review": "passed",
+    "local_tests": 9,
+    "gpu_preflight": "passed",
+    "full_update_parity": "within declared limits; matching-work guard decisions and final PCG exact",
+    "runtime_rule": "Use fresh pinned deployment, never patch a running study. Production memory/throughput still unmeasured."
+  },
+  "validation": {
+    "status": "passed",
+    "local_focused_and_regression_tests": 9,
+    "tests_sha256": "8307384a2914eba0129dd98b92449c67265e2d6fca3d831ab8466ec4776e0849",
+    "tests_log_sha256": "e2a88b863d94c86735e58260f75f3ece341a97542d17b6d25d20e38a3e83bf4a",
+    "canonical_batches": 167,
+    "shuffled_batches": 6,
+    "joint_forward_backward_cases": 3,
+    "preflight_max_gradient_absolute": 4.76837158203125e-07,
+    "preflight_max_gradient_relative_l2": 6.489738983134024e-08,
+    "model_and_rl_settings_unchanged": true,
+    "full_replays": 4,
+    "pairwise_array_comparisons": 6,
+    "arrays_per_comparison": 262,
+    "root_independent_numeric_reduction": "All6pairs recomputed with concatenated arrays; metrics match analyzer to1e-12relative.",
+    "matching_work_guard_sequences": "exact",
+    "final_rng": "exact",
+    "model_and_both_Adam_arrays": "within predeclared envelopes; GPU values are not bitwise identical",
+    "compile": "passed",
+    "git_diff_check": "passed",
+    "independent_final_audit_sha256": "967b88d890bb6bf6bb2131b18d09316bd8237b43e2613993547442812f4aaf9f"
+  },
+  "cleanup": {
+    "remote_owned_groups_gone": true,
+    "gpu_contexts_gone": true,
+    "shared_lock_free": true,
+    "laptop_request_released": true,
+    "day_awake_guard_left_running": true,
+    "protected_checkpoint_files_unchanged": 205,
+    "pinned_runtime_files_unchanged": 273
+  },
+  "backup": {
+    "sha256": "889e556d529673cc78ffd1c5239697f54f503ad7edff482047b41551fabd9b0c",
+    "bytes": 12463953,
+    "files": 42,
+    "npz_crc_passed": 4,
+    "gzip_crc_passed": true
+  },
+  "no_new_games": true,
+  "no_promoted_checkpoints": true,
+  "gpu_trace_recorded": false
+}

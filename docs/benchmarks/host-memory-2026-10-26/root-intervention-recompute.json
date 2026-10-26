@@ -1,0 +1,47 @@
+{
+  "phases": [
+    {
+      "name": "idle-control",
+      "rss_before_mib": 4294.45703125,
+      "rss_after_mib": 4294.47265625,
+      "rss_returned_mib": -0.015625,
+      "allocated_change_mib": 0.0245208740234375,
+      "free_change_mib": -0.0049896240234375,
+      "arena_change_mib": 0.01953125,
+      "result": null,
+      "seconds": 2.013169674,
+      "states_unchanged": true
+    },
+    {
+      "name": "gc-collect",
+      "rss_before_mib": 4294.47265625,
+      "rss_after_mib": 4294.47265625,
+      "rss_returned_mib": 0.0,
+      "allocated_change_mib": -12.11981201171875,
+      "free_change_mib": 12.11981201171875,
+      "arena_change_mib": 0.0,
+      "result": 68,
+      "seconds": 0.18133913,
+      "states_unchanged": true
+    },
+    {
+      "name": "malloc-trim",
+      "rss_before_mib": 4294.484375,
+      "rss_after_mib": 2810.53125,
+      "rss_returned_mib": 1483.953125,
+      "allocated_change_mib": 0.0052337646484375,
+      "free_change_mib": -29.118515014648438,
+      "arena_change_mib": -29.11328125,
+      "result": 1,
+      "seconds": 0.014694358,
+      "states_unchanged": true
+    }
+  ],
+  "natural_first_to_last_mib": {
+    "rss": 669.62890625,
+    "arena": 647.25,
+    "allocated": 25.555038452148438,
+    "free": 621.6949615478516,
+    "mmap": 0.0
+  }
+}

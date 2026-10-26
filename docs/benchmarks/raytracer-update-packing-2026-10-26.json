@@ -1,0 +1,306 @@
+{
+  "status": "complete",
+  "scope": "Frozen fused update profiling and packing/cache benchmarks; no games or learning recipe changes.",
+  "local_base": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/update-packing-20261026",
+  "plan": [
+    "Fused control and fused instrumented replay, then independently pinned packing candidates; original checkpoint39 and round40 800/200 split."
+  ],
+  "tolerances": {
+    "packed_arrays": "bitwise identical including shapes, dtypes and order",
+    "outputs_atol": 2e-05,
+    "outputs_rtol": 0.0002,
+    "gradients_atol": 2e-05,
+    "gradients_rtol": 0.002,
+    "gradient_relative_l2": 0.001,
+    "full_model_max_abs": 0.001,
+    "full_model_relative_l2": 0.0005,
+    "full_adam_max_abs": 0.002,
+    "full_adam_relative_l2": 1e-05,
+    "rng": "exact",
+    "optimizer_steps": "exact",
+    "guard_decisions": "exact for adoption; otherwise diagnose and leave opt-in"
+  },
+  "hyperparameter_overrides": {},
+  "baseline_phase": "update-packing-profile-v2-20261026",
+  "candidate_phase": "update-packing-candidate-20261026",
+  "local_tests": {
+    "packing": 4,
+    "regression": 12,
+    "trace_analysis": 3,
+    "all_passed": true
+  },
+  "initial_deployment_error": "Missing driver; first coordinator exited2 before loading or updating. Preserved old manifest/launch/logs; corrected v2 bundle.",
+  "candidate_manifest_sha256": "7e4efe08061b9efe61eec864350735ad604417fe1c6f0f5a1331e31ed98fe026",
+  "benchmark_order": [
+    "default",
+    "both",
+    "both",
+    "default",
+    "cache",
+    "prepack"
+  ],
+  "model_and_rl_settings_changed": false,
+  "new_games": 0,
+  "profile_result": {
+    "control_seconds": 230.85113406299934,
+    "profile_seconds": 265.48881899800017,
+    "control_retries": 8,
+    "profile_retries": 9,
+    "record_gather_seconds": 169.974794163,
+    "collate_seconds": 51.116670972,
+    "guard_scan_seconds": 119.964887418,
+    "warning": "Spans overlap; profiler/control work differs by one rejected pass. Instrumented elapsed time is not a speedup comparison."
+  },
+  "data_and_gradient_parity": [
+    {
+      "status": "passed",
+      "samples": 85199,
+      "canonical_batches": 167,
+      "shuffled_batches": 6,
+      "numeric_disk_bytes": 2458834760,
+      "policy_cache_disk_bytes": 6229903504,
+      "weights_and_optimizers_unchanged": true,
+      "rng_unchanged": true,
+      "source_unchanged": true,
+      "cudnn_ops": {
+        "CudnnRNNBackpropV3": 4,
+        "CudnnRNNV3": 4
+      }
+    },
+    [
+      {
+        "first": 0,
+        "n": 512,
+        "gradient_max": 3.5762786865234375e-07,
+        "gradient_relative_l2": 5.522550682885076e-08,
+        "output_max": 0.0
+      },
+      {
+        "first": 42496,
+        "n": 512,
+        "gradient_max": 4.76837158203125e-07,
+        "gradient_relative_l2": 6.07132912506968e-08,
+        "output_max": 0.0
+      },
+      {
+        "first": 84992,
+        "n": 207,
+        "gradient_max": 7.450580596923828e-08,
+        "gradient_relative_l2": 5.4880501331988366e-08,
+        "output_max": 0.0
+      }
+    ]
+  ],
+  "temporary_disk_bytes": {
+    "numeric": 2458834760,
+    "canonical_policy_inputs": 6229903504
+  },
+  "followup": {
+    "status": "complete",
+    "reason": "Vectorized gather allocates large int64 grids; direct row copies match bytes and were ~5x faster on a synthetic local gather test. Needs real-data/full-update confirmation.",
+    "microbenchmark": {
+      "status": "passed",
+      "synthetic_batch": 512,
+      "file_bytes": 34694904,
+      "seconds": {
+        "vectorized": [
+          0.0822220389964059,
+          0.08083892898866907,
+          0.08090991503559053
+        ],
+        "row_copy": [
+          0.017610731010790914,
+          0.01608926401240751,
+          0.016164253000169992
+        ]
+      }
+    },
+    "plan": [
+      "Same whole-game parity and GPU gradients; direct-row-copy numerical packing. Finite both,both,prepack,default full update replays; same source/model/settings/RNG."
+    ],
+    "jobs": [
+      {
+        "label": "1-both",
+        "variant": "both"
+      },
+      {
+        "label": "2-both",
+        "variant": "both"
+      },
+      {
+        "label": "3-prepack",
+        "variant": "prepack"
+      },
+      {
+        "label": "4-default",
+        "variant": "default"
+      }
+    ],
+    "local_tests": {
+      "packing_tests": 4,
+      "seconds": 79.666,
+      "status": "passed"
+    }
+  },
+  "historical_manifest_notes": {
+    "first_two_manifests_created_utc": "Inherited the original profile preparation timestamp; actual coordinator starts are recorded in study.json and launch identities.",
+    "first_two_manifests_case_timeout_seconds": 900,
+    "actual_coordinator_case_timeout_seconds": 1200
+  },
+  "prototype_summary": {
+    "mean_seconds": {
+      "both": 261.5469177909995,
+      "cache": 194.72809177300041,
+      "default": 235.26299075750012,
+      "prepack": 312.79696580200016
+    },
+    "speedups": {
+      "both": {
+        "speedup": 0.8995058811799774,
+        "time_reduction_percent": -11.172146944519557
+      },
+      "cache": {
+        "speedup": 1.2081615375338464,
+        "time_reduction_percent": 17.229611361304798
+      },
+      "default": {
+        "speedup": 1.0,
+        "time_reduction_percent": 0.0
+      },
+      "prepack": {
+        "speedup": 0.7521268313913925,
+        "time_reduction_percent": -32.95629915902032
+      }
+    },
+    "same_guard_sequence_and_work_for_cache_only": true,
+    "same_rng_all": true,
+    "cache_only_max_model_abs_vs_control": 4.0343773434869945e-05,
+    "control_repeat_max_model_abs": 0.0003427695482969284
+  },
+  "finished_utc": "2026-10-26T06:00:50.880628+00:00",
+  "methods": {
+    "fused_baseline": {
+      "replays": 2,
+      "mean_seconds": 235.26299075750012,
+      "speedup": 1.0,
+      "time_reduction_percent": 0.0,
+      "keys": [
+        "index_grid/1-default",
+        "index_grid/4-default"
+      ]
+    },
+    "fused_extra_retry": {
+      "replays": 1,
+      "mean_seconds": 256.18239383499986,
+      "speedup": 0.9183417612571246,
+      "time_reduction_percent": -8.891922613983372,
+      "keys": [
+        "direct_copy/4-default"
+      ]
+    },
+    "policy_cache": {
+      "replays": 1,
+      "mean_seconds": 194.72809177300041,
+      "speedup": 1.2081615375338464,
+      "time_reduction_percent": 17.229611361304798,
+      "keys": [
+        "index_grid/5-cache"
+      ]
+    },
+    "direct_prepack": {
+      "replays": 1,
+      "mean_seconds": 203.01475298900004,
+      "speedup": 1.1588467699697045,
+      "time_reduction_percent": 13.707314382371472,
+      "keys": [
+        "direct_copy/3-prepack"
+      ]
+    },
+    "direct_both": {
+      "replays": 2,
+      "mean_seconds": 180.95806994849954,
+      "speedup": 1.3000967065158007,
+      "time_reduction_percent": 23.082644930317986,
+      "keys": [
+        "direct_copy/1-both",
+        "direct_copy/2-both"
+      ]
+    },
+    "prototype_prepack": {
+      "replays": 1,
+      "mean_seconds": 312.79696580200016,
+      "speedup": 0.7521268313913925,
+      "time_reduction_percent": -32.95629915902032,
+      "keys": [
+        "index_grid/6-prepack"
+      ]
+    },
+    "prototype_both": {
+      "replays": 2,
+      "mean_seconds": 261.5469177909995,
+      "speedup": 0.8995058811799774,
+      "time_reduction_percent": -11.172146944519557,
+      "keys": [
+        "index_grid/2-both",
+        "index_grid/3-both"
+      ]
+    }
+  },
+  "validation": {
+    "status": "passed",
+    "utc": "2026-10-26T06:00:50.880628+00:00",
+    "distinct_local_tests": 19,
+    "packing_tests_repeated_after_revision": true,
+    "packing_tests_seconds": [
+      98.78,
+      79.666
+    ],
+    "regression_tests": 12,
+    "trace_analysis_tests": 3,
+    "whole_training_records": 85199,
+    "whole_game_train_holdout": [
+      800,
+      200
+    ],
+    "canonical_batches_per_revision": 167,
+    "shuffled_batches_per_revision": 6,
+    "gpu_parity_cases_per_revision": 3,
+    "max_output_absolute_difference": 0.0,
+    "max_gradient_absolute_difference": 5.960464477539062e-07,
+    "all_final_arrays_within_declared_envelope": true,
+    "all_final_rng_equal": true,
+    "selected_vs_matching_controls_all_work_and_guard_sequences_equal": true,
+    "original_checkpoint_files_unchanged": 205,
+    "py_compile": "passed",
+    "diff_check": "passed",
+    "no_new_games": true,
+    "no_promoted_checkpoints": true,
+    "packing_defaults_enabled": false,
+    "source_files": {
+      "src/patchwork_automaton/neural/packed_rollouts.py": "256331ee972462b1064e903fc71451c9ab2c415a75822c67ed8673659f760291",
+      "src/patchwork_automaton/neural/streaming_ppo.py": "e60f2b3e4f2578798522d31f4f8adcc5a8e5ca27f744b36edf638e84b40b2d0b",
+      "examples/benchmark_update_packing.py": "67de67ea9be0d8aa2daf639c43a23980bb0ee65ec9d8e8ac149097ec9e79f543",
+      "examples/benchmark_packed_update.py": "adc6792cd08ba754bdc1b9c9b426c65adb86c9694e4072a55a07f192847f27e3",
+      "tests/test_packed_rollouts.py": "85e741916bf7fb5ac8b3933c8001e6bfd25ca5ac6eb845447ade62113d2966a9"
+    }
+  },
+  "cleanup": {
+    "linux": "verified",
+    "windows_guard": "released/task removed",
+    "local_inhibitor": "released/group gone"
+  },
+  "backup": {
+    "sha256": "e6d1066d2c76e33ad50455bfc69a831324d356b9763df5797cd9e9247b3bd29d",
+    "bytes": 82608969,
+    "files": 132
+  },
+  "artifacts": "docs/benchmarks/update-packing-2026-10-26",
+  "defaults": "Packing switches remain opt-in. Selective cuDNN GPU default remains enabled.",
+  "limitations": [
+    "One frozen update on one RTX4090; repetitions measure runtime, not independent learning trials.",
+    "Individual guard retries may vary with FP32 GPU execution; compare matching-work cases as well as all trials.",
+    "Inputs/padding/order match exactly; GPU gradients and final states need not be bitwise identical, including A/A controls.",
+    "Reported temporary file sizes are logical backing bytes; mappings also consume reclaimable OS page cache beyond the unchanged explicit512MiB rollout cache.",
+    "Setup, initial data scan, cache construction and cleanup are included in full update timings."
+  ]
+}

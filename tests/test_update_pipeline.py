@@ -47,7 +47,14 @@ class UpdatePipelineTests(unittest.TestCase):
                 for key in ('loss','value_loss','exact_kl','max_state_kl','accepted_steps','critic_steps','rejected_epochs'):
                     self.assertEqual(results[0][key],results[1][key])
                 self.assertEqual(results[1]['rejected_epochs'],1)
-                self.assertEqual(results[1]['pipeline'],dict(prefetch_batches=2,measurement_workers=3))
+                pipeline = results[1]['pipeline']
+                self.assertEqual(pipeline['prefetch_batches'], 2)
+                self.assertEqual(pipeline['measurement_workers'], 3)
+                self.assertFalse(pipeline['numerical_prepacking'])
+                self.assertFalse(pipeline['cache_policy_batches'])
+                self.assertIsNone(pipeline['policy_cache_device'])
+                self.assertIsNone(pipeline['actor_epoch_cache_device'])
+                self.assertEqual(pipeline['actor_epoch_cache_epochs'], [])
                 self.assertLessEqual(results[1]['cache']['retained_bytes'],cache_bytes)
 
     def test_parallel_measurement_calls_overlap(self):

@@ -1,0 +1,43 @@
+{
+  "status": "passed",
+  "reviewer": "/root/device_cache_review",
+  "reviewed_utc": "2026-10-26T15:06:19.795529+00:00",
+  "review_type": "independent read-only predeployment review; proof saved after root confirmed start",
+  "manifest_sha256": "40821819b3227a275044ae277a17990aea68a0d160aa8844f0c263baefa0c7c1",
+  "timed_driver_sha256": "059df6916f6a69dd001fd843c550363251607b5d0777e34a14fecc77c9a592cf",
+  "preflight_driver_sha256": "b3fda8db5dc2921b3bc729c42d3b1c98d4cbfeea8fc3cfaf3846e59557ef0af0",
+  "candidate_source_sha256": {
+    "packed_rollouts.py": "27e584d40aeba5d2f967298612b1a8c1471751b71068afb2f1af298df955f056",
+    "streaming_ppo.py": "443f9e80d4284c51238281efbff0b115029f258f5de094ef2c7976d2e6a9f655"
+  },
+  "scope": [
+    "Same canonical minibatches, padding, dtypes, order, metric reduction and fresh forward/KL after every proposal.",
+    "Once-only deterministic prefix device admission, 8 GiB logical payload bound, CPU count metadata, explicit worker/tensor placement.",
+    "Default disabled; original shuffled optimizer path and CPU-cache fallback retained.",
+    "All reader/critic work joined before cache references are released; genuine OOM remains visible without replay.",
+    "Preflight checks every canonical input across 85199 samples, six shuffled batches, three joint forward/backward cases, immutable checkpoint/optimizers/RNG/source and whole-game exclusion before finite ABBA replays.",
+    "Same immutable consolidated baseline ML runtime; candidate changes limited to packed_rollouts and streaming_ppo, common timed driver, both Adam states and PCG restored.",
+    "All four timings preserved; unequal retry work separated, exact guard decisions required for adoption.",
+    "Shared lock, prior process termination, runtime hashes and native awake proof gated before start.",
+    "Native temporary awake guard independently reviewed: fixed UTC expiry and monotonic maximum, no persistent power/services/WSL/compute changes."
+  ],
+  "resolved_prelaunch_findings": [
+    "Aligned coordinator and timed-driver cache-budget argument.",
+    "Host runtime telemetry predates device cache fields; host-only assertions permit absent device counters as zero while GPU fields remain mandatory.",
+    "Aligned native manifest and state filenames with actual day-awake guard."
+  ],
+  "tests": {
+    "distinct_passed": 9,
+    "log_sha256": "e2a88b863d94c86735e58260f75f3ece341a97542d17b6d25d20e38a3e83bf4a",
+    "log_matches_manifest": true
+  },
+  "native_manifest_sha256": "ceccfe15c230d7b7af0982cca997695989d4c4887e121bc58f12573dcef093c1",
+  "limitations": [
+    "This review is static and verifies the existing local CPU test log; it does not claim GPU numerical or performance success before evidence arrives.",
+    "8 GiB bounds logical input payload only; TensorFlow allocator overhead and active model/optimizer/activation memory require additional VRAM.",
+    "OOM and placement failures abort visibly; no automatic optimizer or RPC replay is introduced.",
+    "Cached tensors are immutable; their containing input dictionaries are documented caller-read-only.",
+    "Only one saved update is benchmarked; production resident game-worker memory pressure is not covered.",
+    "GPU A/A numerical and retry variability must remain visible in final comparisons."
+  ]
+}

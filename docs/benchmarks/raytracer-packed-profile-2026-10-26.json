@@ -1,0 +1,97 @@
+{
+  "status": "complete",
+  "scope": [
+    "Three finite frozen round40 replays with fused memory GRUs, direct-row prepacking and canonical policy input caching. One 30s GPU trace, passive memory/I/O sampling in all three. No games or model/RL changes."
+  ],
+  "source_study": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/raytracer-pooled-40000-2026-10-25",
+  "local_base": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/packed-profile-20261026",
+  "manifest_sha256": "6051ea93ca0717ffe6645bfcb640a2091497fe643e55757126339436c5e0db56",
+  "model_and_rl_changes": false,
+  "limitations": [
+    "Isolated updater; no resident collection workers. Passive Linux counters do not measure Windows host paging. Profiling times include probe overhead."
+  ],
+  "active_deployment": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/packed-profile-v2-20261026",
+  "launch": {
+    "pid": 16268,
+    "pgid": 16268,
+    "sid": 16268,
+    "start_ticks": 865052,
+    "uid": 1000
+  },
+  "native_guard": {
+    "manifest_sha256": "a7c23b5423a4d57d3122ec72230d9b8109c23ace268efc90d2f569308829a086",
+    "status": "holding",
+    "reason": "setup",
+    "utc": "2026-10-26T13:38:22.1538641Z",
+    "started_utc": "2026-10-26T13:32:41.5451635Z",
+    "expires_utc": "2026-10-26T15:32:41.5451635Z",
+    "maximum_seconds": 7200,
+    "windows_pid": 17788,
+    "creation_utc": "2026-10-26T13:32:41.1718692Z"
+  },
+  "failed_predecessor": {
+    "preserved": true,
+    "reason": "Kernel omits /proc/self/io; first diagnostic exited before update; optional counter now explicitly unavailable."
+  },
+  "validation": {
+    "exact_small_replay": "patchwork_automaton/.local/benchmarks/packed-profile-20261026/probe-parity-test.log",
+    "sampler_and_exception_checks": "patchwork_automaton/.local/benchmarks/packed-profile-v2-20261026/sampler-checks.log"
+  },
+  "initial_uninstrumented": {
+    "seconds": 193.454181433,
+    "samples": 85199,
+    "actor_accepted_steps": 334,
+    "critic_steps": 157,
+    "rejections": 8,
+    "storage_summary": {
+      "major_faults": 13,
+      "minor_faults": 733575,
+      "min_available_GiB": 11.937210083007812,
+      "peak_RSS_GiB": 11.402328491210938,
+      "swap_pages_in": 0,
+      "swap_pages_out": 0,
+      "pressure_before": "some avg10=0.00 avg60=0.00 avg300=0.00 total=136\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=136\n",
+      "pressure_after": "some avg10=0.00 avg60=0.00 avg300=0.00 total=136\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=136\n"
+    }
+  },
+  "followup": {
+    "status": "complete",
+    "reason": "Remove GPU trace-induced paging from CPU-span measurement.",
+    "manifest_sha256": "31a78cbf799f4f02f740b6f89bb7c059838c6a16efbb47847233dfa25bfc95e2",
+    "seconds": 192.08482584599915
+  },
+  "finished_utc": "2026-10-26T14:00:08.377548+00:00",
+  "results": "docs/benchmarks/packed-profile-2026-10-26/results.json",
+  "summary": {
+    "normal_run_storage": "Not an observed throughput bottleneck for this isolated saved round:13/9/16 process major faults, negligible Linux memory and I/O pressure outside GPU tracing.",
+    "data_prefetch": "Host-only actor wait0.332s and critic wait0.038s; numerical gather86.96s overlaps TF work and is not equivalent to GPU starvation or potential savings.",
+    "next_candidates": "Investigate many small TensorFlow operations and host/device synchronization; consolidate finite-gradient checks without dropping detection. Repeated input transfers are another candidate. Neither saving is established by this profile.",
+    "tracing_interference": "GPU trace itself caused paging;304493major faults,11.927s memory-pressure stalls,149212swap pages out. Its16s actor wait is not typical uninstrumented behavior.",
+    "timing": "Control-before193.454s/8rejections;host-only192.085s/8;traced220.006s/8;control-after203.665s/9. Preserve additional retry, do not average unequal work into an overhead/speedup estimate."
+  },
+  "cleanup": {
+    "remote": true,
+    "both_native_tasks_removed": true,
+    "laptop_request_removed": true,
+    "all_source_checkpoints_unchanged": 205
+  },
+  "backup_proofs": [
+    {
+      "sha256": "3636bc0e89cf9163fcd2ecc862f980802000fca84b59947738d9fc3c9018743a",
+      "bytes": 66262911,
+      "files": 49,
+      "npz_crc_passed": 3,
+      "gzip_crc_passed": true
+    },
+    {
+      "sha256": "78723e86cedd7ef58c66f5fd695fcf1781e6352347495f5d5cf2096a49cbf6a1",
+      "bytes": 3552636,
+      "files": 20,
+      "npz_crc_passed": 1,
+      "gzip_crc_passed": true
+    }
+  ],
+  "independent_audit": "passed",
+  "no_new_games": true,
+  "no_model_or_RL_changes": true
+}

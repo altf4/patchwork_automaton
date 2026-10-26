@@ -1,0 +1,86 @@
+[
+  {
+    "layer": "actor.history_memory",
+    "operation": "forward",
+    "unfused_ms": 8.550757149998844,
+    "cudnn_ms": 1.450304574996153,
+    "speedup": 5.895835466161669
+  },
+  {
+    "layer": "actor.history_memory",
+    "operation": "forward_backward",
+    "unfused_ms": 45.25546352499532,
+    "cudnn_ms": 3.436604825003542,
+    "speedup": 13.16865506203457
+  },
+  {
+    "layer": "actor.memory",
+    "operation": "forward",
+    "unfused_ms": 1.2382744750084385,
+    "cudnn_ms": 0.7450555249874924,
+    "speedup": 1.6619895208873539
+  },
+  {
+    "layer": "actor.memory",
+    "operation": "forward_backward",
+    "unfused_ms": 3.2836814749998666,
+    "cudnn_ms": 1.5487362749922795,
+    "speedup": 2.1202328169243896
+  },
+  {
+    "layer": "actor.semantic_gru",
+    "operation": "forward",
+    "unfused_ms": 1.572608249989571,
+    "cudnn_ms": 21.015619825004705,
+    "speedup": 0.07483044816591408
+  },
+  {
+    "layer": "actor.semantic_gru",
+    "operation": "forward_backward",
+    "unfused_ms": 4.662404550003885,
+    "cudnn_ms": 60.24622762499803,
+    "speedup": 0.07738915337612455
+  },
+  {
+    "layer": "critic.history_memory",
+    "operation": "forward",
+    "unfused_ms": 8.007934975000808,
+    "cudnn_ms": 1.3162810750031895,
+    "speedup": 6.08375758572796
+  },
+  {
+    "layer": "critic.history_memory",
+    "operation": "forward_backward",
+    "unfused_ms": 53.003591875005895,
+    "cudnn_ms": 3.600646199993207,
+    "speedup": 14.72057762162411
+  },
+  {
+    "layer": "critic.memory",
+    "operation": "forward",
+    "unfused_ms": 1.0197437749980054,
+    "cudnn_ms": 0.6399379499953284,
+    "speedup": 1.5935041436524426
+  },
+  {
+    "layer": "critic.memory",
+    "operation": "forward_backward",
+    "unfused_ms": 3.3326325000075485,
+    "cudnn_ms": 1.4689288999989003,
+    "speedup": 2.2687500395764855
+  },
+  {
+    "layer": "critic.semantic_gru",
+    "operation": "forward",
+    "unfused_ms": 1.9606917750024877,
+    "cudnn_ms": 21.01851945000135,
+    "speedup": 0.09328400983078576
+  },
+  {
+    "layer": "critic.semantic_gru",
+    "operation": "forward_backward",
+    "unfused_ms": 4.633080350015462,
+    "cudnn_ms": 60.34069754999791,
+    "speedup": 0.07678201509315535
+  }
+]

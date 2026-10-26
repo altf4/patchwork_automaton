@@ -1,0 +1,2 @@
+{"verified":true,"utc":"2026-10-26T13:54:53.5499363Z","guard_state":{"manifest_sha256":"ba02b4b2c96ef2ce694572bcc4de4231c6fc83787460d43cb892b992dd3d6786","status":"released","reason":"explicit_stop_file","utc":"2026-10-26T13:54:52.2876166Z","started_utc":"2026-10-26T13:49:35.4581315Z","expires_utc":"2026-10-26T14:19:35.4581315Z","maximum_seconds":1800,"windows_pid":17792,"creation_utc":"2026-10-26T13:49:35.1274441Z"},"task_removed":true,"last_task_result":0,"persistent_settings_changed":false}
+

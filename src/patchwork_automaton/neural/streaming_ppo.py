@@ -35,7 +35,9 @@ def _json_number(value):
 class StreamingPPOTrainer(PPOTrainer):
     def __init__(self, model, *, seed=0, cache_bytes=256 * 1024**2, concurrent_updates=False,
                  prefetch_batches=0, measurement_workers=1, guard_audit=False,
-                 guard_observer=None, **kwargs):
+                 guard_observer=None, numerical_prepacking=False, cache_policy_batches=False,
+                 policy_cache_device=None, policy_cache_device_bytes=0,
+                 actor_epoch_cache_device=None, actor_epoch_cache_bytes=0, **kwargs):
         if type(cache_bytes) is not int or cache_bytes < 0:
             raise ValueError('Rollout cache budget must be nonnegative integer bytes')
         if (type(prefetch_batches) is not int or prefetch_batches < 0
@@ -43,6 +45,14 @@ class StreamingPPOTrainer(PPOTrainer):
             raise ValueError('Invalid prefetch depth or measurement worker count')
         if guard_observer is not None and not callable(guard_observer):
             raise ValueError('Guard observer must be callable')
+        if type(policy_cache_device_bytes) is not int or policy_cache_device_bytes < 0:
+            raise ValueError('Device policy cache budget must be nonnegative integer bytes')
+        if policy_cache_device is None and policy_cache_device_bytes:
+            raise ValueError('Device policy cache budget requires an explicit device')
+        if type(actor_epoch_cache_bytes) is not int or actor_epoch_cache_bytes < 0:
+            raise ValueError('Actor epoch cache budget must be nonnegative integer bytes')
+        if actor_epoch_cache_device is None and actor_epoch_cache_bytes:
+            raise ValueError('Actor epoch cache budget requires an explicit device')
         model(example_batch(model.memory_size, model.feature_spec), training=False)
         super().__init__(model, **kwargs)
         if concurrent_updates and not self.separate_value:
@@ -59,6 +69,12 @@ class StreamingPPOTrainer(PPOTrainer):
         self.rng = np.random.default_rng(seed)
         self.cache_bytes = cache_bytes
         self.guard_audit, self.guard_observer = bool(guard_audit), guard_observer
+        self.numerical_prepacking = bool(numerical_prepacking)
+        self.cache_policy_batches = bool(cache_policy_batches)
+        self.policy_cache_device = policy_cache_device
+        self.policy_cache_device_bytes = policy_cache_device_bytes
+        self.actor_epoch_cache_device = actor_epoch_cache_device
+        self.actor_epoch_cache_bytes = actor_epoch_cache_bytes
 
     def compile(self):
         batch = example_batch(self.model.memory_size, self.model.feature_spec)
@@ -108,6 +124,15 @@ class StreamingPPOTrainer(PPOTrainer):
         # streaming fallback; they never force all trajectories into memory.
         records_cache = RolloutCache(self.cache_bytes * 3 // 4)
         packed_cache = RolloutCache(self.cache_bytes - records_cache.limit)
+        from .packed_rollouts import NumericRollout, PolicyBatchCache, DevicePolicyBatchCache
+        numeric = NumericRollout() if self.numerical_prepacking else None
+        policy_cache = PolicyBatchCache() if self.cache_policy_batches else None
+        if numeric: resources.callback(numeric.close)
+        if policy_cache: resources.callback(policy_cache.close)
+        device_cache = (DevicePolicyBatchCache(device=self.policy_cache_device,
+                        max_bytes=self.policy_cache_device_bytes)
+                        if self.policy_cache_device is not None else None)
+        if device_cache: resources.callback(device_cache.close)
         offsets = []; values = []; returns = []; choices = []; advancing = []
         for index, trajectory in enumerate(trajectories):
             if trajectory['reward'] not in (-1., 0., 1.): raise ValueError('Expected terminal win/loss/draw')
@@ -122,6 +147,7 @@ class StreamingPPOTrainer(PPOTrainer):
                     raise ValueError('Missing or invalid frozen behavior probabilities')
                 if not 0 <= sample.action < len(mask) or not mask[sample.action]:
                     raise ValueError('Invalid rollout action')
+                if numeric: numeric.append(sample)
                 seen += 1; values.append(sample.value); returns.append(trajectory['reward']); choices.append(mask.sum() > 1)
                 advancing.append(sample.advance)
                 if records is not None:
@@ -137,36 +163,58 @@ class StreamingPPOTrainer(PPOTrainer):
         actor_values = values if self.advantage_baseline == 'critic' else np.zeros(len(values), np.float32)
         advantages = normalized_advantages(returns, actor_values, np.asarray(choices), self.advantage_scale_floor)
         count = len(values)
+        if numeric: numeric.finish()
         offsets = np.asarray(offsets, np.int64)
         returns = np.asarray(returns, np.float32)
         indexed = IndexedTrajectories(trajectories, records_cache, read_trajectory, spill)
         resources.callback(indexed.close)
         packing_lock = threading.Lock()
 
-        def pack(chunk):
+        def retain_policy(key, packed):
+            if device_cache:
+                converted = device_cache.put(key, packed)
+                # The initial scan uses the very tensors just uploaded. Avoid
+                # a second transfer or a duplicate host-cache entry for them.
+                if converted is not None: return converted
+            if policy_cache: policy_cache.put(key, packed)
+            return packed
+
+        def pack(chunk, *, policy=False):
             # Both optimizer streams share the bounded cache and seekable file.
             # Hold the lock only for CPU preparation, never during TF execution.
             with packing_lock:
                 key = tuple(map(int, chunk))
+                if policy and device_cache:
+                    hit = device_cache.get(key)
+                    if hit is not None: return hit
+                if policy and policy_cache:
+                    hit = policy_cache.get(key)
+                    if hit is not None: return hit
                 packed = packed_cache.get(key)
                 if packed is not None:
-                    return packed
-                trajectory_ids = np.searchsorted(offsets, chunk, side='right') - 1
-                records = [indexed.get(int(i), int(p-offsets[i])) for i, p in zip(trajectory_ids, chunk)]
-                inputs = collate([s.arrays for s in records])
-                inputs['memory_in'] = np.stack([s.memory for s in records])
-                inputs['advance_memory'] = np.asarray([[float(s.advance)] for s in records], np.float32)
-                old = np.full(inputs['candidate_mask'].shape, -1.e9, np.float32)
-                for row, sample in enumerate(records): old[row, :len(sample.log_probs)] = sample.log_probs
-                actions = np.asarray([s.action for s in records], np.int32)
-                chosen = old[np.arange(len(records)), actions]
-                packed = (inputs, actions, returns[chunk], chosen, advantages[chunk], old)
+                    return retain_policy(key, packed) if policy else packed
+                if numeric:
+                    inputs = numeric.gather(chunk)
+                    old = inputs.pop('_old'); actions = inputs.pop('_action')[:, 0]
+                    chosen = old[np.arange(len(chunk)), actions]
+                    packed = (inputs, actions, returns[chunk], chosen, advantages[chunk], old)
+                else:
+                    trajectory_ids = np.searchsorted(offsets, chunk, side='right') - 1
+                    records = [indexed.get(int(i), int(p-offsets[i])) for i, p in zip(trajectory_ids, chunk)]
+                    inputs = collate([s.arrays for s in records])
+                    inputs['memory_in'] = np.stack([s.memory for s in records])
+                    inputs['advance_memory'] = np.asarray([[float(s.advance)] for s in records], np.float32)
+                    old = np.full(inputs['candidate_mask'].shape, -1.e9, np.float32)
+                    for row, sample in enumerate(records): old[row, :len(sample.log_probs)] = sample.log_probs
+                    actions = np.asarray([s.action for s in records], np.int32)
+                    chosen = old[np.arange(len(records)), actions]
+                    packed = (inputs, actions, returns[chunk], chosen, advantages[chunk], old)
                 if packed_cache.bytes < packed_cache.limit:
                     if not packed_cache.put(key, packed):
                         # Stop admission at the first full prefix, avoiding
                         # repeated copies of batches that cannot fit the cache.
                         packed_cache.limit = packed_cache.bytes
-                return packed
+                return retain_policy(key, packed) if policy else packed
 
         def chunks(order):
             stream = iter(order)
@@ -174,29 +222,81 @@ class StreamingPPOTrainer(PPOTrainer):
                 yield chunk
 
         @contextmanager
-        def batches(order):
+        def batches(order, *, actor_cache=None):
+            def prepare(chunk):
+                if actor_cache is None: return pack(chunk)
+                key = tuple(map(int, chunk))
+                hit = actor_cache.get(key)
+                if hit is not None: return hit
+                packed = pack(chunk)
+                converted = actor_cache.put(key, packed)
+                # The first optimizer pass immediately consumes these newly
+                # uploaded tensors. Only frozen inputs are cached across the
+                # same epoch's backtracks; critic and policy scans use pack.
+                return converted if converted is not None else packed
             if self.prefetch_batches:
-                with ordered_jobs(pack,chunks(order),workers=1,capacity=self.prefetch_batches,
+                with ordered_jobs(prepare,chunks(order),workers=1,capacity=self.prefetch_batches,
                                   name='ppo-prefetch') as prepared:
                     yield prepared
             else:
-                yield map(pack,chunks(order))
+                yield map(prepare,chunks(order))
+
+        actor_epoch_cache_stats = []
+
+        @contextmanager
+        def actor_epoch_inputs(epoch):
+            if self.actor_epoch_cache_device is None:
+                yield None
+                return
+            cache = DevicePolicyBatchCache(device=self.actor_epoch_cache_device,
+                                          max_bytes=self.actor_epoch_cache_bytes)
+            row = dict(epoch=epoch+1, device=cache.device, budget_bytes=cache.max_bytes)
+            try:
+                yield cache
+            finally:
+                # Every nested batches() context has already joined/cancelled
+                # its prefetcher on success, early stop and exceptions. The
+                # critic never references this epoch-local cache.
+                row.update(logical_bytes=cache.bytes, uploads=cache.uploads,
+                           tensors=cache.uploaded_tensors, hits=cache.hits,
+                           fallback_batches=cache.fallback_batches,
+                           fallback_bytes=cache.fallback_bytes,
+                           unique_input_bytes=cache.bytes+cache.fallback_bytes)
+                cache.close()
+                row['released'] = cache.closed and cache.bytes == 0 and not cache.entries
+                actor_epoch_cache_stats.append(row)
 
         def measure(*, actor_only=False):
             sums = np.zeros(5); choice_count = value_count = 0; exact_sum = worst = 0.
             forward = self.measure_actor_with_drift if actor_only else self.measure_with_drift
-            def evaluate(chunk):
-                inputs, actions, rewards, chosen, adv, old = pack(chunk)
-                metrics, drift = map(np.asarray, forward(inputs, actions, rewards, chosen, adv, old))
-                n = int((inputs['candidate_mask'].sum(axis=1) > 1).sum())
-                v = float(inputs['advance_memory'].sum())
+            def prepared_policy_batches():
+                # Input iteration remains on ordered_jobs' calling thread.
+                # This makes device admission a deterministic canonical prefix
+                # even when forwards execute on several measurement workers.
+                for chunk in chunks(range(count)):
+                    packed = pack(chunk, policy=True)
+                    yield packed, device_cache.counts(tuple(map(int, chunk)))
+
+            def evaluate(item):
+                if device_cache:
+                    packed, (n, v) = item
+                else:
+                    packed = pack(item, policy=True)
+                    n = int((packed[0]['candidate_mask'].sum(axis=1) > 1).sum())
+                    v = float(packed[0]['advance_memory'].sum())
+                # Device contexts are thread-local and must be entered inside
+                # every worker, including over-budget CPU-input fallbacks.
+                scope = device_cache._tf.device(device_cache.device) if device_cache else nullcontext()
+                with scope:
+                    metrics, drift = map(np.asarray, forward(*packed))
                 return metrics, drift, n, v
             # The actor is frozen during actor-only checks. Both networks are
             # frozen during full scans. Join every reader before any mutation;
             # reduce in canonical order to preserve the exact acceptance test.
-            jobs = (ordered_jobs(evaluate,chunks(range(count)),workers=self.measurement_workers,
+            items = prepared_policy_batches() if device_cache else chunks(range(count))
+            jobs = (ordered_jobs(evaluate,items,workers=self.measurement_workers,
                                  capacity=self.measurement_workers,name='ppo-measure')
-                    if self.measurement_workers > 1 else nullcontext(map(evaluate,chunks(range(count)))))
+                    if self.measurement_workers > 1 else nullcontext(map(evaluate,items)))
             with jobs as results:
                 for metrics, drift, n, v in results:
                     sums += metrics[1:] * np.asarray([n, v, n, n, n])
@@ -256,6 +356,8 @@ class StreamingPPOTrainer(PPOTrainer):
         guard_proposals = []
         steps = rejected = 0; norm = 0.; stopped = False; largest = np.zeros(2)
         metrics, exact = measure()
+        if policy_cache: policy_cache.finish()
+        if device_cache: device_cache.finish()
         value_loss_before = float(metrics[2])
         # Draw the same critic permutations, in the same order, before the
         # actor consumes RNG, including unused epochs when value fitting is
@@ -286,29 +388,39 @@ class StreamingPPOTrainer(PPOTrainer):
             for epoch in range(0 if critic_only else self.epochs):
                 saved = self.snapshot(); rate = self.learning_rate
                 order = self.rng.permutation(count); accepted = False
-                for attempt in range(self.backtracks+1):
-                    self.optimizer.learning_rate.assign(rate * .5**attempt)
-                    epoch_steps = 0
-                    with batches(order) as prepared:
-                        for inputs, actions, rewards, chosen, adv, _ in prepared:
-                            if future and future.done(): future.result()
-                            norm = float(self.step(inputs, actions, rewards, chosen, adv)); epoch_steps += 1
-                    proposed, drift = measure(actor_only=self.separate_value)
-                    accepted_proposal, finite, reasons = _guard_status(proposed, drift, self.target_kl, self.max_state_kl)
-                    if self.guard_audit:
-                        event = dict(epoch=epoch+1, attempt=attempt,
-                            configured_learning_rate=float(self.learning_rate),
-                            effective_learning_rate=float(self.optimizer.learning_rate.numpy()),
-                            finite=finite, accepted=accepted_proposal, rejection_reasons=reasons,
-                            mean_kl=_json_number(drift[0]), max_state_kl=_json_number(drift[1]),
-                            target_kl=float(self.target_kl), max_state_kl_limit=float(self.max_state_kl),
-                            **audit_states())
-                        guard_proposals.append(event)
-                        if self.guard_observer is not None: self.guard_observer(event)
-                    if accepted_proposal:
-                        metrics, exact = proposed, drift; largest = np.maximum(largest, drift)
-                        steps += epoch_steps; accepted = True; break
-                    self.restore(saved); rejected += 1
+                with actor_epoch_inputs(epoch) as epoch_cache:
+                    for attempt in range(self.backtracks+1):
+                        self.optimizer.learning_rate.assign(rate * .5**attempt)
+                        epoch_steps = 0
+                        with batches(order, actor_cache=epoch_cache) as prepared:
+                            for inputs, actions, rewards, chosen, adv, _ in prepared:
+                                if future and future.done(): future.result()
+                                scope = epoch_cache._tf.device(epoch_cache.device) if epoch_cache else nullcontext()
+                                with scope:
+                                    norm = float(self.step(inputs, actions, rewards, chosen, adv))
+                                epoch_steps += 1
+                        if epoch_cache is not None:
+                            # Do not keep the last consumed device batch alive
+                            # across the epoch boundary after closing its cache.
+                            del inputs, actions, rewards, chosen, adv, _
+                        if epoch_cache is not None and not epoch_cache.finished:
+                            epoch_cache.finish()
+                        proposed, drift = measure(actor_only=self.separate_value)
+                        accepted_proposal, finite, reasons = _guard_status(proposed, drift, self.target_kl, self.max_state_kl)
+                        if self.guard_audit:
+                            event = dict(epoch=epoch+1, attempt=attempt,
+                                configured_learning_rate=float(self.learning_rate),
+                                effective_learning_rate=float(self.optimizer.learning_rate.numpy()),
+                                finite=finite, accepted=accepted_proposal, rejection_reasons=reasons,
+                                mean_kl=_json_number(drift[0]), max_state_kl=_json_number(drift[1]),
+                                target_kl=float(self.target_kl), max_state_kl_limit=float(self.max_state_kl),
+                                **audit_states())
+                            guard_proposals.append(event)
+                            if self.guard_observer is not None: self.guard_observer(event)
+                        if accepted_proposal:
+                            metrics, exact = proposed, drift; largest = np.maximum(largest, drift)
+                            steps += epoch_steps; accepted = True; break
+                        self.restore(saved); rejected += 1
                 if not accepted: stopped = True; break
             if future: critic_stats = future.result()
         if self.separate_value:
@@ -330,7 +442,29 @@ class StreamingPPOTrainer(PPOTrainer):
                 indexed_trajectories=sum(str(t['path']).endswith('.rlt') for t in trajectories)),
             sample_order='global_shuffle_v1',
             update_schedule='concurrent' if self.concurrent_updates else 'sequential',
-            pipeline=dict(prefetch_batches=self.prefetch_batches,measurement_workers=self.measurement_workers),
+            pipeline=dict(prefetch_batches=self.prefetch_batches,measurement_workers=self.measurement_workers,
+                numerical_prepacking=self.numerical_prepacking, cache_policy_batches=self.cache_policy_batches,
+                numerical_disk_bytes=numeric.disk_bytes if numeric else 0,
+                numerical_gathers=numeric.gathers if numeric else 0,
+                policy_cache_disk_bytes=policy_cache.disk_bytes if policy_cache else 0,
+                policy_cache_hits=policy_cache.hits if policy_cache else 0,
+                policy_cache_device=device_cache.device if device_cache else None,
+                policy_cache_device_budget_bytes=self.policy_cache_device_bytes,
+                policy_cache_device_bytes=device_cache.bytes if device_cache else 0,
+                policy_cache_device_uploads=device_cache.uploads if device_cache else 0,
+                policy_cache_device_tensors=device_cache.uploaded_tensors if device_cache else 0,
+                policy_cache_device_hits=device_cache.hits if device_cache else 0,
+                policy_cache_device_fallback_batches=device_cache.fallback_batches if device_cache else 0,
+                policy_cache_device_fallback_bytes=device_cache.fallback_bytes if device_cache else 0,
+                actor_epoch_cache_device=self.actor_epoch_cache_device,
+                actor_epoch_cache_budget_bytes=self.actor_epoch_cache_bytes,
+                actor_epoch_cache_epochs=actor_epoch_cache_stats,
+                actor_epoch_cache_uploads=sum(r['uploads'] for r in actor_epoch_cache_stats),
+                actor_epoch_cache_hits=sum(r['hits'] for r in actor_epoch_cache_stats),
+                actor_epoch_cache_fallback_batches=sum(r['fallback_batches'] for r in actor_epoch_cache_stats),
+                actor_epoch_cache_fallback_bytes=sum(r['fallback_bytes'] for r in actor_epoch_cache_stats),
+                actor_epoch_cache_max_logical_bytes=max((r['logical_bytes'] for r in actor_epoch_cache_stats), default=0),
+                actor_epoch_cache_max_epoch_input_bytes=max((r['unique_input_bytes'] for r in actor_epoch_cache_stats), default=0)),
             behavior_critic=value_prediction_diagnostics(returns, values, advancing),
             recurrent_updates='detached behavior states',terminal_rewards_only=True,
             value_loss_before=value_loss_before, **critic_stats)

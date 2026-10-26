@@ -1,0 +1,14 @@
+{
+  "verified": true,
+  "utc": "2026-10-26T16:34:00.461339+00:00",
+  "released_owner": {
+    "pid": 3647058,
+    "pgid": 3647058,
+    "sid": 3647058,
+    "start_ticks": 51990474,
+    "uid": 1000
+  },
+  "remaining_owned_group_members": [],
+  "temporary_laptop_inhibitor_gone": true,
+  "day_awake_windows_guard_left_running": true
+}

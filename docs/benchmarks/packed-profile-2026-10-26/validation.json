@@ -1,0 +1,13 @@
+{
+  "status": "passed",
+  "small_CPU_replay": "Exact model, both Adam states, PCG, scalar metrics/work with the packing probes enabled.",
+  "sampler_checks": "Unavailable task-I/O counters explicitly null; before/after snapshots and sampler cleanup verified even on exception.",
+  "full_replay": "All6comparisons within prior tolerances;3matching-work pairs exact guard decisions and PCG;9retry control preserved separately.",
+  "compile": "passed",
+  "git_diff_check": "passed",
+  "source_sha256": "71ff3e839498994b1e441110377099000e0cfa9143195163cf48a0dc258bbb58",
+  "logs": {
+    ".local/benchmarks/packed-profile-20261026/probe-parity-test.log": "7e23257cbda679fdaa88d6ebad8192dc32120a76b206a729a7b5e99e1725eb2c",
+    ".local/benchmarks/packed-profile-v2-20261026/sampler-checks.log": "717db8a5dbb582a027dc296f6c67bbc8f67bdc4e75a1476a659b5dba42b8f9f7"
+  }
+}

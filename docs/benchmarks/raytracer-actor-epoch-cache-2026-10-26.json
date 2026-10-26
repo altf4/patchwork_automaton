@@ -1,0 +1,58 @@
+{
+  "status": "validation_failed_no_timed_runs",
+  "manifest_sha256": "9de54ceda5149ef629aa9685afaa3542291bed7f7255977772d124ae7cffaff5",
+  "plan": [
+    "Finite ABBA baseline/epoch-cache/epoch-cache/baseline frozen round40 replays:85199records/800train/200excluded,checkpoint39,identicalmodel/bothAdam/PCG/fullRLconfig. CanonicalpolicyGPUcache8GiB+selectivecuDNN+prepacking+consolidatedgradientcheckscommonallcases.",
+    "Candidateonlycachesfrozenactorinputswithinoneepochacrossbacktracks;newbounded8GiBpayloadprefix,clearatepochboundary;CPUfallbackandOOMremainvisible. Criticpath/guardoutputs/orderunchanged.",
+    "GPUpreflightchecksBOTHactualPCGderivedshuffledordersagainstoriginalcollationwithcanonicalGPUcachealsopresent,fullpayload/admission/fallback/placementand3jointforward/backwardcases. Nooptimizerstepsinpreflight.",
+    "PassiveOS/NVMLonly,noGPUtrace,noactualgamesorpromotedcheckpoints. Comparetimingsonlyifexactwork+guardaccepted/reasons+PCGmatch;preservealloutcomes."
+  ],
+  "local_evidence": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/actor-epoch-cache-20261026",
+  "output": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/actor-epoch-cache-20261026",
+  "jobs": [
+    {
+      "label": "1-baseline",
+      "variant": "baseline"
+    },
+    {
+      "label": "2-epoch-cache",
+      "variant": "epoch-cache"
+    },
+    {
+      "label": "3-epoch-cache",
+      "variant": "epoch-cache"
+    },
+    {
+      "label": "4-baseline",
+      "variant": "baseline"
+    }
+  ],
+  "candidate_default_enabled": false,
+  "hyperparameter_overrides": {},
+  "started_utc": "2026-10-26T16:02:34.432931+00:00",
+  "launch": {
+    "pid": 26732,
+    "pgid": 26732,
+    "sid": 26732,
+    "start_ticks": 1632464,
+    "uid": 1000
+  },
+  "finished_utc": "2026-10-26T16:08:13.167349+00:00",
+  "error": "GPU preflight exited SIGKILL(-9) during high host-memory pressure; system OOM counter1, exact kernel victim log unavailable.",
+  "failed_attempt_backup": {
+    "sha256": "a951c339a8d29eaa3f0aac2260c336389ad272aa3bcb5ba8678961dc17fbe14c",
+    "bytes": 75974,
+    "files": 11,
+    "npz_crc_passed": 0,
+    "gzip_crc_passed": true
+  },
+  "source_checkpoint_files_unchanged": 205,
+  "pinned_runtime_files_unchanged": 276,
+  "cleanup_verified": true,
+  "continued_as": "raytracer-actor-epoch-cache-v2-2026-10-26.json",
+  "validation_failure_evidence": {
+    "health": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/actor-epoch-cache-20261026/preflight-health.json",
+    "oom_diagnosis": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/actor-epoch-cache-20261026/oom-diagnosis.json",
+    "note": "Memory pressure and system OOM counter are consistent with OOM termination; kernel victim PID could not be read. No timed replays or learning experiment were admitted."
+  }
+}

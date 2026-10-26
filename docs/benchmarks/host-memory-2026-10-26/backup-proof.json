@@ -1,0 +1,248 @@
+{
+  "files": 58,
+  "json_validated": 8,
+  "npz_crc_passed": 5,
+  "gzip_crc_passed": true,
+  "jsonl_validated": 1,
+  "jsonl_rows_validated": 18,
+  "xml_validated": 18,
+  "remote_study_status": "complete",
+  "artifacts": {
+    "host-memory-20261026/benchmark_host_memory.py": {
+      "bytes": 15680,
+      "sha256": "d70868923d627adb67ea52271129795842eb8a145cab2b0a799e738e4f604bcc"
+    },
+    "host-memory-20261026/coordinator.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "host-memory-20261026/coordinator.py": {
+      "bytes": 12568,
+      "sha256": "ba6880594325fd550c64d030860ab731e0ebbd6d5c38a2413dbd43ce2906daac"
+    },
+    "host-memory-20261026/launch.json": {
+      "bytes": 109,
+      "sha256": "5843dccf4ca9c056067f31aebb58e025f4fe6378ff5a9f1b7b3219342978562a"
+    },
+    "host-memory-20261026/launch.sh": {
+      "bytes": 867,
+      "sha256": "9919e4ee20a612286c42d8407a67b6259fff2a155d1a151006f50ffc01485e4f"
+    },
+    "host-memory-20261026/manifest.json": {
+      "bytes": 37287,
+      "sha256": "81b55d29a4dc1faef98bae7bed7177e9767ce349d2b2b4ec4ff1b7f8ba91cdba"
+    },
+    "host-memory-20261026/results/host-memory/host-memory-boundaries.jsonl": {
+      "bytes": 80017,
+      "sha256": "c9609d9b5980028931524b420d60b680fe2ca5e20fc985e042e7ed324a4bc978"
+    },
+    "host-memory-20261026/results/host-memory/host-memory-diagnostics.json": {
+      "bytes": 130616,
+      "sha256": "b5f8e4549f8439f2110edc66e2af0590c89343c3a60af63d0926bb5d20a5efcb"
+    },
+    "host-memory-20261026/results/host-memory/host-memory-raw/00-natural-before-series-malloc.xml": {
+      "bytes": 20717,
+      "sha256": "42a8dfc7167c5ef098cc12abcce508d71dd805e8ffe0f9cbe5dd73f3653328bf"
+    },
+    "host-memory-20261026/results/host-memory/host-memory-raw/00-natural-before-series-smaps.txt": {
+      "bytes": 816601,
+      "sha256": "1130743b2a5a842c06ac7fe99e3a5fed4b321ff3c6070653d150b21fb11ed720"
+    },
+    "host-memory-20261026/results/host-memory/host-memory-raw/01-natural-round-0036-before-malloc.xml": {
+      "bytes": 21256,
+      "sha256": "cf998f982301fed0d394435c58b4f9868e47826a38ee1131f50332e4c0f62868"
+    },
+    "host-memory-20261026/results/host-memory/host-memory-raw/01-natural-round-0036-before-smaps.txt": {
+      "bytes": 816601,
+      "sha256": "5e2280d6afe8795ca35e0e3279c5ffa1367935626e757c51352a6243d55ff68b"
+    },
+    "host-memory-20261026/results/host-memory/host-memory-raw/02-natural-round-0036-after-malloc.xml": {
+      "bytes": 52348,
+      "sha256": "4ef1583a17014b673e3b69336c1b09d4b851d379bb856a6cd2384545e691d718"
+    },
+    "host-memory-20261026/results/host-memory/host-memory-raw/02-natural-round-0036-after-smaps.txt": {
+      "bytes": 902603,
+      "sha256": "618eed1ae2da4ad240e0293186812bde7927b7efbf83991db67fe3261f744c2d"
+    },
+    "host-memory-20261026/results/host-memory/host-memory-raw/03-natural-round-0037-before-malloc.xml": {
+      "bytes": 52239,
+      "sha256": "99595f8fb99c76ac348ec3eb846d2aca9b43e600d4a8fa6444b6cc9c3a5ddf4b"
+    },
+    "host-memory-20261026/results/host-memory/host-memory-raw/03-natural-round-0037-before-smaps.txt": {
+      "bytes": 902603,
+      "sha256": "3a24b5c2df5516178546b759bc9a2508d33779d754f7e1ce427bcc0b7e0e8426"
+    },
+    "host-memory-20261026/results/host-memory/host-memory-raw/04-natural-round-0037-after-malloc.xml": {
+      "bytes": 51374,
+      "sha256": "a82d51785c3881d2abd828012209ebc313eb910900d9ebc890a29b2ca75722ca"
+    },
+    "host-memory-20261026/results/host-memory/host-memory-raw/04-natural-round-0037-after-smaps.txt": {
+      "bytes": 921005,
+      "sha256": "037c62bde2e8ed6137421d4cd253624219d73ecc08ca95a78e8ffc8aa3120d71"
+    },
+    "host-memory-20261026/results/host-memory/host-memory-raw/05-natural-round-0038-before-malloc.xml": {
+      "bytes": 51369,
+      "sha256": "54df19ce30056b26677c56412d96f53cb27ca859713d3b298ccb8b07a353c5b6"
+    },
+    "host-memory-20261026/results/host-memory/host-memory-raw/05-natural-round-0038-before-smaps.txt": {
+      "bytes": 921005,
+      "sha256": "037c62bde2e8ed6137421d4cd253624219d73ecc08ca95a78e8ffc8aa3120d71"
+    },
+    "host-memory-20261026/results/host-memory/host-memory-raw/06-natural-round-0038-after-malloc.xml": {
+      "bytes": 53621,
+      "sha256": "488e04d1b22d1c65fa031af800e822feea16fe515d0528a7458bb51e5520a36b"
+    },
+    "host-memory-20261026/results/host-memory/host-memory-raw/06-natural-round-0038-after-smaps.txt": {
+      "bytes": 948740,
+      "sha256": "c8c13b137a2ecdb355673094d35b2792a4c3d157e8b6165f66f7769414ac4ce8"
+    },
+    "host-memory-20261026/results/host-memory/host-memory-raw/07-natural-round-0039-before-malloc.xml": {
+      "bytes": 53567,
+      "sha256": "5497ecbb4e6cbc603435277fc969dafa60deac1b581961261e3f68a5bcf3a47a"
+    },
+    "host-memory-20261026/results/host-memory/host-memory-raw/07-natural-round-0039-before-smaps.txt": {
+      "bytes": 948740,
+      "sha256": "c8c13b137a2ecdb355673094d35b2792a4c3d157e8b6165f66f7769414ac4ce8"
+    },
+    "host-memory-20261026/results/host-memory/host-memory-raw/08-natural-round-0039-after-malloc.xml": {
+      "bytes": 53270,
+      "sha256": "e308fcd2fbe9805c4e722ce598190e3f0d0658a8f467fb363decf5fab06b5c9a"
+    },
+    "host-memory-20261026/results/host-memory/host-memory-raw/08-natural-round-0039-after-smaps.txt": {
+      "bytes": 952512,
+      "sha256": "15c9ce0f50f5bd0af2a2463accd70d045ef8ab50c9b1065ad7824b4efa21db3b"
+    },
+    "host-memory-20261026/results/host-memory/host-memory-raw/09-natural-round-0040-before-malloc.xml": {
+      "bytes": 53270,
+      "sha256": "34b445eab6881cd365b12867518d913f958f9d0640ea839c8e08a8c74efefeef"
+    },
+    "host-memory-20261026/results/host-memory/host-memory-raw/09-natural-round-0040-before-smaps.txt": {
+      "bytes": 952512,
+      "sha256": "3bbdb71e7d12f70f18d91135619a73f0fcbf080c2c91982f660fb60784be65c6"
+    },
+    "host-memory-20261026/results/host-memory/host-memory-raw/10-natural-round-0040-after-malloc.xml": {
+      "bytes": 55246,
+      "sha256": "41f62a8447c1337f2bc786cb74f3dfeb1e50b1b797cf129aad14507150cddc8e"
+    },
+    "host-memory-20261026/results/host-memory/host-memory-raw/10-natural-round-0040-after-smaps.txt": {
+      "bytes": 956346,
+      "sha256": "ec45ffe369c166918875f2ab41747523dda1e6d204791f59281e5f088b4e477d"
+    },
+    "host-memory-20261026/results/host-memory/host-memory-raw/11-idle-control-before-malloc.xml": {
+      "bytes": 55243,
+      "sha256": "a09525e9edf94dd2a019631510d063b3868a6a8616bcc5eb90a59b352e8fd09e"
+    },
+    "host-memory-20261026/results/host-memory/host-memory-raw/11-idle-control-before-smaps.txt": {
+      "bytes": 956346,
+      "sha256": "825d1d6a36601c343568cb148cbafc948e3cf99962e825e4cde0b285721658b9"
+    },
+    "host-memory-20261026/results/host-memory/host-memory-raw/12-idle-control-after-malloc.xml": {
+      "bytes": 55190,
+      "sha256": "8d983602d5964e6eeae11b832bfd113ead1cccc128faf58b7769d2c5363b16a1"
+    },
+    "host-memory-20261026/results/host-memory/host-memory-raw/12-idle-control-after-smaps.txt": {
+      "bytes": 956346,
+      "sha256": "03a34d1a064ab9f792796d519c477d90850611380e9cc74a0857902c9c5af9ec"
+    },
+    "host-memory-20261026/results/host-memory/host-memory-raw/13-gc-collect-before-malloc.xml": {
+      "bytes": 55085,
+      "sha256": "66f21a1a758d34733f4bdfc0a1ad60250a16e421848dd44814d1aed7d3c6f486"
+    },
+    "host-memory-20261026/results/host-memory/host-memory-raw/13-gc-collect-before-smaps.txt": {
+      "bytes": 956346,
+      "sha256": "03a34d1a064ab9f792796d519c477d90850611380e9cc74a0857902c9c5af9ec"
+    },
+    "host-memory-20261026/results/host-memory/host-memory-raw/14-gc-collect-after-malloc.xml": {
+      "bytes": 55032,
+      "sha256": "0c3af261db9065b88a3087a49da1815ec721cecd5ba966940abb16b1334ce4d7"
+    },
+    "host-memory-20261026/results/host-memory/host-memory-raw/14-gc-collect-after-smaps.txt": {
+      "bytes": 956346,
+      "sha256": "03a34d1a064ab9f792796d519c477d90850611380e9cc74a0857902c9c5af9ec"
+    },
+    "host-memory-20261026/results/host-memory/host-memory-raw/15-malloc-trim-before-malloc.xml": {
+      "bytes": 54978,
+      "sha256": "6b17d05933538b30bb199e00d3507615ee0ace8ff509c809ea702d982e11e747"
+    },
+    "host-memory-20261026/results/host-memory/host-memory-raw/15-malloc-trim-before-smaps.txt": {
+      "bytes": 956346,
+      "sha256": "d859af82e77ea6507d011dfac448439b7f243c3f8be67c4ddfd0aa70917306b5"
+    },
+    "host-memory-20261026/results/host-memory/host-memory-raw/16-malloc-trim-after-malloc.xml": {
+      "bytes": 39180,
+      "sha256": "32a7b495ba1ae287c818dfce77c56db4471df2c8b77436c2a717850d5a51ffe9"
+    },
+    "host-memory-20261026/results/host-memory/host-memory-raw/16-malloc-trim-after-smaps.txt": {
+      "bytes": 955591,
+      "sha256": "41a64858e4bf01b9f60edb283a695ec6ddd0175451e3c1384a442ac00b4139a1"
+    },
+    "host-memory-20261026/results/host-memory/host-memory-raw/17-natural-after-series-malloc.xml": {
+      "bytes": 39179,
+      "sha256": "4d49f7586fe48a486dc0f32b896f596dac7e0e0899ed17f99a633e4b4bb0229a"
+    },
+    "host-memory-20261026/results/host-memory/host-memory-raw/17-natural-after-series-smaps.txt": {
+      "bytes": 955591,
+      "sha256": "c599909c109aca5fe20bdc052103b65e2e5f2d5622ca0ca4ce8dd43c9a984aeb"
+    },
+    "host-memory-20261026/results/host-memory/host-spans.json.gz": {
+      "bytes": 325,
+      "sha256": "d835368cdd55781aef934ad3d2ec7157f20430b889faf40a51fe7f2adfc0f39c"
+    },
+    "host-memory-20261026/results/host-memory/nvidia-smi.csv": {
+      "bytes": 63627,
+      "sha256": "ba6b781b66667cb3788ffeb5a8419eb187d96e8787235424b3a9905ff9893fe4"
+    },
+    "host-memory-20261026/results/host-memory/nvidia-smi.stderr.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "host-memory-20261026/results/host-memory/os-samples.json": {
+      "bytes": 5400036,
+      "sha256": "f0b54ed6a814698b733aa453a42d6d787a5559bc5367a2cc14aede987ecebd53"
+    },
+    "host-memory-20261026/results/host-memory/report.json": {
+      "bytes": 1136781,
+      "sha256": "492f141563c7d2cd57d53cdd6d4a27bf87f31c1b25e66a7d62d46be017b6b22d"
+    },
+    "host-memory-20261026/results/host-memory/round-0036-state.npz": {
+      "bytes": 4479462,
+      "sha256": "a8f39334afa6975c5f5a1764d7845fc3aeb98a867da579c111aabecdf141649c"
+    },
+    "host-memory-20261026/results/host-memory/round-0037-state.npz": {
+      "bytes": 4479462,
+      "sha256": "313b20de7c57f9d3004a03eb9ddb4b92fd658cbf515ea6a5e4dc58ea80bc6fea"
+    },
+    "host-memory-20261026/results/host-memory/round-0038-state.npz": {
+      "bytes": 4479462,
+      "sha256": "e438c665b3ab86887950f46cc55c223d0f8ec0ed4e1586395394d9a54afb323d"
+    },
+    "host-memory-20261026/results/host-memory/round-0039-state.npz": {
+      "bytes": 4479462,
+      "sha256": "81f8a7d855893bc0b8be81b09bbaa4d74242ad8715b2945fd0474e0968a3446d"
+    },
+    "host-memory-20261026/results/host-memory/round-0040-state.npz": {
+      "bytes": 4479462,
+      "sha256": "3bf2173d2279526b115324754f23a9aefae064645d2e2dca644367406c3fece3"
+    },
+    "host-memory-20261026/results/host-memory.log": {
+      "bytes": 1372,
+      "sha256": "452e0acd6d1198236eccd8fc8f52931f7a450553c617f2ebc5e8eee8f27febba"
+    },
+    "host-memory-20261026/results/study.json": {
+      "bytes": 2066,
+      "sha256": "8bfca13e3434016312d4e72dd83005c25ed2dadbda8fccc84477096babcdb766"
+    },
+    "host-memory-20261026/runtime-hashes.json": {
+      "bytes": 18705,
+      "sha256": "e116f927c02d80576c73c23687e75f50fea3260796606d67073559755e0e26ee"
+    },
+    "host-memory-20261026/source-checkpoint-hashes.json": {
+      "bytes": 44078,
+      "sha256": "e7980197833d98711095432c31854bb91ad3fa0cbbc2c900b56d292f9f3d4268"
+    }
+  },
+  "sha256": "e48f5eb337e3dc8ffca3393662f950c55441a10ed788a7c397807fc08a2b4236",
+  "bytes": 16084092,
+  "verified_utc": "2026-10-26T17:32:10.321374+00:00",
+  "transfer_attempt": "20261026T173207-9d329c92"
+}

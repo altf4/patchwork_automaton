@@ -1,0 +1,191 @@
+{
+  "status": "complete_with_replay_parity_warning",
+  "started_utc": "2026-10-25T23:53:07.309381+00:00",
+  "scope": "Two isolated replays of saved round40 from checkpoint39: unchanged production update, then timing-instrumented update. No new games, checkpoint promotion, hyperparameter or model changes.",
+  "manifest_sha256": "57e56033d2d43f17093e15727a1f198668de68ec01391b4ed38683dac22faffb",
+  "deployment_sha256": "4c1a8ca10f34ba75b2a275dc9a2015ca411c743c3e64c3e2b30d70296a0c1cd3",
+  "remote": {
+    "owner": {
+      "pid": 1072,
+      "pgid": 1072,
+      "sid": 1072,
+      "start_ticks": 108081,
+      "uid": 1000
+    },
+    "deployment_sha256": "4c1a8ca10f34ba75b2a275dc9a2015ca411c743c3e64c3e2b30d70296a0c1cd3",
+    "files": {
+      "manifest.json": "57e56033d2d43f17093e15727a1f198668de68ec01391b4ed38683dac22faffb",
+      "coordinator.py": "989288a709b1b1d5a4da1f71d1a8c2740bd3a6ff4b67758514a81e122ff5bf9a",
+      "profile_ppo_update.py": "9f15b524e08051af2d05816b3a076f1f9dc4a8555b2a8a03c430981657ab82fa",
+      "launch.sh": "778c2e578e03e0d3b785896371319de6b807bb34ceb98aeffdbc81ea9daa0c9d"
+    },
+    "output": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/update-profile-20261025"
+  },
+  "local_base": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/update-profile-20261025",
+  "source_study": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/raytracer-pooled-40000-2026-10-25",
+  "source_round": 40,
+  "source_checkpoint": 39,
+  "training_games": 800,
+  "heldout_games_excluded": 200,
+  "settings": {
+    "train_batch": 512,
+    "ppo_epochs": 2,
+    "actor_lr": 0.0001,
+    "critic_lr": 0.0003,
+    "critic_steps_cap": 157,
+    "target_kl": 0.02,
+    "max_state_kl": 0.5,
+    "cache_mib": 512,
+    "prefetch_batches": 2,
+    "measurement_workers": 4,
+    "concurrent_updates": true
+  },
+  "tests": {
+    "passed": 4,
+    "log_sha256": "270265bfcbece1ac70d24c160560f3c5767443f2a35e35fea42ce23ab2f6852e",
+    "parity": "Tiny concurrent actor/critic replay with spill and cache; bitwise model/bothAdam and identical RNG/guard outcomes."
+  },
+  "measurement": {
+    "gpu_utilization_sample_ms": 500,
+    "tensorflow_trace_seconds": 30,
+    "trace_after_actor_minibatches": 20,
+    "host_metrics": "CPU preparation, record gather, collate, packing lock wait/hold, optimizer input waits, TF call/result synchronization, guard scans, rollback",
+    "caution": "Concurrent/nested spans cannot be added as disjoint wall-time percentages; CUPTI overhead is compared with the control replay."
+  },
+  "native_awake_guard": {
+    "manifest_sha256": "8672b8ccb13252334b5efd4d00031822e007af32e227759eb46cc7088a815bef",
+    "task": "MTGO-RustMage-Update-Profile-20261025",
+    "maximum_seconds": 3600,
+    "stop_filename": "update-profile.stop",
+    "persistent_power_changes": false
+  },
+  "oversight": {
+    "local_supervisor_pid": 3513940,
+    "one_backup_owner": true,
+    "supervisor_maximum_seconds": 2400,
+    "automation_created": false
+  },
+  "updated_utc": "2026-10-26T00:36:42.013456+00:00",
+  "finished_utc": "2026-10-26T00:33:21.429355+00:00",
+  "results": {
+    "cases": {
+      "control": {
+        "seconds": 328.3391541169999,
+        "actor_steps_kept": 334,
+        "critic_steps": 157,
+        "rejected_full_passes": 8,
+        "gpu_activity_mean_percent": 31.654434250764528,
+        "gpu_activity_median_percent": 34.0,
+        "final_model_sha256": "ea3bb82f30877058a3e38655b6487c87c29e9941a3f0a27110ef927e51e1bf02",
+        "source_unchanged": true,
+        "report_sha256": "9481af108f7a6c6fb0de3df799b9bf39c6a8622678fc125ddc7725b6dabeca2a"
+      },
+      "profile": {
+        "seconds": 371.17112928200004,
+        "actor_steps_kept": 334,
+        "critic_steps": 157,
+        "rejected_full_passes": 9,
+        "gpu_activity_mean_percent": 31.949932341001354,
+        "gpu_activity_median_percent": 37.0,
+        "final_model_sha256": "faeb3664808de945dcef4b4063b185c690e909ae6482a9abc581885ff32e0d64",
+        "source_unchanged": true,
+        "report_sha256": "2608e930f8fe6a72cc4e74005cc77ec4e33b2e152801b9b9d7dda33b75baa88f"
+      },
+      "control-repeat": {
+        "seconds": 335.2250090480002,
+        "actor_steps_kept": 334,
+        "critic_steps": 157,
+        "rejected_full_passes": 8,
+        "gpu_activity_mean_percent": 32.80359820089955,
+        "gpu_activity_median_percent": 38.0,
+        "final_model_sha256": "5e931d806e8c53b34ba336a0fa154b30d45d2845e37ea115339c61719e5305f9",
+        "source_unchanged": true,
+        "report_sha256": "f9b8281b3872206da8a5dc90dd433068eefcf3c0dca39984ec7d7456fa2e80b1"
+      }
+    },
+    "observations": {
+      "mean_control_gpu_activity_percent": 32.22901622583204,
+      "trace_gpu_active_fraction": 0.21885382334391276,
+      "trace_seconds": 30.0,
+      "kernel_launches_in_trace": 570624,
+      "median_kernel_us": 2.496,
+      "small_grid_kernel_fraction": 0.8159085492373261,
+      "device_to_host_copies_in_trace": 91423,
+      "device_to_host_copies_at_most_16_bytes": 90906,
+      "tiny_device_to_host_fraction": 0.9943449678964812,
+      "actor_prefetch_wait_seconds": 0.64782369,
+      "critic_prefetch_wait_seconds": 0.042401853,
+      "explicit_actor_result_readback_seconds": 0.428295631,
+      "explicit_critic_result_readback_seconds": 0.080696169,
+      "record_gather_wall_union_seconds": 174.142762459,
+      "array_assembly_wall_union_seconds": 51.522274505,
+      "guard_scan_wall_seconds": 120.74677442
+    },
+    "fidelity": {
+      "starting_model_matches_preserved_checkpoint39": true,
+      "initial_model_sha256": "e0544b90b1458da14fce65fc5e65d0c1db22045abc3609c2d385e57536fb787c",
+      "same_input_hashes": true,
+      "training_games": 800,
+      "heldout_games_excluded": 200,
+      "same_configuration": true,
+      "same_initial_and_final_rng": true,
+      "source_checkpoint_files_unchanged": 205,
+      "gpu_bitwise_parity": false,
+      "original_strict_gate": "failed: profiled pass9 rejects versus controls8; preserve original coordinator error",
+      "array_comparisons": {
+        "control versus control-repeat": {
+          "bitwise_equal": false,
+          "max_abs_difference_by_group": {
+            "model": 0.0001829303801059723,
+            "actor_optimizer": 4.0745362639427185e-09,
+            "critic_optimizer": 0.00029074307531118393
+          }
+        },
+        "control versus profile": {
+          "bitwise_equal": false,
+          "max_abs_difference_by_group": {
+            "model": 0.0003422200679779053,
+            "actor_optimizer": 0.0012996827717870474,
+            "critic_optimizer": 0.0004196707159280777
+          }
+        },
+        "control-repeat versus profile": {
+          "bitwise_equal": false,
+          "max_abs_difference_by_group": {
+            "model": 0.0003451704978942871,
+            "actor_optimizer": 0.0012996820732951164,
+            "critic_optimizer": 0.0004304107278585434
+          }
+        }
+      },
+      "interpretation": "A/A controls also differ numerically, predominantly in critic/model arrays. Both controls used8 retries; profile and original production used9. This does not prove the probes leave GPU execution numerically identical. Do not interpret elapsed-time differences as an optimization or a clean estimate of profiler overhead."
+    },
+    "interpretation": [
+      "Prefetch queues were generally ready; simply adding prefetch depth is not the leading target.",
+      "GPU execution is fragmented into many very short kernels and internal device-to-host control transfers. Raw trace operation names include GRU while-loop predicates, GRU gradient TensorList bookkeeping and Dense/Tensordot shape transfers.",
+      "Unfused recurrent execution and graph control/shape placement are strong optimization candidates. These observations are not a measured counterfactual speedup.",
+      "Record gathering, collation and serialized packing are also expensive, especially for repeated full-data guard scans. Their timings overlap other work.",
+      "The explicit one-result-per-minibatch Python synchronization is small in this profile; it should not be assumed to explain the idle time."
+    ],
+    "findings_path": "/home/altf4/Code/mtgo-bot/patchwork_automaton/docs/benchmarks/update-profile-2026-10-25/findings.json",
+    "profile_plot": "/home/altf4/Code/mtgo-bot/patchwork_automaton/docs/benchmarks/update-profile-2026-10-25/pipeline-profile.png",
+    "trace_plot": "/home/altf4/Code/mtgo-bot/patchwork_automaton/docs/benchmarks/update-profile-2026-10-25/gpu-waits.png"
+  },
+  "cleanup": {
+    "linux": "verified: no owned processes, shared lock free, no GPU compute contexts",
+    "windows": "verified: temporary awake request released, exact process exited, profiling task removed",
+    "local_oversight": "verified: supervisor exited and temporary laptop inhibitor released"
+  },
+  "extra_control": {
+    "reason": "First strict replay gate failed; one unchanged A/A control, new isolated phase after lock/process cleanup.",
+    "launch": {
+      "pid": 2886,
+      "start_ticks": 201911,
+      "pgid": 2886,
+      "sid": 2886,
+      "uid": 1000,
+      "script_sha256": "68cb7c419cdf3d93c013d767c168e34c0aefd51a9e3721686ca04b077f2a880d"
+    },
+    "status": "complete"
+  }
+}

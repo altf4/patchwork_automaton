@@ -1,0 +1,54 @@
+{
+  "created_utc": "2026-10-26T00:33:21.429605+00:00",
+  "files": {
+    "final-linux-cleanup.json": {
+      "bytes": 201,
+      "sha256": "5414417f4bdf3abc67caf0ce528b9790cba06e789d0d9772b342b04db142dbe0"
+    },
+    "final-local-cleanup.json": {
+      "bytes": 368,
+      "sha256": "022e9c37e62ac360e3c93cc00532d0c0a06d33075a37affa047d0508a5096514"
+    },
+    "final-native-cleanup.json": {
+      "bytes": 621,
+      "sha256": "d76f6d048f86903420c749b32bd239c285f0a73a70f01d22e432420ea053f7b4"
+    },
+    "findings.json": {
+      "bytes": 6915,
+      "sha256": "f17eb1f09abace3a14216f96694bd2a6a93c0cc9b709357c63b0199d50594939"
+    },
+    "gpu-waits.png": {
+      "bytes": 107395,
+      "sha256": "e86525bcc453843d303b0f27d86ca41353974cb776228bee8c02212308216fce"
+    },
+    "gpu-waits.svg": {
+      "bytes": 226682,
+      "sha256": "6ef5f94946846c9ccc42097d633bd0d79eb71fa46ae68bd9b91ca11b6a53231c"
+    },
+    "pipeline-profile.png": {
+      "bytes": 295243,
+      "sha256": "471a5884793bad8cc57fada2ffcc17b5e7c929199b63cb48818e4d84d97d5034"
+    },
+    "pipeline-profile.svg": {
+      "bytes": 141020,
+      "sha256": "0f0a337a0093b4815022067ea43e502eebbdb566a6298cd3344d12372adadf20"
+    },
+    "production-reference.json": {
+      "bytes": 835,
+      "sha256": "1bfb32ba078690f2ccee6de266ddbf2336bc403ddf61f609a9cf459dabe8d5f1"
+    },
+    "repeat-backup-proof.json": {
+      "bytes": 185,
+      "sha256": "ab8bd0458a48dca768bcbdd31f61ea9de0a5be6a2ef9747c0737a043d743b4e8"
+    },
+    "summary.json": {
+      "bytes": 25097,
+      "sha256": "17340bfb1626d80cdf6255fa3d1b6776477c50faa73d0bf9c1ffb27a49f17e0c"
+    }
+  },
+  "sources": {
+    "/home/altf4/Code/mtgo-bot/patchwork_automaton/examples/profile_ppo_update.py": "9f15b524e08051af2d05816b3a076f1f9dc4a8555b2a8a03c430981657ab82fa",
+    "/home/altf4/Code/mtgo-bot/patchwork_automaton/examples/analyze_ppo_update_profile.py": "9f9e67325a6f6130c485fc66e3874013fa7f01a226082a97cacb8d4ad5de81d3"
+  },
+  "updated_utc": "2026-10-26T00:36:42.013456+00:00"
+}

@@ -1,0 +1,31 @@
+{
+  "verified": true,
+  "owner": {
+    "pid": 3541550,
+    "pgid": 3541550,
+    "sid": 3541550,
+    "start_ticks": 48208798,
+    "uid": 1000,
+    "maximum_seconds": 3600
+  },
+  "before_members": [
+    {
+      "pid": 3541550,
+      "pgid": 3541550,
+      "sid": 3541550,
+      "start_ticks": 48208798,
+      "uid": 1000,
+      "state": "S"
+    },
+    {
+      "pid": 3541554,
+      "pgid": 3541550,
+      "sid": 3541550,
+      "start_ticks": 48208801,
+      "uid": 1000,
+      "state": "S"
+    }
+  ],
+  "remaining": [],
+  "inhibitor_absent": true
+}

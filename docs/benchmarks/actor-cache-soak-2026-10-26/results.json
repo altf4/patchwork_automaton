@@ -1,0 +1,1561 @@
+{
+  "status": "passed",
+  "study": "Five persistent actor-cache updates over saved rounds36\u201340",
+  "lifecycle_passed": true,
+  "production_readiness_headroom_passed": true,
+  "production_worker_coexistence_measured": false,
+  "learning_strength_claim": false,
+  "speedup_claim": false,
+  "overall_production_readiness": "not established: generation-worker coexistence is unmeasured",
+  "checkpoint_round": 35,
+  "rounds": [
+    36,
+    37,
+    38,
+    39,
+    40
+  ],
+  "total_saved_training_records": 433093,
+  "updates": [
+    {
+      "round": 36,
+      "samples": 87283,
+      "canonical_batches": 171,
+      "training_games": 800,
+      "heldout_games_excluded": 200,
+      "update_seconds": 91.22676282499742,
+      "process_cpu_seconds": 141.410371733,
+      "accepted_actor_steps": 342,
+      "rejected_epochs": 5,
+      "critic_steps": 157,
+      "guard_proposals": 7,
+      "passes_per_epoch": [
+        3,
+        4
+      ],
+      "early_stop": false,
+      "accepted_epochs": 2,
+      "finite_state_arrays": 262,
+      "state_array_groups": {
+        "model": 86,
+        "actor_adam": 90,
+        "critic_adam": 86
+      },
+      "state_archive_sha256": "e5b16885e2d05768fe0a97d83d47bfbc2fec393be56d39ce5fda51b199b0c9ca",
+      "after_state_sha256": {
+        "model": "568c12b6b9d1594d97290d86eeecac5993db98f3926714ea4ece68649dc63941",
+        "actor_adam": "d58612ae18a6e3f57efebb73479008be95a3f37b1395f50b73f8cfe2511cb5e5",
+        "critic_adam": "1085ced04633525f022cdaf61ee61558e4eb1c509779149acb47601387f9f1b5"
+      },
+      "state_continuity_verified": true,
+      "independently_reconstructed_pcg_orders": [
+        "682d06c86c9c7fef27a9dd677679f26c1a373ea01e7162542083342f3b69078d",
+        "e797a4f23af911d9868a65fb24267b783058e9408642972b8fe0cbd245da6225",
+        "be2eb2f07a7fe49eaf4d954a85d9629bb4bc85074d5ba3602f4ab803032ef88b",
+        "182f91775ca7874d063d9e617aac5b62458adda2120c1440470f7f5dc3ed44a0"
+      ],
+      "tf_allocator_before": {
+        "current": 5177344,
+        "peak": 5177344
+      },
+      "tf_allocator_after": {
+        "current": 5273088,
+        "peak": 17551568896
+      },
+      "canonical_input_cache": {
+        "policy_cache_disk_bytes": 0,
+        "policy_cache_hits": 0,
+        "policy_cache_device": "/GPU:0",
+        "policy_cache_device_budget_bytes": 8589934592,
+        "policy_cache_device_bytes": 6375356781,
+        "policy_cache_device_uploads": 171,
+        "policy_cache_device_tensors": 3591,
+        "policy_cache_device_hits": 1368,
+        "policy_cache_device_fallback_batches": 0,
+        "policy_cache_device_fallback_bytes": 0
+      },
+      "actor_epoch_cache": {
+        "actor_epoch_cache_device": "/GPU:0",
+        "actor_epoch_cache_budget_bytes": 8589934592,
+        "actor_epoch_cache_epochs": [
+          {
+            "epoch": 1,
+            "device": "/GPU:0",
+            "budget_bytes": 8589934592,
+            "logical_bytes": 8580461056,
+            "uploads": 149,
+            "tensors": 3129,
+            "hits": 298,
+            "fallback_batches": 22,
+            "fallback_bytes": 1294500888,
+            "unique_input_bytes": 9874961944,
+            "released": true
+          },
+          {
+            "epoch": 2,
+            "device": "/GPU:0",
+            "budget_bytes": 8589934592,
+            "logical_bytes": 8546829824,
+            "uploads": 148,
+            "tensors": 3108,
+            "hits": 444,
+            "fallback_batches": 23,
+            "fallback_bytes": 1283207242,
+            "unique_input_bytes": 9830037066,
+            "released": true
+          }
+        ],
+        "actor_epoch_cache_uploads": 297,
+        "actor_epoch_cache_hits": 742,
+        "actor_epoch_cache_fallback_batches": 45,
+        "actor_epoch_cache_fallback_bytes": 2577708130,
+        "actor_epoch_cache_max_logical_bytes": 8580461056,
+        "actor_epoch_cache_max_epoch_input_bytes": 9874961944
+      },
+      "lifetime_boundary": {
+        "round": 36,
+        "resources": {
+          "DevicePolicyBatchCache": {
+            "created": 3,
+            "alive_shells": 0,
+            "open_or_retained_payloads": 0,
+            "incomplete_initializations": 0,
+            "close_calls": 3,
+            "close_failures": 0
+          },
+          "GzipFile": {
+            "created": 800,
+            "alive_shells": 0,
+            "open_or_retained_payloads": 0,
+            "incomplete_initializations": 0,
+            "close_calls": 800,
+            "close_failures": 0
+          },
+          "IndexedTrajectories": {
+            "created": 1,
+            "alive_shells": 0,
+            "open_or_retained_payloads": 0,
+            "incomplete_initializations": 0,
+            "close_calls": 1,
+            "close_failures": 0
+          },
+          "NumericRollout": {
+            "created": 1,
+            "alive_shells": 0,
+            "open_or_retained_payloads": 0,
+            "incomplete_initializations": 0,
+            "close_calls": 1,
+            "close_failures": 0
+          },
+          "PolicyBatchCache": {
+            "created": 1,
+            "alive_shells": 0,
+            "open_or_retained_payloads": 0,
+            "incomplete_initializations": 0,
+            "close_calls": 1,
+            "close_failures": 0
+          },
+          "RolloutCache": {
+            "created": 2,
+            "alive_shells": 0,
+            "open_or_retained_payloads": 0,
+            "incomplete_initializations": 0,
+            "close_calls": 0,
+            "close_failures": 0
+          }
+        },
+        "cached_tensor_objects_observed": 9828,
+        "cached_tensor_objects_alive": 0,
+        "device_cache_closes": [
+          {
+            "device": "/GPU:0",
+            "budget_bytes": 8589934592,
+            "logical_bytes": 6375356781,
+            "uploads": 171,
+            "hits": 1368,
+            "fallback_batches": 0,
+            "fallback_bytes": 0
+          },
+          {
+            "device": "/GPU:0",
+            "budget_bytes": 8589934592,
+            "logical_bytes": 8580461056,
+            "uploads": 149,
+            "hits": 298,
+            "fallback_batches": 22,
+            "fallback_bytes": 1294500888
+          },
+          {
+            "device": "/GPU:0",
+            "budget_bytes": 8589934592,
+            "logical_bytes": 8546829824,
+            "uploads": 148,
+            "hits": 444,
+            "fallback_batches": 23,
+            "fallback_bytes": 1283207242
+          }
+        ],
+        "ppo_threads": [],
+        "released": true
+      },
+      "guard_decisions": [
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.0009010374071157392,
+          "max_state_kl": 1.6948059797286987
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.00048444750090807494,
+          "max_state_kl": 1.408384084701538
+        },
+        {
+          "accepted": true,
+          "reasons": [],
+          "mean_kl": 9.398712954777457e-05,
+          "max_state_kl": 0.3080483675003052
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.000856663515747624,
+          "max_state_kl": 2.2271270751953125
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.0007282438380005011,
+          "max_state_kl": 1.9398788213729858
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.00036455167858416197,
+          "max_state_kl": 1.2136412858963013
+        },
+        {
+          "accepted": true,
+          "reasons": [],
+          "mean_kl": 0.00011735574847321223,
+          "max_state_kl": 0.3349168300628662
+        }
+      ],
+      "linux_memory": {
+        "seconds": 91.235604497,
+        "points": 91,
+        "process_rss_before_mib": 1547.97265625,
+        "process_rss_after_mib": 3479.1640625,
+        "sampled_process_rss_peak_mib": 6256.2421875,
+        "sampled_process_swap_peak_mib": 0.0,
+        "lifetime_maxrss_after_mib": 6339.2734375,
+        "process_minor_faults": 1997509,
+        "process_major_faults": 15,
+        "linux_system_swapout_pages": 0,
+        "linux_system_swapin_pages": 9,
+        "linux_oom_counter_before": 1,
+        "linux_oom_counter_after": 1,
+        "linux_oom_counter_delta": 0,
+        "sampled_system_available_min_mib": 11669.25390625,
+        "sampled_linux_swap_used_peak_mib": 92.1328125,
+        "linux_io_available": false,
+        "linux_memory_psi_some_microseconds": 0,
+        "linux_memory_psi_some_percent": 0.0,
+        "linux_memory_psi_full_microseconds": 0,
+        "linux_memory_psi_full_percent": 0.0,
+        "linux_io_psi_some_microseconds": 36304,
+        "linux_io_psi_some_percent": 0.03979148294150202,
+        "linux_io_psi_full_microseconds": 35650,
+        "linux_io_psi_full_percent": 0.03907465752711951,
+        "linux_io_unavailable": "[Errno 2] No such file or directory: '/proc/self/io'"
+      }
+    },
+    {
+      "round": 37,
+      "samples": 85957,
+      "canonical_batches": 168,
+      "training_games": 800,
+      "heldout_games_excluded": 200,
+      "update_seconds": 107.92708972000037,
+      "process_cpu_seconds": 162.925795248,
+      "accepted_actor_steps": 336,
+      "rejected_epochs": 7,
+      "critic_steps": 157,
+      "guard_proposals": 9,
+      "passes_per_epoch": [
+        5,
+        4
+      ],
+      "early_stop": false,
+      "accepted_epochs": 2,
+      "finite_state_arrays": 262,
+      "state_array_groups": {
+        "model": 86,
+        "actor_adam": 90,
+        "critic_adam": 86
+      },
+      "state_archive_sha256": "1f86f920dfeb46691ebe45fe3bff9d5a19b1a1b182c57b4cce0f46304ab78322",
+      "after_state_sha256": {
+        "model": "e8fb3127d2887a464df9b7409ba4f2cc26155105d536daff398e861c39160205",
+        "actor_adam": "3281f2847fb6e02d475d7d77803f063a5b495df411ff1dcc7f6c62041e829b37",
+        "critic_adam": "bb1c1e2f3de8630ccb4c36c4c5d1284150e4463389ca3eb7dbb9c0f3ed0e98ed"
+      },
+      "state_continuity_verified": true,
+      "independently_reconstructed_pcg_orders": [
+        "31737f5a7173d5e2c1f754edc6be0e073372f8aa09d0e7e326687b9a1e4763fe",
+        "3b19230e3fb760c4ab4eeec2a641efc4cd690653d2f389e275d6645e57522f58",
+        "d590e80044871db623da194b2270284c35ae1156878c804e2227a13e768469ce",
+        "8793cff8cad50a83b62669c22d79bd28688f79258d5f76c772a4f2b93521aed3"
+      ],
+      "tf_allocator_before": {
+        "current": 5273088,
+        "peak": 5273088
+      },
+      "tf_allocator_after": {
+        "current": 5251584,
+        "peak": 17611283712
+      },
+      "canonical_input_cache": {
+        "policy_cache_disk_bytes": 0,
+        "policy_cache_hits": 0,
+        "policy_cache_device": "/GPU:0",
+        "policy_cache_device_budget_bytes": 8589934592,
+        "policy_cache_device_bytes": 6407800439,
+        "policy_cache_device_uploads": 168,
+        "policy_cache_device_tensors": 3528,
+        "policy_cache_device_hits": 1680,
+        "policy_cache_device_fallback_batches": 0,
+        "policy_cache_device_fallback_bytes": 0
+      },
+      "actor_epoch_cache": {
+        "actor_epoch_cache_device": "/GPU:0",
+        "actor_epoch_cache_budget_bytes": 8589934592,
+        "actor_epoch_cache_epochs": [
+          {
+            "epoch": 1,
+            "device": "/GPU:0",
+            "budget_bytes": 8589934592,
+            "logical_bytes": 8540600320,
+            "uploads": 144,
+            "tensors": 3024,
+            "hits": 576,
+            "fallback_batches": 24,
+            "fallback_bytes": 1459578905,
+            "unique_input_bytes": 10000179225,
+            "released": true
+          },
+          {
+            "epoch": 2,
+            "device": "/GPU:0",
+            "budget_bytes": 8589934592,
+            "logical_bytes": 8561321472,
+            "uploads": 142,
+            "tensors": 2982,
+            "hits": 426,
+            "fallback_batches": 26,
+            "fallback_bytes": 1503134103,
+            "unique_input_bytes": 10064455575,
+            "released": true
+          }
+        ],
+        "actor_epoch_cache_uploads": 286,
+        "actor_epoch_cache_hits": 1002,
+        "actor_epoch_cache_fallback_batches": 50,
+        "actor_epoch_cache_fallback_bytes": 2962713008,
+        "actor_epoch_cache_max_logical_bytes": 8561321472,
+        "actor_epoch_cache_max_epoch_input_bytes": 10064455575
+      },
+      "lifetime_boundary": {
+        "round": 37,
+        "resources": {
+          "DevicePolicyBatchCache": {
+            "created": 3,
+            "alive_shells": 0,
+            "open_or_retained_payloads": 0,
+            "incomplete_initializations": 0,
+            "close_calls": 3,
+            "close_failures": 0
+          },
+          "GzipFile": {
+            "created": 800,
+            "alive_shells": 0,
+            "open_or_retained_payloads": 0,
+            "incomplete_initializations": 0,
+            "close_calls": 800,
+            "close_failures": 0
+          },
+          "IndexedTrajectories": {
+            "created": 1,
+            "alive_shells": 0,
+            "open_or_retained_payloads": 0,
+            "incomplete_initializations": 0,
+            "close_calls": 1,
+            "close_failures": 0
+          },
+          "NumericRollout": {
+            "created": 1,
+            "alive_shells": 0,
+            "open_or_retained_payloads": 0,
+            "incomplete_initializations": 0,
+            "close_calls": 1,
+            "close_failures": 0
+          },
+          "PolicyBatchCache": {
+            "created": 1,
+            "alive_shells": 0,
+            "open_or_retained_payloads": 0,
+            "incomplete_initializations": 0,
+            "close_calls": 1,
+            "close_failures": 0
+          },
+          "RolloutCache": {
+            "created": 2,
+            "alive_shells": 0,
+            "open_or_retained_payloads": 0,
+            "incomplete_initializations": 0,
+            "close_calls": 0,
+            "close_failures": 0
+          }
+        },
+        "cached_tensor_objects_observed": 9534,
+        "cached_tensor_objects_alive": 0,
+        "device_cache_closes": [
+          {
+            "device": "/GPU:0",
+            "budget_bytes": 8589934592,
+            "logical_bytes": 6407800439,
+            "uploads": 168,
+            "hits": 1680,
+            "fallback_batches": 0,
+            "fallback_bytes": 0
+          },
+          {
+            "device": "/GPU:0",
+            "budget_bytes": 8589934592,
+            "logical_bytes": 8540600320,
+            "uploads": 144,
+            "hits": 576,
+            "fallback_batches": 24,
+            "fallback_bytes": 1459578905
+          },
+          {
+            "device": "/GPU:0",
+            "budget_bytes": 8589934592,
+            "logical_bytes": 8561321472,
+            "uploads": 142,
+            "hits": 426,
+            "fallback_batches": 26,
+            "fallback_bytes": 1503134103
+          }
+        ],
+        "ppo_threads": [],
+        "released": true
+      },
+      "guard_decisions": [
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.0018891285848697367,
+          "max_state_kl": 2.371255397796631
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.0007120555611434663,
+          "max_state_kl": 2.991997480392456
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.0002761228611040296,
+          "max_state_kl": 1.8792716264724731
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 8.790355978003438e-05,
+          "max_state_kl": 0.5554500818252563
+        },
+        {
+          "accepted": true,
+          "reasons": [],
+          "mean_kl": 3.316575508767299e-05,
+          "max_state_kl": 0.23673659563064575
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.0009509829665356433,
+          "max_state_kl": 4.222475051879883
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.0006242074285675544,
+          "max_state_kl": 2.777008056640625
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.00037379874318064257,
+          "max_state_kl": 2.529035806655884
+        },
+        {
+          "accepted": true,
+          "reasons": [],
+          "mean_kl": 7.985220181709339e-05,
+          "max_state_kl": 0.09539487957954407
+        }
+      ],
+      "linux_memory": {
+        "seconds": 107.940004596,
+        "points": 107,
+        "process_rss_before_mib": 3479.234375,
+        "process_rss_after_mib": 3802.05859375,
+        "sampled_process_rss_peak_mib": 6518.7265625,
+        "sampled_process_swap_peak_mib": 0.0,
+        "lifetime_maxrss_after_mib": 6538.14453125,
+        "process_minor_faults": 1980689,
+        "process_major_faults": 0,
+        "linux_system_swapout_pages": 0,
+        "linux_system_swapin_pages": 24,
+        "linux_oom_counter_before": 1,
+        "linux_oom_counter_after": 1,
+        "linux_oom_counter_delta": 0,
+        "sampled_system_available_min_mib": 11348.32421875,
+        "sampled_linux_swap_used_peak_mib": 92.09765625,
+        "linux_io_available": false,
+        "linux_memory_psi_some_microseconds": 233,
+        "linux_memory_psi_some_percent": 0.0002158606541403042,
+        "linux_memory_psi_full_microseconds": 233,
+        "linux_memory_psi_full_percent": 0.0002158606541403042,
+        "linux_io_psi_some_microseconds": 35353,
+        "linux_io_psi_some_percent": 0.03275245367305654,
+        "linux_io_psi_full_microseconds": 34260,
+        "linux_io_psi_full_percent": 0.0317398541238061,
+        "linux_io_unavailable": "[Errno 2] No such file or directory: '/proc/self/io'"
+      }
+    },
+    {
+      "round": 38,
+      "samples": 87154,
+      "canonical_batches": 171,
+      "training_games": 800,
+      "heldout_games_excluded": 200,
+      "update_seconds": 114.8707286429999,
+      "process_cpu_seconds": 175.12330258099996,
+      "accepted_actor_steps": 171,
+      "rejected_epochs": 10,
+      "critic_steps": 157,
+      "guard_proposals": 11,
+      "passes_per_epoch": [
+        4,
+        7
+      ],
+      "early_stop": true,
+      "accepted_epochs": 1,
+      "finite_state_arrays": 262,
+      "state_array_groups": {
+        "model": 86,
+        "actor_adam": 90,
+        "critic_adam": 86
+      },
+      "state_archive_sha256": "c0c05c01d328ed6212e967f21965176905e1e8266fbd452b0ad3deec2ab7626b",
+      "after_state_sha256": {
+        "model": "c8fa7336adfcc8da085016bc9e5d405422870fc2bc3e8d4a25496da869394043",
+        "actor_adam": "b1d9bedb81696347590bf2e52c95e1ffa09ab355613e83081a67d92c2da0b6a4",
+        "critic_adam": "77347eb1a47f928872a140d0bebb8e5ab5f1be1beefad76da68f586df68f5702"
+      },
+      "state_continuity_verified": true,
+      "independently_reconstructed_pcg_orders": [
+        "7e2c0f7be0d93af2487da1eed434ee0da59449e6778f450a482908e38ca5b9a2",
+        "31c7e3d462f36e33779c98d17cd6738977373a69665868eb5a4a49816aaf1a9e",
+        "eb5e8abd06b1387fb178019bb663c0df8f39601714f088a9cf862fc3a879e999",
+        "c95fcac5257aa140cebe554d1ea74b7ab63f8b9160f9f20f41109e89c18f12ad"
+      ],
+      "tf_allocator_before": {
+        "current": 5251584,
+        "peak": 5251584
+      },
+      "tf_allocator_after": {
+        "current": 5543168,
+        "peak": 18018289920
+      },
+      "canonical_input_cache": {
+        "policy_cache_disk_bytes": 0,
+        "policy_cache_hits": 0,
+        "policy_cache_device": "/GPU:0",
+        "policy_cache_device_budget_bytes": 8589934592,
+        "policy_cache_device_bytes": 6356371468,
+        "policy_cache_device_uploads": 171,
+        "policy_cache_device_tensors": 3591,
+        "policy_cache_device_hits": 2052,
+        "policy_cache_device_fallback_batches": 0,
+        "policy_cache_device_fallback_bytes": 0
+      },
+      "actor_epoch_cache": {
+        "actor_epoch_cache_device": "/GPU:0",
+        "actor_epoch_cache_budget_bytes": 8589934592,
+        "actor_epoch_cache_epochs": [
+          {
+            "epoch": 1,
+            "device": "/GPU:0",
+            "budget_bytes": 8589934592,
+            "logical_bytes": 8562201600,
+            "uploads": 145,
+            "tensors": 3045,
+            "hits": 435,
+            "fallback_batches": 26,
+            "fallback_bytes": 1510499248,
+            "unique_input_bytes": 10072700848,
+            "released": true
+          },
+          {
+            "epoch": 2,
+            "device": "/GPU:0",
+            "budget_bytes": 8589934592,
+            "logical_bytes": 8540610048,
+            "uploads": 144,
+            "tensors": 3024,
+            "hits": 864,
+            "fallback_batches": 27,
+            "fallback_bytes": 1534778602,
+            "unique_input_bytes": 10075388650,
+            "released": true
+          }
+        ],
+        "actor_epoch_cache_uploads": 289,
+        "actor_epoch_cache_hits": 1299,
+        "actor_epoch_cache_fallback_batches": 53,
+        "actor_epoch_cache_fallback_bytes": 3045277850,
+        "actor_epoch_cache_max_logical_bytes": 8562201600,
+        "actor_epoch_cache_max_epoch_input_bytes": 10075388650
+      },
+      "lifetime_boundary": {
+        "round": 38,
+        "resources": {
+          "DevicePolicyBatchCache": {
+            "created": 3,
+            "alive_shells": 0,
+            "open_or_retained_payloads": 0,
+            "incomplete_initializations": 0,
+            "close_calls": 3,
+            "close_failures": 0
+          },
+          "GzipFile": {
+            "created": 800,
+            "alive_shells": 0,
+            "open_or_retained_payloads": 0,
+            "incomplete_initializations": 0,
+            "close_calls": 800,
+            "close_failures": 0
+          },
+          "IndexedTrajectories": {
+            "created": 1,
+            "alive_shells": 0,
+            "open_or_retained_payloads": 0,
+            "incomplete_initializations": 0,
+            "close_calls": 1,
+            "close_failures": 0
+          },
+          "NumericRollout": {
+            "created": 1,
+            "alive_shells": 0,
+            "open_or_retained_payloads": 0,
+            "incomplete_initializations": 0,
+            "close_calls": 1,
+            "close_failures": 0
+          },
+          "PolicyBatchCache": {
+            "created": 1,
+            "alive_shells": 0,
+            "open_or_retained_payloads": 0,
+            "incomplete_initializations": 0,
+            "close_calls": 1,
+            "close_failures": 0
+          },
+          "RolloutCache": {
+            "created": 2,
+            "alive_shells": 0,
+            "open_or_retained_payloads": 0,
+            "incomplete_initializations": 0,
+            "close_calls": 0,
+            "close_failures": 0
+          }
+        },
+        "cached_tensor_objects_observed": 9660,
+        "cached_tensor_objects_alive": 0,
+        "device_cache_closes": [
+          {
+            "device": "/GPU:0",
+            "budget_bytes": 8589934592,
+            "logical_bytes": 6356371468,
+            "uploads": 171,
+            "hits": 2052,
+            "fallback_batches": 0,
+            "fallback_bytes": 0
+          },
+          {
+            "device": "/GPU:0",
+            "budget_bytes": 8589934592,
+            "logical_bytes": 8562201600,
+            "uploads": 145,
+            "hits": 435,
+            "fallback_batches": 26,
+            "fallback_bytes": 1510499248
+          },
+          {
+            "device": "/GPU:0",
+            "budget_bytes": 8589934592,
+            "logical_bytes": 8540610048,
+            "uploads": 144,
+            "hits": 864,
+            "fallback_batches": 27,
+            "fallback_bytes": 1534778602
+          }
+        ],
+        "ppo_threads": [],
+        "released": true
+      },
+      "guard_decisions": [
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.0014794346491270331,
+          "max_state_kl": 3.8950889110565186
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.0004548251614081046,
+          "max_state_kl": 2.700852632522583
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.0001546805638932261,
+          "max_state_kl": 1.1363601684570312
+        },
+        {
+          "accepted": true,
+          "reasons": [],
+          "mean_kl": 5.1834765620159134e-05,
+          "max_state_kl": 0.47414442896842957
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.0007877556133661157,
+          "max_state_kl": 2.1016526222229004
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.000304904238855243,
+          "max_state_kl": 0.508581280708313
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.0001115734277157233,
+          "max_state_kl": 0.5062881708145142
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 7.25459817795929e-05,
+          "max_state_kl": 0.5129261016845703
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 5.419428596178064e-05,
+          "max_state_kl": 0.5034729242324829
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 4.6826270150929684e-05,
+          "max_state_kl": 0.5148502588272095
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 4.972421208886436e-05,
+          "max_state_kl": 0.5026584267616272
+        }
+      ],
+      "linux_memory": {
+        "seconds": 114.884664651,
+        "points": 113,
+        "process_rss_before_mib": 3802.05859375,
+        "process_rss_after_mib": 4047.03515625,
+        "sampled_process_rss_peak_mib": 6644.015625,
+        "sampled_process_swap_peak_mib": 0.0,
+        "lifetime_maxrss_after_mib": 6677.27734375,
+        "process_minor_faults": 448388,
+        "process_major_faults": 0,
+        "linux_system_swapout_pages": 0,
+        "linux_system_swapin_pages": 10,
+        "linux_oom_counter_before": 1,
+        "linux_oom_counter_after": 1,
+        "linux_oom_counter_delta": 0,
+        "sampled_system_available_min_mib": 11335.03125,
+        "sampled_linux_swap_used_peak_mib": 92.01171875,
+        "linux_io_available": false,
+        "linux_memory_psi_some_microseconds": 0,
+        "linux_memory_psi_some_percent": 0.0,
+        "linux_memory_psi_full_microseconds": 0,
+        "linux_memory_psi_full_percent": 0.0,
+        "linux_io_psi_some_microseconds": 32800,
+        "linux_io_psi_some_percent": 0.02855037275831444,
+        "linux_io_psi_full_microseconds": 32107,
+        "linux_io_psi_full_percent": 0.02794715908997566,
+        "linux_io_unavailable": "[Errno 2] No such file or directory: '/proc/self/io'"
+      }
+    },
+    {
+      "round": 39,
+      "samples": 87500,
+      "canonical_batches": 171,
+      "training_games": 800,
+      "heldout_games_excluded": 200,
+      "update_seconds": 85.37213392599733,
+      "process_cpu_seconds": 132.263422987,
+      "accepted_actor_steps": 342,
+      "rejected_epochs": 5,
+      "critic_steps": 157,
+      "guard_proposals": 7,
+      "passes_per_epoch": [
+        4,
+        3
+      ],
+      "early_stop": false,
+      "accepted_epochs": 2,
+      "finite_state_arrays": 262,
+      "state_array_groups": {
+        "model": 86,
+        "actor_adam": 90,
+        "critic_adam": 86
+      },
+      "state_archive_sha256": "7bdd647d6e62bcccfaf751b9da6a3a6cac0e94f83617367fe88e5f4d918c1f62",
+      "after_state_sha256": {
+        "model": "6a463ebad1223da6588b1a64abb043287f68994ea0a5237f6814da0fd7e65df7",
+        "actor_adam": "d4d924c798556bab10c049dcf8157c836ec36a64a681f9a77627977a76c24550",
+        "critic_adam": "93c0a1cfda218413cd72de05af2d8a6f40d1c33b853971235123a9e2b38db021"
+      },
+      "state_continuity_verified": true,
+      "independently_reconstructed_pcg_orders": [
+        "51781fbe48a7720bd361ccaebd6a08a8f9698a4673cc759c88ab65b1b16ebf1a",
+        "aef758d6bb15647618f4d33e4768e594b8f0d9b5254fa2775aa344b83c6166c7",
+        "153f2bf49b2219a55f513607659204dc498a44caf3a0b984a5fb08a520ca750e",
+        "db884bcbb2f75400c4e23a912202a0585b216b297ae2799d4d9d649930a9ba9b"
+      ],
+      "tf_allocator_before": {
+        "current": 5543168,
+        "peak": 5543168
+      },
+      "tf_allocator_after": {
+        "current": 5337344,
+        "peak": 17541222656
+      },
+      "canonical_input_cache": {
+        "policy_cache_disk_bytes": 0,
+        "policy_cache_hits": 0,
+        "policy_cache_device": "/GPU:0",
+        "policy_cache_device_budget_bytes": 8589934592,
+        "policy_cache_device_bytes": 6464789264,
+        "policy_cache_device_uploads": 171,
+        "policy_cache_device_tensors": 3591,
+        "policy_cache_device_hits": 1368,
+        "policy_cache_device_fallback_batches": 0,
+        "policy_cache_device_fallback_bytes": 0
+      },
+      "actor_epoch_cache": {
+        "actor_epoch_cache_device": "/GPU:0",
+        "actor_epoch_cache_budget_bytes": 8589934592,
+        "actor_epoch_cache_epochs": [
+          {
+            "epoch": 1,
+            "device": "/GPU:0",
+            "budget_bytes": 8589934592,
+            "logical_bytes": 8586014208,
+            "uploads": 153,
+            "tensors": 3213,
+            "hits": 459,
+            "fallback_batches": 18,
+            "fallback_bytes": 1030922068,
+            "unique_input_bytes": 9616936276,
+            "released": true
+          },
+          {
+            "epoch": 2,
+            "device": "/GPU:0",
+            "budget_bytes": 8589934592,
+            "logical_bytes": 8537703424,
+            "uploads": 152,
+            "tensors": 3192,
+            "hits": 304,
+            "fallback_batches": 19,
+            "fallback_bytes": 1056972344,
+            "unique_input_bytes": 9594675768,
+            "released": true
+          }
+        ],
+        "actor_epoch_cache_uploads": 305,
+        "actor_epoch_cache_hits": 763,
+        "actor_epoch_cache_fallback_batches": 37,
+        "actor_epoch_cache_fallback_bytes": 2087894412,
+        "actor_epoch_cache_max_logical_bytes": 8586014208,
+        "actor_epoch_cache_max_epoch_input_bytes": 9616936276
+      },
+      "lifetime_boundary": {
+        "round": 39,
+        "resources": {
+          "DevicePolicyBatchCache": {
+            "created": 3,
+            "alive_shells": 0,
+            "open_or_retained_payloads": 0,
+            "incomplete_initializations": 0,
+            "close_calls": 3,
+            "close_failures": 0
+          },
+          "GzipFile": {
+            "created": 800,
+            "alive_shells": 0,
+            "open_or_retained_payloads": 0,
+            "incomplete_initializations": 0,
+            "close_calls": 800,
+            "close_failures": 0
+          },
+          "IndexedTrajectories": {
+            "created": 1,
+            "alive_shells": 0,
+            "open_or_retained_payloads": 0,
+            "incomplete_initializations": 0,
+            "close_calls": 1,
+            "close_failures": 0
+          },
+          "NumericRollout": {
+            "created": 1,
+            "alive_shells": 0,
+            "open_or_retained_payloads": 0,
+            "incomplete_initializations": 0,
+            "close_calls": 1,
+            "close_failures": 0
+          },
+          "PolicyBatchCache": {
+            "created": 1,
+            "alive_shells": 0,
+            "open_or_retained_payloads": 0,
+            "incomplete_initializations": 0,
+            "close_calls": 1,
+            "close_failures": 0
+          },
+          "RolloutCache": {
+            "created": 2,
+            "alive_shells": 0,
+            "open_or_retained_payloads": 0,
+            "incomplete_initializations": 0,
+            "close_calls": 0,
+            "close_failures": 0
+          }
+        },
+        "cached_tensor_objects_observed": 9996,
+        "cached_tensor_objects_alive": 0,
+        "device_cache_closes": [
+          {
+            "device": "/GPU:0",
+            "budget_bytes": 8589934592,
+            "logical_bytes": 6464789264,
+            "uploads": 171,
+            "hits": 1368,
+            "fallback_batches": 0,
+            "fallback_bytes": 0
+          },
+          {
+            "device": "/GPU:0",
+            "budget_bytes": 8589934592,
+            "logical_bytes": 8586014208,
+            "uploads": 153,
+            "hits": 459,
+            "fallback_batches": 18,
+            "fallback_bytes": 1030922068
+          },
+          {
+            "device": "/GPU:0",
+            "budget_bytes": 8589934592,
+            "logical_bytes": 8537703424,
+            "uploads": 152,
+            "hits": 304,
+            "fallback_batches": 19,
+            "fallback_bytes": 1056972344
+          }
+        ],
+        "ppo_threads": [],
+        "released": true
+      },
+      "guard_decisions": [
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.0017671574264791394,
+          "max_state_kl": 4.768086910247803
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.0005170183754020503,
+          "max_state_kl": 1.154555082321167
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.00022279470424899566,
+          "max_state_kl": 0.9719861745834351
+        },
+        {
+          "accepted": true,
+          "reasons": [],
+          "mean_kl": 5.829522352740501e-05,
+          "max_state_kl": 0.1438111811876297
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.0010669909476621875,
+          "max_state_kl": 4.4928297996521
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.0003759729583800903,
+          "max_state_kl": 2.2641656398773193
+        },
+        {
+          "accepted": true,
+          "reasons": [],
+          "mean_kl": 0.0001660429721066196,
+          "max_state_kl": 0.37634000182151794
+        }
+      ],
+      "linux_memory": {
+        "seconds": 85.38675014,
+        "points": 85,
+        "process_rss_before_mib": 4047.03515625,
+        "process_rss_after_mib": 4274.23046875,
+        "sampled_process_rss_peak_mib": 6866.71875,
+        "sampled_process_swap_peak_mib": 0.0,
+        "lifetime_maxrss_after_mib": 6930.27734375,
+        "process_minor_faults": 1080678,
+        "process_major_faults": 0,
+        "linux_system_swapout_pages": 0,
+        "linux_system_swapin_pages": 8,
+        "linux_oom_counter_before": 1,
+        "linux_oom_counter_after": 1,
+        "linux_oom_counter_delta": 0,
+        "sampled_system_available_min_mib": 11163.91015625,
+        "sampled_linux_swap_used_peak_mib": 91.97265625,
+        "linux_io_available": false,
+        "linux_memory_psi_some_microseconds": 0,
+        "linux_memory_psi_some_percent": 0.0,
+        "linux_memory_psi_full_microseconds": 0,
+        "linux_memory_psi_full_percent": 0.0,
+        "linux_io_psi_some_microseconds": 23240,
+        "linux_io_psi_some_percent": 0.027217337539952893,
+        "linux_io_psi_full_microseconds": 22598,
+        "linux_io_psi_full_percent": 0.026465464446121148,
+        "linux_io_unavailable": "[Errno 2] No such file or directory: '/proc/self/io'"
+      }
+    },
+    {
+      "round": 40,
+      "samples": 85199,
+      "canonical_batches": 167,
+      "training_games": 800,
+      "heldout_games_excluded": 200,
+      "update_seconds": 110.82849153400093,
+      "process_cpu_seconds": 170.607719837,
+      "accepted_actor_steps": 334,
+      "rejected_epochs": 9,
+      "critic_steps": 157,
+      "guard_proposals": 11,
+      "passes_per_epoch": [
+        5,
+        6
+      ],
+      "early_stop": false,
+      "accepted_epochs": 2,
+      "finite_state_arrays": 262,
+      "state_array_groups": {
+        "model": 86,
+        "actor_adam": 90,
+        "critic_adam": 86
+      },
+      "state_archive_sha256": "b3514d23c4ab569bf73fbb0373f50593fe41be52cecbe941fe458d1b5a82c1f8",
+      "after_state_sha256": {
+        "model": "9cd9899913e61c13623cb419573dc406a9a073d7be7e37ccb33d106164b50420",
+        "actor_adam": "8ee80f03148165b91fa868d9a3c1db9e51f3bf0bef673d3fe46498f012b863ff",
+        "critic_adam": "39c8037c7b75e1b1b6809a77d5280d83cc0e83a691d96add7f030ad497aac61b"
+      },
+      "state_continuity_verified": true,
+      "independently_reconstructed_pcg_orders": [
+        "983b0a3ddd0b5a96b0830af55ea7a6052063cabf63c2f4ebf1134c7dc9eef087",
+        "550e98870be191ec0dbc3216b729f6afb376f4caa5464ac9e3bbf930b17d4c2d",
+        "713e1d82a39f936996b59fa4bd140de65405f826c2eba9ff10fd70d5a35b59cc",
+        "b27258082b1b6d589159d8ac4135c31193ba2a3d08236286365ab1ce53da7468"
+      ],
+      "tf_allocator_before": {
+        "current": 5337344,
+        "peak": 5337344
+      },
+      "tf_allocator_after": {
+        "current": 5339392,
+        "peak": 17864996352
+      },
+      "canonical_input_cache": {
+        "policy_cache_disk_bytes": 0,
+        "policy_cache_hits": 0,
+        "policy_cache_device": "/GPU:0",
+        "policy_cache_device_budget_bytes": 8589934592,
+        "policy_cache_device_bytes": 6229903445,
+        "policy_cache_device_uploads": 167,
+        "policy_cache_device_tensors": 3507,
+        "policy_cache_device_hits": 2004,
+        "policy_cache_device_fallback_batches": 0,
+        "policy_cache_device_fallback_bytes": 0
+      },
+      "actor_epoch_cache": {
+        "actor_epoch_cache_device": "/GPU:0",
+        "actor_epoch_cache_budget_bytes": 8589934592,
+        "actor_epoch_cache_epochs": [
+          {
+            "epoch": 1,
+            "device": "/GPU:0",
+            "budget_bytes": 8589934592,
+            "logical_bytes": 8583458816,
+            "uploads": 153,
+            "tensors": 3213,
+            "hits": 612,
+            "fallback_batches": 14,
+            "fallback_bytes": 714578545,
+            "unique_input_bytes": 9298037361,
+            "released": true
+          },
+          {
+            "epoch": 2,
+            "device": "/GPU:0",
+            "budget_bytes": 8589934592,
+            "logical_bytes": 8561144320,
+            "uploads": 153,
+            "tensors": 3213,
+            "hits": 765,
+            "fallback_batches": 14,
+            "fallback_bytes": 728800810,
+            "unique_input_bytes": 9289945130,
+            "released": true
+          }
+        ],
+        "actor_epoch_cache_uploads": 306,
+        "actor_epoch_cache_hits": 1377,
+        "actor_epoch_cache_fallback_batches": 28,
+        "actor_epoch_cache_fallback_bytes": 1443379355,
+        "actor_epoch_cache_max_logical_bytes": 8583458816,
+        "actor_epoch_cache_max_epoch_input_bytes": 9298037361
+      },
+      "lifetime_boundary": {
+        "round": 40,
+        "resources": {
+          "DevicePolicyBatchCache": {
+            "created": 3,
+            "alive_shells": 0,
+            "open_or_retained_payloads": 0,
+            "incomplete_initializations": 0,
+            "close_calls": 3,
+            "close_failures": 0
+          },
+          "GzipFile": {
+            "created": 800,
+            "alive_shells": 0,
+            "open_or_retained_payloads": 0,
+            "incomplete_initializations": 0,
+            "close_calls": 800,
+            "close_failures": 0
+          },
+          "IndexedTrajectories": {
+            "created": 1,
+            "alive_shells": 0,
+            "open_or_retained_payloads": 0,
+            "incomplete_initializations": 0,
+            "close_calls": 1,
+            "close_failures": 0
+          },
+          "NumericRollout": {
+            "created": 1,
+            "alive_shells": 0,
+            "open_or_retained_payloads": 0,
+            "incomplete_initializations": 0,
+            "close_calls": 1,
+            "close_failures": 0
+          },
+          "PolicyBatchCache": {
+            "created": 1,
+            "alive_shells": 0,
+            "open_or_retained_payloads": 0,
+            "incomplete_initializations": 0,
+            "close_calls": 1,
+            "close_failures": 0
+          },
+          "RolloutCache": {
+            "created": 2,
+            "alive_shells": 0,
+            "open_or_retained_payloads": 0,
+            "incomplete_initializations": 0,
+            "close_calls": 0,
+            "close_failures": 0
+          }
+        },
+        "cached_tensor_objects_observed": 9933,
+        "cached_tensor_objects_alive": 0,
+        "device_cache_closes": [
+          {
+            "device": "/GPU:0",
+            "budget_bytes": 8589934592,
+            "logical_bytes": 6229903445,
+            "uploads": 167,
+            "hits": 2004,
+            "fallback_batches": 0,
+            "fallback_bytes": 0
+          },
+          {
+            "device": "/GPU:0",
+            "budget_bytes": 8589934592,
+            "logical_bytes": 8583458816,
+            "uploads": 153,
+            "hits": 612,
+            "fallback_batches": 14,
+            "fallback_bytes": 714578545
+          },
+          {
+            "device": "/GPU:0",
+            "budget_bytes": 8589934592,
+            "logical_bytes": 8561144320,
+            "uploads": 153,
+            "hits": 765,
+            "fallback_batches": 14,
+            "fallback_bytes": 728800810
+          }
+        ],
+        "ppo_threads": [],
+        "released": true
+      },
+      "guard_decisions": [
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.0018985409006022716,
+          "max_state_kl": 15.797719955444336
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.0008245512419435395,
+          "max_state_kl": 8.452123641967773
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.0002519310073935041,
+          "max_state_kl": 2.8872902393341064
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 6.893328682667003e-05,
+          "max_state_kl": 1.1311190128326416
+        },
+        {
+          "accepted": true,
+          "reasons": [],
+          "mean_kl": 3.5024791321288365e-05,
+          "max_state_kl": 0.4695280194282532
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.0005533647037596707,
+          "max_state_kl": 2.85442852973938
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.00033024333209538047,
+          "max_state_kl": 1.3918559551239014
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.00014272095041467308,
+          "max_state_kl": 0.9539023637771606
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 7.287610934042579e-05,
+          "max_state_kl": 0.7259641885757446
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 5.228100349012772e-05,
+          "max_state_kl": 0.7209631204605103
+        },
+        {
+          "accepted": true,
+          "reasons": [],
+          "mean_kl": 3.645456745490809e-05,
+          "max_state_kl": 0.49647411704063416
+        }
+      ],
+      "linux_memory": {
+        "seconds": 110.843116167,
+        "points": 109,
+        "process_rss_before_mib": 4274.23828125,
+        "process_rss_after_mib": 4397.62890625,
+        "sampled_process_rss_peak_mib": 6952.71875,
+        "sampled_process_swap_peak_mib": 0.0,
+        "lifetime_maxrss_after_mib": 6959.03125,
+        "process_minor_faults": 709118,
+        "process_major_faults": 0,
+        "linux_system_swapout_pages": 0,
+        "linux_system_swapin_pages": 20,
+        "linux_oom_counter_before": 1,
+        "linux_oom_counter_after": 1,
+        "linux_oom_counter_delta": 0,
+        "sampled_system_available_min_mib": 11036.828125,
+        "sampled_linux_swap_used_peak_mib": 91.94140625,
+        "linux_io_available": false,
+        "linux_memory_psi_some_microseconds": 0,
+        "linux_memory_psi_some_percent": 0.0,
+        "linux_memory_psi_full_microseconds": 0,
+        "linux_memory_psi_full_percent": 0.0,
+        "linux_io_psi_some_microseconds": 24765,
+        "linux_io_psi_some_percent": 0.022342388825200662,
+        "linux_io_psi_full_microseconds": 24423,
+        "linux_io_psi_full_percent": 0.022033844630643076,
+        "linux_io_unavailable": "[Errno 2] No such file or directory: '/proc/self/io'"
+      }
+    }
+  ],
+  "post_update_tf_current_bytes": [
+    5273088,
+    5251584,
+    5543168,
+    5337344,
+    5339392
+  ],
+  "last_three_tf_current_range_bytes": 205824,
+  "plateau_limit_bytes": 268435456,
+  "minimum_sampled_headroom_requirement_bytes": 2147483648,
+  "physical_gpu": {
+    "samples": 978,
+    "minimum_headroom_bytes": 2463105024,
+    "maximum_used_mib": 22215.0,
+    "total_mib": 24564.0,
+    "mean_activity_percent": 31.512269938650306,
+    "headroom_gate_passed": true,
+    "raw_timestamp_backward_steps": 15,
+    "maximum_backward_step_seconds": 1.1489999294281006,
+    "timestamp_timezone": "America/Phoenix",
+    "limitations": "Cumulative raw physical GPU samples include between-update state evidence reads. Windows timestamps can step, so wall-clock alignment and curves are approximate; update durations are monotonic. Activity is not FLOPS/occupancy, reserved VRAM is not live tensor payload, and sampling may miss short peaks."
+  },
+  "linux_memory": {
+    "seconds": 511.213767011,
+    "points": 498,
+    "process_rss_before_mib": 1547.953125,
+    "process_rss_after_mib": 4397.62890625,
+    "sampled_process_rss_peak_mib": 6952.71875,
+    "sampled_process_swap_peak_mib": 0.0,
+    "lifetime_maxrss_after_mib": 6959.03125,
+    "process_minor_faults": 6216398,
+    "process_major_faults": 15,
+    "linux_system_swapout_pages": 0,
+    "linux_system_swapin_pages": 71,
+    "linux_oom_counter_before": 1,
+    "linux_oom_counter_after": 1,
+    "linux_oom_counter_delta": 0,
+    "sampled_system_available_min_mib": 11036.828125,
+    "sampled_linux_swap_used_peak_mib": 92.1328125,
+    "linux_io_available": false,
+    "linux_memory_psi_some_microseconds": 233,
+    "linux_memory_psi_some_percent": 4.557780228852609e-05,
+    "linux_memory_psi_full_microseconds": 233,
+    "linux_memory_psi_full_percent": 4.557780228852609e-05,
+    "linux_io_psi_some_microseconds": 152492,
+    "linux_io_psi_some_percent": 0.029829400114085493,
+    "linux_io_psi_full_microseconds": 149068,
+    "linux_io_psi_full_percent": 0.029159621594618056,
+    "linux_io_unavailable": "[Errno 2] No such file or directory: '/proc/self/io'"
+  },
+  "verification": {
+    "five_archives_crc_finite_262_arrays": true,
+    "array_digest_groups_per_archive": 3,
+    "initial_both_adams_match_exact_checkpoint35": true,
+    "initial_checkpoint_pcg_config_match": true,
+    "uninterrupted_state_and_optimizer_counts": true,
+    "pcg_orders_independently_reconstructed": true,
+    "exact_guard_attempt_cache_reuse": true,
+    "weakrefs_readers_workers_released_at_every_boundary": true,
+    "source_checkpoint_files_locally_rehashed": 205,
+    "input_path_set_matches_exact4000_training_games": true,
+    "raw_trajectory_hash_recheck": "Remote frozen driver hashes every training file before and after; raw trajectories are intentionally not copied into this laptop backup.",
+    "runtime_and_implementation_pins": true,
+    "whole_game_holdout_excluded": true,
+    "unchanged_graph_traces": true
+  },
+  "protocol": [
+    "Five consecutive chronological saved-round updates36..40 from exact checkpoint35, one persistent GPU model/trainer/compiled graphs. Model/both Adam/PCG carry between updates; no resets, forced GC, clear_session or allocator flush between calls.",
+    "Same model, selective cuDNN, RL settings, batch512, both GPU cache payload caps8GiB, prepacking and canonical cache. No new games, source checkpoint writes or promoted weights.",
+    "Runtime/lifecycle diagnostic only: later saved behavior policies may differ from evolving diagnostic policy. Preserve guard decisions and full work counts; do not claim fresh on-policy learning strength or compare unequal-work speed.",
+    "Passive NVML/Linux sampling plus TensorFlow allocator current/peak and cache-lifetime observations. Distinguish allocator reserved high-water from live tensor bytes. No GPU trace.",
+    "All five complete finite with unchanged hashes/splits, uninterrupted optimizer/RNG states, bounded and released caches, no PPO worker/readers/cache-owned tensor references at boundaries. Last three post-update TF-current range<=256MiB; observed peak headroom>=2GiB is a separate operational gate, not a universal allocation guarantee.",
+    "No new game-generation workers: production worker coexistence and larger minibatches/rounds remain outside the test scope."
+  ],
+  "criteria": {
+    "post_warm_tf_current_range_bytes": 268435456,
+    "minimum_observed_vram_headroom_bytes": 2147483648,
+    "source_and_rl_unchanged": true,
+    "whole_game_training": 800,
+    "whole_game_holdout_excluded": 200,
+    "diagnostic_only": true
+  },
+  "provenance": {
+    "manifest_sha256": "e929303c60ef418d7b9724c2d62002c6ecad99cd3bc89dd801d3de6fb1a5ed61",
+    "backup_sha256": "94d9aa4214db43adc718d4b04cf658a07445caff27f901c10ee2f9063ef50368",
+    "driver_sha256": "823bcb11b1a0e5283b8b2244afd2874995ac1b4d447b1ad319b05b076d0e266b",
+    "analyzer_sha256": "d203ad865b1e3c22da75a2ce123e51a5490f02b1e073711947629d6b526c0bfb",
+    "predeployment_review_sha256": "2c3f78a391968be26983fd07a15442f6cfa77c54e95964ababf9cd8d99de7f01",
+    "fixture_proof_sha256": "63184a15a1d6328a8c55b7b9c2f9d6cc13f766de3daee12f9a13c8881d1eb8f9",
+    "fixture_source_sha256": "fb9303f27f26f9e6c5204200e66f6a6339b6e53939f8202410c2bbdcbc431cc9",
+    "fixture_log_sha256": "57235d62efe209ff10855e27817b9b0565e9feee8a928fe3fec016acb8949b95",
+    "infrastructure_validation_sha256": "e2792a4b88a1a5d9c821233fff88960028a28f89aceff61aee3c06970bc7f125",
+    "source_report_sha256": "592f3c9cb5090d99eaa61c45ea24e161b1b807ee453c30fd50141626910aba16",
+    "prior_validation": {
+      "manifest_sha256": "f837dda2bf9546d704bd0357b3f183b5f03cffc14b80eee648e41942c0a2cb91",
+      "preflight_report": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/actor-epoch-cache-v2-20261026/results/gpu-preflight/report.json",
+      "preflight_sha256": "0544ea71ea35850a3b079f02e6a5dfd372395d605882f992412e10841cf83968",
+      "results_sha256": "710baab52711f7771523698ca3a2a3153d97b1be7622c07ecb1b0dd46762517a"
+    }
+  },
+  "graphs": [
+    {
+      "png": "tf-allocator-lifecycle.png",
+      "svg": "tf-allocator-lifecycle.svg"
+    },
+    {
+      "png": "physical-gpu-timeline.png",
+      "svg": "physical-gpu-timeline.svg"
+    },
+    {
+      "png": "update-times-and-guard-work.png",
+      "svg": "update-times-and-guard-work.svg"
+    },
+    {
+      "png": "host-memory-and-pressure.png",
+      "svg": "host-memory-and-pressure.svg"
+    }
+  ],
+  "limitations": [
+    "Saved rounds 37\u201340 were collected by historical policies that can differ from this uninterrupted diagnostic replay. This tests finite runtime lifecycle, shape variation and state continuity, not fresh on-policy learning or strength.",
+    "Five saved updates and these shapes establish finite runtime evidence only; they do not establish universal leak freedom, long-run stability or fresh on-policy learning strength.",
+    "No new game-generation workers run concurrently. Full production CPU-worker, producer and Windows-host memory coexistence remains unmeasured.",
+    "No baseline arm is included. Different guard proposal/accepted-step counts change work; observed update times are not a speedup estimate.",
+    "Logical input-cache payload caps exclude allocator bookkeeping, activations and workspaces. Physical NVML reservation may stay high after Python tensors and TF current allocations fall.",
+    "Tensor weakrefs observe Python cached Tensor wrappers, not every internal CUDA reference. TF current/peak and physical NVML provide complementary sampled evidence.",
+    "Cumulative raw physical GPU samples include between-update state evidence reads. Windows timestamps can step, so wall-clock alignment and curves are approximate; update durations are monotonic. Activity is not FLOPS/occupancy, reserved VRAM is not live tensor payload, and sampling may miss short peaks.",
+    "Linux PSI/swap/OOM counters are system-wide and may include unrelated work. Windows-host paging is not measured. RSS includes mapped pages and model/runtime memory; lifetime MaxRSS is not incremental cache memory.",
+    "At least2GiB sampled physical headroom is a separate operational criterion, not a guarantee against unsampled peaks or larger batches/rounds."
+  ],
+  "host_rss_after_update_mib": [
+    3479.1640625,
+    3802.05859375,
+    4047.03515625,
+    4274.23046875,
+    4397.62890625
+  ],
+  "host_rss_plateau_established": false,
+  "overall_long_run_stability_established": false
+}

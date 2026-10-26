@@ -1,0 +1,158 @@
+{
+    "utc":  "2026-10-26T15:19:09.6757561Z",
+    "state":  {
+                  "schema_version":  1,
+                  "run_id":  "day-awake-20261026",
+                  "task_name":  "MTGO-RustMage-Day-Awake-20261026",
+                  "manifest_sha256":  "ceccfe15c230d7b7af0982cca997695989d4c4887e121bc58f12573dcef093c1",
+                  "status":  "holding",
+                  "reason":  "user_requested_rest_of_day",
+                  "utc":  "2026-10-26T15:19:07.7148115Z",
+                  "started_utc":  "2026-10-26T15:05:05.5365902Z",
+                  "expires_utc":  "2026-10-27T07:00:00.0000000Z",
+                  "maximum_seconds":  64800,
+                  "windows_pid":  17460,
+                  "creation_utc":  "2026-10-26T15:05:04.7271020Z"
+              },
+    "task_state":  "Running",
+    "task_execution_limit":  "PT18H2M",
+    "action":  {
+                   "CimClass":  {
+                                    "CimSuperClassName":  "MSFT_TaskAction",
+                                    "CimSuperClass":  {
+                                                          "CimSuperClassName":  null,
+                                                          "CimSuperClass":  null,
+                                                          "CimClassProperties":  [
+                                                                                     {
+                                                                                         "Name":  "Id",
+                                                                                         "Value":  null,
+                                                                                         "CimType":  14,
+                                                                                         "Flags":  "Property, NullValue",
+                                                                                         "Qualifiers":  [
+
+                                                                                                        ],
+                                                                                         "ReferenceClassName":  null
+                                                                                     }
+                                                                                 ],
+                                                          "CimClassQualifiers":  [
+
+                                                                                 ],
+                                                          "CimClassMethods":  [
+
+                                                                              ],
+                                                          "CimSystemProperties":  {
+                                                                                      "Namespace":  "ROOT/Microsoft/Windows/TaskScheduler",
+                                                                                      "ServerName":  "RAYTRACER",
+                                                                                      "ClassName":  "MSFT_TaskAction",
+                                                                                      "Path":  null
+                                                                                  }
+                                                      },
+                                    "CimClassProperties":  [
+                                                               {
+                                                                   "Name":  "Id",
+                                                                   "Value":  null,
+                                                                   "CimType":  14,
+                                                                   "Flags":  "Property, NullValue",
+                                                                   "Qualifiers":  [
+
+                                                                                  ],
+                                                                   "ReferenceClassName":  null
+                                                               },
+                                                               {
+                                                                   "Name":  "Arguments",
+                                                                   "Value":  null,
+                                                                   "CimType":  14,
+                                                                   "Flags":  "Property, NullValue",
+                                                                   "Qualifiers":  [
+
+                                                                                  ],
+                                                                   "ReferenceClassName":  null
+                                                               },
+                                                               {
+                                                                   "Name":  "Execute",
+                                                                   "Value":  null,
+                                                                   "CimType":  14,
+                                                                   "Flags":  "Property, NullValue",
+                                                                   "Qualifiers":  [
+
+                                                                                  ],
+                                                                   "ReferenceClassName":  null
+                                                               },
+                                                               {
+                                                                   "Name":  "WorkingDirectory",
+                                                                   "Value":  null,
+                                                                   "CimType":  14,
+                                                                   "Flags":  "Property, NullValue",
+                                                                   "Qualifiers":  [
+
+                                                                                  ],
+                                                                   "ReferenceClassName":  null
+                                                               }
+                                                           ],
+                                    "CimClassQualifiers":  [
+
+                                                           ],
+                                    "CimClassMethods":  [
+
+                                                        ],
+                                    "CimSystemProperties":  {
+                                                                "Namespace":  "Root/Microsoft/Windows/TaskScheduler",
+                                                                "ServerName":  "RAYTRACER",
+                                                                "ClassName":  "MSFT_TaskExecAction",
+                                                                "Path":  null
+                                                            }
+                                },
+                   "CimInstanceProperties":  [
+                                                 {
+                                                     "Name":  "Id",
+                                                     "Value":  null,
+                                                     "CimType":  14,
+                                                     "Flags":  "Property, NotModified, NullValue",
+                                                     "IsValueModified":  false
+                                                 },
+                                                 {
+                                                     "Name":  "Arguments",
+                                                     "Value":  "-NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File \"C:\\Users\\altf4\\mtgo-training\\day-awake-20261026\\keep-day-awake.ps1\" -ExpectedManifestSHA256 ceccfe15c230d7b7af0982cca997695989d4c4887e121bc58f12573dcef093c1",
+                                                     "CimType":  14,
+                                                     "Flags":  "Property, NotModified",
+                                                     "IsValueModified":  false
+                                                 },
+                                                 {
+                                                     "Name":  "Execute",
+                                                     "Value":  "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+                                                     "CimType":  14,
+                                                     "Flags":  "Property, NotModified",
+                                                     "IsValueModified":  false
+                                                 },
+                                                 {
+                                                     "Name":  "WorkingDirectory",
+                                                     "Value":  "C:\\Users\\altf4\\mtgo-training\\day-awake-20261026",
+                                                     "CimType":  14,
+                                                     "Flags":  "Property, NotModified",
+                                                     "IsValueModified":  false
+                                                 }
+                                             ],
+                   "CimSystemProperties":  {
+                                               "Namespace":  "Root/Microsoft/Windows/TaskScheduler",
+                                               "ServerName":  "RAYTRACER",
+                                               "ClassName":  "MSFT_TaskExecAction",
+                                               "Path":  null
+                                           }
+               },
+    "running_instances":  [
+                              {
+                                  "name":  "MTGO-RustMage-Day-Awake-20261026",
+                                  "instance_guid":  "{E27444D2-5579-4FCE-91B6-186CFE61B375}",
+                                  "path":  "\\MTGO-RustMage-Day-Awake-20261026",
+                                  "state":  4
+                              }
+                          ],
+    "process":  {
+                    "ProcessId":  17460,
+                    "CreationDate":  "\/Date(1793027104727)\/",
+                    "ExecutablePath":  "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+                    "CommandLine":  "\"C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -NoLogo -NoProfile -NonInteractive -ExecutionPolicy Bypass -File \"C:\\Users\\altf4\\mtgo-training\\day-awake-20261026\\keep-day-awake.ps1\" -ExpectedManifestSHA256 ceccfe15c230d7b7af0982cca997695989d4c4887e121bc58f12573dcef093c1"
+                },
+    "persistent_power_unchanged":  true,
+    "power_requests":  "DISPLAY:\r\nNone.\r\n\r\nSYSTEM:\r\n[PROCESS] \\Device\\HarddiskVolume3\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\r\n\r\nAWAYMODE:\r\nNone.\r\n\r\nEXECUTION:\r\nNone.\r\n\r\nPERFBOOST:\r\nNone.\r\n\r\nACTIVELOCKSCREEN:\r\nNone.\r\n\r\n"
+}

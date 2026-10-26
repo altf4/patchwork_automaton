@@ -1,0 +1,49 @@
+{
+  "status": "passed",
+  "reviewer": "/root/device_cache_review",
+  "reviewed_utc": "2026-10-26T16:18:13.337622+00:00",
+  "manifest_sha256": "f837dda2bf9546d704bd0357b3f183b5f03cffc14b80eee648e41942c0a2cb91",
+  "driver_sha256": "a9e349eb56f490ed9c48e82dcc0922f4a6ef3bc774dafa48331321ed41676dfb",
+  "source_sha256": "1b74d69cda3f7f10b5e4917e703a3e5173ef45fd90cdf83dcc9f253a9eef95da",
+  "prior_source_review_sha256": "e899b00d38c11dfbcc267d237e89fca049926d424ca40ce59c327af632537101",
+  "tests_log_sha256": "cc23ee271fb45a53504077940012f271c8092e57ef9ce7af990b5b9d50056ef9",
+  "timed_function_ast_identical_to_failed_phase": true,
+  "scope": [
+    "Per-actor-epoch immutable input/label cache spans only retries of that exact shuffledorder; critic and canonical policy-cache paths remain separate.",
+    "Single prefetch worker makes prefix admission deterministic; first uploaded tuple is used by same initial optimizer pass; first-pass cache finalization follows joined prefetch.",
+    "Cache-owned refs released at epoch/early-stop/exception boundaries; normal completed passes explicitly drop last-consumed GPU batch references.",
+    "Model/PPO/guard/optimizer/RNG/batch/padding/order unchanged; no cached outputs or weaker finite checks.",
+    "Separate8GiB actor payload cap is additive to existing6.23GB canonical policy cache; CPU fallback and allocation failures remain visible without optimizer/RPC replay.",
+    "Preflight clones savedPCG,reserves two criticpermutations,derives both actual actororders and checks all334shuffled CPUbatches against original collation; exact both-order total payload and deterministic admission/fallback are measured before timed ABBA.",
+    "Actual admitted tensors are GPU0 and byte/dtype/shape/value exact; canonical GPUcache remains resident; three joint forward/backward cases retain strict prior tolerances and initialstate immutability.",
+    "Finite ABBA baseline/candidate/candidate/baseline copies137-file completedGPUbaseline; candidate overlays only streaming_ppo; common frozen driver; no live pinnedsource mutation.",
+    "Prior profile completion/exactowner/lock/hash/nativeawake guards precede launch; per-case limits and backup/cleanup retained.",
+    "Four new CPU actorcachetests plus five devicecachetests passed: exact full/prefix/zero-budget/no-prefetch updates with forcedbacktracking, model/bothAdams/PCG/guards, cleanup/earlystop/errors/OOM and criticwarmup isolation."
+  ],
+  "validation_only_repairs": [
+    "Removed redundant unused6.23GB host PolicyBatchCache from correctness preflight; canonical GPUcache and all original-collation/334shuffledbatch comparisons remain.",
+    "For every admitted GPU array, validate through a distinct same-device tf.identity handle; materialize and release that temporary after each exact comparison, leaving retainedcachehandle unmaterialized.",
+    "No source ML, model, optimizer, RLsettings, batch/order/caps, parity tolerances or timed updater code changed.",
+    "New separate output/manifest preserves failed phase and all original pins; start gates failed old coordinator exit, child cleanup and sharedlock release.",
+    "Read-only5-second preflight health snapshots added within original1200-second percase bound; zombie/missing/proc read races are non-fatal. No extra timing probes in ABBA."
+  ],
+  "failed_phase": {
+    "output": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/actor-epoch-cache-20261026",
+    "manifest_sha256": "9de54ceda5149ef629aa9685afaa3542291bed7f7255977772d124ae7cffaff5",
+    "backup_sha256": "a951c339a8d29eaa3f0aac2260c336389ad272aa3bcb5ba8678961dc17fbe14c",
+    "no_timed_ABBA_started": true,
+    "diagnosis": "SIGKILL with high processRSS/swap and OOM counter consistent with memory pressure; kernel victim identity not established."
+  },
+  "limits": [
+    "This is static review plus existing local CPU test evidence; GPUpreflight/performance conclusions require actual reports.",
+    "Fixed gradientcases may include CPUfallback if prefixcloses before selectedbatch; inspect cache_admitted rather than claim all three cases are GPUresident.",
+    "Logical payload budget excludes TFallocator retention, active consumer/prefetch batches, model/optimizer/gradient/activationmemory; measured peakVRAM is required.",
+    "On exceptions, traceback frames may retain the final consumed batch until handled; cache-owned refs are nevertheless cleared after workerjoin.",
+    "One saved round and four timed replays establish isolated updater performance only, not production rollout-worker memory pressure or learning strength.",
+    "Compare timings only with identical work/guardaccepted+reasons/finalPCG; preserve A/A GPUvariation and every unmatchedresult.",
+    "The memory benefit of ephemeral GPU identity reads is a TensorHandle-mirror hypothesis requiring measured health evidence; no proven attribution is claimed.",
+    "Preflight has additional original-data validation/reference-reader work; its CPU memory and duration do not directly measure timed production updater memory.",
+    "A failed validation preflight is not evidence of changed learning quality. Failed-phase bytes/results remain preserved.",
+    "The existing bounded laptop awake guard is reused under its exact identity; no duplicate guard/trainer/producer is authorized by this revision."
+  ]
+}

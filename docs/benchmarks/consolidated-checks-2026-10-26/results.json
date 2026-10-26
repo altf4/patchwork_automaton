@@ -1,0 +1,1320 @@
+{
+  "status": "complete",
+  "scope": "Four finite ABBA replays of frozen round40 from checkpoint39; no new games or promoted checkpoints.",
+  "training_games": 800,
+  "heldout_games_excluded": 200,
+  "samples": 85199,
+  "start_equality_checks": {
+    "config": true,
+    "source_hashes": true,
+    "input_hashes": true,
+    "initial_model_sha256": true,
+    "initial_rng": true,
+    "initial_actor_optimizer_steps": true,
+    "initial_critic_optimizer_steps": true,
+    "training_games": true,
+    "heldout_games_excluded": true,
+    "source_round": true,
+    "mode": true,
+    "packing_variant": true
+  },
+  "config": {
+    "games_per_round": 1000,
+    "train_mode": "versus_baseline",
+    "validation_fraction": 0.2,
+    "eval_games": 200,
+    "eval_every_games": 0,
+    "eval_horizon": 25,
+    "train_horizon": 60,
+    "workers": 48,
+    "inference_processes": 4,
+    "inference_wait_ms": 0.0,
+    "collector": "processes",
+    "pooled_collector_config": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/pooled-40000-20261025-deployment/main-pool.json",
+    "observation_pipeline": "python",
+    "architecture": "separate",
+    "learner_device": "gpu",
+    "inference_device": "cpu",
+    "validation_device": "cpu",
+    "validation_batch": 32,
+    "baseline_eval_games": 0,
+    "baseline_eval_seed": 48261024,
+    "train_batch": 512,
+    "learning_rate": 0.0001,
+    "ppo_epochs": 2,
+    "entropy_weight": 0.01,
+    "advantage_baseline": "critic",
+    "target_kl": 0.02,
+    "max_state_kl": 0.5,
+    "guard_audit": false,
+    "value_learning_rate": 0.0003,
+    "value_max_steps": 157,
+    "critic_update_scope": "all",
+    "critic_unroll": 1,
+    "critic_warmup_games": 1000,
+    "critic_warmup_max_steps": 157,
+    "concurrent_updates": true,
+    "prefetch_batches": 2,
+    "measurement_workers": 4,
+    "rollout_cache_mib": 512,
+    "rollout_storage": "pickle",
+    "seed": 300261025,
+    "algorithm": "ppo",
+    "advantage_scale_floor": 1.0,
+    "ppo_clip": 0.2
+  },
+  "initial_model_sha256": "e0544b90b1458da14fce65fc5e65d0c1db22045abc3609c2d385e57536fb787c",
+  "initial_rng": {
+    "bit_generator": "PCG64",
+    "state": {
+      "state": 238411728669563805245349954794345542224,
+      "inc": 177872769690368037813286698154648419643
+    },
+    "has_uint32": 1,
+    "uinteger": 204343059
+  },
+  "initial_actor_optimizer_steps": 12955,
+  "initial_critic_optimizer_steps": 6280,
+  "tolerances": {
+    "packed_arrays": "bitwise identical including shapes, dtypes and order",
+    "outputs_atol": 2e-05,
+    "outputs_rtol": 0.0002,
+    "gradients_atol": 2e-05,
+    "gradients_rtol": 0.002,
+    "gradient_relative_l2": 0.001,
+    "full_model_max_abs": 0.001,
+    "full_model_relative_l2": 0.0005,
+    "full_adam_max_abs": 0.002,
+    "full_adam_relative_l2": 1e-05,
+    "rng": "exact",
+    "optimizer_steps": "exact",
+    "guard_decisions": "exact for adoption; otherwise diagnose and leave opt-in"
+  },
+  "cases": [
+    {
+      "label": "1-legacy",
+      "variant": "legacy",
+      "seconds": 191.15644297199833,
+      "process_cpu_seconds": 271.907993922,
+      "work": {
+        "samples": 85199,
+        "accepted_steps": 334,
+        "rejected_epochs": 8,
+        "critic_steps": 157,
+        "optimizer_steps": 13289,
+        "critic_optimizer_steps": 6437,
+        "guard_proposals": 10,
+        "guard_acceptances": 2
+      },
+      "guard_decisions": [
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.0019901899966172677,
+          "max_state_kl": 16.028717041015625
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.0008248403435540189,
+          "max_state_kl": 8.433012962341309
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.00019832833621222958,
+          "max_state_kl": 2.947997570037842
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 9.282649482788538e-05,
+          "max_state_kl": 1.2585761547088623
+        },
+        {
+          "accepted": true,
+          "reasons": [],
+          "mean_kl": 3.489847817820324e-05,
+          "max_state_kl": 0.46559351682662964
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.0005698092982586732,
+          "max_state_kl": 2.952929973602295
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.00032316286674919834,
+          "max_state_kl": 1.3988397121429443
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.0001339183334657635,
+          "max_state_kl": 1.0305944681167603
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 7.710807657444714e-05,
+          "max_state_kl": 0.744970440864563
+        },
+        {
+          "accepted": true,
+          "reasons": [],
+          "mean_kl": 4.2737692275854935e-05,
+          "max_state_kl": 0.4765651226043701
+        }
+      ],
+      "guard_rejection_reasons": {
+        "max_state_kl": 8
+      },
+      "final_model_sha256": "764a9409d34e63f3c5b827cd15b4efbc09ed53f53ee231dab19ff092d5a86b42",
+      "final_rng": {
+        "bit_generator": "PCG64",
+        "state": {
+          "state": 83830324702233720868068283841167165539,
+          "inc": 177872769690368037813286698154648419643
+        },
+        "has_uint32": 1,
+        "uinteger": 3687717065
+      },
+      "final_actor_optimizer_steps": 13289,
+      "final_critic_optimizer_steps": 6437,
+      "graph_op_counts": {
+        "step": {
+          "Assert": 1,
+          "CheckNumerics": 44,
+          "CheckNumericsV2": 0,
+          "IsFinite": 0,
+          "All": 2,
+          "Pack": 28,
+          "CudnnRNNV3": 2,
+          "CudnnRNNBackpropV3": 2
+        },
+        "critic_step": {
+          "Assert": 1,
+          "CheckNumerics": 42,
+          "CheckNumericsV2": 0,
+          "IsFinite": 0,
+          "All": 2,
+          "Pack": 12,
+          "CudnnRNNV3": 2,
+          "CudnnRNNBackpropV3": 2
+        },
+        "measure_actor_with_drift": {
+          "Assert": 1,
+          "CheckNumerics": 0,
+          "CheckNumericsV2": 0,
+          "IsFinite": 0,
+          "All": 2,
+          "Pack": 18,
+          "CudnnRNNV3": 2,
+          "CudnnRNNBackpropV3": 0
+        }
+      },
+      "passive_memory": {
+        "boundary_seconds": 191.148767176,
+        "sampled_points_during_update": 187,
+        "sampler_errors": [],
+        "process_major_faults": 10,
+        "process_minor_faults": 898112,
+        "process_user_seconds": 198.02976199999998,
+        "process_system_seconds": 73.870863,
+        "linux_system_swapout_pages": 0,
+        "linux_system_swapin_pages": 0,
+        "lifetime_peak_rss_mib": 11814.16015625,
+        "sampled_process_rss_peak_mib": 11722.015625,
+        "sampled_process_swap_peak_mib": 0.0,
+        "sampled_system_available_min_mib": 12077.875,
+        "sampled_system_swap_used_peak_mib": 4.80859375,
+        "process_io_available": false,
+        "linux_system_memory_psi_some_microseconds": 0,
+        "linux_system_memory_psi_some_percent": 0.0,
+        "linux_system_memory_psi_full_microseconds": 0,
+        "linux_system_memory_psi_full_percent": 0.0,
+        "linux_system_io_psi_some_microseconds": 54737,
+        "linux_system_io_psi_some_percent": 0.02863581115833249,
+        "linux_system_io_psi_full_microseconds": 51682,
+        "linux_system_io_psi_full_percent": 0.027037579558341518,
+        "process_io_unavailable": "[Errno 2] No such file or directory: '/proc/self/io'",
+        "interpretation": "Linux passive counters. Swap and PSI are system-wide and may include unrelated work; Windows host paging is not measured. Peak RSS is a process lifetime high-water mark that includes model loading/compilation and mapped pages, not incremental cache RAM. Sampled update RSS is also total resident process memory, not additional cache RAM."
+      },
+      "pipeline": {
+        "prefetch_batches": 2,
+        "measurement_workers": 4,
+        "numerical_prepacking": true,
+        "cache_policy_batches": true,
+        "numerical_disk_bytes": 2458834760,
+        "numerical_gathers": 1996,
+        "policy_cache_disk_bytes": 6229903504,
+        "policy_cache_hits": 1837
+      }
+    },
+    {
+      "label": "2-consolidated",
+      "variant": "consolidated",
+      "seconds": 179.32153121699957,
+      "process_cpu_seconds": 256.08120794900003,
+      "work": {
+        "samples": 85199,
+        "accepted_steps": 334,
+        "rejected_epochs": 8,
+        "critic_steps": 157,
+        "optimizer_steps": 13289,
+        "critic_optimizer_steps": 6437,
+        "guard_proposals": 10,
+        "guard_acceptances": 2
+      },
+      "guard_decisions": [
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.001990192787961517,
+          "max_state_kl": 16.02873992919922
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.0008248418860806033,
+          "max_state_kl": 8.433026313781738
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.0001983278741452392,
+          "max_state_kl": 2.947998046875
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 9.282639850981419e-05,
+          "max_state_kl": 1.2585854530334473
+        },
+        {
+          "accepted": true,
+          "reasons": [],
+          "mean_kl": 3.4898368083260584e-05,
+          "max_state_kl": 0.4655914306640625
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.0005698121058493358,
+          "max_state_kl": 2.9529318809509277
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.0003231629830798038,
+          "max_state_kl": 1.3988432884216309
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.0001339209440956497,
+          "max_state_kl": 1.030679702758789
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 7.710744236767989e-05,
+          "max_state_kl": 0.7449566721916199
+        },
+        {
+          "accepted": true,
+          "reasons": [],
+          "mean_kl": 4.273766527041991e-05,
+          "max_state_kl": 0.4765690267086029
+        }
+      ],
+      "guard_rejection_reasons": {
+        "max_state_kl": 8
+      },
+      "final_model_sha256": "2aceb8584989561d10300ea3a5d99c68eb9ae833623368b0f2589e0d7477f952",
+      "final_rng": {
+        "bit_generator": "PCG64",
+        "state": {
+          "state": 83830324702233720868068283841167165539,
+          "inc": 177872769690368037813286698154648419643
+        },
+        "has_uint32": 1,
+        "uinteger": 3687717065
+      },
+      "final_actor_optimizer_steps": 13289,
+      "final_critic_optimizer_steps": 6437,
+      "graph_op_counts": {
+        "step": {
+          "Assert": 2,
+          "CheckNumerics": 0,
+          "CheckNumericsV2": 0,
+          "IsFinite": 44,
+          "All": 47,
+          "Pack": 29,
+          "CudnnRNNV3": 2,
+          "CudnnRNNBackpropV3": 2
+        },
+        "critic_step": {
+          "Assert": 2,
+          "CheckNumerics": 0,
+          "CheckNumericsV2": 0,
+          "IsFinite": 42,
+          "All": 45,
+          "Pack": 13,
+          "CudnnRNNV3": 2,
+          "CudnnRNNBackpropV3": 2
+        },
+        "measure_actor_with_drift": {
+          "Assert": 1,
+          "CheckNumerics": 0,
+          "CheckNumericsV2": 0,
+          "IsFinite": 0,
+          "All": 2,
+          "Pack": 18,
+          "CudnnRNNV3": 2,
+          "CudnnRNNBackpropV3": 0
+        }
+      },
+      "passive_memory": {
+        "boundary_seconds": 179.31248483,
+        "sampled_points_during_update": 175,
+        "sampler_errors": [],
+        "process_major_faults": 1,
+        "process_minor_faults": 1984906,
+        "process_user_seconds": 190.48709699999998,
+        "process_system_seconds": 65.585216,
+        "linux_system_swapout_pages": 0,
+        "linux_system_swapin_pages": 0,
+        "lifetime_peak_rss_mib": 11658.62890625,
+        "sampled_process_rss_peak_mib": 11643.828125,
+        "sampled_process_swap_peak_mib": 0.0,
+        "sampled_system_available_min_mib": 12211.11328125,
+        "sampled_system_swap_used_peak_mib": 4.80859375,
+        "process_io_available": false,
+        "linux_system_memory_psi_some_microseconds": 0,
+        "linux_system_memory_psi_some_percent": 0.0,
+        "linux_system_memory_psi_full_microseconds": 0,
+        "linux_system_memory_psi_full_percent": 0.0,
+        "linux_system_io_psi_some_microseconds": 32502,
+        "linux_system_io_psi_some_percent": 0.018125899058737616,
+        "linux_system_io_psi_full_microseconds": 31737,
+        "linux_system_io_psi_full_percent": 0.017699269535018023,
+        "process_io_unavailable": "[Errno 2] No such file or directory: '/proc/self/io'",
+        "interpretation": "Linux passive counters. Swap and PSI are system-wide and may include unrelated work; Windows host paging is not measured. Peak RSS is a process lifetime high-water mark that includes model loading/compilation and mapped pages, not incremental cache RAM. Sampled update RSS is also total resident process memory, not additional cache RAM."
+      },
+      "pipeline": {
+        "prefetch_batches": 2,
+        "measurement_workers": 4,
+        "numerical_prepacking": true,
+        "cache_policy_batches": true,
+        "numerical_disk_bytes": 2458834760,
+        "numerical_gathers": 1996,
+        "policy_cache_disk_bytes": 6229903504,
+        "policy_cache_hits": 1837
+      }
+    },
+    {
+      "label": "3-consolidated",
+      "variant": "consolidated",
+      "seconds": 183.10403597599907,
+      "process_cpu_seconds": 259.62076274599997,
+      "work": {
+        "samples": 85199,
+        "accepted_steps": 334,
+        "rejected_epochs": 8,
+        "critic_steps": 157,
+        "optimizer_steps": 13289,
+        "critic_optimizer_steps": 6437,
+        "guard_proposals": 10,
+        "guard_acceptances": 2
+      },
+      "guard_decisions": [
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.0019901903903406935,
+          "max_state_kl": 16.02872657775879
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.0008248405808800956,
+          "max_state_kl": 8.433029174804688
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.0001983282077285827,
+          "max_state_kl": 2.9480044841766357
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 9.282624442662264e-05,
+          "max_state_kl": 1.2585811614990234
+        },
+        {
+          "accepted": true,
+          "reasons": [],
+          "mean_kl": 3.48984549739456e-05,
+          "max_state_kl": 0.4655933678150177
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.000569812919287716,
+          "max_state_kl": 2.9529471397399902
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.0003231623386191534,
+          "max_state_kl": 1.3988348245620728
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.0001339213546217817,
+          "max_state_kl": 1.0306848287582397
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 7.710802943644874e-05,
+          "max_state_kl": 0.7449653148651123
+        },
+        {
+          "accepted": true,
+          "reasons": [],
+          "mean_kl": 4.273761254361774e-05,
+          "max_state_kl": 0.47657114267349243
+        }
+      ],
+      "guard_rejection_reasons": {
+        "max_state_kl": 8
+      },
+      "final_model_sha256": "8061b31c1ab4f64b5d68f86115b2c27d6353e14fbd95dd14830f0ea0131ad918",
+      "final_rng": {
+        "bit_generator": "PCG64",
+        "state": {
+          "state": 83830324702233720868068283841167165539,
+          "inc": 177872769690368037813286698154648419643
+        },
+        "has_uint32": 1,
+        "uinteger": 3687717065
+      },
+      "final_actor_optimizer_steps": 13289,
+      "final_critic_optimizer_steps": 6437,
+      "graph_op_counts": {
+        "step": {
+          "Assert": 2,
+          "CheckNumerics": 0,
+          "CheckNumericsV2": 0,
+          "IsFinite": 44,
+          "All": 47,
+          "Pack": 29,
+          "CudnnRNNV3": 2,
+          "CudnnRNNBackpropV3": 2
+        },
+        "critic_step": {
+          "Assert": 2,
+          "CheckNumerics": 0,
+          "CheckNumericsV2": 0,
+          "IsFinite": 42,
+          "All": 45,
+          "Pack": 13,
+          "CudnnRNNV3": 2,
+          "CudnnRNNBackpropV3": 2
+        },
+        "measure_actor_with_drift": {
+          "Assert": 1,
+          "CheckNumerics": 0,
+          "CheckNumericsV2": 0,
+          "IsFinite": 0,
+          "All": 2,
+          "Pack": 18,
+          "CudnnRNNV3": 2,
+          "CudnnRNNBackpropV3": 0
+        }
+      },
+      "passive_memory": {
+        "boundary_seconds": 183.094684527,
+        "sampled_points_during_update": 179,
+        "sampler_errors": [],
+        "process_major_faults": 0,
+        "process_minor_faults": 778056,
+        "process_user_seconds": 195.692286,
+        "process_system_seconds": 63.919304,
+        "linux_system_swapout_pages": 0,
+        "linux_system_swapin_pages": 0,
+        "lifetime_peak_rss_mib": 11654.2265625,
+        "sampled_process_rss_peak_mib": 11625.50390625,
+        "sampled_process_swap_peak_mib": 0.0,
+        "sampled_system_available_min_mib": 12232.953125,
+        "sampled_system_swap_used_peak_mib": 4.80859375,
+        "process_io_available": false,
+        "linux_system_memory_psi_some_microseconds": 0,
+        "linux_system_memory_psi_some_percent": 0.0,
+        "linux_system_memory_psi_full_microseconds": 0,
+        "linux_system_memory_psi_full_percent": 0.0,
+        "linux_system_io_psi_some_microseconds": 21644,
+        "linux_system_io_psi_some_percent": 0.011821206091216849,
+        "linux_system_io_psi_full_microseconds": 19942,
+        "linux_system_io_psi_full_percent": 0.010891632409492072,
+        "process_io_unavailable": "[Errno 2] No such file or directory: '/proc/self/io'",
+        "interpretation": "Linux passive counters. Swap and PSI are system-wide and may include unrelated work; Windows host paging is not measured. Peak RSS is a process lifetime high-water mark that includes model loading/compilation and mapped pages, not incremental cache RAM. Sampled update RSS is also total resident process memory, not additional cache RAM."
+      },
+      "pipeline": {
+        "prefetch_batches": 2,
+        "measurement_workers": 4,
+        "numerical_prepacking": true,
+        "cache_policy_batches": true,
+        "numerical_disk_bytes": 2458834760,
+        "numerical_gathers": 1996,
+        "policy_cache_disk_bytes": 6229903504,
+        "policy_cache_hits": 1837
+      }
+    },
+    {
+      "label": "4-legacy",
+      "variant": "legacy",
+      "seconds": 205.57613279100042,
+      "process_cpu_seconds": 295.292088507,
+      "work": {
+        "samples": 85199,
+        "accepted_steps": 334,
+        "rejected_epochs": 9,
+        "critic_steps": 157,
+        "optimizer_steps": 13289,
+        "critic_optimizer_steps": 6437,
+        "guard_proposals": 11,
+        "guard_acceptances": 2
+      },
+      "guard_decisions": [
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.0019901854457577512,
+          "max_state_kl": 16.028743743896484
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.0008248414432531103,
+          "max_state_kl": 8.433051109313965
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.00019832825434291094,
+          "max_state_kl": 2.948002338409424
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 9.282614898867938e-05,
+          "max_state_kl": 1.2585792541503906
+        },
+        {
+          "accepted": true,
+          "reasons": [],
+          "mean_kl": 3.492396015213803e-05,
+          "max_state_kl": 0.4655786454677582
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.0005719835995779944,
+          "max_state_kl": 3.0660853385925293
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.0003239878773615966,
+          "max_state_kl": 1.405346393585205
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 0.0001390261780879858,
+          "max_state_kl": 0.8879061937332153
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 7.724075039163509e-05,
+          "max_state_kl": 0.7471309304237366
+        },
+        {
+          "accepted": false,
+          "reasons": [
+            "max_state_kl"
+          ],
+          "mean_kl": 5.2254615792778685e-05,
+          "max_state_kl": 0.7161242365837097
+        },
+        {
+          "accepted": true,
+          "reasons": [],
+          "mean_kl": 3.640943759892082e-05,
+          "max_state_kl": 0.49254268407821655
+        }
+      ],
+      "guard_rejection_reasons": {
+        "max_state_kl": 9
+      },
+      "final_model_sha256": "8df50055e7e0edc2025aff14e57f27bb9e2026cb935d74ac12d094c9371be1ca",
+      "final_rng": {
+        "bit_generator": "PCG64",
+        "state": {
+          "state": 83830324702233720868068283841167165539,
+          "inc": 177872769690368037813286698154648419643
+        },
+        "has_uint32": 1,
+        "uinteger": 3687717065
+      },
+      "final_actor_optimizer_steps": 13289,
+      "final_critic_optimizer_steps": 6437,
+      "graph_op_counts": {
+        "step": {
+          "Assert": 1,
+          "CheckNumerics": 44,
+          "CheckNumericsV2": 0,
+          "IsFinite": 0,
+          "All": 2,
+          "Pack": 28,
+          "CudnnRNNV3": 2,
+          "CudnnRNNBackpropV3": 2
+        },
+        "critic_step": {
+          "Assert": 1,
+          "CheckNumerics": 42,
+          "CheckNumericsV2": 0,
+          "IsFinite": 0,
+          "All": 2,
+          "Pack": 12,
+          "CudnnRNNV3": 2,
+          "CudnnRNNBackpropV3": 2
+        },
+        "measure_actor_with_drift": {
+          "Assert": 1,
+          "CheckNumerics": 0,
+          "CheckNumericsV2": 0,
+          "IsFinite": 0,
+          "All": 2,
+          "Pack": 18,
+          "CudnnRNNV3": 2,
+          "CudnnRNNBackpropV3": 0
+        }
+      },
+      "passive_memory": {
+        "boundary_seconds": 205.567095063,
+        "sampled_points_during_update": 201,
+        "sampler_errors": [],
+        "process_major_faults": 0,
+        "process_minor_faults": 877662,
+        "process_user_seconds": 217.865456,
+        "process_system_seconds": 77.41787699999999,
+        "linux_system_swapout_pages": 0,
+        "linux_system_swapin_pages": 0,
+        "lifetime_peak_rss_mib": 11765.1171875,
+        "sampled_process_rss_peak_mib": 11728.87890625,
+        "sampled_process_swap_peak_mib": 0.0,
+        "sampled_system_available_min_mib": 12166.30078125,
+        "sampled_system_swap_used_peak_mib": 4.80859375,
+        "process_io_available": false,
+        "linux_system_memory_psi_some_microseconds": 0,
+        "linux_system_memory_psi_some_percent": 0.0,
+        "linux_system_memory_psi_full_microseconds": 0,
+        "linux_system_memory_psi_full_percent": 0.0,
+        "linux_system_io_psi_some_microseconds": 20872,
+        "linux_system_io_psi_some_percent": 0.010153375954261246,
+        "linux_system_io_psi_full_microseconds": 20055,
+        "linux_system_io_psi_full_percent": 0.009755938806185764,
+        "process_io_unavailable": "[Errno 2] No such file or directory: '/proc/self/io'",
+        "interpretation": "Linux passive counters. Swap and PSI are system-wide and may include unrelated work; Windows host paging is not measured. Peak RSS is a process lifetime high-water mark that includes model loading/compilation and mapped pages, not incremental cache RAM. Sampled update RSS is also total resident process memory, not additional cache RAM."
+      },
+      "pipeline": {
+        "prefetch_batches": 2,
+        "measurement_workers": 4,
+        "numerical_prepacking": true,
+        "cache_policy_batches": true,
+        "numerical_disk_bytes": 2458834760,
+        "numerical_gathers": 2163,
+        "policy_cache_disk_bytes": 6229903504,
+        "policy_cache_hits": 2004
+      }
+    }
+  ],
+  "comparisons": [
+    {
+      "left": "1-legacy",
+      "right": "2-consolidated",
+      "cross_variant": true,
+      "same_work": true,
+      "same_guard_acceptance_and_reason_sequence": true,
+      "same_final_rng": true,
+      "all_final_arrays_within_declared_envelope": true,
+      "groups": {
+        "model": {
+          "array_count": 86,
+          "elements": 367714,
+          "max_absolute": 0.0003286004066467285,
+          "largest_difference_array": "model_52",
+          "relative_l2": 4.652266725400079e-05,
+          "bitwise_equal": false,
+          "within_declared_envelope": true
+        },
+        "actor_optimizer": {
+          "array_count": 90,
+          "elements": 251460,
+          "max_absolute": 3.958120942115784e-09,
+          "largest_difference_array": "actor_optimizer_14",
+          "relative_l2": 3.780768898105819e-12,
+          "bitwise_equal": false,
+          "within_declared_envelope": true
+        },
+        "critic_optimizer": {
+          "array_count": 86,
+          "elements": 483972,
+          "max_absolute": 0.000658420380204916,
+          "largest_difference_array": "critic_optimizer_20",
+          "relative_l2": 5.212735016325576e-07,
+          "bitwise_equal": false,
+          "within_declared_envelope": true
+        }
+      }
+    },
+    {
+      "left": "1-legacy",
+      "right": "3-consolidated",
+      "cross_variant": true,
+      "same_work": true,
+      "same_guard_acceptance_and_reason_sequence": true,
+      "same_final_rng": true,
+      "all_final_arrays_within_declared_envelope": true,
+      "groups": {
+        "model": {
+          "array_count": 86,
+          "elements": 367714,
+          "max_absolute": 0.00032822415232658386,
+          "largest_difference_array": "model_52",
+          "relative_l2": 4.709348891642949e-05,
+          "bitwise_equal": false,
+          "within_declared_envelope": true
+        },
+        "actor_optimizer": {
+          "array_count": 90,
+          "elements": 251460,
+          "max_absolute": 4.6566128730773926e-09,
+          "largest_difference_array": "actor_optimizer_74",
+          "relative_l2": 4.445644162936089e-12,
+          "bitwise_equal": false,
+          "within_declared_envelope": true
+        },
+        "critic_optimizer": {
+          "array_count": 86,
+          "elements": 483972,
+          "max_absolute": 0.0006582927890121937,
+          "largest_difference_array": "critic_optimizer_20",
+          "relative_l2": 5.226019000602925e-07,
+          "bitwise_equal": false,
+          "within_declared_envelope": true
+        }
+      }
+    },
+    {
+      "left": "1-legacy",
+      "right": "4-legacy",
+      "cross_variant": false,
+      "same_work": false,
+      "same_guard_acceptance_and_reason_sequence": false,
+      "same_final_rng": true,
+      "all_final_arrays_within_declared_envelope": true,
+      "groups": {
+        "model": {
+          "array_count": 86,
+          "elements": 367714,
+          "max_absolute": 0.000328725203871727,
+          "largest_difference_array": "model_52",
+          "relative_l2": 0.00011496440027145009,
+          "bitwise_equal": false,
+          "within_declared_envelope": true
+        },
+        "actor_optimizer": {
+          "array_count": 90,
+          "elements": 251460,
+          "max_absolute": 0.0012996854493394494,
+          "largest_difference_array": "actor_optimizer_14",
+          "relative_l2": 8.138572246079952e-07,
+          "bitwise_equal": false,
+          "within_declared_envelope": true
+        },
+        "critic_optimizer": {
+          "array_count": 86,
+          "elements": 483972,
+          "max_absolute": 0.0006664895918220282,
+          "largest_difference_array": "critic_optimizer_20",
+          "relative_l2": 5.353311138218048e-07,
+          "bitwise_equal": false,
+          "within_declared_envelope": true
+        }
+      }
+    },
+    {
+      "left": "2-consolidated",
+      "right": "3-consolidated",
+      "cross_variant": false,
+      "same_work": true,
+      "same_guard_acceptance_and_reason_sequence": true,
+      "same_final_rng": true,
+      "all_final_arrays_within_declared_envelope": true,
+      "groups": {
+        "model": {
+          "array_count": 86,
+          "elements": 367714,
+          "max_absolute": 7.31833279132843e-05,
+          "largest_difference_array": "model_52",
+          "relative_l2": 4.647770056448278e-06,
+          "bitwise_equal": false,
+          "within_declared_envelope": true
+        },
+        "actor_optimizer": {
+          "array_count": 90,
+          "elements": 251460,
+          "max_absolute": 6.461050361394882e-09,
+          "largest_difference_array": "actor_optimizer_74",
+          "relative_l2": 4.7582447949462436e-12,
+          "bitwise_equal": false,
+          "within_declared_envelope": true
+        },
+        "critic_optimizer": {
+          "array_count": 86,
+          "elements": 483972,
+          "max_absolute": 1.1182157322764397e-05,
+          "largest_difference_array": "critic_optimizer_20",
+          "relative_l2": 6.349572698934388e-09,
+          "bitwise_equal": false,
+          "within_declared_envelope": true
+        }
+      }
+    },
+    {
+      "left": "2-consolidated",
+      "right": "4-legacy",
+      "cross_variant": true,
+      "same_work": false,
+      "same_guard_acceptance_and_reason_sequence": false,
+      "same_final_rng": true,
+      "all_final_arrays_within_declared_envelope": true,
+      "groups": {
+        "model": {
+          "array_count": 86,
+          "elements": 367714,
+          "max_absolute": 0.00018233060836791992,
+          "largest_difference_array": "model_50",
+          "relative_l2": 0.00010505458267305141,
+          "bitwise_equal": false,
+          "within_declared_envelope": true
+        },
+        "actor_optimizer": {
+          "array_count": 90,
+          "elements": 251460,
+          "max_absolute": 0.0012996828882023692,
+          "largest_difference_array": "actor_optimizer_14",
+          "relative_l2": 8.138559341641069e-07,
+          "bitwise_equal": false,
+          "within_declared_envelope": true
+        },
+        "critic_optimizer": {
+          "array_count": 86,
+          "elements": 483972,
+          "max_absolute": 0.0002185562625527382,
+          "largest_difference_array": "critic_optimizer_20",
+          "relative_l2": 1.1878448188419706e-07,
+          "bitwise_equal": false,
+          "within_declared_envelope": true
+        }
+      }
+    },
+    {
+      "left": "3-consolidated",
+      "right": "4-legacy",
+      "cross_variant": true,
+      "same_work": false,
+      "same_guard_acceptance_and_reason_sequence": false,
+      "same_final_rng": true,
+      "all_final_arrays_within_declared_envelope": true,
+      "groups": {
+        "model": {
+          "array_count": 86,
+          "elements": 367714,
+          "max_absolute": 0.00018170103430747986,
+          "largest_difference_array": "model_50",
+          "relative_l2": 0.00010495373480717753,
+          "bitwise_equal": false,
+          "within_declared_envelope": true
+        },
+        "actor_optimizer": {
+          "array_count": 90,
+          "elements": 251460,
+          "max_absolute": 0.0012996861478313804,
+          "largest_difference_array": "actor_optimizer_14",
+          "relative_l2": 8.138574673406862e-07,
+          "bitwise_equal": false,
+          "within_declared_envelope": true
+        },
+        "critic_optimizer": {
+          "array_count": 86,
+          "elements": 483972,
+          "max_absolute": 0.00021766219288110733,
+          "largest_difference_array": "critic_optimizer_20",
+          "relative_l2": 1.186243027873187e-07,
+          "bitwise_equal": false,
+          "within_declared_envelope": true
+        }
+      }
+    }
+  ],
+  "all_six_pairwise_arrays_within_declared_envelope": true,
+  "all_final_rng_equal": true,
+  "matching_work_cross_variant_comparisons": 2,
+  "all_matching_work_cross_variant_guard_sequences_exact": true,
+  "all_matching_work_cross_variant_final_rng_exact": true,
+  "primary_timing_rule": "Compare only identical sample, accepted/rejected, critic, optimizer and guard-proposal counts. All timing/retry outcomes remain visible.",
+  "timing_groups": [
+    {
+      "work": {
+        "accepted_steps": 334,
+        "critic_optimizer_steps": 6437,
+        "critic_steps": 157,
+        "guard_acceptances": 2,
+        "guard_proposals": 10,
+        "optimizer_steps": 13289,
+        "rejected_epochs": 8,
+        "samples": 85199
+      },
+      "matched": true,
+      "cases": [
+        "1-legacy",
+        "2-consolidated",
+        "3-consolidated"
+      ],
+      "comparison": {
+        "legacy_cases": [
+          "1-legacy"
+        ],
+        "consolidated_cases": [
+          "2-consolidated",
+          "3-consolidated"
+        ],
+        "legacy_replays": 1,
+        "consolidated_replays": 2,
+        "legacy_mean_seconds": 191.15644297199833,
+        "consolidated_mean_seconds": 181.21278359649932,
+        "speedup": 1.0548728361109458,
+        "time_reduction_percent": 5.20184369456781
+      }
+    },
+    {
+      "work": {
+        "accepted_steps": 334,
+        "critic_optimizer_steps": 6437,
+        "critic_steps": 157,
+        "guard_acceptances": 2,
+        "guard_proposals": 11,
+        "optimizer_steps": 13289,
+        "rejected_epochs": 9,
+        "samples": 85199
+      },
+      "matched": false,
+      "cases": [
+        "4-legacy"
+      ],
+      "comparison": null
+    }
+  ],
+  "matched_work_timing_pairs": [
+    {
+      "legacy_cases": [
+        "1-legacy"
+      ],
+      "consolidated_cases": [
+        "2-consolidated"
+      ],
+      "legacy_replays": 1,
+      "consolidated_replays": 1,
+      "legacy_mean_seconds": 191.15644297199833,
+      "consolidated_mean_seconds": 179.32153121699957,
+      "speedup": 1.0659982751356119,
+      "time_reduction_percent": 6.191217816671967
+    },
+    {
+      "legacy_cases": [
+        "1-legacy"
+      ],
+      "consolidated_cases": [
+        "3-consolidated"
+      ],
+      "legacy_replays": 1,
+      "consolidated_replays": 1,
+      "legacy_mean_seconds": 191.15644297199833,
+      "consolidated_mean_seconds": 183.10403597599907,
+      "speedup": 1.0439772228562716,
+      "time_reduction_percent": 4.21246957246365
+    }
+  ],
+  "primary_timing": {
+    "legacy_cases": [
+      "1-legacy"
+    ],
+    "consolidated_cases": [
+      "2-consolidated",
+      "3-consolidated"
+    ],
+    "legacy_replays": 1,
+    "consolidated_replays": 2,
+    "legacy_mean_seconds": 191.15644297199833,
+    "consolidated_mean_seconds": 181.21278359649932,
+    "speedup": 1.0548728361109458,
+    "time_reduction_percent": 5.20184369456781
+  },
+  "primary_timing_uses_all_four_replays": false,
+  "unmatched_timing_cases": [
+    "4-legacy"
+  ],
+  "gpu_preflight": {
+    "status": "passed",
+    "gpu_devices": [
+      "/job:localhost/replica:0/task:0/device:GPU:0",
+      "/job:localhost/replica:0/task:0/device:GPU:0"
+    ],
+    "aggregate_assertions": 1,
+    "per_gradient_checknumerics": 0,
+    "mutation_ops_guarded": 7,
+    "validation_graph_placements": [
+      {
+        "name": "IsFinite",
+        "op": "IsFinite",
+        "device": ""
+      },
+      {
+        "name": "All",
+        "op": "All",
+        "device": ""
+      },
+      {
+        "name": "IsFinite_1",
+        "op": "IsFinite",
+        "device": ""
+      },
+      {
+        "name": "All_1",
+        "op": "All",
+        "device": ""
+      },
+      {
+        "name": "stack",
+        "op": "Pack",
+        "device": ""
+      },
+      {
+        "name": "All_2",
+        "op": "All",
+        "device": ""
+      },
+      {
+        "name": "Assert",
+        "op": "Assert",
+        "device": ""
+      },
+      {
+        "name": "global_norm/stack",
+        "op": "Pack",
+        "device": ""
+      }
+    ],
+    "invalid_cases": [
+      {
+        "position": 0,
+        "invalid": "nan",
+        "rejected_before_mutation": true
+      },
+      {
+        "position": 0,
+        "invalid": "inf",
+        "rejected_before_mutation": true
+      },
+      {
+        "position": 0,
+        "invalid": "-inf",
+        "rejected_before_mutation": true
+      },
+      {
+        "position": 1,
+        "invalid": "nan",
+        "rejected_before_mutation": true
+      },
+      {
+        "position": 1,
+        "invalid": "inf",
+        "rejected_before_mutation": true
+      },
+      {
+        "position": 1,
+        "invalid": "-inf",
+        "rejected_before_mutation": true
+      }
+    ],
+    "finite_steps": 12,
+    "finite_model_and_Adam_max_abs_difference": 0.0
+  },
+  "artifact_verification": {
+    "1-legacy/report.json": {
+      "bytes": 195255,
+      "sha256": "61087306f0cd230c292d2419fefa826ece1802ab5a40ec79a6ad4104b2e0b706"
+    },
+    "1-legacy/result-state.npz": {
+      "bytes": 4481222,
+      "sha256": "f4c6c9764319faeb0e5d28fd5526a5085fdc83b2b6473b469b233adce3bc26f1"
+    },
+    "1-legacy/os-samples.json": {
+      "bytes": 1989233,
+      "sha256": "684106dad7df0509e96608e6d7480d8e6d67f536e77f2032d5967d371666d008"
+    },
+    "2-consolidated/report.json": {
+      "bytes": 195245,
+      "sha256": "45bd1f621600ec7e616baba09fba907f70da9a1a4b549669fecaa30a91931c9c"
+    },
+    "2-consolidated/result-state.npz": {
+      "bytes": 4481222,
+      "sha256": "6160aa4bbbd243abf2ac939951de9eac07ba82942380554208d441ec766682fb"
+    },
+    "2-consolidated/os-samples.json": {
+      "bytes": 1873261,
+      "sha256": "a336b31f4f56c757d32aad336b98bdbc07ceab4e76770ec2d737783cddc318d1"
+    },
+    "3-consolidated/report.json": {
+      "bytes": 195249,
+      "sha256": "a3d6fed71029b30589db0249d69262dc8005577e66e7acd8f18f3b6773fa0e58"
+    },
+    "3-consolidated/result-state.npz": {
+      "bytes": 4481222,
+      "sha256": "b71ee9441bbcd714673fac9cab7b94369dde97f27f8af17fa7d872f67942b550"
+    },
+    "3-consolidated/os-samples.json": {
+      "bytes": 1904936,
+      "sha256": "41f7c80f216e9fef95d4cbd3e63c202bdc40e6810db5e2555dd610f517fd88d1"
+    },
+    "4-legacy/report.json": {
+      "bytes": 195427,
+      "sha256": "20ce1084fed7753ab12408ab653177ae6b8a7264679b8d58510fa893c8956ef0"
+    },
+    "4-legacy/result-state.npz": {
+      "bytes": 4481222,
+      "sha256": "5e8fc9d36836b519af06d9606234daab07508d9f05f37f6f61d90a23613e8d77"
+    },
+    "4-legacy/os-samples.json": {
+      "bytes": 2138048,
+      "sha256": "657f8122f5fdc5633cf25526af4c47d36a400ddb25adcecd19f5d35118d3c587"
+    }
+  },
+  "limitations": [
+    "One frozen saved update on one GPU; this measures update runtime, not learning strength or extra data efficiency.",
+    "GPU floating-point execution may vary even in unchanged A/A controls. Unequal retry/work counts are never pooled as a speedup comparison.",
+    "Exact acceptance/rejection sequence means accepted flag plus rejection reasons; floating KL values need not be bitwise equal.",
+    "Initial model/config/inputs/checkpoint hashes, optimizer iteration counts and PCG state are compared exactly. Initial Adam array digests were not separately recorded; both optimizers are restored from the same hashed checkpoint.",
+    "All final state arrays are finite; every pair is compared against tolerances declared before timing. Bitwise equality is reported separately.",
+    "No GPU trace was recorded in these runs. Graph op counts establish changed validation structure, not observed D2H transfer counts or measured synchronization latency.",
+    "Full graphs can contain unrelated Assert operations. One aggregate finite-gradient assertion does not imply only one Assert in the entire graph.",
+    "Linux memory/PSI/swap counters are passive; system-wide counters may include unrelated activity and do not measure Windows host paging.",
+    "Peak RSS includes model loading/compilation and mapped pages and is not incremental cache RAM. OS page cache may use additional reclaimable memory.",
+    "Isolated update replay omits resident game-generation workers. Production end-to-end memory pressure and speed remain unmeasured.",
+    "Full update includes scan, prepacking, policy-cache construction and cleanup; compile and model restore occur before the timed interval."
+  ],
+  "adoption": {
+    "status": "enabled_in_local_source",
+    "helper": "_assert_finite_gradients",
+    "model_and_rl_changes": false,
+    "predeployment_independent_source_review": "passed",
+    "local_tests": 27,
+    "gpu_safety_gate": "passed",
+    "eager_gpu_placement": "passed",
+    "full_update_parity": "passed within declared limits; matching-work guard decisions and PCG exact",
+    "scope": "Standard actor/critic steps; optional sequence-critic and imitation gradient checks are untouched.",
+    "diagnostic_tradeoff": "Errors retain actor/critic context but omit offending gradient values.",
+    "runtime_rule": "Never patch a running study; use a fresh deployment for future training."
+  },
+  "gpu_eager_placement": {
+    "status": "passed",
+    "all_eager_intermediates_on_gpu0": true,
+    "report": "gpu-placement.json",
+    "limitation": "Concrete eager GPU0 capability/placement only; this is not a full-model graph execution timeline or a measured device-transfer count. Static graph device fields in the prior preflight were blank. The assertion may consume a host scalar, and converting the returned flag to Python also copies a scalar."
+  }
+}

@@ -1,4 +1,256 @@
-# Foundations mono-red CPU PPO
+# Foundations mono-red PPO
+
+## Default update pipeline
+
+Normal training now uses `--update-pipeline auto` for new runs and checkpoint
+resumes. Numerical prepacking and canonical policy-input caching are enabled.
+On an unambiguous single GPU with at least 23 GiB total and 22 GiB currently free,
+the profile also enables the GPU policy-input and actor-epoch caches, each with
+an 8 GiB payload cap. This adopts the validated configuration on Raytracer's
+4090. CPU learners and smaller, occupied or unrecognized GPUs use the host
+packing path. The capacity check is admission guidance, not a VRAM reservation;
+larger input shapes and concurrent allocations still need headroom.
+
+For example, `python -m examples.train_rustmage --output NEW_STUDY --learner-device gpu`
+selects selective cuDNN fusion and the automatic cache profile. Existing game,
+batch-size and RL flags retain their values. Each report invocation records the
+requested profile, resolved settings, GPU inventory and admission reason. These
+runtime options can change on resume without changing the immutable learning
+recipe, model, both Adam states or trainer RNG.
+
+Use `--update-pipeline host` to keep the new preparation path without GPU caches,
+or `--update-pipeline legacy` to disable the new input caches and prepacking.
+`--update-pipeline gpu` explicitly enables GPU caches and bypasses the automatic
+capacity gate. Set `--policy-cache-mib N` and `--actor-epoch-cache-mib N` to choose
+their independent payload caps; zero disables that GPU cache. Automatic mode
+admits at most the validated 8192 MiB cap per cache; larger caps require the
+explicit GPU profile. CPU fallback still handles batches beyond the admitted
+prefix; device-placement and allocation failures remain visible.
+
+GPU history/state GRUs use cuDNN by default; `--learner-gru-backend unfused`
+selects the original execution backend. Consolidated finite-gradient checks
+remain active in every profile. No automatic host allocator trimming is enabled:
+the diagnostic below established reclaimability, but did not measure subsequent
+allocation costs. The low-level `StreamingPPOTrainer` constructor retains
+explicit cache opt-ins for other callers.
+
+## GPU learner GRUs
+
+GPU learning now defaults to selective cuDNN fusion: the history and state-memory
+GRUs use cuDNN, while semantic GRUs retain the original implementation. CPU
+learners, CPU inference replicas and standalone checkpoint loading retain the
+original backend. The model architecture, weights, FP32 precision and PPO
+settings are unchanged. The [saved-update benchmark](benchmarks/fused-gru-2026-10-25/README.md)
+measured about 34% less update time; matching policy-retry counts still saved
+31–33% on that round.
+
+`--learner-device gpu` selects this default. Use
+`--learner-gru-backend unfused` to compare with the original implementation, or
+`--learner-gru-backend cudnn-memory` to request selective fusion explicitly.
+Explicit cuDNN with a CPU learner fails before creating an experiment.
+
+Backend selection occurs before trainer graphs are compiled, including when
+resuming older checkpoints. Both Adam states and the trainer RNG are restored.
+This runtime option can change on resume without changing the saved learning
+recipe. Each report invocation records the resolved backend and all six
+per-layer choices; checkpoints stay portable to CPU inference. Do not edit or
+replace a running study's pinned runtime to adopt it: deploy a new reviewed
+runtime for the next study or continuation.
+
+## Frozen-update packing and policy-input caching
+
+`StreamingPPOTrainer` supports two opt-in runtime choices:
+`numerical_prepacking=True` packs records during the initial scan into anonymous
+numerical backing storage, and `cache_policy_batches=True` retains the canonical
+padded inputs used by repeated policy checks. Policy outputs and KL checks are
+recomputed after every proposal. Local padding, sample order, model equations,
+PPO minibatch size, optimizer settings and guard thresholds remain unchanged.
+Both constructor arguments default to false; the normal training CLI enables
+them through its runtime profile described above.
+
+Prepacking uses direct contiguous row copies. The initial implementation's large
+index grids were slower; those trials remain in the
+[complete benchmark results](benchmarks/update-packing-2026-10-26/results.json).
+Before timing, the diagnostic verifies every canonical training batch, shuffled
+batches and fused GPU outputs/gradients. Full replays restore checkpoint 39,
+both Adam states and PCG, optimize the original round 40 training partition only,
+and retain final arrays plus every proposal decision. No diagnostic checkpoint
+is promoted.
+
+Reproduce a variant in an isolated runtime with
+`python -m examples.benchmark_packed_update --source STUDY --output NEW_OUTPUT --round 40 --device gpu --gru-backend cudnn-memory --packing-variant both`.
+Run `python -m examples.benchmark_update_packing --source STUDY --output NEW_PARITY_OUTPUT`
+first. Variant choices are `default`, `cache`, `prepack` and `both`.
+
+The measured round uses about 2.46GB of numerical backing plus 6.23GB of cached
+padded inputs when both are enabled. These anonymous files are removed after
+the update. Their mappings consume reclaimable OS page cache in addition to the
+unchanged explicit 512MiB rollout cache. Timings include setup and cleanup, but
+replay an isolated updater without resident game-generation workers. Check
+memory pressure and end-to-end performance before choosing this runtime for a
+long study. Deploy a fresh pinned runtime; do not alter an active study.
+
+`python -m examples.profile_packed_update --source STUDY --output NEW_OUTPUT --round 40 --instrumented --trace-seconds 0`
+replays the same GPU update with CPU spans and passive Linux memory/I/O counters.
+Set `--trace-seconds 30` to add a GPU trace; omit `--instrumented` for a timing
+control. Full GPU tracing can itself cause paging in a 16GiB WSL environment,
+so compare memory pressure with the control and a pass without GPU tracing.
+Missing per-process I/O counters are recorded as unavailable, never zero.
+See the [optimized pipeline profile](benchmarks/packed-profile-2026-10-26/results.json).
+
+Standard actor and critic optimizer steps consolidate finite-gradient validation into one
+scalar assertion. Every gradient is still checked, and clipping plus all Adam
+weight, slot and iteration writes depend on that assertion. Gradient values,
+clipping order and optimizer arithmetic are unchanged. Failure messages retain
+actor/critic context but no longer copy offending gradient values into the
+diagnostic. See the [frozen-update safety and timing comparison](benchmarks/consolidated-checks-2026-10-26/results.json).
+
+### GPU-resident policy inputs
+
+`StreamingPPOTrainer` also accepts the runtime arguments
+`policy_cache_device='/GPU:0'` and `policy_cache_device_bytes=8 * 1024**3`.
+The cache admits a deterministic prefix of canonical policy-check batches and
+uploads those immutable inputs once. Each proposal still recomputes policy
+outputs, KL and guard decisions. Shuffled actor and critic training batches
+retain their original packing and transfer path. Model and RL settings do not
+change. The constructor device and budget default to `None` and `0`; the CLI's
+GPU profile sets the validated cap and device explicitly.
+
+The byte limit covers tensor payload, not TensorFlow allocator overhead, model
+weights or activations. A batch that exceeds the remaining budget closes prefix
+admission; subsequent policy batches use the CPU path. Enable
+`cache_policy_batches=True` for a host policy-cache fallback. Reports distinguish
+device uploads, hits, payload, fallback batches and host-cache bytes. Device
+placement failures and GPU allocation errors remain explicit. Device-admitted
+batches bypass the host policy mmap; all cache references are released after
+concurrent readers and optimizers join, including failures.
+
+The GPU correctness preflight is
+`python -m examples.benchmark_device_policy_cache --source STUDY --output NEW_PARITY_OUTPUT`.
+It compares all canonical inputs, shuffled batches and joint forward/backward
+results on the frozen training partition. The timing driver is
+`python -m examples.benchmark_device_cached_update --source STUDY --output NEW_OUTPUT --cache-placement gpu --preflight-report NEW_PARITY_OUTPUT/report.json`;
+use `--cache-placement host` for the prior implementation in its frozen runtime.
+These drivers replay saved round 40 only and never promote their updated weights.
+
+The [four-replay comparison](benchmarks/device-policy-cache-2026-10-26/results.json)
+measured 185.4s mean update time with the CPU cache versus 152.4s with GPU inputs:
+17.8% less time, with matching optimizer work, policy-check decisions and PCG in
+all four runs. Every pair of final model and both Adam arrays remained within
+the declared tolerance. All canonical inputs matched exactly; three joint GPU
+backward cases had a maximum gradient difference below 4.8e-7. Nine local tests
+passed. The GPU cache uploaded 167 batches once and recorded 1,837 reuse hits,
+with no fallback.
+
+The tensor payload was 6.23GB (5.80GiB). Sampled total GPU memory peaked at
+8.75GiB versus 1.75GiB for the CPU cache, while sampled process RSS fell from
+about 11.2GiB to 5.8GiB. No Linux swapout or candidate memory-pressure stalls were
+observed. These are isolated updates without resident game workers; production
+memory and full-training throughput remain unmeasured. Sampled GPU activity
+stayed near 31%, which is busy time rather than a
+measure of available compute capacity.
+
+### Profile with GPU input residency
+
+`python -m examples.profile_device_cached_update --source STUDY --output NEW_OUTPUT --preflight-report PRIOR_POLICY_PREFLIGHT/report.json --instrumented`
+adds host timing spans and passive memory/GPU samples to the GPU-cache updater.
+Omit `--instrumented` for the control. GPU tracing is disabled. The
+[profile and control](benchmarks/device-cache-profile-2026-10-26/README.md)
+preserved checkpoint state and the whole-game partition. They had nine and
+eight rejected proposals respectively, so their 160.4s and 153.6s durations do
+not estimate instrumentation overhead.
+
+The instrumented update spent 116.2s in actor passes, 32.8s in policy scans and
+11.1s in the initial scan. Numerical gathering occupied 83.6s, overlapping
+80.2s of the actor passes; those times cannot be added. Waiting for actor inputs
+was only 0.4s. This motivated reusing an epoch's identical shuffled inputs across
+its backtracking retries rather than increasing prefetch depth.
+
+### GPU-resident actor epoch inputs
+
+`StreamingPPOTrainer(actor_epoch_cache_device='/GPU:0',
+actor_epoch_cache_bytes=8 * 1024**3)` enables a separate, bounded cache of an
+epoch's immutable shuffled minibatches. It reuses them across that epoch's
+backtracking attempts, then releases them before the next epoch. Model outputs,
+gradients, optimizer steps, clipping and policy guards are still recomputed.
+The critic and canonical policy-input cache remain independent. The constructor
+device and budget default to `None` and `0`; the CLI's GPU profile enables
+the cache as a runtime choice without changing the saved learning recipe.
+
+Admission follows the original shuffled order and stops at the first batch
+that cannot fit; remaining batches use the existing CPU preparation path.
+Prefetch workers join before cache release on completion, early stop and errors.
+Placement and allocation failures remain explicit. The byte limit covers tensor
+payload, excluding allocator retention, model weights and graph workspaces.
+
+The [four-replay comparison](benchmarks/actor-epoch-cache-2026-10-26/README.md)
+measured **152.8s baseline versus 106.4s cached**, or **30.3% less update time**.
+All four runs used identical optimizer work, guard accept/reject decisions and
+final PCG state. All six comparisons of final model and both Adam arrays met
+the declared tolerances. Exact validation covered 167 canonical batches and
+both actual shuffled orders (334 batches); three joint GPU forward/backward
+cases passed, including a short CPU-input fallback. Nine local tests passed.
+
+On this round, each epoch retained 153 of 167 batches within 8 GiB. The two
+epochs recorded 1,224 reuse hits, reducing numerical gathers from 1,996 to 772.
+Sampled peak GPU usage increased from 8.75 to 21.69 GiB, leaving about 2.29 GiB
+on this GPU; sampled process RSS increased from about 5.6–5.8 to 6.2 GiB.
+No timed-run Linux swapout or new OOM
+kill was observed. These isolated updates exclude resident game-generation
+workers, so full-training throughput and memory headroom remain unmeasured.
+
+The preflight command is
+`python -m examples.benchmark_actor_epoch_cache --mode preflight --source STUDY --output NEW_PARITY_OUTPUT --policy-preflight-report PRIOR_POLICY_PREFLIGHT/report.json`.
+After it passes, replay with `--mode baseline` or `--mode epoch-cache` and
+`--actor-preflight-report NEW_PARITY_OUTPUT/report.json`, using a fresh output
+directory for every case. The first exhaustive validation was killed during
+high host memory pressure before any timed run; its evidence is preserved.
+The repaired validation retains every exact input and gradient check while
+avoiding redundant host copies. Deploy a new pinned runtime to adopt the optimization; do not edit a
+running study.
+
+### Consecutive-update memory validation
+
+The [five-update memory test](benchmarks/actor-cache-soak-2026-10-26/README.md)
+replayed saved rounds 36–40 from checkpoint 35 in one persistent GPU process,
+with both 8 GiB input-cache caps and minibatch 512. Model weights, both Adam
+states and PCG continued between calls; no TensorFlow session reset, allocator
+flush or forced garbage collection occurred between updates. This is a runtime
+test: later historical behavior policies can differ from the diagnostic policy,
+so its results make no fresh on-policy learning or speedup claim.
+
+All five updates completed with finite state, no graph retracing and no surviving
+cached Tensor objects, readers or PPO worker threads at each boundary. Tracked
+live TensorFlow allocations returned to 5.0–5.3 MiB, with a final-three range of
+0.196 MiB. Sampled physical VRAM stayed within the earlier 21.69 GiB peak,
+leaving at least 2.29 GiB. All 205 source checkpoint files remained unchanged.
+
+Host memory did not establish a plateau: post-update RSS rose from 3.40 to
+4.29 GiB, mostly anonymous/private memory; sampled peak RSS was 6.79 GiB.
+No process swapping, Linux swapout or new OOM kill was observed. The measurements
+do not distinguish allocator retention from live internal allocations. GPU cache
+lifecycle checks passed, while longer host-memory stability and production
+worker coexistence remain unmeasured. Retain the memory budgets and use the host
+profile when headroom is limited; the measured peak is not a ceiling for larger
+input shapes.
+
+### Host RAM attribution
+
+A subsequent [allocator investigation](benchmarks/host-memory-2026-10-26/README.md)
+repeated the same five saved updates with the unchanged model and RL settings.
+Post-update RSS grew 670 MiB; glibc's free-arena bookkeeping grew 622 MiB while
+allocated-arena bookkeeping grew 26 MiB. The diagnostic's retained-container
+estimates grew about 18 MiB. These counters support native allocator retention
+as the main explanation, but are not an exact resident-memory attribution.
+
+After all normal updates, a two-second idle control barely changed RSS. Python
+GC freed about 12 MiB of allocated bookkeeping without reducing RSS. A subsequent
+`malloc_trim(0)` returned 1.45 GiB of process-resident pages, reducing RSS from
+4.19 to 2.74 GiB while model, both Adam states and PCG remained exactly unchanged.
+The trim itself took 14.7 ms; the effect on later allocation/page-fault costs was
+not measured. No production trimming policy has been enabled. This establishes
+substantial reclaimability, while natural long-run RAM stability and concurrent
+worker memory remain unmeasured.
 
 ## Budgeted learning-recipe investigation, October 25, 2026
 

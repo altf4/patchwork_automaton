@@ -1,0 +1,14 @@
+{
+  "verified": true,
+  "utc": "2026-10-26T14:33:20.050379+00:00",
+  "original_owner": {
+    "pid": 3598253,
+    "pgid": 3598253,
+    "sid": 3598253,
+    "start_ticks": 51357209,
+    "uid": 1000,
+    "maximum_seconds": 3600
+  },
+  "remaining_owned_members": [],
+  "temporary_sleep_request_absent": true
+}

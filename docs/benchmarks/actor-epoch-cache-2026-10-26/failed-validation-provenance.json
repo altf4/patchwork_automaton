@@ -1,0 +1,104 @@
+{
+  "status": "preserved_validation_failure",
+  "no_timed_replays_started": true,
+  "manifest": {
+    "output": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/actor-epoch-cache-20261026",
+    "manifest_sha256": "9de54ceda5149ef629aa9685afaa3542291bed7f7255977772d124ae7cffaff5",
+    "status": "gpu_preflight_killed_no_timing_runs",
+    "backup_sha256": "a951c339a8d29eaa3f0aac2260c336389ad272aa3bcb5ba8678961dc17fbe14c",
+    "diagnosis": "SIGKILL with high RSS/swap and system OOM counter1; kernel PID log unavailable. Validation removes redundant host policy-cache and resolves ephemeral GPU identities to avoid retaining validation CPU mirrors; coverage/model/RL/caps unchanged."
+  },
+  "backup_proof": {
+    "sha256": "a951c339a8d29eaa3f0aac2260c336389ad272aa3bcb5ba8678961dc17fbe14c",
+    "bytes": 75974,
+    "files": 11,
+    "npz_crc_passed": 0,
+    "gzip_crc_passed": true
+  },
+  "study": {
+    "status": "error",
+    "owner": {
+      "pid": 26732,
+      "pgid": 26732,
+      "sid": 26732,
+      "start_ticks": 1632464,
+      "uid": 1000
+    },
+    "started_utc": "2026-10-26T16:00:29.871900+00:00",
+    "manifest_sha256": "9de54ceda5149ef629aa9685afaa3542291bed7f7255977772d124ae7cffaff5",
+    "cases": [
+      {
+        "label": "gpu-preflight",
+        "status": "error",
+        "owner": {
+          "pid": 26734,
+          "pgid": 26734,
+          "sid": 26734,
+          "start_ticks": 1632506,
+          "uid": 1000
+        },
+        "started_utc": "2026-10-26T16:00:30.243651+00:00",
+        "exit_code": -9,
+        "finished_utc": "2026-10-26T16:08:13.142947+00:00"
+      }
+    ],
+    "error": "RuntimeError('Case failed: gpu-preflight')",
+    "finished_utc": "2026-10-26T16:08:13.167349+00:00",
+    "source_checkpoint_files_unchanged": 205,
+    "original_runtime_unchanged": true,
+    "base_runtime_unchanged": true,
+    "pinned_runtimes_unchanged": true,
+    "cleanup": {
+      "owned_children_remaining": 0,
+      "shared_lock_released": true,
+      "utc": "2026-10-26T16:08:13.610010+00:00"
+    }
+  },
+  "diagnosis": {
+    "utc": "2026-10-26T16:11:52.098737+00:00",
+    "oom_kill": 1,
+    "kernel_log_status": 1,
+    "kernel_oom_lines": [],
+    "kernel_log_error": "sudo: a password is required\n",
+    "memory_pressure": "some avg10=0.00 avg60=0.35 avg300=4.19 total=61387888\nfull avg10=0.00 avg60=0.35 avg300=4.19 total=61312145\n"
+  },
+  "observed_validation_health": {
+    "state": "R",
+    "cpu_ticks": 18755,
+    "status": {
+      "VmRSS": "14507040 kB",
+      "VmSwap": "4088168 kB",
+      "Threads": "37"
+    },
+    "memory_pressure": "some avg10=10.09 avg60=12.55 avg300=6.10 total=37887198\nfull avg10=10.09 avg60=12.54 avg300=6.10 total=37842674\n",
+    "gpu": "0, 17153, 24564"
+  },
+  "source_artifacts": {
+    "results.tar.gz": {
+      "sha256": "a951c339a8d29eaa3f0aac2260c336389ad272aa3bcb5ba8678961dc17fbe14c",
+      "bytes": 75974
+    },
+    "manifest.json": {
+      "sha256": "9de54ceda5149ef629aa9685afaa3542291bed7f7255977772d124ae7cffaff5",
+      "bytes": 35517
+    },
+    "backup-proof.json": {
+      "sha256": "282f7ffb5fbc4efbd9fe1d9a54c758d23e129593981ea74b3b8094141f8884cf",
+      "bytes": 166
+    },
+    "oom-diagnosis.json": {
+      "sha256": "87e72e75b449105856da1c506ca08af81c3a139e752fde561fdb170cdc8c913d",
+      "bytes": 294
+    },
+    "preflight-health.json": {
+      "sha256": "9477e631a6550e4ce3f93cc6669a835f82bfb92d61819c2afb21159081362bf3",
+      "bytes": 275
+    },
+    "linux-cleanup.json": {
+      "sha256": "02c271f1cf13f82dabbd137c40a28caf6910f02bed1486fd8c8955e4dcb03ed9",
+      "bytes": 395
+    }
+  },
+  "attribution": "SIGKILL, high validation RSS/swap and a nonzero global OOM-kill counter were observed. Kernel PID attribution was unavailable; exact allocation/source attribution is unproven.",
+  "interpretation": "This was a validation-only failure, not a failed timed actor-cache learning update. No games or promoted checkpoints were produced."
+}
