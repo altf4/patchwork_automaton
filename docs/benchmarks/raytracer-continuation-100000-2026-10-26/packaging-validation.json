@@ -1,0 +1,33 @@
+{
+  "status": "passed",
+  "generated_utc": "2026-10-26T22:28:30.654635+00:00",
+  "packager_sha256": "418c212097e29204ae319c700a0a662d9b15570c46a2d79bf6ece50a09e0dd94",
+  "independent_tool_review_sha256": "128a96224edb1b3a775a4d0044196c7339100780c7bc3b5e19dd750d50ecd084",
+  "actual_final_reports_packaged": 8,
+  "actual_final_attempts": 50000,
+  "unique_final_schedules": 15000,
+  "monitoring_points": 11,
+  "monitoring_attempts_per_point": 2000,
+  "monitoring_unique_schedules": 2000,
+  "final_terminal_attempts": 50000,
+  "final_draws": 0,
+  "final_cutoffs": 0,
+  "final_errors": 0,
+  "table_rows": 19,
+  "csv_json_outcomes_and_denominators_agree": true,
+  "actual_png_visual_review": {
+    "combined-open-monitoring.png": "Passed: actual values, protocol/focal labels, intervals, denominator captions, readable layout; no clipping or synthetic values.",
+    "fresh-baseline-and-primary-gain.png": "Passed: actual values, protocol/focal labels, intervals, denominator captions, readable layout; no clipping or synthetic values.",
+    "actual-neural-head-to-head.png": "Passed: actual values, protocol/focal labels, intervals, denominator captions, readable layout; no clipping or synthetic values."
+  },
+  "primary_interval_method": "Audited coordinator matched-attempt percentile bootstrap, seed9901,4000resamples; postprocessor preserved CI and recomputed point estimate/transitions.",
+  "publication_contains_raw_game_arrays": false,
+  "publication_contains_models": false,
+  "publication_contains_synthetic_fixtures": false,
+  "notes": [
+    "Marginal Wilson intervals and primary paired bootstrap intervals are distinctly labelled.",
+    "Shared schedules are not pooled as independent evidence.",
+    "One continued training seed; game intervals exclude training-seed variance.",
+    "Root owns independent statistical final audit, live cleanup verification, publication narrative and commit."
+  ]
+}

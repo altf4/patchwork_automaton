@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "status": "passed",
+  "generated_utc": "2026-10-26T22:31:43.852121+00:00",
+  "training": {
+    "evidence": "final-training-audit-100k.json",
+    "sha256": "1ebc02eabb5090a78c873c2b3592d143b673b41e00f489364761086476c9ec7f",
+    "status": "passed",
+    "checks_passed": 12237
+  },
+  "final_results": {
+    "evidence": "final-results-independent-audit.json",
+    "sha256": "a5b933bfa0a3ab085daa6d461c122f49284542d10c4306f9ef206b3bb3aad890",
+    "status": "passed",
+    "checks_passed": 1234
+  },
+  "local_backup_cleanup": {
+    "evidence": "final-local-backup-cleanup-verification.json",
+    "sha256": "11d8a2766ae8dbac51ed73142b88d0020ee6ffcd305018236cbc873a068d7847",
+    "status": "passed",
+    "checks_passed": 748
+  },
+  "remote_cleanup": {
+    "evidence": "final-remote-cleanup-verification-20261026T2226Z.json",
+    "sha256": "c361980a6f0f58c5c54306babe800756078cc64494dcc4cc0edb5aa244503d23",
+    "status": "passed",
+    "checks_passed": null
+  },
+  "archives_verified": 75,
+  "checkpoint_files_verified": 505,
+  "final_archive_sha256": "1f0b8f02803bbe39a9a0070f98fb23c3bd2d2fdc8ef5e870de3fa8c140ce3d95",
+  "final_backup_receipt_sha256": "841fea4a6707222257c87a5cae607d6f6adedcdfe32a7f2cc3604951f526ad2f",
+  "installed_final_members_verified": 86,
+  "runtime_files_verified": 150,
+  "original_source_artifacts_verified": 210,
+  "owned_remote_child_records_checked": 22,
+  "remote_live_owned_sessions_or_groups": [],
+  "remote_shared_lock_free": true,
+  "linux_terminal_receipt_sha256": "84555baa60a79241a2eb08b4342a2f126c6aaf4c1bd0ecd6a6ed3e235e96a72a",
+  "local_observer_exited": true,
+  "local_orphaned_observer_or_plot_processes": [],
+  "native_cleanup": {
+    "status": "passed",
+    "utc": "2026-10-26T22:30:25.3571301Z",
+    "checks_passed": 12,
+    "checks": [
+      "Continuation task Ready, successful exit, no running instances",
+      "Explicit CIM count proves exact continuation PID absent; no signal issued",
+      "Guardian released its own request through exact post-terminal stop marker",
+      "Complete terminal receipt remains bound",
+      "Released state belongs to exact native owner and manifest",
+      "Guardian native source pins unchanged",
+      "Only day-guard PowerShell SYSTEM_REQUIRED request remains after continuation owner exit",
+      "Separate day guard exact original owner remains running",
+      "Fresh direct CIM day owner identity remains exact",
+      "Day guard manifest, expiry and task limit unchanged",
+      "Day guard heartbeat fresh at native status observation",
+      "Stop helper acted only on exact completed guardian grace"
+    ],
+    "release_executed": true,
+    "release_file": "grace-release-20261026T2229Z.json",
+    "release_sha256": "c94a5e30ac28525464a4245cde4d5837d69475ea22433e95ee1bfcbaaa0b280a",
+    "native_final_status_file": "native-final-status-20261026T2229Z.json",
+    "native_final_status_sha256": "f9f95bf414a1c6567ca60e7a6841d5a089743068d7488242b7831a4f440d7505",
+    "native_exit_proof_file": "native-exit-proof-20261026T2230Z.json",
+    "native_exit_proof_sha256": "8b54dd1295f5b8c08ad9aedfd3ae2608b82b764635dcefccf027710a2e472419",
+    "native_owner": {
+      "windows_pid": 16496,
+      "creation_utc": "2026-10-26T18:28:00.1804135Z"
+    },
+    "continuation_guardian_released": true,
+    "continuation_owner_exited": true,
+    "continuation_task_state": "Ready",
+    "continuation_task_last_result": 0,
+    "continuation_task_running_instances": 0,
+    "continuation_system_required_present": false,
+    "native_finished_utc": "2026-10-26T22:29:36.8690104Z",
+    "release_reason": "post_terminal_explicit_stop",
+    "remaining_system_required_process_requests": 1,
+    "day_guard_owner": {
+      "windows_pid": 17460,
+      "creation_utc": "2026-10-26T15:05:04.7271020Z"
+    },
+    "day_guard_exact_owner": true,
+    "day_guard_alive": true,
+    "day_guard_task_state": "Running",
+    "day_guard_system_required_present": true,
+    "day_guard_expiry_utc": "2026-10-27T07:00:00.0000000Z",
+    "day_guard_preserved": true,
+    "shutdown_performed": false,
+    "settings_changed": false,
+    "linux_or_training_launched": false,
+    "terminal_receipt_sha256": "84555baa60a79241a2eb08b4342a2f126c6aaf4c1bd0ecd6a6ed3e235e96a72a",
+    "linux_cleanup_sha256": "82435b5f5dba7c3d90fb91b2e767bb646c339e5eea8812db52e298b33a3d94ce",
+    "evidence": "windows/native-final-cleanup-proof-20261026T2229Z.json",
+    "sha256": "0d95e319d2ece74a159333b78d031a734078cd5548e9546078bf74475be097f0"
+  },
+  "separate_day_awake_guard_must_remain": true,
+  "visual_qa": "All three supplemental PNGs and the saved pipeline PNG inspected after actual results packaging; no synthetic fixture figures published.",
+  "artifact_manifest_sha256": "c36a5243a868c6f84efedc1914ce81e997777614432d057cb8cf61d698631dfd",
+  "svg_publication_formatting_verified": true,
+  "csv_rows_preserved_after_line_ending_normalization": true
+}

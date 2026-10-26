@@ -1,0 +1,26 @@
+{
+  "status": "actual_results_and_verification",
+  "generated_utc": "2026-10-26T22:31:43.852121+00:00",
+  "files": {
+    "result-summary.json": {
+      "sha256": "6c01d2dbc500aa18531644e6850d6da22086fd06f2d40c4f0e3e51b08ec7bd02",
+      "bytes": 10292
+    },
+    "verification.json": {
+      "sha256": "b8b017e845c06865360a2391f70107ae45c2cf281eb588c9cd22f4d763590765",
+      "bytes": 4906
+    },
+    "training-and-update-pipeline.png": {
+      "sha256": "cf6bab86d4058c30cef4e1a87cf3592084f9ecab9b34d667e4190bb1a7b4116b",
+      "bytes": 333245
+    },
+    "training-and-update-pipeline.svg": {
+      "sha256": "9f78ef3e9fd3014f6089212bbaf3308fbdd15f725fd4b37fdcfcf5cc002fb0fe",
+      "bytes": 104617
+    }
+  },
+  "companion_manifest": {
+    "file": "artifact-manifest.json",
+    "sha256": "c36a5243a868c6f84efedc1914ce81e997777614432d057cb8cf61d698631dfd"
+  }
+}

@@ -1,0 +1,284 @@
+{
+  "schema_version": 1,
+  "run_id": "raytracer-continuation-100000-2026-10-26",
+  "status": "complete_saved_results",
+  "generated_utc": "2026-10-26T22:31:01.355863+00:00",
+  "finding": "The continued 100k policy improved against the fixed baseline and won more than half of the actual head-to-head games against each earlier frozen policy.",
+  "training": {
+    "source_round": 40,
+    "target_round": 100,
+    "additional_unique_terminal_attempts": 60000,
+    "total_unique_terminal_attempts": 100000,
+    "optimization_games": 80000,
+    "whole_game_holdouts": 20000,
+    "training_seed": 300261025,
+    "batch_size": 512,
+    "additional_raytracer_games": 60000,
+    "additional_laptop_games": 0,
+    "actor_optimizer_steps": 32822,
+    "critic_optimizer_steps": 15857,
+    "model_and_rl_settings_unchanged": true,
+    "critic_rewarm": false,
+    "continuation_restarts": 0,
+    "continued_same_model_both_adam_states_and_pcg64": true
+  },
+  "fresh_baseline": [
+    {
+      "kind": "fresh_baseline",
+      "label": "40k",
+      "attempts": 10000,
+      "terminal_games": 10000,
+      "wins": 5558,
+      "losses": 4442,
+      "draws": 0,
+      "cutoffs": 0,
+      "errors": 0,
+      "unresolved_attempts": 0,
+      "win_rate": 0.5558,
+      "ci95": [
+        0.5460418168036314,
+        0.5655153289782011
+      ],
+      "checkpoint_sha256": "6e8919de5af6f9ec651b88da228745d9fc525d4286c7393958c9f188dd203ce2",
+      "opponent_checkpoint_sha256": null,
+      "seed_base": 450261026,
+      "seed_last": 450271025,
+      "mode": "versus_baseline",
+      "input_sha256": "8ffde52393518b8e5b8155518efe8921857dc8a7b8eddfd41143c3f1367794f7",
+      "input_file": "continuation-study/confirmation-round-40.json"
+    },
+    {
+      "kind": "fresh_baseline",
+      "label": "100k",
+      "attempts": 10000,
+      "terminal_games": 10000,
+      "wins": 6467,
+      "losses": 3533,
+      "draws": 0,
+      "cutoffs": 0,
+      "errors": 0,
+      "unresolved_attempts": 0,
+      "win_rate": 0.6467,
+      "ci95": [
+        0.6372767693755718,
+        0.6560105655024718
+      ],
+      "checkpoint_sha256": "204664758c6efd96ea2ddf7560e86f47a7449950fc3b37bd391dd7028333c30b",
+      "opponent_checkpoint_sha256": null,
+      "seed_base": 450261026,
+      "seed_last": 450271025,
+      "mode": "versus_baseline",
+      "input_sha256": "728db89aca1d21e531a55b5e0fe2d43a3e8c339c2fd2ab14bb30e4e4d289983b",
+      "input_file": "continuation-study/confirmation-round-100.json"
+    }
+  ],
+  "primary_paired_comparison": {
+    "attempted_pairs": 10000,
+    "terminal_pairs": 10000,
+    "unresolved_pairs": 0,
+    "recorded_attempt_win_rate_change": 0.0909,
+    "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+      0.0846,
+      0.09760250000000001
+    ],
+    "terminal_score_change_on_terminal_pairs": 0.0909,
+    "terminal_score_change_bootstrap_95_interval": [
+      0.0846,
+      0.09760250000000001
+    ],
+    "status_transitions": {
+      "loss->loss": 3401,
+      "loss->win": 1041,
+      "win->loss": 132,
+      "win->win": 5426
+    },
+    "improved_recorded_win_attempts": 1041,
+    "worsened_recorded_win_attempts": 132,
+    "tied_recorded_win_attempts": 8827,
+    "bootstrap": {
+      "unit": "matched_attempt",
+      "seed": 9901,
+      "resamples": 4000
+    },
+    "validation": "Point estimate and matched outcome transitions recomputed; bootstrap interval preserved from audited coordinator.",
+    "independently_recomputed": true
+  },
+  "actual_head_to_head": [
+    {
+      "kind": "actual_head_to_head_100k_focal",
+      "label": "Imitation",
+      "attempts": 5000,
+      "terminal_games": 5000,
+      "wins": 3226,
+      "losses": 1774,
+      "draws": 0,
+      "cutoffs": 0,
+      "errors": 0,
+      "unresolved_attempts": 0,
+      "win_rate": 0.6452,
+      "ci95": [
+        0.6318313647815169,
+        0.6583456945736385
+      ],
+      "checkpoint_sha256": "204664758c6efd96ea2ddf7560e86f47a7449950fc3b37bd391dd7028333c30b",
+      "opponent_checkpoint_sha256": "3438e3837ca7f86c498a60bf29d2503c12b80f3f693b732423b5dca65a39c682",
+      "seed_base": 460261026,
+      "seed_last": 460266025,
+      "mode": "versus_neural",
+      "input_sha256": "49a3427bda225c9d496ab893e43a3c6a2bce85ef3429180365d97d1120dc7083",
+      "input_file": "continuation-study/head-to-head-imitation.json"
+    },
+    {
+      "kind": "actual_head_to_head_100k_focal",
+      "label": "10k",
+      "attempts": 5000,
+      "terminal_games": 5000,
+      "wins": 3166,
+      "losses": 1834,
+      "draws": 0,
+      "cutoffs": 0,
+      "errors": 0,
+      "unresolved_attempts": 0,
+      "win_rate": 0.6332,
+      "ci95": [
+        0.6197442709872141,
+        0.6464512132146227
+      ],
+      "checkpoint_sha256": "204664758c6efd96ea2ddf7560e86f47a7449950fc3b37bd391dd7028333c30b",
+      "opponent_checkpoint_sha256": "b5ec59f1ef6ec3e3a9ae28039b1d5352057ecc5931000142fb0e6223fa683184",
+      "seed_base": 460261026,
+      "seed_last": 460266025,
+      "mode": "versus_neural",
+      "input_sha256": "6e33bbbbb749c5ee8e2503c58f51eb9ff76f08301633e0ae16b3dd8cc031aa01",
+      "input_file": "continuation-study/head-to-head-round-10.json"
+    },
+    {
+      "kind": "actual_head_to_head_100k_focal",
+      "label": "20k",
+      "attempts": 5000,
+      "terminal_games": 5000,
+      "wins": 3094,
+      "losses": 1906,
+      "draws": 0,
+      "cutoffs": 0,
+      "errors": 0,
+      "unresolved_attempts": 0,
+      "win_rate": 0.6188,
+      "ci95": [
+        0.6052514982862855,
+        0.6321660957315689
+      ],
+      "checkpoint_sha256": "204664758c6efd96ea2ddf7560e86f47a7449950fc3b37bd391dd7028333c30b",
+      "opponent_checkpoint_sha256": "a6f07e8b8d008a54445d4017f82ee96dcc4cfc913f7c3b33cc80ec2423c41f90",
+      "seed_base": 460261026,
+      "seed_last": 460266025,
+      "mode": "versus_neural",
+      "input_sha256": "fa1978509e9a0575824ec333c096d77effb816dc94dcee8ff77022db88545538",
+      "input_file": "continuation-study/head-to-head-round-20.json"
+    },
+    {
+      "kind": "actual_head_to_head_100k_focal",
+      "label": "40k",
+      "attempts": 5000,
+      "terminal_games": 5000,
+      "wins": 2951,
+      "losses": 2049,
+      "draws": 0,
+      "cutoffs": 0,
+      "errors": 0,
+      "unresolved_attempts": 0,
+      "win_rate": 0.5902,
+      "ci95": [
+        0.5765041532816637,
+        0.6037573532874478
+      ],
+      "checkpoint_sha256": "204664758c6efd96ea2ddf7560e86f47a7449950fc3b37bd391dd7028333c30b",
+      "opponent_checkpoint_sha256": "6e8919de5af6f9ec651b88da228745d9fc525d4286c7393958c9f188dd203ce2",
+      "seed_base": 460261026,
+      "seed_last": 460266025,
+      "mode": "versus_neural",
+      "input_sha256": "66f6e449ecd383623b84163d0b7b81e84dc9ffc8f7b95b5459e20ca9c9acb957",
+      "input_file": "continuation-study/head-to-head-round-40.json"
+    },
+    {
+      "kind": "actual_head_to_head_100k_focal",
+      "label": "60k",
+      "attempts": 5000,
+      "terminal_games": 5000,
+      "wins": 2802,
+      "losses": 2198,
+      "draws": 0,
+      "cutoffs": 0,
+      "errors": 0,
+      "unresolved_attempts": 0,
+      "win_rate": 0.5604,
+      "ci95": [
+        0.5466012878443577,
+        0.5741059737606794
+      ],
+      "checkpoint_sha256": "204664758c6efd96ea2ddf7560e86f47a7449950fc3b37bd391dd7028333c30b",
+      "opponent_checkpoint_sha256": "51567da980de184bb608b2cbe40335d1ab036f99eb54cbf2ff146bdb17450642",
+      "seed_base": 460261026,
+      "seed_last": 460266025,
+      "mode": "versus_neural",
+      "input_sha256": "419c4af2468c385d69dac25dad663f9f6fb47f9bbede6f34a04b00b7f39e63e8",
+      "input_file": "continuation-study/head-to-head-round-60.json"
+    },
+    {
+      "kind": "actual_head_to_head_100k_focal",
+      "label": "80k",
+      "attempts": 5000,
+      "terminal_games": 5000,
+      "wins": 2661,
+      "losses": 2339,
+      "draws": 0,
+      "cutoffs": 0,
+      "errors": 0,
+      "unresolved_attempts": 0,
+      "win_rate": 0.5322,
+      "ci95": [
+        0.5183502985052261,
+        0.5460002614895122
+      ],
+      "checkpoint_sha256": "204664758c6efd96ea2ddf7560e86f47a7449950fc3b37bd391dd7028333c30b",
+      "opponent_checkpoint_sha256": "f1bc60d729d5e61531cf40915163d91e82772e5b80ca06ce88ff96a90d1d6ed1",
+      "seed_base": 460261026,
+      "seed_last": 460266025,
+      "mode": "versus_neural",
+      "input_sha256": "8e869c6d6466a2c0566626e3e01311536e9d0a3f7ba93e58bbab36b7e49d92b8",
+      "input_file": "continuation-study/head-to-head-round-80.json"
+    }
+  ],
+  "final_denominators": {
+    "attempts": 50000,
+    "terminal": 50000,
+    "draws": 0,
+    "cutoffs": 0,
+    "errors": 0,
+    "unique_schedule_definitions": 15000,
+    "baseline_cohort": 450261026,
+    "head_to_head_cohort": 460261026
+  },
+  "interpretation": "The 100k versus 80k result supports improvement late in this run. It does not establish how much further training would improve performance.",
+  "limitations": [
+    "One continued training seed. Game-level intervals do not measure training-seed variability.",
+    "Monitoring reuses one open 2,000-schedule cohort; pointwise intervals are descriptive and unadjusted for repeated looks.",
+    "Final baseline and actual neural head-to-head are distinct protocols and cohorts; their rates are not interchangeable.",
+    "Shared schedules support matched comparisons, not independent extra samples; do not pool opponents or monitoring points.",
+    "The primary metric is recorded wins / all scheduled attempts; draws, cutoffs and errors remain in the denominator.",
+    "More games also add optimizer steps. This continuation does not isolate data quantity from update quantity.",
+    "One fixed mono-red Foundations deck matchup and the stated opponents limit generalization."
+  ],
+  "historical_source_provenance": "The original 40k run retains its prior interruption/replay and late-fallback evidence in raytracer-pooled-40000-2026-10-25.json. The continuation resumed its exact checkpoint and preserved all original source artifacts. Scheduled unique attempts are distinct from physical executions in that historical run.",
+  "figures": [
+    "combined-open-monitoring.png",
+    "fresh-baseline-and-primary-gain.png",
+    "actual-neural-head-to-head.png",
+    "training-and-update-pipeline.png"
+  ],
+  "tables": [
+    "comparison-table.json",
+    "comparison-table.csv"
+  ],
+  "verification": "verification.json"
+}
