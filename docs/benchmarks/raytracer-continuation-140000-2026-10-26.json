@@ -1,6 +1,6 @@
 {
   "run_id": "raytracer-continuation-140000-2026-10-26",
-  "status": "running",
+  "status": "cancelled_by_user",
   "created_utc": "2026-10-26T22:55:02.394007+00:00",
   "authorization": "User approved40,000 additional training games from exact current100k checkpoint; prior all-Raytracer collection and unchanged model/RL settings persist. Existing older-checkpoint comparisons continue at the new endpoint.",
   "source": {
@@ -131,7 +131,7 @@
     "terminal_receipt_required": true,
     "instance_guid": "{75D24760-242E-4A0E-A827-6CC235D68A11}"
   },
-  "updated_utc": "2026-10-26T23:20:08.603824+00:00",
+  "updated_utc": "2026-10-27T03:55:46.540256+00:00",
   "pins": {
     "source_manifest_sha256": "2657f0cfb2c21dd9e8a202de5fb4e590f487cf668dce319250f8062bd0bdb24b",
     "runtime_files": 151,
@@ -204,25 +204,21 @@
     "temporary_laptop_sleep_guard": false
   },
   "backup_status": {
-    "status": "running",
-    "highest_verified_round": 102,
+    "status": "attention",
+    "highest_verified_round": 140,
     "failure_count_consecutive": 0,
     "last_error": null,
-    "terminal_cleanup_verified": false,
-    "verified_archive_count": 3,
+    "terminal_cleanup_verified": true,
+    "verified_archive_count": 45,
     "last_verified_backup": {
       "status": "verified",
-      "finished_utc": "2026-10-26T23:20:00.429052+00:00",
-      "archive": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/continuation-140000-20261026/live-backup/archives/20261026T231939.683823Z-p3949845.tar.gz",
-      "archive_sha256": "e8f60bd48eae681a2226d0dc2e2390c510202a7a7383a13a32a57ce4647f3b9a",
-      "latest_round": 102,
-      "included_checkpoint_rounds": [
-        102
-      ],
-      "receipt": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/continuation-140000-20261026/live-backup/receipts/20261026T231939.683823Z-p3949845.json"
+      "finished_utc": "2026-10-27T01:12:46.675622+00:00",
+      "archive_sha256": "1785bcb507a1fa5e69d81143b2408234bef125fb88da5a1fcaff0ebb58293737",
+      "latest_round": 140,
+      "receipt": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/continuation-140000-20261026/live-backup/receipts/20261027T011216.408457Z-p3949845.json"
     }
   },
-  "latest_oversight_evidence": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/continuation-140000-20261026/oversight-20261026T2320Z.json",
+  "latest_oversight_evidence": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/continuation-140000-20261026/results-readonly-20261027T024217Z.json",
   "latest_resource_check": {
     "utc": "2026-10-26T23:19:20.948502+00:00",
     "gpu": "NVIDIA GeForce RTX 4090, 0 %, 17173 MiB, 24564 MiB",
@@ -235,42 +231,28 @@
     "memory_pressure": "some avg10=0.00 avg60=2.02 avg300=1.91 total=127236331\nfull avg10=0.00 avg60=2.02 avg300=1.90 total=126811515\n"
   },
   "progress": {
-    "utc": "2026-10-26T23:19:20.948502+00:00",
-    "study_status": "running",
+    "utc": "2026-10-27T02:42:18.027576+00:00",
+    "study_status": "error",
     "committed_checkpoint": {
-      "checkpoint": "round-0102"
+      "checkpoint": "round-0140"
     },
-    "coordinator_exact": true,
-    "lock_free": false,
-    "milestones": {
-      "101": {
-        "completed_utc": "2026-10-26T23:15:30.035603+00:00",
-        "games": 101000,
-        "added_games": 1000,
-        "continuation_raytracer_games": 1000,
-        "continuation_laptop_games": 0,
-        "actor_optimizer_steps": 33138,
-        "critic_optimizer_steps": 16014,
-        "monitoring_summary": null
-      }
-    },
-    "native": {
-      "utc": "2026-10-26T23:19:18.0113249Z",
-      "windows_pid": 7056,
-      "creation_utc": "2026-10-26T23:06:56.8466576Z",
-      "status": "holding",
-      "phase": "awaiting_terminal_receipt",
-      "terminal_received": false,
-      "heartbeat_error": null,
-      "receipt_rejection": null
-    }
+    "total_training_attempts": 140000,
+    "additional_training_attempts": 40000,
+    "additional_training_completed": true,
+    "coordinator_exited": true,
+    "shared_lock_free": true,
+    "owned_children_remaining": 0
   },
   "current_active_log": {
     "path": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/raytracer-continuation-140000-2026-10-26/train-through-0110-20261026T231532.133469Z.log",
     "size": 134931
   },
   "final_evaluation_progress": {
-    "completed_report_names": [],
+    "completed_report_names": [
+      "confirmation-round-100.json",
+      "confirmation-round-140.json",
+      "head-to-head-imitation.json"
+    ],
     "registered_policy_evaluations": 9,
     "registered_final_attempts": 55000
   },
@@ -287,10 +269,12 @@
   },
   "oversight": {
     "automation_id": "oversee-raytracer-140k-continuation",
-    "cadence_minutes": 15,
     "notification_policy": "Meaningful failure, recovery or completion only",
     "no_time_based_training_stop": true,
-    "reduce_to_5_minute_cadence_at_checkpoint": 135
+    "status": "deleted_at_user_request",
+    "removed_utc": "2026-10-26T23:31:28.165011+00:00",
+    "monitoring_owner": "user",
+    "automatic_followups": false
   },
   "independent_reviews": {
     "coordinator_and_deployment_checks": 208,
@@ -358,5 +342,820 @@
   "first_production_resource_samples": {
     "evidence": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/continuation-140000-20261026/first-production-resource-samples.json",
     "sha256": "7060f215e84b3513efe80d26cdc2fc6bf3a1da8d37d2385bb7289e6c964a63fe"
+  },
+  "dashboard": {
+    "url": "http://192.168.1.200:8765",
+    "role": "read_only_live_dashboard",
+    "refresh_seconds": 3,
+    "pid_owner": {
+      "pid": 97093,
+      "pgid": 97093,
+      "sid": 97093,
+      "uid": 1000,
+      "start_ticks": 4350055,
+      "port": 8765,
+      "bind": "0.0.0.0"
+    },
+    "deployment": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/run-dashboard-20261026",
+    "firewall_scope": "LocalSubnet",
+    "independent_of_training": true,
+    "preserve_after_study_cleanup": false,
+    "verification_file": ".local/benchmarks/continuation-140000-20261026/dashboard-verification.json",
+    "current_rss_kib": 53136,
+    "reboot_autostart": false,
+    "status": "stopped_by_user",
+    "lan_access_removed": true
+  },
+  "endpoint_training_checkpoint": {
+    "round": 140,
+    "actor_optimizer_steps": 45118,
+    "critic_optimizer_steps": 22137,
+    "files_sha256": {
+      "optimizer.npz": "d669d9a0fcacaea6b7b39a963866a23aeeeab4bc36581e0a61e21f4cb8dc8e65",
+      "state.json": "fd7730697f0eaa7bf6d54288da977db709cec335a70a1f55f7b98f606fa01ab8",
+      "policy.manifest.json": "db77c61067b1879667e5e0d6e05198fdf4240b267819e80355297f8ea34564e6",
+      "policy.keras": "e7cc210859227123fa3089f74cda3876c02a7b86fbed2bf7104e7207860966c1",
+      "critic-optimizer.npz": "f62363dd7ca178b6681f05b4f9fd9c9cde1845b21fe99cddcd39ad4a08b1ac9c"
+    },
+    "backup_verified": true
+  },
+  "evaluation_failure": {
+    "error": {
+      "type": "RuntimeError",
+      "message": "Child failed with exit -9: /home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/raytracer-continuation-140000-2026-10-26/train-through-0140-20261027T004209.605581Z.log",
+      "utc": "2026-10-27T01:11:21.689869+00:00"
+    },
+    "cause": "SIGKILL observed; sender and reason not established. Cumulative OOM counter is not incident attribution.",
+    "passive_goldfish_200_games_completed": true,
+    "failure_window": "After passive goldfish summary, before report evaluation publication",
+    "monitor_140_complete": false,
+    "final_confirmation_complete": false,
+    "head_to_head_complete": false,
+    "remote_evidence": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/continuation-140000-20261026/results-readonly-20261027T024217Z.json",
+    "remote_evidence_sha256": "591d9ee2cf77635973ab868b8057c26ff00fca993f8731430ea3e3892d4166f7",
+    "local_diagnosis_sha256": "0582b512fbfc20f2eaede208d8e8e7a95dfe57f386ef737b89c2eb452632044b"
+  },
+  "saved_monitoring_results": {
+    "cohort": 320261025,
+    "cohort_type": "Repeated open monitoring; not fresh final confirmation",
+    "results": [
+      {
+        "games_trained": 100000,
+        "attempts": 2000,
+        "wins": 1327,
+        "losses": 673,
+        "draws": 0,
+        "cutoffs": 0,
+        "errors": 0,
+        "win_rate": 0.6635,
+        "wilson_95_interval": [
+          0.6424956692163982,
+          0.6838774563226321
+        ],
+        "source_file": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/continuation-100000-20261026/live-backup/current/monitor-0100.json"
+      },
+      {
+        "games_trained": 110000,
+        "attempts": 2000,
+        "wins": 1339,
+        "losses": 661,
+        "draws": 0,
+        "cutoffs": 0,
+        "errors": 0,
+        "win_rate": 0.6695,
+        "wilson_95_interval": [
+          0.6485767557412889,
+          0.6897733652303664
+        ],
+        "source_file": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/continuation-140000-20261026/live-backup/current/monitor-0110.json"
+      },
+      {
+        "games_trained": 120000,
+        "attempts": 2000,
+        "wins": 1345,
+        "losses": 655,
+        "draws": 0,
+        "cutoffs": 0,
+        "errors": 0,
+        "win_rate": 0.6725,
+        "wilson_95_interval": [
+          0.6516187123098238,
+          0.692719906378144
+        ],
+        "source_file": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/continuation-140000-20261026/live-backup/current/monitor-0120.json"
+      },
+      {
+        "games_trained": 130000,
+        "attempts": 2000,
+        "wins": 1355,
+        "losses": 645,
+        "draws": 0,
+        "cutoffs": 0,
+        "errors": 0,
+        "win_rate": 0.6775,
+        "wilson_95_interval": [
+          0.6566907564469646,
+          0.6976286917681906
+        ],
+        "source_file": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/continuation-140000-20261026/live-backup/current/monitor-0130.json"
+      }
+    ],
+    "pool_as_independent_samples": false
+  },
+  "final_training_audit": {
+    "status": "training_complete_final_evaluation_unrun",
+    "evidence": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/continuation-140000-20261026/final-training-readonly-audit.json",
+    "sha256": "52936c1eb62ff3159f304c8bcb50896e7c1da94cf2ca0a62acae3980f6a68c81",
+    "new_terminal_attempts": 40000,
+    "new_optimization_games": 32000,
+    "new_holdout_games": 8000,
+    "all_game_generation": "Raytracer",
+    "all_40_adam_and_pcg_advances_verified": true,
+    "architecture_unchanged": true,
+    "playing_strength_evaluation_complete": false
+  },
+  "evaluation_recovery": {
+    "status": "interrupted_at_user_request",
+    "run_id": "raytracer-continuation-140000-evaluation-recovery2-2026-10-27",
+    "recovery_epoch": 2,
+    "authorization": "User explicitly requested the saved140k baseline and older-checkpoint evaluations be finished without repeating training.",
+    "additional_training_games": 0,
+    "remaining_evaluation_attempts": 57000,
+    "remaining_evaluations": 10,
+    "monitoring_games": 2000,
+    "baseline_comparison_games": 20000,
+    "older_checkpoint_duel_games": 35000,
+    "unchanged_original_cohorts": true,
+    "original_training_artifacts_preserved": true,
+    "source_checkpoint_round": 140,
+    "source_checkpoint_policy_sha256": "e7cc210859227123fa3089f74cda3876c02a7b86fbed2bf7104e7207860966c1",
+    "paths": {
+      "runtime": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/continuation-140000-20261026-evaluation-runtime",
+      "output": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/raytracer-continuation-140000-2026-10-26-evaluation-recovery2",
+      "source_training": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/raytracer-continuation-140000-2026-10-26/training",
+      "native_liveness": "/mnt/c/Users/altf4/mtgo-training/continuation-140000-evaluation-recovery2-20261027/evaluation-recovery2-live.json",
+      "native_terminal_receipt": "/mnt/c/Users/altf4/mtgo-training/continuation-140000-evaluation-recovery2-20261027/linux-terminal.json"
+    },
+    "local_evidence": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/continuation-140000-20261026/evaluation-recovery-preparation",
+    "source_manifest_sha256": "9ea4869f003ae396f3c36ee805f95025b85925ec3e6294f64346db93914cff06",
+    "coordinator_sha256": "d5bd25a325b195384e40bf4f0ac48617ccc2b68c6281f30e82281aa68c7cc4fb",
+    "runtime_files": 152,
+    "unchanged_prior_runtime_files": 151,
+    "original_source_artifact_files": 737,
+    "deployment_proof_sha256": "f034dc2fdcebe37eb00ac789089625db9e91b6ac4409a69bc8321f121bf067ab",
+    "native_manifest_sha256": "09bc00f3ab329b692a4abc960ab029a7ae4d5131dc5bac2dee9b802c6cd8a133",
+    "oversight_timer_recreated": false,
+    "launch": {
+      "started_utc": "2026-10-27T03:04:06.041732+00:00",
+      "owner": {
+        "pid": 126667,
+        "uid": 1000,
+        "pgid": 126667,
+        "sid": 126667,
+        "start_ticks": 5691905
+      },
+      "native_owner": {
+        "windows_pid": 3876,
+        "creation_utc": "2026-10-27T03:01:16.7559479Z"
+      },
+      "native_manifest_sha256": "09bc00f3ab329b692a4abc960ab029a7ae4d5131dc5bac2dee9b802c6cd8a133",
+      "study_manifest_sha256": "5807af235ed80f4e615773b7844f773ab45804c5b0e9e247bd140da32bb7ff08",
+      "deployment_sha256": "da8a82ae83f3ef6f52aeee5d88f7702cab6f72cd38acbf8495e221efd040e130",
+      "recovery_epoch": 2,
+      "training": false,
+      "additional_training_games": 0,
+      "remaining_evaluation_attempts": 57000,
+      "stdout": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/continuation-140000-20261026-evaluation-recovery2/coordinator.log",
+      "detached": true
+    },
+    "native_owner": {
+      "windows_pid": 3876,
+      "creation_utc": "2026-10-27T03:01:16.7559479Z"
+    },
+    "study_manifest_sha256": "5807af235ed80f4e615773b7844f773ab45804c5b0e9e247bd140da32bb7ff08",
+    "deployment_sha256": "da8a82ae83f3ef6f52aeee5d88f7702cab6f72cd38acbf8495e221efd040e130",
+    "latest_evidence": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/continuation-140000-20261026/evaluation-recovery-preparation/latest-status.json",
+    "completed_evaluations": [
+      "monitor-0140",
+      "confirmation-round-100",
+      "confirmation-round-140",
+      "head-to-head-imitation"
+    ],
+    "coordinator_exact": true,
+    "source_preservation": "152runtime/737artifact hashes verified beforelaunch; oldtrainingoutputsunchanged",
+    "final_bound_review_sha256": "944911d9a49488a4bd78602f8596002ac18fa6939ab3fb4f0c1d122b26d21d66",
+    "latest_evidence_sha256": "a485ad2154cc97bad4dd37edd4e348255206cae69d52aaf086b15018844e695f",
+    "latest_observation_utc": "2026-10-27T03:25:07.956976+00:00",
+    "latest_memory": {
+      "MemAvailable": "4685600 kB",
+      "SwapTotal": "4194304 kB",
+      "SwapFree": "4066240 kB"
+    },
+    "latest_memory_pressure": "some avg10=0.00 avg60=0.00 avg300=0.00 total=216224358\nfull avg10=0.00 avg60=0.00 avg300=0.00 total=215447427\n",
+    "monitoring_summary": {
+      "attempted_games": 2000,
+      "terminal_games": 2000,
+      "wins": 1368,
+      "losses": 632,
+      "draws": 0,
+      "cutoffs": 0,
+      "errors": 0,
+      "unresolved_attempts": 0,
+      "terminal_fraction": 1.0,
+      "win_rate_all_attempts": 0.684,
+      "win_rate_all_attempts_wilson_95_interval": [
+        0.6632884153284588,
+        0.7040061112720402
+      ],
+      "terminal_win_rate": 0.684,
+      "terminal_score_rate": 0.684,
+      "metric": "recorded_wins_per_scheduled_attempt",
+      "mode": "versus_baseline",
+      "win_rate_denominator": "all_attempts_including_cutoffs_and_errors",
+      "unresolved_outcomes": "unknown; no terminal score or training return assigned",
+      "seat_start_balanced": true,
+      "seat_start_strata": {
+        "seat_0_start_P0": {
+          "attempted_games": 500,
+          "terminal_games": 500,
+          "wins": 358,
+          "losses": 142,
+          "draws": 0,
+          "cutoffs": 0,
+          "errors": 0,
+          "unresolved_attempts": 0,
+          "terminal_fraction": 1.0,
+          "win_rate_all_attempts": 0.716,
+          "win_rate_all_attempts_wilson_95_interval": [
+            0.674944056876268,
+            0.7537622280443413
+          ],
+          "terminal_win_rate": 0.716,
+          "terminal_score_rate": 0.716
+        },
+        "seat_0_start_P1": {
+          "attempted_games": 500,
+          "terminal_games": 500,
+          "wins": 334,
+          "losses": 166,
+          "draws": 0,
+          "cutoffs": 0,
+          "errors": 0,
+          "unresolved_attempts": 0,
+          "terminal_fraction": 1.0,
+          "win_rate_all_attempts": 0.668,
+          "win_rate_all_attempts_wilson_95_interval": [
+            0.6255786634624316,
+            0.7078595581424869
+          ],
+          "terminal_win_rate": 0.668,
+          "terminal_score_rate": 0.668
+        },
+        "seat_1_start_P0": {
+          "attempted_games": 500,
+          "terminal_games": 500,
+          "wins": 320,
+          "losses": 180,
+          "draws": 0,
+          "cutoffs": 0,
+          "errors": 0,
+          "unresolved_attempts": 0,
+          "terminal_fraction": 1.0,
+          "win_rate_all_attempts": 0.64,
+          "win_rate_all_attempts_wilson_95_interval": [
+            0.597006617075836,
+            0.6808585675949294
+          ],
+          "terminal_win_rate": 0.64,
+          "terminal_score_rate": 0.64
+        },
+        "seat_1_start_P1": {
+          "attempted_games": 500,
+          "terminal_games": 500,
+          "wins": 356,
+          "losses": 144,
+          "draws": 0,
+          "cutoffs": 0,
+          "errors": 0,
+          "unresolved_attempts": 0,
+          "terminal_fraction": 1.0,
+          "win_rate_all_attempts": 0.712,
+          "win_rate_all_attempts_wilson_95_interval": [
+            0.6708105507601558,
+            0.749956728884146
+          ],
+          "terminal_win_rate": 0.712,
+          "terminal_score_rate": 0.712
+        }
+      }
+    },
+    "laptop_backup_observer": {
+      "owner": {
+        "pid": 4190548,
+        "start_ticks": 56000513,
+        "uid": 1000,
+        "pgid": 4190548,
+        "sid": 4190548
+      },
+      "started_utc": "2026-10-27T03:08:38.140738+00:00",
+      "supervisor_sha256": "d6eb25fadc4b02c3fc5a273eeaf2bf11bcd4e0a671e193873e08cc67419ca0a3",
+      "config_sha256": "20515184d23e2b4455aa0a5a7cd750ed24c1a448cbf963e15b6144e532c80caa",
+      "tooling_manifest_sha256": "6cbfb8f2c0c0927cf418e7526d515c4c193c9b3a96d87a1a70cad53983bcb67c",
+      "log": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/continuation-140000-20261026/evaluation-recovery-preparation/backup-only-20261027T030838.160394Z.log",
+      "role": "backup_and_plots_only",
+      "no_game_producer": true,
+      "remote_training_dependency": false,
+      "temporary_laptop_sleep_guard": false
+    },
+    "backup_status": {
+      "status": "running",
+      "completed_evaluations": [
+        "confirmation-round-100.json",
+        "confirmation-round-140.json",
+        "head-to-head-imitation.json",
+        "monitor-0140.json"
+      ],
+      "verified_attempts": 27000,
+      "failure_count_consecutive": 0,
+      "last_error": null,
+      "terminal_cleanup_verified": false,
+      "plots": null,
+      "cleanup": null,
+      "verified_archive_count": 4,
+      "last_verified_backup": {
+        "started_utc": "2026-10-27T03:24:51.563167+00:00",
+        "known_evaluations": [
+          "confirmation-round-100.json",
+          "confirmation-round-140.json",
+          "monitor-0140.json"
+        ],
+        "partial_archive": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/continuation-140000-20261026/evaluation-recovery-preparation/live-backup/archives/20261027T032451.563137Z-p4190548.tar.gz.part",
+        "stderr": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/continuation-140000-20261026/evaluation-recovery-preparation/live-backup/logs/backup-20261027T032451.563137Z-p4190548.stderr.log",
+        "staging": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/continuation-140000-20261026/evaluation-recovery-preparation/live-backup/staging/20261027T032451.563137Z-p4190548",
+        "status": "verified",
+        "finished_utc": "2026-10-27T03:24:54.032137+00:00",
+        "archive": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/continuation-140000-20261026/evaluation-recovery-preparation/live-backup/archives/20261027T032451.563137Z-p4190548.tar.gz",
+        "archive_sha256": "574651e9d5251a21bd626493ae35f2c28f8ca5b77647b5922208c8783d93cff3",
+        "receipt": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/continuation-140000-20261026/evaluation-recovery-preparation/live-backup/receipts/20261027T032451.563137Z-p4190548.json",
+        "completed_evaluations": [
+          "confirmation-round-100.json",
+          "confirmation-round-140.json",
+          "head-to-head-imitation.json",
+          "monitor-0140.json"
+        ],
+        "verified_attempts": 27000,
+        "member_count": 17,
+        "uncompressed_bytes": 6953495,
+        "terminal_cleanup_verified": false
+      }
+    },
+    "confirmation_summaries": {
+      "round-100": {
+        "attempted_games": 10000,
+        "terminal_games": 10000,
+        "wins": 6506,
+        "losses": 3494,
+        "draws": 0,
+        "cutoffs": 0,
+        "errors": 0,
+        "unresolved_attempts": 0,
+        "terminal_fraction": 1.0,
+        "win_rate_all_attempts": 0.6506,
+        "win_rate_all_attempts_wilson_95_interval": [
+          0.6411990592439984,
+          0.6598852804467537
+        ],
+        "terminal_win_rate": 0.6506,
+        "terminal_score_rate": 0.6506,
+        "metric": "recorded_wins_per_scheduled_attempt",
+        "mode": "versus_baseline",
+        "win_rate_denominator": "all_attempts_including_cutoffs_and_errors",
+        "unresolved_outcomes": "unknown; no terminal score or training return assigned",
+        "seat_start_balanced": true,
+        "seat_start_strata": {
+          "seat_0_start_P0": {
+            "attempted_games": 2500,
+            "terminal_games": 2500,
+            "wins": 1701,
+            "losses": 799,
+            "draws": 0,
+            "cutoffs": 0,
+            "errors": 0,
+            "unresolved_attempts": 0,
+            "terminal_fraction": 1.0,
+            "win_rate_all_attempts": 0.6804,
+            "win_rate_all_attempts_wilson_95_interval": [
+              0.6618556855248053,
+              0.6983907657121035
+            ],
+            "terminal_win_rate": 0.6804,
+            "terminal_score_rate": 0.6804
+          },
+          "seat_0_start_P1": {
+            "attempted_games": 2500,
+            "terminal_games": 2500,
+            "wins": 1527,
+            "losses": 973,
+            "draws": 0,
+            "cutoffs": 0,
+            "errors": 0,
+            "unresolved_attempts": 0,
+            "terminal_fraction": 1.0,
+            "win_rate_all_attempts": 0.6108,
+            "win_rate_all_attempts_wilson_95_interval": [
+              0.5915315713825688,
+              0.6297284441221402
+            ],
+            "terminal_win_rate": 0.6108,
+            "terminal_score_rate": 0.6108
+          },
+          "seat_1_start_P0": {
+            "attempted_games": 2500,
+            "terminal_games": 2500,
+            "wins": 1537,
+            "losses": 963,
+            "draws": 0,
+            "cutoffs": 0,
+            "errors": 0,
+            "unresolved_attempts": 0,
+            "terminal_fraction": 1.0,
+            "win_rate_all_attempts": 0.6148,
+            "win_rate_all_attempts_wilson_95_interval": [
+              0.5955616592690044,
+              0.6336860824272105
+            ],
+            "terminal_win_rate": 0.6148,
+            "terminal_score_rate": 0.6148
+          },
+          "seat_1_start_P1": {
+            "attempted_games": 2500,
+            "terminal_games": 2500,
+            "wins": 1741,
+            "losses": 759,
+            "draws": 0,
+            "cutoffs": 0,
+            "errors": 0,
+            "unresolved_attempts": 0,
+            "terminal_fraction": 1.0,
+            "win_rate_all_attempts": 0.6964,
+            "win_rate_all_attempts_wilson_95_interval": [
+              0.6780856918559007,
+              0.7141116641470312
+            ],
+            "terminal_win_rate": 0.6964,
+            "terminal_score_rate": 0.6964
+          }
+        }
+      },
+      "round-140": {
+        "attempted_games": 10000,
+        "terminal_games": 10000,
+        "wins": 6882,
+        "losses": 3118,
+        "draws": 0,
+        "cutoffs": 0,
+        "errors": 0,
+        "unresolved_attempts": 0,
+        "terminal_fraction": 1.0,
+        "win_rate_all_attempts": 0.6882,
+        "win_rate_all_attempts_wilson_95_interval": [
+          0.6790500729454414,
+          0.6972053900678359
+        ],
+        "terminal_win_rate": 0.6882,
+        "terminal_score_rate": 0.6882,
+        "metric": "recorded_wins_per_scheduled_attempt",
+        "mode": "versus_baseline",
+        "win_rate_denominator": "all_attempts_including_cutoffs_and_errors",
+        "unresolved_outcomes": "unknown; no terminal score or training return assigned",
+        "seat_start_balanced": true,
+        "seat_start_strata": {
+          "seat_0_start_P0": {
+            "attempted_games": 2500,
+            "terminal_games": 2500,
+            "wins": 1759,
+            "losses": 741,
+            "draws": 0,
+            "cutoffs": 0,
+            "errors": 0,
+            "unresolved_attempts": 0,
+            "terminal_fraction": 1.0,
+            "win_rate_all_attempts": 0.7036,
+            "win_rate_all_attempts_wilson_95_interval": [
+              0.6853975259869538,
+              0.7211777371606884
+            ],
+            "terminal_win_rate": 0.7036,
+            "terminal_score_rate": 0.7036
+          },
+          "seat_0_start_P1": {
+            "attempted_games": 2500,
+            "terminal_games": 2500,
+            "wins": 1649,
+            "losses": 851,
+            "draws": 0,
+            "cutoffs": 0,
+            "errors": 0,
+            "unresolved_attempts": 0,
+            "terminal_fraction": 1.0,
+            "win_rate_all_attempts": 0.6596,
+            "win_rate_all_attempts_wilson_95_interval": [
+              0.6407934452119818,
+              0.6779168298290971
+            ],
+            "terminal_win_rate": 0.6596,
+            "terminal_score_rate": 0.6596
+          },
+          "seat_1_start_P0": {
+            "attempted_games": 2500,
+            "terminal_games": 2500,
+            "wins": 1664,
+            "losses": 836,
+            "draws": 0,
+            "cutoffs": 0,
+            "errors": 0,
+            "unresolved_attempts": 0,
+            "terminal_fraction": 1.0,
+            "win_rate_all_attempts": 0.6656,
+            "win_rate_all_attempts_wilson_95_interval": [
+              0.6468649302352372,
+              0.6838269340931005
+            ],
+            "terminal_win_rate": 0.6656,
+            "terminal_score_rate": 0.6656
+          },
+          "seat_1_start_P1": {
+            "attempted_games": 2500,
+            "terminal_games": 2500,
+            "wins": 1810,
+            "losses": 690,
+            "draws": 0,
+            "cutoffs": 0,
+            "errors": 0,
+            "unresolved_attempts": 0,
+            "terminal_fraction": 1.0,
+            "win_rate_all_attempts": 0.724,
+            "win_rate_all_attempts_wilson_95_interval": [
+              0.7061436723613995,
+              0.7411689943629219
+            ],
+            "terminal_win_rate": 0.724,
+            "terminal_score_rate": 0.724
+          }
+        }
+      }
+    },
+    "paired_comparisons": {
+      "primary-140k-minus-100k": {
+        "attempted_pairs": 10000,
+        "terminal_pairs": 10000,
+        "unresolved_pairs": 0,
+        "recorded_attempt_win_rate_change": 0.0376,
+        "recorded_attempt_win_rate_change_bootstrap_95_interval": [
+          0.0324,
+          0.0423
+        ],
+        "terminal_score_change_on_terminal_pairs": 0.0376,
+        "terminal_score_change_bootstrap_95_interval": [
+          0.0324,
+          0.0423
+        ],
+        "status_transitions": {
+          "loss->loss": 2963,
+          "loss->win": 531,
+          "win->loss": 155,
+          "win->win": 6351
+        },
+        "improved_recorded_win_attempts": 531,
+        "worsened_recorded_win_attempts": 155,
+        "tied_recorded_win_attempts": 9314,
+        "bootstrap": {
+          "unit": "matched_attempt",
+          "seed": 9901,
+          "resamples": 4000
+        }
+      }
+    },
+    "head_to_head": {
+      "imitation": {
+        "summary": {
+          "attempted_games": 5000,
+          "terminal_games": 5000,
+          "wins": 3481,
+          "losses": 1519,
+          "draws": 0,
+          "cutoffs": 0,
+          "errors": 0,
+          "unresolved_attempts": 0,
+          "terminal_fraction": 1.0,
+          "win_rate_all_attempts": 0.6962,
+          "win_rate_all_attempts_wilson_95_interval": [
+            0.6833059112144734,
+            0.7087928425422864
+          ],
+          "terminal_win_rate": 0.6962,
+          "terminal_score_rate": 0.6962,
+          "mode": "versus_neural",
+          "metric": "focal_recorded_wins_per_scheduled_attempt",
+          "win_rate_denominator": "all_attempts_including_cutoffs_and_errors",
+          "unresolved_outcomes": "unknown; no terminal score or training return assigned",
+          "seat_start_balanced": true,
+          "seat_start_strata": {
+            "seat_0_start_P0": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 911,
+              "losses": 339,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.7288,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.7034810606554512,
+                0.7527169665959342
+              ],
+              "terminal_win_rate": 0.7288,
+              "terminal_score_rate": 0.7288
+            },
+            "seat_0_start_P1": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 822,
+              "losses": 428,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.6576,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.6308478870000476,
+                0.6833864184842984
+              ],
+              "terminal_win_rate": 0.6576,
+              "terminal_score_rate": 0.6576
+            },
+            "seat_1_start_P0": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 817,
+              "losses": 433,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.6536,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.626787874075458,
+                0.6794709414219755
+              ],
+              "terminal_win_rate": 0.6536,
+              "terminal_score_rate": 0.6536
+            },
+            "seat_1_start_P1": {
+              "attempted_games": 1250,
+              "terminal_games": 1250,
+              "wins": 931,
+              "losses": 319,
+              "draws": 0,
+              "cutoffs": 0,
+              "errors": 0,
+              "unresolved_attempts": 0,
+              "terminal_fraction": 1.0,
+              "win_rate_all_attempts": 0.7448,
+              "win_rate_all_attempts_wilson_95_interval": [
+                0.7199066953212749,
+                0.7681932918777599
+              ],
+              "terminal_win_rate": 0.7448,
+              "terminal_score_rate": 0.7448
+            }
+          }
+        },
+        "checkpoint_sha256": "e7cc210859227123fa3089f74cda3876c02a7b86fbed2bf7104e7207860966c1",
+        "opponent_checkpoint_sha256": "3438e3837ca7f86c498a60bf29d2503c12b80f3f693b732423b5dca65a39c682",
+        "seed": 530261026,
+        "games": 5000
+      }
+    },
+    "cleanup": {
+      "finished_utc": "2026-10-27T03:30:52.059715+00:00",
+      "coordinator_pid": 126667,
+      "status": "interrupted",
+      "shared_lock_released": true,
+      "owned_children_remaining": 0,
+      "owned_process_records_checked": 5
+    },
+    "coordinator_exited": true,
+    "shared_lock_free": true,
+    "pause_signal_proof_sha256": "6169aca811174a7f6924ce991b39c156da8d49e3e8679abc4f27d233d2ca9216",
+    "pause_backup_audit_sha256": "e7369e4db1c136547f45eb0ab4dd01651edb76434d8e9bfe0390f8ef4fa0263e",
+    "user_resume_authorized": true
+  },
+  "evaluation_recovery3": {
+    "status": "cancelled_by_user",
+    "run_id": "raytracer-continuation-140000-evaluation-recovery3-2026-10-27",
+    "recovery_epoch": 3,
+    "additional_training_games": 0,
+    "adopted_result_files": 4,
+    "adopted_evaluation_attempts": 27000,
+    "remaining_evaluation_attempts": 30000,
+    "remaining_children": 6,
+    "same_registered_cohorts_and_ids": true,
+    "interrupted_round10_physical_attempts": 5000,
+    "interrupted_round10_durable_result_present": false,
+    "round10_same_schedule_replay_required": true,
+    "expected_total_140k_phase_physical_attempts_without_further_retries": 109008,
+    "oversight_timer_recreated": false,
+    "authorization": "User explicitly cancelled the resumed evaluations and requested they be killed rather than paused. No restart is authorized.",
+    "cancelled_utc": "2026-10-27T03:51:09.227506+00:00",
+    "launch": {
+      "started_utc": "2026-10-27T03:49:17.167271+00:00",
+      "owner": {
+        "pid": 137178,
+        "uid": 1000,
+        "pgid": 137178,
+        "sid": 137178,
+        "start_ticks": 5961246
+      },
+      "native_owner": {
+        "windows_pid": 9408,
+        "creation_utc": "2026-10-27T03:45:57.3304364Z"
+      },
+      "native_manifest_sha256": "86103b9a07f33f155103a0c283677619e74b1756d756f45a75611251ff7fd0da",
+      "study_manifest_sha256": "7cb8d9b18938f2864ae191ea5720b6e11931f528eb9c20af702c7d749380ee3a",
+      "deployment_sha256": "adf49af10389e3fe34621711eb8ea40749d5c6a656917cb4c1ea00b63c385fa3",
+      "recovery_epoch": 3,
+      "training": false,
+      "additional_training_games": 0,
+      "remaining_evaluation_attempts": 30000,
+      "stdout": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/continuation-140000-20261026-evaluation-recovery3/coordinator.log",
+      "detached": true
+    },
+    "cancellation": {
+      "signal": "SIGKILL",
+      "proof": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/continuation-140000-20261026/evaluation-recovery3-preparation/user-cancel-proof.json",
+      "proof_sha256": "46ced5276feadea3c573e7d76f139c569c0861e2bc7a2433f0ef3fd12b6b1dfc",
+      "coordinator_exact_alive": false,
+      "remaining_owned_processes": [],
+      "shared_lock_free": true,
+      "no_restart": true,
+      "checkpoints_and_results_preserved": true
+    },
+    "completed_evaluations": [
+      "monitor-0140",
+      "confirmation-round-100",
+      "confirmation-round-140",
+      "head-to-head-imitation"
+    ],
+    "new_completed_comparisons": 0,
+    "latest_evidence": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/continuation-140000-20261026/evaluation-recovery3-preparation/latest-status.json",
+    "latest_evidence_sha256": "71eeba228700daf31a47c82ec3b755cc5bfb39ff88b86816e411da80094f7440",
+    "historical_remote_report_status": "running",
+    "historical_report_status_explanation": "SIGKILL intentionally prevents graceful final report publication; exact process ownership and cancellation receipt establish termination.",
+    "laptop_observer_started": false,
+    "latest_incomplete_progress": {
+      "path": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/raytracer-continuation-140000-2026-10-26-evaluation-recovery3/head-to-head-round-10-20261027T034936.817767Z.log",
+      "bytes": 2170,
+      "last_json": {
+        "completed": 1000,
+        "status": "loss"
+      },
+      "non_json_tail": null
+    },
+    "planned_physical_inventory_not_completed": true,
+    "interrupted_epoch3_round10_progress_log_lower_bound": 1000,
+    "native_guard_cleanup": "exact_owner_exited_task_ready_no_instances",
+    "native_cancellation": {
+      "proof": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/continuation-140000-20261026/evaluation-recovery3-preparation/windows/native-user-cancel-file-proof.json",
+      "sha256": "08c4e9e181ba78171b2c03431e2f576052dcbb902fb9834ecfacc15dd3ddbb8c",
+      "utc": "2026-10-27T03:54:28.5176633Z",
+      "guardian_owner_exited": true,
+      "task_state": "Ready",
+      "instance_count": 0,
+      "own_sleep_request_released": true,
+      "day_guard_untouched": true,
+      "no_restart": true,
+      "terminal_receipt_fabricated": false,
+      "independent_postcheck": {
+        "path": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/benchmarks/continuation-140000-20261026/evaluation-recovery3-preparation/windows/native-user-cancel-final-proof.json",
+        "sha256": "f00de6b8eb970964debbfd7b201253828f745e61962ecbf64326cd3848443d0d",
+        "status": "passed"
+      }
+    }
+  },
+  "saved_progress": {
+    "status": "saved_without_resuming_evaluations",
+    "artifacts": {
+      "docs/benchmarks/raytracer-continuation-140000-2026-10-26/evaluation-cancellation.json": "46ced5276feadea3c573e7d76f139c569c0861e2bc7a2433f0ef3fd12b6b1dfc",
+      "docs/benchmarks/raytracer-continuation-140000-2026-10-26/native-cancellation-verification.json": "f00de6b8eb970964debbfd7b201253828f745e61962ecbf64326cd3848443d0d",
+      "docs/benchmarks/raytracer-continuation-140000-2026-10-26/saved-result-summary.json": "4e655510f306f8a3c049c3a36f83027edd8291163457f5a458b00d1adecbc4bd",
+      "docs/benchmarks/raytracer-continuation-140000-2026-10-26/training-checkpoint-audit.json": "52936c1eb62ff3159f304c8bcb50896e7c1da94cf2ca0a62acae3980f6a68c81"
+    },
+    "recovery_tests_passed": 17,
+    "no_automatic_restart": true
   }
 }

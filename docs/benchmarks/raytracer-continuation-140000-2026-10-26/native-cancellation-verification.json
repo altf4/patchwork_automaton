@@ -1,0 +1,39 @@
+{
+  "utc": "2026-10-27T03:55:32.663681+00:00",
+  "status": "cancelled_by_user",
+  "guardian_owner": {
+    "windows_pid": 9408,
+    "creation_utc": "2026-10-27T03:45:57.3304364Z"
+  },
+  "guardian_owner_exited": true,
+  "task_name": "MTGO-RustMage-140k-Evaluation-Recovery3-20261027",
+  "task_ready": true,
+  "no_instances": true,
+  "last_task_result": 267014,
+  "explicit_termination": true,
+  "own_system_request_absent": true,
+  "remaining_system_requests": 1,
+  "day_guard": {
+    "windows_pid": 17460,
+    "creation_utc": "2026-10-26T15:05:04.7271020Z",
+    "expires_utc": "2026-10-27T07:00:00.0000000Z",
+    "exact_alive": true,
+    "task_running": true,
+    "request_present": true,
+    "unchanged": true
+  },
+  "linux_terminal_receipt_absent": true,
+  "no_fabricated_receipt": true,
+  "no_restart": true,
+  "no_shutdown": true,
+  "explicit_cancellation_intent_sha256": "01bb4314b54e3ae7dde4c8ee7d1ccfe1714ccdc2c5431e69bba20a6b6c35b1c0",
+  "root_linux_cleanup_sha256": "46ced5276feadea3c573e7d76f139c569c0861e2bc7a2433f0ef3fd12b6b1dfc",
+  "input_sha256": {
+    "cancel-evaluation-recovery3-guardian.ps1": "6f91be7cc1eceaf86faf9d99ca34542a1a3f7a57fb21a2c242fb186dd204e236",
+    "native-user-cancel-proof.stderr": "712f89f4976302078a5046faca78c00b32aaf1aa6c5f6455945d776ff60eafb5",
+    "native-user-cancel-upload-proof.json": "a447b82319662742eafbb50886b339fc4c99b14dfd0afecf248aa7e56cc79629",
+    "native-user-cancel-file-proof.json": "08c4e9e181ba78171b2c03431e2f576052dcbb902fb9834ecfacc15dd3ddbb8c",
+    "native-user-cancel-readonly.json": "9ff597afd0f782b58164f095f37418a163446f60f6313edfa67a6069ff6a86cb"
+  },
+  "failed_initial_dispatch": "Windows command line length rejected before PowerShell execution; exact same reviewed helper uploaded and invoked once through short SHA-checked -File wrapper"
+}

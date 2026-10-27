@@ -1,0 +1,566 @@
+{
+  "status": "training_complete_final_evaluation_unrun",
+  "audit_utc": "2026-10-27T02:45:07.985285+00:00",
+  "study_status": "error",
+  "study_last_error": {
+    "type": "RuntimeError",
+    "message": "Child failed with exit -9: /home/altf4/benchmarks/mtgo-cpu-gpu-20261024/project/.local/raytracer-continuation-140000-2026-10-26/train-through-0140-20261027T004209.605581Z.log",
+    "utc": "2026-10-27T01:11:21.689869+00:00"
+  },
+  "report_status": "running",
+  "total_training_attempts": 140000,
+  "added_training_attempts": 40000,
+  "new_unique_attempt_ids": [
+    100000,
+    139999
+  ],
+  "new_seed_interval": [
+    300362025,
+    300402024
+  ],
+  "continuation_outcomes": {
+    "win": 26789,
+    "loss": 13211
+  },
+  "raytracer_games": 40000,
+  "laptop_games": 0,
+  "optimization_games": 32000,
+  "heldout_games": 8000,
+  "source_actor_steps": 32822,
+  "source_critic_steps": 15857,
+  "actor_steps_added": 12296,
+  "critic_steps_added": 6280,
+  "final_actor_steps": 45118,
+  "final_critic_steps": 22137,
+  "all40round_pcg_advances_independently_reconstructed": true,
+  "final_rng_sha256": "eb498ff26b15ad7439ef9b79cb2ec260a727b0986e2b26dd98387fb5265797b7",
+  "all40round_adam_npz_crc_finite_counters_and_shape_inventory_verified": true,
+  "all40round_gpu_caches_verified": true,
+  "actor_cache_fallback_batches_recorded": 995,
+  "historical100_round_rows_unchanged": true,
+  "source100_state_bytes_unchanged": true,
+  "model_architecture_unchanged": true,
+  "final_model_arrays": {
+    "datasets": 86,
+    "actor_datasets_changed": 43,
+    "critic_datasets_changed": 41,
+    "architecture_unchanged": true,
+    "weights_finite": true
+  },
+  "checkpoint140_sha256": {
+    "policy.keras": "e7cc210859227123fa3089f74cda3876c02a7b86fbed2bf7104e7207860966c1",
+    "policy.manifest.json": "db77c61067b1879667e5e0d6e05198fdf4240b267819e80355297f8ea34564e6",
+    "optimizer.npz": "d669d9a0fcacaea6b7b39a963866a23aeeeab4bc36581e0a61e21f4cb8dc8e65",
+    "critic-optimizer.npz": "f62363dd7ca178b6681f05b4f9fd9c9cde1845b21fe99cddcd39ad4a08b1ac9c",
+    "state.json": "fd7730697f0eaa7bf6d54288da977db709cec335a70a1f55f7b98f606fa01ab8"
+  },
+  "training_report_sha256": "9db318307b73dadafc772521618d707b5c4f62caffe658c8cbc6478ba3e156e2",
+  "round_checks": [
+    {
+      "round": 101,
+      "attempts": 1000,
+      "actor_steps": 316,
+      "critic_steps": 157,
+      "actor_total": 33138,
+      "critic_total": 16014,
+      "rng_sha256": "5a66a8c68868fcd58870f2358f322398fd959d08b974ee60cfeaa97b4e5a893f",
+      "source_state_sha256": "d599fc11a770e4db5b966f0632b6628cad3da0bd8afc34f4f0d6fc025f233c91"
+    },
+    {
+      "round": 102,
+      "attempts": 1000,
+      "actor_steps": 320,
+      "critic_steps": 157,
+      "actor_total": 33458,
+      "critic_total": 16171,
+      "rng_sha256": "51c6b36d86379039342d605a94e6c459e2cd8d835c6d06ee6ef93246631897aa",
+      "source_state_sha256": "19e33ce71d8fab7ee8809a66b1228ec41b7e08d4639bed9e41b5c4e9d8f2bc92"
+    },
+    {
+      "round": 103,
+      "attempts": 1000,
+      "actor_steps": 310,
+      "critic_steps": 157,
+      "actor_total": 33768,
+      "critic_total": 16328,
+      "rng_sha256": "53996119068241edb758cf4c3460acf55e346ecfe150fa7578cfd786cba457cd",
+      "source_state_sha256": "7a7fed843a9cf3c71dff584f6701e99bf69bb90e6c574102ae26bb427e21693f"
+    },
+    {
+      "round": 104,
+      "attempts": 1000,
+      "actor_steps": 310,
+      "critic_steps": 157,
+      "actor_total": 34078,
+      "critic_total": 16485,
+      "rng_sha256": "8ffecb62bf544442020d2ac6cac640cbff49d7e4ff00ec34277ca52c09c533c4",
+      "source_state_sha256": "55ac8c94b18286fd09687b735a9c65f2373378ee060c233ca84039e4f6664544"
+    },
+    {
+      "round": 105,
+      "attempts": 1000,
+      "actor_steps": 310,
+      "critic_steps": 157,
+      "actor_total": 34388,
+      "critic_total": 16642,
+      "rng_sha256": "1800e3f0208c660c1245cadb04326e0b4688aba4f9db70f8e9f7ded90202993c",
+      "source_state_sha256": "806d5e300805eff8f6faea5cb871f90c580b9e5bb9d5420861675fdd354703b8"
+    },
+    {
+      "round": 106,
+      "attempts": 1000,
+      "actor_steps": 310,
+      "critic_steps": 157,
+      "actor_total": 34698,
+      "critic_total": 16799,
+      "rng_sha256": "673c07de53ee809bcdc39f87fb409d07b6e47b1430cd3ba5d8a7482e4bcc9dc4",
+      "source_state_sha256": "1d00d08cd92e57cf1755d850c94412cc4d2090c44ae7e1665cc21930bbf159ff"
+    },
+    {
+      "round": 107,
+      "attempts": 1000,
+      "actor_steps": 314,
+      "critic_steps": 157,
+      "actor_total": 35012,
+      "critic_total": 16956,
+      "rng_sha256": "38782916ef866d0a58e7a9f18b868fec87b6099cbe5095c44baa32fcb5318304",
+      "source_state_sha256": "a586dbc003552d946442afa759f75a5eb9ae7d993f9d01ef71b95758ee8a57e1"
+    },
+    {
+      "round": 108,
+      "attempts": 1000,
+      "actor_steps": 310,
+      "critic_steps": 157,
+      "actor_total": 35322,
+      "critic_total": 17113,
+      "rng_sha256": "40054ed53afa388c1d3717813f0e5f6edd12ecc3616926704daaf8f3f17ddcda",
+      "source_state_sha256": "d0ae8e527b3a45c81aa1867d5cef2b59efccd02f3b0ca8fbf961492951a9cfb6"
+    },
+    {
+      "round": 109,
+      "attempts": 1000,
+      "actor_steps": 302,
+      "critic_steps": 157,
+      "actor_total": 35624,
+      "critic_total": 17270,
+      "rng_sha256": "1ee9bc1361d31eb309809359f89dced7006f5b68803df0baf1ca8c1b34ec8e21",
+      "source_state_sha256": "65ce5bbd32e25129408233e9e359f8b781f99bf1731622a57aaeab2b719fa5a7"
+    },
+    {
+      "round": 110,
+      "attempts": 1000,
+      "actor_steps": 306,
+      "critic_steps": 157,
+      "actor_total": 35930,
+      "critic_total": 17427,
+      "rng_sha256": "2725ccfc40ef59ed5f8e49b244c83489778c53c1e2f09854bfabf3693949aa53",
+      "source_state_sha256": "e508c1a9d85339da79864891845d3a52e7262d07c50548391928c4e50ba67a3a"
+    },
+    {
+      "round": 111,
+      "attempts": 1000,
+      "actor_steps": 310,
+      "critic_steps": 157,
+      "actor_total": 36240,
+      "critic_total": 17584,
+      "rng_sha256": "6b255e7533aae1bb7c154c9f13cafdac5626f0756b9f95e504b23283f230e0e4",
+      "source_state_sha256": "31e4033d9d621ff596b4e695b75c3b1fe458aea47468f807302b41424f783609"
+    },
+    {
+      "round": 112,
+      "attempts": 1000,
+      "actor_steps": 304,
+      "critic_steps": 157,
+      "actor_total": 36544,
+      "critic_total": 17741,
+      "rng_sha256": "3b7d4adcddf656afa453947491032a1702f3f7bcc05a32174172cfe8f614c3ae",
+      "source_state_sha256": "3cd6424d366ce2368d74757678a72a41c4d9905ffafbc60dbf9154a0b471d388"
+    },
+    {
+      "round": 113,
+      "attempts": 1000,
+      "actor_steps": 308,
+      "critic_steps": 157,
+      "actor_total": 36852,
+      "critic_total": 17898,
+      "rng_sha256": "88f34ef9e08d07e32a0bca14bfb05e74744f552e27c064d8307454f1cde1c3f8",
+      "source_state_sha256": "00651a8f3948fb1eada9f330d9600b3400a90d4691a39f74f6dda315f6792442"
+    },
+    {
+      "round": 114,
+      "attempts": 1000,
+      "actor_steps": 312,
+      "critic_steps": 157,
+      "actor_total": 37164,
+      "critic_total": 18055,
+      "rng_sha256": "fa3a821619b6d49fbb92f7bc8354cfb136db83c960c3082a13f328770fffd50a",
+      "source_state_sha256": "dc646763f1e5dadebd8f471975caf89e5eb8aee8b17d4958c1aec566e64e8b03"
+    },
+    {
+      "round": 115,
+      "attempts": 1000,
+      "actor_steps": 312,
+      "critic_steps": 157,
+      "actor_total": 37476,
+      "critic_total": 18212,
+      "rng_sha256": "e364a887fc5a63e946054355d8508c94dc40587c512b2c217dc51200d18d520b",
+      "source_state_sha256": "cf12a984a00c7056c23a859d781fa271c4c91ae005e5855f3b16e1a004ee7252"
+    },
+    {
+      "round": 116,
+      "attempts": 1000,
+      "actor_steps": 310,
+      "critic_steps": 157,
+      "actor_total": 37786,
+      "critic_total": 18369,
+      "rng_sha256": "0a9349f8eea674814c27810be07d88679b8a013aaa5062e41576087ea0b12f47",
+      "source_state_sha256": "d78a0f22897d5d3a3586583e7b140c8feb8f37bbc88bcd45881c27c62f165163"
+    },
+    {
+      "round": 117,
+      "attempts": 1000,
+      "actor_steps": 304,
+      "critic_steps": 157,
+      "actor_total": 38090,
+      "critic_total": 18526,
+      "rng_sha256": "30a70652539110c2a941d1bb3638f9588b72590ee986d4b088f6a132f6b27a30",
+      "source_state_sha256": "c119d6e4eb5112de11390a76c9661dada38cbb134e94e1d6e95a762064596527"
+    },
+    {
+      "round": 118,
+      "attempts": 1000,
+      "actor_steps": 308,
+      "critic_steps": 157,
+      "actor_total": 38398,
+      "critic_total": 18683,
+      "rng_sha256": "f02c2b9664c50b898a90e8f5e7613f004e0cc8a9b12500723e3b5ce91de131fd",
+      "source_state_sha256": "e6db193203828d7307fce31ff35151d1059bf19ecd83a14334a972707f8d6440"
+    },
+    {
+      "round": 119,
+      "attempts": 1000,
+      "actor_steps": 308,
+      "critic_steps": 157,
+      "actor_total": 38706,
+      "critic_total": 18840,
+      "rng_sha256": "e88b4983e3a9280240c886c50b3f798d81383ed368585dba5e31ed8d4ba8200f",
+      "source_state_sha256": "209d4779036733cf3aaa9b896031c553397ff545975b45a7efb96cfddb09d060"
+    },
+    {
+      "round": 120,
+      "attempts": 1000,
+      "actor_steps": 314,
+      "critic_steps": 157,
+      "actor_total": 39020,
+      "critic_total": 18997,
+      "rng_sha256": "374954f3dfaf3f6c1b3155f11ccb07d48870004bc2456412794dc1438dcd46ee",
+      "source_state_sha256": "5e00aaf50322f8bd13972699481e20bf4250322e96105571a2bc487954f088e6"
+    },
+    {
+      "round": 121,
+      "attempts": 1000,
+      "actor_steps": 314,
+      "critic_steps": 157,
+      "actor_total": 39334,
+      "critic_total": 19154,
+      "rng_sha256": "cad6acd51e60cd0c62a716d8c6d697b49a5d4528e2dc2d245a73fdef60096e5c",
+      "source_state_sha256": "ef0b76e9c60889a2df1d3b447cd8dd53b5cfd70d26997e4b7e951a59f6e76319"
+    },
+    {
+      "round": 122,
+      "attempts": 1000,
+      "actor_steps": 306,
+      "critic_steps": 157,
+      "actor_total": 39640,
+      "critic_total": 19311,
+      "rng_sha256": "1c9ab9058f8c3776db9d181446293cbd769836e907e9ed1981485bd60226b054",
+      "source_state_sha256": "18fe825a93b6f6e178017463c755909df2fdb08ad65a64f2543b5d871096903a"
+    },
+    {
+      "round": 123,
+      "attempts": 1000,
+      "actor_steps": 314,
+      "critic_steps": 157,
+      "actor_total": 39954,
+      "critic_total": 19468,
+      "rng_sha256": "0f8c00b1f451bcb4d1e2cca9d9949d91ca080827cf77cbe96d1000950461dbe2",
+      "source_state_sha256": "86300aeda632ddfeb95450798f410f1628931241d8cdffb909f51ab032625632"
+    },
+    {
+      "round": 124,
+      "attempts": 1000,
+      "actor_steps": 308,
+      "critic_steps": 157,
+      "actor_total": 40262,
+      "critic_total": 19625,
+      "rng_sha256": "b850967a1dde994f495d455ee09d9352eea8e9487763b54eac2b487c2fbb8063",
+      "source_state_sha256": "42190823b259e4d1aa5028c24c93f02aee2a20047de935a8886a3fc06a55adff"
+    },
+    {
+      "round": 125,
+      "attempts": 1000,
+      "actor_steps": 306,
+      "critic_steps": 157,
+      "actor_total": 40568,
+      "critic_total": 19782,
+      "rng_sha256": "88cb777b2218bd0b3bb0ad45a90c1bbfe4008b9c0c77397a3972f95f4b7d96f5",
+      "source_state_sha256": "f63dd33348e0aa0996542f0463e9fd94622dcd054d4d8fe89e82f798036cbe64"
+    },
+    {
+      "round": 126,
+      "attempts": 1000,
+      "actor_steps": 304,
+      "critic_steps": 157,
+      "actor_total": 40872,
+      "critic_total": 19939,
+      "rng_sha256": "7785e82eb09bcbe0c65ddd88b853f244d70a425244eca6fadf8613c976719a5e",
+      "source_state_sha256": "0823754ecd1926fc6a7027a9bca3bf1633f87084130e27bf99beed10714f2f5a"
+    },
+    {
+      "round": 127,
+      "attempts": 1000,
+      "actor_steps": 312,
+      "critic_steps": 157,
+      "actor_total": 41184,
+      "critic_total": 20096,
+      "rng_sha256": "a239726344a472b59879e8597edb71d42ae1a54564cfc7705e876e87fe56bce8",
+      "source_state_sha256": "8e4fbcd01f21f42a1af4194f3eddbe5f75177220dcd97c8cc450510717ae9a0f"
+    },
+    {
+      "round": 128,
+      "attempts": 1000,
+      "actor_steps": 300,
+      "critic_steps": 157,
+      "actor_total": 41484,
+      "critic_total": 20253,
+      "rng_sha256": "ef259619b725cf52c17e1fa614b18bdd10681e68a6da4755e0bdf31528d3ca4a",
+      "source_state_sha256": "eb0a61ce1d1cfc1edcffbdc477a1441485d261c3b1808d2f5599a8190d22eafb"
+    },
+    {
+      "round": 129,
+      "attempts": 1000,
+      "actor_steps": 314,
+      "critic_steps": 157,
+      "actor_total": 41798,
+      "critic_total": 20410,
+      "rng_sha256": "c1b2b61d08b7e2b0b22c465825ad47b0ca398f764f0192d2f032388563a47d9e",
+      "source_state_sha256": "3772428c2361773afa218c57da7a27170a6c46dae5889202350ef10a78ec0fa1"
+    },
+    {
+      "round": 130,
+      "attempts": 1000,
+      "actor_steps": 302,
+      "critic_steps": 157,
+      "actor_total": 42100,
+      "critic_total": 20567,
+      "rng_sha256": "0401cbaf01a3ffc69f9bdeb599a91c33ca6e75062fcd32a47e09a0657c0b939f",
+      "source_state_sha256": "f8e806177b8333d4da5b3929ba12f4faae02efbf0877640acfe817d36129ea9b"
+    },
+    {
+      "round": 131,
+      "attempts": 1000,
+      "actor_steps": 300,
+      "critic_steps": 157,
+      "actor_total": 42400,
+      "critic_total": 20724,
+      "rng_sha256": "a0b0d05c46d06dcce1ae2ef4e84c5838e60e6485c465f93af1739ecb10aca16b",
+      "source_state_sha256": "3d9813ecf38161938125043b37200ebbd02dc1ef521179a1fd43b8df9f9b9ebb"
+    },
+    {
+      "round": 132,
+      "attempts": 1000,
+      "actor_steps": 302,
+      "critic_steps": 157,
+      "actor_total": 42702,
+      "critic_total": 20881,
+      "rng_sha256": "987f54b0ad9676cb5c9c77a07ce1e2ecbed6d4ef6ceea87c3a52a70cc58112c9",
+      "source_state_sha256": "7e0d51233b97acb346a5f22800dab46476a5578d7f2f2b9cae82075200bd27c3"
+    },
+    {
+      "round": 133,
+      "attempts": 1000,
+      "actor_steps": 302,
+      "critic_steps": 157,
+      "actor_total": 43004,
+      "critic_total": 21038,
+      "rng_sha256": "0a5d90bf7e4d0cf19341274d6b59d4355373d35401ca9321726dee8355e14b32",
+      "source_state_sha256": "0ecf2145f2ab9cfeeea667302b2dd84054672ca630fba5d2e89f2c75c2f0ccc3"
+    },
+    {
+      "round": 134,
+      "attempts": 1000,
+      "actor_steps": 304,
+      "critic_steps": 157,
+      "actor_total": 43308,
+      "critic_total": 21195,
+      "rng_sha256": "9fc13f6c97b9fb1fad536e3d51e8bd1c95fcccb512b1a690389ea4a1cb504549",
+      "source_state_sha256": "b32bfa27ef0d71403691bcaff7ea9d26423563030fde031420c4912d2c4ab36e"
+    },
+    {
+      "round": 135,
+      "attempts": 1000,
+      "actor_steps": 302,
+      "critic_steps": 157,
+      "actor_total": 43610,
+      "critic_total": 21352,
+      "rng_sha256": "90ca8335fda3c75ef0c03367b9bace72c8c828ae909ad277c4c6820cc5c1ae44",
+      "source_state_sha256": "1aa878d5db63c6933b0eead0ea5397da569def5993c4852b5773074ceaf72866"
+    },
+    {
+      "round": 136,
+      "attempts": 1000,
+      "actor_steps": 304,
+      "critic_steps": 157,
+      "actor_total": 43914,
+      "critic_total": 21509,
+      "rng_sha256": "34644c7c3100710d72ad0783d1ba8d85aa3bf39e4235af143a7a0a1e359950c5",
+      "source_state_sha256": "d1a4faa1d7403fe398e39f844fd753e8a10c4266cd8625f7ef93fac491f82147"
+    },
+    {
+      "round": 137,
+      "attempts": 1000,
+      "actor_steps": 298,
+      "critic_steps": 157,
+      "actor_total": 44212,
+      "critic_total": 21666,
+      "rng_sha256": "d4e00f56298cf47b42de3482425bacd14b396aefa80453825d171b82f55106a2",
+      "source_state_sha256": "0cd0db0e3e37a0e3cc3e392bd8c04a82eeae2f01c588f1e5a09de98dae0a016c"
+    },
+    {
+      "round": 138,
+      "attempts": 1000,
+      "actor_steps": 304,
+      "critic_steps": 157,
+      "actor_total": 44516,
+      "critic_total": 21823,
+      "rng_sha256": "4eb66a86f42366625d9785d13ad9e05e2ebeec8c9fd6da411ba5084a28140736",
+      "source_state_sha256": "12104670aa9bc264167f994b96795834e97625d8ebe14e9d05562cb64c0c2dbd"
+    },
+    {
+      "round": 139,
+      "attempts": 1000,
+      "actor_steps": 298,
+      "critic_steps": 157,
+      "actor_total": 44814,
+      "critic_total": 21980,
+      "rng_sha256": "508a3188c3df75ec9b2ac278f7053aa55d01026ab3d2fe7938a4aef5cb115aba",
+      "source_state_sha256": "f0e02c5d9e3d9210ffc09f8167c4ed25e639def42b4ab54690bfbe837fc98df5"
+    },
+    {
+      "round": 140,
+      "attempts": 1000,
+      "actor_steps": 304,
+      "critic_steps": 157,
+      "actor_total": 45118,
+      "critic_total": 22137,
+      "rng_sha256": "eb498ff26b15ad7439ef9b79cb2ec260a727b0986e2b26dd98387fb5265797b7",
+      "source_state_sha256": "fd7730697f0eaa7bf6d54288da977db709cec335a70a1f55f7b98f606fa01ab8"
+    }
+  ],
+  "open_monitoring": [
+    {
+      "label": "100k",
+      "attempts": 2000,
+      "terminal_games": 2000,
+      "wins": 1327,
+      "losses": 673,
+      "draws": 0,
+      "cutoffs": 0,
+      "errors": 0,
+      "win_rate": 0.6635,
+      "ci95": [
+        0.6424956692163982,
+        0.6838774563226321
+      ],
+      "checkpoint_sha256": "204664758c6efd96ea2ddf7560e86f47a7449950fc3b37bd391dd7028333c30b",
+      "input_sha256": "58781b758dce86d7b0a4da9b254d1bff283500ddb24843aebe3c75f232cf360a"
+    },
+    {
+      "label": "110k",
+      "attempts": 2000,
+      "terminal_games": 2000,
+      "wins": 1339,
+      "losses": 661,
+      "draws": 0,
+      "cutoffs": 0,
+      "errors": 0,
+      "win_rate": 0.6695,
+      "ci95": [
+        0.6485767557412889,
+        0.6897733652303664
+      ],
+      "checkpoint_sha256": "f02bb75ddac5b9b07245d4de911077c4f6dea6c603cc8723b36a6e7d08f61a66",
+      "input_sha256": "de0671dd59f934fc8b422ee6e63e8ce421e35c6a265fbd3d039f6e6c8e23bb75",
+      "matched_win_rate_change_vs100k": 0.006,
+      "matched_status_transitions_vs100k": {
+        "win->win": 1318,
+        "loss->loss": 652,
+        "win->loss": 9,
+        "loss->win": 21
+      }
+    },
+    {
+      "label": "120k",
+      "attempts": 2000,
+      "terminal_games": 2000,
+      "wins": 1345,
+      "losses": 655,
+      "draws": 0,
+      "cutoffs": 0,
+      "errors": 0,
+      "win_rate": 0.6725,
+      "ci95": [
+        0.6516187123098238,
+        0.692719906378144
+      ],
+      "checkpoint_sha256": "bd99c0cd08f1123b5eab5e5f52777fef545af3943936a2d881621d7a01e113b2",
+      "input_sha256": "d4ea7ef64b977f1257b1a93856c5c297020a20d9e4efdea64c86d2443c57fb97",
+      "matched_win_rate_change_vs100k": 0.009,
+      "matched_status_transitions_vs100k": {
+        "win->win": 1303,
+        "loss->loss": 631,
+        "loss->win": 42,
+        "win->loss": 24
+      }
+    },
+    {
+      "label": "130k",
+      "attempts": 2000,
+      "terminal_games": 2000,
+      "wins": 1355,
+      "losses": 645,
+      "draws": 0,
+      "cutoffs": 0,
+      "errors": 0,
+      "win_rate": 0.6775,
+      "ci95": [
+        0.6566907564469646,
+        0.6976286917681906
+      ],
+      "checkpoint_sha256": "40572ccc34ed5cedf5451b8af1ce329c3ad82305b2ae3b2a7ddadf125f868706",
+      "input_sha256": "ec3b820388ed1809b01cd9de6992faf944c8575fe068164a7ee39bb01167b621",
+      "matched_win_rate_change_vs100k": 0.014,
+      "matched_status_transitions_vs100k": {
+        "win->win": 1288,
+        "loss->loss": 606,
+        "loss->win": 67,
+        "win->loss": 39
+      }
+    }
+  ],
+  "monitor140_present": false,
+  "final_result_files": [],
+  "saved_terminal_cleanup": {
+    "status": "error",
+    "shared_lock_released": true,
+    "owned_children_remaining": 0
+  },
+  "limitations": [
+    "No140k frozen-policy monitoring/fresh confirmation/duel results exist. A140k win-rate or head-to-head improvement cannot be claimed.",
+    "110k/120k/130k points reuse the same open2,000-schedule cohort; they are exploratory monitoring,not sealed confirmation or independent extra samples.",
+    "One continued training seed; game intervals do not quantify training-seed variance.",
+    "Exit-9 records SIGKILL; its cause cannot be established from these saved artifacts.",
+    "No restart,new training,models loaded,games generated,network calls or transfers were performed.",
+    "Kernel/native/live-owner verification is outside this local saved-artifact audit."
+  ]
+}
