@@ -1,0 +1,1 @@
+{"status": "complete", "tests": ["both private hands", "hidden opponent deck", "tensor isolation", "non-actor actions", "foreign session", "stale revision"]}

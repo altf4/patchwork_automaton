@@ -1,0 +1,15 @@
+{
+  "index": 1944,
+  "baseline_reason": "wall_clock_timeout",
+  "baseline_records": 152,
+  "direct_records": 160,
+  "prefix_mismatch_count": 0,
+  "prefix_mismatches": [],
+  "direct_status": "win",
+  "direct_turn": 13,
+  "direct_decisions": 441,
+  "direct_final_life": [
+    17,
+    -3
+  ]
+}

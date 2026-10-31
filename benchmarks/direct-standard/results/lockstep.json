@@ -1,0 +1,251 @@
+{
+  "status": "complete",
+  "games": [
+    {
+      "seed": 1322610310000,
+      "decks": [
+        "mono-green-landfall",
+        "mono-green-landfall"
+      ],
+      "status": "terminal",
+      "decisions": 482
+    },
+    {
+      "seed": 1322610310001,
+      "decks": [
+        "mono-green-landfall",
+        "mono-green-landfall"
+      ],
+      "status": "terminal",
+      "decisions": 457
+    },
+    {
+      "seed": 1322610310002,
+      "decks": [
+        "mono-green-landfall",
+        "mono-green-landfall"
+      ],
+      "status": "terminal",
+      "decisions": 505
+    },
+    {
+      "seed": 1322610310003,
+      "decks": [
+        "mono-green-landfall",
+        "izzet-prowess"
+      ],
+      "status": "terminal",
+      "decisions": 330
+    },
+    {
+      "seed": 1322610310004,
+      "decks": [
+        "mono-green-landfall",
+        "izzet-prowess"
+      ],
+      "status": "terminal",
+      "decisions": 313
+    },
+    {
+      "seed": 1322610310005,
+      "decks": [
+        "mono-green-landfall",
+        "izzet-prowess"
+      ],
+      "status": "terminal",
+      "decisions": 358
+    },
+    {
+      "seed": 1322610310006,
+      "decks": [
+        "mono-green-landfall",
+        "bw-lifegain"
+      ],
+      "status": "terminal",
+      "decisions": 398
+    },
+    {
+      "seed": 1322610310007,
+      "decks": [
+        "mono-green-landfall",
+        "bw-lifegain"
+      ],
+      "status": "terminal",
+      "decisions": 432
+    },
+    {
+      "seed": 1322610310008,
+      "decks": [
+        "mono-green-landfall",
+        "bw-lifegain"
+      ],
+      "status": "terminal",
+      "decisions": 450
+    },
+    {
+      "seed": 1322610310009,
+      "decks": [
+        "izzet-prowess",
+        "mono-green-landfall"
+      ],
+      "status": "terminal",
+      "decisions": 443
+    },
+    {
+      "seed": 1322610310010,
+      "decks": [
+        "izzet-prowess",
+        "mono-green-landfall"
+      ],
+      "status": "terminal",
+      "decisions": 301
+    },
+    {
+      "seed": 1322610310011,
+      "decks": [
+        "izzet-prowess",
+        "mono-green-landfall"
+      ],
+      "status": "terminal",
+      "decisions": 383
+    },
+    {
+      "seed": 1322610310012,
+      "decks": [
+        "izzet-prowess",
+        "izzet-prowess"
+      ],
+      "status": "terminal",
+      "decisions": 325
+    },
+    {
+      "seed": 1322610310013,
+      "decks": [
+        "izzet-prowess",
+        "izzet-prowess"
+      ],
+      "status": "terminal",
+      "decisions": 288
+    },
+    {
+      "seed": 1322610310014,
+      "decks": [
+        "izzet-prowess",
+        "izzet-prowess"
+      ],
+      "status": "terminal",
+      "decisions": 281
+    },
+    {
+      "seed": 1322610310015,
+      "decks": [
+        "izzet-prowess",
+        "bw-lifegain"
+      ],
+      "status": "terminal",
+      "decisions": 310
+    },
+    {
+      "seed": 1322610310016,
+      "decks": [
+        "izzet-prowess",
+        "bw-lifegain"
+      ],
+      "status": "terminal",
+      "decisions": 328
+    },
+    {
+      "seed": 1322610310017,
+      "decks": [
+        "izzet-prowess",
+        "bw-lifegain"
+      ],
+      "status": "terminal",
+      "decisions": 337
+    },
+    {
+      "seed": 1322610310018,
+      "decks": [
+        "bw-lifegain",
+        "mono-green-landfall"
+      ],
+      "status": "terminal",
+      "decisions": 315
+    },
+    {
+      "seed": 1322610310019,
+      "decks": [
+        "bw-lifegain",
+        "mono-green-landfall"
+      ],
+      "status": "terminal",
+      "decisions": 471
+    },
+    {
+      "seed": 1322610310020,
+      "decks": [
+        "bw-lifegain",
+        "mono-green-landfall"
+      ],
+      "status": "terminal",
+      "decisions": 342
+    },
+    {
+      "seed": 1322610310021,
+      "decks": [
+        "bw-lifegain",
+        "izzet-prowess"
+      ],
+      "status": "terminal",
+      "decisions": 381
+    },
+    {
+      "seed": 1322610310022,
+      "decks": [
+        "bw-lifegain",
+        "izzet-prowess"
+      ],
+      "status": "terminal",
+      "decisions": 233
+    },
+    {
+      "seed": 1322610310023,
+      "decks": [
+        "bw-lifegain",
+        "izzet-prowess"
+      ],
+      "status": "terminal",
+      "decisions": 387
+    },
+    {
+      "seed": 1322610310024,
+      "decks": [
+        "bw-lifegain",
+        "bw-lifegain"
+      ],
+      "status": "terminal",
+      "decisions": 465
+    },
+    {
+      "seed": 1322610310025,
+      "decks": [
+        "bw-lifegain",
+        "bw-lifegain"
+      ],
+      "status": "terminal",
+      "decisions": 348
+    },
+    {
+      "seed": 1322610310026,
+      "decks": [
+        "bw-lifegain",
+        "bw-lifegain"
+      ],
+      "status": "terminal",
+      "decisions": 359
+    }
+  ],
+  "views": 20098,
+  "choices": 38057,
+  "tensor_decisions": 10022
+}
