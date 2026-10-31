@@ -27,6 +27,13 @@ admits at most the validated 8192 MiB cap per cache; larger caps require the
 explicit GPU profile. CPU fallback still handles batches beyond the admitted
 prefix; device-placement and allocation failures remain visible.
 
+Numerical rollout preparation defaults to one coalesced reader worker. Set
+`PATCHWORK_NUMERIC_READ_WORKERS=4` before training to use four workers, or set
+another positive integer for a different count. Reports expose the effective
+count in `pipeline.numerical_reader.workers`. The one-worker default was faster
+on the [250K-model training replay](benchmarks/numeric-reader-2026-10-31/README.md);
+larger datasets that exceed host memory may benefit from additional workers.
+
 GPU history/state GRUs use cuDNN by default; `--learner-gru-backend unfused`
 selects the original execution backend. Consolidated finite-gradient checks
 remain active in every profile. No automatic host allocator trimming is enabled:

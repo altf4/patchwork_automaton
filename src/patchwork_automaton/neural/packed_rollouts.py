@@ -12,15 +12,24 @@ from concurrent.futures import ThreadPoolExecutor, wait
 from types import MappingProxyType
 import numpy as np
 
+NUMERIC_READ_WORKERS_ENV = 'PATCHWORK_NUMERIC_READ_WORKERS'
+
 
 class NumericRollout:
     """Append frozen records once; gather the same locally padded batches."""
-    def __init__(self, max_bytes=None, *, read_mode='auto', read_workers=4,
+    def __init__(self, max_bytes=None, *, read_mode='auto', read_workers=None,
                  read_buffer_bytes=64*1024**2):
         if read_mode == 'auto':
             read_mode = 'coalesced' if hasattr(os, 'pread') else 'mmap'
         if read_mode not in ('coalesced', 'mmap'):
             raise ValueError('Unknown numerical rollout read mode')
+        if read_workers is None:
+            try:
+                read_workers = int(os.environ.get(NUMERIC_READ_WORKERS_ENV, '1'))
+                if read_workers < 1:
+                    raise ValueError
+            except ValueError:
+                raise ValueError(f'{NUMERIC_READ_WORKERS_ENV} must be a positive integer') from None
         if type(read_workers) is not int or read_workers < 1:
             raise ValueError('Record reader workers must be positive')
         if type(read_buffer_bytes) is not int or read_buffer_bytes < 2:
