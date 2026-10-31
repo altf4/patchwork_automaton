@@ -4,8 +4,51 @@ import os
 from pathlib import Path
 from types import SimpleNamespace
 import unittest
-from unittest.mock import patch
+from unittest.mock import MagicMock, patch
 from test_neural import AVAILABLE
+
+
+class ReplicaThreadConfigurationTests(unittest.TestCase):
+    def test_cpu_default_override_and_invalid_values(self):
+        from patchwork_automaton.neural.inference_processes import _cpu_intra_threads, CPU_INTRA_THREADS_ENV
+        with patch.dict(os.environ, {'TF_NUM_INTRAOP_THREADS': '8'}, clear=True):
+            self.assertEqual(_cpu_intra_threads('cpu'), 1)
+            os.environ[CPU_INTRA_THREADS_ENV] = '3'
+            self.assertEqual(_cpu_intra_threads('cpu'), 3)
+            self.assertEqual(_cpu_intra_threads('cpu', 2), 2)
+            for value in ('0', '-1', 'invalid'):
+                os.environ[CPU_INTRA_THREADS_ENV] = value
+                with self.assertRaisesRegex(ValueError, 'positive integer'):
+                    _cpu_intra_threads('cpu')
+            for value in (0, -1, True, 1.5):
+                with self.assertRaisesRegex(ValueError, 'positive integer'):
+                    _cpu_intra_threads('cpu', value)
+            self.assertIsNone(_cpu_intra_threads('gpu'))
+            with self.assertRaisesRegex(ValueError, 'requires a CPU'):
+                _cpu_intra_threads('gpu', 2)
+
+    def test_gpu_does_not_change_tensorflow_threads(self):
+        import sys
+        from patchwork_automaton.neural.inference_processes import _configure_replica_threads
+        tensorflow = MagicMock()
+        with patch.dict(sys.modules, {'tensorflow': tensorflow}):
+            _configure_replica_threads('gpu', None)
+            tensorflow.config.threading.set_intra_op_parallelism_threads.assert_not_called()
+            _configure_replica_threads('cpu', 1)
+            tensorflow.config.threading.set_intra_op_parallelism_threads.assert_called_once_with(1)
+            tensorflow.config.threading.set_intra_op_parallelism_threads.side_effect = RuntimeError('initialized')
+            with self.assertRaisesRegex(RuntimeError, 'before TensorFlow runtime initialization'):
+                _configure_replica_threads('cpu', 1)
+
+    def test_replica_start_rejects_wrong_reported_cpu_thread_count(self):
+        from patchwork_automaton.neural.inference_processes import InferenceProcessGroup
+        with patch.dict(os.environ, {}, clear=True):
+            group = InferenceProcessGroup([object()], replicas=1)
+            state = dict(version=3, weights_sha256='digest', device='/CPU:0', intra_op_threads=2)
+            with self.assertRaisesRegex(RuntimeError, 'intra-op thread count'):
+                group._verify([state], 3, 'digest')
+            state['intra_op_threads'] = 1
+            group._verify([state], 3, 'digest')
 
 
 @unittest.skipUnless(AVAILABLE,'Install neural dependencies with uv')
@@ -35,20 +78,29 @@ class InferenceReplicaTests(unittest.TestCase):
             compiled = tf.function(model.call,input_signature=[input_signature(batch)],autograph=False)
             expected = {k:np.asarray(v) for k,v in compiled(batch).items()}
             pairs = [mp.get_context('spawn').Pipe() for _ in range(2)]
-            group = InferenceProcessGroup([p[0] for p in pairs],replicas=2)
             clients = [_RemoteInference(p[1]) for p in pairs]
             async def predict(client,version):
                 return await asyncio.to_thread(client.predict,batch,version=version,identity=('test','game'))
-            try:
-                # A GPU-enabled learner must not leak its CUDA visibility or
-                # default device into independently spawned CPU replicas.
-                with patch.dict(os.environ, CUDA_VISIBLE_DEVICES='0'):
+            # A learner's TensorFlow and CUDA settings must not control or be
+            # changed by the independently spawned CPU replicas.
+            with patch.dict(os.environ, {'CUDA_VISIBLE_DEVICES':'0', 'TF_NUM_INTRAOP_THREADS':'2'}):
+                os.environ.pop('PATCHWORK_CPU_INFERENCE_INTRA_THREADS', None)
+                group = InferenceProcessGroup([p[0] for p in pairs],replicas=2)
+                parent_intra = tf.config.threading.get_intra_op_parallelism_threads()
+                try:
                     await group.start(model)
+                    self.assertEqual(tf.config.threading.get_intra_op_parallelism_threads(), parent_intra)
+                except BaseException:
+                    await group.close()
+                    for _,client in pairs: client.close()
+                    raise
+            try:
                 pids = {s['pid'] for s in group.stats()['replicas']}
                 self.assertEqual(len(pids),2)
                 self.assertNotIn(os.getpid(),pids)
                 for state in group.stats()['replicas']:
                     self.assertEqual(state['device'], '/CPU:0')
+                    self.assertEqual(state['intra_op_threads'], 1)
                     self.assertEqual(state['cuda_visible_devices'], '-1')
                     self.assertEqual(state['visible_gpus'], [])
                     self.assertTrue(all(value.endswith('/device:CPU:0') for value in state['model_variable_devices']))
@@ -80,6 +132,21 @@ class InferenceReplicaTests(unittest.TestCase):
                 await group.close()
                 for _,client in pairs: client.close()
             self.assertTrue(all(not p.is_alive() for _,p in group.handles))
+        asyncio.run(run())
+
+    def test_explicit_cpu_replica_override(self):
+        async def run():
+            import multiprocessing as mp
+            from patchwork_automaton.neural.inference_processes import InferenceProcessGroup
+            model,_ = self.fixture()
+            server,client = mp.get_context('spawn').Pipe()
+            with patch.dict(os.environ, {'PATCHWORK_CPU_INFERENCE_INTRA_THREADS':'2'}):
+                group = InferenceProcessGroup([server], replicas=1)
+                try:
+                    await group.start(model)
+                    self.assertEqual(group.stats()['replicas'][0]['intra_op_threads'], 2)
+                finally:
+                    await group.close(); client.close()
         asyncio.run(run())
 
     def test_failed_initialization_joins_processes(self):

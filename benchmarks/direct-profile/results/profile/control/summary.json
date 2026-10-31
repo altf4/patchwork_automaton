@@ -1,0 +1,614 @@
+{
+  "child_cpu_seconds": 0,
+  "coordinator_cpu_seconds": 0.2332846599999998,
+  "decisions": 80935,
+  "draw_reasons": {},
+  "games": 240,
+  "games_per_minute": 951.8044309658058,
+  "inference_wait_seconds": 604.6653079190819,
+  "learner_calls": 3676,
+  "learner_replica_cpu_seconds": 46.891589063,
+  "learner_requests": 19815,
+  "learner_service_wall_seconds": 28.630950442040557,
+  "opponent_calls": 3981,
+  "opponent_replica_cpu_seconds": 45.82732252300001,
+  "opponent_requests": 18911,
+  "opponent_service_wall_seconds": 28.362768450955627,
+  "outcomes": {
+    "loss": 125,
+    "win": 115
+  },
+  "parent_worker_cpu_seconds": 0.9538851370000001,
+  "replica_after": [
+    {
+      "learner": {
+        "batch_histogram": {
+          "1": 472,
+          "2": 258,
+          "3": 294,
+          "4": 305,
+          "5": 276,
+          "6": 250,
+          "7": 208,
+          "8": 164,
+          "9": 129,
+          "10": 89,
+          "11": 49,
+          "12": 29,
+          "13": 16,
+          "14": 13,
+          "15": 1
+        },
+        "calls": 2553,
+        "device": "/CPU:0",
+        "graph_traces": [
+          1
+        ],
+        "inference_seconds": 18.76440822404038,
+        "mean_batch": 4.73207990599295,
+        "mean_queue_ms": 4.512595176687883,
+        "replica_cpu_seconds": 31.743178442,
+        "replicas": [
+          {
+            "batch_histogram": {
+              "1": 472,
+              "2": 258,
+              "3": 294,
+              "4": 305,
+              "5": 276,
+              "6": 250,
+              "7": 208,
+              "8": 164,
+              "9": 129,
+              "10": 89,
+              "11": 49,
+              "12": 29,
+              "13": 16,
+              "14": 13,
+              "15": 1
+            },
+            "calls": 2553,
+            "cuda_visible_devices": "-1",
+            "device": "/CPU:0",
+            "engines": 24,
+            "graph_traces": 1,
+            "inference_seconds": 18.76440822404038,
+            "mean_batch": 4.73207990599295,
+            "mean_queue_ms": 4.512595176687883,
+            "model_variable_devices": [
+              "/job:localhost/replica:0/task:0/device:CPU:0"
+            ],
+            "output_placements": {
+              "logits": "/job:localhost/replica:0/task:0/device:CPU:0",
+              "memory_out": "/job:localhost/replica:0/task:0/device:CPU:0",
+              "value": "/job:localhost/replica:0/task:0/device:CPU:0"
+            },
+            "pid": 63913,
+            "process_cpu_seconds": 31.743178442,
+            "requests": 12081,
+            "version": 250,
+            "visible_gpus": [],
+            "weights_sha256": "971bfb895309c78b1c089635a6bcfc3b8406d8a1a192052538407ee8fb0766d2"
+          }
+        ],
+        "requests": 12081,
+        "version": 250,
+        "weights_sha256": "971bfb895309c78b1c089635a6bcfc3b8406d8a1a192052538407ee8fb0766d2"
+      },
+      "opponent": {
+        "batch_histogram": {
+          "1": 630,
+          "2": 395,
+          "3": 354,
+          "4": 297,
+          "5": 259,
+          "6": 245,
+          "7": 221,
+          "8": 168,
+          "9": 111,
+          "10": 76,
+          "11": 37,
+          "12": 22,
+          "13": 5,
+          "14": 2,
+          "15": 2,
+          "16": 1,
+          "19": 1
+        },
+        "calls": 2826,
+        "device": "/CPU:0",
+        "graph_traces": [
+          1
+        ],
+        "inference_seconds": 18.977526778937317,
+        "mean_batch": 4.21585279547063,
+        "mean_queue_ms": 4.195003989421706,
+        "replica_cpu_seconds": 31.576875972,
+        "replicas": [
+          {
+            "batch_histogram": {
+              "1": 630,
+              "2": 395,
+              "3": 354,
+              "4": 297,
+              "5": 259,
+              "6": 245,
+              "7": 221,
+              "8": 168,
+              "9": 111,
+              "10": 76,
+              "11": 37,
+              "12": 22,
+              "13": 5,
+              "14": 2,
+              "15": 2,
+              "16": 1,
+              "19": 1
+            },
+            "calls": 2826,
+            "cuda_visible_devices": "-1",
+            "device": "/CPU:0",
+            "engines": 24,
+            "graph_traces": 1,
+            "inference_seconds": 18.977526778937317,
+            "mean_batch": 4.21585279547063,
+            "mean_queue_ms": 4.195003989421706,
+            "model_variable_devices": [
+              "/job:localhost/replica:0/task:0/device:CPU:0"
+            ],
+            "output_placements": {
+              "logits": "/job:localhost/replica:0/task:0/device:CPU:0",
+              "memory_out": "/job:localhost/replica:0/task:0/device:CPU:0",
+              "value": "/job:localhost/replica:0/task:0/device:CPU:0"
+            },
+            "pid": 63967,
+            "process_cpu_seconds": 31.576875972,
+            "requests": 11914,
+            "version": 250,
+            "visible_gpus": [],
+            "weights_sha256": "971bfb895309c78b1c089635a6bcfc3b8406d8a1a192052538407ee8fb0766d2"
+          }
+        ],
+        "requests": 11914,
+        "version": 250,
+        "weights_sha256": "971bfb895309c78b1c089635a6bcfc3b8406d8a1a192052538407ee8fb0766d2"
+      }
+    },
+    {
+      "learner": {
+        "batch_histogram": {
+          "1": 365,
+          "2": 248,
+          "3": 242,
+          "4": 253,
+          "5": 249,
+          "6": 234,
+          "7": 227,
+          "8": 173,
+          "9": 134,
+          "10": 84,
+          "11": 53,
+          "12": 31,
+          "13": 15,
+          "14": 2,
+          "15": 2,
+          "16": 1
+        },
+        "calls": 2313,
+        "device": "/CPU:0",
+        "graph_traces": [
+          1
+        ],
+        "inference_seconds": 17.50435957101763,
+        "mean_batch": 4.96800691742326,
+        "mean_queue_ms": 4.404927045347847,
+        "replica_cpu_seconds": 29.747436211,
+        "replicas": [
+          {
+            "batch_histogram": {
+              "1": 365,
+              "2": 248,
+              "3": 242,
+              "4": 253,
+              "5": 249,
+              "6": 234,
+              "7": 227,
+              "8": 173,
+              "9": 134,
+              "10": 84,
+              "11": 53,
+              "12": 31,
+              "13": 15,
+              "14": 2,
+              "15": 2,
+              "16": 1
+            },
+            "calls": 2313,
+            "cuda_visible_devices": "-1",
+            "device": "/CPU:0",
+            "engines": 24,
+            "graph_traces": 1,
+            "inference_seconds": 17.50435957101763,
+            "mean_batch": 4.96800691742326,
+            "mean_queue_ms": 4.404927045347847,
+            "model_variable_devices": [
+              "/job:localhost/replica:0/task:0/device:CPU:0"
+            ],
+            "output_placements": {
+              "logits": "/job:localhost/replica:0/task:0/device:CPU:0",
+              "memory_out": "/job:localhost/replica:0/task:0/device:CPU:0",
+              "value": "/job:localhost/replica:0/task:0/device:CPU:0"
+            },
+            "pid": 63914,
+            "process_cpu_seconds": 29.747436211,
+            "requests": 11491,
+            "version": 250,
+            "visible_gpus": [],
+            "weights_sha256": "971bfb895309c78b1c089635a6bcfc3b8406d8a1a192052538407ee8fb0766d2"
+          }
+        ],
+        "requests": 11491,
+        "version": 250,
+        "weights_sha256": "971bfb895309c78b1c089635a6bcfc3b8406d8a1a192052538407ee8fb0766d2"
+      },
+      "opponent": {
+        "batch_histogram": {
+          "1": 345,
+          "2": 298,
+          "3": 335,
+          "4": 273,
+          "5": 266,
+          "6": 291,
+          "7": 231,
+          "8": 152,
+          "9": 105,
+          "10": 52,
+          "11": 26,
+          "12": 15,
+          "13": 2,
+          "14": 2,
+          "15": 1
+        },
+        "calls": 2394,
+        "device": "/CPU:0",
+        "graph_traces": [
+          1
+        ],
+        "inference_seconds": 17.755483856019055,
+        "mean_batch": 4.572681704260652,
+        "mean_queue_ms": 4.239126669198259,
+        "replica_cpu_seconds": 29.6099177,
+        "replicas": [
+          {
+            "batch_histogram": {
+              "1": 345,
+              "2": 298,
+              "3": 335,
+              "4": 273,
+              "5": 266,
+              "6": 291,
+              "7": 231,
+              "8": 152,
+              "9": 105,
+              "10": 52,
+              "11": 26,
+              "12": 15,
+              "13": 2,
+              "14": 2,
+              "15": 1
+            },
+            "calls": 2394,
+            "cuda_visible_devices": "-1",
+            "device": "/CPU:0",
+            "engines": 24,
+            "graph_traces": 1,
+            "inference_seconds": 17.755483856019055,
+            "mean_batch": 4.572681704260652,
+            "mean_queue_ms": 4.239126669198259,
+            "model_variable_devices": [
+              "/job:localhost/replica:0/task:0/device:CPU:0"
+            ],
+            "output_placements": {
+              "logits": "/job:localhost/replica:0/task:0/device:CPU:0",
+              "memory_out": "/job:localhost/replica:0/task:0/device:CPU:0",
+              "value": "/job:localhost/replica:0/task:0/device:CPU:0"
+            },
+            "pid": 63993,
+            "process_cpu_seconds": 29.6099177,
+            "requests": 10947,
+            "version": 250,
+            "visible_gpus": [],
+            "weights_sha256": "971bfb895309c78b1c089635a6bcfc3b8406d8a1a192052538407ee8fb0766d2"
+          }
+        ],
+        "requests": 10947,
+        "version": 250,
+        "weights_sha256": "971bfb895309c78b1c089635a6bcfc3b8406d8a1a192052538407ee8fb0766d2"
+      }
+    }
+  ],
+  "replica_before": [
+    {
+      "learner": {
+        "batch_histogram": {
+          "1": 252,
+          "2": 76,
+          "3": 60,
+          "4": 49,
+          "5": 26,
+          "6": 32,
+          "7": 14,
+          "8": 16,
+          "9": 12,
+          "10": 8,
+          "11": 8,
+          "12": 6,
+          "13": 2,
+          "14": 2
+        },
+        "calls": 563,
+        "device": "/CPU:0",
+        "graph_traces": [
+          1
+        ],
+        "inference_seconds": 3.851886391010339,
+        "mean_batch": 3.072824156305506,
+        "mean_queue_ms": 4.34863000054081,
+        "replica_cpu_seconds": 7.1357948,
+        "replicas": [
+          {
+            "batch_histogram": {
+              "1": 252,
+              "2": 76,
+              "3": 60,
+              "4": 49,
+              "5": 26,
+              "6": 32,
+              "7": 14,
+              "8": 16,
+              "9": 12,
+              "10": 8,
+              "11": 8,
+              "12": 6,
+              "13": 2,
+              "14": 2
+            },
+            "calls": 563,
+            "cuda_visible_devices": "-1",
+            "device": "/CPU:0",
+            "engines": 24,
+            "graph_traces": 1,
+            "inference_seconds": 3.851886391010339,
+            "mean_batch": 3.072824156305506,
+            "mean_queue_ms": 4.34863000054081,
+            "model_variable_devices": [
+              "/job:localhost/replica:0/task:0/device:CPU:0"
+            ],
+            "output_placements": {
+              "logits": "/job:localhost/replica:0/task:0/device:CPU:0",
+              "memory_out": "/job:localhost/replica:0/task:0/device:CPU:0",
+              "value": "/job:localhost/replica:0/task:0/device:CPU:0"
+            },
+            "pid": 63913,
+            "process_cpu_seconds": 7.1357948,
+            "requests": 1730,
+            "version": 250,
+            "visible_gpus": [],
+            "weights_sha256": "971bfb895309c78b1c089635a6bcfc3b8406d8a1a192052538407ee8fb0766d2"
+          }
+        ],
+        "requests": 1730,
+        "version": 250,
+        "weights_sha256": "971bfb895309c78b1c089635a6bcfc3b8406d8a1a192052538407ee8fb0766d2"
+      },
+      "opponent": {
+        "batch_histogram": {
+          "1": 273,
+          "2": 118,
+          "3": 80,
+          "4": 54,
+          "5": 40,
+          "6": 33,
+          "7": 22,
+          "8": 19,
+          "9": 9,
+          "10": 6,
+          "11": 4,
+          "12": 2
+        },
+        "calls": 660,
+        "device": "/CPU:0",
+        "graph_traces": [
+          1
+        ],
+        "inference_seconds": 4.218647513991527,
+        "mean_batch": 2.8454545454545452,
+        "mean_queue_ms": 3.7038203445311635,
+        "replica_cpu_seconds": 7.719112932,
+        "replicas": [
+          {
+            "batch_histogram": {
+              "1": 273,
+              "2": 118,
+              "3": 80,
+              "4": 54,
+              "5": 40,
+              "6": 33,
+              "7": 22,
+              "8": 19,
+              "9": 9,
+              "10": 6,
+              "11": 4,
+              "12": 2
+            },
+            "calls": 660,
+            "cuda_visible_devices": "-1",
+            "device": "/CPU:0",
+            "engines": 24,
+            "graph_traces": 1,
+            "inference_seconds": 4.218647513991527,
+            "mean_batch": 2.8454545454545452,
+            "mean_queue_ms": 3.7038203445311635,
+            "model_variable_devices": [
+              "/job:localhost/replica:0/task:0/device:CPU:0"
+            ],
+            "output_placements": {
+              "logits": "/job:localhost/replica:0/task:0/device:CPU:0",
+              "memory_out": "/job:localhost/replica:0/task:0/device:CPU:0",
+              "value": "/job:localhost/replica:0/task:0/device:CPU:0"
+            },
+            "pid": 63967,
+            "process_cpu_seconds": 7.719112932,
+            "requests": 1878,
+            "version": 250,
+            "visible_gpus": [],
+            "weights_sha256": "971bfb895309c78b1c089635a6bcfc3b8406d8a1a192052538407ee8fb0766d2"
+          }
+        ],
+        "requests": 1878,
+        "version": 250,
+        "weights_sha256": "971bfb895309c78b1c089635a6bcfc3b8406d8a1a192052538407ee8fb0766d2"
+      }
+    },
+    {
+      "learner": {
+        "batch_histogram": {
+          "1": 211,
+          "2": 113,
+          "3": 84,
+          "4": 66,
+          "5": 51,
+          "6": 23,
+          "7": 23,
+          "8": 22,
+          "9": 12,
+          "10": 11,
+          "11": 7,
+          "12": 3,
+          "13": 1
+        },
+        "calls": 627,
+        "device": "/CPU:0",
+        "graph_traces": [
+          1
+        ],
+        "inference_seconds": 3.7859309620071144,
+        "mean_batch": 3.2328548644338118,
+        "mean_queue_ms": 3.155158775553709,
+        "replica_cpu_seconds": 7.46323079,
+        "replicas": [
+          {
+            "batch_histogram": {
+              "1": 211,
+              "2": 113,
+              "3": 84,
+              "4": 66,
+              "5": 51,
+              "6": 23,
+              "7": 23,
+              "8": 22,
+              "9": 12,
+              "10": 11,
+              "11": 7,
+              "12": 3,
+              "13": 1
+            },
+            "calls": 627,
+            "cuda_visible_devices": "-1",
+            "device": "/CPU:0",
+            "engines": 24,
+            "graph_traces": 1,
+            "inference_seconds": 3.7859309620071144,
+            "mean_batch": 3.2328548644338118,
+            "mean_queue_ms": 3.155158775553709,
+            "model_variable_devices": [
+              "/job:localhost/replica:0/task:0/device:CPU:0"
+            ],
+            "output_placements": {
+              "logits": "/job:localhost/replica:0/task:0/device:CPU:0",
+              "memory_out": "/job:localhost/replica:0/task:0/device:CPU:0",
+              "value": "/job:localhost/replica:0/task:0/device:CPU:0"
+            },
+            "pid": 63914,
+            "process_cpu_seconds": 7.46323079,
+            "requests": 2027,
+            "version": 250,
+            "visible_gpus": [],
+            "weights_sha256": "971bfb895309c78b1c089635a6bcfc3b8406d8a1a192052538407ee8fb0766d2"
+          }
+        ],
+        "requests": 2027,
+        "version": 250,
+        "weights_sha256": "971bfb895309c78b1c089635a6bcfc3b8406d8a1a192052538407ee8fb0766d2"
+      },
+      "opponent": {
+        "batch_histogram": {
+          "1": 157,
+          "2": 96,
+          "3": 85,
+          "4": 58,
+          "5": 48,
+          "6": 46,
+          "7": 35,
+          "8": 26,
+          "9": 17,
+          "10": 7,
+          "11": 4
+        },
+        "calls": 579,
+        "device": "/CPU:0",
+        "graph_traces": [
+          1
+        ],
+        "inference_seconds": 4.151594670009217,
+        "mean_batch": 3.5785837651122625,
+        "mean_queue_ms": 3.6875505844174317,
+        "replica_cpu_seconds": 7.640358217,
+        "replicas": [
+          {
+            "batch_histogram": {
+              "1": 157,
+              "2": 96,
+              "3": 85,
+              "4": 58,
+              "5": 48,
+              "6": 46,
+              "7": 35,
+              "8": 26,
+              "9": 17,
+              "10": 7,
+              "11": 4
+            },
+            "calls": 579,
+            "cuda_visible_devices": "-1",
+            "device": "/CPU:0",
+            "engines": 24,
+            "graph_traces": 1,
+            "inference_seconds": 4.151594670009217,
+            "mean_batch": 3.5785837651122625,
+            "mean_queue_ms": 3.6875505844174317,
+            "model_variable_devices": [
+              "/job:localhost/replica:0/task:0/device:CPU:0"
+            ],
+            "output_placements": {
+              "logits": "/job:localhost/replica:0/task:0/device:CPU:0",
+              "memory_out": "/job:localhost/replica:0/task:0/device:CPU:0",
+              "value": "/job:localhost/replica:0/task:0/device:CPU:0"
+            },
+            "pid": 63993,
+            "process_cpu_seconds": 7.640358217,
+            "requests": 2072,
+            "version": 250,
+            "visible_gpus": [],
+            "weights_sha256": "971bfb895309c78b1c089635a6bcfc3b8406d8a1a192052538407ee8fb0766d2"
+          }
+        ],
+        "requests": 2072,
+        "version": 250,
+        "weights_sha256": "971bfb895309c78b1c089635a6bcfc3b8406d8a1a192052538407ee8fb0766d2"
+      }
+    }
+  ],
+  "stages": {},
+  "wall_seconds": 15.129158398000072
+}

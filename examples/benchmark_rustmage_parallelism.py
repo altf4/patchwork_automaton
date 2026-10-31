@@ -44,6 +44,7 @@ def metadata(args):
                        if line.startswith('model name')),
         available_cpus=sorted(os.sched_getaffinity(0)), tensorflow=tf.__version__,
         runtime={k: os.environ.get(k) for k in ('TF_NUM_INTRAOP_THREADS', 'TF_NUM_INTEROP_THREADS',
+                                              'PATCHWORK_CPU_INFERENCE_INTRA_THREADS',
                                               'TF_ENABLE_ONEDNN_OPTS', 'CUDA_VISIBLE_DEVICES')},
         source_sha256={str(p): digest(p) for p in [Path(__file__),
             *Path('src/patchwork_automaton/neural').glob('*.py'),
@@ -276,6 +277,7 @@ def main():
             parser.error('For replicated inference set max-batch to workers; each replica batches its assigned engines')
     os.environ.update(KERAS_BACKEND='tensorflow', CUDA_VISIBLE_DEVICES='-1',
         TF_NUM_INTRAOP_THREADS=str(args.intra), TF_NUM_INTEROP_THREADS=str(args.inter),
+        PATCHWORK_CPU_INFERENCE_INTRA_THREADS=str(args.intra),
         TF_ENABLE_ONEDNN_OPTS='0', TF_CPP_MIN_LOG_LEVEL='2')
     args.output.mkdir(parents=True, exist_ok=False)
     from patchwork_automaton.neural.experiment import atomic_json

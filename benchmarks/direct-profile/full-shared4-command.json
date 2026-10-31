@@ -1,0 +1,17 @@
+[
+  "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/venv/bin/python",
+  "-u",
+  "/home/altf4/benchmarks/direct-profile-20261031/compare_shared.py",
+  "--checkpoint",
+  "/home/altf4/benchmarks/standard-ppo-100000-compact-20261028/selfplay-250k-20261029/treatment/run/checkpoints/round-0250/policy.keras",
+  "--output",
+  "/home/altf4/benchmarks/direct-profile-20261031/full-shared4",
+  "--shared-replicas",
+  "4",
+  "--pairs",
+  "2",
+  "--games-per-phase",
+  "1000",
+  "--seed",
+  "1822610310000"
+]

@@ -1,0 +1,461 @@
+{
+  "default-check": {
+    "comparisons": [
+      {
+        "differing_indices": [],
+        "fields": [
+          "index",
+          "seed",
+          "status",
+          "winner_seat",
+          "decisions",
+          "turn",
+          "final_life",
+          "actions"
+        ],
+        "games": 240,
+        "matching": 240,
+        "pair": 1,
+        "trajectory": {
+          "compared_games": 240,
+          "feature_mismatch_count": 0,
+          "feature_mismatches": [],
+          "max_abs_logp_error": 1.33514404296875e-05,
+          "max_abs_memory_error": 3.159046173095703e-06,
+          "max_abs_value_error": 4.336237907409668e-06,
+          "memory_mismatch_count": 42,
+          "output_mismatch_count": 23,
+          "output_tolerance": {
+            "absolute": 1e-06,
+            "relative": 1e-05
+          },
+          "records": 19104,
+          "skipped_adjudicated": []
+        }
+      }
+    ],
+    "minimum_available_gib": 6.202392578125,
+    "phases": [
+      {
+        "configuration": "baseline",
+        "games": 240,
+        "games_per_minute": 973.0725322315919,
+        "inference_replica_cpu_seconds": 92.475896295,
+        "mean_batch": 5.095206479883149,
+        "outcomes": {
+          "loss": 110,
+          "win": 130
+        },
+        "pair": 1,
+        "wall_seconds": 14.79848574800053
+      },
+      {
+        "configuration": "threads1",
+        "games": 240,
+        "games_per_minute": 1026.5776364700862,
+        "inference_replica_cpu_seconds": 78.612457775,
+        "mean_batch": 5.131318534367478,
+        "outcomes": {
+          "loss": 110,
+          "win": 130
+        },
+        "pair": 1,
+        "wall_seconds": 14.02719043200159
+      }
+    ]
+  },
+  "full-threads1": {
+    "aggregate": {
+      "baseline_games_per_minute": 932.9507671167632,
+      "baseline_replica_cpu_seconds": 802.041126647,
+      "candidate_games_per_minute": 995.9208680279517,
+      "candidate_replica_cpu_seconds": 674.948954639,
+      "replica_cpu_reduction_percent": 15.846091651100169,
+      "throughput_increase_percent": 6.749563120655799,
+      "wall_time_reduction_percent": 6.32280163341462
+    },
+    "comparisons": [
+      {
+        "differing_indices": [],
+        "fields": [
+          "index",
+          "seed",
+          "status",
+          "winner_seat",
+          "decisions",
+          "turn",
+          "final_life",
+          "actions"
+        ],
+        "games": 1000,
+        "matching": 1000,
+        "pair": 1,
+        "trajectory": {
+          "compared_games": 1000,
+          "feature_mismatch_count": 0,
+          "feature_mismatches": [],
+          "max_abs_logp_error": 1.430511474609375e-05,
+          "max_abs_memory_error": 4.600733518600464e-06,
+          "max_abs_value_error": 4.976987838745117e-06,
+          "memory_mismatch_count": 112,
+          "output_mismatch_count": 73,
+          "output_tolerance": {
+            "absolute": 1e-06,
+            "relative": 1e-05
+          },
+          "records": 78565,
+          "skipped_adjudicated": []
+        }
+      },
+      {
+        "differing_indices": [],
+        "fields": [
+          "index",
+          "seed",
+          "status",
+          "winner_seat",
+          "decisions",
+          "turn",
+          "final_life",
+          "actions"
+        ],
+        "games": 1000,
+        "matching": 1000,
+        "pair": 2,
+        "trajectory": {
+          "compared_games": 1000,
+          "feature_mismatch_count": 0,
+          "feature_mismatches": [],
+          "max_abs_logp_error": 1.33514404296875e-05,
+          "max_abs_memory_error": 2.5331974029541016e-06,
+          "max_abs_value_error": 6.884336471557617e-06,
+          "memory_mismatch_count": 113,
+          "output_mismatch_count": 100,
+          "output_tolerance": {
+            "absolute": 1e-06,
+            "relative": 1e-05
+          },
+          "records": 81180,
+          "skipped_adjudicated": []
+        }
+      }
+    ],
+    "minimum_available_gib": 5.983081817626953,
+    "phases": [
+      {
+        "configuration": "baseline",
+        "games": 1000,
+        "games_per_minute": 942.8642539528171,
+        "inference_replica_cpu_seconds": 389.679692015,
+        "mean_batch": 5.473424542496239,
+        "outcomes": {
+          "loss": 502,
+          "win": 498
+        },
+        "pair": 1,
+        "wall_seconds": 63.6358836899999
+      },
+      {
+        "configuration": "threads1",
+        "games": 1000,
+        "games_per_minute": 998.5748008914975,
+        "inference_replica_cpu_seconds": 330.89448903000005,
+        "mean_batch": 5.448260248685173,
+        "outcomes": {
+          "loss": 502,
+          "win": 498
+        },
+        "pair": 1,
+        "wall_seconds": 60.0856339919992
+      },
+      {
+        "configuration": "threads1",
+        "games": 1000,
+        "games_per_minute": 993.2810045961086,
+        "inference_replica_cpu_seconds": 344.054465609,
+        "mean_batch": 5.526039550318298,
+        "outcomes": {
+          "loss": 504,
+          "win": 496
+        },
+        "pair": 2,
+        "wall_seconds": 60.405866741000864
+      },
+      {
+        "configuration": "baseline",
+        "games": 1000,
+        "games_per_minute": 923.243576496587,
+        "inference_replica_cpu_seconds": 412.361434632,
+        "mean_batch": 5.529971874894107,
+        "outcomes": {
+          "loss": 504,
+          "win": 496
+        },
+        "pair": 2,
+        "wall_seconds": 64.98826693999945
+      }
+    ]
+  },
+  "preflight-shared2": {
+    "comparisons": [
+      {
+        "differing_indices": [],
+        "fields": [
+          "index",
+          "seed",
+          "status",
+          "winner_seat",
+          "decisions",
+          "turn",
+          "final_life",
+          "actions"
+        ],
+        "games": 240,
+        "matching": 240,
+        "pair": 1,
+        "trajectory": {
+          "compared_games": 240,
+          "feature_mismatch_count": 0,
+          "feature_mismatches": [],
+          "max_abs_logp_error": 1.1444091796875e-05,
+          "max_abs_memory_error": 4.559755325317383e-06,
+          "max_abs_value_error": 3.7550926208496094e-06,
+          "memory_mismatch_count": 25,
+          "output_mismatch_count": 13,
+          "output_tolerance": {
+            "absolute": 1e-06,
+            "relative": 1e-05
+          },
+          "records": 18520,
+          "skipped_adjudicated": []
+        }
+      }
+    ],
+    "minimum_available_gib": 6.224235534667969,
+    "phases": [
+      {
+        "configuration": "baseline",
+        "games": 240,
+        "games_per_minute": 1013.5565130493213,
+        "inference_replica_cpu_seconds": 86.572807316,
+        "mean_batch": 5.116992819935239,
+        "outcomes": {
+          "loss": 126,
+          "win": 114
+        },
+        "pair": 1,
+        "wall_seconds": 14.207397234000382
+      },
+      {
+        "configuration": "shared",
+        "games": 240,
+        "games_per_minute": 841.9337901955577,
+        "inference_replica_cpu_seconds": 52.694043987,
+        "mean_batch": 10.01819184123484,
+        "outcomes": {
+          "loss": 126,
+          "win": 114
+        },
+        "pair": 1,
+        "wall_seconds": 17.103482681999594
+      }
+    ]
+  },
+  "preflight-shared4": {
+    "comparisons": [
+      {
+        "differing_indices": [],
+        "fields": [
+          "index",
+          "seed",
+          "status",
+          "winner_seat",
+          "decisions",
+          "turn",
+          "final_life",
+          "actions"
+        ],
+        "games": 240,
+        "matching": 240,
+        "pair": 1,
+        "trajectory": {
+          "compared_games": 240,
+          "feature_mismatch_count": 0,
+          "feature_mismatches": [],
+          "max_abs_logp_error": 1.1444091796875e-05,
+          "max_abs_memory_error": 3.21120023727417e-06,
+          "max_abs_value_error": 2.8312206268310547e-06,
+          "memory_mismatch_count": 22,
+          "output_mismatch_count": 11,
+          "output_tolerance": {
+            "absolute": 1e-06,
+            "relative": 1e-05
+          },
+          "records": 18520,
+          "skipped_adjudicated": []
+        }
+      }
+    ],
+    "minimum_available_gib": 6.21197509765625,
+    "phases": [
+      {
+        "configuration": "baseline",
+        "games": 240,
+        "games_per_minute": 1004.8888267803615,
+        "inference_replica_cpu_seconds": 87.00845011199999,
+        "mean_batch": 5.096186203028603,
+        "outcomes": {
+          "loss": 126,
+          "win": 114
+        },
+        "pair": 1,
+        "wall_seconds": 14.3299433889988
+      },
+      {
+        "configuration": "shared",
+        "games": 240,
+        "games_per_minute": 978.9946908645686,
+        "inference_replica_cpu_seconds": 83.98745707100001,
+        "mean_batch": 5.3098612125639155,
+        "outcomes": {
+          "loss": 126,
+          "win": 114
+        },
+        "pair": 1,
+        "wall_seconds": 14.708966386000611
+      }
+    ]
+  },
+  "preflight-threads1": {
+    "comparisons": [
+      {
+        "differing_indices": [],
+        "fields": [
+          "index",
+          "seed",
+          "status",
+          "winner_seat",
+          "decisions",
+          "turn",
+          "final_life",
+          "actions"
+        ],
+        "games": 240,
+        "matching": 240,
+        "pair": 1,
+        "trajectory": {
+          "compared_games": 240,
+          "feature_mismatch_count": 0,
+          "feature_mismatches": [],
+          "max_abs_logp_error": 1.1444091796875e-05,
+          "max_abs_memory_error": 2.4884939193725586e-06,
+          "max_abs_value_error": 3.337860107421875e-06,
+          "memory_mismatch_count": 31,
+          "output_mismatch_count": 11,
+          "output_tolerance": {
+            "absolute": 1e-06,
+            "relative": 1e-05
+          },
+          "records": 18566,
+          "skipped_adjudicated": []
+        }
+      }
+    ],
+    "minimum_available_gib": 6.236377716064453,
+    "phases": [
+      {
+        "configuration": "baseline",
+        "games": 240,
+        "games_per_minute": 983.7017367690215,
+        "inference_replica_cpu_seconds": 91.769804737,
+        "mean_batch": 5.1057458861613165,
+        "outcomes": {
+          "loss": 115,
+          "win": 125
+        },
+        "pair": 1,
+        "wall_seconds": 14.638583486999778
+      },
+      {
+        "configuration": "threads1",
+        "games": 240,
+        "games_per_minute": 1033.4409349355144,
+        "inference_replica_cpu_seconds": 78.166953202,
+        "mean_batch": 5.076984978540772,
+        "outcomes": {
+          "loss": 115,
+          "win": 125
+        },
+        "pair": 1,
+        "wall_seconds": 13.934032912000475
+      }
+    ]
+  },
+  "profile": {
+    "categories": [
+      {
+        "category": "inference replicas",
+        "cpu_seconds": 413.652222651,
+        "share_percent": 54.084562549578166
+      },
+      {
+        "category": "other game work and instrumentation",
+        "cpu_seconds": 82.92013240899992,
+        "share_percent": 10.841713986576638
+      },
+      {
+        "category": "game-side inference pipe",
+        "cpu_seconds": 75.7703581270001,
+        "share_percent": 9.906889046214987
+      },
+      {
+        "category": "Rust observation",
+        "cpu_seconds": 50.14622100999996,
+        "share_percent": 6.5565619579144725
+      },
+      {
+        "category": "rollout writing and close",
+        "cpu_seconds": 35.25353229199998,
+        "share_percent": 4.609359669629803
+      },
+      {
+        "category": "Rust history, choices and encoding",
+        "cpu_seconds": 30.067970652999993,
+        "share_percent": 3.9313533216358447
+      },
+      {
+        "category": "Rust action application",
+        "cpu_seconds": 29.668325491999983,
+        "share_percent": 3.8791001666323055
+      },
+      {
+        "category": "NumPy array-view setup",
+        "cpu_seconds": 28.25320756100002,
+        "share_percent": 3.694075089857193
+      },
+      {
+        "category": "other native and action-label overhead",
+        "cpu_seconds": 14.407557098000002,
+        "share_percent": 1.8837718749811636
+      },
+      {
+        "category": "worker, coordinator and unaccounted child CPU",
+        "cpu_seconds": 4.685411934000001,
+        "share_percent": 0.6126123369794263
+      }
+    ],
+    "decisions": 340129,
+    "games": 1000,
+    "games_per_minute": 928.6044241395995,
+    "mean_batch": 5.3780268618672595,
+    "minimum_available_gib": 6.415855407714844,
+    "pilot_profile_wall_ratio": 1.0313987624759255,
+    "service_overlapping_wall_seconds": {
+      "batch_packing": 54.113851079941014,
+      "model_forward": 179.93685270403512,
+      "result_conversion": 1.8589214751045802
+    },
+    "total_cpu_seconds": 764.824939227,
+    "wall_seconds": 64.6130886739993
+  }
+}

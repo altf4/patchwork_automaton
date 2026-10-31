@@ -1,0 +1,23 @@
+[
+  "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/venv/bin/python",
+  "-u",
+  "/home/altf4/benchmarks/direct-profile-20261031/profile_direct.py",
+  "--checkpoint",
+  "/home/altf4/benchmarks/standard-ppo-100000-compact-20261028/selfplay-250k-20261029/treatment/run/checkpoints/round-0250/policy.keras",
+  "--output",
+  "/home/altf4/benchmarks/direct-profile-20261031/profile",
+  "--games",
+  "1000",
+  "--pilot-games",
+  "240",
+  "--workers",
+  "48",
+  "--runners",
+  "2",
+  "--learner-replicas",
+  "2",
+  "--opponent-replicas",
+  "2",
+  "--seed",
+  "1722610310000"
+]

@@ -1,0 +1,15 @@
+[
+  "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/venv/bin/python",
+  "-u",
+  "/home/altf4/benchmarks/direct-profile-20261031/compare_threads.py",
+  "--checkpoint",
+  "/home/altf4/benchmarks/standard-ppo-100000-compact-20261028/selfplay-250k-20261029/treatment/run/checkpoints/round-0250/policy.keras",
+  "--output",
+  "/home/altf4/benchmarks/direct-profile-20261031/preflight-threads1",
+  "--pairs",
+  "1",
+  "--games-per-phase",
+  "240",
+  "--seed",
+  "1922610310000"
+]

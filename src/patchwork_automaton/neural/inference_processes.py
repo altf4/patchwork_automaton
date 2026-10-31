@@ -12,6 +12,38 @@ from threading import Event
 import time
 import traceback
 
+CPU_INTRA_THREADS_ENV = 'PATCHWORK_CPU_INFERENCE_INTRA_THREADS'
+
+
+def _cpu_intra_threads(device, requested=None):
+    """Resolve a replica-only override without changing the learner's runtime."""
+    from .devices import canonical_device
+    if canonical_device(device) != '/CPU:0':
+        if requested is not None:
+            raise ValueError('CPU inference thread override requires a CPU replica')
+        return None
+    if requested is None:
+        raw = os.environ.get(CPU_INTRA_THREADS_ENV, '1')
+        try:
+            requested = int(raw)
+        except (TypeError, ValueError):
+            raise ValueError(f'{CPU_INTRA_THREADS_ENV} must be a positive integer') from None
+    if type(requested) is not int or requested < 1:
+        raise ValueError('CPU inference intra-op threads must be a positive integer')
+    return requested
+
+
+def _configure_replica_threads(device, cpu_intra_threads):
+    """Configure only a fresh CPU replica, before TensorFlow initializes."""
+    from .devices import canonical_device
+    if canonical_device(device) != '/CPU:0':
+        return
+    import tensorflow as tf
+    try:
+        tf.config.threading.set_intra_op_parallelism_threads(cpu_intra_threads)
+    except RuntimeError as error:
+        raise RuntimeError('CPU inference threads must be configured before TensorFlow runtime initialization') from error
+
 
 async def _settle(awaitable):
     """Drain an in-flight pipe exchange before cancellation can close its pipe."""
@@ -51,7 +83,7 @@ def bridge_requests(connection, batcher, stopping):
             return
 
 
-def _replica_main(control, connections, config, weights, version, wait_ms, device):
+def _replica_main(control, connections, config, weights, version, wait_ms, device, cpu_intra_threads=None):
     async def serve():
         import keras
         from . import model as registered_models  # noqa: F401
@@ -71,6 +103,10 @@ def _replica_main(control, connections, config, weights, version, wait_ms, devic
                 weights_sha256=weights_digest(network.get_weights()),
                 visible_gpus=[gpu.name for gpu in tf.config.get_visible_devices('GPU')],
                 cuda_visible_devices=os.environ.get('CUDA_VISIBLE_DEVICES'),
+                intra_op_threads=tf.config.threading.get_intra_op_parallelism_threads(),
+                inter_op_threads=tf.config.threading.get_inter_op_parallelism_threads(),
+                tf_num_intraop_threads_env=os.environ.get('TF_NUM_INTRAOP_THREADS'),
+                tf_num_interop_threads_env=os.environ.get('TF_NUM_INTEROP_THREADS'),
                 process_cpu_seconds=time.process_time(),**batcher.stats())
         try:
             await batcher.start()
@@ -104,6 +140,10 @@ def _replica_main(control, connections, config, weights, version, wait_ms, devic
 
     try:
         from .devices import configure_runtime, canonical_device
+        if canonical_device(device) == '/CPU:0':
+            # Hide learner GPUs before the threading helper imports TensorFlow.
+            os.environ['CUDA_VISIBLE_DEVICES'] = '-1'
+            _configure_replica_threads(device, _cpu_intra_threads(device, cpu_intra_threads))
         configure_runtime(device, hide_gpu=canonical_device(device) == '/CPU:0')
         asyncio.run(serve_with_timer() if os.environ.get('PATCHWORK_ARENA_POLL_INFERENCE') == '1'
                     else serve())
@@ -116,7 +156,7 @@ def _replica_main(control, connections, config, weights, version, wait_ms, devic
 
 
 class InferenceProcessGroup:
-    def __init__(self, connections, *, replicas=2, wait_ms=0, timeout=120, device='cpu'):
+    def __init__(self, connections, *, replicas=2, wait_ms=0, timeout=120, device='cpu', cpu_intra_threads=None):
         if type(replicas) is not int or not 1 <= replicas <= len(connections):
             raise ValueError('Inference processes must be between one and the game-engine count')
         if not 0 <= wait_ms < float('inf') or not 0 < timeout < float('inf'):
@@ -125,6 +165,7 @@ class InferenceProcessGroup:
         self.wait_ms,self.timeout = wait_ms,timeout
         from .devices import canonical_device
         self.device = canonical_device(device)
+        self.cpu_intra_threads = _cpu_intra_threads(self.device, cpu_intra_threads)
         self.handles = []
         self.states = []
         self.started = self.closed = self.broken = self.busy = False
@@ -156,6 +197,8 @@ class InferenceProcessGroup:
             raise RuntimeError('Inference replicas disagree on frozen policy weights or version')
         if any(s['device'] != self.device for s in states):
             raise RuntimeError('Inference replicas disagree on requested neural device')
+        if self.cpu_intra_threads is not None and any(s['intra_op_threads'] != self.cpu_intra_threads for s in states):
+            raise RuntimeError('CPU inference replicas disagree on intra-op thread count')
         self.states,self.version,self.digest = states,version,digest
 
     async def start(self, model, *, version=0):
@@ -171,7 +214,7 @@ class InferenceProcessGroup:
                 parent,child = context.Pipe()
                 assigned = self.connections[i::self.replicas]
                 process = context.Process(target=_replica_main,
-                    args=(child,assigned,config,weights,version,self.wait_ms,self.device),name=f'inference-replica-{i}')
+                    args=(child,assigned,config,weights,version,self.wait_ms,self.device,self.cpu_intra_threads),name=f'inference-replica-{i}')
                 try: process.start()
                 except BaseException:
                     parent.close();child.close()
