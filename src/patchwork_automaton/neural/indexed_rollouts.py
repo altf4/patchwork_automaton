@@ -127,7 +127,7 @@ class IndexedTrajectoryReader:
     def get(self,position):
         if self.fd is None:raise ValueError('Indexed rollout reader is closed')
         if not 0<=position<self.count:raise IndexError(position)
-        from .training import Sample
+        from .rollout_records import Sample
         width=len(self.fields)*4*8
         raw_index=self._read(width+(8 if position+1<self.count else 0),self.index_offset+position*width)
         row=np.frombuffer(raw_index,dtype='<u8',count=len(self.fields)*4).reshape(len(self.fields),4)

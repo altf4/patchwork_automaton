@@ -13,22 +13,26 @@ from .batching import example_batch, input_signature
 from .demonstrations import read_demonstration
 from .features import collate
 from .rustmage_features import ACTIONS
+from .devices import canonical_device, device_scope, assert_output_device
 
 
 class ImitationTrainer:
     def __init__(self, model, *, learning_rate=.0003, batch_size=32, epochs=2,
-                 unroll=8, seed=5721, clip_norm=1.):
+                 unroll=8, seed=5721, clip_norm=1., action_kinds=None, device='cpu'):
         if min(batch_size, epochs, unroll) < 1 or not 0 < learning_rate < float('inf') or clip_norm <= 0:
             raise ValueError('Positive counts, learning rate, and clipping norm required')
+        self.device = canonical_device(device)
         self.model = model
         self.policy = model.actor if getattr(model, 'separate_value', False) else model
         self.batch_size, self.epochs, self.unroll = batch_size, epochs, unroll
         self.clip_norm = clip_norm
+        self.action_kinds = tuple(action_kinds or ACTIONS)
         self.rng = np.random.default_rng(seed)
         self.optimizer = keras.optimizers.Adam(learning_rate)
         example = example_batch(self.policy.memory_size, model.feature_spec)
-        self.policy(example, training=False)
-        self.optimizer.build(self.policy.trainable_variables)
+        with device_scope(self.device):
+            self.policy(example, training=False)
+            self.optimizer.build(self.policy.trainable_variables)
         sig = {k: tf.TensorSpec((None, *v.shape), v.dtype)
                for k, v in input_signature(example).items() if k not in ('memory_in', 'advance_memory')}
         signature = [tf.TensorSpec((None, self.policy.memory_size), tf.float32), sig,
@@ -95,7 +99,11 @@ class ImitationTrainer:
             memory = np.zeros((len(streams), self.policy.memory_size), np.float32)
             for packed, labels, active, samples in self._chunks(streams):
                 fn = self.train_chunk if training else self.evaluate_chunk
-                memory, losses, predicted = [np.asarray(v) for v in fn(memory, packed, labels, active)]
+                # Device scopes are thread-local; fitting runs in a worker thread.
+                with device_scope(self.device):
+                    output = fn(memory, packed, labels, active)
+                assert_output_device({'memory': output[0], 'losses': output[1]}, self.device)
+                memory, losses, predicted = [np.asarray(v) for v in output]
                 if not all(np.isfinite(v).all() for v in (memory, losses)):
                     raise FloatingPointError('Nonfinite imitation output')
                 for pos in zip(*np.nonzero(active)):
@@ -103,7 +111,7 @@ class ImitationTrainer:
                     row = totals[sample.action_kind]
                     nll = float(losses[pos])
                     chosen = int(predicted[pos])
-                    kind = ACTIONS[int(np.argmax(packed['candidates'][(*pos, chosen, slice(0, len(ACTIONS)))]))]
+                    kind = self.action_kinds[int(np.argmax(packed['candidates'][(*pos, chosen, slice(0, len(self.action_kinds)))]))]
                     row['samples'] += 1
                     row['correct'] += int(chosen == sample.action)
                     row['kind_correct'] += int(kind == sample.action_kind)

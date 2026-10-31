@@ -44,14 +44,21 @@ def _initialize_worker(connections, counter, metadata):
 
 
 def _run_game(options):
-    from .rustmage_experiment import play_game
+    options = dict(options)
+    runner = options.pop('game_runner', None)
+    if runner == 'standard_ppo':
+        from .standard_ppo import play_ppo_game as play_game
+    elif runner == 'standard':
+        from .standard_imitation import play_standard_evaluation as play_game
+    else:
+        from .rustmage_experiment import play_game
     _worker_batcher.wait_seconds = 0.
     _worker_batcher.requests = 0
     started = time.process_time()
     result = play_game(model=_worker_model, batcher=_worker_batcher, **options)
     result['worker_cpu_seconds'] = time.process_time() - started
-    result['worker_inference_seconds'] = _worker_batcher.wait_seconds
-    result['worker_inference_requests'] = _worker_batcher.requests
+    result['worker_inference_seconds'] = result.get('game_inference_seconds',_worker_batcher.wait_seconds)
+    result['worker_inference_requests'] = result.get('game_inference_requests',_worker_batcher.requests)
     result['worker_pid'] = os.getpid()
     return result
 
@@ -120,22 +127,26 @@ class ProcessGameCollector:
         return dict(self.batcher.stats(),version=self.version,weights_sha256=self.policy_digest)
 
     async def run_games(self, *, games, seed_base, index_base=0, progress=None, **options):
+        jobs = [dict(seed=seed_base+i,index=index_base+i) for i in range(games)]
+        return await self.run_schedule(jobs, progress=progress, **options)
+
+    async def run_schedule(self, jobs, *, progress=None, **options):
         if self.closed or self.broken or self.active: raise RuntimeError('Collector is unavailable or active')
         if self.replicas:
             if not self.replicas.started: await self.start()
             options.setdefault('version',self.version)
             if options['version'] != self.version: raise ValueError('Stale model version for collection')
         loop = asyncio.get_running_loop()
-        async def one(i):
+        async def one(job):
             row = await loop.run_in_executor(self.pool, _run_game,
-                dict(options, seed=seed_base+i, index=index_base+i))
+                dict(options, **job))
             if progress: progress(row)
             return row
         self.active = True
         try:
             # Finish all submitted games even if a progress callback fails.
             # Ordering, seeds and seats are independent of completion order.
-            results = await asyncio.gather(*(one(i) for i in range(games)),return_exceptions=True)
+            results = await asyncio.gather(*(one(job) for job in jobs),return_exceptions=True)
             for result in results:
                 if isinstance(result,BaseException): raise result
             if self.replicas: await self.replicas.refresh_stats()

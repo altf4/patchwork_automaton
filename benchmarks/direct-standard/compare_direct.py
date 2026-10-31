@@ -25,11 +25,10 @@ os.environ.setdefault('PATCHWORK_ROLLOUT_STORAGE', 'pickle')
 def initialize(connections, counter, metadata, native):
     from patchwork_automaton.rl.standard_selfplay_processes import _initialize_worker
     _initialize_worker(connections, counter, metadata)
+    os.environ['PATCHWORK_STANDARD_PLAYBACK'] = 'direct' if native else 'python'
     if native:
-        from patchwork_automaton.rl import standard_imitation
-        import runtime
-        runtime.native()  # load/configure before the single-threaded game fork
-        standard_imitation.play_standard_game = runtime.play
+        from patchwork_automaton.neural.direct_standard import library
+        library()  # load/configure before the single-threaded game fork
 
 
 def compare_trajectories(a, b):
@@ -111,6 +110,7 @@ async def run(args):
     manifest=dict(status='running', checkpoint=str(checkpoint), checkpoint_sha256=checkpoint_sha,
         source_sha256=sources, driver_sha256=sha(Path(__file__)), games_per_phase=args.games_per_phase,
         pairs=args.pairs, seed=args.seed, workers=48, runners=2, opponent_replicas=2,
+        opponent_kind='scripted' if args.scripted else 'frozen_neural',
         configurations={'python': 'python',candidate: 'python' if args.baseline_repeat else 'direct'}, baseline_repeat=args.baseline_repeat, native_library_sha256=sha(Path(os.environ['DIRECT_STANDARD_LIBRARY'])),
         phase_order=[f'python-{candidate}' if i%2 else f'{candidate}-python' for i in range(1,args.pairs+1)], cpu_model=next((s.split(':',1)[1].strip() for s in Path('/proc/cpuinfo').read_text().splitlines() if s.startswith('model name')),None),
         logical_cpus=os.cpu_count(), phases=[], comparisons=[])
@@ -141,7 +141,9 @@ async def run(args):
                     for i,c in enumerate(cs)))
             warm=schedule(240,seed=args.seed+1000000+run_number*10000,round_id=1)[:48]
             for game in warm:
-                game.update(opponent_kind='frozen_neural',opponent_version=250,opponent_checkpoint_sha256=checkpoint_sha)
+                game.update(opponent_kind='scripted' if args.scripted else 'frozen_neural')
+                if not args.scripted:
+                    game.update(opponent_version=250,opponent_checkpoint_sha256=checkpoint_sha)
             await batch(warm)
             before=[c.stats() for c in cs]
             start=time.perf_counter(); coord=time.process_time()
@@ -180,7 +182,9 @@ async def run(args):
         for run_number in range(1,args.pairs+1):
             jobs=schedule(1000,seed=args.seed,round_id=run_number)[:args.games_per_phase]
             for game in jobs:
-                game.update(opponent_kind='frozen_neural',opponent_version=250,opponent_checkpoint_sha256=checkpoint_sha)
+                game.update(opponent_kind='scripted' if args.scripted else 'frozen_neural')
+                if not args.scripted:
+                    game.update(opponent_version=250,opponent_checkpoint_sha256=checkpoint_sha)
             labels=('python',candidate) if run_number%2 else (candidate,'python')
             rows={}; results={}
             for label in labels:
@@ -205,6 +209,7 @@ def main():
     p.add_argument('--seed',type=int,default=1022610310000);p.add_argument('--pairs',type=int,default=2)
     p.add_argument('--games-per-phase',type=int,default=1000)
     p.add_argument('--baseline-repeat',action='store_true',help='Run Python versus Python to quantify inference nondeterminism')
+    p.add_argument('--scripted',action='store_true',help='Use the scripted opponent in both matched configurations')
     a=p.parse_args()
     if a.pairs not in (1,2) or not 48<=a.games_per_phase<=1000:
         p.error('One or two pairs, with 48–1000 games per phase, required')

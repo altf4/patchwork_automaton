@@ -252,7 +252,8 @@ class _Sample:
 
 class _NumericUnpickler(pickle.Unpickler):
     def find_class(self, module, name):
-        if (module, name) == ('patchwork_automaton.neural.training', 'Sample'):
+        if name == 'Sample' and module in ('patchwork_automaton.neural.training',
+                                          'patchwork_automaton.neural.rollout_records'):
             return _Sample
         if module == 'numpy' and name in ('dtype', 'ndarray'):
             return getattr(np, name)

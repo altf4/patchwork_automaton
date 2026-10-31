@@ -21,8 +21,8 @@ from ..core import (Capabilities, Decision, DecisionToken, Handle, ObjectView,
                     Observation, Option, Outcome, PlayerView, Response)
 from ..errors import Disconnected, GameEnded, StaleDecision, UnsupportedInteraction
 
-RUSTMAGE_REVISION = '78d717856af36274018634b54a3fc8cbacf4c829'
-OBSERVATION_SCHEMA = 131
+RUSTMAGE_REVISION = '046b25ef14671753a2eea6336bc1ce974b298253'
+OBSERVATION_SCHEMA = 169
 CAPABILITIES = Capabilities('rustmage', frozenset((
     'private_views', 'sequential_choices', 'seed', 'concede', 'snapshot', 'restore', 'fork')))
 PHASES = {'Pregame': None, 'Main1': 'precombat_main', 'Main2': 'postcombat_main',
@@ -63,6 +63,7 @@ def action_options(raw):
                for i, a in enumerate(raw['actions'])]
     # Representatives in actions are not exhaustive for large numeric domains.
     for field, kind in (('x_choice', 'integer'), ('damage_assignment', 'integer'),
+                        ('target_amount', 'integer'), ('source_counter_choice', 'integer'),
                         ('mana_lot_spend', 'integer'), ('mana_payment', 'mana_payment')):
         if raw.get(field) is not None:
             options.append(Option('domain:' + field, kind, field, raw[field]))
@@ -85,8 +86,14 @@ def domain_action(option, value):
         if not any(r['minimum'] <= value <= r['maximum'] for r in c['intervals']):
             raise ValueError('X is outside the offered intervals')
         return {'kind': 'ChooseX', 'value': value}
+    if field == 'source_counter_choice':
+        if not 0 <= value <= c['maximum']:
+            raise ValueError('Value is outside the offered range')
+        return {'kind': 'ChooseSourceCounterAmount', 'amount': value}
     if not c['minimum'] <= value <= c['maximum']:
         raise ValueError('Value is outside the offered range')
+    if field == 'target_amount':
+        return {'kind': 'AllocateTargetAmount', 'amount': value}
     if field == 'mana_lot_spend':
         if c.get('values') is not None and value not in c['values']:
             raise ValueError('Amount is absent from the exact offered set')

@@ -36,7 +36,11 @@ def bridge_requests(connection, batcher, stopping):
     while not stopping.is_set():
         try:
             if not connection.poll(.2): continue
-            batch, version, identity, unbatched = connection.recv()
+            request = connection.recv()
+            if len(request) == 2 and request[0] == 'reset':
+                connection.send(request)
+                continue
+            batch, version, identity, unbatched = request
             try:
                 result = batcher.predict(batch,version=version,identity=identity,unbatched=unbatched)
                 message = (True,result)
@@ -90,10 +94,19 @@ def _replica_main(control, connections, config, weights, version, wait_ms, devic
             stopping.set()
             if bridges: await asyncio.to_thread(bridges.shutdown,wait=True)
             await batcher.close()
+    async def serve_with_timer():
+        loop = asyncio.get_running_loop()
+        def tick():
+            if not loop.is_closed():
+                loop.call_later(.002, tick)
+        loop.call_later(.002, tick)
+        await serve()
+
     try:
         from .devices import configure_runtime, canonical_device
         configure_runtime(device, hide_gpu=canonical_device(device) == '/CPU:0')
-        asyncio.run(serve())
+        asyncio.run(serve_with_timer() if os.environ.get('PATCHWORK_ARENA_POLL_INFERENCE') == '1'
+                    else serve())
     except BaseException:
         try: control.send((False,traceback.format_exc()))
         except (BrokenPipeError,EOFError,OSError): pass

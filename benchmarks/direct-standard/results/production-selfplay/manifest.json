@@ -1,0 +1,1473 @@
+{
+  "baseline_repeat": false,
+  "checkpoint": "/home/altf4/benchmarks/standard-ppo-100000-compact-20261028/selfplay-250k-20261029/treatment/run/checkpoints/round-0250/policy.keras",
+  "checkpoint_sha256": "12f263e2024014574c96130fc707fee95cdb9837130e498f27d27661fa5ce623",
+  "comparisons": [
+    {
+      "differing_indices": [],
+      "fields": [
+        "index",
+        "seed",
+        "status",
+        "winner_seat",
+        "decisions",
+        "turn",
+        "final_life",
+        "actions"
+      ],
+      "games": 240,
+      "matching": 240,
+      "pair": 1,
+      "trajectory": {
+        "compared_games": 240,
+        "feature_mismatch_count": 0,
+        "feature_mismatches": [],
+        "max_abs_logp_error": 1.1444091796875e-05,
+        "max_abs_memory_error": 4.3585896492004395e-06,
+        "max_abs_value_error": 3.5762786865234375e-06,
+        "memory_mismatch_count": 46,
+        "output_mismatch_count": 19,
+        "output_tolerance": {
+          "absolute": 1e-06,
+          "relative": 1e-05
+        },
+        "records": 18385,
+        "skipped_adjudicated": []
+      }
+    }
+  ],
+  "configurations": {
+    "direct": "direct",
+    "python": "python"
+  },
+  "cpu_model": "13th Gen Intel(R) Core(TM) i7-13700K",
+  "driver_sha256": "d020eb45b0faa26c2d12ae1ffa18466e914967363d816b50b07a0802555c65c1",
+  "games_per_phase": 240,
+  "logical_cpus": 24,
+  "native_library_sha256": "6eeed6a362868206353e06a1f9ad8d84cd008af3c76784d02e86618372772152",
+  "opponent_kind": "frozen_neural",
+  "opponent_replicas": 2,
+  "pairs": 1,
+  "phase_order": [
+    "python-direct"
+  ],
+  "phases": [
+    {
+      "configuration": "python",
+      "coordinator_cpu_seconds": 0.5049463899999997,
+      "decisions": 80097,
+      "draw_reasons": {},
+      "games": 240,
+      "games_per_minute": 485.4535076636481,
+      "learner_calls": 4122,
+      "learner_inference_seconds": 41.832014869938575,
+      "learner_mean_queue_ms": 4.694212423278045,
+      "learner_replica_cpu_seconds": 62.65967396400001,
+      "learner_requests": 18385,
+      "opponent_calls": 4091,
+      "opponent_inference_seconds": 42.078235674041935,
+      "opponent_mean_queue_ms": 4.861644962515469,
+      "opponent_replica_cpu_seconds": 63.19217578400001,
+      "opponent_requests": 18839,
+      "outcomes": {
+        "loss": 105,
+        "win": 135
+      },
+      "pair": 1,
+      "parent_worker_cpu_seconds": 1.1931651540000001,
+      "pipeline_mode": "python",
+      "replica_after": [
+        {
+          "learner": {
+            "batch_histogram": {
+              "1": 732,
+              "2": 368,
+              "3": 343,
+              "4": 349,
+              "5": 317,
+              "6": 223,
+              "7": 181,
+              "8": 112,
+              "9": 84,
+              "10": 53,
+              "11": 24,
+              "12": 19,
+              "13": 8,
+              "14": 1
+            },
+            "calls": 2814,
+            "device": "/CPU:0",
+            "graph_traces": [
+              1
+            ],
+            "inference_seconds": 25.742654674968435,
+            "mean_batch": 3.8646055437100215,
+            "mean_queue_ms": 4.18394823375057,
+            "replica_cpu_seconds": 39.346137138,
+            "replicas": [
+              {
+                "batch_histogram": {
+                  "1": 732,
+                  "2": 368,
+                  "3": 343,
+                  "4": 349,
+                  "5": 317,
+                  "6": 223,
+                  "7": 181,
+                  "8": 112,
+                  "9": 84,
+                  "10": 53,
+                  "11": 24,
+                  "12": 19,
+                  "13": 8,
+                  "14": 1
+                },
+                "calls": 2814,
+                "cuda_visible_devices": "-1",
+                "device": "/CPU:0",
+                "engines": 24,
+                "graph_traces": 1,
+                "inference_seconds": 25.742654674968435,
+                "mean_batch": 3.8646055437100215,
+                "mean_queue_ms": 4.18394823375057,
+                "model_variable_devices": [
+                  "/job:localhost/replica:0/task:0/device:CPU:0"
+                ],
+                "output_placements": {
+                  "logits": "/job:localhost/replica:0/task:0/device:CPU:0",
+                  "memory_out": "/job:localhost/replica:0/task:0/device:CPU:0",
+                  "value": "/job:localhost/replica:0/task:0/device:CPU:0"
+                },
+                "pid": 59969,
+                "process_cpu_seconds": 39.346137138,
+                "requests": 10875,
+                "version": 250,
+                "visible_gpus": [],
+                "weights_sha256": "971bfb895309c78b1c089635a6bcfc3b8406d8a1a192052538407ee8fb0766d2"
+              }
+            ],
+            "requests": 10875,
+            "version": 250,
+            "weights_sha256": "971bfb895309c78b1c089635a6bcfc3b8406d8a1a192052538407ee8fb0766d2"
+          },
+          "opponent": {
+            "batch_histogram": {
+              "1": 613,
+              "2": 308,
+              "3": 310,
+              "4": 287,
+              "5": 269,
+              "6": 257,
+              "7": 223,
+              "8": 140,
+              "9": 96,
+              "10": 69,
+              "11": 34,
+              "12": 13,
+              "13": 10,
+              "14": 5,
+              "15": 6,
+              "16": 4,
+              "17": 1
+            },
+            "calls": 2645,
+            "device": "/CPU:0",
+            "graph_traces": [
+              1
+            ],
+            "inference_seconds": 25.95479485199212,
+            "mean_batch": 4.2835538752362945,
+            "mean_queue_ms": 4.6830347912582155,
+            "replica_cpu_seconds": 39.852783545,
+            "replicas": [
+              {
+                "batch_histogram": {
+                  "1": 613,
+                  "2": 308,
+                  "3": 310,
+                  "4": 287,
+                  "5": 269,
+                  "6": 257,
+                  "7": 223,
+                  "8": 140,
+                  "9": 96,
+                  "10": 69,
+                  "11": 34,
+                  "12": 13,
+                  "13": 10,
+                  "14": 5,
+                  "15": 6,
+                  "16": 4,
+                  "17": 1
+                },
+                "calls": 2645,
+                "cuda_visible_devices": "-1",
+                "device": "/CPU:0",
+                "engines": 24,
+                "graph_traces": 1,
+                "inference_seconds": 25.95479485199212,
+                "mean_batch": 4.2835538752362945,
+                "mean_queue_ms": 4.6830347912582155,
+                "model_variable_devices": [
+                  "/job:localhost/replica:0/task:0/device:CPU:0"
+                ],
+                "output_placements": {
+                  "logits": "/job:localhost/replica:0/task:0/device:CPU:0",
+                  "memory_out": "/job:localhost/replica:0/task:0/device:CPU:0",
+                  "value": "/job:localhost/replica:0/task:0/device:CPU:0"
+                },
+                "pid": 60020,
+                "process_cpu_seconds": 39.852783545,
+                "requests": 11330,
+                "version": 250,
+                "visible_gpus": [],
+                "weights_sha256": "971bfb895309c78b1c089635a6bcfc3b8406d8a1a192052538407ee8fb0766d2"
+              }
+            ],
+            "requests": 11330,
+            "version": 250,
+            "weights_sha256": "971bfb895309c78b1c089635a6bcfc3b8406d8a1a192052538407ee8fb0766d2"
+          }
+        },
+        {
+          "learner": {
+            "batch_histogram": {
+              "1": 792,
+              "2": 360,
+              "3": 373,
+              "4": 338,
+              "5": 294,
+              "6": 208,
+              "7": 169,
+              "8": 138,
+              "9": 107,
+              "10": 60,
+              "11": 41,
+              "12": 18,
+              "13": 9,
+              "14": 2,
+              "16": 2
+            },
+            "calls": 2911,
+            "device": "/CPU:0",
+            "graph_traces": [
+              1
+            ],
+            "inference_seconds": 26.226818846016613,
+            "mean_batch": 3.91446238406046,
+            "mean_queue_ms": 4.6692475149518105,
+            "replica_cpu_seconds": 41.547142364,
+            "replicas": [
+              {
+                "batch_histogram": {
+                  "1": 792,
+                  "2": 360,
+                  "3": 373,
+                  "4": 338,
+                  "5": 294,
+                  "6": 208,
+                  "7": 169,
+                  "8": 138,
+                  "9": 107,
+                  "10": 60,
+                  "11": 41,
+                  "12": 18,
+                  "13": 9,
+                  "14": 2,
+                  "16": 2
+                },
+                "calls": 2911,
+                "cuda_visible_devices": "-1",
+                "device": "/CPU:0",
+                "engines": 24,
+                "graph_traces": 1,
+                "inference_seconds": 26.226818846016613,
+                "mean_batch": 3.91446238406046,
+                "mean_queue_ms": 4.6692475149518105,
+                "model_variable_devices": [
+                  "/job:localhost/replica:0/task:0/device:CPU:0"
+                ],
+                "output_placements": {
+                  "logits": "/job:localhost/replica:0/task:0/device:CPU:0",
+                  "memory_out": "/job:localhost/replica:0/task:0/device:CPU:0",
+                  "value": "/job:localhost/replica:0/task:0/device:CPU:0"
+                },
+                "pid": 59970,
+                "process_cpu_seconds": 41.547142364,
+                "requests": 11395,
+                "version": 250,
+                "visible_gpus": [],
+                "weights_sha256": "971bfb895309c78b1c089635a6bcfc3b8406d8a1a192052538407ee8fb0766d2"
+              }
+            ],
+            "requests": 11395,
+            "version": 250,
+            "weights_sha256": "971bfb895309c78b1c089635a6bcfc3b8406d8a1a192052538407ee8fb0766d2"
+          },
+          "opponent": {
+            "batch_histogram": {
+              "1": 859,
+              "2": 379,
+              "3": 339,
+              "4": 336,
+              "5": 341,
+              "6": 284,
+              "7": 202,
+              "8": 120,
+              "9": 94,
+              "10": 45,
+              "11": 25,
+              "12": 23,
+              "13": 8,
+              "14": 4,
+              "15": 4,
+              "16": 2
+            },
+            "calls": 3065,
+            "device": "/CPU:0",
+            "graph_traces": [
+              1
+            ],
+            "inference_seconds": 26.507122966024326,
+            "mean_batch": 3.869494290375204,
+            "mean_queue_ms": 4.4187441471224975,
+            "replica_cpu_seconds": 42.157898508,
+            "replicas": [
+              {
+                "batch_histogram": {
+                  "1": 859,
+                  "2": 379,
+                  "3": 339,
+                  "4": 336,
+                  "5": 341,
+                  "6": 284,
+                  "7": 202,
+                  "8": 120,
+                  "9": 94,
+                  "10": 45,
+                  "11": 25,
+                  "12": 23,
+                  "13": 8,
+                  "14": 4,
+                  "15": 4,
+                  "16": 2
+                },
+                "calls": 3065,
+                "cuda_visible_devices": "-1",
+                "device": "/CPU:0",
+                "engines": 24,
+                "graph_traces": 1,
+                "inference_seconds": 26.507122966024326,
+                "mean_batch": 3.869494290375204,
+                "mean_queue_ms": 4.4187441471224975,
+                "model_variable_devices": [
+                  "/job:localhost/replica:0/task:0/device:CPU:0"
+                ],
+                "output_placements": {
+                  "logits": "/job:localhost/replica:0/task:0/device:CPU:0",
+                  "memory_out": "/job:localhost/replica:0/task:0/device:CPU:0",
+                  "value": "/job:localhost/replica:0/task:0/device:CPU:0"
+                },
+                "pid": 60046,
+                "process_cpu_seconds": 42.157898508,
+                "requests": 11860,
+                "version": 250,
+                "visible_gpus": [],
+                "weights_sha256": "971bfb895309c78b1c089635a6bcfc3b8406d8a1a192052538407ee8fb0766d2"
+              }
+            ],
+            "requests": 11860,
+            "version": 250,
+            "weights_sha256": "971bfb895309c78b1c089635a6bcfc3b8406d8a1a192052538407ee8fb0766d2"
+          }
+        }
+      ],
+      "replica_before": [
+        {
+          "learner": {
+            "batch_histogram": {
+              "1": 349,
+              "2": 87,
+              "3": 74,
+              "4": 66,
+              "5": 41,
+              "6": 28,
+              "7": 22,
+              "8": 15,
+              "9": 10,
+              "10": 9,
+              "11": 2,
+              "12": 3
+            },
+            "calls": 706,
+            "device": "/CPU:0",
+            "graph_traces": [
+              1
+            ],
+            "inference_seconds": 5.266730306037061,
+            "mean_batch": 2.68271954674221,
+            "mean_queue_ms": 3.6637698837858417,
+            "replica_cpu_seconds": 8.985967673,
+            "replicas": [
+              {
+                "batch_histogram": {
+                  "1": 349,
+                  "2": 87,
+                  "3": 74,
+                  "4": 66,
+                  "5": 41,
+                  "6": 28,
+                  "7": 22,
+                  "8": 15,
+                  "9": 10,
+                  "10": 9,
+                  "11": 2,
+                  "12": 3
+                },
+                "calls": 706,
+                "cuda_visible_devices": "-1",
+                "device": "/CPU:0",
+                "engines": 24,
+                "graph_traces": 1,
+                "inference_seconds": 5.266730306037061,
+                "mean_batch": 2.68271954674221,
+                "mean_queue_ms": 3.6637698837858417,
+                "model_variable_devices": [
+                  "/job:localhost/replica:0/task:0/device:CPU:0"
+                ],
+                "output_placements": {
+                  "logits": "/job:localhost/replica:0/task:0/device:CPU:0",
+                  "memory_out": "/job:localhost/replica:0/task:0/device:CPU:0",
+                  "value": "/job:localhost/replica:0/task:0/device:CPU:0"
+                },
+                "pid": 59969,
+                "process_cpu_seconds": 8.985967673,
+                "requests": 1894,
+                "version": 250,
+                "visible_gpus": [],
+                "weights_sha256": "971bfb895309c78b1c089635a6bcfc3b8406d8a1a192052538407ee8fb0766d2"
+              }
+            ],
+            "requests": 1894,
+            "version": 250,
+            "weights_sha256": "971bfb895309c78b1c089635a6bcfc3b8406d8a1a192052538407ee8fb0766d2"
+          },
+          "opponent": {
+            "batch_histogram": {
+              "1": 271,
+              "2": 108,
+              "3": 78,
+              "4": 52,
+              "5": 46,
+              "6": 33,
+              "7": 33,
+              "8": 14,
+              "9": 10,
+              "10": 8,
+              "11": 3,
+              "12": 1,
+              "13": 3,
+              "14": 3,
+              "15": 2,
+              "16": 2,
+              "17": 1
+            },
+            "calls": 668,
+            "device": "/CPU:0",
+            "graph_traces": [
+              1
+            ],
+            "inference_seconds": 5.261088971961726,
+            "mean_batch": 3.106287425149701,
+            "mean_queue_ms": 3.7012554544712493,
+            "replica_cpu_seconds": 9.142956634,
+            "replicas": [
+              {
+                "batch_histogram": {
+                  "1": 271,
+                  "2": 108,
+                  "3": 78,
+                  "4": 52,
+                  "5": 46,
+                  "6": 33,
+                  "7": 33,
+                  "8": 14,
+                  "9": 10,
+                  "10": 8,
+                  "11": 3,
+                  "12": 1,
+                  "13": 3,
+                  "14": 3,
+                  "15": 2,
+                  "16": 2,
+                  "17": 1
+                },
+                "calls": 668,
+                "cuda_visible_devices": "-1",
+                "device": "/CPU:0",
+                "engines": 24,
+                "graph_traces": 1,
+                "inference_seconds": 5.261088971961726,
+                "mean_batch": 3.106287425149701,
+                "mean_queue_ms": 3.7012554544712493,
+                "model_variable_devices": [
+                  "/job:localhost/replica:0/task:0/device:CPU:0"
+                ],
+                "output_placements": {
+                  "logits": "/job:localhost/replica:0/task:0/device:CPU:0",
+                  "memory_out": "/job:localhost/replica:0/task:0/device:CPU:0",
+                  "value": "/job:localhost/replica:0/task:0/device:CPU:0"
+                },
+                "pid": 60020,
+                "process_cpu_seconds": 9.142956634,
+                "requests": 2075,
+                "version": 250,
+                "visible_gpus": [],
+                "weights_sha256": "971bfb895309c78b1c089635a6bcfc3b8406d8a1a192052538407ee8fb0766d2"
+              }
+            ],
+            "requests": 2075,
+            "version": 250,
+            "weights_sha256": "971bfb895309c78b1c089635a6bcfc3b8406d8a1a192052538407ee8fb0766d2"
+          }
+        },
+        {
+          "learner": {
+            "batch_histogram": {
+              "1": 531,
+              "2": 114,
+              "3": 85,
+              "4": 60,
+              "5": 37,
+              "6": 22,
+              "7": 17,
+              "8": 7,
+              "9": 9,
+              "10": 7,
+              "11": 4,
+              "12": 2,
+              "13": 2
+            },
+            "calls": 897,
+            "device": "/CPU:0",
+            "graph_traces": [
+              1
+            ],
+            "inference_seconds": 4.870728345009411,
+            "mean_batch": 2.2196209587513933,
+            "mean_queue_ms": 2.7444685650708607,
+            "replica_cpu_seconds": 9.247637865,
+            "replicas": [
+              {
+                "batch_histogram": {
+                  "1": 531,
+                  "2": 114,
+                  "3": 85,
+                  "4": 60,
+                  "5": 37,
+                  "6": 22,
+                  "7": 17,
+                  "8": 7,
+                  "9": 9,
+                  "10": 7,
+                  "11": 4,
+                  "12": 2,
+                  "13": 2
+                },
+                "calls": 897,
+                "cuda_visible_devices": "-1",
+                "device": "/CPU:0",
+                "engines": 24,
+                "graph_traces": 1,
+                "inference_seconds": 4.870728345009411,
+                "mean_batch": 2.2196209587513933,
+                "mean_queue_ms": 2.7444685650708607,
+                "model_variable_devices": [
+                  "/job:localhost/replica:0/task:0/device:CPU:0"
+                ],
+                "output_placements": {
+                  "logits": "/job:localhost/replica:0/task:0/device:CPU:0",
+                  "memory_out": "/job:localhost/replica:0/task:0/device:CPU:0",
+                  "value": "/job:localhost/replica:0/task:0/device:CPU:0"
+                },
+                "pid": 59970,
+                "process_cpu_seconds": 9.247637865,
+                "requests": 1991,
+                "version": 250,
+                "visible_gpus": [],
+                "weights_sha256": "971bfb895309c78b1c089635a6bcfc3b8406d8a1a192052538407ee8fb0766d2"
+              }
+            ],
+            "requests": 1991,
+            "version": 250,
+            "weights_sha256": "971bfb895309c78b1c089635a6bcfc3b8406d8a1a192052538407ee8fb0766d2"
+          },
+          "opponent": {
+            "batch_histogram": {
+              "1": 554,
+              "2": 109,
+              "3": 55,
+              "4": 62,
+              "5": 59,
+              "6": 49,
+              "7": 29,
+              "8": 19,
+              "9": 7,
+              "10": 5,
+              "11": 2,
+              "12": 1
+            },
+            "calls": 951,
+            "device": "/CPU:0",
+            "graph_traces": [
+              1
+            ],
+            "inference_seconds": 5.122593172012785,
+            "mean_batch": 2.3932702418506837,
+            "mean_queue_ms": 2.72251988267647,
+            "replica_cpu_seconds": 9.675549635,
+            "replicas": [
+              {
+                "batch_histogram": {
+                  "1": 554,
+                  "2": 109,
+                  "3": 55,
+                  "4": 62,
+                  "5": 59,
+                  "6": 49,
+                  "7": 29,
+                  "8": 19,
+                  "9": 7,
+                  "10": 5,
+                  "11": 2,
+                  "12": 1
+                },
+                "calls": 951,
+                "cuda_visible_devices": "-1",
+                "device": "/CPU:0",
+                "engines": 24,
+                "graph_traces": 1,
+                "inference_seconds": 5.122593172012785,
+                "mean_batch": 2.3932702418506837,
+                "mean_queue_ms": 2.72251988267647,
+                "model_variable_devices": [
+                  "/job:localhost/replica:0/task:0/device:CPU:0"
+                ],
+                "output_placements": {
+                  "logits": "/job:localhost/replica:0/task:0/device:CPU:0",
+                  "memory_out": "/job:localhost/replica:0/task:0/device:CPU:0",
+                  "value": "/job:localhost/replica:0/task:0/device:CPU:0"
+                },
+                "pid": 60046,
+                "process_cpu_seconds": 9.675549635,
+                "requests": 2276,
+                "version": 250,
+                "visible_gpus": [],
+                "weights_sha256": "971bfb895309c78b1c089635a6bcfc3b8406d8a1a192052538407ee8fb0766d2"
+              }
+            ],
+            "requests": 2276,
+            "version": 250,
+            "weights_sha256": "971bfb895309c78b1c089635a6bcfc3b8406d8a1a192052538407ee8fb0766d2"
+          }
+        }
+      ],
+      "wall_seconds": 29.66298476099837
+    },
+    {
+      "configuration": "direct",
+      "coordinator_cpu_seconds": 0.18290912799999992,
+      "decisions": 80097,
+      "draw_reasons": {},
+      "games": 240,
+      "games_per_minute": 657.2333924380044,
+      "learner_calls": 3609,
+      "learner_inference_seconds": 28.605969490052303,
+      "learner_mean_queue_ms": 4.686744338429244,
+      "learner_replica_cpu_seconds": 46.431172215,
+      "learner_requests": 18385,
+      "opponent_calls": 3649,
+      "opponent_inference_seconds": 28.753418853975745,
+      "opponent_mean_queue_ms": 4.8538082471571276,
+      "opponent_replica_cpu_seconds": 46.6776838,
+      "opponent_requests": 18839,
+      "outcomes": {
+        "loss": 105,
+        "win": 135
+      },
+      "pair": 1,
+      "parent_worker_cpu_seconds": 0.9709458709999996,
+      "pipeline_mode": "direct",
+      "replica_after": [
+        {
+          "learner": {
+            "batch_histogram": {
+              "1": 548,
+              "2": 261,
+              "3": 281,
+              "4": 311,
+              "5": 270,
+              "6": 257,
+              "7": 225,
+              "8": 146,
+              "9": 98,
+              "10": 54,
+              "11": 30,
+              "12": 14,
+              "13": 9,
+              "14": 1,
+              "15": 1,
+              "17": 1
+            },
+            "calls": 2507,
+            "device": "/CPU:0",
+            "graph_traces": [
+              1
+            ],
+            "inference_seconds": 17.965577283050152,
+            "mean_batch": 4.3378540087754285,
+            "mean_queue_ms": 4.194286091196626,
+            "replica_cpu_seconds": 29.827351484,
+            "replicas": [
+              {
+                "batch_histogram": {
+                  "1": 548,
+                  "2": 261,
+                  "3": 281,
+                  "4": 311,
+                  "5": 270,
+                  "6": 257,
+                  "7": 225,
+                  "8": 146,
+                  "9": 98,
+                  "10": 54,
+                  "11": 30,
+                  "12": 14,
+                  "13": 9,
+                  "14": 1,
+                  "15": 1,
+                  "17": 1
+                },
+                "calls": 2507,
+                "cuda_visible_devices": "-1",
+                "device": "/CPU:0",
+                "engines": 24,
+                "graph_traces": 1,
+                "inference_seconds": 17.965577283050152,
+                "mean_batch": 4.3378540087754285,
+                "mean_queue_ms": 4.194286091196626,
+                "model_variable_devices": [
+                  "/job:localhost/replica:0/task:0/device:CPU:0"
+                ],
+                "output_placements": {
+                  "logits": "/job:localhost/replica:0/task:0/device:CPU:0",
+                  "memory_out": "/job:localhost/replica:0/task:0/device:CPU:0",
+                  "value": "/job:localhost/replica:0/task:0/device:CPU:0"
+                },
+                "pid": 60520,
+                "process_cpu_seconds": 29.827351484,
+                "requests": 10875,
+                "version": 250,
+                "visible_gpus": [],
+                "weights_sha256": "971bfb895309c78b1c089635a6bcfc3b8406d8a1a192052538407ee8fb0766d2"
+              }
+            ],
+            "requests": 10875,
+            "version": 250,
+            "weights_sha256": "971bfb895309c78b1c089635a6bcfc3b8406d8a1a192052538407ee8fb0766d2"
+          },
+          "opponent": {
+            "batch_histogram": {
+              "1": 460,
+              "2": 277,
+              "3": 209,
+              "4": 213,
+              "5": 268,
+              "6": 224,
+              "7": 253,
+              "8": 173,
+              "9": 149,
+              "10": 81,
+              "11": 48,
+              "12": 13,
+              "13": 8,
+              "14": 1,
+              "15": 3
+            },
+            "calls": 2380,
+            "device": "/CPU:0",
+            "graph_traces": [
+              1
+            ],
+            "inference_seconds": 18.046616119961982,
+            "mean_batch": 4.760504201680672,
+            "mean_queue_ms": 4.766144606014296,
+            "replica_cpu_seconds": 30.104761788,
+            "replicas": [
+              {
+                "batch_histogram": {
+                  "1": 460,
+                  "2": 277,
+                  "3": 209,
+                  "4": 213,
+                  "5": 268,
+                  "6": 224,
+                  "7": 253,
+                  "8": 173,
+                  "9": 149,
+                  "10": 81,
+                  "11": 48,
+                  "12": 13,
+                  "13": 8,
+                  "14": 1,
+                  "15": 3
+                },
+                "calls": 2380,
+                "cuda_visible_devices": "-1",
+                "device": "/CPU:0",
+                "engines": 24,
+                "graph_traces": 1,
+                "inference_seconds": 18.046616119961982,
+                "mean_batch": 4.760504201680672,
+                "mean_queue_ms": 4.766144606014296,
+                "model_variable_devices": [
+                  "/job:localhost/replica:0/task:0/device:CPU:0"
+                ],
+                "output_placements": {
+                  "logits": "/job:localhost/replica:0/task:0/device:CPU:0",
+                  "memory_out": "/job:localhost/replica:0/task:0/device:CPU:0",
+                  "value": "/job:localhost/replica:0/task:0/device:CPU:0"
+                },
+                "pid": 60569,
+                "process_cpu_seconds": 30.104761788,
+                "requests": 11330,
+                "version": 250,
+                "visible_gpus": [],
+                "weights_sha256": "971bfb895309c78b1c089635a6bcfc3b8406d8a1a192052538407ee8fb0766d2"
+              }
+            ],
+            "requests": 11330,
+            "version": 250,
+            "weights_sha256": "971bfb895309c78b1c089635a6bcfc3b8406d8a1a192052538407ee8fb0766d2"
+          }
+        },
+        {
+          "learner": {
+            "batch_histogram": {
+              "1": 714,
+              "2": 289,
+              "3": 234,
+              "4": 257,
+              "5": 234,
+              "6": 216,
+              "7": 185,
+              "8": 159,
+              "9": 125,
+              "10": 87,
+              "11": 64,
+              "12": 34,
+              "13": 8,
+              "14": 6,
+              "15": 3
+            },
+            "calls": 2615,
+            "device": "/CPU:0",
+            "graph_traces": [
+              1
+            ],
+            "inference_seconds": 18.85331834000681,
+            "mean_batch": 4.357552581261951,
+            "mean_queue_ms": 4.662878221871791,
+            "replica_cpu_seconds": 32.201736901,
+            "replicas": [
+              {
+                "batch_histogram": {
+                  "1": 714,
+                  "2": 289,
+                  "3": 234,
+                  "4": 257,
+                  "5": 234,
+                  "6": 216,
+                  "7": 185,
+                  "8": 159,
+                  "9": 125,
+                  "10": 87,
+                  "11": 64,
+                  "12": 34,
+                  "13": 8,
+                  "14": 6,
+                  "15": 3
+                },
+                "calls": 2615,
+                "cuda_visible_devices": "-1",
+                "device": "/CPU:0",
+                "engines": 24,
+                "graph_traces": 1,
+                "inference_seconds": 18.85331834000681,
+                "mean_batch": 4.357552581261951,
+                "mean_queue_ms": 4.662878221871791,
+                "model_variable_devices": [
+                  "/job:localhost/replica:0/task:0/device:CPU:0"
+                ],
+                "output_placements": {
+                  "logits": "/job:localhost/replica:0/task:0/device:CPU:0",
+                  "memory_out": "/job:localhost/replica:0/task:0/device:CPU:0",
+                  "value": "/job:localhost/replica:0/task:0/device:CPU:0"
+                },
+                "pid": 60521,
+                "process_cpu_seconds": 32.201736901,
+                "requests": 11395,
+                "version": 250,
+                "visible_gpus": [],
+                "weights_sha256": "971bfb895309c78b1c089635a6bcfc3b8406d8a1a192052538407ee8fb0766d2"
+              }
+            ],
+            "requests": 11395,
+            "version": 250,
+            "weights_sha256": "971bfb895309c78b1c089635a6bcfc3b8406d8a1a192052538407ee8fb0766d2"
+          },
+          "opponent": {
+            "batch_histogram": {
+              "1": 707,
+              "2": 301,
+              "3": 288,
+              "4": 266,
+              "5": 264,
+              "6": 261,
+              "7": 214,
+              "8": 181,
+              "9": 118,
+              "10": 88,
+              "11": 39,
+              "12": 14,
+              "13": 7,
+              "14": 7,
+              "15": 2,
+              "16": 1,
+              "17": 1
+            },
+            "calls": 2759,
+            "device": "/CPU:0",
+            "graph_traces": [
+              1
+            ],
+            "inference_seconds": 19.133361479978703,
+            "mean_batch": 4.298658934396521,
+            "mean_queue_ms": 4.475270071004236,
+            "replica_cpu_seconds": 32.553743433,
+            "replicas": [
+              {
+                "batch_histogram": {
+                  "1": 707,
+                  "2": 301,
+                  "3": 288,
+                  "4": 266,
+                  "5": 264,
+                  "6": 261,
+                  "7": 214,
+                  "8": 181,
+                  "9": 118,
+                  "10": 88,
+                  "11": 39,
+                  "12": 14,
+                  "13": 7,
+                  "14": 7,
+                  "15": 2,
+                  "16": 1,
+                  "17": 1
+                },
+                "calls": 2759,
+                "cuda_visible_devices": "-1",
+                "device": "/CPU:0",
+                "engines": 24,
+                "graph_traces": 1,
+                "inference_seconds": 19.133361479978703,
+                "mean_batch": 4.298658934396521,
+                "mean_queue_ms": 4.475270071004236,
+                "model_variable_devices": [
+                  "/job:localhost/replica:0/task:0/device:CPU:0"
+                ],
+                "output_placements": {
+                  "logits": "/job:localhost/replica:0/task:0/device:CPU:0",
+                  "memory_out": "/job:localhost/replica:0/task:0/device:CPU:0",
+                  "value": "/job:localhost/replica:0/task:0/device:CPU:0"
+                },
+                "pid": 60595,
+                "process_cpu_seconds": 32.553743433,
+                "requests": 11860,
+                "version": 250,
+                "visible_gpus": [],
+                "weights_sha256": "971bfb895309c78b1c089635a6bcfc3b8406d8a1a192052538407ee8fb0766d2"
+              }
+            ],
+            "requests": 11860,
+            "version": 250,
+            "weights_sha256": "971bfb895309c78b1c089635a6bcfc3b8406d8a1a192052538407ee8fb0766d2"
+          }
+        }
+      ],
+      "replica_before": [
+        {
+          "learner": {
+            "batch_histogram": {
+              "1": 268,
+              "2": 98,
+              "3": 54,
+              "4": 56,
+              "5": 40,
+              "6": 39,
+              "7": 36,
+              "8": 18,
+              "9": 13,
+              "10": 5,
+              "11": 2,
+              "12": 1,
+              "13": 1
+            },
+            "calls": 631,
+            "device": "/CPU:0",
+            "graph_traces": [
+              1
+            ],
+            "inference_seconds": 3.9843633680084167,
+            "mean_batch": 3.0015847860538827,
+            "mean_queue_ms": 3.897389842091671,
+            "replica_cpu_seconds": 7.496323109,
+            "replicas": [
+              {
+                "batch_histogram": {
+                  "1": 268,
+                  "2": 98,
+                  "3": 54,
+                  "4": 56,
+                  "5": 40,
+                  "6": 39,
+                  "7": 36,
+                  "8": 18,
+                  "9": 13,
+                  "10": 5,
+                  "11": 2,
+                  "12": 1,
+                  "13": 1
+                },
+                "calls": 631,
+                "cuda_visible_devices": "-1",
+                "device": "/CPU:0",
+                "engines": 24,
+                "graph_traces": 1,
+                "inference_seconds": 3.9843633680084167,
+                "mean_batch": 3.0015847860538827,
+                "mean_queue_ms": 3.897389842091671,
+                "model_variable_devices": [
+                  "/job:localhost/replica:0/task:0/device:CPU:0"
+                ],
+                "output_placements": {
+                  "logits": "/job:localhost/replica:0/task:0/device:CPU:0",
+                  "memory_out": "/job:localhost/replica:0/task:0/device:CPU:0",
+                  "value": "/job:localhost/replica:0/task:0/device:CPU:0"
+                },
+                "pid": 60520,
+                "process_cpu_seconds": 7.496323109,
+                "requests": 1894,
+                "version": 250,
+                "visible_gpus": [],
+                "weights_sha256": "971bfb895309c78b1c089635a6bcfc3b8406d8a1a192052538407ee8fb0766d2"
+              }
+            ],
+            "requests": 1894,
+            "version": 250,
+            "weights_sha256": "971bfb895309c78b1c089635a6bcfc3b8406d8a1a192052538407ee8fb0766d2"
+          },
+          "opponent": {
+            "batch_histogram": {
+              "1": 216,
+              "2": 116,
+              "3": 63,
+              "4": 44,
+              "5": 45,
+              "6": 45,
+              "7": 33,
+              "8": 25,
+              "9": 19,
+              "10": 11,
+              "11": 5
+            },
+            "calls": 622,
+            "device": "/CPU:0",
+            "graph_traces": [
+              1
+            ],
+            "inference_seconds": 4.043110474964124,
+            "mean_batch": 3.3360128617363345,
+            "mean_queue_ms": 3.8224733798003387,
+            "replica_cpu_seconds": 7.619796414,
+            "replicas": [
+              {
+                "batch_histogram": {
+                  "1": 216,
+                  "2": 116,
+                  "3": 63,
+                  "4": 44,
+                  "5": 45,
+                  "6": 45,
+                  "7": 33,
+                  "8": 25,
+                  "9": 19,
+                  "10": 11,
+                  "11": 5
+                },
+                "calls": 622,
+                "cuda_visible_devices": "-1",
+                "device": "/CPU:0",
+                "engines": 24,
+                "graph_traces": 1,
+                "inference_seconds": 4.043110474964124,
+                "mean_batch": 3.3360128617363345,
+                "mean_queue_ms": 3.8224733798003387,
+                "model_variable_devices": [
+                  "/job:localhost/replica:0/task:0/device:CPU:0"
+                ],
+                "output_placements": {
+                  "logits": "/job:localhost/replica:0/task:0/device:CPU:0",
+                  "memory_out": "/job:localhost/replica:0/task:0/device:CPU:0",
+                  "value": "/job:localhost/replica:0/task:0/device:CPU:0"
+                },
+                "pid": 60569,
+                "process_cpu_seconds": 7.619796414,
+                "requests": 2075,
+                "version": 250,
+                "visible_gpus": [],
+                "weights_sha256": "971bfb895309c78b1c089635a6bcfc3b8406d8a1a192052538407ee8fb0766d2"
+              }
+            ],
+            "requests": 2075,
+            "version": 250,
+            "weights_sha256": "971bfb895309c78b1c089635a6bcfc3b8406d8a1a192052538407ee8fb0766d2"
+          }
+        },
+        {
+          "learner": {
+            "batch_histogram": {
+              "1": 508,
+              "2": 117,
+              "3": 71,
+              "4": 70,
+              "5": 29,
+              "6": 37,
+              "7": 27,
+              "8": 10,
+              "9": 11,
+              "10": 1,
+              "11": 1
+            },
+            "calls": 882,
+            "device": "/CPU:0",
+            "graph_traces": [
+              1
+            ],
+            "inference_seconds": 4.228562764996241,
+            "mean_batch": 2.2573696145124718,
+            "mean_queue_ms": 2.6112041974129063,
+            "replica_cpu_seconds": 8.101593061,
+            "replicas": [
+              {
+                "batch_histogram": {
+                  "1": 508,
+                  "2": 117,
+                  "3": 71,
+                  "4": 70,
+                  "5": 29,
+                  "6": 37,
+                  "7": 27,
+                  "8": 10,
+                  "9": 11,
+                  "10": 1,
+                  "11": 1
+                },
+                "calls": 882,
+                "cuda_visible_devices": "-1",
+                "device": "/CPU:0",
+                "engines": 24,
+                "graph_traces": 1,
+                "inference_seconds": 4.228562764996241,
+                "mean_batch": 2.2573696145124718,
+                "mean_queue_ms": 2.6112041974129063,
+                "model_variable_devices": [
+                  "/job:localhost/replica:0/task:0/device:CPU:0"
+                ],
+                "output_placements": {
+                  "logits": "/job:localhost/replica:0/task:0/device:CPU:0",
+                  "memory_out": "/job:localhost/replica:0/task:0/device:CPU:0",
+                  "value": "/job:localhost/replica:0/task:0/device:CPU:0"
+                },
+                "pid": 60521,
+                "process_cpu_seconds": 8.101593061,
+                "requests": 1991,
+                "version": 250,
+                "visible_gpus": [],
+                "weights_sha256": "971bfb895309c78b1c089635a6bcfc3b8406d8a1a192052538407ee8fb0766d2"
+              }
+            ],
+            "requests": 1991,
+            "version": 250,
+            "weights_sha256": "971bfb895309c78b1c089635a6bcfc3b8406d8a1a192052538407ee8fb0766d2"
+          },
+          "opponent": {
+            "batch_histogram": {
+              "1": 475,
+              "2": 109,
+              "3": 78,
+              "4": 41,
+              "5": 30,
+              "6": 38,
+              "7": 34,
+              "8": 24,
+              "9": 21,
+              "10": 11,
+              "11": 6,
+              "12": 1
+            },
+            "calls": 868,
+            "device": "/CPU:0",
+            "graph_traces": [
+              1
+            ],
+            "inference_seconds": 4.383448271000816,
+            "mean_batch": 2.622119815668203,
+            "mean_queue_ms": 3.3851474503397965,
+            "replica_cpu_seconds": 8.361025007,
+            "replicas": [
+              {
+                "batch_histogram": {
+                  "1": 475,
+                  "2": 109,
+                  "3": 78,
+                  "4": 41,
+                  "5": 30,
+                  "6": 38,
+                  "7": 34,
+                  "8": 24,
+                  "9": 21,
+                  "10": 11,
+                  "11": 6,
+                  "12": 1
+                },
+                "calls": 868,
+                "cuda_visible_devices": "-1",
+                "device": "/CPU:0",
+                "engines": 24,
+                "graph_traces": 1,
+                "inference_seconds": 4.383448271000816,
+                "mean_batch": 2.622119815668203,
+                "mean_queue_ms": 3.3851474503397965,
+                "model_variable_devices": [
+                  "/job:localhost/replica:0/task:0/device:CPU:0"
+                ],
+                "output_placements": {
+                  "logits": "/job:localhost/replica:0/task:0/device:CPU:0",
+                  "memory_out": "/job:localhost/replica:0/task:0/device:CPU:0",
+                  "value": "/job:localhost/replica:0/task:0/device:CPU:0"
+                },
+                "pid": 60595,
+                "process_cpu_seconds": 8.361025007,
+                "requests": 2276,
+                "version": 250,
+                "visible_gpus": [],
+                "weights_sha256": "971bfb895309c78b1c089635a6bcfc3b8406d8a1a192052538407ee8fb0766d2"
+              }
+            ],
+            "requests": 2276,
+            "version": 250,
+            "weights_sha256": "971bfb895309c78b1c089635a6bcfc3b8406d8a1a192052538407ee8fb0766d2"
+          }
+        }
+      ],
+      "wall_seconds": 21.910024909999265
+    }
+  ],
+  "runners": 2,
+  "seed": 1022610310000,
+  "source_sha256": {
+    ".local/rustmage/data/observation-schema.txt": "1ee1c7eb8ed268e88ca294b11ff2463a7edf168833613d0f5a191877657ea752",
+    ".local/rustmage/python/rustmage.py": "1ad978d02354b3655fbe4cad3286a9adc67633e6e1b88fa27bd1b433efa257f5",
+    ".local/rustmage/target/release/librustmage.so": "51cb6efd0b4621c67af9aefff5f1c0c6dd46c7b570ff84171796bd2ef0557c60",
+    "examples/analyze_ppo_update_profile.py": "9959146718ec8f46d85a16d28cbe6489104e90692e021418e9c90e35ef5585c7",
+    "examples/backup_rustmage_continuation.py": "6c14c2768c601ac2280621790ea6551e50477647bb430708cb081ada8b25ac14",
+    "examples/backup_rustmage_pooled_study.py": "44ffa604c30e65c303f3b1059779fe8d0af18f3f926a294692e05033271820f7",
+    "examples/benchmark_actor_cache_soak.py": "823bcb11b1a0e5283b8b2244afd2874995ac1b4d447b1ad319b05b076d0e266b",
+    "examples/benchmark_actor_epoch_cache.py": "a9e349eb56f490ed9c48e82dcc0922f4a6ef3bc774dafa48331321ed41676dfb",
+    "examples/benchmark_device_cached_update.py": "059df6916f6a69dd001fd843c550363251607b5d0777e34a14fecc77c9a592cf",
+    "examples/benchmark_device_policy_cache.py": "b3fda8db5dc2921b3bc729c42d3b1c98d4cbfeea8fc3cfaf3846e59557ef0af0",
+    "examples/benchmark_fused_gru.py": "b0af040c043df638e9fce55d179f41b941ae26bb6882c4608fe0e394ce0cc9b2",
+    "examples/benchmark_fused_gru_update.py": "3847ad5f84d1b99aa58e6a687d6c9cc14d21124b11c4cfeadc6531dde35b852e",
+    "examples/benchmark_gru_layers.py": "6d4727b4b8064e8a1dcd17e10d8d61d4e86ef346253ebf84973c982f7438fafd",
+    "examples/benchmark_host_memory.py": "d70868923d627adb67ea52271129795842eb8a145cab2b0a799e738e4f604bcc",
+    "examples/benchmark_native_pipeline.py": "ee21848c8566982e677a3e31f3c4218d10c7686d867648bf92dd265d730b7d88",
+    "examples/benchmark_neural_devices.py": "7beeb2086f764573593419b7a4f9cc347cd21f5721e13382cb80babf225afdad",
+    "examples/benchmark_packed_update.py": "adc6792cd08ba754bdc1b9c9b426c65adb86c9694e4072a55a07f192847f27e3",
+    "examples/benchmark_pipeline.py": "800c4e2d3c3df250a267a332189d880c4a40a7355b997b9b7a39380d80ecd048",
+    "examples/benchmark_rollout_pipeline.py": "c783f045ac3aea5cf8345bb17e7d7a44e4273faff2a5ed091ceaebea3c94ecff",
+    "examples/benchmark_rustmage_collectors.py": "8acbedc509e017a5bdac551e5aaf2e6f29461472f2999da6a799d6f60b24d800",
+    "examples/benchmark_rustmage_cpu.py": "700c53044236f340f69e7bbf9006515fa54a7f8f7938ad22d6a10867a590baa4",
+    "examples/benchmark_rustmage_parallelism.py": "f9d370a087faffe201bd387a257f3a224e12fcbc5533336ce9667361e813895b",
+    "examples/benchmark_update_packing.py": "67de67ea9be0d8aa2daf639c43a23980bb0ee65ec9d8e8ac149097ec9e79f543",
+    "examples/burn_baseline.py": "a2e4e4022c6d7a34d6e0935c953b005f41c64685d94dece2e289c9a7ac9d328a",
+    "examples/collect_rustmage_demonstrations.py": "8a7c523659d229ed6680a8f9ca7269d3172f2467a3e6f8ec1c6864837cf7a15a",
+    "examples/collect_standard_demonstrations.py": "10260333bd5efada6d77a27a8941012966338b64ac29d0ceb135b9dc83aff0a8",
+    "examples/compare_engines.py": "63132d783343db8dbe279fab57cd3980d66f4f09d7cd93694912dec1633b497f",
+    "examples/diagnose_curriculum.py": "25b626fed3b6aad25dbdd40303aab901d847ead3a0bb96dd4c30941709ac5a03",
+    "examples/diagnose_policy_value_generalization.py": "87062ea0951580b328112c1461b4b8005a8437b4bd82978bd3890d9db0d103e6",
+    "examples/diagnose_rustmage_critic.py": "303fb2e4f260bed1ade3bc7e426fb972fe6b3b9fda108d6b5d2c61449d22fc90",
+    "examples/diagnose_rustmage_guard.py": "50c71a654def6e6832e9263b3da8f9c3e2eed2d6a099dfdcc709da6280519aee",
+    "examples/diagnose_rustmage_recurrence.py": "795bd0e33342393ca4cd9d62fc693178f21c286cf2389c57a4dfb72aca9dedea",
+    "examples/diagnose_scenario_transfer.py": "317aa3b4410169c7c6c06f235620dce9a17862bbcab8520e69a1991ad1acba3d",
+    "examples/diagnose_scenarios.py": "ad82d55d5cd4715e258d5f2912af81e7c3008c1dd1046f7f09866dd62d483270",
+    "examples/evaluate_baseline.py": "d83b52c12ee047fd06b54785e79e64be28ebdee5e6b69eb841bc6819ec54401f",
+    "examples/evaluate_goldfish.py": "b51e4b76ccfc6eb9bffc2a6bf7165abd85f17f8f1d4ce13f4d8fe09d2d8c53ac",
+    "examples/evaluate_openings.py": "ab8a47713be759ee486743862d0436df0a3a0ca6733494e9ebe1cadf92f3659e",
+    "examples/evaluate_rustmage.py": "2c06de2daf9fc5b60d86051dec2139099993188621ece8579f4c19d25e632623",
+    "examples/evaluate_rustmage_head_to_head.py": "de6ee0ecad61e086a6d88c19ab1ea1d82333f5de3fe19f4745109898c631d1d5",
+    "examples/evaluate_rustmage_policy.py": "e3b45a81f00f0d1f46bf3fb21e4773d9f7212640fe68f6b396cb5b8a06968167",
+    "examples/evaluate_standard_baselines.py": "85f6be066d2d7fa9761477943b95aaf0332a5037fc7744a7e501274dc63dc4d4",
+    "examples/evaluate_standard_selfplay.py": "974a99bf66f6e639aec49bcfc318e3765736b1cc6005586231da6657876264ca",
+    "examples/idle_session.py": "9245df417d03f6afc8197aa1f890d021b6730f89494954fcb2ba1cee73ab14b9",
+    "examples/inspect_solitaire.py": "389e86d1d61b89af0bdcb06717cd4740ef69fc5588313b67812667b9378d8220",
+    "examples/neural_xmage.py": "20d2f66740302493b176eadb815cf78944eeece5f0edc47c6b428080fa28c1a6",
+    "examples/pilot_standard_selfplay.py": "365e64eef6c71524f86f4f701dc582f35a8b793bfe4be42c3f743e985b65de06",
+    "examples/plot_policy_value_generalization.py": "724a4c0378d2af6792b263a77adf622dcf22ee2911e2820921ac7643a7a5acdf",
+    "examples/plot_rustmage_imitation.py": "185ecabe282635c812c75de1e19673ba63bb6c689d802cd93219eb4e5e35ed0f",
+    "examples/plot_rustmage_pooled_study.py": "a8d8bf8552b5f698227eb998283e4101665eaf58ea21750e51284d2b3521f35a",
+    "examples/plot_rustmage_progress.py": "c9d220dae4c81a102d1bbfc75ec9ddf108ceba930e3a0e3aa14e9939e528393c",
+    "examples/plot_rustmage_training.py": "c895250da32c954a48ef1b60cbb4dc6c2275dd7569ff0575ba2f96e3f0d9451e",
+    "examples/preflight_rustmage_pool.py": "353c51646582f6fc04970fbf6783e11a39cbbe884893e4e0b0482055ffb2c24e",
+    "examples/produce_rustmage_rollouts.py": "2b5f75454ebe45fb1ed1a870544965bcd6567fe3c73b24c150aaee03b18d0f81",
+    "examples/profile_device_cached_update.py": "b71cde8ada66178c394ec90ef3b8fb7a3f763c2e03754a5b6cdf4f65ebe8cf68",
+    "examples/profile_packed_update.py": "71ff3e839498994b1e441110377099000e0cfa9143195163cf48a0dc258bbb58",
+    "examples/profile_ppo_update.py": "9f15b524e08051af2d05816b3a076f1f9dc4a8555b2a8a03c430981657ab82fa",
+    "examples/profile_rustmage.py": "a46df4d1a4177f77b5c830b15444b36ec9b55ce2bcdbf1baff1ad94c166dd878",
+    "examples/rollout_exchange_rpc.py": "d4fa97678c5a388b1a11df8d6272ca1cfd75e5d08d01f65b9d2648bafc864a74",
+    "examples/run_rustmage_140k_evaluation_recovery.py": "d5bd25a325b195384e40bf4f0ac48617ccc2b68c6281f30e82281aa68c7cc4fb",
+    "examples/run_rustmage_140k_evaluation_recovery3.py": "5367070512860f4dfb180f3c530d469376189e83d893f1b6827015b1ad548ff5",
+    "examples/run_rustmage_continuation.py": "d57b0351f68543ae4e1a34c897ec7b0a30f909a7e738f2355b23b66624dcf5a7",
+    "examples/run_rustmage_continuation_140k.py": "8f75a76f159c9a744fe30d691d508f62af5593f2ec2ab517f9a444e2e710e1b7",
+    "examples/run_rustmage_pooled_study.py": "9b9b2b4fcf0004dcc945047837128a3bffe5230fefac58fb890d58b46a3d70c0",
+    "examples/run_standard_imitation.py": "2a9634de45dee5dfbb7613a224ed86748a6a22f8405f186dd66be63fd6ca8db5",
+    "examples/summarize_standard_baselines.py": "34e0ad73ee1250a6185731e05cdef50dbc43e0129c142bd6be2e843b66717ccc",
+    "examples/train_curriculum.py": "7b01a1770e9295d09d276de589dae88be7e1732800f6a439ffe0ff5c86b1b86c",
+    "examples/train_parallel.py": "a140b3d321a975af734ca48a534e0a1c259d8a168342be57ac651354cb7897b9",
+    "examples/train_rollout_scenarios.py": "01c3afd3a2f97159c1d4e906e9e1f8eb9233c6456da59872fa65292ec3eda11c",
+    "examples/train_rustmage.py": "b0ac43a520e39c67c68075b51c562cfbb7dbbc7036508b8dbb2e735be97eb5a9",
+    "examples/train_rustmage_imitation.py": "3969358d103b8439037ce231cd783e270c2304886192cf60225cce98cc59cd63",
+    "examples/train_scenario_suite.py": "707d1c77932b9884c8d21ecebe8a0580a6a0aeebc47ce38f734ad5a76fc70b6f",
+    "examples/train_scenarios.py": "a1a5115c31d0ea7949f8b0bed2377327e85d5c4502dedb70b06ef4336b8b82e6",
+    "examples/train_selfplay.py": "1ece3633435fb1c1c1a146984a3c8010c30a2601c9e11925bfbe725b90bef4dc",
+    "examples/train_standard_imitation.py": "862af3c677f6cf49926519f9d6540445f91771bc2bf878fbbf9ea771c53f0e49",
+    "examples/train_standard_ppo.py": "51892ca47dae48746054fad5f05cad48abecebc98918308d92c95c74caa60c9b",
+    "examples/train_standard_value.py": "19993b79ce6330a6389bc0fbbd7178d66cafc2e9c27413aba3d6c9aa7416135d",
+    "examples/verify_scenario_suite.py": "00101530ad15df696fbe8e8058cfac93395cdd55c23c7f458aea4522bce97a33",
+    "examples/xmage_benchmark.py": "0ed80a3c770d4ee761c43859463769c30c0c3e60ed88742583a6a2c3648a4117",
+    "examples/xmage_selfplay.py": "66022adc7efc284a486ef9ef9535180a29f8e6d08a564bf8748e74e01ba2bfd6",
+    "src/patchwork_automaton/__init__.py": "92c85b06bd61ecb0bf2d96785fddbd0338eb18fe35bc94b65d7f22d2656dc7c1",
+    "src/patchwork_automaton/actions.py": "7704eed73e7bb4f9de2e30079f2df1370639e5026042aa1557b2eaea358dc3d1",
+    "src/patchwork_automaton/backends/__init__.py": "3774d14bbe03c1af4151044eeaa704029613b8a8941d1904a88a2e9de0155e07",
+    "src/patchwork_automaton/backends/burn_actions.py": "b44f41f14884c8e5d5fc7d63f2c42f65aee0dcfc9baf40155d5c50fb340a784d",
+    "src/patchwork_automaton/backends/mtgo.py": "546f2e082c7b6832c4bf25ac186e9bb77e4dfd7d00dd3e41c03100135cfadf78",
+    "src/patchwork_automaton/backends/rustmage.py": "66883aa9ac1f47cb3faac60cf4e43d3ba023e8dcbb3844e7d8bf083228f9412f",
+    "src/patchwork_automaton/backends/xmage.py": "32159c91b58ffbf780fc87cf4b25442b3bce8babf7aab1e00ef372f539139223",
+    "src/patchwork_automaton/backends/xmage_choices.py": "c77c1109e7f4a09904deb6d11f738476acc3df9dfb17f31054109eca3623f964",
+    "src/patchwork_automaton/backends/xmage_combat.py": "5ffbe9581d5b1e8ca980890da7164e6996aa63fa71d20ed12f40546b1b5a1d12",
+    "src/patchwork_automaton/backends/xmage_prompts.py": "5c73ffb4b8377ab83eb2004e74c9d76ab1b9c649e8449e4284909370382bf46c",
+    "src/patchwork_automaton/baselines/__init__.py": "cc5ab2acc5c0d305a4592061d6facade79eeec4482d1e8a973c58f6645b7ea4f",
+    "src/patchwork_automaton/baselines/burn_mulligan.py": "d64569a79b5db18fdea68bf2107059f539040f660dfb41d123b247cbea3905ba",
+    "src/patchwork_automaton/baselines/foundations.py": "09f7fe35941f13b45ac2c99a94e61a94ec589739f2aeb96b5b539dc6667e68af",
+    "src/patchwork_automaton/baselines/modern_burn.py": "a3716e04c28dc0fe459f04574d93524bea64854fd96e154c63739cacd648cd57",
+    "src/patchwork_automaton/baselines/passive.py": "e780a87d0cefa6efc4319bbe7f907ce983a9fb64903aae701ff127a10057438a",
+    "src/patchwork_automaton/baselines/standard.py": "39e063cc85a4159b0c941c7a38ab45b1fd8e6e299913db9829a4f02d5073c620",
+    "src/patchwork_automaton/baselines/standard_decks.py": "5d8bbbd242afc9809a12b04a225474604d8232b4d3049c709b343aaecc7474c0",
+    "src/patchwork_automaton/baselines/standard_tactical.py": "63028ed7da0adff69f94821d899bef3aeb5afe6ce51da8e85f4b9f2e424e5e86",
+    "src/patchwork_automaton/burn_semantics.py": "0a183bdb53917160097b3a642a6288d5966407e07b9bc56e7da989a338aa1265",
+    "src/patchwork_automaton/choice_catalog.py": "8ed17e6c6ec5f7d28f7817649fdd2759e4ccb04e15ff06604b63060a9aa1512b",
+    "src/patchwork_automaton/client.py": "6883abc174771b4e21e7298e38b785389b25e66e52ef31da6c6e3d07b433e5c6",
+    "src/patchwork_automaton/controls.py": "3beb0d81f3dbabb0cb07ad895eaed02f9b6c1114540c7267605462b4ffae4206",
+    "src/patchwork_automaton/core/__init__.py": "3c95fec6012d22197c90d7f9183475dce775f1dab7033cddd895bdf66c905c50",
+    "src/patchwork_automaton/data/burn-opening-layout.json": "7047d6cde94ad1a0cef78a6c0bb5d1cbcd1b7125fce1127b9fb6a1293c82c7e7",
+    "src/patchwork_automaton/data/burn-semantics-review.json": "584c82bfc1d5fdbd5cb4b5c3f672d9ab727432ff72196a4e5965bafd835f5f8a",
+    "src/patchwork_automaton/data/foundations-aggro.json": "94f7f8894129c50a9a66bc8d0a16b4a149f498dd56c121c6c581e76d3ee9839c",
+    "src/patchwork_automaton/data/interaction-enums.json": "3d038e3e1ad1dff21c504023f09f8df6fa8697e2bd8803ff056f88ba15efab7c",
+    "src/patchwork_automaton/data/messages.json": "0c5b5f921c2a0fb9a0655e5ed2436e7b9c40bf8f601060ca36169d060dc6271b",
+    "src/patchwork_automaton/data/modern-burn-2026-10-04.json": "d3631b34995bf031c60e4d516473bcdcc7c71fbf2d7029cdee3e467fa7d3dd9a",
+    "src/patchwork_automaton/data/rustmage-card-traits.json": "7d30d9f9bf20c4721c5cc638eed7623df0115e33d2ef989322dad9b506e88635",
+    "src/patchwork_automaton/data/standard-baselines.json": "ddaac94bb5d2147a488a45a99198fcfb3ebaf2e530829feb556a165ae0eb264f",
+    "src/patchwork_automaton/errors.py": "675282c34e18bbafcd290d33c266eb3fd87c3a3a66683a1a32bf4101e4289646",
+    "src/patchwork_automaton/game.py": "57b908d1aa839ec47255d04da74ff24b7c3f9b24b099415be9669594d0f42ddb",
+    "src/patchwork_automaton/interactions.py": "25752842afbf3a93e1198668fb36ba0d611fb3297421e501476242c48cbdfb7e",
+    "src/patchwork_automaton/models.py": "23dba706da1695e647266e9679025289b631a4f7aefc3543f1f06fb7ea362059",
+    "src/patchwork_automaton/neural/__init__.py": "83a1588922dcdf47a7dbbcc41d76f5edf3934b3100e55582f5c814d155c7532a",
+    "src/patchwork_automaton/neural/augmentation.py": "215ef801da040da9db1821b419209a3d49a5a22a0fde2aff6f83c6cdb7690a07",
+    "src/patchwork_automaton/neural/batching.py": "578c80b273b9c5ad96c8f07a037a028f78b97211d07859e345e385e0389d81b7",
+    "src/patchwork_automaton/neural/calibration.py": "a867ec3615f74c2cb812171d3bd5b2bce5c25e733196b924cac137eeddbbb802",
+    "src/patchwork_automaton/neural/card_traits.py": "fdf51cca52f11e919804ffd608e6197c61e5ddf7916628f79a69d093dbc02d0a",
+    "src/patchwork_automaton/neural/compact_inputs.py": "3fc8bbe59b9937a09a3b19ab769a42d299dfd03b1ddf511d50d9f2a813daabb0",
+    "src/patchwork_automaton/neural/curriculum.py": "0b04a9667acd622c09717f4efb5b49e842558c2abc84f14919c199eaa7f9f853",
+    "src/patchwork_automaton/neural/demonstrations.py": "6821f9844e6334bf2f2535d6c197be84e97594b3205c259cd81511f54c19f510",
+    "src/patchwork_automaton/neural/devices.py": "38bc033756eeab6bcf413d4b1131ef28dcf13912efaf69ac3f7ca2886fb53b12",
+    "src/patchwork_automaton/neural/direct_standard.py": "6b81ad03c5d7a7bbbcbc0e762899eeb1f355259b8a546350fca8ed246e07951c",
+    "src/patchwork_automaton/neural/episodes.py": "c519dc6dd780d02ea23a8f2fe73dab522a6b612bebada15610874918b65ab62b",
+    "src/patchwork_automaton/neural/experiment.py": "e3e6fdaa59f29c7f323a6a76211d64446f30ae13c19b1afef66387a26287a4b9",
+    "src/patchwork_automaton/neural/features.py": "48df788ba954b94de76c935b32839a20c7c748974e96ef4f2208b1d79bcbd7ca",
+    "src/patchwork_automaton/neural/history.py": "4415a4c1b4b00484af78dcb04db01c2e7d7aafbf088bd15499d9ceed18c62d75",
+    "src/patchwork_automaton/neural/host_memory.py": "ad16cc9d7a66f5d33a132d144f1da6166806e72a6980a822dc36979d1bb8d9cf",
+    "src/patchwork_automaton/neural/imitation.py": "a9ef63b05f9fb94fca0f55a6e95c52c4c26f6afbed4bae3198c81f9a5d32fd0c",
+    "src/patchwork_automaton/neural/indexed_rollouts.py": "6d1e46e980c5f128785ae2ebd8b614fafbb5e60893220b675180fd0f88cb8373",
+    "src/patchwork_automaton/neural/inference_processes.py": "231517000a0ed4e92b011b261dcf939320cc9e4044bdc39822af4265472bbdaa",
+    "src/patchwork_automaton/neural/model.py": "2e53f68f5c0988a796d84f60ac3cdea7eeb546fb178f0cce3cfaa34c8bc56142",
+    "src/patchwork_automaton/neural/native_layout.py": "e5cb94f329a4621a92fa9e6e2210c3694e2fbd6e4977e3790656bb206ef1dc91",
+    "src/patchwork_automaton/neural/native_pipeline.py": "9d9365b48901f1bb2f316cc45bbbab2646e2b3370f1c76d28337cf35fbcb8da1",
+    "src/patchwork_automaton/neural/ordered_jobs.py": "b9010c47f8fb2bf6e8497c105eed48d4177efc30d084ebc06b099c6e2fc3fb2d",
+    "src/patchwork_automaton/neural/packed_rollouts.py": "45084fb30a4aa0e22b0fc9c412b5a992120df32c937dbc70cfb9f844256ecdb7",
+    "src/patchwork_automaton/neural/payment_scenarios.py": "011be640915449167ce429d80cb1bd8586a37d527454cf0161b95f2c86e9c243",
+    "src/patchwork_automaton/neural/policy.py": "fe226a1e8b6ed50184c948eebd750fa2d9d3c56d569a9abab7ffd60a0ad556b1",
+    "src/patchwork_automaton/neural/pooled_collector.py": "f025135a0a7ae6ff0ff2d6cbeed82e2e22ad91fdb002b7bafd1d1283288895ef",
+    "src/patchwork_automaton/neural/ppo.py": "4b98184a9e9b836763c3fc6a99656f2f288a470698519985a81370e4164f4342",
+    "src/patchwork_automaton/neural/recurrent.py": "37a3113b49805a690d5799d4dda4589af48df0326548c457ea04a4a5697f9154",
+    "src/patchwork_automaton/neural/rollout_cache.py": "fadf0eaf2077ca13f0ddd8f8810a9019d524ccd615f0c814d16aab248bfcd21f",
+    "src/patchwork_automaton/neural/rollout_exchange.py": "c1ac56914ace33a0378558ed16c67e28744f63994612fd37e70641838e160d38",
+    "src/patchwork_automaton/neural/rollout_records.py": "b027133d65a5e84bc5b5fead33a294301a2df6915f9c71c984e352a6a5fe2e1b",
+    "src/patchwork_automaton/neural/rustmage_evaluation.py": "9ca24e68a03247101ebda6787670a66b5a477003d6516e87ff47fc944988a803",
+    "src/patchwork_automaton/neural/rustmage_features.py": "cf26fedac8d66d6f6a83be0778b0bb9a6bb0f81ed15085906e77a1058b7b0cb7",
+    "src/patchwork_automaton/neural/rustmage_observation.py": "773cbaff36e036b330c3bf1071228663eb918d9a74c4cdb0646576605e2141be",
+    "src/patchwork_automaton/neural/rustmage_policy.py": "a45a4b75eb2f59a3bf7d7524f492bc371181866a44fb5e9d57f1208e25d5214b",
+    "src/patchwork_automaton/neural/scenarios.py": "6b36460767475498b7130c52a2fbbeab98d36310a843c747200f6bff4da480c2",
+    "src/patchwork_automaton/neural/sequence_critic.py": "8ca35b954bb10eb6deb2f6cab00e46f5142813ea5b4d915353afb84fad6d572d",
+    "src/patchwork_automaton/neural/standard_features.py": "50a9a40babb0231ad83e128518aeac71581ee9a96f54de9f273d8ae7bcce1e91",
+    "src/patchwork_automaton/neural/standard_inference.py": "7e79b7e5cf89fadba2c8766ecf203e1b1a7e1bbcc2ab861c1d719fedd1fb1095",
+    "src/patchwork_automaton/neural/standard_policy.py": "f64a28a8648b247dae330c811663ceba66b57ceed51813f826a5d80c24d2c394",
+    "src/patchwork_automaton/neural/streaming_ppo.py": "9127cf14d6264340ba813e5ce008561437c172cfe3a6df7e0461eff6f8fc74a9",
+    "src/patchwork_automaton/neural/training.py": "551120be5c9a823f05526221e6c05f7e15aeb47fded6e49b38545c6c6ed99b34",
+    "src/patchwork_automaton/neural/update_pipeline.py": "5284eeb49c027f42af2bfeb15a3a1581d5045c1b2a38206ec0d083b544a44786",
+    "src/patchwork_automaton/neural/update_progress.py": "138579bdd06aba715f8a87cc3f14f7fc3ba706225e42be247cb5e7e13c92dc73",
+    "src/patchwork_automaton/neural/validation.py": "bbd53a7472060568640a41bcda2e0e0b79b8e29bc31a6cdd9f75b3c16a5d6672",
+    "src/patchwork_automaton/neural/value_demonstrations.py": "32a200e020f89a7a617eea95b2711af4bff09d8943d88203598168168d9c37cd",
+    "src/patchwork_automaton/neural/value_imitation.py": "e715b2bb72b4ca7120b715efea95e8d2a2e62feb658a02091f77627b85a219b2",
+    "src/patchwork_automaton/properties.py": "3727f7cad0e8b352485c476883af11672bc7de040cc4aebcaf7a98943dfad348",
+    "src/patchwork_automaton/protocol.py": "23b7d84830b3b4fc4d66d2a7b6dfd821b60bbd1d47dcd38e44c374f08ea47aa7",
+    "src/patchwork_automaton/rl/__init__.py": "0f44d7d22f560bf27c0bea234bc9aab9ad81aa36dd7979dae9530f54325d50cc",
+    "src/patchwork_automaton/rl/envs.py": "663d75276b48d2c1f8febe46aa51ccb8922492e0bfc2f3dca1e0141c8ade252f",
+    "src/patchwork_automaton/rl/goldfish.py": "037bfb247013b1c271fecc3271348f019a30086353f6a51d644699567aa7a367",
+    "src/patchwork_automaton/rl/runner.py": "67875c760120ce5b6c4e8ff44ab63caadb101848898d806e6cc79708052e0e63",
+    "src/patchwork_automaton/rl/rustmage.py": "3d347ff0deee35bb0a84d7dbf9ff8bb7ba8af19d86a67ae242c072ff110459ab",
+    "src/patchwork_automaton/rl/rustmage_duels.py": "6007252b4c2fcbe2d03a9ed201a20ad36510dc5a52731b328af0b7b31ccb8fc1",
+    "src/patchwork_automaton/rl/rustmage_experiment.py": "ad53fd4a4b8863bb2f60b8880bd7ec1a5347bc7431dc28042bd0594064c77c51",
+    "src/patchwork_automaton/rl/rustmage_processes.py": "6cca0af64e5f0dbfb7977eba92ea48f036f3410ee88ae5b9eadcee6e907f08b2",
+    "src/patchwork_automaton/rl/standard_direct.py": "c7e724cf15677d4ff66f6214ebc492ec79d389678cadcb4b2785562b5b836d3d",
+    "src/patchwork_automaton/rl/standard_imitation.py": "f52e3522983c0ae80db046bb36d45b5624c4726a7358cd87f6356d478d59c1c7",
+    "src/patchwork_automaton/rl/standard_ppo.py": "62d0256509ea294e4fcecc3952f49f1325735d617c59956e52c9021dd7d7e4e5",
+    "src/patchwork_automaton/rl/standard_selfplay_processes.py": "fca686f8426ff6a40192ea709702adeed30de1d15bf0a6a1f8f2e6ffc48b4688",
+    "src/patchwork_automaton/rl/standard_selfplay_schedule.py": "13c94e405c204bb95ebd4fad596dbf0317af127f02076fd1599b2eeb2d358b03",
+    "src/patchwork_automaton/rl/xmage.py": "d02bae344625a51cf6520cd4e51d517398ef1c20b3c92c5457752c08f897bb8d",
+    "src/patchwork_automaton/semantics.py": "76f36faaa5bb82c3544fbdc15a5613e66badcb361c5edfb38fbea6f14da6ff57",
+    "src/patchwork_automaton/state.py": "f8aa3848ff4e2e1cb245a995f2cc9daf83d453a6974c504b736486c7e79429df"
+  },
+  "status": "complete",
+  "workers": 48
+}

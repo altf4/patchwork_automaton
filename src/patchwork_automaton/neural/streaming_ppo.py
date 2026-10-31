@@ -6,6 +6,7 @@ This is one-step truncated recurrence, not sequence backpropagation.
 import itertools
 import tempfile
 import threading
+import time
 from concurrent.futures import ThreadPoolExecutor
 from contextlib import contextmanager, nullcontext, ExitStack
 import numpy as np
@@ -37,7 +38,10 @@ class StreamingPPOTrainer(PPOTrainer):
                  prefetch_batches=0, measurement_workers=1, guard_audit=False,
                  guard_observer=None, numerical_prepacking=False, cache_policy_batches=False,
                  policy_cache_device=None, policy_cache_device_bytes=0,
-                 actor_epoch_cache_device=None, actor_epoch_cache_bytes=0, **kwargs):
+                 actor_epoch_cache_device=None, actor_epoch_cache_bytes=0,
+                 compact_device_cache=False, **kwargs):
+        if type(compact_device_cache) is not bool:
+            raise ValueError('Compact input cache flag must be boolean')
         if type(cache_bytes) is not int or cache_bytes < 0:
             raise ValueError('Rollout cache budget must be nonnegative integer bytes')
         if (type(prefetch_batches) is not int or prefetch_batches < 0
@@ -75,6 +79,7 @@ class StreamingPPOTrainer(PPOTrainer):
         self.policy_cache_device_bytes = policy_cache_device_bytes
         self.actor_epoch_cache_device = actor_epoch_cache_device
         self.actor_epoch_cache_bytes = actor_epoch_cache_bytes
+        self.compact_device_cache = compact_device_cache
 
     def compile(self):
         batch = example_batch(self.model.memory_size, self.model.feature_spec)
@@ -120,17 +125,24 @@ class StreamingPPOTrainer(PPOTrainer):
         if self.guard_audit and not getattr(self.model, 'deterministic_forward', False):
             raise ValueError('Guard auditing requires deterministic read-only forwards')
         trajectories = list(trajectories)
+        from .update_progress import UpdateProgress
+        progress = UpdateProgress(getattr(self,'progress_callback',None),
+            timeout_seconds=getattr(self,'update_timeout_seconds',None))
+        update_started = time.monotonic()
+        actor_step_seconds = actor_input_wait_seconds = measurement_seconds = 0.
+        measurement_scans = 0
+        progress.emit('packing',force=True,samples=0,total=sum(t['samples'] for t in trajectories))
         # Caches live for one frozen rollout only. Larger rollouts retain the
         # streaming fallback; they never force all trajectories into memory.
         records_cache = RolloutCache(self.cache_bytes * 3 // 4)
         packed_cache = RolloutCache(self.cache_bytes - records_cache.limit)
         from .packed_rollouts import NumericRollout, PolicyBatchCache, DevicePolicyBatchCache
-        numeric = NumericRollout() if self.numerical_prepacking else None
-        policy_cache = PolicyBatchCache() if self.cache_policy_batches else None
+        numeric = NumericRollout(max_bytes=getattr(self,'numeric_disk_limit_bytes',None)) if self.numerical_prepacking else None
+        policy_cache = PolicyBatchCache(max_bytes=getattr(self,'policy_disk_limit_bytes',None)) if self.cache_policy_batches else None
         if numeric: resources.callback(numeric.close)
         if policy_cache: resources.callback(policy_cache.close)
         device_cache = (DevicePolicyBatchCache(device=self.policy_cache_device,
-                        max_bytes=self.policy_cache_device_bytes)
+                        max_bytes=self.policy_cache_device_bytes,compact=self.compact_device_cache)
                         if self.policy_cache_device is not None else None)
         if device_cache: resources.callback(device_cache.close)
         offsets = []; values = []; returns = []; choices = []; advancing = []
@@ -150,6 +162,8 @@ class StreamingPPOTrainer(PPOTrainer):
                 if numeric: numeric.append(sample)
                 seen += 1; values.append(sample.value); returns.append(trajectory['reward']); choices.append(mask.sum() > 1)
                 advancing.append(sample.advance)
+                if len(values)%10000 == 0:
+                    progress.emit('packing',samples=len(values))
                 if records is not None:
                     record_bytes += retained_bytes(sample) + 16
                     if records_cache.bytes + record_bytes + 256 <= records_cache.limit:
@@ -164,6 +178,7 @@ class StreamingPPOTrainer(PPOTrainer):
         advantages = normalized_advantages(returns, actor_values, np.asarray(choices), self.advantage_scale_floor)
         count = len(values)
         if numeric: numeric.finish()
+        packing_seconds = time.monotonic()-update_started
         offsets = np.asarray(offsets, np.int64)
         returns = np.asarray(returns, np.float32)
         indexed = IndexedTrajectories(trajectories, records_cache, read_trajectory, spill)
@@ -249,7 +264,7 @@ class StreamingPPOTrainer(PPOTrainer):
                 yield None
                 return
             cache = DevicePolicyBatchCache(device=self.actor_epoch_cache_device,
-                                          max_bytes=self.actor_epoch_cache_bytes)
+                                          max_bytes=self.actor_epoch_cache_bytes,compact=self.compact_device_cache)
             row = dict(epoch=epoch+1, device=cache.device, budget_bytes=cache.max_bytes)
             try:
                 yield cache
@@ -261,12 +276,19 @@ class StreamingPPOTrainer(PPOTrainer):
                            tensors=cache.uploaded_tensors, hits=cache.hits,
                            fallback_batches=cache.fallback_batches,
                            fallback_bytes=cache.fallback_bytes,
-                           unique_input_bytes=cache.bytes+cache.fallback_bytes)
+                           dense_bytes=cache.dense_bytes,compact_arrays=cache.compact_arrays,
+                           encode_seconds=cache.encode_seconds,decode_seconds=cache.decode_seconds,
+                           unique_input_bytes=cache.dense_bytes+cache.fallback_bytes)
                 cache.close()
                 row['released'] = cache.closed and cache.bytes == 0 and not cache.entries
                 actor_epoch_cache_stats.append(row)
 
         def measure(*, actor_only=False):
+            nonlocal measurement_seconds, measurement_scans
+            measurement_scans += 1
+            started = time.monotonic()
+            progress.emit('measurement',force=True,scan=measurement_scans,
+                          actor_only=actor_only,batches_done=0)
             sums = np.zeros(5); choice_count = value_count = 0; exact_sum = worst = 0.
             forward = self.measure_actor_with_drift if actor_only else self.measure_with_drift
             def prepared_policy_batches():
@@ -298,13 +320,18 @@ class StreamingPPOTrainer(PPOTrainer):
                                  capacity=self.measurement_workers,name='ppo-measure')
                     if self.measurement_workers > 1 else nullcontext(map(evaluate,items)))
             with jobs as results:
+                measured_batches = 0
                 for metrics, drift, n, v in results:
                     sums += metrics[1:] * np.asarray([n, v, n, n, n])
                     choice_count += n; value_count += v
                     exact_sum += float(drift[0]) * n; worst = max(worst, float(drift[1]))
+                    measured_batches += 1
+                    progress.emit('measurement',scan=measurement_scans,actor_only=actor_only,
+                        batches_done=measured_batches,batches_total=(count+self.batch_size-1)//self.batch_size)
             denominator = np.asarray([choice_count, value_count, choice_count, choice_count, choice_count])
             terms = np.divide(sums, denominator, out=np.zeros_like(sums), where=denominator > 0)
             loss = terms[0] + self.value_weight * terms[1] - self.entropy_weight * terms[2]
+            measurement_seconds += time.monotonic()-started
             return np.r_[loss, terms], np.asarray([exact_sum / max(choice_count, 1), worst])
 
         def audit_states():
@@ -392,13 +419,28 @@ class StreamingPPOTrainer(PPOTrainer):
                     for attempt in range(self.backtracks+1):
                         self.optimizer.learning_rate.assign(rate * .5**attempt)
                         epoch_steps = 0
+                        progress.emit('actor_epoch',force=True,epoch=epoch+1,attempt=attempt+1,
+                            batches_done=0,batches_total=(count+self.batch_size-1)//self.batch_size)
                         with batches(order, actor_cache=epoch_cache) as prepared:
-                            for inputs, actions, rewards, chosen, adv, _ in prepared:
+                            iterator = iter(prepared)
+                            while True:
+                                started = time.monotonic()
+                                try: batch = next(iterator)
+                                except StopIteration: break
+                                actor_input_wait_seconds += time.monotonic()-started
+                                inputs, actions, rewards, chosen, adv, _ = batch
+                                del batch
                                 if future and future.done(): future.result()
                                 scope = epoch_cache._tf.device(epoch_cache.device) if epoch_cache else nullcontext()
                                 with scope:
+                                    started = time.monotonic()
                                     norm = float(self.step(inputs, actions, rewards, chosen, adv))
+                                    actor_step_seconds += time.monotonic()-started
                                 epoch_steps += 1
+                                progress.emit('actor_epoch',epoch=epoch+1,attempt=attempt+1,
+                                    batches_done=epoch_steps,batches_total=(count+self.batch_size-1)//self.batch_size,
+                                    actor_step_seconds=actor_step_seconds,actor_input_wait_seconds=actor_input_wait_seconds,
+                                    reader=numeric.stats() if numeric else None)
                         if epoch_cache is not None:
                             # Do not keep the last consumed device batch alive
                             # across the epoch boundary after closing its cache.
@@ -407,6 +449,9 @@ class StreamingPPOTrainer(PPOTrainer):
                             epoch_cache.finish()
                         proposed, drift = measure(actor_only=self.separate_value)
                         accepted_proposal, finite, reasons = _guard_status(proposed, drift, self.target_kl, self.max_state_kl)
+                        progress.emit('guard_result',force=True,epoch=epoch+1,attempt=attempt+1,
+                            accepted=accepted_proposal,reasons=reasons,mean_kl=_json_number(drift[0]),
+                            max_state_kl=_json_number(drift[1]))
                         if self.guard_audit:
                             event = dict(epoch=epoch+1, attempt=attempt,
                                 configured_learning_rate=float(self.learning_rate),
@@ -443,14 +488,23 @@ class StreamingPPOTrainer(PPOTrainer):
             sample_order='global_shuffle_v1',
             update_schedule='concurrent' if self.concurrent_updates else 'sequential',
             pipeline=dict(prefetch_batches=self.prefetch_batches,measurement_workers=self.measurement_workers,
+                timing=dict(packing_seconds=packing_seconds,actor_step_seconds=actor_step_seconds,
+                    actor_input_wait_seconds=actor_input_wait_seconds,measurement_seconds=measurement_seconds,
+                    measurement_scans=measurement_scans,elapsed_seconds=time.monotonic()-update_started),
                 numerical_prepacking=self.numerical_prepacking, cache_policy_batches=self.cache_policy_batches,
                 numerical_disk_bytes=numeric.disk_bytes if numeric else 0,
+                numerical_reader=numeric.stats() if numeric else None,
                 numerical_gathers=numeric.gathers if numeric else 0,
                 policy_cache_disk_bytes=policy_cache.disk_bytes if policy_cache else 0,
                 policy_cache_hits=policy_cache.hits if policy_cache else 0,
                 policy_cache_device=device_cache.device if device_cache else None,
                 policy_cache_device_budget_bytes=self.policy_cache_device_bytes,
                 policy_cache_device_bytes=device_cache.bytes if device_cache else 0,
+                compact_device_cache=self.compact_device_cache,
+                policy_cache_device_dense_bytes=device_cache.dense_bytes if device_cache else 0,
+                policy_cache_compact_arrays=device_cache.compact_arrays if device_cache else 0,
+                policy_cache_encode_seconds=device_cache.encode_seconds if device_cache else 0,
+                policy_cache_decode_seconds=device_cache.decode_seconds if device_cache else 0,
                 policy_cache_device_uploads=device_cache.uploads if device_cache else 0,
                 policy_cache_device_tensors=device_cache.uploaded_tensors if device_cache else 0,
                 policy_cache_device_hits=device_cache.hits if device_cache else 0,
@@ -469,4 +523,6 @@ class StreamingPPOTrainer(PPOTrainer):
             recurrent_updates='detached behavior states',terminal_rewards_only=True,
             value_loss_before=value_loss_before, **critic_stats)
         if self.guard_audit: result['guard_proposals'] = guard_proposals
+        progress.emit('complete',force=True,accepted_steps=steps,rejected_epochs=rejected,
+                      timing=result['pipeline']['timing'])
         return result

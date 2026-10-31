@@ -20,6 +20,7 @@ _CACHE_ATTRIBUTES = (
     'numerical_prepacking', 'cache_policy_batches',
     'policy_cache_device', 'policy_cache_device_bytes',
     'actor_epoch_cache_device', 'actor_epoch_cache_bytes',
+    'compact_device_cache',
 )
 
 
@@ -59,7 +60,7 @@ def _gpu_inventory():
 
 
 def resolve_update_pipeline(learner_device, profile='auto',
-                            policy_cache_mib=8192, actor_epoch_cache_mib=8192):
+                            policy_cache_mib=8192, actor_epoch_cache_mib=8192, *, compact_inputs=False):
     """Return JSON-serializable runtime settings and their admission reason.
 
     ``host`` packs numerical records and caches canonical policy inputs in
@@ -71,6 +72,8 @@ def resolve_update_pipeline(learner_device, profile='auto',
     """
     if learner_device not in ('cpu', 'gpu'):
         raise ValueError('Learner device must be cpu or gpu')
+    if type(compact_inputs) is not bool:
+        raise ValueError('Compact input cache flag must be boolean')
     if profile not in ('auto', 'host', 'gpu', 'legacy'):
         raise ValueError('Update pipeline profile must be auto, host, gpu or legacy')
     policy_cache_mib = _budget(policy_cache_mib, 'Policy cache')
@@ -115,6 +118,7 @@ def resolve_update_pipeline(learner_device, profile='auto',
         policy_cache_device_bytes=policy_cache_mib * _MIB if gpu else 0,
         actor_epoch_cache_device='/GPU:0' if gpu and actor_epoch_cache_mib else None,
         actor_epoch_cache_bytes=actor_epoch_cache_mib * _MIB if gpu else 0,
+        compact_device_cache=compact_inputs and gpu,
     )
 
 

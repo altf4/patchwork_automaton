@@ -1,0 +1,13 @@
+[
+  "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/venv/bin/python",
+  "-u",
+  "/home/altf4/benchmarks/direct-standard-production-20261031/code/compare_direct.py",
+  "--checkpoint",
+  "/home/altf4/benchmarks/standard-ppo-100000-compact-20261028/selfplay-250k-20261029/treatment/run/checkpoints/round-0250/policy.keras",
+  "--output",
+  "/home/altf4/benchmarks/direct-standard-production-20261031/selfplay",
+  "--pairs",
+  "1",
+  "--games-per-phase",
+  "240"
+]

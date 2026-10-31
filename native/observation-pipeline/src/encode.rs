@@ -5,12 +5,24 @@ use serde_json::{Value, json};
 use std::collections::{HashMap, HashSet};
 
 #[derive(Deserialize)]
+pub struct FeatureSpec {
+    pub entities: usize,
+    pub semantics: usize,
+    pub context: usize,
+    pub candidates: usize,
+    pub history: usize,
+}
+
+#[derive(Deserialize)]
 pub struct Config {
     pub fingerprint: String,
     pub schema: u64,
     pub cards: Vec<String>,
-    pub semantics: Vec<Vec<f32>>,
-    pub mana_values: Vec<f64>,
+    pub aliases: HashMap<String, String>,
+    pub traits: Vec<Vec<f32>>,
+    pub unknown_traits: Vec<f32>,
+    pub mana_values: Vec<Option<f64>>,
+    pub feature_spec: FeatureSpec,
     pub actions: Vec<(String, Vec<String>)>,
     pub zones: Vec<String>,
     pub steps: Vec<String>,
@@ -19,12 +31,114 @@ pub struct Config {
     pub flags: Vec<String>,
     pub player_stats: Vec<String>,
     pub history_zones: Vec<String>,
+    #[serde(skip)]
+    card_indices: HashMap<String, usize>,
 }
 impl Config {
+    pub fn initialize(&mut self) -> Result<()> {
+        let spec = &self.feature_spec;
+        let entity_width = self.zones.len()
+            + 2
+            + 1
+            + self.flags.len()
+            + 16
+            + 6
+            + 64
+            + 3 * 2
+            + 2
+            + self.counters.len() * 2
+            + self.player_stats.len() * 2
+            + 6 * 2;
+        let role_width = 1 + spec.semantics + entity_width;
+        let candidate_width =
+            self.actions.len() + 3 * role_width + 2 * 2 + 6 * 2 + 2 * 2 + self.counters.len() * 2;
+        let context_width =
+            self.steps.len() + self.decisions.len() + 3 + 2 * 8 + spec.semantics + 2 * 3 + 6 * 4;
+        let history_width = 7 + 3 + 2 * self.history_zones.len() + 6 + spec.semantics;
+        if spec.semantics == 0
+            || self.traits.len() != self.cards.len()
+            || self.mana_values.len() != self.cards.len()
+            || self.unknown_traits.len() != spec.semantics
+            || self.traits.iter().any(|row| row.len() != spec.semantics)
+            || self
+                .traits
+                .iter()
+                .flatten()
+                .chain(&self.unknown_traits)
+                .any(|v| !v.is_finite())
+            || self.mana_values.iter().flatten().any(|v| !v.is_finite())
+            || spec.entities != entity_width
+            || spec.candidates != candidate_width
+            || spec.context != context_width
+            || spec.history != history_width
+        {
+            return Err("Inconsistent numeric encoder configuration".into());
+        }
+        self.card_indices = self
+            .cards
+            .iter()
+            .enumerate()
+            .map(|(i, name)| (name.clone(), i + 1))
+            .collect();
+        if self.card_indices.len() != self.cards.len() {
+            return Err("Duplicate canonical card identity".into());
+        }
+        for (alias, canonical) in &self.aliases {
+            let id = *self
+                .card_indices
+                .get(canonical)
+                .ok_or("Alias references an unknown canonical identity")?;
+            if self.card_indices.get(alias).is_some_and(|old| *old != id) {
+                return Err("Ambiguous card identity alias".into());
+            }
+            self.card_indices.insert(alias.clone(), id);
+        }
+        Ok(())
+    }
+
     pub fn card(&self, name: &Value) -> usize {
         name.as_str()
-            .and_then(|n| self.cards.iter().position(|c| c == n))
-            .map_or(0, |i| i + 1)
+            .and_then(|n| self.card_indices.get(n))
+            .copied()
+            .unwrap_or(0)
+    }
+
+    pub fn object_identity<'a>(&self, object: &'a Value) -> Option<&'a str> {
+        if ["hideInfo", "faceDown", "face_down"]
+            .iter()
+            .any(|key| truth(&object[key]))
+        {
+            return None;
+        }
+        let identity = if object["card"].is_string() {
+            &object["card"]
+        } else {
+            &object["name"]
+        };
+        identity.as_str()
+    }
+
+    pub fn object_card(&self, object: &Value) -> usize {
+        self.object_identity(object)
+            .and_then(|identity| self.card_indices.get(identity))
+            .copied()
+            .unwrap_or(0)
+    }
+
+    pub fn card_traits(&self, id: usize) -> &[f32] {
+        if id == 0 {
+            &self.unknown_traits
+        } else {
+            &self.traits[id - 1]
+        }
+    }
+
+    pub fn source_traits(&self, name: &Value) -> Vec<f32> {
+        if !name.is_null() {
+            self.card_traits(self.card(name)).to_vec()
+        } else {
+            vec![0.; self.feature_spec.semantics]
+        }
     }
 }
 pub fn list(v: &Value) -> &[Value] {
@@ -62,7 +176,7 @@ pub fn one(row: &mut Vec<f32>, index: usize, count: usize) {
 
 fn entity(obj: &Value, side: usize, player: bool) -> Vec<f32> {
     let c = config();
-    let mut row = Vec::with_capacity(105);
+    let mut row = Vec::with_capacity(c.feature_spec.entities);
     hot(
         &mut row,
         if player {
@@ -76,16 +190,16 @@ fn entity(obj: &Value, side: usize, player: bool) -> Vec<f32> {
     one(&mut row, side, 2);
     row.push(player as u8 as f32);
     row.extend(c.flags.iter().map(|k| truth(&obj[k]) as u8 as f32));
-    for (key, bits) in [("kinds", 8), ("colors", 6), ("keywords", 28)] {
+    for (key, bits) in [("kinds", 16), ("colors", 6), ("keywords", 64)] {
         let mask = obj[key].as_u64().unwrap_or(0);
         row.extend((0..bits).map(|b| ((mask & (1 << b)) != 0) as u8 as f32));
     }
     for k in ["power", "toughness", "damage"] {
         numeric(&mut row, &obj[k]);
     }
-    let id = c.card(&obj["name"]);
-    if id > 0 {
-        number(&mut row, c.mana_values[id - 1]);
+    let id = if player { 0 } else { c.object_card(obj) };
+    if let Some(value) = id.checked_sub(1).and_then(|index| c.mana_values[index]) {
+        number(&mut row, value);
     } else {
         numeric(&mut row, &Value::Null);
     }
@@ -106,7 +220,7 @@ fn entity(obj: &Value, side: usize, player: bool) -> Vec<f32> {
             },
         );
     }
-    assert_eq!(row.len(), 105);
+    assert_eq!(row.len(), c.feature_spec.entities);
     row
 }
 
@@ -133,8 +247,10 @@ pub fn choices(raw: &Value, allow_concede: bool) -> Result<Vec<Choice>> {
             add(format!("action:{i}"), Value::Null, a.clone());
         }
     }
-    if !raw["x_choice"].is_null() {
-        return Err("Domain outside mono-red schema: domain:x_choice".into());
+    for field in ["x_choice", "target_amount", "source_counter_choice"] {
+        if !raw[field].is_null() {
+            return Err(format!("Domain outside mono-red schema: domain:{field}"));
+        }
     }
     for field in ["damage_assignment", "mana_lot_spend", "mana_payment"] {
         let d = &raw[field];
@@ -233,18 +349,22 @@ fn resolve(
     }
     Err("Unknown target representation".into())
 }
-fn role(row: &mut Vec<f32>, index: Option<usize>, name: &Value, ids: &[i32], rows: &[Vec<f32>]) {
+fn role(
+    row: &mut Vec<f32>,
+    index: Option<usize>,
+    name: &Value,
+    traits: &[Vec<f32>],
+    rows: &[Vec<f32>],
+) {
     let c = config();
     if let Some(i) = index {
         row.push(1.);
-        one(row, ids[i] as usize, c.cards.len() + 1);
-        row.remove(row.len() - c.cards.len() - 1);
+        row.extend(&traits[i]);
         row.extend(&rows[i]);
     } else {
-        let id = c.card(name);
-        row.push((id > 0) as u8 as f32);
-        row.extend((1..=c.cards.len()).map(|i| (i == id) as u8 as f32));
-        row.extend([0.; 105]);
+        row.push((!name.is_null()) as u8 as f32);
+        row.extend(c.source_traits(name));
+        row.resize(row.len() + c.feature_spec.entities, 0.);
     }
 }
 
@@ -278,16 +398,12 @@ pub fn encode(raw: &Value, choices: &[Choice]) -> Result<Arrays> {
         entity(&players[viewer], 0, true),
         entity(&players[1 - viewer], 1, true),
     ];
-    let mut ids = vec![0, 0];
+    let mut traits = vec![vec![0.; c.feature_spec.semantics]; 2];
     let mut lookup = HashMap::new();
     lookup.insert(json!(format!("P{viewer}")).to_string(), 0);
     lookup.insert(json!(format!("P{}", 1 - viewer)).to_string(), 1);
     for (i, obj) in objects.iter().enumerate() {
-        let id = c.card(&obj["name"]);
-        if id == 0 {
-            return Err("Card outside Foundations mono-red vocabulary".into());
-        }
-        ids.push(id as i32);
+        traits.push(c.card_traits(c.object_card(obj)).to_vec());
         rows.push(entity(obj, (obj["controller"] != *me) as usize, false));
         lookup.insert(obj["id"].to_string(), i + 2);
     }
@@ -342,7 +458,7 @@ pub fn encode(raw: &Value, choices: &[Choice]) -> Result<Arrays> {
             link(i, j, 1);
         }
     }
-    let mut candidates = Vec::with_capacity(a * 408);
+    let mut candidates = Vec::with_capacity(a * c.feature_spec.candidates);
     let mut refs = vec![0.; a * n];
     for (ci, choice) in choices.iter().enumerate() {
         let action = &choice.action;
@@ -372,11 +488,17 @@ pub fn encode(raw: &Value, choices: &[Choice]) -> Result<Arrays> {
         let source = lookup.get(&source_id.to_string()).copied();
         let target = resolve(&action["target"], &lookup, &stack_by_id)?;
         let other = lookup.get(&action["attacker"].to_string()).copied();
-        let mut row = Vec::with_capacity(408);
+        let mut row = Vec::with_capacity(c.feature_spec.candidates);
         one(&mut row, ki, c.actions.len());
-        role(&mut row, source, &source_item["source_card"], &ids, &rows);
-        role(&mut row, target, &Value::Null, &ids, &rows);
-        role(&mut row, other, &Value::Null, &ids, &rows);
+        role(
+            &mut row,
+            source,
+            &source_item["source_card"],
+            &traits,
+            &rows,
+        );
+        role(&mut row, target, &Value::Null, &traits, &rows);
+        role(&mut row, other, &Value::Null, &traits, &rows);
         for k in ["ability", "amount"] {
             numeric(&mut row, &action[k]);
         }
@@ -396,7 +518,7 @@ pub fn encode(raw: &Value, choices: &[Choice]) -> Result<Arrays> {
                 action["counter_payment"].get(k).unwrap_or(&json!(0)),
             );
         }
-        assert_eq!(row.len(), 408);
+        assert_eq!(row.len(), c.feature_spec.candidates);
         candidates.extend(row);
         let linked: Vec<_> = [source, target, other].into_iter().flatten().collect();
         for &i in &linked {
@@ -427,7 +549,7 @@ pub fn encode(raw: &Value, choices: &[Choice]) -> Result<Arrays> {
                 .eq_ignore_ascii_case("battlefield")
         })
         .collect();
-    let mut context = Vec::with_capacity(87);
+    let mut context = Vec::with_capacity(c.feature_spec.context);
     hot(&mut context, raw["step"].as_str().unwrap(), &c.steps);
     hot(
         &mut context,
@@ -444,20 +566,24 @@ pub fn encode(raw: &Value, choices: &[Choice]) -> Result<Arrays> {
         list(&raw["stack"]).len(),
         list(&raw["waiting_triggers"]).len(),
         hand.len(),
-        hand.iter().filter(|o| o["name"] == "Mountain").count(),
+        hand.iter()
+            .filter(|o| o["kinds"].as_u64().unwrap_or(0) & 2 != 0)
+            .count(),
         board
             .iter()
-            .filter(|o| o["name"] == "Mountain" && !truth(&o["tapped"]))
+            .filter(|o| o["kinds"].as_u64().unwrap_or(0) & 2 != 0 && !truth(&o["tapped"]))
             .count(),
-        board.iter().filter(|o| o["name"] != "Mountain").count(),
+        board
+            .iter()
+            .filter(|o| o["kinds"].as_u64().unwrap_or(0) & 2 == 0)
+            .count(),
         hand.iter()
-            .filter(|o| c.mana_values[c.card(&o["name"]) - 1] == 2.)
+            .filter(|o| o["kinds"].as_u64().unwrap_or(0) & 1 != 0)
             .count(),
     ] {
         number(&mut context, v as f64);
     }
-    let pending_id = c.card(&pending["source_card"]);
-    context.extend((1..=c.cards.len()).map(|i| (i == pending_id) as u8 as f32));
+    context.extend(c.source_traits(&pending["source_card"]));
     numeric(&mut context, &raw["targeting_group"]);
     numeric(&mut context, &pending["x"]);
     number(&mut context, truth(&pending["cast"]["kicker"]) as u8 as f64);
@@ -469,24 +595,33 @@ pub fn encode(raw: &Value, choices: &[Choice]) -> Result<Arrays> {
             );
         }
     }
-    assert_eq!(context.len(), 87);
-    let mut semantics = vec![0.; n * 25];
-    for (i, &id) in ids.iter().enumerate().skip(2) {
-        semantics[i * 25..(i + 1) * 25].copy_from_slice(&c.semantics[id as usize - 1]);
-    }
+    assert_eq!(context.len(), c.feature_spec.context);
+    let semantics = traits.into_iter().flatten().collect();
     Ok(Arrays::new(vec![
-        Array::floats(0, &[n, 105], rows.into_iter().flatten().collect()),
-        Array::ints(1, &[n], ids),
+        Array::floats(
+            0,
+            &[n, c.feature_spec.entities],
+            rows.into_iter().flatten().collect(),
+        ),
+        Array::ints(1, &[n], vec![0; n]),
         Array::bools(2, &[n], vec![1; n]),
-        Array::floats(3, &[n, 1, 25], semantics),
+        Array::floats(3, &[n, 1, c.feature_spec.semantics], semantics),
         Array::bools(4, &[n, 1], vec![1; n]),
         Array::floats(5, &[n, n, 4], relations),
-        Array::floats(6, &[87], context),
-        Array::floats(7, &[a, 408], candidates),
+        Array::floats(6, &[c.feature_spec.context], context),
+        Array::floats(7, &[a, c.feature_spec.candidates], candidates),
         Array::floats(8, &[a, n], refs),
         Array::bools(9, &[a], vec![1; a]),
-        Array::floats(10, &[408], vec![0.; 408]),
-        Array::floats(11, &[1, 40], vec![0.; 40]),
+        Array::floats(
+            10,
+            &[c.feature_spec.candidates],
+            vec![0.; c.feature_spec.candidates],
+        ),
+        Array::floats(
+            11,
+            &[1, c.feature_spec.history],
+            vec![0.; c.feature_spec.history],
+        ),
         Array::ints(12, &[1], vec![0]),
         Array::bools(13, &[1], vec![0]),
     ]))

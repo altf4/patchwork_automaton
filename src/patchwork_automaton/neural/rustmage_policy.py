@@ -1,4 +1,4 @@
-"""RustMage mono-red actor-critic policy; all non-forced choices are neural."""
+"""RustMage actor-critic policy; all non-forced choices are neural."""
 import json
 from pathlib import Path
 
@@ -30,7 +30,7 @@ class RustMagePolicy(NeuralPolicy):
         if self.previous.get(key) == token: raise StaleDecision('Already answered')
         self.observe(obs)
         choices = (obs.native.native_choices(self.encoder.allow_concede) if hasattr(obs.native, 'native_choices')
-                   else expand_options(obs.decision, allow_concede=self.encoder.allow_concede))
+                   else self.encoder.expand_options(obs.decision))
         # Forced rules choices need no inference. Their visible changes are kept
         # in History and consumed at the next genuine choice, including changes
         # during opponent actions. There is no strategy fallback here.
@@ -76,5 +76,5 @@ class RustMagePolicy(NeuralPolicy):
         # for version-1 manifests, whose JSON writer preserves insertion order.
         if (saved['fingerprint'] != current['fingerprint']
                 or tuple(saved['actions']) != tuple(current['actions'])):
-            raise ValueError('RustMage checkpoint vocabulary mismatch')
+            raise ValueError('RustMage checkpoint feature schema mismatch')
         return cls(keras.saving.load_model(path), encoder, **options)

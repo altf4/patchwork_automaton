@@ -64,9 +64,9 @@ def expert_index(decision, response, choices):
 
 class RecordingExpert:
     """Use the same history/previous-action convention as RustMagePolicy."""
-    def __init__(self, writer, expert=None):
+    def __init__(self, writer, expert=None, encoder=None):
         self.writer, self.expert = writer, expert or FoundationsAggro()
-        self.encoder = RustMageEncoder()
+        self.encoder = encoder or RustMageEncoder()
         self.history = History(self.encoder.registry)
         self.last_choice = None
 
@@ -76,7 +76,7 @@ class RecordingExpert:
     def choose(self, observation):
         self.observe(observation)
         response = self.expert.choose(observation)
-        choices = expand_options(observation.decision, allow_concede=False)
+        choices = self.encoder.expand_options(observation.decision)
         index = expert_index(observation.decision, response, choices)
         # Match inference: forced actions do not consume history or advance memory.
         if len(choices) > 1:

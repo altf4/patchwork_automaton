@@ -167,6 +167,26 @@ pub unsafe extern "C" fn ds_apply_choice(session: *mut Session, view: *const Vie
         Ok(true)
     })
 }
+/// Apply an action chosen by an existing Python scripted policy. Neural
+/// policies use ds_apply_choice and never serialize actions. This compatibility
+/// entry point retains full numeric-domain support for scripted policies.
+#[unsafe(no_mangle)]
+pub unsafe extern "C" fn ds_apply_script(session: *mut Session, view: *const View, data: *const c_char) -> bool {
+    guard(|| {
+        let session = unsafe { session.as_mut() }.ok_or("null game")?;
+        let view = unsafe { view.as_ref() }.ok_or("null observation")?;
+        if view.session_id != session.id || view.observation.revision != session.game.revision() {
+            return Err("foreign or stale observation".into());
+        }
+        let actor = view.observation.actor.ok_or("no decision actor")?;
+        if actor != view.observation.viewer { return Err("viewer is not the decision actor".into()); }
+        if data.is_null() { return Err("null scripted action".into()); }
+        let action: rustmage::Action = serde_json::from_slice(unsafe { CStr::from_ptr(data) }.to_bytes())
+            .map_err(|e| e.to_string())?;
+        session.game.apply(actor, action).map_err(|e| e.to_string())?;
+        Ok(true)
+    })
+}
 /// Diagnostic-only action export for parity testing.
 #[unsafe(no_mangle)]
 pub unsafe extern "C" fn ds_choice_debug_json(view: *const View, index: usize) -> *mut c_char {

@@ -1,0 +1,406 @@
+{
+  "schema": 1,
+  "format": "Standard",
+  "event": "Magic Spotlight: Fracture — SCG CON Hartford, October 24–25, 2026",
+  "event_url": "https://decksnipe.com/tournament/2026-10-24-magic-spotlight-fracture-scg-con-hartford",
+  "provenance": {
+    "source_artifact": "docs/decks/hartford-selected-decks-2026-10-26.json",
+    "source_sha256": "726b7925d9b8c23d740579330dc1b089a0138671f5421368c389602455f4706b",
+    "source_audit_date": "2026-10-26"
+  },
+  "note": "Exact registered lists; sideboards are retained for provenance and optional export. The RustMage match adapter accepts mainboards only.",
+  "decks": {
+    "mono-green-landfall": {
+      "archetype": "Mono-Green Landfall",
+      "pilot": "John Norman",
+      "username": "eeeeeeeeeeeeno",
+      "place": 3,
+      "record": "13-4-0",
+      "event": "Magic Spotlight: Fracture - SCG CON Hartford",
+      "event_date": "2026-10-24",
+      "format": "Standard",
+      "source_url": "https://decks.botbox.dev/decks/2386354",
+      "melee_url": "https://melee.gg/Decklist/View/b757cb25-e4bc-4659-a61a-b4ed000a5d52",
+      "mainboard": [
+        {
+          "quantity": 4,
+          "name": "Llanowar Elves"
+        },
+        {
+          "quantity": 4,
+          "name": "Sazh's Chocobo"
+        },
+        {
+          "quantity": 2,
+          "name": "Keen-Eyed Curator"
+        },
+        {
+          "quantity": 4,
+          "name": "Mossborn Hydra"
+        },
+        {
+          "quantity": 4,
+          "name": "Icetill Explorer"
+        },
+        {
+          "quantity": 4,
+          "name": "Mightform Harmonizer"
+        },
+        {
+          "quantity": 4,
+          "name": "Earthbender Ascension"
+        },
+        {
+          "quantity": 3,
+          "name": "Sapling Nursery"
+        },
+        {
+          "quantity": 3,
+          "name": "Carnivorous Cultivator // Enroot"
+        },
+        {
+          "quantity": 2,
+          "name": "Esper Origins // Summon: Esper Maduin"
+        },
+        {
+          "quantity": 3,
+          "name": "Ba Sing Se"
+        },
+        {
+          "quantity": 1,
+          "name": "Demolition Field"
+        },
+        {
+          "quantity": 2,
+          "name": "Elven Passage"
+        },
+        {
+          "quantity": 3,
+          "name": "Escape Tunnel"
+        },
+        {
+          "quantity": 4,
+          "name": "Fabled Passage"
+        },
+        {
+          "quantity": 13,
+          "name": "Forest"
+        }
+      ],
+      "sideboard": [
+        {
+          "quantity": 1,
+          "name": "Sandman, Shifting Scoundrel"
+        },
+        {
+          "quantity": 2,
+          "name": "Surrak, Elusive Hunter"
+        },
+        {
+          "quantity": 3,
+          "name": "Torpor Orb"
+        },
+        {
+          "quantity": 4,
+          "name": "Meltstrider's Resolve"
+        },
+        {
+          "quantity": 1,
+          "name": "Hunter's Talent"
+        },
+        {
+          "quantity": 1,
+          "name": "Sapling Nursery"
+        },
+        {
+          "quantity": 1,
+          "name": "Defend the Rider"
+        },
+        {
+          "quantity": 1,
+          "name": "Origin of Metalbending"
+        },
+        {
+          "quantity": 1,
+          "name": "Pawpatch Formation"
+        }
+      ],
+      "notes": [],
+      "deck_url": "https://decks.botbox.dev/decks/2386354",
+      "primary_source_url": "https://melee.gg/Decklist/View/b757cb25-e4bc-4659-a61a-b4ed000a5d52",
+      "source_deck_id": "2386354"
+    },
+    "izzet-prowess": {
+      "archetype": "Izzet Prowess (Fling variant)",
+      "pilot": "AlexMacIsaac",
+      "place": 43,
+      "record": "10-4-1",
+      "source_url": "https://decksnipe.com/archetype/standard/izzet-prowess",
+      "standings_url": "https://decks.botbox.dev/tournaments/341108",
+      "deck_url": "https://decks.botbox.dev/decks/2386394",
+      "mainboard": [
+        {
+          "quantity": 4,
+          "name": "Elusive Otter // Grove's Bounty"
+        },
+        {
+          "quantity": 1,
+          "name": "Balmor, Battlemage Captain"
+        },
+        {
+          "quantity": 2,
+          "name": "Drake Hatcher"
+        },
+        {
+          "quantity": 4,
+          "name": "Slickshot Show-Off"
+        },
+        {
+          "quantity": 2,
+          "name": "Full Bore"
+        },
+        {
+          "quantity": 1,
+          "name": "Magic Damper"
+        },
+        {
+          "quantity": 3,
+          "name": "Opt"
+        },
+        {
+          "quantity": 2,
+          "name": "Secret Identity"
+        },
+        {
+          "quantity": 2,
+          "name": "Turn Inside Out"
+        },
+        {
+          "quantity": 4,
+          "name": "Ancestral Anger"
+        },
+        {
+          "quantity": 4,
+          "name": "Pompous Battlemage // Improvised Act"
+        },
+        {
+          "quantity": 4,
+          "name": "Sleight of Hand"
+        },
+        {
+          "quantity": 4,
+          "name": "Wild Ride"
+        },
+        {
+          "quantity": 4,
+          "name": "Callous Sell-Sword // Burn Together"
+        },
+        {
+          "quantity": 1,
+          "name": "Mountain"
+        },
+        {
+          "quantity": 3,
+          "name": "Multiversal Passage"
+        },
+        {
+          "quantity": 3,
+          "name": "Riverpyre Verge"
+        },
+        {
+          "quantity": 4,
+          "name": "Spirebluff Canal"
+        },
+        {
+          "quantity": 4,
+          "name": "Starting Town"
+        },
+        {
+          "quantity": 4,
+          "name": "Steam Vents"
+        }
+      ],
+      "sideboard": [
+        {
+          "quantity": 1,
+          "name": "Poison Dart Frog"
+        },
+        {
+          "quantity": 1,
+          "name": "Soul-Guide Lantern"
+        },
+        {
+          "quantity": 2,
+          "name": "Dreadmaw's Ire"
+        },
+        {
+          "quantity": 1,
+          "name": "Full Bore"
+        },
+        {
+          "quantity": 1,
+          "name": "Into the Flood Maw"
+        },
+        {
+          "quantity": 1,
+          "name": "Magic Damper"
+        },
+        {
+          "quantity": 1,
+          "name": "Octopus Form"
+        },
+        {
+          "quantity": 1,
+          "name": "Secret Identity"
+        },
+        {
+          "quantity": 2,
+          "name": "Shore Up"
+        },
+        {
+          "quantity": 4,
+          "name": "Spell Pierce"
+        }
+      ],
+      "event": "Magic Spotlight: Fracture - SCG CON Hartford",
+      "event_date": "2026-10-24",
+      "format": "Standard",
+      "primary_source_url": "https://melee.gg/Decklist/View/d49ec0e4-56fe-4fac-a1c9-b4eb00ef9350",
+      "source_deck_id": "2386394"
+    },
+    "bw-lifegain": {
+      "archetype": "Orzhov Lifegain",
+      "pilot": "Jarvis Yu",
+      "username": "jarvisyu",
+      "place": 19,
+      "record": "11-4-0",
+      "event": "Magic Spotlight: Fracture - SCG CON Hartford",
+      "event_date": "2026-10-24",
+      "format": "Standard",
+      "source_url": "https://decks.botbox.dev/decks/2386370",
+      "melee_url": "https://melee.gg/Decklist/View/b6280413-0cdf-4468-96cd-b4ec00caab14",
+      "mainboard": [
+        {
+          "quantity": 1,
+          "name": "Aunt May"
+        },
+        {
+          "quantity": 4,
+          "name": "Hinterland Sanctifier"
+        },
+        {
+          "quantity": 2,
+          "name": "Liliana the Faultless"
+        },
+        {
+          "quantity": 4,
+          "name": "Amalia Benavides Aguirre"
+        },
+        {
+          "quantity": 4,
+          "name": "Enlightened Confidant"
+        },
+        {
+          "quantity": 1,
+          "name": "Essence Channeler"
+        },
+        {
+          "quantity": 3,
+          "name": "Starscape Cleric"
+        },
+        {
+          "quantity": 3,
+          "name": "Haliya, Guided by Light"
+        },
+        {
+          "quantity": 3,
+          "name": "Moseo, Vein's New Dean"
+        },
+        {
+          "quantity": 4,
+          "name": "Case of the Uneaten Feast"
+        },
+        {
+          "quantity": 4,
+          "name": "Lunar Convocation"
+        },
+        {
+          "quantity": 3,
+          "name": "Erode"
+        },
+        {
+          "quantity": 2,
+          "name": "Bitter Triumph"
+        },
+        {
+          "quantity": 1,
+          "name": "Bleachbone Verge"
+        },
+        {
+          "quantity": 4,
+          "name": "Concealed Courtyard"
+        },
+        {
+          "quantity": 4,
+          "name": "Godless Shrine"
+        },
+        {
+          "quantity": 1,
+          "name": "Great Arashin City"
+        },
+        {
+          "quantity": 4,
+          "name": "Multiversal Passage"
+        },
+        {
+          "quantity": 4,
+          "name": "Plains"
+        },
+        {
+          "quantity": 4,
+          "name": "Starting Town"
+        }
+      ],
+      "sideboard": [
+        {
+          "quantity": 2,
+          "name": "Cathar Commando"
+        },
+        {
+          "quantity": 1,
+          "name": "Essence Channeler"
+        },
+        {
+          "quantity": 1,
+          "name": "M.O.D.O.K."
+        },
+        {
+          "quantity": 2,
+          "name": "Ghost Vacuum"
+        },
+        {
+          "quantity": 2,
+          "name": "Seam Rip"
+        },
+        {
+          "quantity": 2,
+          "name": "Sheltered by Ghosts"
+        },
+        {
+          "quantity": 2,
+          "name": "Pyrrhic Strike"
+        },
+        {
+          "quantity": 3,
+          "name": "Duress"
+        }
+      ],
+      "notes": [
+        "Melee/DeckSnipe labels Orzhov Lifegain; Botbox classifier calls this Standard v3 Group 4629CD (Aunt May, Enlightened Confidant). Highest-placing Orzhov list in event standings."
+      ],
+      "deck_url": "https://decks.botbox.dev/decks/2386370",
+      "primary_source_url": "https://melee.gg/Decklist/View/b6280413-0cdf-4468-96cd-b4ec00caab14",
+      "source_deck_id": "2386370"
+    }
+  }
+}

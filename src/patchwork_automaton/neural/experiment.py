@@ -165,7 +165,7 @@ def save_checkpoint(directory,model,trainer,state,*,policy_type=NeuralPolicy):
     return destination
 
 
-def load_checkpoint(directory, *, gru_backend=None):
+def load_checkpoint(directory, *, gru_backend=None, policy_type=None):
     """Restore model, Adam and PCG; optionally select GRU execution before tracing."""
     directory=Path(directory)
     name=json.loads((directory/'latest.json').read_text())['checkpoint']
@@ -175,7 +175,7 @@ def load_checkpoint(directory, *, gru_backend=None):
     manifest=json.loads((root/'policy.manifest.json').read_text())
     if manifest.get('backend') == 'rustmage':
         from .rustmage_policy import RustMagePolicy
-        model=RustMagePolicy.load(root/'policy.keras').model
+        model=(policy_type or RustMagePolicy).load(root/'policy.keras').model
     else:
         model=NeuralPolicy.load(root/'policy.keras').model
     # Runtime-only selection must precede trainer construction/compilation.
@@ -208,11 +208,17 @@ def load_checkpoint(directory, *, gru_backend=None):
 
 
 def make_trainer(model,config):
+    if config.get('algorithm') == 'value-imitation':
+        from .value_imitation import ValueImitationTrainer
+        return ValueImitationTrainer(model, learning_rate=config['learning_rate'],
+            batch_size=config['train_batch'], unroll=config['unroll'],
+            seed=config['seed'], device=config['learner_device'])
     if config.get('algorithm') == 'imitation':
         from .imitation import ImitationTrainer
         return ImitationTrainer(model, learning_rate=config['learning_rate'],
             batch_size=config['train_batch'], epochs=config['epochs'],
-            unroll=config['unroll'], seed=config['seed'] + 5000)
+            unroll=config['unroll'], seed=config['seed'] + 5000,
+            action_kinds=config.get('action_kinds'), device=config.get('learner_device', 'cpu'))
     if config.get('algorithm','actor-critic')=='ppo':
         from .streaming_ppo import StreamingPPOTrainer
         return StreamingPPOTrainer(model,learning_rate=config['learning_rate'],batch_size=config['train_batch'],

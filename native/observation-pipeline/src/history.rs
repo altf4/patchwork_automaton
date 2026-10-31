@@ -6,7 +6,8 @@ use std::collections::HashMap;
 
 struct Object {
     id: u64,
-    card: i32,
+    card: usize,
+    unknown_identity: Option<String>,
     zone: String,
     side: usize,
 }
@@ -18,7 +19,7 @@ struct State {
 }
 pub struct History {
     previous: Option<State>,
-    pending: Vec<(i32, Vec<f32>)>,
+    pending: Vec<Vec<f32>>,
     pub limit: usize,
     viewer: Option<String>,
 }
@@ -35,7 +36,7 @@ impl History {
     fn event(
         &mut self,
         kind: usize,
-        card: i32,
+        card: usize,
         side: usize,
         old: &str,
         new: &str,
@@ -48,7 +49,8 @@ impl History {
                 "Neural history overflow; consume decisions or increase the explicit limit".into(),
             );
         }
-        let mut row = Vec::with_capacity(40);
+        let c = config();
+        let mut row = Vec::with_capacity(c.feature_spec.history);
         one(&mut row, kind, 7);
         one(&mut row, side, 3);
         hot(&mut row, old, &config().history_zones);
@@ -56,8 +58,15 @@ impl History {
         numeric(&mut row, &value);
         numeric(&mut row, &delta);
         numeric(&mut row, turn);
-        assert_eq!(row.len(), 40);
-        self.pending.push((card, row));
+        // Descriptor IDs are bookkeeping only. Model history receives the same
+        // fixed numerical traits as current entities, never a card-name lookup.
+        if kind <= 2 {
+            row.extend(c.card_traits(card));
+        } else {
+            row.resize(row.len() + c.feature_spec.semantics, 0.);
+        }
+        assert_eq!(row.len(), c.feature_spec.history);
+        self.pending.push(row);
         Ok(())
     }
     pub fn observe(&mut self, raw: &Value) -> Result<()> {
@@ -80,9 +89,16 @@ impl History {
         let objects: Vec<_> = list(&raw["objects"])
             .iter()
             .map(|o| {
+                let c = config();
+                let card = c.object_card(o);
                 Ok(Object {
                     id: o["id"].as_u64().ok_or("Invalid object ID")?,
-                    card: config().card(&o["name"]) as i32,
+                    card,
+                    unknown_identity: if card == 0 {
+                        c.object_identity(o).map(str::to_owned)
+                    } else {
+                        None
+                    },
                     zone: o["zone"].as_str().unwrap_or("").to_lowercase(),
                     side: (o["controller"] != viewer) as usize,
                 })
@@ -106,7 +122,10 @@ impl History {
         let turn = &raw["turn"];
         for obj in &objects {
             match old.get(&obj.id) {
-                Some(before) if before.card == obj.card => {
+                Some(before)
+                    if before.card == obj.card
+                        && before.unknown_identity == obj.unknown_identity =>
+                {
                     if before.zone != obj.zone {
                         self.event(
                             2,
@@ -191,17 +210,16 @@ impl History {
     pub fn take(&mut self) -> Arrays {
         let pending = std::mem::take(&mut self.pending);
         let size = pending.len().max(1);
-        let mut rows = vec![0.; size * 40];
-        let mut cards = vec![0; size];
+        let width = config().feature_spec.history;
+        let mut rows = vec![0.; size * width];
         let mut mask = vec![0; size];
-        for (i, (card, row)) in pending.into_iter().enumerate() {
-            cards[i] = card;
+        for (i, row) in pending.into_iter().enumerate() {
             mask[i] = 1;
-            rows[i * 40..(i + 1) * 40].copy_from_slice(&row);
+            rows[i * width..(i + 1) * width].copy_from_slice(&row);
         }
         Arrays::new(vec![
-            Array::floats(11, &[size, 40], rows),
-            Array::ints(12, &[size], cards),
+            Array::floats(11, &[size, width], rows),
+            Array::ints(12, &[size], vec![0; size]),
             Array::bools(13, &[size], mask),
         ])
     }

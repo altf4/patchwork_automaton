@@ -99,6 +99,17 @@ class NativePipelineTests(unittest.TestCase):
         for raw in [dict(actions=[], damage_assignment=dict(minimum=0, maximum=999999)),
                     dict(actions=[], x_choice=dict(intervals=[])), dict(actions=[])]:
             with self.assertRaises(UnsupportedInteraction): NativeObservation.from_raw(raw).native_choices()
+        for field, domain in [('target_amount', dict(minimum=1, maximum=1000)),
+                              ('source_counter_choice', dict(maximum=2**64-1))]:
+            raw = dict(actions=[dict(kind='Pass')], **{field: domain})
+            native = NativeObservation.from_raw(raw)
+            options = action_options(native)
+            self.assertIsNone(native._full)
+            self.assertIn('domain:' + field, [o.id for o in options])
+            with self.assertRaisesRegex(UnsupportedInteraction, 'Domain outside mono-red schema'):
+                native.native_choices()
+            with self.assertRaisesRegex(UnsupportedInteraction, 'Domain outside mono-red schema'):
+                expand_options(Decision(None, 'priority', '', options))
 
     def test_stochastic_choices_match_reference_without_materializing_python_objects(self):
         encoder, rng = RustMageEncoder(), np.random.default_rng(753)

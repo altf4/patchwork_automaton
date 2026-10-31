@@ -3,7 +3,6 @@
 One optimizer update per completed self-play game. Gradients are accumulated
 across minibatches before applying, keeping the entire rollout on-policy.
 """
-from dataclasses import dataclass
 import numpy as np
 import tensorflow as tf
 import keras
@@ -24,14 +23,7 @@ def terminal_reward(outcome):
     raise ValueError('Unknown terminal outcome')
 
 
-@dataclass
-class Sample:
-    arrays: dict
-    memory: np.ndarray
-    advance: bool
-    action: int
-    value: float
-    log_probs: np.ndarray | None = None
+from .rollout_records import Sample  # Also resolves historical training.Sample pickles.
 
 
 class RolloutPolicy(NeuralPolicy):

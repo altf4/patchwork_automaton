@@ -1,4 +1,4 @@
-//! Numeric observation boundary for the pinned mono-red encoder. No game rules.
+//! General numerical card traits with explicitly scoped actions. No game rules.
 //! All handles are owned. ctypes holds locks and keeps buffers alive across calls.
 mod arrays;
 mod encode;
@@ -65,6 +65,8 @@ impl Observation {
             "actions",
             "x_choice",
             "damage_assignment",
+            "target_amount",
+            "source_counter_choice",
             "mana_lot_spend",
             "mana_payment",
         ] {
@@ -99,16 +101,9 @@ pub extern "C" fn pp_error() -> *const c_char {
 #[unsafe(no_mangle)]
 pub unsafe extern "C" fn pp_configure(text: *const c_char) -> bool {
     guard(|| {
-        let c: Config = serde_json::from_slice(unsafe { CStr::from_ptr(text) }.to_bytes())
+        let mut c: Config = serde_json::from_slice(unsafe { CStr::from_ptr(text) }.to_bytes())
             .map_err(|e| e.to_string())?;
-        if c.cards.len() != 11
-            || c.actions.len() != 27
-            || c.semantics.len() != 11
-            || c.semantics.iter().any(|s| s.len() != 25)
-            || c.mana_values.len() != 11
-        {
-            return Err("Unsupported numeric encoder configuration".into());
-        }
+        c.initialize()?;
         if let Some(old) = CONFIG.get() {
             if old.fingerprint != c.fingerprint {
                 return Err("Native encoder already configured with a different vocabulary".into());

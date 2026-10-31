@@ -1,8 +1,8 @@
-"""Numerical schema for the pinned Foundations mono-red experiment.
+"""General numerical card traits with a bounded RustMage action schema.
 
-Names are exact identity lookups, never language-model input. Native live IDs
-bind references only. Large/arbitrary domains fail explicitly: this encoder is
-for this deck, not a claim of support for RustMage's whole catalogue.
+Card names resolve offline descriptors; names and catalogue IDs never enter model
+features. Unknown cards retain their visible live characteristics and explicit
+unknown static traits. Action support is versioned separately from card traits.
 """
 from dataclasses import dataclass
 import hashlib
@@ -12,16 +12,41 @@ import json
 import numpy as np
 
 from ..backends.rustmage import OBSERVATION_SCHEMA, RUSTMAGE_REVISION, _plain, domain_action
-from ..baselines.foundations import DATA, FACTS
 from ..core import Response
 from ..errors import UnsupportedInteraction
 from ..semantics import CardSemantics, Coverage
 from .features import numeric, onehot
 from .history import HISTORY_WIDTH
+from . import card_traits
 
-CARDS = tuple(c['name'] for c in DATA['decks']['red']['cards'])
-CARD_IDS = {name: i + 1 for i, name in enumerate(CARDS)}
-REGISTRY = {name: CardSemantics(i, Coverage.PARTIAL) for name, i in CARD_IDS.items()}
+CARDS = card_traits.CARDS
+FACTS = card_traits.FACTS
+CARD_IDS = {name: card_traits.index_for(name) for name in (*CARDS, *card_traits.ALIASES)}
+
+
+class TraitRegistry(dict):
+    # Descriptor IDs remain bookkeeping for history; model identity inputs are 0.
+    trait_rows = (card_traits.UNKNOWN_TRAITS,) + tuple(card_traits.TRAITS[n] for n in CARDS)
+    trait_width = card_traits.TRAIT_WIDTH
+    identity_embeddings = False
+
+
+REGISTRY = TraitRegistry({name: CardSemantics(i, Coverage.PARTIAL) for name, i in CARD_IDS.items()})
+
+
+def visible_identity(obj):
+    if any(obj.get(k) for k in ('hideInfo', 'faceDown', 'face_down')):
+        return None
+    identity = obj.get('card')
+    if not isinstance(identity, str):
+        identity = obj.get('name')
+    return card_traits.ALIASES.get(identity, identity)
+
+
+def static_traits(obj):
+    return card_traits.traits_for(visible_identity(obj))
+
+
 ZONES = ('player', 'hand', 'battlefield', 'graveyard', 'exile', 'stack', 'command', 'library')
 STEPS = ('Pregame', 'Upkeep', 'Draw', 'Main1', 'BeginCombat', 'Attackers', 'Blockers',
          'FirstStrikeDamage', 'CombatDamage', 'EndCombat', 'Main2', 'End', 'Cleanup')
@@ -42,35 +67,10 @@ ACTION_FIELDS = {
     'PutTrigger': ('id',), 'ChooseOptional': ('accept',), 'ChooseManaLotSpend': ('amount',),
 }
 ACTIONS = tuple(ACTION_FIELDS)
-# Reviewed, deliberately partial semantic labels. Dynamic P/T and keywords come
-# from the engine, including Lavarunner's graveyard condition and temporary buffs.
-TAGS = ('red_mana', 'tap_cost', 'sacrifice_source', 'damage_any', 'damage_opponent',
-        'entry_trigger', 'noncreature_cast_trigger', 'dragon_cast_trigger',
-        'two_instants_sorceries_graveyard', 'grant_haste', 'grant_power',
-        'until_end_turn', 'kicker', 'grant_first_strike', 'damage_creature',
-        'damage_planeswalker', 'exile_if_dies_this_turn', 'exile_attached_equipment')
-LABELS = {
-    'Mountain': ('red_mana', 'tap_cost'),
-    'Fanatical Firebrand': ('tap_cost', 'sacrifice_source', 'damage_any'),
-    'Ghitu Lavarunner': ('two_instants_sorceries_graveyard', 'grant_haste', 'grant_power'),
-    'Firebrand Archer': ('noncreature_cast_trigger', 'damage_opponent'),
-    'Viashino Pyromancer': ('entry_trigger', 'damage_opponent'),
-    'Firespitter Whelp': ('noncreature_cast_trigger', 'dragon_cast_trigger', 'damage_opponent'),
-    'Burst Lightning': ('damage_any', 'kicker'),
-    'Kindled Fury': ('grant_power', 'grant_first_strike', 'until_end_turn'),
-    'Sure Strike': ('grant_power', 'grant_first_strike', 'until_end_turn'),
-    'Scorching Dragonfire': ('damage_creature', 'damage_planeswalker', 'exile_if_dies_this_turn'),
-    'Fiery Annihilation': ('damage_creature', 'exile_if_dies_this_turn', 'exile_attached_equipment'),
-}
-DAMAGE = {'Fanatical Firebrand': 1, 'Firebrand Archer': 1, 'Viashino Pyromancer': 2,
-          'Firespitter Whelp': 1, 'Burst Lightning': 2, 'Scorching Dragonfire': 3,
-          'Fiery Annihilation': 5}
-POWER_BONUS = {'Ghitu Lavarunner': 1, 'Kindled Fury': 1, 'Sure Strike': 3}
-SEMANTICS = {name: [1.] + [float(tag in LABELS[name]) for tag in TAGS]
-             + numeric(DAMAGE.get(name, 0)) + numeric(4 if name == 'Burst Lightning' else 0)
-             + numeric(POWER_BONUS.get(name, 0))
-             for name in CARDS}
-SEMANTIC_WIDTH = len(SEMANTICS['Mountain'])
+# One fixed feature schema for the entire catalogue, including future unknowns.
+SEMANTICS = card_traits.TRAITS
+SEMANTIC_WIDTH = card_traits.TRAIT_WIDTH
+TYPE_BITS, COLOR_BITS, KEYWORD_BITS = 16, 6, 64
 COUNTERS = ('plus_one', 'minus_one', 'stun', 'loyalty', 'lore')
 FLAGS = ('tapped', 'summoning_sick', 'attacking', 'damaged_this_turn', 'dealt_damage_this_turn', 'modified')
 PLAYER_STATS = ('life', 'hand_count', 'library_count', 'poison_counters', 'spells_cast_this_turn',
@@ -78,14 +78,14 @@ PLAYER_STATS = ('life', 'hand_count', 'library_count', 'poison_counters', 'spell
 
 
 def entity_row(obj, side, *, player=False):
-    name = obj.get('name')
+    name = visible_identity(obj)
     row = onehot('player' if player else obj.get('zone', '').lower(), ZONES) + onehot(side, (0, 1))
     row += [float(player)] + [float(bool(obj.get(k))) for k in FLAGS]
-    row += [float(bool(obj.get('kinds', 0) & 2**i)) for i in range(8)]
-    row += [float(bool(obj.get('colors', 0) & 2**i)) for i in range(6)]
-    row += [float(bool(obj.get('keywords', 0) & 2**i)) for i in range(28)]
+    row += [float(bool(obj.get('kinds', 0) & 2**i)) for i in range(TYPE_BITS)]
+    row += [float(bool(obj.get('colors', 0) & 2**i)) for i in range(COLOR_BITS)]
+    row += [float(bool(obj.get('keywords', 0) & 2**i)) for i in range(KEYWORD_BITS)]
     row += sum((numeric(obj.get(k)) for k in ('power', 'toughness', 'damage')), [])
-    row += numeric(FACTS[name]['mana_value'] if name in CARD_IDS else None)
+    row += numeric(FACTS.get(name, {}).get('mana_value'))
     row += sum((numeric(obj.get('counters', {}).get(k, 0)) for k in COUNTERS), [])
     row += sum((numeric(obj.get(k) if player else None) for k in PLAYER_STATS), [])
     row += sum((numeric(v) for v in (obj.get('mana', (0,)*6) if player else (0,)*6)), [])
@@ -93,14 +93,14 @@ def entity_row(obj, side, *, player=False):
 
 
 ENTITY_WIDTH = len(entity_row({}, 0))
-# Each ordered source/target/other role has its own identity and raw facts.
+# Each ordered source/target/other role has static traits and live facts.
 # This preserves e.g. Block(blocker,attacker) even though the attention reference
 # also pools linked objects. IDs themselves never enter a tensor.
-ROLE_WIDTH = 1 + len(CARDS) + ENTITY_WIDTH
+ROLE_WIDTH = 1 + SEMANTIC_WIDTH + ENTITY_WIDTH
 CANDIDATE_WIDTH = len(ACTIONS) + 3*ROLE_WIDTH + 2*2 + 6*2 + 2*2 + len(COUNTERS)*2
-CONTEXT_WIDTH = len(STEPS) + len(DECISIONS) + 3 + 2*8 + len(CARDS) + 2*3 + 6*4
+CONTEXT_WIDTH = len(STEPS) + len(DECISIONS) + 3 + 2*8 + SEMANTIC_WIDTH + 2*3 + 6*4
 FEATURE_SPEC = dict(entities=ENTITY_WIDTH, semantics=SEMANTIC_WIDTH,
-                    context=CONTEXT_WIDTH, candidates=CANDIDATE_WIDTH, history=HISTORY_WIDTH)
+                    context=CONTEXT_WIDTH, candidates=CANDIDATE_WIDTH, history=HISTORY_WIDTH + SEMANTIC_WIDTH)
 
 
 def canonical(action):
@@ -156,20 +156,33 @@ class EncodedRustDecision:
 
 class RustMageEncoder:
     registry = REGISTRY
-    card_count = len(CARDS) + 1
+    card_count = 1  # No per-card learned identity table; shared traits carry meaning.
     feature_spec = FEATURE_SPEC
+    action_fields, actions, decisions = ACTION_FIELDS, ACTIONS, DECISIONS
+    decision_aliases = {}
+    entity_row = staticmethod(entity_row)
+
+    def expand_options(self, decision):
+        return expand_options(decision, allow_concede=self.allow_concede)
+
+    def action_extras(self, action):
+        return []
+
+    def action_roles(self, action):
+        return action
 
     def __init__(self, *, allow_concede=False):
         self.allow_concede = allow_concede
 
     def manifest(self):
-        result = dict(backend='rustmage', feature_version=2, observation_schema=OBSERVATION_SCHEMA,
-            rustmage_revision=RUSTMAGE_REVISION, deck=DATA['decks']['red'], cards=CARDS,
-            facts={n: FACTS[n] for n in CARDS}, semantic_tags=TAGS, semantic_labels=LABELS,
-            semantics=SEMANTICS, actions=ACTION_FIELDS, decisions=DECISIONS, steps=STEPS,
+        result = dict(backend='rustmage', feature_version=3, observation_schema=OBSERVATION_SCHEMA,
+            rustmage_revision=RUSTMAGE_REVISION, card_encoding='shared_traits_without_identity_embeddings',
+            card_traits=dict(card_traits.MANIFEST), trait_features=card_traits.FEATURE_NAMES,
+            actions=self.action_fields, decisions=self.decisions, steps=STEPS,
             zones=ZONES, counters=COUNTERS, flags=FLAGS, player_stats=PLAYER_STATS,
-            feature_spec=FEATURE_SPEC, allow_concede=self.allow_concede,
-            scope='Foundations mono-red mirrors and passive 60-Mountain opponent')
+            bit_widths=dict(kinds=TYPE_BITS, colors=COLOR_BITS, keywords=KEYWORD_BITS),
+            feature_spec=self.feature_spec, allow_concede=self.allow_concede,
+            scope='General catalogue card traits; bounded action schema, currently validated on Foundations')
         result['fingerprint'] = hashlib.sha256(json.dumps(result, sort_keys=True).encode()).hexdigest()
         return result
 
@@ -181,17 +194,18 @@ class RustMageEncoder:
             native_choices = raw.native_choices(self.allow_concede)
             if choices is None or choices == native_choices:
                 return raw.encoded(obs.decision.token, self.allow_concede)
-        if raw['schema'] != OBSERVATION_SCHEMA or raw['decision'] not in DECISIONS:
+        decision = self.decision_aliases.get(raw['decision'], raw['decision'])
+        if raw['schema'] != OBSERVATION_SCHEMA or decision not in self.decisions:
             raise UnsupportedInteraction('Unsupported RustMage schema/decision: ' + str(raw['decision']))
         if raw['step'] not in STEPS: raise UnsupportedInteraction('Unsupported step')
         me = obs.actor.value
         players = sorted(obs.players, key=lambda p: p.id != obs.actor)
         objects = list(obs.objects.values())
-        if any(o.name not in CARD_IDS for o in objects):
-            raise UnsupportedInteraction('Card outside Foundations mono-red vocabulary')
-        rows = [entity_row(p.native, int(p.id != obs.actor), player=True) for p in players]
-        rows += [entity_row(o.properties, int(o.controller != obs.actor)) for o in objects]
-        ids = [0, 0] + [CARD_IDS[o.name] for o in objects]
+        rows = [self.entity_row(p.native, int(p.id != obs.actor), player=True) for p in players]
+        rows += [self.entity_row(o.properties, int(o.controller != obs.actor)) for o in objects]
+        ids = [0] * len(rows)
+        trait_rows = [[0.] * SEMANTIC_WIDTH for _ in players]
+        trait_rows += [list(static_traits(o.properties)) for o in objects]
         lookup = {p.id.value: i for i, p in enumerate(players)}
         lookup.update({int(o.id.value): i+2 for i, o in enumerate(objects)})
         stack = list(raw['stack']) + list(raw['waiting_triggers'])
@@ -207,8 +221,9 @@ class RustMageEncoder:
             raise UnsupportedInteraction('Unknown target representation')
         def role(index, name=None):
             if index is not None:
-                return [1.] + onehot(ids[index], range(1, len(CARDS)+1)) + rows[index]
-            return [float(name in CARD_IDS)] + onehot(CARD_IDS.get(name), range(1, len(CARDS)+1)) + [0.]*ENTITY_WIDTH
+                return [1.] + trait_rows[index] + rows[index]
+            traits = list(card_traits.traits_for(name)) if name is not None else [0.] * SEMANTIC_WIDTH
+            return [float(name is not None)] + traits + [0.] * self.feature_spec['entities']
         relations = np.zeros((n, n, 4), np.float32)
         for i, o in enumerate(objects, 2):
             relations[i, lookup[o.controller.value], 0] = 1
@@ -226,23 +241,25 @@ class RustMageEncoder:
         for blocker, attacker in raw.get('blocks', ()):
             if blocker in lookup and attacker in lookup: relations[lookup[blocker], lookup[attacker], 1] = 1
         if choices is None:
-            choices = expand_options(obs.decision, allow_concede=self.allow_concede)
+            choices = self.expand_options(obs.decision)
         candidates, refs = [], []
         for response, action in choices:
             kind = action['kind']
-            if kind not in ACTION_FIELDS or set(action) != {'kind', *ACTION_FIELDS[kind]}:
+            if kind not in self.action_fields or set(action) != {'kind', *self.action_fields[kind]}:
                 raise UnsupportedInteraction('Unknown native action fields: ' + repr(action))
+            roles = self.action_roles(action)
             source_item = stack_by_id.get(action.get('id'), {}) if kind == 'PutTrigger' else pending
-            source = lookup.get(action.get('card', action.get('blocker', source_item.get('card'))))
-            target = resolve(action.get('target'))
-            other = lookup.get(action.get('attacker'))
+            source = lookup.get(roles.get('card', roles.get('blocker', source_item.get('card'))))
+            target = resolve(roles.get('target'))
+            other = lookup.get(roles.get('attacker'))
             source_name = source_item.get('source_card')
-            row = onehot(kind, ACTIONS) + role(source, source_name) + role(target) + role(other)
+            row = onehot(kind, self.actions) + role(source, source_name) + role(target) + role(other)
             row += numeric(action.get('ability')) + numeric(action.get('amount'))
             row += sum((numeric(v) for v in action.get('payment', (None,)*6)), [])
             row += numeric(int(action['pay']) if 'pay' in action else None)
             row += numeric(int(action['accept']) if 'accept' in action else None)
             row += sum((numeric(action.get('counter_payment', {}).get(k, 0)) for k in COUNTERS), [])
+            row += self.action_extras(action)
             candidates.append(row)
             ref = np.zeros(n, np.float32)
             for index in (source, target, other):
@@ -252,22 +269,25 @@ class RustMageEncoder:
         hand = [o for o in own_objects if o.zone == 'hand']
         battlefield = [o for o in own_objects if o.zone == 'battlefield']
         numbers = (raw['turn'], len(raw['stack']), len(raw['waiting_triggers']), len(hand),
-            sum(o.name == 'Mountain' for o in hand), sum(o.name == 'Mountain' and not o.properties['tapped'] for o in battlefield),
-            sum(o.name != 'Mountain' for o in battlefield), sum(FACTS[o.name]['mana_value'] == 2 for o in hand))
-        context = onehot(raw['step'], STEPS) + onehot(raw['decision'], DECISIONS)
+            sum(bool(o.properties.get('kinds', 0) & 2) for o in hand),
+            sum(bool(o.properties.get('kinds', 0) & 2) and not o.properties.get('tapped', False) for o in battlefield),
+            sum(not (o.properties.get('kinds', 0) & 2) for o in battlefield),
+            sum(bool(o.properties.get('kinds', 0) & 1) for o in hand))
+        context = onehot(raw['step'], STEPS) + onehot(decision, self.decisions)
         context += [float(raw['active'] == me), float(bool(pending)), float(bool(raw.get('announcing_payment')))]
         context += sum((numeric(v) for v in numbers), [])
-        context += onehot(CARD_IDS.get(pending.get('source_card')), range(1, len(CARDS)+1))
+        source_name = pending.get('source_card')
+        context += list(card_traits.traits_for(source_name)) if source_name is not None else [0.] * SEMANTIC_WIDTH
         context += numeric(raw.get('targeting_group')) + numeric(pending.get('x'))
         context += numeric(int((pending.get('cast') or {}).get('kicker') or False))
         payment = raw.get('mana_payment') or {}
         context += sum((numeric(v) for key in ('required', 'available') for v in payment.get(key, (None,)*6)), [])
         arrays = dict(entities=np.asarray(rows, np.float32), card_ids=np.asarray(ids, np.int32),
-            entity_mask=np.ones(n, bool), semantics=np.asarray([[([0.]*SEMANTIC_WIDTH if i < 2 else SEMANTICS[objects[i-2].name])] for i in range(n)], np.float32),
+            entity_mask=np.ones(n, bool), semantics=np.asarray([[traits] for traits in trait_rows], np.float32),
             semantic_mask=np.ones((n, 1), bool), relations=relations, context=np.asarray(context, np.float32),
             candidates=np.asarray(candidates, np.float32), candidate_refs=np.asarray(refs, np.float32),
-            candidate_mask=np.ones(len(choices), bool), selection=np.zeros(CANDIDATE_WIDTH, np.float32),
-            history=np.zeros((1, HISTORY_WIDTH), np.float32), history_cards=np.zeros(1, np.int32), history_mask=np.zeros(1, bool))
-        for key, width in FEATURE_SPEC.items():
+            candidate_mask=np.ones(len(choices), bool), selection=np.zeros(self.feature_spec['candidates'], np.float32),
+            history=np.zeros((1, self.feature_spec['history']), np.float32), history_cards=np.zeros(1, np.int32), history_mask=np.zeros(1, bool))
+        for key, width in self.feature_spec.items():
             if arrays[key].shape[-1] != width: raise AssertionError((key, arrays[key].shape, width))
         return EncodedRustDecision(arrays, tuple(c[0] for c in choices), tuple(c[1] for c in choices), obs.decision.token)

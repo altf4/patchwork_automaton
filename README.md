@@ -277,7 +277,7 @@ No CI has been configured.
 For Standard self-play performance changes, see the [direct Rust playback
 benchmark](benchmarks/direct-standard/README.md) for the guarded build,
 private-view and matched-game checks, frozen 250K baseline, and raytracer
-results. The direct path remains an experimental benchmark candidate.
+results. Standard playback uses the direct path by default.
 
 Source provenance and protocol evidence are in `docs/discovery/`. The
 repository's GPL-3.0 license applies; deployment-specific protocol metadata

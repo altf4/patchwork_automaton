@@ -71,12 +71,14 @@ def library():
         fn = getattr(lib, name); fn.argtypes = args; fn.restype = result
     if lib.pp_abi_version() != 1:
         raise RuntimeError('Unsupported observation pipeline ABI')
-    from .rustmage_features import RustMageEncoder, CARDS, SEMANTICS, ACTION_FIELDS
+    from .rustmage_features import RustMageEncoder, ACTION_FIELDS
+    from .card_traits import CARDS, ALIASES, TRAITS, UNKNOWN_TRAITS, FACTS
     from .features import ZONES
     manifest = RustMageEncoder().manifest()
     config = dict(fingerprint=manifest['fingerprint'], schema=manifest['observation_schema'],
-                  cards=CARDS, semantics=[SEMANTICS[c] for c in CARDS],
-                  mana_values=[manifest['facts'][c]['mana_value'] for c in CARDS],
+                  cards=CARDS, aliases=dict(ALIASES), traits=[TRAITS[c] for c in CARDS],
+                  unknown_traits=UNKNOWN_TRAITS, feature_spec=manifest['feature_spec'],
+                  mana_values=[FACTS[c]['mana_value'] for c in CARDS],
                   actions=list(ACTION_FIELDS.items()), history_zones=ZONES,
                   **{k: manifest[k] for k in ('zones', 'steps', 'decisions', 'counters', 'flags', 'player_stats')})
     if not lib.pp_configure(orjson.dumps(config)):
