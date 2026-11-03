@@ -1,0 +1,378 @@
+{
+  "16861": {
+    "files": [
+      "/home/altf4/benchmarks/hartford-identity-ab-20261103/head-to-head-extension-20k-v1/games-20k/diagnostics/game-016861/adjudication.json",
+      "/home/altf4/benchmarks/hartford-identity-ab-20261103/head-to-head-extension-20k-v1/games-20k/diagnostics/game-016861/progress.json",
+      "/home/altf4/benchmarks/hartford-identity-ab-20261103/head-to-head-extension-20k-v1/games-20k/diagnostics/game-016861/python-stack.txt"
+    ],
+    "adjudication": {
+      "index": 16861,
+      "seed": 432611046861,
+      "pairing": [
+        "dimir-midrange",
+        "four-color-control"
+      ],
+      "decks": [
+        "four-color-control",
+        "dimir-midrange"
+      ],
+      "learner_seat": 1,
+      "learner_deck": "dimir-midrange",
+      "opponent_deck": "four-color-control",
+      "starting_player": "P0",
+      "partition": "evaluation",
+      "deck_catalog": "hartford",
+      "behavior_version": 150,
+      "opponent_version": 150,
+      "opponent_kind": "frozen_neural",
+      "opponent_checkpoint_sha256": "dfa899c49a05c85e81722080cd783f7fc8bdbc785042cd5fac1b5ee98b652610",
+      "status": "draw",
+      "draw": true,
+      "adjudicated": true,
+      "reason": "wall_clock_timeout",
+      "timeout_seconds": 20,
+      "seconds": 20.04658257801202,
+      "winner_seat": null,
+      "winner_deck": null,
+      "trajectories": [],
+      "turn": 39,
+      "decisions": 1632,
+      "final_life": [
+        9,
+        1
+      ],
+      "learner_won": false,
+      "diagnostics": "/home/altf4/benchmarks/hartford-identity-ab-20261103/head-to-head-extension-20k-v1/games-20k/diagnostics/game-016861",
+      "playback_pipeline": "direct"
+    }
+  },
+  "29974": {
+    "files": [
+      "/home/altf4/benchmarks/hartford-identity-ab-20261103/head-to-head-extension-20k-v1/games-20k/diagnostics/game-029974/adjudication.json",
+      "/home/altf4/benchmarks/hartford-identity-ab-20261103/head-to-head-extension-20k-v1/games-20k/diagnostics/game-029974/progress.json",
+      "/home/altf4/benchmarks/hartford-identity-ab-20261103/head-to-head-extension-20k-v1/games-20k/diagnostics/game-029974/python-stack.txt"
+    ],
+    "adjudication": {
+      "index": 29974,
+      "seed": 432611059974,
+      "pairing": [
+        "bant-airbending",
+        "bant-airbending"
+      ],
+      "decks": [
+        "bant-airbending",
+        "bant-airbending"
+      ],
+      "learner_seat": 0,
+      "learner_deck": "bant-airbending",
+      "opponent_deck": "bant-airbending",
+      "starting_player": "P1",
+      "partition": "evaluation",
+      "deck_catalog": "hartford",
+      "behavior_version": 150,
+      "opponent_version": 150,
+      "opponent_kind": "frozen_neural",
+      "opponent_checkpoint_sha256": "dfa899c49a05c85e81722080cd783f7fc8bdbc785042cd5fac1b5ee98b652610",
+      "status": "draw",
+      "draw": true,
+      "adjudicated": true,
+      "reason": "wall_clock_timeout",
+      "timeout_seconds": 20,
+      "seconds": 20.04348408500664,
+      "winner_seat": null,
+      "winner_deck": null,
+      "trajectories": [],
+      "turn": 1,
+      "decisions": 0,
+      "final_life": [
+        20,
+        20
+      ],
+      "learner_won": false,
+      "diagnostics": "/home/altf4/benchmarks/hartford-identity-ab-20261103/head-to-head-extension-20k-v1/games-20k/diagnostics/game-029974",
+      "playback_pipeline": "direct"
+    }
+  },
+  "23769": {
+    "files": [
+      "/home/altf4/benchmarks/hartford-identity-ab-20261103/head-to-head-extension-20k-v1/games-20k/diagnostics/game-023769/adjudication.json",
+      "/home/altf4/benchmarks/hartford-identity-ab-20261103/head-to-head-extension-20k-v1/games-20k/diagnostics/game-023769/progress.json",
+      "/home/altf4/benchmarks/hartford-identity-ab-20261103/head-to-head-extension-20k-v1/games-20k/diagnostics/game-023769/python-stack.txt"
+    ],
+    "adjudication": {
+      "index": 23769,
+      "seed": 432611053769,
+      "pairing": [
+        "izzet-spellementals",
+        "mardu-discard"
+      ],
+      "decks": [
+        "mardu-discard",
+        "izzet-spellementals"
+      ],
+      "learner_seat": 1,
+      "learner_deck": "izzet-spellementals",
+      "opponent_deck": "mardu-discard",
+      "starting_player": "P0",
+      "partition": "evaluation",
+      "deck_catalog": "hartford",
+      "behavior_version": 150,
+      "opponent_version": 150,
+      "opponent_kind": "frozen_neural",
+      "opponent_checkpoint_sha256": "dfa899c49a05c85e81722080cd783f7fc8bdbc785042cd5fac1b5ee98b652610",
+      "status": "draw",
+      "draw": true,
+      "adjudicated": true,
+      "reason": "wall_clock_timeout",
+      "timeout_seconds": 20,
+      "seconds": 20.04399063400342,
+      "winner_seat": null,
+      "winner_deck": null,
+      "trajectories": [],
+      "turn": 1,
+      "decisions": 0,
+      "final_life": [
+        20,
+        20
+      ],
+      "learner_won": false,
+      "diagnostics": "/home/altf4/benchmarks/hartford-identity-ab-20261103/head-to-head-extension-20k-v1/games-20k/diagnostics/game-023769",
+      "playback_pipeline": "direct"
+    }
+  },
+  "29052": {
+    "files": [
+      "/home/altf4/benchmarks/hartford-identity-ab-20261103/head-to-head-extension-20k-v1/games-20k/diagnostics/game-029052/adjudication.json",
+      "/home/altf4/benchmarks/hartford-identity-ab-20261103/head-to-head-extension-20k-v1/games-20k/diagnostics/game-029052/progress.json",
+      "/home/altf4/benchmarks/hartford-identity-ab-20261103/head-to-head-extension-20k-v1/games-20k/diagnostics/game-029052/python-stack.txt"
+    ],
+    "adjudication": {
+      "index": 29052,
+      "seed": 432611059052,
+      "pairing": [
+        "jund-sacrifice",
+        "bant-airbending"
+      ],
+      "decks": [
+        "bant-airbending",
+        "jund-sacrifice"
+      ],
+      "learner_seat": 0,
+      "learner_deck": "bant-airbending",
+      "opponent_deck": "jund-sacrifice",
+      "starting_player": "P0",
+      "partition": "evaluation",
+      "deck_catalog": "hartford",
+      "behavior_version": 150,
+      "opponent_version": 150,
+      "opponent_kind": "frozen_neural",
+      "opponent_checkpoint_sha256": "dfa899c49a05c85e81722080cd783f7fc8bdbc785042cd5fac1b5ee98b652610",
+      "status": "draw",
+      "draw": true,
+      "adjudicated": true,
+      "reason": "wall_clock_timeout",
+      "timeout_seconds": 20,
+      "seconds": 20.045679792994633,
+      "winner_seat": null,
+      "winner_deck": null,
+      "trajectories": [],
+      "turn": 1,
+      "decisions": 0,
+      "final_life": [
+        20,
+        20
+      ],
+      "learner_won": false,
+      "diagnostics": "/home/altf4/benchmarks/hartford-identity-ab-20261103/head-to-head-extension-20k-v1/games-20k/diagnostics/game-029052",
+      "playback_pipeline": "direct"
+    }
+  },
+  "20106": {
+    "files": [
+      "/home/altf4/benchmarks/hartford-identity-ab-20261103/head-to-head-extension-20k-v1/games-20k/diagnostics/game-020106/adjudication.json",
+      "/home/altf4/benchmarks/hartford-identity-ab-20261103/head-to-head-extension-20k-v1/games-20k/diagnostics/game-020106/progress.json",
+      "/home/altf4/benchmarks/hartford-identity-ab-20261103/head-to-head-extension-20k-v1/games-20k/diagnostics/game-020106/python-stack.txt"
+    ],
+    "adjudication": {
+      "index": 20106,
+      "seed": 432611050106,
+      "pairing": [
+        "mono-green-landfall",
+        "jund-sacrifice"
+      ],
+      "decks": [
+        "jund-sacrifice",
+        "mono-green-landfall"
+      ],
+      "learner_seat": 0,
+      "learner_deck": "jund-sacrifice",
+      "opponent_deck": "mono-green-landfall",
+      "starting_player": "P1",
+      "partition": "evaluation",
+      "deck_catalog": "hartford",
+      "behavior_version": 150,
+      "opponent_version": 150,
+      "opponent_kind": "frozen_neural",
+      "opponent_checkpoint_sha256": "dfa899c49a05c85e81722080cd783f7fc8bdbc785042cd5fac1b5ee98b652610",
+      "status": "draw",
+      "draw": true,
+      "adjudicated": true,
+      "reason": "wall_clock_timeout",
+      "timeout_seconds": 20,
+      "seconds": 20.044189640990226,
+      "winner_seat": null,
+      "winner_deck": null,
+      "trajectories": [],
+      "turn": 1,
+      "decisions": 0,
+      "final_life": [
+        20,
+        20
+      ],
+      "learner_won": false,
+      "diagnostics": "/home/altf4/benchmarks/hartford-identity-ab-20261103/head-to-head-extension-20k-v1/games-20k/diagnostics/game-020106",
+      "playback_pipeline": "direct"
+    }
+  },
+  "13544": {
+    "files": [
+      "/home/altf4/benchmarks/hartford-identity-ab-20261103/head-to-head-extension-20k-v1/games-20k/diagnostics/game-013544/adjudication.json",
+      "/home/altf4/benchmarks/hartford-identity-ab-20261103/head-to-head-extension-20k-v1/games-20k/diagnostics/game-013544/progress.json",
+      "/home/altf4/benchmarks/hartford-identity-ab-20261103/head-to-head-extension-20k-v1/games-20k/diagnostics/game-013544/python-stack.txt"
+    ],
+    "adjudication": {
+      "index": 13544,
+      "seed": 432611043544,
+      "pairing": [
+        "izzet-prowess",
+        "jeskai-artifacts"
+      ],
+      "decks": [
+        "izzet-prowess",
+        "jeskai-artifacts"
+      ],
+      "learner_seat": 0,
+      "learner_deck": "izzet-prowess",
+      "opponent_deck": "jeskai-artifacts",
+      "starting_player": "P0",
+      "partition": "evaluation",
+      "deck_catalog": "hartford",
+      "behavior_version": 150,
+      "opponent_version": 150,
+      "opponent_kind": "frozen_neural",
+      "opponent_checkpoint_sha256": "dfa899c49a05c85e81722080cd783f7fc8bdbc785042cd5fac1b5ee98b652610",
+      "status": "draw",
+      "draw": true,
+      "adjudicated": true,
+      "reason": "wall_clock_timeout",
+      "timeout_seconds": 20,
+      "seconds": 20.04319753899472,
+      "winner_seat": null,
+      "winner_deck": null,
+      "trajectories": [],
+      "turn": 1,
+      "decisions": 0,
+      "final_life": [
+        20,
+        20
+      ],
+      "learner_won": false,
+      "diagnostics": "/home/altf4/benchmarks/hartford-identity-ab-20261103/head-to-head-extension-20k-v1/games-20k/diagnostics/game-013544",
+      "playback_pipeline": "direct"
+    }
+  },
+  "20490": {
+    "files": [
+      "/home/altf4/benchmarks/hartford-identity-ab-20261103/head-to-head-extension-20k-v1/games-20k/diagnostics/game-020490/adjudication.json",
+      "/home/altf4/benchmarks/hartford-identity-ab-20261103/head-to-head-extension-20k-v1/games-20k/diagnostics/game-020490/progress.json",
+      "/home/altf4/benchmarks/hartford-identity-ab-20261103/head-to-head-extension-20k-v1/games-20k/diagnostics/game-020490/python-stack.txt"
+    ],
+    "adjudication": {
+      "index": 20490,
+      "seed": 432611050490,
+      "pairing": [
+        "bw-lifegain",
+        "jund-sacrifice"
+      ],
+      "decks": [
+        "jund-sacrifice",
+        "bw-lifegain"
+      ],
+      "learner_seat": 0,
+      "learner_deck": "jund-sacrifice",
+      "opponent_deck": "bw-lifegain",
+      "starting_player": "P1",
+      "partition": "evaluation",
+      "deck_catalog": "hartford",
+      "behavior_version": 150,
+      "opponent_version": 150,
+      "opponent_kind": "frozen_neural",
+      "opponent_checkpoint_sha256": "dfa899c49a05c85e81722080cd783f7fc8bdbc785042cd5fac1b5ee98b652610",
+      "status": "draw",
+      "draw": true,
+      "adjudicated": true,
+      "reason": "wall_clock_timeout",
+      "timeout_seconds": 20,
+      "seconds": 20.049961609009188,
+      "winner_seat": null,
+      "winner_deck": null,
+      "trajectories": [],
+      "turn": 1,
+      "decisions": 0,
+      "final_life": [
+        20,
+        20
+      ],
+      "learner_won": false,
+      "diagnostics": "/home/altf4/benchmarks/hartford-identity-ab-20261103/head-to-head-extension-20k-v1/games-20k/diagnostics/game-020490",
+      "playback_pipeline": "direct"
+    }
+  },
+  "23420": {
+    "files": [
+      "/home/altf4/benchmarks/hartford-identity-ab-20261103/head-to-head-extension-20k-v1/games-20k/diagnostics/game-023420/adjudication.json",
+      "/home/altf4/benchmarks/hartford-identity-ab-20261103/head-to-head-extension-20k-v1/games-20k/diagnostics/game-023420/progress.json",
+      "/home/altf4/benchmarks/hartford-identity-ab-20261103/head-to-head-extension-20k-v1/games-20k/diagnostics/game-023420/python-stack.txt"
+    ],
+    "adjudication": {
+      "index": 23420,
+      "seed": 432611053420,
+      "pairing": [
+        "izzet-spellementals",
+        "jeskai-artifacts"
+      ],
+      "decks": [
+        "izzet-spellementals",
+        "jeskai-artifacts"
+      ],
+      "learner_seat": 0,
+      "learner_deck": "izzet-spellementals",
+      "opponent_deck": "jeskai-artifacts",
+      "starting_player": "P0",
+      "partition": "evaluation",
+      "deck_catalog": "hartford",
+      "behavior_version": 150,
+      "opponent_version": 150,
+      "opponent_kind": "frozen_neural",
+      "opponent_checkpoint_sha256": "dfa899c49a05c85e81722080cd783f7fc8bdbc785042cd5fac1b5ee98b652610",
+      "status": "draw",
+      "draw": true,
+      "adjudicated": true,
+      "reason": "wall_clock_timeout",
+      "timeout_seconds": 20,
+      "seconds": 20.045116852998035,
+      "winner_seat": null,
+      "winner_deck": null,
+      "trajectories": [],
+      "turn": 1,
+      "decisions": 0,
+      "final_life": [
+        20,
+        20
+      ],
+      "learner_won": false,
+      "diagnostics": "/home/altf4/benchmarks/hartford-identity-ab-20261103/head-to-head-extension-20k-v1/games-20k/diagnostics/game-023420",
+      "playback_pipeline": "direct"
+    }
+  }
+}

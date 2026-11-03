@@ -1,5 +1,29 @@
 # Ten-deck Hartford self-play PPO
 
+## Default for future experiments
+
+Use the diverse opponent recipe for new Hartford learning experiments: 580
+current-policy games, 100 each against three pinned historical identity policies,
+and 120 StandardAggro games per 1,000-game round. The validated historical
+opponents are identity checkpoints 25, 50 and 75. Scripts occupy supported
+mono-green, Izzet and BW opponent-deck cells only; the 800/200 training/holdout
+split and balanced deck, seat and start assignments remain intact.
+
+New `--fork-from` continuations default to `--opponent-recipe diverse`.
+`--opponent-recipe current` remains available for explicit control arms. Resume
+without a recipe restores the manifest's saved choice. The current continuation
+admission is deliberately limited to the tested checkpoint-100, 50-round setup;
+other parents or durations require validated admission and provenance support.
+The older fresh-run CLI configuration and frozen runs retain their original
+protocol and do not silently adopt this change.
+
+The [opponent-diversity experiment](benchmarks/hartford-identity-opponents-ab-2026-11-03/README.md)
+records the implementation and audited results. Diverse scored 51.725% against
+control over 30,000 games (nominal 95% interval 50.941%–52.509%). This is a modest
+advantage for one trained agent per recipe; it does not establish training-seed
+variation or generalization to unseen opponents. The sections below describe
+the original compact experiment and its reproduction protocol.
+
 The experiment uses RustMage commit
 `e732a4bb42774fc20672dc2aad3952f9d1b57ae7` (observation schema 198), which
 supports all 164 distinct cards in the ten exact mainboards. The driver refuses

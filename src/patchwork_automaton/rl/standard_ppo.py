@@ -87,11 +87,23 @@ def play_ppo_game(*, seed, index, game, model, batcher, version,
         if game.get('opponent_version') != opponent_version or opponent_version is None:
             raise ValueError('Frozen neural opponent version mismatch')
     game = dict(game, behavior_version=version)
+    completed_directory = options.pop('completed_result_directory', None)
+    completed_path = (Path(completed_directory) / f'game-{index}.json'
+                      if completed_directory is not None else None)
+    if completed_path is not None and completed_path.exists():
+        raise FileExistsError('Game already has a completed result handoff')
     try:
-        return timed_standard_game(game, model=model,batcher=batcher,version=version,
+        row = timed_standard_game(game, model=model,batcher=batcher,version=version,
             learner_seat=game['learner_seat'],record_ppo=True,
             opponent_model=opponent_model,opponent_batcher=opponent_batcher,
             opponent_version=opponent_version,opponent_sha256=opponent_sha256,**options)
+        if completed_path is not None:
+            import hashlib
+            import json
+            from .hartford_evaluation import atomic_json
+            payload = json.dumps(row, sort_keys=True, separators=(',', ':'), allow_nan=False).encode()
+            atomic_json(completed_path, dict(row=row, sha256=hashlib.sha256(payload).hexdigest()))
+        return row
     finally:
         try:
             _reset_inference(batcher,seed)

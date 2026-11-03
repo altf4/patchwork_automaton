@@ -1,14 +1,22 @@
 # Identity PPO: current versus diverse opponents
 
-Status: **RUNNING**, launched 2026-11-03 14:27 UTC (07:27 MST).
-The control arm runs first, followed automatically by the diverse arm and the
-10,000-game endpoint. Hourly health checks are active. Guarded 48-game plumbing
-acceptance passed with identical restored model/optimizer/RNG states and no
-optimizer updates. See `validation.json`, `acceptance.json` and `launch.json`.
+Status: **COMPLETE**, 2026-11-03 20:19 UTC. Both 50K arms and the
+10,000-game comparison passed their audits. The diverse agent scored 51.61%
+against control (95% interval 50.25%–52.96%): 5,019 wins, 4,698 losses, and
+283 adjudicated draws. See the [audited results and graph](head-to-head/README.md).
+Guarded 48-game plumbing acceptance is recorded in `acceptance.json`.
+
+The later [20K extension and combined 30K comparison](extension-20k/combined-30k/README.md)
+scored diverse at 51.725% (nominal 95% interval 50.941%–52.509%). Its recovery
+record and adjudication limitations are preserved alongside the original 10K.
+The [four fixed-opponent 10K panels](post-ab-comparisons/results/README.md)
+compare both agents with scripted baselines and their shared identity parent.
+The diverse recipe is the repository default for future Hartford experiments;
+the old recipe remains available for explicit control arms and saved resumes.
 
 User-authorized comparison: 100,000 additional collection games in two independent
 50K arms, followed by a 10,000-game head-to-head and a graph. No intermediate
-policy-strength evaluations or extra baseline panels are scheduled.
+policy-strength evaluations or extra baseline panels were run.
 
 Both arms start from completed identity checkpoint 100 (300K total exposure),
 preserving model weights, both Adam states and trainer RNG. Each local checkpoint

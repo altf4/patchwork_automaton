@@ -1,0 +1,8 @@
+{
+  "focused_tests_passed": 11,
+  "scripted_panel_exact_games": 10000,
+  "neural_panel_exact_games": 10000,
+  "matched_seeds_and_roles": true,
+  "result_handoff_survives_reset_failure": true,
+  "first_production_outcomes": 862
+}

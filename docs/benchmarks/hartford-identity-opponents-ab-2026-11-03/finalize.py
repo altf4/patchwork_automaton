@@ -35,7 +35,8 @@ def plot(result, output):
     ax, heat = fig.add_subplot(grid[0]), fig.add_subplot(grid[1])
     fig.suptitle('Broader opponents vs continued self-play', x=.04, y=.97,
                  ha='left', fontsize=21, fontweight='bold')
-    fig.text(.04, .905, '10,000 games · 100 ordered Hartford matchups · 100 games per matchup',
+    games = result['games']
+    fig.text(.04, .905, f'{games:,} games · 100 ordered Hartford matchups · {games // 100} games per matchup',
              color='#52606d', fontsize=12)
     groups = [summary, summary['on_play'], summary['on_draw']]
     values = np.array([v['score'] for v in groups]) * 100

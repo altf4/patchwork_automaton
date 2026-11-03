@@ -1,0 +1,17 @@
+{
+  "control": {
+    "path": "/home/altf4/benchmarks/hartford-identity-ab-20261103/control/checkpoints/round-0050/policy.keras",
+    "sha256": "dfa899c49a05c85e81722080cd783f7fc8bdbc785042cd5fac1b5ee98b652610",
+    "manifest_sha256": "b17e2ca879f83b5325ae088cc0618302a22355f417d9e04b07a188e9ff49204c"
+  },
+  "diverse": {
+    "path": "/home/altf4/benchmarks/hartford-identity-ab-20261103/diverse/checkpoints/round-0050/policy.keras",
+    "sha256": "1517a7006c61ca0c17aaa711e7fa69e68e1f6e7f500b91a3bffb94ca2a689ca6",
+    "manifest_sha256": "b17e2ca879f83b5325ae088cc0618302a22355f417d9e04b07a188e9ff49204c"
+  },
+  "reference": {
+    "path": "/home/altf4/benchmarks/hartford-identity-ab-20261103/inputs/identity-100k/checkpoints/round-0100/policy.keras",
+    "sha256": "7c5290d0a6ea4ad2d5697087cb8bd1880a52e04c48b84f2c0d171541e709b845",
+    "manifest_sha256": "b17e2ca879f83b5325ae088cc0618302a22355f417d9e04b07a188e9ff49204c"
+  }
+}

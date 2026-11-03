@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "audited_at": "2026-11-03T20:37:24.069614+00:00",
+  "games": 10000,
+  "scheduled_identities_verified": true,
+  "deck_seat_start_balance_verified": true,
+  "failed_games": 0,
+  "training": false,
+  "guard_exit_code": 0,
+  "adjudication_diagnostic_hashes_verified": true,
+  "model_source_parent_hashes_verified": true,
+  "provenance_files_verified": 2862,
+  "both_training_completion_audits_passed": true,
+  "summary_recomputed": true,
+  "games_gzip_sha256": "b2438bdaaa20add9f74fc4765b2ec8b2b9b41ae630b67bea774fecc9516bda07",
+  "minimum_available_gib": 3.0389480590820312,
+  "limitation": "One training run per recipe; endpoint head-to-head does not measure absolute strength or performance against unseen opponents."
+}

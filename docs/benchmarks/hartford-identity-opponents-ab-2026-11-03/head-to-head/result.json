@@ -1,0 +1,2864 @@
+{
+  "all_source_models_and_training_artifacts_unchanged": true,
+  "completed_at": "2026-11-03T20:19:03.833649+00:00",
+  "focal": "diverse",
+  "games": 10000,
+  "manifest_sha256": "768828c075b5f41dcb92dbd371ac74941600b048005564352dc8d426859b33b7",
+  "opponent": "control",
+  "rows_sha256": "a22524c13f7812d47979653330920a29b8b0f55de86fd12e18ce2cb8210be556",
+  "stats": [
+    {
+      "learner": {
+        "batch_histogram": {
+          "1": 8867,
+          "2": 10595,
+          "3": 12732,
+          "4": 13297,
+          "5": 11917,
+          "6": 9810,
+          "7": 7795,
+          "8": 5600,
+          "9": 3739,
+          "10": 2466,
+          "11": 1358,
+          "12": 698,
+          "13": 339,
+          "14": 134,
+          "15": 37,
+          "16": 11,
+          "17": 5,
+          "18": 1
+        },
+        "calls": 89401,
+        "device": "/CPU:0",
+        "graph_traces": [
+          1
+        ],
+        "inference_seconds": 1037.3559128227935,
+        "mean_batch": 4.787340186351383,
+        "mean_queue_ms": 4.412992073760635,
+        "replica_cpu_seconds": 1178.848229664,
+        "replicas": [
+          {
+            "batch_histogram": {
+              "1": 8867,
+              "2": 10595,
+              "3": 12732,
+              "4": 13297,
+              "5": 11917,
+              "6": 9810,
+              "7": 7795,
+              "8": 5600,
+              "9": 3739,
+              "10": 2466,
+              "11": 1358,
+              "12": 698,
+              "13": 339,
+              "14": 134,
+              "15": 37,
+              "16": 11,
+              "17": 5,
+              "18": 1
+            },
+            "calls": 89401,
+            "cuda_visible_devices": "-1",
+            "device": "/CPU:0",
+            "engines": 24,
+            "graph_traces": 1,
+            "inference_seconds": 1037.3559128227935,
+            "inter_op_threads": 0,
+            "intra_op_threads": 1,
+            "mean_batch": 4.787340186351383,
+            "mean_queue_ms": 4.412992073760635,
+            "model_variable_devices": [
+              "/job:localhost/replica:0/task:0/device:CPU:0"
+            ],
+            "output_placements": {
+              "logits": "/job:localhost/replica:0/task:0/device:CPU:0",
+              "memory_out": "/job:localhost/replica:0/task:0/device:CPU:0",
+              "value": "/job:localhost/replica:0/task:0/device:CPU:0"
+            },
+            "pid": 719599,
+            "process_cpu_seconds": 1178.848229664,
+            "requests": 427993,
+            "tf_num_interop_threads_env": "2",
+            "tf_num_intraop_threads_env": "2",
+            "version": 150,
+            "versions": null,
+            "visible_gpus": [],
+            "weights_sha256": "34d65a0fb5c225bf6316a2d648ae7474a7c3c184ee2fdfba7200bf7d25c0fead"
+          }
+        ],
+        "requests": 427993,
+        "version": 150,
+        "weights_sha256": "34d65a0fb5c225bf6316a2d648ae7474a7c3c184ee2fdfba7200bf7d25c0fead"
+      },
+      "opponent": {
+        "batch_histogram": {
+          "1": 15941,
+          "2": 15855,
+          "3": 16704,
+          "4": 14763,
+          "5": 12057,
+          "6": 9033,
+          "7": 6357,
+          "8": 4263,
+          "9": 2568,
+          "10": 1428,
+          "11": 717,
+          "12": 352,
+          "13": 131,
+          "14": 54,
+          "15": 14,
+          "16": 6,
+          "17": 1,
+          "18": 1
+        },
+        "calls": 100245,
+        "device": "/CPU:0",
+        "graph_traces": [
+          1
+        ],
+        "inference_seconds": 1030.0472948636743,
+        "mean_batch": 4.012210085291037,
+        "mean_queue_ms": 3.8878680703335746,
+        "replica_cpu_seconds": 1188.313567021,
+        "replicas": [
+          {
+            "batch_histogram": {
+              "1": 15941,
+              "2": 15855,
+              "3": 16704,
+              "4": 14763,
+              "5": 12057,
+              "6": 9033,
+              "7": 6357,
+              "8": 4263,
+              "9": 2568,
+              "10": 1428,
+              "11": 717,
+              "12": 352,
+              "13": 131,
+              "14": 54,
+              "15": 14,
+              "16": 6,
+              "17": 1,
+              "18": 1
+            },
+            "calls": 100245,
+            "cuda_visible_devices": "-1",
+            "device": "/CPU:0",
+            "engines": 24,
+            "graph_traces": 1,
+            "inference_seconds": 1030.0472948636743,
+            "inter_op_threads": 0,
+            "intra_op_threads": 1,
+            "mean_batch": 4.012210085291037,
+            "mean_queue_ms": 3.8878680703335746,
+            "model_variable_devices": [
+              "/job:localhost/replica:0/task:0/device:CPU:0"
+            ],
+            "output_placements": {
+              "logits": "/job:localhost/replica:0/task:0/device:CPU:0",
+              "memory_out": "/job:localhost/replica:0/task:0/device:CPU:0",
+              "value": "/job:localhost/replica:0/task:0/device:CPU:0"
+            },
+            "pid": 719649,
+            "process_cpu_seconds": 1188.313567021,
+            "requests": 402204,
+            "tf_num_interop_threads_env": "2",
+            "tf_num_intraop_threads_env": "2",
+            "version": 150,
+            "versions": null,
+            "visible_gpus": [],
+            "weights_sha256": "723e53b70ea1e0afe88dd005405bb614cf8ce3b55dc6144cbc40911525749145"
+          }
+        ],
+        "requests": 402204,
+        "version": 150,
+        "weights_sha256": "723e53b70ea1e0afe88dd005405bb614cf8ce3b55dc6144cbc40911525749145"
+      }
+    },
+    {
+      "learner": {
+        "batch_histogram": {
+          "1": 8701,
+          "2": 10820,
+          "3": 13013,
+          "4": 12955,
+          "5": 11734,
+          "6": 9921,
+          "7": 7806,
+          "8": 5732,
+          "9": 3956,
+          "10": 2449,
+          "11": 1384,
+          "12": 706,
+          "13": 366,
+          "14": 150,
+          "15": 59,
+          "16": 16,
+          "17": 8,
+          "18": 1
+        },
+        "calls": 89777,
+        "device": "/CPU:0",
+        "graph_traces": [
+          1
+        ],
+        "inference_seconds": 1035.8367527766386,
+        "mean_batch": 4.8101072657807675,
+        "mean_queue_ms": 4.360947691619978,
+        "replica_cpu_seconds": 1177.137168694,
+        "replicas": [
+          {
+            "batch_histogram": {
+              "1": 8701,
+              "2": 10820,
+              "3": 13013,
+              "4": 12955,
+              "5": 11734,
+              "6": 9921,
+              "7": 7806,
+              "8": 5732,
+              "9": 3956,
+              "10": 2449,
+              "11": 1384,
+              "12": 706,
+              "13": 366,
+              "14": 150,
+              "15": 59,
+              "16": 16,
+              "17": 8,
+              "18": 1
+            },
+            "calls": 89777,
+            "cuda_visible_devices": "-1",
+            "device": "/CPU:0",
+            "engines": 24,
+            "graph_traces": 1,
+            "inference_seconds": 1035.8367527766386,
+            "inter_op_threads": 0,
+            "intra_op_threads": 1,
+            "mean_batch": 4.8101072657807675,
+            "mean_queue_ms": 4.360947691619978,
+            "model_variable_devices": [
+              "/job:localhost/replica:0/task:0/device:CPU:0"
+            ],
+            "output_placements": {
+              "logits": "/job:localhost/replica:0/task:0/device:CPU:0",
+              "memory_out": "/job:localhost/replica:0/task:0/device:CPU:0",
+              "value": "/job:localhost/replica:0/task:0/device:CPU:0"
+            },
+            "pid": 719600,
+            "process_cpu_seconds": 1177.137168694,
+            "requests": 431837,
+            "tf_num_interop_threads_env": "2",
+            "tf_num_intraop_threads_env": "2",
+            "version": 150,
+            "versions": null,
+            "visible_gpus": [],
+            "weights_sha256": "34d65a0fb5c225bf6316a2d648ae7474a7c3c184ee2fdfba7200bf7d25c0fead"
+          }
+        ],
+        "requests": 431837,
+        "version": 150,
+        "weights_sha256": "34d65a0fb5c225bf6316a2d648ae7474a7c3c184ee2fdfba7200bf7d25c0fead"
+      },
+      "opponent": {
+        "batch_histogram": {
+          "1": 16031,
+          "2": 16348,
+          "3": 16889,
+          "4": 14809,
+          "5": 12155,
+          "6": 8792,
+          "7": 6285,
+          "8": 4186,
+          "9": 2455,
+          "10": 1484,
+          "11": 769,
+          "12": 346,
+          "13": 157,
+          "14": 60,
+          "15": 26,
+          "16": 2
+        },
+        "calls": 100794,
+        "device": "/CPU:0",
+        "graph_traces": [
+          1
+        ],
+        "inference_seconds": 1027.9562893770926,
+        "mean_batch": 3.993184118102268,
+        "mean_queue_ms": 3.8529513034613125,
+        "replica_cpu_seconds": 1185.363591666,
+        "replicas": [
+          {
+            "batch_histogram": {
+              "1": 16031,
+              "2": 16348,
+              "3": 16889,
+              "4": 14809,
+              "5": 12155,
+              "6": 8792,
+              "7": 6285,
+              "8": 4186,
+              "9": 2455,
+              "10": 1484,
+              "11": 769,
+              "12": 346,
+              "13": 157,
+              "14": 60,
+              "15": 26,
+              "16": 2
+            },
+            "calls": 100794,
+            "cuda_visible_devices": "-1",
+            "device": "/CPU:0",
+            "engines": 24,
+            "graph_traces": 1,
+            "inference_seconds": 1027.9562893770926,
+            "inter_op_threads": 0,
+            "intra_op_threads": 1,
+            "mean_batch": 3.993184118102268,
+            "mean_queue_ms": 3.8529513034613125,
+            "model_variable_devices": [
+              "/job:localhost/replica:0/task:0/device:CPU:0"
+            ],
+            "output_placements": {
+              "logits": "/job:localhost/replica:0/task:0/device:CPU:0",
+              "memory_out": "/job:localhost/replica:0/task:0/device:CPU:0",
+              "value": "/job:localhost/replica:0/task:0/device:CPU:0"
+            },
+            "pid": 719675,
+            "process_cpu_seconds": 1185.363591666,
+            "requests": 402489,
+            "tf_num_interop_threads_env": "2",
+            "tf_num_intraop_threads_env": "2",
+            "version": 150,
+            "versions": null,
+            "visible_gpus": [],
+            "weights_sha256": "723e53b70ea1e0afe88dd005405bb614cf8ce3b55dc6144cbc40911525749145"
+          }
+        ],
+        "requests": 402489,
+        "version": 150,
+        "weights_sha256": "723e53b70ea1e0afe88dd005405bb614cf8ce3b55dc6144cbc40911525749145"
+      }
+    }
+  ],
+  "status": "complete",
+  "summary": {
+    "adjudicated_games": 283,
+    "adjudication_reasons": {
+      "turn_limit": 2,
+      "wall_clock_timeout": 281
+    },
+    "deck_ids": [
+      "mono-green-landfall",
+      "izzet-prowess",
+      "bw-lifegain",
+      "dimir-midrange",
+      "four-color-control",
+      "jund-sacrifice",
+      "izzet-spellementals",
+      "jeskai-artifacts",
+      "mardu-discard",
+      "bant-airbending"
+    ],
+    "draws": 283,
+    "games": 10000,
+    "losses": 4698,
+    "matchups": {
+      "bant-airbending": {
+        "bant-airbending": {
+          "adjudicated_games": 1,
+          "adjudication_reasons": {
+            "wall_clock_timeout": 1
+          },
+          "draws": 1,
+          "games": 100,
+          "losses": 50,
+          "natural_draws": 0,
+          "score": 0.495,
+          "score_ci95": [
+            0.35918984842593804,
+            0.630810151574062
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.49,
+          "win_rate_ci95": [
+            0.3942199893044113,
+            0.5865198806597283
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 49
+        },
+        "bw-lifegain": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 75,
+          "natural_draws": 0,
+          "score": 0.25,
+          "score_ci95": [
+            0.11418984842593805,
+            0.38581015157406195
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.25,
+          "win_rate_ci95": [
+            0.17545211362287672,
+            0.34304463548061603
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 25
+        },
+        "dimir-midrange": {
+          "adjudicated_games": 1,
+          "adjudication_reasons": {
+            "wall_clock_timeout": 1
+          },
+          "draws": 1,
+          "games": 100,
+          "losses": 48,
+          "natural_draws": 0,
+          "score": 0.515,
+          "score_ci95": [
+            0.37918984842593806,
+            0.650810151574062
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.51,
+          "win_rate_ci95": [
+            0.4134801193402717,
+            0.6057800106955886
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 51
+        },
+        "four-color-control": {
+          "adjudicated_games": 4,
+          "adjudication_reasons": {
+            "wall_clock_timeout": 4
+          },
+          "draws": 4,
+          "games": 100,
+          "losses": 42,
+          "natural_draws": 0,
+          "score": 0.56,
+          "score_ci95": [
+            0.4241898484259381,
+            0.695810151574062
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.54,
+          "win_rate_ci95": [
+            0.44264860323368227,
+            0.6343919169097589
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 54
+        },
+        "izzet-prowess": {
+          "adjudicated_games": 1,
+          "adjudication_reasons": {
+            "wall_clock_timeout": 1
+          },
+          "draws": 1,
+          "games": 100,
+          "losses": 54,
+          "natural_draws": 0,
+          "score": 0.455,
+          "score_ci95": [
+            0.31918984842593806,
+            0.590810151574062
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.45,
+          "win_rate_ci95": [
+            0.3561453797951198,
+            0.5475539700255787
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 45
+        },
+        "izzet-spellementals": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 79,
+          "natural_draws": 0,
+          "score": 0.21,
+          "score_ci95": [
+            0.07418984842593804,
+            0.3458101515740619
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.21,
+          "win_rate_ci95": [
+            0.141656540619153,
+            0.29979968834089865
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 21
+        },
+        "jeskai-artifacts": {
+          "adjudicated_games": 14,
+          "adjudication_reasons": {
+            "wall_clock_timeout": 14
+          },
+          "draws": 14,
+          "games": 100,
+          "losses": 59,
+          "natural_draws": 0,
+          "score": 0.34,
+          "score_ci95": [
+            0.20418984842593807,
+            0.475810151574062
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.27,
+          "win_rate_ci95": [
+            0.1926958414957634,
+            0.36432116767944994
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 27
+        },
+        "jund-sacrifice": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 37,
+          "natural_draws": 0,
+          "score": 0.63,
+          "score_ci95": [
+            0.49418984842593805,
+            0.765810151574062
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.63,
+          "win_rate_ci95": [
+            0.5322052958094291,
+            0.7181763946567546
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 63
+        },
+        "mardu-discard": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 52,
+          "natural_draws": 0,
+          "score": 0.48,
+          "score_ci95": [
+            0.344189848425938,
+            0.6158101515740619
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.48,
+          "win_rate_ci95": [
+            0.384645517580519,
+            0.5768342223477603
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 48
+        },
+        "mono-green-landfall": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 89,
+          "natural_draws": 0,
+          "score": 0.11,
+          "score_ci95": [
+            0.0,
+            0.24581015157406194
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.11,
+          "win_rate_ci95": [
+            0.06254196357064568,
+            0.18631296503080313
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 11
+        }
+      },
+      "bw-lifegain": {
+        "bant-airbending": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 32,
+          "natural_draws": 0,
+          "score": 0.68,
+          "score_ci95": [
+            0.5441898484259381,
+            0.815810151574062
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.68,
+          "win_rate_ci95": [
+            0.5833738138954762,
+            0.7633085267500092
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 68
+        },
+        "bw-lifegain": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 54,
+          "natural_draws": 0,
+          "score": 0.46,
+          "score_ci95": [
+            0.32418984842593807,
+            0.5958101515740619
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.46,
+          "win_rate_ci95": [
+            0.36560808309024106,
+            0.5573513967663177
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 46
+        },
+        "dimir-midrange": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 38,
+          "natural_draws": 0,
+          "score": 0.62,
+          "score_ci95": [
+            0.48418984842593804,
+            0.755810151574062
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.62,
+          "win_rate_ci95": [
+            0.5220975529551107,
+            0.7090240074752127
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 62
+        },
+        "four-color-control": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 14,
+          "natural_draws": 0,
+          "score": 0.86,
+          "score_ci95": [
+            0.724189848425938,
+            0.9958101515740619
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.86,
+          "win_rate_ci95": [
+            0.7786281178903616,
+            0.9147365634006086
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 86
+        },
+        "izzet-prowess": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 34,
+          "natural_draws": 0,
+          "score": 0.66,
+          "score_ci95": [
+            0.5241898484259381,
+            0.795810151574062
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.66,
+          "win_rate_ci95": [
+            0.5627772885472462,
+            0.7453847920265184
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 66
+        },
+        "izzet-spellementals": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 39,
+          "natural_draws": 0,
+          "score": 0.61,
+          "score_ci95": [
+            0.47418984842593803,
+            0.7458101515740619
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.61,
+          "win_rate_ci95": [
+            0.5120301704584073,
+            0.6998312599360558
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 61
+        },
+        "jeskai-artifacts": {
+          "adjudicated_games": 13,
+          "adjudication_reasons": {
+            "wall_clock_timeout": 13
+          },
+          "draws": 13,
+          "games": 100,
+          "losses": 31,
+          "natural_draws": 0,
+          "score": 0.625,
+          "score_ci95": [
+            0.48918984842593805,
+            0.760810151574062
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.56,
+          "win_rate_ci95": [
+            0.4622810465167699,
+            0.6532797336983921
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 56
+        },
+        "jund-sacrifice": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 27,
+          "natural_draws": 0,
+          "score": 0.73,
+          "score_ci95": [
+            0.594189848425938,
+            0.8658101515740619
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.73,
+          "win_rate_ci95": [
+            0.6356788323205499,
+            0.8073041585042365
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 73
+        },
+        "mardu-discard": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 41,
+          "natural_draws": 0,
+          "score": 0.59,
+          "score_ci95": [
+            0.454189848425938,
+            0.7258101515740619
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.59,
+          "win_rate_ci95": [
+            0.4920143005341078,
+            0.6813268697886348
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 59
+        },
+        "mono-green-landfall": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 69,
+          "natural_draws": 0,
+          "score": 0.31,
+          "score_ci95": [
+            0.17418984842593804,
+            0.44581015157406195
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.31,
+          "win_rate_ci95": [
+            0.22779697212376038,
+            0.40626055719489407
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 31
+        }
+      },
+      "dimir-midrange": {
+        "bant-airbending": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 43,
+          "natural_draws": 0,
+          "score": 0.57,
+          "score_ci95": [
+            0.434189848425938,
+            0.7058101515740619
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.57,
+          "win_rate_ci95": [
+            0.47215389549212305,
+            0.6626670147588988
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 57
+        },
+        "bw-lifegain": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 67,
+          "natural_draws": 0,
+          "score": 0.33,
+          "score_ci95": [
+            0.19418984842593806,
+            0.46581015157406197
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.33,
+          "win_rate_ci95": [
+            0.24563122734128034,
+            0.4269465620490947
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 33
+        },
+        "dimir-midrange": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 43,
+          "natural_draws": 0,
+          "score": 0.57,
+          "score_ci95": [
+            0.434189848425938,
+            0.7058101515740619
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.57,
+          "win_rate_ci95": [
+            0.47215389549212305,
+            0.6626670147588988
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 57
+        },
+        "four-color-control": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 29,
+          "natural_draws": 0,
+          "score": 0.71,
+          "score_ci95": [
+            0.574189848425938,
+            0.8458101515740619
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.71,
+          "win_rate_ci95": [
+            0.6146110882442888,
+            0.7898516425087772
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 71
+        },
+        "izzet-prowess": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 32,
+          "natural_draws": 0,
+          "score": 0.68,
+          "score_ci95": [
+            0.5441898484259381,
+            0.815810151574062
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.68,
+          "win_rate_ci95": [
+            0.5833738138954762,
+            0.7633085267500092
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 68
+        },
+        "izzet-spellementals": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 60,
+          "natural_draws": 0,
+          "score": 0.4,
+          "score_ci95": [
+            0.26418984842593807,
+            0.535810151574062
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.4,
+          "win_rate_ci95": [
+            0.3094012864324589,
+            0.4979974132089382
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 40
+        },
+        "jeskai-artifacts": {
+          "adjudicated_games": 15,
+          "adjudication_reasons": {
+            "wall_clock_timeout": 15
+          },
+          "draws": 15,
+          "games": 100,
+          "losses": 46,
+          "natural_draws": 0,
+          "score": 0.465,
+          "score_ci95": [
+            0.32918984842593807,
+            0.600810151574062
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.39,
+          "win_rate_ci95": [
+            0.3001687400639441,
+            0.4879698295415926
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 39
+        },
+        "jund-sacrifice": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 28,
+          "natural_draws": 0,
+          "score": 0.72,
+          "score_ci95": [
+            0.584189848425938,
+            0.8558101515740619
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.72,
+          "win_rate_ci95": [
+            0.6251197129007884,
+            0.7986031478881379
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 72
+        },
+        "mardu-discard": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 47,
+          "natural_draws": 0,
+          "score": 0.53,
+          "score_ci95": [
+            0.39418984842593807,
+            0.665810151574062
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.53,
+          "win_rate_ci95": [
+            0.4328885697009936,
+            0.6248918204065872
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 53
+        },
+        "mono-green-landfall": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 71,
+          "natural_draws": 0,
+          "score": 0.29,
+          "score_ci95": [
+            0.15418984842593803,
+            0.42581015157406193
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.29,
+          "win_rate_ci95": [
+            0.2101483574912227,
+            0.3853889117557111
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 29
+        }
+      },
+      "four-color-control": {
+        "bant-airbending": {
+          "adjudicated_games": 4,
+          "adjudication_reasons": {
+            "wall_clock_timeout": 4
+          },
+          "draws": 4,
+          "games": 100,
+          "losses": 45,
+          "natural_draws": 0,
+          "score": 0.53,
+          "score_ci95": [
+            0.39418984842593807,
+            0.665810151574062
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.51,
+          "win_rate_ci95": [
+            0.4134801193402717,
+            0.6057800106955886
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 51
+        },
+        "bw-lifegain": {
+          "adjudicated_games": 2,
+          "adjudication_reasons": {
+            "wall_clock_timeout": 2
+          },
+          "draws": 2,
+          "games": 100,
+          "losses": 85,
+          "natural_draws": 0,
+          "score": 0.14,
+          "score_ci95": [
+            0.004189848425938059,
+            0.27581015157406197
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.13,
+          "win_rate_ci95": [
+            0.07757167427240512,
+            0.20980351440076428
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 13
+        },
+        "dimir-midrange": {
+          "adjudicated_games": 4,
+          "adjudication_reasons": {
+            "turn_limit": 2,
+            "wall_clock_timeout": 2
+          },
+          "draws": 4,
+          "games": 100,
+          "losses": 56,
+          "natural_draws": 0,
+          "score": 0.42,
+          "score_ci95": [
+            0.28418984842593803,
+            0.5558101515740619
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.4,
+          "win_rate_ci95": [
+            0.3094012864324589,
+            0.4979974132089382
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 40
+        },
+        "four-color-control": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 41,
+          "natural_draws": 0,
+          "score": 0.59,
+          "score_ci95": [
+            0.454189848425938,
+            0.7258101515740619
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.59,
+          "win_rate_ci95": [
+            0.4920143005341078,
+            0.6813268697886348
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 59
+        },
+        "izzet-prowess": {
+          "adjudicated_games": 1,
+          "adjudication_reasons": {
+            "wall_clock_timeout": 1
+          },
+          "draws": 1,
+          "games": 100,
+          "losses": 63,
+          "natural_draws": 0,
+          "score": 0.365,
+          "score_ci95": [
+            0.22918984842593804,
+            0.500810151574062
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.36,
+          "win_rate_ci95": [
+            0.2727122040140433,
+            0.4576459754839126
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 36
+        },
+        "izzet-spellementals": {
+          "adjudicated_games": 1,
+          "adjudication_reasons": {
+            "wall_clock_timeout": 1
+          },
+          "draws": 1,
+          "games": 100,
+          "losses": 80,
+          "natural_draws": 0,
+          "score": 0.195,
+          "score_ci95": [
+            0.05918984842593805,
+            0.33081015157406196
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.19,
+          "win_rate_ci95": [
+            0.12514751509768735,
+            0.27778845379064376
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 19
+        },
+        "jeskai-artifacts": {
+          "adjudicated_games": 15,
+          "adjudication_reasons": {
+            "wall_clock_timeout": 15
+          },
+          "draws": 15,
+          "games": 100,
+          "losses": 60,
+          "natural_draws": 0,
+          "score": 0.325,
+          "score_ci95": [
+            0.18918984842593806,
+            0.46081015157406197
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.25,
+          "win_rate_ci95": [
+            0.17545211362287672,
+            0.34304463548061603
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 25
+        },
+        "jund-sacrifice": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 43,
+          "natural_draws": 0,
+          "score": 0.57,
+          "score_ci95": [
+            0.434189848425938,
+            0.7058101515740619
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.57,
+          "win_rate_ci95": [
+            0.47215389549212305,
+            0.6626670147588988
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 57
+        },
+        "mardu-discard": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 69,
+          "natural_draws": 0,
+          "score": 0.31,
+          "score_ci95": [
+            0.17418984842593804,
+            0.44581015157406195
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.31,
+          "win_rate_ci95": [
+            0.22779697212376038,
+            0.40626055719489407
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 31
+        },
+        "mono-green-landfall": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 92,
+          "natural_draws": 0,
+          "score": 0.08,
+          "score_ci95": [
+            0.0,
+            0.21581015157406197
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.08,
+          "win_rate_ci95": [
+            0.041093461484380624,
+            0.14998107700948735
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 8
+        }
+      },
+      "izzet-prowess": {
+        "bant-airbending": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 37,
+          "natural_draws": 0,
+          "score": 0.63,
+          "score_ci95": [
+            0.49418984842593805,
+            0.765810151574062
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.63,
+          "win_rate_ci95": [
+            0.5322052958094291,
+            0.7181763946567546
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 63
+        },
+        "bw-lifegain": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 64,
+          "natural_draws": 0,
+          "score": 0.36,
+          "score_ci95": [
+            0.22418984842593803,
+            0.49581015157406194
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.36,
+          "win_rate_ci95": [
+            0.2727122040140433,
+            0.4576459754839126
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 36
+        },
+        "dimir-midrange": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 58,
+          "natural_draws": 0,
+          "score": 0.42,
+          "score_ci95": [
+            0.28418984842593803,
+            0.5558101515740619
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.42,
+          "win_rate_ci95": [
+            0.3279838267435473,
+            0.5179351329695703
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 42
+        },
+        "four-color-control": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 29,
+          "natural_draws": 0,
+          "score": 0.71,
+          "score_ci95": [
+            0.574189848425938,
+            0.8458101515740619
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.71,
+          "win_rate_ci95": [
+            0.6146110882442888,
+            0.7898516425087772
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 71
+        },
+        "izzet-prowess": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 54,
+          "natural_draws": 0,
+          "score": 0.46,
+          "score_ci95": [
+            0.32418984842593807,
+            0.5958101515740619
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.46,
+          "win_rate_ci95": [
+            0.36560808309024106,
+            0.5573513967663177
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 46
+        },
+        "izzet-spellementals": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 50,
+          "natural_draws": 0,
+          "score": 0.5,
+          "score_ci95": [
+            0.36418984842593805,
+            0.635810151574062
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.5,
+          "win_rate_ci95": [
+            0.4038315303659956,
+            0.5961684696340044
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 50
+        },
+        "jeskai-artifacts": {
+          "adjudicated_games": 7,
+          "adjudication_reasons": {
+            "wall_clock_timeout": 7
+          },
+          "draws": 7,
+          "games": 100,
+          "losses": 36,
+          "natural_draws": 0,
+          "score": 0.605,
+          "score_ci95": [
+            0.469189848425938,
+            0.7408101515740619
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.57,
+          "win_rate_ci95": [
+            0.47215389549212305,
+            0.6626670147588988
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 57
+        },
+        "jund-sacrifice": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 43,
+          "natural_draws": 0,
+          "score": 0.57,
+          "score_ci95": [
+            0.434189848425938,
+            0.7058101515740619
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.57,
+          "win_rate_ci95": [
+            0.47215389549212305,
+            0.6626670147588988
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 57
+        },
+        "mardu-discard": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 56,
+          "natural_draws": 0,
+          "score": 0.44,
+          "score_ci95": [
+            0.30418984842593805,
+            0.5758101515740619
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.44,
+          "win_rate_ci95": [
+            0.34672026630160796,
+            0.5377189534832302
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 44
+        },
+        "mono-green-landfall": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 72,
+          "natural_draws": 0,
+          "score": 0.28,
+          "score_ci95": [
+            0.14418984842593807,
+            0.415810151574062
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.28,
+          "win_rate_ci95": [
+            0.20139685211186212,
+            0.3748802870992116
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 28
+        }
+      },
+      "izzet-spellementals": {
+        "bant-airbending": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 16,
+          "natural_draws": 0,
+          "score": 0.84,
+          "score_ci95": [
+            0.704189848425938,
+            0.9758101515740619
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.84,
+          "win_rate_ci95": [
+            0.7557973061072976,
+            0.8990471151119521
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 84
+        },
+        "bw-lifegain": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 49,
+          "natural_draws": 0,
+          "score": 0.51,
+          "score_ci95": [
+            0.37418984842593805,
+            0.645810151574062
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.51,
+          "win_rate_ci95": [
+            0.4134801193402717,
+            0.6057800106955886
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 51
+        },
+        "dimir-midrange": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 33,
+          "natural_draws": 0,
+          "score": 0.67,
+          "score_ci95": [
+            0.5341898484259381,
+            0.805810151574062
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.67,
+          "win_rate_ci95": [
+            0.5730534379509052,
+            0.7543687726587197
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 67
+        },
+        "four-color-control": {
+          "adjudicated_games": 1,
+          "adjudication_reasons": {
+            "wall_clock_timeout": 1
+          },
+          "draws": 1,
+          "games": 100,
+          "losses": 18,
+          "natural_draws": 0,
+          "score": 0.815,
+          "score_ci95": [
+            0.679189848425938,
+            0.9508101515740619
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.81,
+          "win_rate_ci95": [
+            0.7222115462093562,
+            0.8748524849023126
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 81
+        },
+        "izzet-prowess": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 47,
+          "natural_draws": 0,
+          "score": 0.53,
+          "score_ci95": [
+            0.39418984842593807,
+            0.665810151574062
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.53,
+          "win_rate_ci95": [
+            0.4328885697009936,
+            0.6248918204065872
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 53
+        },
+        "izzet-spellementals": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 45,
+          "natural_draws": 0,
+          "score": 0.55,
+          "score_ci95": [
+            0.4141898484259381,
+            0.685810151574062
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.55,
+          "win_rate_ci95": [
+            0.45244602997442135,
+            0.6438546202048803
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 55
+        },
+        "jeskai-artifacts": {
+          "adjudicated_games": 11,
+          "adjudication_reasons": {
+            "wall_clock_timeout": 11
+          },
+          "draws": 11,
+          "games": 100,
+          "losses": 34,
+          "natural_draws": 0,
+          "score": 0.605,
+          "score_ci95": [
+            0.469189848425938,
+            0.7408101515740619
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.55,
+          "win_rate_ci95": [
+            0.45244602997442135,
+            0.6438546202048803
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 55
+        },
+        "jund-sacrifice": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 24,
+          "natural_draws": 0,
+          "score": 0.76,
+          "score_ci95": [
+            0.624189848425938,
+            0.895810151574062
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.76,
+          "win_rate_ci95": [
+            0.6676766365018553,
+            0.8330867444305122
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 76
+        },
+        "mardu-discard": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 46,
+          "natural_draws": 0,
+          "score": 0.54,
+          "score_ci95": [
+            0.4041898484259381,
+            0.675810151574062
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.54,
+          "win_rate_ci95": [
+            0.44264860323368227,
+            0.6343919169097589
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 54
+        },
+        "mono-green-landfall": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 81,
+          "natural_draws": 0,
+          "score": 0.19,
+          "score_ci95": [
+            0.05418984842593805,
+            0.32581015157406196
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.19,
+          "win_rate_ci95": [
+            0.12514751509768735,
+            0.27778845379064376
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 19
+        }
+      },
+      "jeskai-artifacts": {
+        "bant-airbending": {
+          "adjudicated_games": 26,
+          "adjudication_reasons": {
+            "wall_clock_timeout": 26
+          },
+          "draws": 26,
+          "games": 100,
+          "losses": 18,
+          "natural_draws": 0,
+          "score": 0.69,
+          "score_ci95": [
+            0.554189848425938,
+            0.8258101515740619
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.56,
+          "win_rate_ci95": [
+            0.4622810465167699,
+            0.6532797336983921
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 56
+        },
+        "bw-lifegain": {
+          "adjudicated_games": 14,
+          "adjudication_reasons": {
+            "wall_clock_timeout": 14
+          },
+          "draws": 14,
+          "games": 100,
+          "losses": 38,
+          "natural_draws": 0,
+          "score": 0.55,
+          "score_ci95": [
+            0.4141898484259381,
+            0.685810151574062
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.48,
+          "win_rate_ci95": [
+            0.384645517580519,
+            0.5768342223477603
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 48
+        },
+        "dimir-midrange": {
+          "adjudicated_games": 15,
+          "adjudication_reasons": {
+            "wall_clock_timeout": 15
+          },
+          "draws": 15,
+          "games": 100,
+          "losses": 36,
+          "natural_draws": 0,
+          "score": 0.565,
+          "score_ci95": [
+            0.429189848425938,
+            0.7008101515740619
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.49,
+          "win_rate_ci95": [
+            0.3942199893044113,
+            0.5865198806597283
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 49
+        },
+        "four-color-control": {
+          "adjudicated_games": 18,
+          "adjudication_reasons": {
+            "wall_clock_timeout": 18
+          },
+          "draws": 18,
+          "games": 100,
+          "losses": 23,
+          "natural_draws": 0,
+          "score": 0.68,
+          "score_ci95": [
+            0.5441898484259381,
+            0.815810151574062
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.59,
+          "win_rate_ci95": [
+            0.4920143005341078,
+            0.6813268697886348
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 59
+        },
+        "izzet-prowess": {
+          "adjudicated_games": 13,
+          "adjudication_reasons": {
+            "wall_clock_timeout": 13
+          },
+          "draws": 13,
+          "games": 100,
+          "losses": 51,
+          "natural_draws": 0,
+          "score": 0.425,
+          "score_ci95": [
+            0.28918984842593803,
+            0.560810151574062
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.36,
+          "win_rate_ci95": [
+            0.2727122040140433,
+            0.4576459754839126
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 36
+        },
+        "izzet-spellementals": {
+          "adjudicated_games": 11,
+          "adjudication_reasons": {
+            "wall_clock_timeout": 11
+          },
+          "draws": 11,
+          "games": 100,
+          "losses": 52,
+          "natural_draws": 0,
+          "score": 0.425,
+          "score_ci95": [
+            0.28918984842593803,
+            0.560810151574062
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.37,
+          "win_rate_ci95": [
+            0.28182360534324524,
+            0.4677947041905709
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 37
+        },
+        "jeskai-artifacts": {
+          "adjudicated_games": 27,
+          "adjudication_reasons": {
+            "wall_clock_timeout": 27
+          },
+          "draws": 27,
+          "games": 100,
+          "losses": 26,
+          "natural_draws": 0,
+          "score": 0.605,
+          "score_ci95": [
+            0.469189848425938,
+            0.7408101515740619
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.47,
+          "win_rate_ci95": [
+            0.3751081795934127,
+            0.5671114302990063
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 47
+        },
+        "jund-sacrifice": {
+          "adjudicated_games": 14,
+          "adjudication_reasons": {
+            "wall_clock_timeout": 14
+          },
+          "draws": 14,
+          "games": 100,
+          "losses": 35,
+          "natural_draws": 0,
+          "score": 0.58,
+          "score_ci95": [
+            0.444189848425938,
+            0.7158101515740619
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.51,
+          "win_rate_ci95": [
+            0.4134801193402717,
+            0.6057800106955886
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 51
+        },
+        "mardu-discard": {
+          "adjudicated_games": 12,
+          "adjudication_reasons": {
+            "wall_clock_timeout": 12
+          },
+          "draws": 12,
+          "games": 100,
+          "losses": 44,
+          "natural_draws": 0,
+          "score": 0.5,
+          "score_ci95": [
+            0.36418984842593805,
+            0.635810151574062
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.44,
+          "win_rate_ci95": [
+            0.34672026630160796,
+            0.5377189534832302
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 44
+        },
+        "mono-green-landfall": {
+          "adjudicated_games": 9,
+          "adjudication_reasons": {
+            "wall_clock_timeout": 9
+          },
+          "draws": 9,
+          "games": 100,
+          "losses": 74,
+          "natural_draws": 0,
+          "score": 0.215,
+          "score_ci95": [
+            0.07918984842593804,
+            0.3508101515740619
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.17,
+          "win_rate_ci95": [
+            0.10893566114059931,
+            0.25548004767601123
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 17
+        }
+      },
+      "jund-sacrifice": {
+        "bant-airbending": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 56,
+          "natural_draws": 0,
+          "score": 0.44,
+          "score_ci95": [
+            0.30418984842593805,
+            0.5758101515740619
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.44,
+          "win_rate_ci95": [
+            0.34672026630160796,
+            0.5377189534832302
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 44
+        },
+        "bw-lifegain": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 74,
+          "natural_draws": 0,
+          "score": 0.26,
+          "score_ci95": [
+            0.12418984842593805,
+            0.39581015157406196
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.26,
+          "win_rate_ci95": [
+            0.18404698464748132,
+            0.3537098944918718
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 26
+        },
+        "dimir-midrange": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 69,
+          "natural_draws": 0,
+          "score": 0.31,
+          "score_ci95": [
+            0.17418984842593804,
+            0.44581015157406195
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.31,
+          "win_rate_ci95": [
+            0.22779697212376038,
+            0.40626055719489407
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 31
+        },
+        "four-color-control": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 57,
+          "natural_draws": 0,
+          "score": 0.43,
+          "score_ci95": [
+            0.29418984842593804,
+            0.5658101515740619
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.43,
+          "win_rate_ci95": [
+            0.33733298524110106,
+            0.5278461045078768
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 43
+        },
+        "izzet-prowess": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 48,
+          "natural_draws": 0,
+          "score": 0.52,
+          "score_ci95": [
+            0.38418984842593806,
+            0.655810151574062
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.52,
+          "win_rate_ci95": [
+            0.4231657776522397,
+            0.615354482419481
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 52
+        },
+        "izzet-spellementals": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 68,
+          "natural_draws": 0,
+          "score": 0.32,
+          "score_ci95": [
+            0.18418984842593805,
+            0.45581015157406196
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.32,
+          "win_rate_ci95": [
+            0.23669147324999093,
+            0.41662618610452384
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 32
+        },
+        "jeskai-artifacts": {
+          "adjudicated_games": 10,
+          "adjudication_reasons": {
+            "wall_clock_timeout": 10
+          },
+          "draws": 10,
+          "games": 100,
+          "losses": 56,
+          "natural_draws": 0,
+          "score": 0.39,
+          "score_ci95": [
+            0.25418984842593806,
+            0.525810151574062
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.34,
+          "win_rate_ci95": [
+            0.25461520797348164,
+            0.43722271145275377
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 34
+        },
+        "jund-sacrifice": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 53,
+          "natural_draws": 0,
+          "score": 0.47,
+          "score_ci95": [
+            0.334189848425938,
+            0.6058101515740619
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.47,
+          "win_rate_ci95": [
+            0.3751081795934127,
+            0.5671114302990063
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 47
+        },
+        "mardu-discard": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 57,
+          "natural_draws": 0,
+          "score": 0.43,
+          "score_ci95": [
+            0.29418984842593804,
+            0.5658101515740619
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.43,
+          "win_rate_ci95": [
+            0.33733298524110106,
+            0.5278461045078768
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 43
+        },
+        "mono-green-landfall": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 86,
+          "natural_draws": 0,
+          "score": 0.14,
+          "score_ci95": [
+            0.004189848425938059,
+            0.27581015157406197
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.14,
+          "win_rate_ci95": [
+            0.08526343659939134,
+            0.22137188210963837
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 14
+        }
+      },
+      "mardu-discard": {
+        "bant-airbending": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 47,
+          "natural_draws": 0,
+          "score": 0.53,
+          "score_ci95": [
+            0.39418984842593807,
+            0.665810151574062
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.53,
+          "win_rate_ci95": [
+            0.4328885697009936,
+            0.6248918204065872
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 53
+        },
+        "bw-lifegain": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 60,
+          "natural_draws": 0,
+          "score": 0.4,
+          "score_ci95": [
+            0.26418984842593807,
+            0.535810151574062
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.4,
+          "win_rate_ci95": [
+            0.3094012864324589,
+            0.4979974132089382
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 40
+        },
+        "dimir-midrange": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 48,
+          "natural_draws": 0,
+          "score": 0.52,
+          "score_ci95": [
+            0.38418984842593806,
+            0.655810151574062
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.52,
+          "win_rate_ci95": [
+            0.4231657776522397,
+            0.615354482419481
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 52
+        },
+        "four-color-control": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 27,
+          "natural_draws": 0,
+          "score": 0.73,
+          "score_ci95": [
+            0.594189848425938,
+            0.8658101515740619
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.73,
+          "win_rate_ci95": [
+            0.6356788323205499,
+            0.8073041585042365
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 73
+        },
+        "izzet-prowess": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 42,
+          "natural_draws": 0,
+          "score": 0.58,
+          "score_ci95": [
+            0.444189848425938,
+            0.7158101515740619
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.58,
+          "win_rate_ci95": [
+            0.4820648670304296,
+            0.6720161732564526
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 58
+        },
+        "izzet-spellementals": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 55,
+          "natural_draws": 0,
+          "score": 0.45,
+          "score_ci95": [
+            0.31418984842593806,
+            0.5858101515740619
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.45,
+          "win_rate_ci95": [
+            0.3561453797951198,
+            0.5475539700255787
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 45
+        },
+        "jeskai-artifacts": {
+          "adjudicated_games": 12,
+          "adjudication_reasons": {
+            "wall_clock_timeout": 12
+          },
+          "draws": 12,
+          "games": 100,
+          "losses": 33,
+          "natural_draws": 0,
+          "score": 0.61,
+          "score_ci95": [
+            0.47418984842593803,
+            0.7458101515740619
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.55,
+          "win_rate_ci95": [
+            0.45244602997442135,
+            0.6438546202048803
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 55
+        },
+        "jund-sacrifice": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 36,
+          "natural_draws": 0,
+          "score": 0.64,
+          "score_ci95": [
+            0.5041898484259381,
+            0.775810151574062
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.64,
+          "win_rate_ci95": [
+            0.5423540245160874,
+            0.7272877959859567
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 64
+        },
+        "mardu-discard": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 57,
+          "natural_draws": 0,
+          "score": 0.43,
+          "score_ci95": [
+            0.29418984842593804,
+            0.5658101515740619
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.43,
+          "win_rate_ci95": [
+            0.33733298524110106,
+            0.5278461045078768
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 43
+        },
+        "mono-green-landfall": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 79,
+          "natural_draws": 0,
+          "score": 0.21,
+          "score_ci95": [
+            0.07418984842593804,
+            0.3458101515740619
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.21,
+          "win_rate_ci95": [
+            0.141656540619153,
+            0.29979968834089865
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 21
+        }
+      },
+      "mono-green-landfall": {
+        "bant-airbending": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 6,
+          "natural_draws": 0,
+          "score": 0.94,
+          "score_ci95": [
+            0.804189848425938,
+            1.0
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.94,
+          "win_rate_ci95": [
+            0.8752318455410406,
+            0.9722138760368118
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 94
+        },
+        "bw-lifegain": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 28,
+          "natural_draws": 0,
+          "score": 0.72,
+          "score_ci95": [
+            0.584189848425938,
+            0.8558101515740619
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.72,
+          "win_rate_ci95": [
+            0.6251197129007884,
+            0.7986031478881379
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 72
+        },
+        "dimir-midrange": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 25,
+          "natural_draws": 0,
+          "score": 0.75,
+          "score_ci95": [
+            0.614189848425938,
+            0.885810151574062
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.75,
+          "win_rate_ci95": [
+            0.656955364519384,
+            0.8245478863771232
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 75
+        },
+        "four-color-control": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 5,
+          "natural_draws": 0,
+          "score": 0.95,
+          "score_ci95": [
+            0.814189848425938,
+            1.0
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.95,
+          "win_rate_ci95": [
+            0.8882495307680808,
+            0.9784563208456319
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 95
+        },
+        "izzet-prowess": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 39,
+          "natural_draws": 0,
+          "score": 0.61,
+          "score_ci95": [
+            0.47418984842593803,
+            0.7458101515740619
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.61,
+          "win_rate_ci95": [
+            0.5120301704584073,
+            0.6998312599360558
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 61
+        },
+        "izzet-spellementals": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 24,
+          "natural_draws": 0,
+          "score": 0.76,
+          "score_ci95": [
+            0.624189848425938,
+            0.895810151574062
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.76,
+          "win_rate_ci95": [
+            0.6676766365018553,
+            0.8330867444305122
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 76
+        },
+        "jeskai-artifacts": {
+          "adjudicated_games": 6,
+          "adjudication_reasons": {
+            "wall_clock_timeout": 6
+          },
+          "draws": 6,
+          "games": 100,
+          "losses": 26,
+          "natural_draws": 0,
+          "score": 0.71,
+          "score_ci95": [
+            0.574189848425938,
+            0.8458101515740619
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.68,
+          "win_rate_ci95": [
+            0.5833738138954762,
+            0.7633085267500092
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 68
+        },
+        "jund-sacrifice": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 11,
+          "natural_draws": 0,
+          "score": 0.89,
+          "score_ci95": [
+            0.7541898484259381,
+            1.0
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.89,
+          "win_rate_ci95": [
+            0.8136870349691969,
+            0.9374580364293543
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 89
+        },
+        "mardu-discard": {
+          "adjudicated_games": 0,
+          "adjudication_reasons": {},
+          "draws": 0,
+          "games": 100,
+          "losses": 28,
+          "natural_draws": 0,
+          "score": 0.72,
+          "score_ci95": [
+            0.584189848425938,
+            0.8558101515740619
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.72,
+          "win_rate_ci95": [
+            0.6251197129007884,
+            0.7986031478881379
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 72
+        },
+        "mono-green-landfall": {
+          "adjudicated_games": 1,
+          "adjudication_reasons": {
+            "wall_clock_timeout": 1
+          },
+          "draws": 1,
+          "games": 100,
+          "losses": 45,
+          "natural_draws": 0,
+          "score": 0.545,
+          "score_ci95": [
+            0.4091898484259381,
+            0.680810151574062
+          ],
+          "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+          "win_rate": 0.54,
+          "win_rate_ci95": [
+            0.44264860323368227,
+            0.6343919169097589
+          ],
+          "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+          "wins": 54
+        }
+      }
+    },
+    "natural_draws": 0,
+    "on_draw": {
+      "adjudicated_games": 141,
+      "adjudication_reasons": {
+        "turn_limit": 1,
+        "wall_clock_timeout": 140
+      },
+      "draws": 141,
+      "games": 5000,
+      "losses": 2483,
+      "natural_draws": 0,
+      "score": 0.4893,
+      "score_ci95": [
+        0.4700935441736016,
+        0.5085064558263984
+      ],
+      "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+      "win_rate": 0.4752,
+      "win_rate_ci95": [
+        0.46138236016742357,
+        0.4890557178490514
+      ],
+      "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+      "wins": 2376
+    },
+    "on_play": {
+      "adjudicated_games": 142,
+      "adjudication_reasons": {
+        "turn_limit": 1,
+        "wall_clock_timeout": 141
+      },
+      "draws": 142,
+      "games": 5000,
+      "losses": 2215,
+      "natural_draws": 0,
+      "score": 0.5428,
+      "score_ci95": [
+        0.5235935441736015,
+        0.5620064558263984
+      ],
+      "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+      "win_rate": 0.5286,
+      "win_rate_ci95": [
+        0.514746991021871,
+        0.5424090964268716
+      ],
+      "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+      "wins": 2643
+    },
+    "score": 0.51605,
+    "score_ci95": [
+      0.5024689848425938,
+      0.5296310151574062
+    ],
+    "score_ci95_method": "Hoeffding bound for independent scores in [0,1]",
+    "score_matrix": [
+      [
+        0.545,
+        0.61,
+        0.72,
+        0.75,
+        0.95,
+        0.89,
+        0.76,
+        0.71,
+        0.72,
+        0.94
+      ],
+      [
+        0.28,
+        0.46,
+        0.36,
+        0.42,
+        0.71,
+        0.57,
+        0.5,
+        0.605,
+        0.44,
+        0.63
+      ],
+      [
+        0.31,
+        0.66,
+        0.46,
+        0.62,
+        0.86,
+        0.73,
+        0.61,
+        0.625,
+        0.59,
+        0.68
+      ],
+      [
+        0.29,
+        0.68,
+        0.33,
+        0.57,
+        0.71,
+        0.72,
+        0.4,
+        0.465,
+        0.53,
+        0.57
+      ],
+      [
+        0.08,
+        0.365,
+        0.14,
+        0.42,
+        0.59,
+        0.57,
+        0.195,
+        0.325,
+        0.31,
+        0.53
+      ],
+      [
+        0.14,
+        0.52,
+        0.26,
+        0.31,
+        0.43,
+        0.47,
+        0.32,
+        0.39,
+        0.43,
+        0.44
+      ],
+      [
+        0.19,
+        0.53,
+        0.51,
+        0.67,
+        0.815,
+        0.76,
+        0.55,
+        0.605,
+        0.54,
+        0.84
+      ],
+      [
+        0.215,
+        0.425,
+        0.55,
+        0.565,
+        0.68,
+        0.58,
+        0.425,
+        0.605,
+        0.5,
+        0.69
+      ],
+      [
+        0.21,
+        0.58,
+        0.4,
+        0.52,
+        0.73,
+        0.64,
+        0.45,
+        0.61,
+        0.43,
+        0.53
+      ],
+      [
+        0.11,
+        0.455,
+        0.25,
+        0.515,
+        0.56,
+        0.63,
+        0.21,
+        0.34,
+        0.48,
+        0.495
+      ]
+    ],
+    "win_rate": 0.5019,
+    "win_rate_ci95": [
+      0.4921014029327049,
+      0.5116971378734865
+    ],
+    "win_rate_ci95_method": "Wilson interval; draws count as non-wins",
+    "win_rate_matrix": [
+      [
+        0.54,
+        0.61,
+        0.72,
+        0.75,
+        0.95,
+        0.89,
+        0.76,
+        0.68,
+        0.72,
+        0.94
+      ],
+      [
+        0.28,
+        0.46,
+        0.36,
+        0.42,
+        0.71,
+        0.57,
+        0.5,
+        0.57,
+        0.44,
+        0.63
+      ],
+      [
+        0.31,
+        0.66,
+        0.46,
+        0.62,
+        0.86,
+        0.73,
+        0.61,
+        0.56,
+        0.59,
+        0.68
+      ],
+      [
+        0.29,
+        0.68,
+        0.33,
+        0.57,
+        0.71,
+        0.72,
+        0.4,
+        0.39,
+        0.53,
+        0.57
+      ],
+      [
+        0.08,
+        0.36,
+        0.13,
+        0.4,
+        0.59,
+        0.57,
+        0.19,
+        0.25,
+        0.31,
+        0.51
+      ],
+      [
+        0.14,
+        0.52,
+        0.26,
+        0.31,
+        0.43,
+        0.47,
+        0.32,
+        0.34,
+        0.43,
+        0.44
+      ],
+      [
+        0.19,
+        0.53,
+        0.51,
+        0.67,
+        0.81,
+        0.76,
+        0.55,
+        0.55,
+        0.54,
+        0.84
+      ],
+      [
+        0.17,
+        0.36,
+        0.48,
+        0.49,
+        0.59,
+        0.51,
+        0.37,
+        0.47,
+        0.44,
+        0.56
+      ],
+      [
+        0.21,
+        0.58,
+        0.4,
+        0.52,
+        0.73,
+        0.64,
+        0.45,
+        0.55,
+        0.43,
+        0.53
+      ],
+      [
+        0.11,
+        0.45,
+        0.25,
+        0.51,
+        0.54,
+        0.63,
+        0.21,
+        0.27,
+        0.48,
+        0.49
+      ]
+    ],
+    "wins": 5019
+  },
+  "training": false
+}

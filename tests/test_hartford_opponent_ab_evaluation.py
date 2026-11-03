@@ -42,6 +42,24 @@ class EndpointEvaluationTests(unittest.TestCase):
         self.assertEqual(self.planned, evaluation.schedule(self.config, HARTFORD_DECKS, 'a' * 64))
         self.assertTrue(all(r['deck_catalog'] == 'hartford' for r in self.planned))
 
+    def test_extension_has_twenty_thousand_fresh_balanced_games(self):
+        from collections import Counter
+        extension = evaluation.schedule(dict(seed=432611040000, games=20000), HARTFORD_DECKS, 'a' * 64)
+        self.assertEqual(len(extension), 20000)
+        self.assertEqual({r['index'] for r in extension}, set(range(10000, 30000)))
+        self.assertEqual({r['seed'] for r in extension}, set(range(432611040000, 432611060000)))
+        self.assertTrue({r['seed'] for r in self.planned}.isdisjoint(r['seed'] for r in extension))
+        counts = Counter((r['learner_deck'], r['opponent_deck'], r['learner_seat'], r['starting_player'])
+                         for r in self.planned + extension)
+        self.assertEqual(len(counts), 400)
+        self.assertEqual(set(counts.values()), {75})
+
+    def test_original_schedule_keeps_its_audited_hash(self):
+        expected = '5500e9a7449bcccf9fa6180cf636d6581611f8070ab069c6eb65bd18303a23d2'
+        opponent = 'dfa899c49a05c85e81722080cd783f7fc8bdbc785042cd5fac1b5ee98b652610'
+        planned = evaluation.schedule(self.config, HARTFORD_DECKS, opponent)
+        self.assertEqual(evaluation.value_sha(planned), expected)
+
     def test_resume_recovers_exact_successes_and_blocks_corruption(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

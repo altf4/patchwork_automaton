@@ -71,6 +71,23 @@ class ForkTests(unittest.TestCase):
             self.assertEqual(driver.prepare_fork_checkpoint(args.output, config), result)
         self.assertEqual(driver.checkpoint_hashes(self.parent), before)
 
+    def test_new_fork_defaults_to_diverse_and_pins_historical_opponents(self):
+        args = self.arguments('diverse')
+        explicit = driver.configuration(args)
+        args.opponent_recipe = None
+        self.assertEqual(driver.configuration(args), explicit)
+        self.assertEqual(set(explicit['fork']['external_opponents']), {'1025', '1050', '1075'})
+
+    def test_resume_without_recipe_preserves_either_saved_arm(self):
+        for recipe in ('current', 'diverse'):
+            args = self.arguments(recipe)
+            expected = driver.configuration(args)
+            args.output.mkdir()
+            driver.atomic_json(args.output / 'manifest.json', dict(config=expected))
+            args.resume = True
+            args.opponent_recipe = None
+            self.assertEqual(driver.configuration(args), expected)
+
     def test_reject_changed_hash_recipe_seed_and_partial_parent(self):
         args = self.arguments()
         for key, value in [('fork_from_sha256', '0' * 64), ('rounds', 100),

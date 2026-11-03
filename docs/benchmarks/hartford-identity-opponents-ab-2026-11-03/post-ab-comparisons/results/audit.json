@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "games": 40000,
+  "panels": 4,
+  "games_per_panel": 10000,
+  "models_source_engine_training_hashes_verified": true,
+  "all_outcome_handoffs_verified": true,
+  "matched_seeds_verified": true,
+  "deck_seat_start_schedules_verified": true,
+  "published_handoffs_recovered": 0,
+  "games_replayed": 0,
+  "guard_exit_code": 0,
+  "minimum_available_gib": 3.609844207763672,
+  "outcomes_gzip_sha256": "2dc3c4a4b36361e5ebec7252fc503d6d95aedb18cee3ab47ff9238a5fc160ceb"
+}

@@ -1,5 +1,5 @@
 {
-  "status": "running",
+  "status": "complete",
   "remote": {
     "environment_overrides": {
       "CUDA_VISIBLE_DEVICES": "0",
@@ -2830,6 +2830,36 @@
   "automation": {
     "id": "check-hartford-identity-opponent-a-b",
     "interval_minutes": 60,
-    "status": "active"
+    "status": "deleted",
+    "deleted_at": "2026-11-03T20:38:20.941844+00:00"
+  },
+  "completed_at": "2026-11-03T20:19:06.574083+00:00",
+  "completion": {
+    "status": "complete",
+    "completed_at": "2026-11-03T20:19:06.574083+00:00",
+    "audited_at": "2026-11-03T20:37:24.069614+00:00",
+    "audit_file": "/home/altf4/Code/mtgo-bot/patchwork_automaton/docs/benchmarks/hartford-identity-opponents-ab-2026-11-03/head-to-head/audit.json",
+    "result_file": "/home/altf4/Code/mtgo-bot/patchwork_automaton/docs/benchmarks/hartford-identity-opponents-ab-2026-11-03/head-to-head/result.json",
+    "figure": "/home/altf4/Code/mtgo-bot/patchwork_automaton/docs/benchmarks/hartford-identity-opponents-ab-2026-11-03/head-to-head/head-to-head.png",
+    "collection_games": 100000,
+    "training_games": 80000,
+    "holdout_games": 20000,
+    "evaluation_games": 10000,
+    "guard_exit_code": 0,
+    "wins": 5019,
+    "losses": 4698,
+    "draws": 283,
+    "score": 0.51605,
+    "score_ci95": [
+      0.5024689848425938,
+      0.5296310151574062
+    ],
+    "adjudicated_games": 283,
+    "adjudication_reasons": {
+      "turn_limit": 2,
+      "wall_clock_timeout": 281
+    },
+    "monitor_removal_status": "deleted",
+    "monitor_removed_at": "2026-11-03T20:38:20.941844+00:00"
   }
 }

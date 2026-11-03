@@ -1,0 +1,156 @@
+{
+  "status": "complete",
+  "remote": {
+    "environment_overrides": {
+      "CUDA_VISIBLE_DEVICES": "0",
+      "DIRECT_STANDARD_LIBRARY": "/home/altf4/benchmarks/hartford-identity-ppo-20261102/project-trigger-v2/.local/direct-standard/target-4f64940e46e0-capped256/release/libpatchwork_direct_standard.so",
+      "KERAS_BACKEND": "tensorflow",
+      "MPLCONFIGDIR": "/tmp/compact-ppo-mpl",
+      "OPENBLAS_NUM_THREADS": "1",
+      "PATCHWORK_ARENA_POLL_INFERENCE": "1",
+      "PATCHWORK_OBSERVATION_PIPELINE": "python",
+      "PATCHWORK_ROLLOUT_STORAGE": "pickle",
+      "PATCHWORK_STANDARD_PLAYBACK": "direct",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONPATH": "/home/altf4/benchmarks/hartford-identity-ab-20261103/project-v1/src:/home/altf4/benchmarks/hartford-identity-ab-20261103/project-v1/tests:/home/altf4/benchmarks/hartford-identity-ab-20261103/project-v1",
+      "RUSTMAGE_LIBRARY": "/home/altf4/benchmarks/hartford-identity-ppo-20261102/project-trigger-v2/.local/direct-standard/target-4f64940e46e0-capped256/release/librustmage.so",
+      "RUSTMAGE_ROOT": "/home/altf4/benchmarks/hartford-identity-ppo-20261102/project-trigger-v2/.local/direct-standard/rustmage-4f64940e46e0",
+      "TF_CPP_MIN_LOG_LEVEL": "3",
+      "TF_ENABLE_ONEDNN_OPTS": "0",
+      "TF_NUM_INTEROP_THREADS": "2",
+      "TF_NUM_INTRAOP_THREADS": "2"
+    },
+    "environment_source": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/env.sh",
+    "host": "raytracer",
+    "ssh_argv_prefix": [
+      "/usr/bin/ssh",
+      "-F",
+      "/home/altf4/.ssh/config",
+      "-o",
+      "ProxyCommand=/usr/bin/ssh -F /home/altf4/.ssh/config -T -o BatchMode=yes -o LogLevel=ERROR raytracer-windows wsl.exe --distribution Ubuntu-24.04 --user altf4 --exec /usr/bin/nc 127.0.0.1 2222",
+      "-o",
+      "BatchMode=yes",
+      "-o",
+      "ConnectTimeout=15",
+      "raytracer"
+    ],
+    "venv_python": "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/venv/bin/python",
+    "working_directory": "/home/altf4/benchmarks/hartford-identity-ab-20261103/project-v1"
+  },
+  "output": "/home/altf4/benchmarks/hartford-identity-ab-20261103/post-ab-comparisons-v1",
+  "project": "/home/altf4/benchmarks/hartford-identity-ab-20261103/post-ab-comparisons-v1/project-v1",
+  "config": "/home/altf4/benchmarks/hartford-identity-ab-20261103/post-ab-comparisons-v1/config.json",
+  "config_sha256": "c6cb1fdb6ca07edabe3568635bbf38746ed69134a218fc175dc2672abdc4f462",
+  "environment": {
+    "CUDA_VISIBLE_DEVICES": "-1",
+    "DIRECT_STANDARD_LIBRARY": "/home/altf4/benchmarks/hartford-identity-ppo-20261102/project-trigger-v2/.local/direct-standard/target-4f64940e46e0-capped256/release/libpatchwork_direct_standard.so",
+    "KERAS_BACKEND": "tensorflow",
+    "MPLCONFIGDIR": "/tmp/compact-ppo-mpl",
+    "OPENBLAS_NUM_THREADS": "1",
+    "PATCHWORK_ARENA_POLL_INFERENCE": "1",
+    "PATCHWORK_OBSERVATION_PIPELINE": "python",
+    "PATCHWORK_ROLLOUT_STORAGE": "pickle",
+    "PATCHWORK_STANDARD_PLAYBACK": "direct",
+    "PYTHONDONTWRITEBYTECODE": "1",
+    "PYTHONPATH": "/home/altf4/benchmarks/hartford-identity-ab-20261103/post-ab-comparisons-v1/project-v1/src:/home/altf4/benchmarks/hartford-identity-ab-20261103/post-ab-comparisons-v1/project-v1/tests:/home/altf4/benchmarks/hartford-identity-ab-20261103/post-ab-comparisons-v1/project-v1",
+    "RUSTMAGE_LIBRARY": "/home/altf4/benchmarks/hartford-identity-ppo-20261102/project-trigger-v2/.local/direct-standard/target-4f64940e46e0-capped256/release/librustmage.so",
+    "RUSTMAGE_ROOT": "/home/altf4/benchmarks/hartford-identity-ppo-20261102/project-trigger-v2/.local/direct-standard/rustmage-4f64940e46e0",
+    "TF_CPP_MIN_LOG_LEVEL": "3",
+    "TF_ENABLE_ONEDNN_OPTS": "0",
+    "TF_NUM_INTEROP_THREADS": "2",
+    "TF_NUM_INTRAOP_THREADS": "2"
+  },
+  "guard": "/home/altf4/benchmarks/hartford-identity-ab-20261103/post-ab-comparisons-v1/guard-v1",
+  "launcher": "/home/altf4/benchmarks/hartford-identity-ab-20261103/post-ab-comparisons-v1/launch-v1/launch.sh",
+  "session": "hartford-post-ab-comparisons",
+  "command_argv": [
+    "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/venv/bin/python",
+    "-u",
+    "/home/altf4/benchmarks/hartford-identity-ab-20261103/post-ab-comparisons-v1/evaluate.py",
+    "--config",
+    "/home/altf4/benchmarks/hartford-identity-ab-20261103/post-ab-comparisons-v1/config.json"
+  ],
+  "supervisor_argv": [
+    "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/venv/bin/python",
+    "-u",
+    "/home/altf4/benchmarks/hartford-identity-ab-20261103/post-ab-comparisons-v1/project-v1/scripts/guard-hartford-run.py",
+    "--root",
+    "/home/altf4/benchmarks/hartford-identity-ab-20261103/post-ab-comparisons-v1/guard-v1",
+    "--command",
+    "/home/altf4/benchmarks/hartford-identity-ab-20261103/post-ab-comparisons-v1/launch-v1/command.json",
+    "--cwd",
+    "/home/altf4/benchmarks/hartford-identity-ab-20261103/post-ab-comparisons-v1/project-v1",
+    "--min-available-mib",
+    "1536",
+    "--memory-grace-seconds",
+    "5",
+    "--keep-windows-awake",
+    "--powershell",
+    "/mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe"
+  ],
+  "panels": [
+    {
+      "name": "control-vs-baselines",
+      "model": "control",
+      "kind": "scripted",
+      "games": 10000,
+      "offset": 0,
+      "game_timeout": 60
+    },
+    {
+      "name": "diverse-vs-baselines",
+      "model": "diverse",
+      "kind": "scripted",
+      "games": 10000,
+      "offset": 10000,
+      "game_timeout": 60
+    },
+    {
+      "name": "control-vs-identity-100k",
+      "model": "control",
+      "kind": "neural",
+      "games": 10000,
+      "offset": 20000,
+      "game_timeout": 20
+    },
+    {
+      "name": "diverse-vs-identity-100k",
+      "model": "diverse",
+      "kind": "neural",
+      "games": 10000,
+      "offset": 30000,
+      "game_timeout": 20
+    }
+  ],
+  "games": 40000,
+  "runtime_amendment": "Durable completed outcome handoff precedes inference reset. Reset failure may resolve only from all validated original outcomes after collectors close, with explicit transport-error evidence.",
+  "started_at": "2026-11-03T22:05:19.615587+00:00",
+  "automation": {
+    "id": "check-hartford-fixed-opponent-evaluations",
+    "status": "deleted",
+    "interval_minutes": 60,
+    "deleted_at": "2026-11-03T23:03:48.368343+00:00"
+  },
+  "validation": {
+    "focused_tests_passed": 11,
+    "scripted_panel_exact_games": 10000,
+    "neural_panel_exact_games": 10000,
+    "matched_seeds_and_roles": true,
+    "result_handoff_survives_reset_failure": true,
+    "first_production_outcomes": 862
+  },
+  "completed_at": "2026-11-03T23:03:07.637305+00:00",
+  "completion": {
+    "audit": "/home/altf4/Code/mtgo-bot/patchwork_automaton/docs/benchmarks/hartford-identity-opponents-ab-2026-11-03/post-ab-comparisons/results/audit.json",
+    "figure": "/home/altf4/Code/mtgo-bot/patchwork_automaton/docs/benchmarks/hartford-identity-opponents-ab-2026-11-03/post-ab-comparisons/results/comparison.png",
+    "games": 40000,
+    "audit_passed": true,
+    "monitor_removed_at": "2026-11-03T23:03:48.368343+00:00",
+    "scores": {
+      "control-vs-baselines": 0.503,
+      "diverse-vs-baselines": 0.5106,
+      "control-vs-identity-100k": 0.4976,
+      "diverse-vs-identity-100k": 0.51065
+    }
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "audit": "/home/altf4/Code/mtgo-bot/patchwork_automaton/docs/benchmarks/hartford-identity-opponents-ab-2026-11-03/post-ab-comparisons/results/audit.json",
+  "figure": "/home/altf4/Code/mtgo-bot/patchwork_automaton/docs/benchmarks/hartford-identity-opponents-ab-2026-11-03/post-ab-comparisons/results/comparison.png",
+  "games": 40000,
+  "audit_passed": true,
+  "monitor_removed_at": "2026-11-03T23:03:48.368343+00:00",
+  "scores": {
+    "control-vs-baselines": 0.503,
+    "diverse-vs-baselines": 0.5106,
+    "control-vs-identity-100k": 0.4976,
+    "diverse-vs-identity-100k": 0.51065
+  }
+}

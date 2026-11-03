@@ -1,0 +1,19 @@
+{
+  "audit": "/home/altf4/Code/mtgo-bot/patchwork_automaton/docs/benchmarks/hartford-identity-opponents-ab-2026-11-03/extension-20k/combined-30k/audit.json",
+  "result": "/home/altf4/Code/mtgo-bot/patchwork_automaton/docs/benchmarks/hartford-identity-opponents-ab-2026-11-03/extension-20k/combined-30k/result.json",
+  "figure": "/home/altf4/Code/mtgo-bot/patchwork_automaton/docs/benchmarks/hartford-identity-opponents-ab-2026-11-03/extension-20k/combined-30k/head-to-head.png",
+  "games": 30000,
+  "additional_games": 20000,
+  "score": 0.51725,
+  "score_ci95": [
+    0.5094089972430031,
+    0.5250910027569968
+  ],
+  "audited_at": "2026-11-03T21:54:10.065021+00:00",
+  "publication_recovery": {
+    "original_adjudications_recovered": 8,
+    "games_replayed": 0,
+    "original_failure_retained": true
+  },
+  "monitor_removed_at": "2026-11-03T21:54:52.305458+00:00"
+}

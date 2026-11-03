@@ -1,0 +1,278 @@
+{
+  "guard": {
+    "attempts": 1,
+    "child_exit_code": 1,
+    "child_pid": 730406,
+    "cleanup": {
+      "child_exit_code": 1,
+      "kill_sent": false,
+      "process_group": 730406,
+      "term_sent": false
+    },
+    "command": [
+      "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/venv/bin/python",
+      "-u",
+      "/home/altf4/benchmarks/hartford-identity-ab-20261103/head-to-head-extension-20k-v1/evaluate.py",
+      "--launch",
+      "/home/altf4/benchmarks/hartford-identity-ab-20261103/head-to-head-extension-20k-v1/launch.json"
+    ],
+    "command_file": "/home/altf4/benchmarks/hartford-identity-ab-20261103/head-to-head-extension-20k-v1/launch-v1/command.json",
+    "command_sha256": "0a67407f2983d7e5920a4dc57c9be707f20d06bd7292f5d42497f16882637f2e",
+    "cwd": "/home/altf4/benchmarks/hartford-identity-ab-20261103/project-v1",
+    "elapsed_seconds": 2168.782314653974,
+    "exit_code": 1,
+    "finished_at": "2026-11-03T21:20:45.381523+00:00",
+    "guard_exit_code": 1,
+    "last_sample": {
+      "available_memory_bytes": 14385786880,
+      "elapsed_seconds": 2166.750324360997,
+      "low_memory_seconds": 0.0,
+      "process_group_pids": [
+        730406,
+        730417,
+        730493
+      ],
+      "process_group_rss_bytes": 1679319040,
+      "timestamp": "2026-11-03T21:20:43.356992+00:00"
+    },
+    "limits": {
+      "check_seconds": 2,
+      "memory_grace_seconds": 5.0,
+      "min_available_mib": 1536.0,
+      "terminate_grace_seconds": 15
+    },
+    "process_group": 730406,
+    "reason": "child_exit",
+    "schema": 1,
+    "started_at": "2026-11-03T20:44:36.590924+00:00",
+    "status": "exited",
+    "supervisor_pid": 730400,
+    "supervisor_sha256": "bdb4510c1d8445dba58041873dfad881801c71d6157dce0dee83e73226e503df",
+    "windows_awake": {
+      "pid": 730404,
+      "ready": true,
+      "release": {
+        "exit_code": 0,
+        "graceful_release": true,
+        "ready": true
+      },
+      "requested": true
+    }
+  },
+  "saved_count": 19992,
+  "missing": [
+    {
+      "behavior_version": 150,
+      "deck_catalog": "hartford",
+      "decks": [
+        "four-color-control",
+        "dimir-midrange"
+      ],
+      "index": 16861,
+      "learner_deck": "dimir-midrange",
+      "learner_seat": 1,
+      "opponent_checkpoint_sha256": "dfa899c49a05c85e81722080cd783f7fc8bdbc785042cd5fac1b5ee98b652610",
+      "opponent_deck": "four-color-control",
+      "opponent_kind": "frozen_neural",
+      "opponent_version": 150,
+      "pairing": [
+        "dimir-midrange",
+        "four-color-control"
+      ],
+      "partition": "evaluation",
+      "seed": 432611046861,
+      "starting_player": "P0"
+    },
+    {
+      "behavior_version": 150,
+      "deck_catalog": "hartford",
+      "decks": [
+        "bant-airbending",
+        "bant-airbending"
+      ],
+      "index": 29974,
+      "learner_deck": "bant-airbending",
+      "learner_seat": 0,
+      "opponent_checkpoint_sha256": "dfa899c49a05c85e81722080cd783f7fc8bdbc785042cd5fac1b5ee98b652610",
+      "opponent_deck": "bant-airbending",
+      "opponent_kind": "frozen_neural",
+      "opponent_version": 150,
+      "pairing": [
+        "bant-airbending",
+        "bant-airbending"
+      ],
+      "partition": "evaluation",
+      "seed": 432611059974,
+      "starting_player": "P1"
+    },
+    {
+      "behavior_version": 150,
+      "deck_catalog": "hartford",
+      "decks": [
+        "mardu-discard",
+        "izzet-spellementals"
+      ],
+      "index": 23769,
+      "learner_deck": "izzet-spellementals",
+      "learner_seat": 1,
+      "opponent_checkpoint_sha256": "dfa899c49a05c85e81722080cd783f7fc8bdbc785042cd5fac1b5ee98b652610",
+      "opponent_deck": "mardu-discard",
+      "opponent_kind": "frozen_neural",
+      "opponent_version": 150,
+      "pairing": [
+        "izzet-spellementals",
+        "mardu-discard"
+      ],
+      "partition": "evaluation",
+      "seed": 432611053769,
+      "starting_player": "P0"
+    },
+    {
+      "behavior_version": 150,
+      "deck_catalog": "hartford",
+      "decks": [
+        "bant-airbending",
+        "jund-sacrifice"
+      ],
+      "index": 29052,
+      "learner_deck": "bant-airbending",
+      "learner_seat": 0,
+      "opponent_checkpoint_sha256": "dfa899c49a05c85e81722080cd783f7fc8bdbc785042cd5fac1b5ee98b652610",
+      "opponent_deck": "jund-sacrifice",
+      "opponent_kind": "frozen_neural",
+      "opponent_version": 150,
+      "pairing": [
+        "jund-sacrifice",
+        "bant-airbending"
+      ],
+      "partition": "evaluation",
+      "seed": 432611059052,
+      "starting_player": "P0"
+    },
+    {
+      "behavior_version": 150,
+      "deck_catalog": "hartford",
+      "decks": [
+        "jund-sacrifice",
+        "mono-green-landfall"
+      ],
+      "index": 20106,
+      "learner_deck": "jund-sacrifice",
+      "learner_seat": 0,
+      "opponent_checkpoint_sha256": "dfa899c49a05c85e81722080cd783f7fc8bdbc785042cd5fac1b5ee98b652610",
+      "opponent_deck": "mono-green-landfall",
+      "opponent_kind": "frozen_neural",
+      "opponent_version": 150,
+      "pairing": [
+        "mono-green-landfall",
+        "jund-sacrifice"
+      ],
+      "partition": "evaluation",
+      "seed": 432611050106,
+      "starting_player": "P1"
+    },
+    {
+      "behavior_version": 150,
+      "deck_catalog": "hartford",
+      "decks": [
+        "izzet-prowess",
+        "jeskai-artifacts"
+      ],
+      "index": 13544,
+      "learner_deck": "izzet-prowess",
+      "learner_seat": 0,
+      "opponent_checkpoint_sha256": "dfa899c49a05c85e81722080cd783f7fc8bdbc785042cd5fac1b5ee98b652610",
+      "opponent_deck": "jeskai-artifacts",
+      "opponent_kind": "frozen_neural",
+      "opponent_version": 150,
+      "pairing": [
+        "izzet-prowess",
+        "jeskai-artifacts"
+      ],
+      "partition": "evaluation",
+      "seed": 432611043544,
+      "starting_player": "P0"
+    },
+    {
+      "behavior_version": 150,
+      "deck_catalog": "hartford",
+      "decks": [
+        "jund-sacrifice",
+        "bw-lifegain"
+      ],
+      "index": 20490,
+      "learner_deck": "jund-sacrifice",
+      "learner_seat": 0,
+      "opponent_checkpoint_sha256": "dfa899c49a05c85e81722080cd783f7fc8bdbc785042cd5fac1b5ee98b652610",
+      "opponent_deck": "bw-lifegain",
+      "opponent_kind": "frozen_neural",
+      "opponent_version": 150,
+      "pairing": [
+        "bw-lifegain",
+        "jund-sacrifice"
+      ],
+      "partition": "evaluation",
+      "seed": 432611050490,
+      "starting_player": "P1"
+    },
+    {
+      "behavior_version": 150,
+      "deck_catalog": "hartford",
+      "decks": [
+        "izzet-spellementals",
+        "jeskai-artifacts"
+      ],
+      "index": 23420,
+      "learner_deck": "izzet-spellementals",
+      "learner_seat": 0,
+      "opponent_checkpoint_sha256": "dfa899c49a05c85e81722080cd783f7fc8bdbc785042cd5fac1b5ee98b652610",
+      "opponent_deck": "jeskai-artifacts",
+      "opponent_kind": "frozen_neural",
+      "opponent_version": 150,
+      "pairing": [
+        "izzet-spellementals",
+        "jeskai-artifacts"
+      ],
+      "partition": "evaluation",
+      "seed": 432611053420,
+      "starting_player": "P0"
+    }
+  ],
+  "failures": {
+    "attempt-20261103T204440379123Z.json": {
+      "error": "TimeoutError('Inference reset timed out')",
+      "missing_games": 20000,
+      "reused_games": 0,
+      "started_at": "2026-11-03T20:44:40.379144+00:00",
+      "status": "failed",
+      "traceback": "Traceback (most recent call last):\n  File \"/home/altf4/benchmarks/hartford-identity-ab-20261103/head-to-head-extension-20k-v1/evaluate.py\", line 291, in run\n    await settle(c.run_schedule(jobs[i::2], progress=persist, game_runner='standard_ppo',\n  File \"/home/altf4/benchmarks/hartford-identity-ab-20261103/head-to-head-extension-20k-v1/evaluate.py\", line 200, in settle\n    raise result\n  File \"/home/altf4/benchmarks/hartford-identity-ab-20261103/project-v1/src/patchwork_automaton/rl/standard_selfplay_processes.py\", line 165, in run_schedule\n    raise row\n  File \"/home/altf4/benchmarks/hartford-identity-ab-20261103/project-v1/src/patchwork_automaton/rl/standard_selfplay_processes.py\", line 157, in one\n    row = await loop.run_in_executor(self.pool, _run_game, dict(options, **job))\n          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nTimeoutError: Inference reset timed out\n"
+    }
+  },
+  "processes": [],
+  "log_alerts": [
+    "Traceback (most recent call last):",
+    "TimeoutError: Inference reset timed out"
+  ],
+  "last_saved": [
+    [
+      1793740773.0150857,
+      "game-19978.json"
+    ],
+    [
+      1793740773.1245112,
+      "game-29838.json"
+    ],
+    [
+      1793740773.6086996,
+      "game-27567.json"
+    ],
+    [
+      1793740779.1313496,
+      "game-25072.json"
+    ],
+    [
+      1793740789.7134118,
+      "game-24567.json"
+    ]
+  ]
+}

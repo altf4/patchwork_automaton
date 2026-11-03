@@ -1,4 +1,4 @@
-"""Pinned, resumable 10,000-game diverse-versus-control endpoint comparison.
+"""Pinned, resumable diverse-versus-control endpoint comparison.
 
 Run on Raytracer under the production resource guard with --launch launch.json.
 No training, baseline panels, automatic retries, or replacement of valid games.
@@ -20,6 +20,11 @@ import time
 import traceback
 
 
+ORIGINAL_SEED = 432611030000
+ORIGINAL_GAMES = 10000
+EXTENSION_GAMES = 20000
+
+
 def read(path):
     return json.loads(Path(path).read_text())
 
@@ -39,7 +44,11 @@ def value_sha(value):
 
 def protocol(launch):
     raw = launch['evaluation']
-    fixed = dict(seed=432611030000, games=10000, workers=48, runners=2,
+    seed, games = raw.get('seed'), raw.get('games')
+    if (seed, games) not in ((ORIGINAL_SEED, ORIGINAL_GAMES),
+                            (ORIGINAL_SEED + ORIGINAL_GAMES, EXTENSION_GAMES)):
+        raise ValueError('Unexpected endpoint seed range or game count')
+    fixed = dict(seed=seed, games=games, workers=48, runners=2,
                  inference_processes=2, opponent_inference_processes=2,
                  game_timeout=20, max_turns=50, max_decisions=6000)
     for name, expected in fixed.items():
@@ -47,7 +56,7 @@ def protocol(launch):
             raise ValueError(f'Unexpected evaluation {name}: {raw.get(name)!r}')
     return dict(fixed, focal='diverse', opponent='control', local_checkpoint=50,
                 lineage_checkpoint=150, policy='sampled temperature 1', training=False,
-                deck_catalog='hartford', games_per_ordered_matchup=100,
+                deck_catalog='hartford', games_per_ordered_matchup=games // 100,
                 input_format='sparse-identity-standard-v2')
 
 
@@ -55,14 +64,17 @@ def schedule(config, decks, opponent_sha256):
     decks = tuple(decks)
     if len(decks) != 10 or len(set(decks)) != 10:
         raise ValueError('The endpoint requires ten distinct Hartford decks')
+    games = config.get('games', ORIGINAL_GAMES)
+    games_per_cell = games // 100
+    first_index = config['seed'] - ORIGINAL_SEED
     rows = []
     for cell, (deck, other) in enumerate(product(decks, repeat=2)):
-        for repeat in range(100):
+        for repeat in range(games_per_cell):
             seat = repeat % 2
             seating = [other, other]
             seating[seat] = deck
-            index = cell * 100 + repeat
-            rows.append(dict(index=index, seed=config['seed'] + index,
+            index = first_index + cell * games_per_cell + repeat
+            rows.append(dict(index=index, seed=ORIGINAL_SEED + index,
                 pairing=sorted((deck, other), key=decks.index), decks=seating,
                 learner_seat=seat, learner_deck=deck, opponent_deck=other,
                 starting_player=f'P{(repeat // 2) % 2}', partition='evaluation',
@@ -71,7 +83,7 @@ def schedule(config, decks, opponent_sha256):
     random.Random('hartford-identity-opponents-ab-v1').shuffle(rows)
     counts = Counter((r['learner_deck'], r['opponent_deck'], r['learner_seat'],
                       r['starting_player']) for r in rows)
-    if len(rows) != 10000 or len(counts) != 400 or set(counts.values()) != {25}:
+    if len(rows) != games or len(counts) != 400 or set(counts.values()) != {games_per_cell // 4}:
         raise AssertionError('Unbalanced endpoint schedule')
     return rows
 
@@ -339,12 +351,12 @@ def audit(launch):
         fcntl.flock(lock, fcntl.LOCK_SH | fcntl.LOCK_NB)
         rows_by_id = load_results(root, planned)
         if set(rows_by_id) != {r['index'] for r in planned}:
-            raise ValueError('Endpoint does not contain exactly all 10,000 scheduled outcomes')
+            raise ValueError(f"Endpoint does not contain all {manifest['config']['games']:,} scheduled outcomes")
         rows = [rows_by_id[i] for i in sorted(rows_by_id)]
         result = read(root / 'summary.json')
         recomputed = summarize(rows, HARTFORD_DECKS)
         if (result.get('status') != 'complete' or result.get('training') is not False
-                or result.get('games') != 10000 or result['summary'] != recomputed
+                or result.get('games') != manifest['config']['games'] or result['summary'] != recomputed
                 or result['rows_sha256'] != value_sha(rows)
                 or result['manifest_sha256'] != sha(root / 'manifest.json')):
             raise ValueError('Endpoint summary or outcome digest differs from the complete results')
@@ -354,7 +366,7 @@ def audit(launch):
     if not samples or max(r['low_memory_seconds'] for r in samples) >= 5:
         raise ValueError('Missing resource history or memory guard breach')
     payload = gzip.compress(canonical(rows), mtime=0)
-    evidence = dict(passed=True, audited_at=datetime.now(timezone.utc).isoformat(), games=10000,
+    evidence = dict(passed=True, audited_at=datetime.now(timezone.utc).isoformat(), games=len(rows),
         scheduled_identities_verified=True, deck_seat_start_balance_verified=True,
         failed_games=0, training=False, guard_exit_code=0,
         adjudication_diagnostic_hashes_verified=True,

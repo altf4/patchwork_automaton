@@ -1,0 +1,9 @@
+{
+  "passed": true,
+  "observed_at": "2026-11-03T20:46:00.446353+00:00",
+  "durable_games": 721,
+  "guard": "running",
+  "integrity_errors": [],
+  "original_10000_preserved": true,
+  "final_combined_games": 30000
+}

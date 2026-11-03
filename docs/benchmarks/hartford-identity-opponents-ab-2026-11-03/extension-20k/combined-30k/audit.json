@@ -1,0 +1,50 @@
+{
+  "passed": true,
+  "audited_at": "2026-11-03T21:54:10.065021+00:00",
+  "games": 30000,
+  "additional_games": 20000,
+  "original_games": 10000,
+  "unique_ids": true,
+  "unique_seeds": true,
+  "all_400_seat_start_strata_have_75_games": true,
+  "same_frozen_models_and_engine": true,
+  "original_results_preserved": true,
+  "games_gzip_sha256": "20158a16201e7bdcec031ce6baf7d3c1cef69d4d9c579c1a6fb04fc59e2208d4",
+  "batch_audits": [
+    {
+      "passed": true,
+      "audited_at": "2026-11-03T21:54:06.595815+00:00",
+      "games": 10000,
+      "scheduled_identities_verified": true,
+      "deck_seat_start_balance_verified": true,
+      "failed_games": 0,
+      "training": false,
+      "guard_exit_code": 0,
+      "adjudication_diagnostic_hashes_verified": true,
+      "model_source_parent_hashes_verified": true,
+      "provenance_files_verified": 2862,
+      "both_training_completion_audits_passed": true,
+      "summary_recomputed": true,
+      "games_gzip_sha256": "b2438bdaaa20add9f74fc4765b2ec8b2b9b41ae630b67bea774fecc9516bda07",
+      "minimum_available_gib": 3.0389480590820312,
+      "limitation": "One training run per recipe; endpoint head-to-head does not measure absolute strength or performance against unseen opponents."
+    },
+    {
+      "passed": true,
+      "games": 20000,
+      "audited_at": "2026-11-03T21:54:09.223893+00:00",
+      "scheduled_identities_verified": true,
+      "deck_seat_start_balance_verified": true,
+      "model_source_parent_hashes_verified": true,
+      "original_diagnostics_verified": true,
+      "publication_recovered_outcomes": 8,
+      "games_replayed": 0,
+      "failure_logs_preserved": true,
+      "original_guard_exit_code": 1,
+      "publication_guard_exit_code": 0,
+      "minimum_available_gib": 3.988994598388672,
+      "games_gzip_sha256": "8927e858f6bcbf2cb92daa0edca245c7151d6bbdb9e463c30513b9ae95d696c6"
+    }
+  ],
+  "interval_note": "Fixed additional sample requested after inspecting 10K results. Combined 95% intervals are nominal fixed-sample intervals."
+}

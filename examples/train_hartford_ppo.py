@@ -75,10 +75,18 @@ def checkpoint_bundle_sha256(path):
 def configure_fork(config, args):
     """Admit the fixed 50-round comparison without resetting training state."""
     from patchwork_automaton.rl.hartford_ab import EXTERNAL_BASE, PARENT_ROUND
+    recipe = args.opponent_recipe
+    if recipe is None:
+        if args.resume:
+            if args.output is None:
+                raise ValueError('Resume requires --output to resolve the saved opponent recipe')
+            recipe = json.loads((args.output / 'manifest.json').read_text())['config']['opponent_recipe']
+        else:
+            recipe = 'diverse'
     parent = args.fork_from.resolve()
     if args.architecture != 'compact-identity' or args.initialize_from is not None or args.initialize_from_sha256:
         raise ValueError('Checkpoint continuation requires identity architecture without weight transfer')
-    if args.opponent_recipe not in ('current', 'diverse') or args.rounds != 50 or not args.skip_evaluations:
+    if recipe not in ('current', 'diverse') or args.rounds != 50 or not args.skip_evaluations:
         raise ValueError('A/B continuation requires one recipe, 50 rounds and --skip-evaluations')
     if not args.fork_from_sha256 or checkpoint_bundle_sha256(parent) != args.fork_from_sha256:
         raise ValueError('Continuation checkpoint bundle hash mismatch')
@@ -105,7 +113,7 @@ def configure_fork(config, args):
     low, high = training_seed_bounds(rounds=args.rounds, seed=args.seed)
     if not (high < prior_low or low > prior_high):
         raise ValueError('Continuation reuses parent collection seeds')
-    external = (97, 98, 99) if args.opponent_recipe == 'current' else (25, 50, 75)
+    external = (97, 98, 99) if recipe == 'current' else (25, 50, 75)
     opponents = {}
     for number in external:
         path = parent.parent / f'round-{number:04d}'
@@ -118,7 +126,7 @@ def configure_fork(config, args):
     config.update(experiment='hartford-identity-opponent-ab-v1', architecture='compact-identity-standard-v2',
         input_representation='sparse-identity-standard-v2', initialization='continue_full_identity_checkpoint',
         identity_width=16, use_identity=True, use_rules=False, weight_seed=previous['weight_seed'],
-        opponent_recipe=args.opponent_recipe, opponent_mode='fork_' + args.opponent_recipe,
+        opponent_recipe=recipe, opponent_mode='fork_' + recipe,
         fork=dict(parent_checkpoint=str(parent), parent_hashes=checkpoint_hashes(parent),
             parent_bundle_sha256=args.fork_from_sha256, parent_round=PARENT_ROUND,
             parent_report=str(parent_report_path), parent_report_sha256=sha256(parent_report_path),
@@ -1097,7 +1105,8 @@ def parser():
     result.add_argument('--initialize-from-sha256',help='Required SHA256 of the initialization policy')
     result.add_argument('--fork-from', type=Path, help='Completed identity checkpoint directory; retain both optimizers and RNG')
     result.add_argument('--fork-from-sha256', help='SHA256 of the canonical checkpoint-file hash mapping')
-    result.add_argument('--opponent-recipe', choices=('current', 'diverse'), help='Fixed 50-round continuation arm')
+    result.add_argument('--opponent-recipe', choices=('current', 'diverse'),
+        help='Fixed 50-round continuation recipe: diverse for a new fork; saved recipe on resume')
     result.add_argument('--prepare-fork-only', action='store_true', help='Prepare and pin local checkpoint zero without training')
     result.add_argument('--game-timeout',type=float,help='Hard per-game deadline in seconds (compact: 20; legacy: 60)')
     result.add_argument('--adopt-memory-fix-from', type=Path)
