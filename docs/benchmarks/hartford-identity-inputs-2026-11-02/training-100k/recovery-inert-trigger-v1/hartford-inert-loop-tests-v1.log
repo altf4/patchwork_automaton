@@ -1,0 +1,79 @@
+Running as unit: rustmage-build-d42c6a545bbb40daa459b85feab0bbde.service; invocation ID: 00c90f7c336c41ee84d7e7b4edef71da
+Waiting for the shared build slot...
+   Compiling proc-macro2 v1.0.107
+   Compiling unicode-ident v1.0.26
+   Compiling quote v1.0.47
+   Compiling serde_core v1.0.229
+   Compiling syn v3.0.6
+   Compiling zmij v1.0.23
+   Compiling serde v1.0.229
+   Compiling serde_json v1.0.151
+   Compiling serde_derive v1.0.229
+   Compiling itoa v1.0.18
+   Compiling memchr v2.8.3
+   Compiling rustmage-test-access v0.1.0 (/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/engine-trigger-loop-fix-v1/crates/test-access)
+   Compiling rustmage-core v0.1.0 (/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/engine-trigger-loop-fix-v1/crates/engine)
+   Compiling rustmage-cards-eoc v0.1.0 (/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/engine-trigger-loop-fix-v1/crates/cards/eoc)
+   Compiling rustmage-cards-ecc v0.1.0 (/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/engine-trigger-loop-fix-v1/crates/cards/ecc)
+   Compiling rustmage-cards-one v0.1.0 (/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/engine-trigger-loop-fix-v1/crates/cards/one)
+   Compiling rustmage-cards-ddg v0.1.0 (/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/engine-trigger-loop-fix-v1/crates/cards/ddg)
+   Compiling rustmage-cards-big v0.1.0 (/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/engine-trigger-loop-fix-v1/crates/cards/big)
+   Compiling rustmage-cards-otj v0.1.0 (/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/engine-trigger-loop-fix-v1/crates/cards/otj)
+   Compiling rustmage-cards-inr v0.1.0 (/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/engine-trigger-loop-fix-v1/crates/cards/inr)
+   Compiling rustmage-cards-soc v0.1.0 (/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/engine-trigger-loop-fix-v1/crates/cards/soc)
+   Compiling rustmage-cards-w17 v0.1.0 (/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/engine-trigger-loop-fix-v1/crates/cards/w17)
+   Compiling rustmage-cards-hob v0.1.0 (/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/engine-trigger-loop-fix-v1/crates/cards/hob)
+   Compiling rustmage-cards-rix v0.1.0 (/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/engine-trigger-loop-fix-v1/crates/cards/rix)
+   Compiling rustmage-cards-tdc v0.1.0 (/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/engine-trigger-loop-fix-v1/crates/cards/tdc)
+   Compiling rustmage-cards-tdm v0.1.0 (/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/engine-trigger-loop-fix-v1/crates/cards/tdm)
+   Compiling rustmage-cards-dft v0.1.0 (/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/engine-trigger-loop-fix-v1/crates/cards/dft)
+   Compiling rustmage-cards-pspl v0.1.0 (/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/engine-trigger-loop-fix-v1/crates/cards/pspl)
+   Compiling rustmage-cards-tle v0.1.0 (/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/engine-trigger-loop-fix-v1/crates/cards/tle)
+   Compiling rustmage-cards-eoe v0.1.0 (/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/engine-trigger-loop-fix-v1/crates/cards/eoe)
+   Compiling rustmage-cards-jmp v0.1.0 (/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/engine-trigger-loop-fix-v1/crates/cards/jmp)
+   Compiling rustmage-cards-tmc v0.1.0 (/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/engine-trigger-loop-fix-v1/crates/cards/tmc)
+   Compiling rustmage-cards-mkm v0.1.0 (/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/engine-trigger-loop-fix-v1/crates/cards/mkm)
+   Compiling rustmage-cards-fin v0.1.0 (/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/engine-trigger-loop-fix-v1/crates/cards/fin)
+   Compiling rustmage-cards-fra v0.1.0 (/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/engine-trigger-loop-fix-v1/crates/cards/fra)
+   Compiling rustmage-cards-frc v0.1.0 (/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/engine-trigger-loop-fix-v1/crates/cards/frc)
+   Compiling rustmage-cards-tmt v0.1.0 (/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/engine-trigger-loop-fix-v1/crates/cards/tmt)
+   Compiling rustmage-cards-msh v0.1.0 (/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/engine-trigger-loop-fix-v1/crates/cards/msh)
+   Compiling rustmage-cards-ecl v0.1.0 (/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/engine-trigger-loop-fix-v1/crates/cards/ecl)
+   Compiling rustmage-cards-m19 v0.1.0 (/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/engine-trigger-loop-fix-v1/crates/cards/m19)
+   Compiling rustmage-cards-znr v0.1.0 (/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/engine-trigger-loop-fix-v1/crates/cards/znr)
+   Compiling rustmage-cards-afr v0.1.0 (/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/engine-trigger-loop-fix-v1/crates/cards/afr)
+   Compiling rustmage-cards-mom v0.1.0 (/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/engine-trigger-loop-fix-v1/crates/cards/mom)
+   Compiling rustmage-cards-sos v0.1.0 (/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/engine-trigger-loop-fix-v1/crates/cards/sos)
+   Compiling rustmage-cards-dsk v0.1.0 (/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/engine-trigger-loop-fix-v1/crates/cards/dsk)
+   Compiling rustmage-cards-legacy v0.1.0 (/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/engine-trigger-loop-fix-v1/crates/cards/legacy)
+   Compiling rustmage-cards-synthetic v0.1.0 (/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/engine-trigger-loop-fix-v1/crates/cards/synthetic)
+   Compiling rustmage-cards-lci v0.1.0 (/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/engine-trigger-loop-fix-v1/crates/cards/lci)
+   Compiling rustmage-cards-lcc v0.1.0 (/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/engine-trigger-loop-fix-v1/crates/cards/lcc)
+   Compiling rustmage-cards-spm v0.1.0 (/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/engine-trigger-loop-fix-v1/crates/cards/spm)
+   Compiling rustmage-cards-cmm v0.1.0 (/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/engine-trigger-loop-fix-v1/crates/cards/cmm)
+   Compiling rustmage-cards-hoc v0.1.0 (/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/engine-trigger-loop-fix-v1/crates/cards/hoc)
+   Compiling rustmage-cards-fdn v0.1.0 (/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/engine-trigger-loop-fix-v1/crates/cards/fdn)
+   Compiling rustmage-cards-blb v0.1.0 (/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/engine-trigger-loop-fix-v1/crates/cards/blb)
+   Compiling rustmage-cards-tla v0.1.0 (/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/engine-trigger-loop-fix-v1/crates/cards/tla)
+   Compiling rustmage-cards-woe v0.1.0 (/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/engine-trigger-loop-fix-v1/crates/cards/woe)
+   Compiling rustmage-cards-msc v0.1.0 (/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/engine-trigger-loop-fix-v1/crates/cards/msc)
+   Compiling rustmage v0.1.0 (/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/engine-trigger-loop-fix-v1)
+    Finished `test` profile [unoptimized] target(s) in 1m 59s
+     Running tests/mandatory_loops.rs (target/debug/deps/mandatory_loops-7737af393b71303a)
+
+running 6 tests
+test available_damage_target_or_instant_escape_declines_extended_proof ... ok
+test mandatory_exile_loop_draws_raw_indexed_and_restored_branches ... ok
+test optional_instant_and_rejected_indices_preserve_the_game ... ok
+test optional_target_and_observer_never_force_a_draw ... ok
+test stale_unmapped_entry_history_declines_detection ... ok
+test unplaceable_entry_damage_order_does_not_hide_mandatory_cycle ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+
+Resource report: /home/altf4/.cache/rustmage-build-reports/411d35703bff4cbcaf380d503bd8b01c.json
+          Finished with result: success
+Main processes terminated with: code=exited, status=0/SUCCESS
+               Service runtime: 1min 59.443s
+             CPU time consumed: 1min 59.784s
+                   Memory peak: 1.6G (swap: 0B)

@@ -1,0 +1,1454 @@
+{
+  "schema": 1,
+  "format": "Standard",
+  "event": "Magic Spotlight: Fracture - SCG CON Hartford",
+  "event_date": "2026-10-24",
+  "event_url": "https://melee.gg/Tournament/View/440878",
+  "assembled_date": "2026-10-31",
+  "note": "Ten published 60-card mainboards and 15-card sideboards. This is a decklist archive, not a RustMage card-support audit or a change to the three-deck baseline experiment.",
+  "provenance": {
+    "existing_baseline_decks": {
+      "source_file": "src/patchwork_automaton/data/standard-baselines.json",
+      "source_sha256": "ddaac94bb5d2147a488a45a99198fcfb3ebaf2e530829feb556a165ae0eb264f",
+      "deck_ids": [
+        "mono-green-landfall",
+        "izzet-prowess",
+        "bw-lifegain"
+      ],
+      "original_source_audit": {
+        "source_artifact": "docs/decks/hartford-selected-decks-2026-10-26.json",
+        "source_sha256": "726b7925d9b8c23d740579330dc1b089a0138671f5421368c389602455f4706b",
+        "source_audit_date": "2026-10-26"
+      }
+    },
+    "additional_decks": {
+      "source_file": "docs/decks/hartford-seven-standard-2026-10-31.json",
+      "source_sha256": "0f92c1ba577c8c0fd924c1abcacda9cee66b6818ef19b950505c839dced01302",
+      "deck_ids": [
+        "dimir-midrange",
+        "four-color-control",
+        "jund-sacrifice",
+        "izzet-spellementals",
+        "jeskai-artifacts",
+        "mardu-discard",
+        "bant-airbending"
+      ]
+    }
+  },
+  "decks": {
+    "mono-green-landfall": {
+      "archetype": "Mono-Green Landfall",
+      "pilot": "John Norman",
+      "username": "eeeeeeeeeeeeno",
+      "place": 3,
+      "record": "13-4-0",
+      "event": "Magic Spotlight: Fracture - SCG CON Hartford",
+      "event_date": "2026-10-24",
+      "format": "Standard",
+      "source_url": "https://decks.botbox.dev/decks/2386354",
+      "melee_url": "https://melee.gg/Decklist/View/b757cb25-e4bc-4659-a61a-b4ed000a5d52",
+      "mainboard": [
+        {
+          "quantity": 4,
+          "name": "Llanowar Elves"
+        },
+        {
+          "quantity": 4,
+          "name": "Sazh's Chocobo"
+        },
+        {
+          "quantity": 2,
+          "name": "Keen-Eyed Curator"
+        },
+        {
+          "quantity": 4,
+          "name": "Mossborn Hydra"
+        },
+        {
+          "quantity": 4,
+          "name": "Icetill Explorer"
+        },
+        {
+          "quantity": 4,
+          "name": "Mightform Harmonizer"
+        },
+        {
+          "quantity": 4,
+          "name": "Earthbender Ascension"
+        },
+        {
+          "quantity": 3,
+          "name": "Sapling Nursery"
+        },
+        {
+          "quantity": 3,
+          "name": "Carnivorous Cultivator // Enroot"
+        },
+        {
+          "quantity": 2,
+          "name": "Esper Origins // Summon: Esper Maduin"
+        },
+        {
+          "quantity": 3,
+          "name": "Ba Sing Se"
+        },
+        {
+          "quantity": 1,
+          "name": "Demolition Field"
+        },
+        {
+          "quantity": 2,
+          "name": "Elven Passage"
+        },
+        {
+          "quantity": 3,
+          "name": "Escape Tunnel"
+        },
+        {
+          "quantity": 4,
+          "name": "Fabled Passage"
+        },
+        {
+          "quantity": 13,
+          "name": "Forest"
+        }
+      ],
+      "sideboard": [
+        {
+          "quantity": 1,
+          "name": "Sandman, Shifting Scoundrel"
+        },
+        {
+          "quantity": 2,
+          "name": "Surrak, Elusive Hunter"
+        },
+        {
+          "quantity": 3,
+          "name": "Torpor Orb"
+        },
+        {
+          "quantity": 4,
+          "name": "Meltstrider's Resolve"
+        },
+        {
+          "quantity": 1,
+          "name": "Hunter's Talent"
+        },
+        {
+          "quantity": 1,
+          "name": "Sapling Nursery"
+        },
+        {
+          "quantity": 1,
+          "name": "Defend the Rider"
+        },
+        {
+          "quantity": 1,
+          "name": "Origin of Metalbending"
+        },
+        {
+          "quantity": 1,
+          "name": "Pawpatch Formation"
+        }
+      ],
+      "notes": [],
+      "deck_url": "https://decks.botbox.dev/decks/2386354",
+      "primary_source_url": "https://melee.gg/Decklist/View/b757cb25-e4bc-4659-a61a-b4ed000a5d52",
+      "source_deck_id": "2386354",
+      "text_file": "docs/decks/hartford-2026-10-24-mono-green-landfall.txt"
+    },
+    "izzet-prowess": {
+      "archetype": "Izzet Prowess (Fling variant)",
+      "pilot": "AlexMacIsaac",
+      "place": 43,
+      "record": "10-4-1",
+      "source_url": "https://decksnipe.com/archetype/standard/izzet-prowess",
+      "standings_url": "https://decks.botbox.dev/tournaments/341108",
+      "deck_url": "https://decks.botbox.dev/decks/2386394",
+      "mainboard": [
+        {
+          "quantity": 4,
+          "name": "Elusive Otter // Grove's Bounty"
+        },
+        {
+          "quantity": 1,
+          "name": "Balmor, Battlemage Captain"
+        },
+        {
+          "quantity": 2,
+          "name": "Drake Hatcher"
+        },
+        {
+          "quantity": 4,
+          "name": "Slickshot Show-Off"
+        },
+        {
+          "quantity": 2,
+          "name": "Full Bore"
+        },
+        {
+          "quantity": 1,
+          "name": "Magic Damper"
+        },
+        {
+          "quantity": 3,
+          "name": "Opt"
+        },
+        {
+          "quantity": 2,
+          "name": "Secret Identity"
+        },
+        {
+          "quantity": 2,
+          "name": "Turn Inside Out"
+        },
+        {
+          "quantity": 4,
+          "name": "Ancestral Anger"
+        },
+        {
+          "quantity": 4,
+          "name": "Pompous Battlemage // Improvised Act"
+        },
+        {
+          "quantity": 4,
+          "name": "Sleight of Hand"
+        },
+        {
+          "quantity": 4,
+          "name": "Wild Ride"
+        },
+        {
+          "quantity": 4,
+          "name": "Callous Sell-Sword // Burn Together"
+        },
+        {
+          "quantity": 1,
+          "name": "Mountain"
+        },
+        {
+          "quantity": 3,
+          "name": "Multiversal Passage"
+        },
+        {
+          "quantity": 3,
+          "name": "Riverpyre Verge"
+        },
+        {
+          "quantity": 4,
+          "name": "Spirebluff Canal"
+        },
+        {
+          "quantity": 4,
+          "name": "Starting Town"
+        },
+        {
+          "quantity": 4,
+          "name": "Steam Vents"
+        }
+      ],
+      "sideboard": [
+        {
+          "quantity": 1,
+          "name": "Poison Dart Frog"
+        },
+        {
+          "quantity": 1,
+          "name": "Soul-Guide Lantern"
+        },
+        {
+          "quantity": 2,
+          "name": "Dreadmaw's Ire"
+        },
+        {
+          "quantity": 1,
+          "name": "Full Bore"
+        },
+        {
+          "quantity": 1,
+          "name": "Into the Flood Maw"
+        },
+        {
+          "quantity": 1,
+          "name": "Magic Damper"
+        },
+        {
+          "quantity": 1,
+          "name": "Octopus Form"
+        },
+        {
+          "quantity": 1,
+          "name": "Secret Identity"
+        },
+        {
+          "quantity": 2,
+          "name": "Shore Up"
+        },
+        {
+          "quantity": 4,
+          "name": "Spell Pierce"
+        }
+      ],
+      "event": "Magic Spotlight: Fracture - SCG CON Hartford",
+      "event_date": "2026-10-24",
+      "format": "Standard",
+      "primary_source_url": "https://melee.gg/Decklist/View/d49ec0e4-56fe-4fac-a1c9-b4eb00ef9350",
+      "source_deck_id": "2386394",
+      "text_file": "docs/decks/hartford-2026-10-24-izzet-prowess.txt"
+    },
+    "bw-lifegain": {
+      "archetype": "Orzhov Lifegain",
+      "pilot": "Jarvis Yu",
+      "username": "jarvisyu",
+      "place": 19,
+      "record": "11-4-0",
+      "event": "Magic Spotlight: Fracture - SCG CON Hartford",
+      "event_date": "2026-10-24",
+      "format": "Standard",
+      "source_url": "https://decks.botbox.dev/decks/2386370",
+      "melee_url": "https://melee.gg/Decklist/View/b6280413-0cdf-4468-96cd-b4ec00caab14",
+      "mainboard": [
+        {
+          "quantity": 1,
+          "name": "Aunt May"
+        },
+        {
+          "quantity": 4,
+          "name": "Hinterland Sanctifier"
+        },
+        {
+          "quantity": 2,
+          "name": "Liliana the Faultless"
+        },
+        {
+          "quantity": 4,
+          "name": "Amalia Benavides Aguirre"
+        },
+        {
+          "quantity": 4,
+          "name": "Enlightened Confidant"
+        },
+        {
+          "quantity": 1,
+          "name": "Essence Channeler"
+        },
+        {
+          "quantity": 3,
+          "name": "Starscape Cleric"
+        },
+        {
+          "quantity": 3,
+          "name": "Haliya, Guided by Light"
+        },
+        {
+          "quantity": 3,
+          "name": "Moseo, Vein's New Dean"
+        },
+        {
+          "quantity": 4,
+          "name": "Case of the Uneaten Feast"
+        },
+        {
+          "quantity": 4,
+          "name": "Lunar Convocation"
+        },
+        {
+          "quantity": 3,
+          "name": "Erode"
+        },
+        {
+          "quantity": 2,
+          "name": "Bitter Triumph"
+        },
+        {
+          "quantity": 1,
+          "name": "Bleachbone Verge"
+        },
+        {
+          "quantity": 4,
+          "name": "Concealed Courtyard"
+        },
+        {
+          "quantity": 4,
+          "name": "Godless Shrine"
+        },
+        {
+          "quantity": 1,
+          "name": "Great Arashin City"
+        },
+        {
+          "quantity": 4,
+          "name": "Multiversal Passage"
+        },
+        {
+          "quantity": 4,
+          "name": "Plains"
+        },
+        {
+          "quantity": 4,
+          "name": "Starting Town"
+        }
+      ],
+      "sideboard": [
+        {
+          "quantity": 2,
+          "name": "Cathar Commando"
+        },
+        {
+          "quantity": 1,
+          "name": "Essence Channeler"
+        },
+        {
+          "quantity": 1,
+          "name": "M.O.D.O.K."
+        },
+        {
+          "quantity": 2,
+          "name": "Ghost Vacuum"
+        },
+        {
+          "quantity": 2,
+          "name": "Seam Rip"
+        },
+        {
+          "quantity": 2,
+          "name": "Sheltered by Ghosts"
+        },
+        {
+          "quantity": 2,
+          "name": "Pyrrhic Strike"
+        },
+        {
+          "quantity": 3,
+          "name": "Duress"
+        }
+      ],
+      "notes": [
+        "Melee/DeckSnipe labels Orzhov Lifegain; Botbox classifier calls this Standard v3 Group 4629CD (Aunt May, Enlightened Confidant). Highest-placing Orzhov list in event standings."
+      ],
+      "deck_url": "https://decks.botbox.dev/decks/2386370",
+      "primary_source_url": "https://melee.gg/Decklist/View/b6280413-0cdf-4468-96cd-b4ec00caab14",
+      "source_deck_id": "2386370",
+      "text_file": "docs/decks/hartford-2026-10-24-bw-lifegain.txt"
+    },
+    "dimir-midrange": {
+      "archetype": "Dimir Midrange",
+      "pilot": "Dylan Morgan",
+      "username": "DisgruntledSylveon",
+      "place": 6,
+      "record": "12-3-1",
+      "source_url": "https://mtgpile.com/deck/magic-spotlight-fracture-hartford-20261024-dylan-morgan",
+      "text_file": "docs/decks/hartford-2026-10-24-dimir-midrange.txt",
+      "mainboard": [
+        {
+          "quantity": 4,
+          "name": "Dream Beavers"
+        },
+        {
+          "quantity": 4,
+          "name": "Spyglass Siren"
+        },
+        {
+          "quantity": 1,
+          "name": "Yuriko, Hope from the Shadows"
+        },
+        {
+          "quantity": 4,
+          "name": "Floodpits Drowner"
+        },
+        {
+          "quantity": 2,
+          "name": "The Wondrous Wasp"
+        },
+        {
+          "quantity": 1,
+          "name": "Tishana's Tidebinder"
+        },
+        {
+          "quantity": 4,
+          "name": "Enduring Curiosity"
+        },
+        {
+          "quantity": 3,
+          "name": "Requiting Hex"
+        },
+        {
+          "quantity": 1,
+          "name": "Spell Snare"
+        },
+        {
+          "quantity": 2,
+          "name": "Bitter Triumph"
+        },
+        {
+          "quantity": 1,
+          "name": "Shoot the Sheriff"
+        },
+        {
+          "quantity": 3,
+          "name": "We Say Thee Nay!"
+        },
+        {
+          "quantity": 2,
+          "name": "Strategic Betrayal"
+        },
+        {
+          "quantity": 4,
+          "name": "Kaito, Bane of Nightmares"
+        },
+        {
+          "quantity": 4,
+          "name": "Gloomlake Verge"
+        },
+        {
+          "quantity": 3,
+          "name": "Hidden Lair"
+        },
+        {
+          "quantity": 4,
+          "name": "Island"
+        },
+        {
+          "quantity": 2,
+          "name": "Restless Reef"
+        },
+        {
+          "quantity": 2,
+          "name": "Soulstone Sanctuary"
+        },
+        {
+          "quantity": 5,
+          "name": "Swamp"
+        },
+        {
+          "quantity": 4,
+          "name": "Watery Grave"
+        }
+      ],
+      "sideboard": [
+        {
+          "quantity": 1,
+          "name": "Annul"
+        },
+        {
+          "quantity": 2,
+          "name": "Day of Black Sun"
+        },
+        {
+          "quantity": 2,
+          "name": "Disdainful Stroke"
+        },
+        {
+          "quantity": 2,
+          "name": "Duress"
+        },
+        {
+          "quantity": 1,
+          "name": "Head of the Hunt"
+        },
+        {
+          "quantity": 1,
+          "name": "Negate"
+        },
+        {
+          "quantity": 1,
+          "name": "Requiting Hex"
+        },
+        {
+          "quantity": 1,
+          "name": "Strategic Betrayal"
+        },
+        {
+          "quantity": 1,
+          "name": "Tishana's Tidebinder"
+        },
+        {
+          "quantity": 1,
+          "name": "Vren, the Relentless"
+        },
+        {
+          "quantity": 2,
+          "name": "Wan Shi Tong, Librarian"
+        }
+      ],
+      "event": "Magic Spotlight: Fracture - SCG CON Hartford",
+      "event_date": "2026-10-24",
+      "format": "Standard"
+    },
+    "four-color-control": {
+      "archetype": "Four-Color Control",
+      "pilot": "Ryan Mullens",
+      "username": "burnt_taco77",
+      "place": 32,
+      "record": "10-4-1",
+      "source_url": "https://mtgpile.com/deck/magic-spotlight-fracture-hartford-20261024-ryan-mullens",
+      "text_file": "docs/decks/hartford-2026-10-24-four-color-control.txt",
+      "mainboard": [
+        {
+          "quantity": 3,
+          "name": "Firebending Lesson"
+        },
+        {
+          "quantity": 2,
+          "name": "Flashback"
+        },
+        {
+          "quantity": 2,
+          "name": "Consult the Star Charts"
+        },
+        {
+          "quantity": 2,
+          "name": "Sear"
+        },
+        {
+          "quantity": 2,
+          "name": "Shoot the Sheriff"
+        },
+        {
+          "quantity": 3,
+          "name": "Inevitable Defeat"
+        },
+        {
+          "quantity": 4,
+          "name": "Jeskai Revelation"
+        },
+        {
+          "quantity": 1,
+          "name": "Duress"
+        },
+        {
+          "quantity": 1,
+          "name": "Pest Control"
+        },
+        {
+          "quantity": 2,
+          "name": "Strategic Betrayal"
+        },
+        {
+          "quantity": 4,
+          "name": "Stock Up"
+        },
+        {
+          "quantity": 2,
+          "name": "Deadly Cover-Up"
+        },
+        {
+          "quantity": 2,
+          "name": "Together as One"
+        },
+        {
+          "quantity": 4,
+          "name": "Tablet of Discovery"
+        },
+        {
+          "quantity": 3,
+          "name": "Bleachbone Verge"
+        },
+        {
+          "quantity": 4,
+          "name": "Blood Crypt"
+        },
+        {
+          "quantity": 4,
+          "name": "Great Hall of the Biblioplex"
+        },
+        {
+          "quantity": 1,
+          "name": "Island"
+        },
+        {
+          "quantity": 1,
+          "name": "Plains"
+        },
+        {
+          "quantity": 3,
+          "name": "Riverpyre Verge"
+        },
+        {
+          "quantity": 2,
+          "name": "Sacred Foundry"
+        },
+        {
+          "quantity": 2,
+          "name": "Shattered Sanctum"
+        },
+        {
+          "quantity": 2,
+          "name": "Starting Town"
+        },
+        {
+          "quantity": 1,
+          "name": "Steam Vents"
+        },
+        {
+          "quantity": 1,
+          "name": "Swamp"
+        },
+        {
+          "quantity": 2,
+          "name": "Undercity Sewers"
+        }
+      ],
+      "sideboard": [
+        {
+          "quantity": 1,
+          "name": "Day of Black Sun"
+        },
+        {
+          "quantity": 1,
+          "name": "Deadly Cover-Up"
+        },
+        {
+          "quantity": 1,
+          "name": "Disdainful Stroke"
+        },
+        {
+          "quantity": 3,
+          "name": "Duress"
+        },
+        {
+          "quantity": 1,
+          "name": "Flashfreeze"
+        },
+        {
+          "quantity": 1,
+          "name": "Negate"
+        },
+        {
+          "quantity": 1,
+          "name": "Outrageous Robbery"
+        },
+        {
+          "quantity": 1,
+          "name": "Petrified Hamlet"
+        },
+        {
+          "quantity": 1,
+          "name": "Riverchurn Monument"
+        },
+        {
+          "quantity": 1,
+          "name": "Spell Snare"
+        },
+        {
+          "quantity": 1,
+          "name": "Strategic Betrayal"
+        },
+        {
+          "quantity": 2,
+          "name": "Torpor Orb"
+        }
+      ],
+      "event": "Magic Spotlight: Fracture - SCG CON Hartford",
+      "event_date": "2026-10-24",
+      "format": "Standard"
+    },
+    "jund-sacrifice": {
+      "archetype": "Jund Sacrifice",
+      "pilot": "Alexander von Stange",
+      "username": "AlexVS",
+      "place": 1,
+      "record": "15-2-1",
+      "source_url": "https://mtgpile.com/deck/magic-spotlight-fracture-hartford-20261024-alexander-von-stange",
+      "text_file": "docs/decks/hartford-2026-10-24-jund-sacrifice.txt",
+      "mainboard": [
+        {
+          "quantity": 4,
+          "name": "Gene Pollinator"
+        },
+        {
+          "quantity": 4,
+          "name": "Greedy Freebooter"
+        },
+        {
+          "quantity": 1,
+          "name": "Llanowar Elves"
+        },
+        {
+          "quantity": 4,
+          "name": "Biotech Specialist"
+        },
+        {
+          "quantity": 4,
+          "name": "The Sackville-Bagginses"
+        },
+        {
+          "quantity": 4,
+          "name": "Umbral Collar Zealot"
+        },
+        {
+          "quantity": 1,
+          "name": "Smaug the Magnificent"
+        },
+        {
+          "quantity": 1,
+          "name": "Requiting Hex"
+        },
+        {
+          "quantity": 3,
+          "name": "Torch the Tower"
+        },
+        {
+          "quantity": 1,
+          "name": "Stir Up Trouble"
+        },
+        {
+          "quantity": 4,
+          "name": "Lively Dirge"
+        },
+        {
+          "quantity": 4,
+          "name": "Obsessive Pursuit"
+        },
+        {
+          "quantity": 3,
+          "name": "The Misty Mountains Cold"
+        },
+        {
+          "quantity": 1,
+          "name": "Blazemire Verge"
+        },
+        {
+          "quantity": 4,
+          "name": "Blood Crypt"
+        },
+        {
+          "quantity": 4,
+          "name": "Blooming Marsh"
+        },
+        {
+          "quantity": 1,
+          "name": "Forest"
+        },
+        {
+          "quantity": 1,
+          "name": "Mountain"
+        },
+        {
+          "quantity": 2,
+          "name": "Overgrown Tomb"
+        },
+        {
+          "quantity": 4,
+          "name": "Starting Town"
+        },
+        {
+          "quantity": 3,
+          "name": "Stomping Ground"
+        },
+        {
+          "quantity": 1,
+          "name": "Swamp"
+        },
+        {
+          "quantity": 1,
+          "name": "Thornspire Verge"
+        }
+      ],
+      "sideboard": [
+        {
+          "quantity": 3,
+          "name": "Duress"
+        },
+        {
+          "quantity": 2,
+          "name": "Fire Magic"
+        },
+        {
+          "quantity": 1,
+          "name": "Guerrilla Gorilla"
+        },
+        {
+          "quantity": 1,
+          "name": "Heritage Reclamation"
+        },
+        {
+          "quantity": 1,
+          "name": "Leatherhead, Swamp Stalker"
+        },
+        {
+          "quantity": 1,
+          "name": "Maelstrom Pulse"
+        },
+        {
+          "quantity": 1,
+          "name": "Professor Dellian Fel"
+        },
+        {
+          "quantity": 1,
+          "name": "Shoot the Sheriff"
+        },
+        {
+          "quantity": 3,
+          "name": "Strategic Betrayal"
+        },
+        {
+          "quantity": 1,
+          "name": "Vengeful Tracker"
+        }
+      ],
+      "event": "Magic Spotlight: Fracture - SCG CON Hartford",
+      "event_date": "2026-10-24",
+      "format": "Standard"
+    },
+    "izzet-spellementals": {
+      "archetype": "Izzet Spellementals",
+      "pilot": "Matt Rosenbloom",
+      "username": "Mrosenbloom",
+      "place": 37,
+      "record": "10-4-1",
+      "source_url": "https://www.spellbinder.gg/decks/izzet-spellementals-sjvph8w3b4",
+      "text_file": "docs/decks/hartford-2026-10-24-izzet-spellementals.txt",
+      "mainboard": [
+        {
+          "quantity": 4,
+          "name": "Hearth Elemental // Stoke Genius"
+        },
+        {
+          "quantity": 4,
+          "name": "Eddymurk Crab"
+        },
+        {
+          "quantity": 4,
+          "name": "Sunderflock"
+        },
+        {
+          "quantity": 4,
+          "name": "Burst Lightning"
+        },
+        {
+          "quantity": 4,
+          "name": "Opt"
+        },
+        {
+          "quantity": 1,
+          "name": "Spell Pierce"
+        },
+        {
+          "quantity": 2,
+          "name": "Spell Snare"
+        },
+        {
+          "quantity": 2,
+          "name": "Get Out"
+        },
+        {
+          "quantity": 4,
+          "name": "Prismari Charm"
+        },
+        {
+          "quantity": 3,
+          "name": "Traumatic Critique"
+        },
+        {
+          "quantity": 1,
+          "name": "Impractical Joke"
+        },
+        {
+          "quantity": 4,
+          "name": "Sleight of Hand"
+        },
+        {
+          "quantity": 3,
+          "name": "Winternight Stories"
+        },
+        {
+          "quantity": 6,
+          "name": "Island"
+        },
+        {
+          "quantity": 2,
+          "name": "Multiversal Passage"
+        },
+        {
+          "quantity": 4,
+          "name": "Riverpyre Verge"
+        },
+        {
+          "quantity": 4,
+          "name": "Spirebluff Canal"
+        },
+        {
+          "quantity": 4,
+          "name": "Steam Vents"
+        }
+      ],
+      "sideboard": [
+        {
+          "quantity": 1,
+          "name": "Annul"
+        },
+        {
+          "quantity": 1,
+          "name": "Ghost Vacuum"
+        },
+        {
+          "quantity": 1,
+          "name": "Disdainful Stroke"
+        },
+        {
+          "quantity": 1,
+          "name": "Flashfreeze"
+        },
+        {
+          "quantity": 2,
+          "name": "Hydro-Man, Fluid Felon"
+        },
+        {
+          "quantity": 1,
+          "name": "Negate"
+        },
+        {
+          "quantity": 1,
+          "name": "Avengers Disassembled"
+        },
+        {
+          "quantity": 1,
+          "name": "Broadside Barrage"
+        },
+        {
+          "quantity": 4,
+          "name": "Colorstorm Stallion"
+        },
+        {
+          "quantity": 2,
+          "name": "Sunspine Lynx"
+        }
+      ],
+      "event": "Magic Spotlight: Fracture - SCG CON Hartford",
+      "event_date": "2026-10-24",
+      "format": "Standard"
+    },
+    "jeskai-artifacts": {
+      "archetype": "Jeskai Artifacts",
+      "pilot": "Talonflame23185",
+      "username": "Talonflame23185",
+      "place": 2,
+      "record": "14-2-2",
+      "source_url": "https://www.spellbinder.gg/decks/jeskai-artifacts-yf1izk0nyy",
+      "text_file": "docs/decks/hartford-2026-10-24-jeskai-artifacts.txt",
+      "mainboard": [
+        {
+          "quantity": 4,
+          "name": "United Battlefront"
+        },
+        {
+          "quantity": 2,
+          "name": "The Enigma Jewel // Locus of Enlightenment"
+        },
+        {
+          "quantity": 4,
+          "name": "Cryogen Relic"
+        },
+        {
+          "quantity": 2,
+          "name": "Solitary Cell"
+        },
+        {
+          "quantity": 1,
+          "name": "Spring-Loaded Sawblades // Bladewheel Chariot"
+        },
+        {
+          "quantity": 4,
+          "name": "The Mind Stone"
+        },
+        {
+          "quantity": 1,
+          "name": "Torpor Orb"
+        },
+        {
+          "quantity": 1,
+          "name": "Braided Net // Braided Quipu"
+        },
+        {
+          "quantity": 4,
+          "name": "Perilous Snare"
+        },
+        {
+          "quantity": 3,
+          "name": "Pinnacle Starcage"
+        },
+        {
+          "quantity": 3,
+          "name": "Repurposing Bay"
+        },
+        {
+          "quantity": 4,
+          "name": "Simulacrum Synthesizer"
+        },
+        {
+          "quantity": 1,
+          "name": "Warmaker Gunship"
+        },
+        {
+          "quantity": 1,
+          "name": "The Fire Crystal"
+        },
+        {
+          "quantity": 1,
+          "name": "White Auracite"
+        },
+        {
+          "quantity": 4,
+          "name": "Castle Doom"
+        },
+        {
+          "quantity": 1,
+          "name": "Deserted Beach"
+        },
+        {
+          "quantity": 3,
+          "name": "Floodfarm Verge"
+        },
+        {
+          "quantity": 1,
+          "name": "Fomori Vault"
+        },
+        {
+          "quantity": 3,
+          "name": "Hallowed Fountain"
+        },
+        {
+          "quantity": 1,
+          "name": "Island"
+        },
+        {
+          "quantity": 2,
+          "name": "Meticulous Archive"
+        },
+        {
+          "quantity": 1,
+          "name": "Plains"
+        },
+        {
+          "quantity": 2,
+          "name": "Sacred Foundry"
+        },
+        {
+          "quantity": 3,
+          "name": "Starting Town"
+        },
+        {
+          "quantity": 2,
+          "name": "Steam Vents"
+        },
+        {
+          "quantity": 1,
+          "name": "Sundown Pass"
+        }
+      ],
+      "sideboard": [
+        {
+          "quantity": 2,
+          "name": "Erode"
+        },
+        {
+          "quantity": 2,
+          "name": "Seam Rip"
+        },
+        {
+          "quantity": 2,
+          "name": "Negate"
+        },
+        {
+          "quantity": 1,
+          "name": "Rest in Peace"
+        },
+        {
+          "quantity": 1,
+          "name": "Tony Stark // The Invincible Iron Man"
+        },
+        {
+          "quantity": 2,
+          "name": "Torpor Orb"
+        },
+        {
+          "quantity": 2,
+          "name": "Voice of Victory"
+        },
+        {
+          "quantity": 1,
+          "name": "Braided Net // Braided Quipu"
+        },
+        {
+          "quantity": 1,
+          "name": "Chandra, Chill of Compliance"
+        },
+        {
+          "quantity": 1,
+          "name": "Day of Judgment"
+        }
+      ],
+      "classification_note": "Also classified as Azorius Artifacts by DeckSnipe; this list contains red cards and red mana sources.",
+      "event": "Magic Spotlight: Fracture - SCG CON Hartford",
+      "event_date": "2026-10-24",
+      "format": "Standard"
+    },
+    "mardu-discard": {
+      "archetype": "Mardu Discard",
+      "pilot": "SteveKnack",
+      "username": "SteveKnack",
+      "place": 10,
+      "record": "12-3-0",
+      "source_url": "https://decks.botbox.dev/decks/2386361",
+      "text_file": "docs/decks/hartford-2026-10-24-mardu-discard.txt",
+      "mainboard": [
+        {
+          "quantity": 4,
+          "name": "Dark Matter Manipulator"
+        },
+        {
+          "quantity": 4,
+          "name": "Marauding Mako"
+        },
+        {
+          "quantity": 4,
+          "name": "Moonshadow"
+        },
+        {
+          "quantity": 4,
+          "name": "Bloodghast"
+        },
+        {
+          "quantity": 4,
+          "name": "Hardened Academic"
+        },
+        {
+          "quantity": 1,
+          "name": "Inti, Seneschal of the Sun"
+        },
+        {
+          "quantity": 4,
+          "name": "Iron-Shield Elf"
+        },
+        {
+          "quantity": 1,
+          "name": "Carnage, Crimson Chaos"
+        },
+        {
+          "quantity": 4,
+          "name": "Cool but Rude"
+        },
+        {
+          "quantity": 2,
+          "name": "Erode"
+        },
+        {
+          "quantity": 2,
+          "name": "Requiting Hex"
+        },
+        {
+          "quantity": 4,
+          "name": "Practiced Offense"
+        },
+        {
+          "quantity": 4,
+          "name": "Blood Crypt"
+        },
+        {
+          "quantity": 2,
+          "name": "Concealed Courtyard"
+        },
+        {
+          "quantity": 3,
+          "name": "Godless Shrine"
+        },
+        {
+          "quantity": 2,
+          "name": "Inspiring Vantage"
+        },
+        {
+          "quantity": 1,
+          "name": "Mountain"
+        },
+        {
+          "quantity": 2,
+          "name": "Multiversal Passage"
+        },
+        {
+          "quantity": 4,
+          "name": "Sacred Foundry"
+        },
+        {
+          "quantity": 3,
+          "name": "Starting Town"
+        },
+        {
+          "quantity": 1,
+          "name": "Swamp"
+        }
+      ],
+      "sideboard": [
+        {
+          "quantity": 2,
+          "name": "Doorkeeper Thrull"
+        },
+        {
+          "quantity": 2,
+          "name": "Ghost Vacuum"
+        },
+        {
+          "quantity": 3,
+          "name": "Monument to Endurance"
+        },
+        {
+          "quantity": 2,
+          "name": "Sheltered by Ghosts"
+        },
+        {
+          "quantity": 2,
+          "name": "Shoot the Sheriff"
+        },
+        {
+          "quantity": 2,
+          "name": "Duress"
+        },
+        {
+          "quantity": 2,
+          "name": "Strategic Betrayal"
+        }
+      ],
+      "registration_url": "https://melee.gg/Decklist/View/daa00e22-90c7-45e9-b079-b4eb01519e53",
+      "event": "Magic Spotlight: Fracture - SCG CON Hartford",
+      "event_date": "2026-10-24",
+      "format": "Standard"
+    },
+    "bant-airbending": {
+      "archetype": "Bant Airbending",
+      "pilot": "Andrew Maine",
+      "username": "AndM124",
+      "place": 8,
+      "record": "12-4-0",
+      "source_url": "https://decks.botbox.dev/decks/2386359",
+      "text_file": "docs/decks/hartford-2026-10-24-bant-airbending.txt",
+      "mainboard": [
+        {
+          "quantity": 4,
+          "name": "Llanowar Elves"
+        },
+        {
+          "quantity": 4,
+          "name": "Bramble Familiar // Fetch Quest"
+        },
+        {
+          "quantity": 4,
+          "name": "Doc Aurlock, Grizzled Genius"
+        },
+        {
+          "quantity": 4,
+          "name": "Aang, Swift Savior // Aang and La, Ocean's Fury"
+        },
+        {
+          "quantity": 4,
+          "name": "Appa, Steadfast Guardian"
+        },
+        {
+          "quantity": 2,
+          "name": "Jennifer Walters // The Sensational She-Hulk"
+        },
+        {
+          "quantity": 4,
+          "name": "Interdimensional Web Watch"
+        },
+        {
+          "quantity": 2,
+          "name": "Airbender Ascension"
+        },
+        {
+          "quantity": 1,
+          "name": "Aang's Iceberg"
+        },
+        {
+          "quantity": 4,
+          "name": "Way of the Paradox"
+        },
+        {
+          "quantity": 2,
+          "name": "Skycoach Conductor // All Aboard"
+        },
+        {
+          "quantity": 4,
+          "name": "Breeding Pool"
+        },
+        {
+          "quantity": 2,
+          "name": "Cavern of Souls"
+        },
+        {
+          "quantity": 2,
+          "name": "Floodfarm Verge"
+        },
+        {
+          "quantity": 1,
+          "name": "Forest"
+        },
+        {
+          "quantity": 3,
+          "name": "Hallowed Fountain"
+        },
+        {
+          "quantity": 3,
+          "name": "Hushwood Verge"
+        },
+        {
+          "quantity": 1,
+          "name": "Island"
+        },
+        {
+          "quantity": 1,
+          "name": "Multiversal Passage"
+        },
+        {
+          "quantity": 1,
+          "name": "Plains"
+        },
+        {
+          "quantity": 3,
+          "name": "Starting Town"
+        },
+        {
+          "quantity": 4,
+          "name": "Temple Garden"
+        }
+      ],
+      "sideboard": [
+        {
+          "quantity": 1,
+          "name": "Webstrike Elite"
+        },
+        {
+          "quantity": 2,
+          "name": "Quantum Riddler"
+        },
+        {
+          "quantity": 2,
+          "name": "Seam Rip"
+        },
+        {
+          "quantity": 3,
+          "name": "Rest in Peace"
+        },
+        {
+          "quantity": 2,
+          "name": "Erode"
+        },
+        {
+          "quantity": 2,
+          "name": "Bovine Intervention"
+        },
+        {
+          "quantity": 1,
+          "name": "Pyrrhic Strike"
+        },
+        {
+          "quantity": 2,
+          "name": "Avatar's Wrath"
+        }
+      ],
+      "registration_url": "https://melee.gg/Decklist/View/0df4b674-23b4-4b9e-b802-b4ec00df0939",
+      "event": "Magic Spotlight: Fracture - SCG CON Hartford",
+      "event_date": "2026-10-24",
+      "format": "Standard"
+    }
+  }
+}

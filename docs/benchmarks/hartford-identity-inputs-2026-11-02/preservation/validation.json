@@ -1,0 +1,21 @@
+{
+  "scope": "Completed experiment preservation commit; tests executed against staged Git tree exported to /tmp/hartford-preserve-index",
+  "compact_tests": {
+    "run": 26,
+    "passed": true,
+    "skipped": 1
+  },
+  "hartford_tests": {
+    "run": 103,
+    "passed": true,
+    "skipped": 0
+  },
+  "native_test_runtime": "local verified e732a4bb4277 capped256 bridge and matching RustMage library; completed production runtime separately archived as 4f64940",
+  "source_archive": {
+    "verified_files": 387,
+    "sha256": "74291d204fabb71bc98c268f401ba180fc1223633bae9d73ddc70d4a4c580f85"
+  },
+  "report_rounds": 100,
+  "policy_strength_evaluation_during_preservation": false,
+  "notes": "Initial Hartford test invocation discovered an older default schema169 library. Explicit matching schema198 library paths resolved the four parity-test errors; the complete staged-tree suite then passed."
+}

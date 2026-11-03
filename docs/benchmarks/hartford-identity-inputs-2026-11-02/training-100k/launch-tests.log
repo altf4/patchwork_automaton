@@ -1,0 +1,21 @@
+test_cli_initializes_transfer_with_zero_optimizer_steps (test_hartford_identity_launch.IdentityLaunchTests.test_cli_initializes_transfer_with_zero_optimizer_steps) ... /home/altf4/Code/mtgo-bot/patchwork_automaton/.venv/lib/python3.12/site-packages/keras/src/backend/tensorflow/core.py:172: DeprecationWarning: __array__ implementation doesn't accept a copy keyword, so passing copy=False failed. __array__ must implement 'dtype' and 'copy' keyword arguments. To learn more, see the migration guide https://numpy.org/devdocs/numpy_2_0_migration_guide.html#adapting-to-changes-in-the-copy-keyword
+  return np.array(x)
+ok
+test_legacy_and_default_runs_reject_transfer_arguments (test_hartford_identity_launch.IdentityLaunchTests.test_legacy_and_default_runs_reject_transfer_arguments) ... ok
+test_transfer_is_explicit_and_hash_pinned (test_hartford_identity_launch.IdentityLaunchTests.test_transfer_is_explicit_and_hash_pinned) ... ok
+test_bad_input_budget_and_architecture_resume_are_rejected (test_compact_ppo.ConfigurationTests.test_bad_input_budget_and_architecture_resume_are_rejected) ... ok
+test_compact_default_is_explicit_and_legacy_config_stays_compatible (test_compact_ppo.ConfigurationTests.test_compact_default_is_explicit_and_legacy_config_stays_compatible) ... ok
+test_fresh_disabled_run_has_no_final_evaluation (test_hartford_skip_evaluations.SkipEvaluationTests.test_fresh_disabled_run_has_no_final_evaluation) ... ok
+test_rejects_unrelated_recipe_changes_and_missing_history (test_hartford_skip_evaluations.SkipEvaluationTests.test_rejects_unrelated_recipe_changes_and_missing_history) ... ok
+test_retains_completed_evaluations_and_historical_checkpoint_configs (test_hartford_skip_evaluations.SkipEvaluationTests.test_retains_completed_evaluations_and_historical_checkpoint_configs) ... ok
+test_count_and_seed_bounds_cover_actual_schedules (test_hartford_schedule.HartfordScheduleTests.test_count_and_seed_bounds_cover_actual_schedules) ... ok
+test_deterministic_order_and_no_global_rng_change (test_hartford_schedule.HartfordScheduleTests.test_deterministic_order_and_no_global_rng_change) ... ok
+test_evaluation_all_cells_balanced_and_unique_across_windows (test_hartford_schedule.HartfordScheduleTests.test_evaluation_all_cells_balanced_and_unique_across_windows) ... ok
+test_full_100_round_experiment_has_exact_balanced_cells (test_hartford_schedule.HartfordScheduleTests.test_full_100_round_experiment_has_exact_balanced_cells) ... ok
+test_invalid_inputs (test_hartford_schedule.HartfordScheduleTests.test_invalid_inputs) ... ok
+test_startup_and_previous_checkpoint_window (test_hartford_schedule.HartfordScheduleTests.test_startup_and_previous_checkpoint_window) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 2.688s
+
+OK

@@ -1,0 +1,37 @@
+Running as unit: rustmage-build-3c02dff202a94612b8a01acd334fefd3.service; invocation ID: 531aee12fffa4e1da10a6af5ef1bbcd5
+Waiting for the shared build slot...
+   Compiling rustmage v0.1.0 (/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/engine-trigger-loop-fix-v1)
+    Finished `test` profile [unoptimized] target(s) in 0.64s
+     Running tests/mandatory_loops.rs (target/debug/deps/mandatory_loops-7737af393b71303a)
+
+running 9 tests
+test available_damage_target_remains_a_real_choice ... ok
+test both_explicit_trigger_orders_draw_without_mutating_saved_branches ... ok
+test funded_activation_escape_is_not_overridden_by_the_proof ... 
+thread 'funded_activation_escape_is_not_overridden_by_the_proof' (1118462) panicked at tests/mandatory_loops.rs:309:9:
+assertion `left == right` failed
+  left: Some(Draw)
+ right: None
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+FAILED
+test funded_instant_escape_stays_playable_with_observer ... ok
+test mandatory_exile_loop_draws_raw_indexed_and_restored_branches ... ok
+test optional_instant_and_rejected_indices_preserve_the_game ... ok
+test optional_target_and_observer_never_force_a_draw ... ok
+test stale_unmapped_entry_history_declines_detection ... ok
+test unplaceable_entry_damage_order_does_not_hide_mandatory_cycle ... ok
+
+failures:
+
+failures:
+    funded_activation_escape_is_not_overridden_by_the_proof
+
+test result: FAILED. 8 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+
+error: test failed, to rerun pass `--test mandatory_loops`
+Resource report: /home/altf4/.cache/rustmage-build-reports/c252a54500a64b7fac8e42ba660f53af.json
+          Finished with result: exit-code
+Main processes terminated with: code=exited, status=101/n/a
+               Service runtime: 744ms
+             CPU time consumed: 831ms
+                   Memory peak: 188.2M (swap: 0B)

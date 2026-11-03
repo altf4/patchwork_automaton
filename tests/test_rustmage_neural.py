@@ -117,7 +117,7 @@ class RustNeuralTests(unittest.TestCase):
             np.testing.assert_array_equal(value,encoder.encode(changed).arrays[key])
         with self.assertRaises(UnsupportedInteraction):encoder.encode(replace(obs,backend='xmage'))
 
-    def test_source_target_and_card_identity_are_distinct(self):
+    def test_source_target_and_card_traits_preserve_roles(self):
         _,obs=self.initial()
         cards=list(obs.objects)
         actions=[{'kind':'ChooseTarget','target':{'Player':p.id.value}} for p in obs.players]
@@ -128,8 +128,10 @@ class RustNeuralTests(unittest.TestCase):
         arrays=RustMageEncoder().encode(fake).arrays
         self.assertFalse(np.array_equal(arrays['candidates'][0],arrays['candidates'][1]))
         # Direction changes source/other role rows even with the same pooled refs.
-        if obs.objects[cards[0]].name != obs.objects[cards[1]].name:
+        from patchwork_automaton.neural.rustmage_features import static_traits
+        if static_traits(obs.objects[cards[0]].properties) != static_traits(obs.objects[cards[1]].properties):
             self.assertFalse(np.array_equal(arrays['candidates'][-1],arrays['candidates'][-2]))
+        self.assertFalse(arrays['card_ids'].any())
         self.assertEqual(arrays['candidate_refs'][0,0],1)
         self.assertEqual(arrays['candidate_refs'][1,1],1)
 

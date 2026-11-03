@@ -8,9 +8,10 @@ from unittest.mock import patch
 import numpy as np
 
 from patchwork_automaton.neural.standard_features import StandardEncoder
+from patchwork_automaton.neural.direct_standard import library_path
 from patchwork_automaton.rl import standard_imitation
 
-LIBRARY = Path('.local/direct-standard/target/release/libpatchwork_direct_standard.so')
+LIBRARY = library_path()
 
 
 class DispatchTests(unittest.TestCase):

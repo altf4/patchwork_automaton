@@ -1,0 +1,12 @@
+[
+  "/home/altf4/Code/mtgo-bot/patchwork_automaton/.venv/bin/python",
+  "-u",
+  "-m",
+  "examples.experiment_hartford_identity",
+  "--source",
+  "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/hartford-identity-inputs/source-200k/policy.keras",
+  "--output",
+  "/home/altf4/Code/mtgo-bot/patchwork_automaton/docs/benchmarks/hartford-identity-inputs-2026-11-02/acceptance-v1",
+  "--mode",
+  "acceptance"
+]

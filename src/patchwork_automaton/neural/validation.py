@@ -4,6 +4,8 @@ Policy surrogate improvement is a local, noisy outcome-based proxy, not a win
 rate or action accuracy. Recorded behavior probabilities and values stay fixed.
 Validation never participates in optimization or advantage normalization.
 """
+from .compact_dispatch import is_compact,codec,neural,V2
+
 import numpy as np
 
 
@@ -73,14 +75,15 @@ def bootstrap_mean(rows, numerator, denominator, *, seed=1701, resamples=4000):
 class GameValidator:
     def __init__(self, model, *, batch_size=32, clip_ratio=.2, advantage_baseline='critic'):
         import tensorflow as tf
-        from .batching import example_batch, input_signature
+        from .batching import model_example_batch, input_signature
         if batch_size < 1 or not 0 < clip_ratio < 1:
             raise ValueError('Invalid validation batch size or clipping ratio')
         if advantage_baseline not in ('critic','zero'):
             raise ValueError('Unknown actor advantage baseline')
         self.model, self.batch_size, self.clip_ratio = model, batch_size, clip_ratio
         self.advantage_baseline = advantage_baseline
-        @tf.function(input_signature=[input_signature(example_batch(model.memory_size, model.feature_spec))], autograph=False)
+        self.compact=is_compact(model)
+        @tf.function(input_signature=[input_signature(model_example_batch(model))], autograph=False)
         def forward(inputs):
             output = model(inputs, training=False)
             return output['value'][:,0], tf.nn.log_softmax(output['logits']), output['memory_out']
@@ -100,23 +103,36 @@ class GameValidator:
             policy_kl=0., max_state_kl=0.) for g in games if g.get('trajectories')}
         trajectories = [(g['index'],t) for g in games for t in g.get('trajectories', ())]
         targets, before, after = [], [], []
-        for start in range(0, len(trajectories), self.batch_size):
-            descriptors = trajectories[start:start+self.batch_size]
-            streams = []
-            for _, trajectory in descriptors:
-                if trajectory['reward'] not in (-1., 0., 1.):
-                    raise ValueError('Validation requires terminal win/loss/draw returns')
-                records = list(read_trajectory(trajectory['path']))
-                if len(records) != trajectory['samples']:
-                    raise ValueError('Incomplete validation trajectory')
-                streams.append(records)
+        def batches():
+            if self.compact:
+                import itertools
+                def items():
+                    for descriptor in trajectories:
+                        _,t=descriptor
+                        if t['reward'] not in (-1.,0.,1.):raise ValueError('Validation requires terminal win/loss/draw returns')
+                        seen=0
+                        for sample in read_trajectory(t['path']):
+                            seen+=1;yield descriptor,sample
+                        if seen!=t['samples']:raise ValueError('Incomplete validation trajectory')
+                iterator=items()
+                while chunk:=list(itertools.islice(iterator,self.batch_size)):
+                    yield [x[0] for x in chunk],[[x[1]] for x in chunk]
+            else:
+                for start in range(0,len(trajectories),self.batch_size):
+                    descriptors=trajectories[start:start+self.batch_size];streams=[]
+                    for _,t in descriptors:
+                        if t['reward'] not in (-1.,0.,1.):raise ValueError('Validation requires terminal win/loss/draw returns')
+                        records=list(read_trajectory(t['path']))
+                        if len(records)!=t['samples']:raise ValueError('Incomplete validation trajectory')
+                        streams.append(records)
+                    yield descriptors,streams
+        from .batching import record_batch
+        for descriptors,streams in batches():
             memory = np.zeros((len(streams), self.model.memory_size), np.float32)
             for step in range(max(map(len, streams), default=0)):
                 active = [i for i,s in enumerate(streams) if step<len(s)]
                 records = [streams[i][step] for i in active]
-                inputs = collate([s.arrays for s in records])
-                inputs['memory_in'] = memory[active] if replay else np.stack([s.memory for s in records])
-                inputs['advance_memory'] = np.asarray([[float(s.advance)] for s in records], np.float32)
+                inputs=record_batch(self.model,records,memory=memory[active] if replay else None)
                 values, logp, updated = [np.asarray(x) for x in self.forward(inputs)]
                 if not all(np.isfinite(x).all() for x in (values,logp,updated)):
                     raise FloatingPointError('Nonfinite validation inference')
@@ -157,7 +173,7 @@ class GameValidator:
         valid = np.ones(len(targets), bool)
         choices = sum(r['choices'] for r in rows)
         return dict(scope='Frozen recorded observations/actions; terminal targets only. Policy surrogate gains are not win rates.',
-            recurrent_states='replayed from zero with current weights' if replay else 'frozen behavior states',
+            recurrent_states='stateless current observation' if self.compact else 'replayed from zero with current weights' if replay else 'frozen behavior states',
             attempted_games=len(games), terminal_games=len(rows), normalization=normalization,
             advantage_baseline=self.advantage_baseline,
             value_before=value_prediction_diagnostics(targets,before,valid),

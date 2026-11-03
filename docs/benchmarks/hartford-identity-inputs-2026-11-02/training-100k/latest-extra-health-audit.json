@@ -1,0 +1,12 @@
+{
+  "checkpoint": 18,
+  "finite_model_datasets": 41,
+  "saved_rng_present": true,
+  "guard_samples": 1975,
+  "minimum_available_gib": 2.4697265625,
+  "maximum_low_memory_seconds": 0.0,
+  "committed_rounds_audited": 18,
+  "evaluation_games": 0,
+  "log_alerts": [],
+  "errors": []
+}

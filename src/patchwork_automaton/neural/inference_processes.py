@@ -64,6 +64,10 @@ def weights_digest(weights):
     return digest.hexdigest()
 
 
+def _versions_digest(digests):
+    return hashlib.sha256(repr(sorted(digests.items())).encode()).hexdigest()
+
+
 def bridge_requests(connection, batcher, stopping):
     while not stopping.is_set():
         try:
@@ -83,24 +87,68 @@ def bridge_requests(connection, batcher, stopping):
             return
 
 
-def _replica_main(control, connections, config, weights, version, wait_ms, device, cpu_intra_threads=None):
+class _VersionBatchers:
+    """Route immutable checkpoint versions inside one inference process."""
+    version = None
+
+    def __init__(self, batchers):
+        self.batchers = batchers
+
+    def predict(self, batch, *, version, **options):
+        if version not in self.batchers:
+            raise RuntimeError(f'Unknown frozen opponent version: {version}')
+        return self.batchers[version].predict(batch, version=version, **options)
+
+    def stats(self):
+        rows = [b.stats() for b in self.batchers.values()]
+        result = dict(rows[0]);histogram = {}
+        for row in rows:
+            for size, count in row['batch_histogram'].items():
+                histogram[size] = histogram.get(size, 0) + count
+        for key in ('calls', 'requests', 'inference_seconds', 'graph_traces'):
+            result[key] = sum(row[key] for row in rows)
+        result.update(mean_batch=result['requests']/max(result['calls'], 1), batch_histogram=histogram,
+            mean_queue_ms=sum(row['mean_queue_ms']*row['requests'] for row in rows)/max(result['requests'], 1),
+            version_stats={n:b.stats() for n,b in self.batchers.items()})
+        return result
+
+    async def close(self):
+        await asyncio.gather(*(b.close() for b in self.batchers.values()))
+
+
+def _replica_main(control, connections, config, weights, version, wait_ms, device, cpu_intra_threads=None,
+                  version_weights=None):
     async def serve():
         import keras
         from . import model as registered_models  # noqa: F401
-        from .batching import InferenceBatcher, example_batch
+        from . import compact_standard_model as registered_compact_models  # noqa: F401
+        from . import compact_identity_model as registered_identity_models  # noqa: F401
+        from .batching import InferenceBatcher, model_example_batch
         from .devices import device_scope, assert_model_device
         import tensorflow as tf
-        with device_scope(device):
-            network = keras.saving.deserialize_keras_object(config)
-            network(example_batch(network.memory_size,network.feature_spec),training=False)
-            network.set_weights(weights)
-        assert_model_device(network, device)
-        batcher = InferenceBatcher(network,max_batch=len(connections),wait_ms=wait_ms,device=device)
+        batchers = {};networks = {}
+        try:
+            for number, frozen_weights in (version_weights or {version: weights}).items():
+                with device_scope(device):
+                    network = keras.saving.deserialize_keras_object(config)
+                    network(model_example_batch(network),training=False)
+                    network.set_weights(frozen_weights)
+                assert_model_device(network, device)
+                service = InferenceBatcher(network,max_batch=len(connections),wait_ms=wait_ms,device=device)
+                networks[number] = network;batchers[number] = service
+                await service.start();service.set_version(number)
+        except BaseException:
+            await asyncio.gather(*(b.close() for b in batchers.values()),return_exceptions=True)
+            raise
+        batcher = _VersionBatchers(batchers) if version_weights is not None else batchers[version]
+        digests = {number: weights_digest(network.get_weights()) for number, network in networks.items()}
+        digest = _versions_digest(digests) if version_weights is not None else digests[version]
         bridges = None
         stopping = Event()
         def state():
             return dict(pid=os.getpid(),engines=len(connections),version=batcher.version,
-                weights_sha256=weights_digest(network.get_weights()),
+                weights_sha256=digest if version_weights is not None else weights_digest(network.get_weights()),
+                versions=digests if version_weights is not None else None,
                 visible_gpus=[gpu.name for gpu in tf.config.get_visible_devices('GPU')],
                 cuda_visible_devices=os.environ.get('CUDA_VISIBLE_DEVICES'),
                 intra_op_threads=tf.config.threading.get_intra_op_parallelism_threads(),
@@ -109,8 +157,6 @@ def _replica_main(control, connections, config, weights, version, wait_ms, devic
                 tf_num_interop_threads_env=os.environ.get('TF_NUM_INTEROP_THREADS'),
                 process_cpu_seconds=time.process_time(),**batcher.stats())
         try:
-            await batcher.start()
-            batcher.set_version(version)
             bridges = ThreadPoolExecutor(max_workers=len(connections),thread_name_prefix='replica-inference')
             for connection in connections:
                 bridges.submit(bridge_requests,connection,batcher,stopping)
@@ -119,6 +165,7 @@ def _replica_main(control, connections, config, weights, version, wait_ms, devic
                 command,payload = await asyncio.to_thread(control.recv)
                 if command == 'close': break
                 if command == 'sync':
+                    if version_weights is not None:raise RuntimeError('Frozen checkpoint bank cannot be mutated')
                     new_version,new_weights = payload
                     batcher.set_version(new_version)
                     with device_scope(device):
@@ -171,6 +218,7 @@ class InferenceProcessGroup:
         self.started = self.closed = self.broken = self.busy = False
         self.version = None
         self.digest = None
+        self.version_digests = None
 
     def _receive(self, handle):
         connection,process = handle
@@ -195,13 +243,15 @@ class InferenceProcessGroup:
     def _verify(self, states, version, digest):
         if any(s['version'] != version or s['weights_sha256'] != digest for s in states):
             raise RuntimeError('Inference replicas disagree on frozen policy weights or version')
+        if self.version_digests is not None and any(s.get('versions') != self.version_digests for s in states):
+            raise RuntimeError('Inference replicas disagree on frozen checkpoint bank')
         if any(s['device'] != self.device for s in states):
             raise RuntimeError('Inference replicas disagree on requested neural device')
         if self.cpu_intra_threads is not None and any(s['intra_op_threads'] != self.cpu_intra_threads for s in states):
             raise RuntimeError('CPU inference replicas disagree on intra-op thread count')
         self.states,self.version,self.digest = states,version,digest
 
-    async def start(self, model, *, version=0):
+    async def start(self, model, *, version=0, version_weights=None):
         if self.started or self.closed or self.busy: raise RuntimeError('Inference group cannot start')
         import keras
         self.busy = True
@@ -209,12 +259,17 @@ class InferenceProcessGroup:
             config = keras.saving.serialize_keras_object(model)
             weights = model.get_weights()
             digest = weights_digest(weights)
+            if version_weights is not None:
+                if not version_weights or len(version_weights)>4 or any(type(n) is not int or n<0 for n in version_weights):
+                    raise ValueError('Frozen opponent bank requires one to four nonnegative checkpoint versions')
+                self.version_digests = {n:weights_digest(w) for n,w in version_weights.items()}
+                version = None;digest = _versions_digest(self.version_digests)
             context = mp.get_context('spawn')
             for i in range(self.replicas):
                 parent,child = context.Pipe()
                 assigned = self.connections[i::self.replicas]
                 process = context.Process(target=_replica_main,
-                    args=(child,assigned,config,weights,version,self.wait_ms,self.device,self.cpu_intra_threads),name=f'inference-replica-{i}')
+                    args=(child,assigned,config,weights,version,self.wait_ms,self.device,self.cpu_intra_threads,version_weights),name=f'inference-replica-{i}')
                 try: process.start()
                 except BaseException:
                     parent.close();child.close()
@@ -251,6 +306,7 @@ class InferenceProcessGroup:
         finally: self.busy = False
 
     async def sync(self, model, version):
+        if self.version_digests is not None:raise RuntimeError('Frozen checkpoint bank cannot be mutated')
         weights = model.get_weights()
         await self._command('sync',(version,weights),version=version,digest=weights_digest(weights))
 

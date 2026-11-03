@@ -84,6 +84,7 @@ class ProcessGameCollector:
             self.bridge_futures = [self.bridges.submit(bridge_requests,c,batcher,self.stopping) for c in self.connections]
         # Keras wraps dictionaries in trackers containing non-picklable callbacks.
         metadata = dict(card_count=model.card_count, memory_size=model.memory_size, feature_spec=dict(model.feature_spec))
+        metadata['input_format']=getattr(model,'input_format',None)
         self.pool = ProcessPoolExecutor(max_workers=workers, mp_context=context,
             initializer=_initialize_worker, initargs=(self.worker_connections, context.Value('i', 0), metadata))
         self.closed = self.active = self.broken = False

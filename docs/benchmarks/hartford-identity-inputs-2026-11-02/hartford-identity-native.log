@@ -1,0 +1,6 @@
+test_private_native_choices_and_identity_sidecar_match_reference (test_compact_identity.NativeParityTests.test_private_native_choices_and_identity_sidecar_match_reference) ... ok
+
+----------------------------------------------------------------------
+Ran 1 test in 1.892s
+
+OK

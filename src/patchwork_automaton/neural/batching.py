@@ -1,4 +1,6 @@
 """One compiled inference service shared by independent game workers."""
+from .compact_dispatch import is_compact,codec,neural,V2
+
 import asyncio
 from concurrent.futures import ThreadPoolExecutor
 from contextlib import nullcontext
@@ -31,12 +33,30 @@ def example_batch(memory_size, feature_spec=None):
     return batch
 
 
+def model_example_batch(model):
+    custom=getattr(model,'example_inputs',None)
+    return custom() if custom else example_batch(model.memory_size,getattr(model,'feature_spec',None))
+
+
+def record_batch(model,records,*,memory=None):
+    if is_compact(model):
+        module=codec(model)
+        store=neural(model).TensorStore(module.pack([module.decision(s.arrays) for s in records]))
+        b=store.batch(tf.range(len(records),dtype=tf.int32))
+        b['advance_memory']=tf.convert_to_tensor([[float(s.advance)] for s in records],tf.float32)
+        return b
+    b=collate([s.arrays for s in records])
+    b['memory_in']=np.stack([s.memory for s in records]) if memory is None else memory
+    b['advance_memory']=np.asarray([[float(s.advance)] for s in records],np.float32)
+    return b
+
+
 def input_signature(batch):
     # Only record widths and recurrent state widths are static. Dynamic axes
     # share one graph across batch sizes, entity counts and sequence lengths.
     fixed_last = {'entities', 'semantics', 'relations', 'context', 'candidates',
-                  'selection', 'history', 'memory_in', 'advance_memory'}
-    return {key: tf.TensorSpec(tuple(size if key in fixed_last and i == value.ndim-1 else None
+                  'selection', 'history', 'memory_in', 'advance_memory', 'roles', 'edges', 'refs', 'identity_roles'}
+    return {key: tf.TensorSpec(tuple(size if key in fixed_last and i == len(value.shape)-1 else None
                                     for i, size in enumerate(value.shape)), tf.as_dtype(value.dtype), name=key)
             for key, value in batch.items()}
 
@@ -51,10 +71,19 @@ class Request:
     unbatched: bool = False
 
 
-def pack_requests(requests):
+def pack_requests(requests, *, compact_raw=False):
     """Accept both existing batch-of-one callers and direct numerical records."""
     items = [{k: v if r.unbatched else v[0] for k, v in r.batch.items()
               if k not in ('memory_in', 'advance_memory')} for r in requests]
+    if items and '_compact' in items[0]:
+        if not all('_compact' in item for item in items):raise ValueError('Mixed compact and dense inference requests')
+        from .compact_dispatch import record_version
+        version=record_version(items[0]['_compact'])
+        if any(record_version(item['_compact'])!=version for item in items):raise ValueError('Mixed compact input versions')
+        data=codec(version).pack([item['_compact'] for item in items])
+        if compact_raw:return items,data
+        store=neural(version).TensorStore(data)
+        return items,store.batch(tf.range(len(items),dtype=tf.int32))
     batch = collate(items)
     for key in ('memory_in', 'advance_memory'):
         batch[key] = np.stack([r.batch[key] if r.unbatched else r.batch[key][0] for r in requests])
@@ -80,10 +109,22 @@ class InferenceBatcher:
     async def start(self):
         self.loop = asyncio.get_running_loop()
         def warm():
-            batch = example_batch(self.model.memory_size, getattr(self.model, 'feature_spec', None))
             with device_scope(self.device) if self.device else nullcontext():
+                batch = model_example_batch(self.model)
                 self.model(batch, training=False)
-                self.compiled = tf.function(self.model.call, input_signature=[input_signature(batch)], autograph=False)
+                self.compact=is_compact(self.model)
+                if self.compact:
+                    module=neural(self.model)
+                    TensorStore=module.TensorStore
+                    batch=module.example_store()
+                    def forward(data):
+                        prepared=TensorStore.batch_data(data,tf.range(tf.size(data['action'])))
+                        return self.model(prepared,training=False)
+                else:
+                    forward=self.model.call
+                # Sparse gathers belong in the same graph as the model. Eager
+                # preparation otherwise dispatches dozens of kernels per call.
+                self.compiled = tf.function(forward, input_signature=[input_signature(batch)], autograph=False)
                 outputs = self.compiled(batch)
             if self.device:
                 self.variable_placements = assert_model_device(self.model, self.device)
@@ -125,13 +166,13 @@ class InferenceBatcher:
         self.queue_seconds = stats['mean_queue_ms'] * self.requests / 1000
 
     def _infer(self, requests):
-        items, batch = pack_requests(requests)
         with device_scope(self.device) if self.device else nullcontext():
+            items, batch = pack_requests(requests,compact_raw=self.compact)
             outputs = self.compiled(batch)
         if self.device:
             self.output_placements = assert_output_device(outputs, self.device)
         output = {k: np.asarray(v) for k,v in outputs.items()}
-        return [{k: (v[i:i+1, :len(items[i]['candidates'])] if k == 'logits' else v[i:i+1])
+        return [{k: (v[i:i+1, :len(items[i]['candidate_mask'])] if k == 'logits' else v[i:i+1])
                  for k,v in output.items()} for i in range(len(requests))]
 
     async def _serve(self):

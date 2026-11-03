@@ -1,0 +1,45 @@
+{
+  "status": "passed",
+  "audited_at": "2026-11-03T13:53:11.329793+00:00",
+  "games": 11200,
+  "panels": {
+    "identity-vs-parent": {
+      "games": 4000,
+      "all_scheduled_identities_verified": true,
+      "balanced_decks_seats_starts": true,
+      "no_training_trajectories": true,
+      "summaries_recomputed": true,
+      "failed_games": 0
+    },
+    "identity-vs-scripted": {
+      "games": 3600,
+      "all_scheduled_identities_verified": true,
+      "balanced_decks_seats_starts": true,
+      "no_training_trajectories": true,
+      "summaries_recomputed": true,
+      "failed_games": 0
+    },
+    "parent-vs-scripted": {
+      "games": 3600,
+      "all_scheduled_identities_verified": true,
+      "balanced_decks_seats_starts": true,
+      "no_training_trajectories": true,
+      "summaries_recomputed": true,
+      "failed_games": 0
+    }
+  },
+  "guard_exit_code": 0,
+  "minimum_available_gib": 4.515636444091797,
+  "all_original_training_checkpoints_and_sources_unchanged": true,
+  "provenance_files_verified": 1915,
+  "games_gzip_sha256": "2680652d7519549517b19fedc2c376b03578d5682f8e3a47d772b56d176fec96",
+  "engine": {
+    "build_manifest": "/home/altf4/benchmarks/hartford-identity-ppo-20261102/project-trigger-v2/.local/direct-standard/target-4f64940e46e0-capped256/release/libpatchwork_direct_standard.build.json",
+    "checkout": "/home/altf4/benchmarks/hartford-identity-ppo-20261102/project-trigger-v2/.local/direct-standard/rustmage-4f64940e46e0",
+    "library": "/home/altf4/benchmarks/hartford-identity-ppo-20261102/project-trigger-v2/.local/direct-standard/target-4f64940e46e0-capped256/release/libpatchwork_direct_standard.so",
+    "library_sha256": "f6433993218834a14bbd6d4619e2ce03a2c2056b124aa6d0f7f58aa4bf9b84a4",
+    "observation_schema": 198,
+    "revision": "4f64940e46e0181bf963c0de0f6f5a9a51a926b5"
+  },
+  "limitation": "Identity arm has 100000 additional training games; this is not an isolated architecture ablation."
+}

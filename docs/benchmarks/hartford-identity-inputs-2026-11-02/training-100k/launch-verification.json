@@ -1,0 +1,20 @@
+{
+  "status": "launched_first_round_verified",
+  "observed_at": "2026-11-03T04:47:41.459037+00:00",
+  "checkpoint": 1,
+  "committed_games": 1000,
+  "training_games": 800,
+  "holdout_games": 200,
+  "training_decisions": 66238,
+  "ppo_epochs": 2,
+  "rejected_epochs": 0,
+  "exact_kl": 0.00224545398939116,
+  "collection_seconds": 130.5538508380123,
+  "update_seconds": 42.573025265999604,
+  "validation_seconds": 4.314933229004964,
+  "encoded_input_mib": 104.22412872314453,
+  "available_memory_gib": 12.559951782226562,
+  "disk_free_gib": 821.175048828125,
+  "integrity_errors": [],
+  "guard_status": "running"
+}

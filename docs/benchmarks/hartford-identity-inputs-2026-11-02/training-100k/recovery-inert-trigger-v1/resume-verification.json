@@ -1,0 +1,80 @@
+{
+  "passed": true,
+  "committed_round": 43,
+  "committed_games": 43000,
+  "old_checkpoints_preserved": 43,
+  "successful_games_reused": 999,
+  "replayed_successful_games": 0,
+  "original_attempt_and_full_archive_intact": true,
+  "repaired_game": {
+    "actions": null,
+    "behavior_version": 42,
+    "decisions": 196,
+    "deck_catalog": "hartford",
+    "decks": [
+      "jeskai-artifacts",
+      "jeskai-artifacts"
+    ],
+    "draw": true,
+    "final_life": [
+      20,
+      18
+    ],
+    "index": 42776,
+    "learner_deck": "jeskai-artifacts",
+    "learner_seat": 0,
+    "learner_won": false,
+    "opponent_checkpoint_sha256": "8bb9813e87534294a72d22b2de686ef7dacda1566f1ef98b466689c58c36be75",
+    "opponent_deck": "jeskai-artifacts",
+    "opponent_kind": "frozen_neural",
+    "opponent_version": 39,
+    "pairing": [
+      "jeskai-artifacts",
+      "jeskai-artifacts"
+    ],
+    "partition": "training",
+    "seconds": 0.27260076798847876,
+    "seed": 412610552776,
+    "starting_player": "P1",
+    "status": "draw",
+    "trajectories": [
+      {
+        "deck": "jeskai-artifacts",
+        "path": "/home/altf4/benchmarks/hartford-identity-ppo-20261102/run-v1/decision-limit-investigation-v1/retry-fixed-engine-v1/game-042776-p0.pkl.gz",
+        "player": 0,
+        "reward": 0.0,
+        "samples": 20,
+        "sha256": "4895d93d42135a17e29b4f4ab45afc1870e8aea62631291dae47000174562afc",
+        "value_square_sum": 2.8276092725661286,
+        "value_sum": -6.991884768009186
+      }
+    ],
+    "turn": 9,
+    "winner_deck": null,
+    "winner_seat": null
+  },
+  "retry_audit": {
+    "passed": true,
+    "failed_identity": 42776,
+    "unchanged_seed": 412610552776,
+    "checkpoint_hashes": [
+      "b6c7676f5c17257350ee60dd366c6b7cc3111be4ff58f970b54bdd80783e3dc6",
+      "8bb9813e87534294a72d22b2de686ef7dacda1566f1ef98b466689c58c36be75"
+    ],
+    "decisions": 196,
+    "turn": 9,
+    "rules_draw": true,
+    "original_decisions": 6000,
+    "matched_original_learner_prefix": 20,
+    "model_weights_unchanged": true,
+    "original_attempt_preserved": true,
+    "no_successful_game_replayed": true,
+    "policy_evaluation_games": 0
+  },
+  "collection_inference": [],
+  "collection_seconds": 0.11057698000513483,
+  "update_seconds": 41.13193402600882,
+  "validation_seconds": 4.560271483991528,
+  "exact_kl": 0.002387382422309267,
+  "policy_evaluation_games": 0
+}

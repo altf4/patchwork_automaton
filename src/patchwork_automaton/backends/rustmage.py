@@ -21,8 +21,8 @@ from ..core import (Capabilities, Decision, DecisionToken, Handle, ObjectView,
                     Observation, Option, Outcome, PlayerView, Response)
 from ..errors import Disconnected, GameEnded, StaleDecision, UnsupportedInteraction
 
-RUSTMAGE_REVISION = '046b25ef14671753a2eea6336bc1ce974b298253'
-OBSERVATION_SCHEMA = 169
+RUSTMAGE_REVISION = 'e732a4bb42774fc20672dc2aad3952f9d1b57ae7'
+OBSERVATION_SCHEMA = 198
 CAPABILITIES = Capabilities('rustmage', frozenset((
     'private_views', 'sequential_choices', 'seed', 'concede', 'snapshot', 'restore', 'fork')))
 PHASES = {'Pregame': None, 'Main1': 'precombat_main', 'Main2': 'postcombat_main',

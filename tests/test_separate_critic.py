@@ -26,7 +26,8 @@ class SeparateCriticTests(unittest.TestCase):
             batch[key] = np.repeat(batch[key], 2, axis=1)
         batch['candidates'][:, 1, 0] = 1.
         batch['entities'][:, 0, 0] = [1., -1.]
-        batch['card_ids'][:, 0] = 1
+        # RustMage has no per-card learned identity: traits carry card meaning.
+        batch['card_ids'][:, 0] = 0
         batch['semantics'][:, 0, 0, 0] = 1.
         batch['memory_in'][:] = .1
         model(batch)

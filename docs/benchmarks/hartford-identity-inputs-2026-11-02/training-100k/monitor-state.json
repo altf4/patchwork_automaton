@@ -1,0 +1,30 @@
+{
+  "observed_at": "2026-11-03T11:55:53.090301+00:00",
+  "guard_status": "exited",
+  "owned_child_alive": false,
+  "progress": {
+    "completed_games": 100000,
+    "evaluation_games": 0,
+    "phase": "complete",
+    "round": 100
+  },
+  "checkpoint": 100,
+  "committed_games": 100000,
+  "durable_unpruned_results": 2000,
+  "available_memory_bytes": 15388266496,
+  "disk_free_bytes": 879913828352,
+  "integrity_errors": [],
+  "failure_files": [],
+  "resource_history": {
+    "samples": 5884,
+    "minimum_available_bytes": 2665951232,
+    "maximum_low_memory_seconds": 0.0
+  },
+  "finite_model_datasets": 41,
+  "last_check_result": "completion_audit_passed",
+  "completion_audit": "/home/altf4/Code/mtgo-bot/patchwork_automaton/docs/benchmarks/hartford-identity-inputs-2026-11-02/training-100k/completion-audit/20261103T115903Z-audit.json",
+  "completed_at": "2026-11-03T11:53:26.933411+00:00",
+  "completion_verified_at": "2026-11-03T11:59:38.253978+00:00",
+  "monitoring_status": "finished_automation_deleted",
+  "automation_deleted_at": "2026-11-03T11:59:50.540385+00:00"
+}

@@ -1,0 +1,47 @@
+{
+  "passed": true,
+  "matched_complete_games_per_arm": 12,
+  "matched_fields": [
+    "index",
+    "seed",
+    "decks",
+    "starting_player",
+    "learner_seat",
+    "status",
+    "winner_seat",
+    "decisions",
+    "turn",
+    "final_life",
+    "actions"
+  ],
+  "training_games": 8,
+  "holdout_games": 4,
+  "training_samples": 515,
+  "ppo_epochs": 2,
+  "accepted_steps": 4,
+  "source_200k_sha256": "eb56f40c7e3519a9cbb69dbbc9d85129bec91a6bf600d13ce3d599c5ee64fef6",
+  "native_engine_revision": "e732a4bb42774fc20672dc2aad3952f9d1b57ae7",
+  "limitations": [
+    "Local CPU pipeline acceptance, not Raytracer GPU/full-quota throughput validation.",
+    "No game-strength improvement measured. Acceptance transfers the unchanged 200k policy exactly.",
+    "Initial harness delayed at asyncio executor shutdown after all artifacts were saved; shutdown helper repaired separately."
+  ],
+  "artifact_sha256": {
+    "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/hartford-identity-inputs/source-200k/policy.keras": "eb56f40c7e3519a9cbb69dbbc9d85129bec91a6bf600d13ce3d599c5ee64fef6",
+    "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/direct-standard/target-e732a4bb4277-capped256/release/libpatchwork_direct_standard.so": "242c35677ba2e8fdfc9b66fdf0f5fdf2bf5431b6a2469e568424d68f5e74ab88",
+    "/home/altf4/Code/mtgo-bot/patchwork_automaton/docs/benchmarks/hartford-identity-inputs-2026-11-02/acceptance-v1/checkpoints/round-0001/optimizer.npz": "ada8f8f90b9afc4d62d114d2f1ad55d9bc2bd626ae5d1b1f8b98fcb1156f7c75",
+    "/home/altf4/Code/mtgo-bot/patchwork_automaton/docs/benchmarks/hartford-identity-inputs-2026-11-02/acceptance-v1/checkpoints/round-0001/state.json": "90bc75cf2853294ef218cd6b5d4a33884aef376f5fbf6c028cc467ce08ea05e3",
+    "/home/altf4/Code/mtgo-bot/patchwork_automaton/docs/benchmarks/hartford-identity-inputs-2026-11-02/acceptance-v1/checkpoints/round-0001/policy.manifest.json": "b17e2ca879f83b5325ae088cc0618302a22355f417d9e04b07a188e9ff49204c",
+    "/home/altf4/Code/mtgo-bot/patchwork_automaton/docs/benchmarks/hartford-identity-inputs-2026-11-02/acceptance-v1/checkpoints/round-0001/policy.keras": "fa7291f2ce4d88c620d4f870ec48e2697db8dc6f5796c34071c84b1e6fc2248b",
+    "/home/altf4/Code/mtgo-bot/patchwork_automaton/docs/benchmarks/hartford-identity-inputs-2026-11-02/acceptance-v1/checkpoints/round-0001/critic-optimizer.npz": "db5887c0a2c605cd09d0d5b1fa8ca69046a9050c7340e03f48558a57583c7bb2"
+  },
+  "guard_exit_code": 0,
+  "min_available_physical_gib": 16.746170043945312,
+  "tests": {
+    "identity": 9,
+    "prior_compact_regressions": 13,
+    "total_distinct": 22
+  },
+  "shutdown_fix": "Explicit executor shutdown with timer active; independently compiled replica test passed.",
+  "no_successful_games_replayed": true
+}

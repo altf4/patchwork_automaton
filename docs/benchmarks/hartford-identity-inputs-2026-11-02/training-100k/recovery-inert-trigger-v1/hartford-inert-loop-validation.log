@@ -1,0 +1,18 @@
+Running as unit: rustmage-build-aabc99b43b3e4a0a837099eac5911609.service; invocation ID: 0b79da25ead145b8a53bff9688ca93a1
+Waiting for the shared build slot...
+Validation report: /home/altf4/.cache/rustmage-validation-u75fvygf/report/result.json
+1/8 source pins: exit=0 0.766s
+2/8 format: exit=0 3.076s
+3/8 card format: exit=0 1.071s
+4/8 script contracts: exit=0 1.169s
+5/8 clippy: exit=0 62.236s
+6/8 native assurance: exit=0 197.768s
+7/8 release build: exit=0 158.181s
+8/8 simulation sample: exit=0 0.217s
+{"success": true, "report": "/home/altf4/.cache/rustmage-validation-u75fvygf/report/result.json", "seconds": 424.665019913984, "complete_cards": 3001, "cleaned_bytes": 0}
+Resource report: /home/altf4/.cache/rustmage-build-reports/56a73d4c157c45e09edd78ec81340965.json
+          Finished with result: success
+Main processes terminated with: code=exited, status=0/SUCCESS
+               Service runtime: 7min 4.925s
+             CPU time consumed: 7min 7.498s
+                   Memory peak: 3.2G (swap: 0B)

@@ -115,6 +115,43 @@ class ArenaScheduleTests(unittest.TestCase):
 
 
 class ArenaReportTests(unittest.TestCase):
+    def test_natural_completion_excludes_adjudication_and_unresolved_attempts(self):
+        rows = [
+            report_row(0, 'win', starting_player='P0'),
+            report_row(1, 'loss', starting_player='P1'),
+            report_row(2, 'draw', starting_player='P0'),
+            dict(report_row(3, 'draw', starting_player='P1', reason='turn_limit'),
+                 adjudicated=True),
+            report_row(4, 'cutoff', starting_player='P0'),
+            report_row(5, 'error', starting_player='P1'),
+        ]
+        summary = summarize_arena(rows)
+        aggregate = summary['aggregate']
+        self.assertEqual((aggregate['attempted'], aggregate['completed'],
+                          aggregate['natural_completed'], aggregate['adjudicated_draws']),
+                         (6, 4, 3, 1))
+        self.assertEqual(aggregate['completion_rate'], .5)
+        low, high = aggregate['completion_rate_wilson_95_interval']
+        self.assertAlmostEqual(low, .1876163, places=6)
+        self.assertAlmostEqual(high, .8123837, places=6)
+        self.assertEqual((aggregate['on_play']['natural_completed'],
+                          aggregate['on_play']['attempted'],
+                          aggregate['on_draw']['natural_completed'],
+                          aggregate['on_draw']['attempted']), (2, 3, 1, 3))
+        for group in (summary['entrants'][0], summary['cells'][0]):
+            self.assertEqual(group['natural_completed'], 3)
+            self.assertEqual(group['completion_rate'], .5)
+            self.assertEqual(group['completion_rate_wilson_95_interval'],
+                             aggregate['completion_rate_wilson_95_interval'])
+        self.assertEqual(aggregate['win_rate'], .25)
+        self.assertEqual(aggregate['game_score'], .5)
+
+    def test_empty_completion_rate_is_undefined(self):
+        aggregate = summarize_arena([])['aggregate']
+        self.assertEqual(aggregate['natural_completed'], 0)
+        self.assertIsNone(aggregate['completion_rate'])
+        self.assertIsNone(aggregate['completion_rate_wilson_95_interval'])
+
     def test_attempts_outcomes_and_play_draw_splits(self):
         rows = [
             report_row(0, 'win', learner_seat=0, starting_player='P0'),

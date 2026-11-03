@@ -65,7 +65,7 @@ pub unsafe extern "C" fn ds_configure(data: *const c_char) -> bool {
         let c: EncoderConfig = serde_json::from_slice(unsafe { CStr::from_ptr(data) }.to_bytes())
             .map_err(|e| e.to_string())?;
         if c.fingerprint.is_empty() { return Err("missing schema fingerprint".into()); }
-        if c.unknown_traits.len() != 252 || c.traits.values().any(|v| v.len() != 252) || c.actions.len() != 106 {
+        if c.unknown_traits.len() != 252 || c.traits.values().any(|v| v.len() != 252) || c.actions.len() != 200 {
             return Err("unsupported Standard feature schema".into());
         }
         let new = Encoder { fingerprint: c.fingerprint, catalogue: Catalogue {
@@ -229,8 +229,7 @@ pub unsafe extern "C" fn ds_choice_kind(view: *const View, index: usize) -> *mut
     guard(|| {
         let view = unsafe { view.as_ref() }.ok_or("null observation")?;
         let choice = view.choices.as_ref().ok_or("choices not prepared")?.get(index).ok_or("choice out of bounds")?;
-        let kind = if matches!(choice.action, rustmage::Action::ChooseHarmonizer { .. }) {"ChooseHarmonizer"}
-                   else {actions::project(&choice.action)?.kind};
+        let kind = actions::project(&choice.action)?.kind;
         Ok(CString::new(kind).map_err(|e|e.to_string())?.into_raw())
     })
 }
@@ -299,4 +298,18 @@ pub unsafe extern "C" fn ds_debug_json(view: *const View) -> *mut c_char {
 #[unsafe(no_mangle)]
 pub unsafe extern "C" fn ds_string_free(value: *mut c_char) {
     if value != ptr::null_mut() { drop(unsafe { CString::from_raw(value) }); }
+}
+
+/// Diagnostic parity only: encode a supplied action against a private view.
+/// This never applies an action or changes a game; production uses ds_encode.
+#[unsafe(no_mangle)]
+pub unsafe extern "C" fn ds_encode_debug_action(view:*const View,data:*const c_char)->*mut Arrays {
+    guard(|| {
+        let view=unsafe {view.as_ref()}.ok_or("null observation")?;
+        if data.is_null(){return Err("null diagnostic action".into());}
+        let action:rustmage::Action=serde_json::from_slice(unsafe {CStr::from_ptr(data)}.to_bytes()).map_err(|e|e.to_string())?;
+        let encoder=ENCODER.get().ok_or("encoder not configured")?;
+        let choices=[choices::Choice {action,finite_index:None}];
+        Ok(Box::into_raw(Box::new(encode::encode(&view.observation,&choices,encoder)?)))
+    })
 }

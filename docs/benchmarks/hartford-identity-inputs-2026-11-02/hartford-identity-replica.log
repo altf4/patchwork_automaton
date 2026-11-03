@@ -1,0 +1,46 @@
+test_identity_payload_through_independent_compiled_replica (test_compact_identity.ReplicaTests.test_identity_payload_through_independent_compiled_replica) ... WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1793666972.466724       3 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1793666973.103437       3 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1793666974.040001      11 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+I0000 00:00:1793666974.661471      11 port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+ERROR
+
+======================================================================
+ERROR: test_identity_payload_through_independent_compiled_replica (test_compact_identity.ReplicaTests.test_identity_payload_through_independent_compiled_replica)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/altf4/Code/mtgo-bot/patchwork_automaton/tests/test_compact_identity.py", line 253, in test_identity_payload_through_independent_compiled_replica
+    finally:
+  File "/home/altf4/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py", line 195, in run
+    return runner.run(main)
+           ^^^^^^^^^^^^^^^^
+  File "/home/altf4/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/runners.py", line 118, in run
+    return self._loop.run_until_complete(task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/altf4/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/base_events.py", line 691, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/home/altf4/Code/mtgo-bot/patchwork_automaton/examples/experiment_hartford_identity.py", line 182, in with_executor_shutdown
+    result=await coroutine
+           ^^^^^^^^^^^^^^^
+  File "/home/altf4/Code/mtgo-bot/patchwork_automaton/tests/test_compact_identity.py", line 244, in run
+    group=InferenceProcessGroup([server],replicas=1,timeout=20)
+        ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/altf4/Code/mtgo-bot/patchwork_automaton/src/patchwork_automaton/neural/inference_processes.py", line 282, in start
+    self._verify(await self._receive_all(),version,digest)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/altf4/Code/mtgo-bot/patchwork_automaton/src/patchwork_automaton/neural/inference_processes.py", line 240, in _receive_all
+    if isinstance(result,BaseException): raise result
+                                         ^^^^^^^^^^^^
+  File "/home/altf4/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/lib/python3.12/asyncio/threads.py", line 25, in to_thread
+    return await loop.run_in_executor(None, func_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: Inference process response timed out
+
+----------------------------------------------------------------------
+Ran 1 test in 126.708s
+
+FAILED (errors=1)

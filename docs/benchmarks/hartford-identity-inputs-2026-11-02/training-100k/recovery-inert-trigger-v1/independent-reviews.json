@@ -1,0 +1,15 @@
+{
+  "reviewers": [
+    "inert_loop_review_a",
+    "inert_loop_review_b"
+  ],
+  "independent_nonauthor": true,
+  "engine_sha256": "d0524094c13e888319ad7c018d6b36b909607e2b4adb155715e518c4dc90b6d7",
+  "tests_sha256": "57154c9a67cd5856cd03a1a9c14db828e526d847493dfa0cb70b6c91023fa2e2",
+  "findings": "No remaining blockers; fixed craft admission, printed packet identity, live-exiler peer checks, both orderings, targets and real escapes.",
+  "focused_tests": 10,
+  "focused_status": "passed",
+  "broader_release_validation": "passed",
+  "native_tests": 3024,
+  "release_validation_seconds": 424.665019913984
+}

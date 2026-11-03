@@ -70,6 +70,7 @@ class PackedRolloutTests(unittest.TestCase):
                     fixture=CriticWarmupTests();m,a,paths=fixture.fixture(Path(d)/'a',cache_bytes=cache_bytes,value_max_steps=2)
                     n,b,_=fixture.fixture(Path(d)/'b',cache_bytes=cache_bytes,value_max_steps=2)
                     b.numerical_prepacking=prepack;b.cache_policy_batches=policy
+                    progress=[];b.progress_callback=progress.append;b.update_timeout_seconds=600
                     a.guard_audit=b.guard_audit=True
                     a.compile();b.compile();x=a.update_files(paths);y=b.update_files(paths)
                     for key in ['loss','exact_kl','max_state_kl','value_loss','entropy','accepted_steps','rejected_epochs','critic_steps','optimizer_steps','critic_optimizer_steps','early_stop','samples','guard_proposals']:
@@ -81,6 +82,8 @@ class PackedRolloutTests(unittest.TestCase):
                         for u,v in zip(left,right):np.testing.assert_array_equal(np.asarray(u),np.asarray(v))
                     if policy:self.assertGreater(y['pipeline']['policy_cache_hits'],0)
                     if prepack:self.assertGreater(y['pipeline']['numerical_disk_bytes'],0)
+                    self.assertTrue(any(e['phase']=='guard_result' for e in progress))
+                    self.assertEqual(progress[-1]['phase'],'complete')
 
     def test_resources_close_when_optimizer_raises(self):
         from test_critic_warmup import CriticWarmupTests
@@ -93,6 +96,33 @@ class PackedRolloutTests(unittest.TestCase):
             trainer.numerical_prepacking=trainer.cache_policy_batches=True
             with patch.object(NumericRollout,'close',nc),patch.object(PolicyBatchCache,'close',pc),patch.object(trainer,'step',side_effect=RuntimeError('optimizer failed')):
                 with self.assertRaisesRegex(RuntimeError,'optimizer failed'):trainer.update_files(paths)
+        self.assertCountEqual(closed,['numeric','policy'])
+
+    def test_update_budget_closes_readers_and_preserves_saved_rollouts(self):
+        from test_critic_warmup import CriticWarmupTests
+        from patchwork_automaton.neural.packed_rollouts import NumericRollout,PolicyBatchCache
+        closed=[];nclose=NumericRollout.close;pclose=PolicyBatchCache.close
+        def nc(x):closed.append('numeric');nclose(x)
+        def pc(x):closed.append('policy');pclose(x)
+        with tempfile.TemporaryDirectory() as d:
+            _,trainer,paths=CriticWarmupTests().fixture(d)
+            trainer.numerical_prepacking=trainer.cache_policy_batches=True
+            trainer.update_timeout_seconds=5
+            saved={str(p):p.read_bytes() for p in Path(d).rglob('*') if p.is_file()}
+            events=[]
+            # Advance the budget only after initial measurement, when the
+            # reader and prefetch resources have already been exercised.
+            with patch('patchwork_automaton.neural.update_progress.time.monotonic') as clock:
+                clock.return_value=0
+                def progress(event):
+                    events.append(event)
+                    if event['phase']=='actor_epoch':clock.return_value=6
+                trainer.progress_callback=progress
+                with patch.object(NumericRollout,'close',nc),patch.object(PolicyBatchCache,'close',pc):
+                    with self.assertRaisesRegex(TimeoutError,'wall-clock budget'):
+                        trainer.update_files(paths)
+            self.assertEqual(events[-1]['phase'],'timeout')
+            self.assertEqual(saved,{str(p):p.read_bytes() for p in Path(d).rglob('*') if p.is_file()})
         self.assertCountEqual(closed,['numeric','policy'])
 
 

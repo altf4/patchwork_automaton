@@ -1,0 +1,57 @@
+{
+  "attempts": 1,
+  "child_exit_code": 0,
+  "child_pid": 4,
+  "cleanup": {
+    "child_exit_code": 0,
+    "kill_sent": false,
+    "process_group": 4,
+    "term_sent": false
+  },
+  "command": [
+    "/home/altf4/Code/mtgo-bot/patchwork_automaton/.venv/bin/python",
+    "-u",
+    "-m",
+    "examples.experiment_hartford_identity",
+    "--source",
+    "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/hartford-identity-inputs/source-200k/policy.keras",
+    "--output",
+    "/home/altf4/Code/mtgo-bot/patchwork_automaton/docs/benchmarks/hartford-identity-inputs-2026-11-02/acceptance-v1",
+    "--mode",
+    "acceptance"
+  ],
+  "command_file": "/home/altf4/Code/mtgo-bot/patchwork_automaton/docs/benchmarks/hartford-identity-inputs-2026-11-02/acceptance-command.json",
+  "command_sha256": "8f590dadba009b5d97c45962d3f0d6905ef05e393a963e45112a97dbf88f9194",
+  "cwd": "/home/altf4/Code/mtgo-bot/patchwork_automaton",
+  "elapsed_seconds": 342.02905908299726,
+  "exit_code": 0,
+  "finished_at": "2026-11-03T00:52:33.164405+00:00",
+  "guard_exit_code": 0,
+  "last_sample": {
+    "available_memory_bytes": 20600557568,
+    "elapsed_seconds": 340.0286028800183,
+    "low_memory_seconds": 0.0,
+    "process_group_pids": [
+      4
+    ],
+    "process_group_rss_bytes": 840421376,
+    "timestamp": "2026-11-03T00:52:31.164651+00:00"
+  },
+  "limits": {
+    "check_seconds": 2,
+    "memory_grace_seconds": 5,
+    "min_available_mib": 1536,
+    "terminate_grace_seconds": 15
+  },
+  "process_group": 4,
+  "reason": "child_exit",
+  "schema": 1,
+  "started_at": "2026-11-03T00:46:51.131450+00:00",
+  "status": "exited",
+  "supervisor_pid": 2,
+  "supervisor_sha256": "bdb4510c1d8445dba58041873dfad881801c71d6157dce0dee83e73226e503df",
+  "windows_awake": {
+    "ready": false,
+    "requested": false
+  }
+}

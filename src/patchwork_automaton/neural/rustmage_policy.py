@@ -1,4 +1,6 @@
 """RustMage actor-critic policy; all non-forced choices are neural."""
+from .compact_dispatch import is_compact,codec,neural,V2
+
 import json
 from pathlib import Path
 
@@ -22,6 +24,10 @@ class RustMagePolicy(NeuralPolicy):
         from .native_pipeline import enabled, NativeHistory
         if enabled(): self.history = NativeHistory(self.encoder.registry)
 
+    def observe(self,observation):
+        if is_compact(self.model):return
+        super().observe(observation)
+
     def act(self, obs):
         if obs.backend != 'rustmage' or obs.decision is None:
             raise ValueError('RustMage decision required')
@@ -39,7 +45,11 @@ class RustMagePolicy(NeuralPolicy):
             return ActionRecord(choices[0][0], (), 0.)
         encoded = self.encoder.encode(obs, choices=choices)
         arrays = encoded.arrays
-        arrays.update(self.history.take(obs))
+        compact=is_compact(self.model)
+        if compact:
+            arrays=codec(self.model).observation(arrays)
+        else:
+            arrays.update(self.history.take(obs))
         state = self.states.get(key, np.zeros(self.model.memory_size, np.float32))
         if key in self.last_choices: arrays['selection'] = self.last_choices[key]
         if self.batcher:
@@ -47,8 +57,12 @@ class RustMagePolicy(NeuralPolicy):
             batch = dict(arrays, memory_in=state, advance_memory=np.ones(1, np.float32))
             output = self.batcher.predict(batch, version=self.version, identity=key, unbatched=True)
         else:
-            batch = collate([arrays])
-            batch.update(memory_in=state[None, :], advance_memory=np.ones((1, 1), np.float32))
+            if compact:
+                import tensorflow as tf
+                batch=neural(self.model).TensorStore(codec(self.model).pack([arrays['_compact']])).batch(tf.constant([0],tf.int32))
+            else:
+                batch = collate([arrays])
+                batch.update(memory_in=state[None, :], advance_memory=np.ones((1, 1), np.float32))
             output = self.model(batch, training=False)
         logits = np.asarray(output['logits'])[0].astype(np.float64) / self.temperature
         if not np.isfinite(logits).all(): raise ValueError('Nonfinite model scores')
@@ -59,7 +73,7 @@ class RustMagePolicy(NeuralPolicy):
         value = float(np.asarray(output['value'])[0, 0])
         if self.sink: self.sink.write(Sample(arrays, state, True, index, value, logp.astype(np.float32)))
         self.states[key] = np.asarray(output['memory_out'])[0].copy()
-        self.last_choices[key] = arrays['candidates'][index].copy()
+        if not compact:self.last_choices[key] = arrays['candidates'][index].copy()
         self.previous[key] = token
         record = Selection('option', index, len(logp), float(logp[index]), float(-np.sum(probabilities*logp)))
         return ActionRecord(encoded.responses[index], (record,), value)

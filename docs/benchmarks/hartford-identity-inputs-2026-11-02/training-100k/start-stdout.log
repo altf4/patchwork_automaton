@@ -1,0 +1,2 @@
+Frozen source, parent checkpoint and runtime verified; no experiment started.
+{"start_requested_at": "2026-11-03T04:44:21.263226+00:00", "session": "hartford-identity-100k", "available_memory_bytes": 15551856640, "disk_free_bytes": 881887117312, "gpu": "NVIDIA GeForce RTX 4090, 862 MiB, 23277 MiB", "launcher": "/home/altf4/benchmarks/hartford-identity-ppo-20261102/run-launch-v1/launch.sh"}

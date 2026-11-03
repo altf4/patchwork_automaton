@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "failed_identity": 42776,
+  "unchanged_seed": 412610552776,
+  "checkpoint_hashes": [
+    "b6c7676f5c17257350ee60dd366c6b7cc3111be4ff58f970b54bdd80783e3dc6",
+    "8bb9813e87534294a72d22b2de686ef7dacda1566f1ef98b466689c58c36be75"
+  ],
+  "decisions": 196,
+  "turn": 9,
+  "rules_draw": true,
+  "original_decisions": 6000,
+  "matched_original_learner_prefix": 20,
+  "model_weights_unchanged": true,
+  "original_attempt_preserved": true,
+  "no_successful_game_replayed": true,
+  "policy_evaluation_games": 0
+}

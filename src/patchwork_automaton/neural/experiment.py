@@ -180,7 +180,7 @@ def load_checkpoint(directory, *, gru_backend=None, policy_type=None):
         model=NeuralPolicy.load(root/'policy.keras').model
     # Runtime-only selection must precede trainer construction/compilation.
     # Callers that do not opt in retain portable, unfused checkpoint loading.
-    if gru_backend is not None:
+    if gru_backend is not None and not getattr(model,'stateless',False):
         from .recurrent import configure_gru_backend
         configure_gru_backend(model, gru_backend)
     config=state['config']
@@ -220,6 +220,17 @@ def make_trainer(model,config):
             unroll=config['unroll'], seed=config['seed'] + 5000,
             action_kinds=config.get('action_kinds'), device=config.get('learner_device', 'cpu'))
     if config.get('algorithm','actor-critic')=='ppo':
+        if config.get('architecture') in ('compact-standard-v1','compact-identity-standard-v2'):
+            from .compact_ppo import CompactPPOTrainer
+            return CompactPPOTrainer(model,learning_rate=config['learning_rate'],batch_size=config['train_batch'],
+                seed=config.get('seed',0)+5000,epochs=config.get('ppo_epochs',2),clip_ratio=config.get('ppo_clip',.2),
+                target_kl=config.get('target_kl',.01),max_state_kl=config.get('max_state_kl',.05),
+                advantage_scale_floor=config.get('advantage_scale_floor',1.),trust_guard=True,
+                advantage_baseline=config.get('advantage_baseline','critic'),entropy_weight=config.get('entropy_weight',.01),
+                critic_update_scope=config.get('critic_update_scope','all'),critic_unroll=config.get('critic_unroll',1),
+                concurrent_updates=config.get('concurrent_updates',False),
+                value_learning_rate=config.get('value_learning_rate'),value_max_steps=config.get('value_max_steps'),
+                input_budget_bytes=config.get('compact_input_mib',512)*1024**2)
         from .streaming_ppo import StreamingPPOTrainer
         return StreamingPPOTrainer(model,learning_rate=config['learning_rate'],batch_size=config['train_batch'],
             seed=config.get('seed',0)+5000,epochs=config.get('ppo_epochs',2),clip_ratio=config.get('ppo_clip',.2),

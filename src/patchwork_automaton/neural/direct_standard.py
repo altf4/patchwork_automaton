@@ -11,10 +11,10 @@ from . import card_traits
 from .native_pipeline import KEYS
 from .standard_features import StandardEncoder
 
-# This bridge implements the 250K Standard encoder exactly. A width match is
+# This bridge implements the pinned Standard encoder exactly. A width match is
 # insufficient: action ordering or semantic definitions can change in place.
-FINGERPRINT = 'fc440f7227ce73636193fd743f404f28da3478414dfa2490318bf847125a7810'
-ENGINE_REVISION = '046b25ef14671753a2eea6336bc1ce974b298253'
+FINGERPRINT = 'bddb155245929c0dd3a3d59ab48c85f724739dd5767ae86a67146faf2abc9ac6'
+ENGINE_REVISION = 'e732a4bb42774fc20672dc2aad3952f9d1b57ae7'
 
 
 class Metadata(C.Structure):
@@ -42,7 +42,7 @@ def library_path():
     filename = {'linux': 'libpatchwork_direct_standard.so',
                 'darwin': 'libpatchwork_direct_standard.dylib',
                 'win32': 'patchwork_direct_standard.dll'}[sys.platform]
-    return Path(os.environ.get('DIRECT_STANDARD_LIBRARY', root / '.local/direct-standard/target/release' / filename)).resolve()
+    return Path(os.environ.get('DIRECT_STANDARD_LIBRARY', root / '.local/direct-standard/target-e732a4bb4277-capped256/release' / filename)).resolve()
 
 
 @lru_cache(maxsize=1)

@@ -156,12 +156,15 @@ fn target_rule(s: &mut Summary, rule: TargetRule) {
         }
         TargetRule::Filtered { base, .. }
         | TargetRule::Grouped { base, .. }
+        | TargetRule::ManaValueExactly { base, .. }
         | TargetRule::ManaValueAtMost { base, .. } => {
             target_rule(s, *base);
             s.flag("conditional");
             s.unknown();
         }
         TargetRule::Spell
+        | TargetRule::Ability
+        | TargetRule::CreatureOrLegendarySpell
         | TargetRule::SingleTargetStackObject
         | TargetRule::SpellKinds { .. }
         | TargetRule::YourSpellKinds { .. }
@@ -336,7 +339,9 @@ fn mana(s: &mut Summary, value: ManaProduction) {
             s.produced_colors |= mask;
             s.effect("mana", None);
         }
-        ManaProduction::ChosenColor | ManaProduction::MonocoloredPermanentColors => {
+        ManaProduction::ChosenColor
+        | ManaProduction::MonocoloredPermanentColors
+        | ManaProduction::DistinctCreaturePowers => {
             // Possible colors, not a guarantee that the board permits all five.
             s.produced_colors |= 31;
             s.flag("conditional");

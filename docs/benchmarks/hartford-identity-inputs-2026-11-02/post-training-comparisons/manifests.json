@@ -1,0 +1,256 @@
+{
+  "identity-vs-parent": {
+    "config": {
+      "baseline_seed": 802610300000,
+      "engine": {
+        "build_manifest": "/home/altf4/benchmarks/hartford-identity-ppo-20261102/project-trigger-v2/.local/direct-standard/target-4f64940e46e0-capped256/release/libpatchwork_direct_standard.build.json",
+        "checkout": "/home/altf4/benchmarks/hartford-identity-ppo-20261102/project-trigger-v2/.local/direct-standard/rustmage-4f64940e46e0",
+        "library": "/home/altf4/benchmarks/hartford-identity-ppo-20261102/project-trigger-v2/.local/direct-standard/target-4f64940e46e0-capped256/release/libpatchwork_direct_standard.so",
+        "library_sha256": "f6433993218834a14bbd6d4619e2ce03a2c2056b124aa6d0f7f58aa4bf9b84a4",
+        "observation_schema": 198,
+        "revision": "4f64940e46e0181bf963c0de0f6f5a9a51a926b5"
+      },
+      "inference_processes": 2,
+      "max_decisions": 6000,
+      "max_turns": 50,
+      "models": {
+        "identity": {
+          "local_checkpoint": 100,
+          "path": "/home/altf4/benchmarks/hartford-identity-ppo-20261102/post-identity-comparisons-v1/models/identity/policy.keras",
+          "sha256": "7c5290d0a6ea4ad2d5697087cb8bd1880a52e04c48b84f2c0d171541e709b845",
+          "total_exposure_games": 300000
+        },
+        "parent": {
+          "local_checkpoint": 200,
+          "path": "/home/altf4/benchmarks/hartford-identity-ppo-20261102/post-identity-comparisons-v1/models/parent/policy.keras",
+          "sha256": "eb56f40c7e3519a9cbb69dbbc9d85129bec91a6bf600d13ce3d599c5ee64fef6",
+          "total_exposure_games": 200000
+        }
+      },
+      "neural_seed": 3126110300000,
+      "notes": "Independent evaluation only; historical three-deck StandardAggro decklists. Baseline arms share 400 seed offsets repeated over nine cells; use paired clustered intervals.",
+      "opponent_inference_processes": 2,
+      "panels": [
+        {
+          "game_timeout": 20,
+          "games": 4000,
+          "kind": "neural",
+          "model": "identity",
+          "name": "identity-vs-parent",
+          "offset": 0,
+          "version": 300
+        },
+        {
+          "game_timeout": 60,
+          "games": 3600,
+          "kind": "scripted",
+          "model": "identity",
+          "name": "identity-vs-scripted",
+          "offset": 4000,
+          "version": 300
+        },
+        {
+          "game_timeout": 60,
+          "games": 3600,
+          "kind": "scripted",
+          "model": "parent",
+          "name": "parent-vs-scripted",
+          "offset": 7600,
+          "version": 200
+        }
+      ],
+      "policy": "sampled temperature 1",
+      "training": false,
+      "workers": 48
+    },
+    "model_input_formats": [
+      "sparse-identity-standard-v2",
+      "sparse-factored-standard-v1"
+    ],
+    "model_weight_digests": [
+      "506708697a6f779c20b15fd51b7f27cded113862d1cef4c76d8276dd8e80c5e0",
+      "ada9b95f8981c650764674a103c555d0fe2ab5e3a0a1f008adb0fdd8a16d71fb"
+    ],
+    "panel": {
+      "game_timeout": 20,
+      "games": 4000,
+      "kind": "neural",
+      "model": "identity",
+      "name": "identity-vs-parent",
+      "offset": 0,
+      "version": 300
+    },
+    "policy": "sampled temperature 1",
+    "schedule_sha256": "c2611682f82171358f7fe1f55c75d665c90d531c733f04c86ebd44eef6f07c01",
+    "source_provenance_sha256": "047d1bf78ebbe756bb1bc82106a4b4eb1c75f0c7f5328113b8821beb01f44730",
+    "training": false
+  },
+  "identity-vs-scripted": {
+    "config": {
+      "baseline_seed": 802610300000,
+      "engine": {
+        "build_manifest": "/home/altf4/benchmarks/hartford-identity-ppo-20261102/project-trigger-v2/.local/direct-standard/target-4f64940e46e0-capped256/release/libpatchwork_direct_standard.build.json",
+        "checkout": "/home/altf4/benchmarks/hartford-identity-ppo-20261102/project-trigger-v2/.local/direct-standard/rustmage-4f64940e46e0",
+        "library": "/home/altf4/benchmarks/hartford-identity-ppo-20261102/project-trigger-v2/.local/direct-standard/target-4f64940e46e0-capped256/release/libpatchwork_direct_standard.so",
+        "library_sha256": "f6433993218834a14bbd6d4619e2ce03a2c2056b124aa6d0f7f58aa4bf9b84a4",
+        "observation_schema": 198,
+        "revision": "4f64940e46e0181bf963c0de0f6f5a9a51a926b5"
+      },
+      "inference_processes": 2,
+      "max_decisions": 6000,
+      "max_turns": 50,
+      "models": {
+        "identity": {
+          "local_checkpoint": 100,
+          "path": "/home/altf4/benchmarks/hartford-identity-ppo-20261102/post-identity-comparisons-v1/models/identity/policy.keras",
+          "sha256": "7c5290d0a6ea4ad2d5697087cb8bd1880a52e04c48b84f2c0d171541e709b845",
+          "total_exposure_games": 300000
+        },
+        "parent": {
+          "local_checkpoint": 200,
+          "path": "/home/altf4/benchmarks/hartford-identity-ppo-20261102/post-identity-comparisons-v1/models/parent/policy.keras",
+          "sha256": "eb56f40c7e3519a9cbb69dbbc9d85129bec91a6bf600d13ce3d599c5ee64fef6",
+          "total_exposure_games": 200000
+        }
+      },
+      "neural_seed": 3126110300000,
+      "notes": "Independent evaluation only; historical three-deck StandardAggro decklists. Baseline arms share 400 seed offsets repeated over nine cells; use paired clustered intervals.",
+      "opponent_inference_processes": 2,
+      "panels": [
+        {
+          "game_timeout": 20,
+          "games": 4000,
+          "kind": "neural",
+          "model": "identity",
+          "name": "identity-vs-parent",
+          "offset": 0,
+          "version": 300
+        },
+        {
+          "game_timeout": 60,
+          "games": 3600,
+          "kind": "scripted",
+          "model": "identity",
+          "name": "identity-vs-scripted",
+          "offset": 4000,
+          "version": 300
+        },
+        {
+          "game_timeout": 60,
+          "games": 3600,
+          "kind": "scripted",
+          "model": "parent",
+          "name": "parent-vs-scripted",
+          "offset": 7600,
+          "version": 200
+        }
+      ],
+      "policy": "sampled temperature 1",
+      "training": false,
+      "workers": 48
+    },
+    "model_input_formats": [
+      "sparse-identity-standard-v2"
+    ],
+    "model_weight_digests": [
+      "506708697a6f779c20b15fd51b7f27cded113862d1cef4c76d8276dd8e80c5e0"
+    ],
+    "panel": {
+      "game_timeout": 60,
+      "games": 3600,
+      "kind": "scripted",
+      "model": "identity",
+      "name": "identity-vs-scripted",
+      "offset": 4000,
+      "version": 300
+    },
+    "policy": "sampled temperature 1",
+    "schedule_sha256": "b1ef0040fab24f325d2c7e2ec1a1677a3ec0740c122bc2609ea217b7b9114868",
+    "source_provenance_sha256": "047d1bf78ebbe756bb1bc82106a4b4eb1c75f0c7f5328113b8821beb01f44730",
+    "training": false
+  },
+  "parent-vs-scripted": {
+    "config": {
+      "baseline_seed": 802610300000,
+      "engine": {
+        "build_manifest": "/home/altf4/benchmarks/hartford-identity-ppo-20261102/project-trigger-v2/.local/direct-standard/target-4f64940e46e0-capped256/release/libpatchwork_direct_standard.build.json",
+        "checkout": "/home/altf4/benchmarks/hartford-identity-ppo-20261102/project-trigger-v2/.local/direct-standard/rustmage-4f64940e46e0",
+        "library": "/home/altf4/benchmarks/hartford-identity-ppo-20261102/project-trigger-v2/.local/direct-standard/target-4f64940e46e0-capped256/release/libpatchwork_direct_standard.so",
+        "library_sha256": "f6433993218834a14bbd6d4619e2ce03a2c2056b124aa6d0f7f58aa4bf9b84a4",
+        "observation_schema": 198,
+        "revision": "4f64940e46e0181bf963c0de0f6f5a9a51a926b5"
+      },
+      "inference_processes": 2,
+      "max_decisions": 6000,
+      "max_turns": 50,
+      "models": {
+        "identity": {
+          "local_checkpoint": 100,
+          "path": "/home/altf4/benchmarks/hartford-identity-ppo-20261102/post-identity-comparisons-v1/models/identity/policy.keras",
+          "sha256": "7c5290d0a6ea4ad2d5697087cb8bd1880a52e04c48b84f2c0d171541e709b845",
+          "total_exposure_games": 300000
+        },
+        "parent": {
+          "local_checkpoint": 200,
+          "path": "/home/altf4/benchmarks/hartford-identity-ppo-20261102/post-identity-comparisons-v1/models/parent/policy.keras",
+          "sha256": "eb56f40c7e3519a9cbb69dbbc9d85129bec91a6bf600d13ce3d599c5ee64fef6",
+          "total_exposure_games": 200000
+        }
+      },
+      "neural_seed": 3126110300000,
+      "notes": "Independent evaluation only; historical three-deck StandardAggro decklists. Baseline arms share 400 seed offsets repeated over nine cells; use paired clustered intervals.",
+      "opponent_inference_processes": 2,
+      "panels": [
+        {
+          "game_timeout": 20,
+          "games": 4000,
+          "kind": "neural",
+          "model": "identity",
+          "name": "identity-vs-parent",
+          "offset": 0,
+          "version": 300
+        },
+        {
+          "game_timeout": 60,
+          "games": 3600,
+          "kind": "scripted",
+          "model": "identity",
+          "name": "identity-vs-scripted",
+          "offset": 4000,
+          "version": 300
+        },
+        {
+          "game_timeout": 60,
+          "games": 3600,
+          "kind": "scripted",
+          "model": "parent",
+          "name": "parent-vs-scripted",
+          "offset": 7600,
+          "version": 200
+        }
+      ],
+      "policy": "sampled temperature 1",
+      "training": false,
+      "workers": 48
+    },
+    "model_input_formats": [
+      "sparse-factored-standard-v1"
+    ],
+    "model_weight_digests": [
+      "ada9b95f8981c650764674a103c555d0fe2ab5e3a0a1f008adb0fdd8a16d71fb"
+    ],
+    "panel": {
+      "game_timeout": 60,
+      "games": 3600,
+      "kind": "scripted",
+      "model": "parent",
+      "name": "parent-vs-scripted",
+      "offset": 7600,
+      "version": 200
+    },
+    "policy": "sampled temperature 1",
+    "schedule_sha256": "f395041682aed6641e9e60ad94faab874825bb57fd3ddfcd91577de99096a5cc",
+    "source_provenance_sha256": "047d1bf78ebbe756bb1bc82106a4b4eb1c75f0c7f5328113b8821beb01f44730",
+    "training": false
+  }
+}

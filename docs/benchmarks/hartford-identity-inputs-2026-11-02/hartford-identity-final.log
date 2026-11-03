@@ -1,0 +1,16 @@
+test_hidden_and_unknown_identities_stay_unknown (test_compact_identity.InputTests.test_hidden_and_unknown_identities_stay_unknown) ... ok
+test_named_stack_target_without_live_object_keeps_public_identity (test_compact_identity.InputTests.test_named_stack_target_without_live_object_keeps_public_identity) ... ok
+test_old_collision_is_split_by_identity_and_typed_rules (test_compact_identity.InputTests.test_old_collision_is_split_by_identity_and_typed_rules) ... ok
+test_version_boundary_and_budget (test_compact_identity.InputTests.test_version_boundary_and_budget) ... ok
+test_private_native_choices_and_identity_sidecar_match_reference (test_compact_identity.NativeParityTests.test_private_native_choices_and_identity_sidecar_match_reference) ... ok
+test_new_identity_inputs_receive_gradients (test_compact_identity.NeuralTests.test_new_identity_inputs_receive_gradients) ... ok
+test_ppo_holdout_optimizer_rng_resume_and_compiled_inference (test_compact_identity.NeuralTests.test_ppo_holdout_optimizer_rng_resume_and_compiled_inference) ... /home/altf4/Code/mtgo-bot/patchwork_automaton/.venv/lib/python3.12/site-packages/keras/src/backend/tensorflow/core.py:172: DeprecationWarning: __array__ implementation doesn't accept a copy keyword, so passing copy=False failed. __array__ must implement 'dtype' and 'copy' keyword arguments. To learn more, see the migration guide https://numpy.org/devdocs/numpy_2_0_migration_guide.html#adapting-to-changes-in-the-copy-keyword
+  return np.array(x)
+ok
+test_transfer_permutation_packing_and_serialization (test_compact_identity.NeuralTests.test_transfer_permutation_packing_and_serialization) ... ok
+test_identity_payload_through_independent_compiled_replica (test_compact_identity.ReplicaTests.test_identity_payload_through_independent_compiled_replica) ... ok
+
+----------------------------------------------------------------------
+Ran 9 tests in 13.955s
+
+OK

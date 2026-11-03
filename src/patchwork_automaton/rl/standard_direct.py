@@ -1,9 +1,11 @@
 """Standard game playback with Rust-owned state and direct numerical inputs.
 
-Neural seats receive only numeric arrays built from their own redacted Rust
-views. Scripted policies still require a Python private observation; only their
-own view is materialized for those policies.
+Neural seats receive numerical features from their own redacted Rust views.
+The opt-in identity sidecar and scripted policies also use that seat's private
+Python observation.
 """
+from ..neural.compact_dispatch import is_compact,codec,V2
+
 from collections import Counter
 import ctypes as C
 import json
@@ -64,14 +66,13 @@ def play(game, *, output=None, model=None, batcher=None, learner_seat=None,
             elif output is not None and not record_ppo and player not in neural:
                 from ..neural.demonstrations import DemonstrationWriter
                 writers[player] = DemonstrationWriter(Path(output) / f"game-{game['index']:06d}-p{player}.pkl.gz")
-        decks = [standard_deck(d) for d in game['decks']]
+        decks = [standard_deck(d, catalog=game.get('deck_catalog', 'standard')) for d in game['decks']]
         config = dict(decks=[[c.name for c in d.cards for _ in range(c.quantity)] for d in decks],
                       seed=game['seed'], starting_player=game['starting_player'], deck_rules='Constructed')
         handle = check(lib, lib.ds_new(json.dumps(config, separators=(',', ':')).encode()))
         rng = [np.random.default_rng(game['seed'] * 2 + p) for p in range(2)]
         states, previous = [None, None], [None, None]
-        # Only scripted policies receive a Python representation, and only for
-        # the acting player's already-redacted observation.
+        # Materialize only the acting player's already-redacted observation.
         game_handle = Handle('rustmage', 'game', uuid.uuid4().hex)
         session = uuid.uuid4().hex
         while True:
@@ -80,7 +81,10 @@ def play(game, *, output=None, model=None, batcher=None, learner_seat=None,
                 for player in range(2):
                     view = check(lib, lib.ds_observe(handle, player)); views.append(view)
                     meta = Metadata(); check(lib, lib.ds_metadata(view, C.byref(meta)))
-                    check(lib, lib.ds_history_observe(handle, view)); metadata.append(meta)
+                    side = model if player==learner_seat else opponent_model if player in neural else None
+                    if not is_compact(side):
+                        check(lib, lib.ds_history_observe(handle, view))
+                    metadata.append(meta)
                 script_views = {}
                 def script_view(player):
                     if player not in script_views:
@@ -151,8 +155,18 @@ def play(game, *, output=None, model=None, batcher=None, learner_seat=None,
                     if size.value == 1:
                         index = 0
                     else:
-                        data = arrays(lib, lib.ds_encode(view)); data.update(arrays(lib, lib.ds_history_take(handle, view)))
                         side_model = model if actor == learner_seat else opponent_model
+                        data = arrays(lib, lib.ds_encode(view))
+                        compact=is_compact(side_model)
+                        if compact:
+                            if getattr(side_model,'input_format',None)==V2:
+                                from ..neural.compact_identity import IdentityEncoder
+                                encoder=IdentityEncoder();obs=script_view(actor)
+                                choices=encoder.expand_options(obs.decision)
+                                data=encoder.enrich(obs,choices,data)
+                            data=codec(side_model).observation(data)
+                        else:
+                            data.update(arrays(lib, lib.ds_history_take(handle, view)))
                         state = states[actor] if states[actor] is not None else np.zeros(side_model.memory_size, np.float32)
                         if previous[actor] is not None: data['selection'] = previous[actor]
                         service = batcher if actor == learner_seat else opponent_batcher
@@ -168,7 +182,7 @@ def play(game, *, output=None, model=None, batcher=None, learner_seat=None,
                             if not np.isfinite(value): raise ValueError('Nonfinite behavior value')
                             writers[actor].write(Sample(data, state.copy(), True, index, value, logp.astype(np.float32)))
                         states[actor] = np.asarray(result['memory_out'])[0].copy()
-                        previous[actor] = data['candidates'][index].copy()
+                        previous[actor] = None if compact else data['candidates'][index].copy()
                     action_kind = string(lib, lib.ds_choice_kind(view, index))
                     check(lib, lib.ds_apply_choice(handle, view, index))
                 counts[f'p{actor}:{action_kind}'] += 1; row['decisions'] += 1

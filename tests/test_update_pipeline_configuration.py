@@ -131,6 +131,19 @@ class UpdatePipelineConfigurationTests(unittest.TestCase):
                 with self.subTest(value=value, keyword=keyword), self.assertRaises(ValueError):
                     pipeline.resolve_update_pipeline('gpu', **{keyword:value})
 
+    def test_compact_storage_is_optional_and_only_enabled_for_gpu_profiles(self):
+        for device, profile in [('gpu', 'gpu'), ('cpu', 'host'), ('gpu', 'host'), ('gpu', 'legacy')]:
+            with self.subTest(device=device, profile=profile):
+                ordinary = pipeline.resolve_update_pipeline(device, profile)
+                compact = pipeline.resolve_update_pipeline(device, profile, compact_inputs=True)
+                self.assertFalse(ordinary['compact_device_cache'])
+                self.assertEqual(compact['compact_device_cache'], profile == 'gpu')
+                ordinary.pop('compact_device_cache'); compact.pop('compact_device_cache')
+                self.assertEqual(ordinary, compact)
+        for value in (0, 1, None, 'true'):
+            with self.subTest(value=value), self.assertRaisesRegex(ValueError, 'boolean'):
+                pipeline.resolve_update_pipeline('gpu', 'gpu', compact_inputs=value)
+
     def test_application_only_changes_cache_attributes_and_missing_fields_are_atomic(self):
         settings = pipeline.resolve_update_pipeline('gpu', 'gpu', 7, 9)
         trainer = SimpleNamespace(**{name:None for name in pipeline._CACHE_ATTRIBUTES},

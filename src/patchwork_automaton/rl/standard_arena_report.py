@@ -18,7 +18,7 @@ _Z95 = 1.959963984540054
 
 
 def _wilson(wins, attempts):
-    """Wilson 95% interval for wins out of completed games; draws are non-wins."""
+    """Two-sided Wilson 95% interval for successes out of attempts."""
     if not attempts:
         return None
     p = wins / attempts
@@ -40,12 +40,18 @@ def _counts(rows):
     """Count a possibly empty subset without assuming a particular seat."""
     statuses = Counter(row['status'] for row in rows)
     completed = statuses['win'] + statuses['loss'] + statuses['draw']
+    natural_completed = sum(row['status'] in ('win', 'loss', 'draw')
+                            and not row.get('adjudicated') for row in rows)
+    attempted = len(rows)
     wins = sum(row['learner_won'] is True for row in rows
                if row['status'] in ('win', 'loss'))
     losses = statuses['win'] + statuses['loss'] - wins
     draws = statuses['draw']
     return dict(
-        attempted=len(rows), completed=completed,
+        attempted=attempted, completed=completed,
+        natural_completed=natural_completed,
+        completion_rate=natural_completed / attempted if attempted else None,
+        completion_rate_wilson_95_interval=_wilson(natural_completed, attempted),
         wins=wins, losses=losses, draws=draws,
         cutoffs=statuses['cutoff'], errors=statuses['error'],
         adjudicated_draws=sum(bool(row.get('adjudicated')) for row in rows
@@ -121,8 +127,10 @@ def summarize_arena(rows):
     runner's raw ``status``. Decisive rows supply ``winner_seat``,
     ``learner_won``, and ``draw=False``; draws supply ``draw=True`` and no
     winner. Optional ``reason`` and ``adjudicated`` fields are retained
-    in aggregate counts. Rates exclude cutoffs/errors and count draws as
-    non-wins. The game score grants half a point for a draw.
+    in aggregate counts. Completion counts only native terminal outcomes
+    without adjudication and uses all attempts as its denominator.
+    Win and game-score rates exclude cutoffs/errors and count draws as
+    non-wins or half a point, respectively.
 
     Returns aggregate statistics, per-entrant statistics, and per-cell matchup
     statistics. No file or model state is read or changed.

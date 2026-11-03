@@ -1,0 +1,60 @@
+{
+  "archive": "/home/altf4/benchmarks/hartford-identity-ppo-20261102/run-v1/decision-limit-investigation-v1",
+  "results": 1000,
+  "status_counts": {
+    "draw": 41,
+    "cutoff": 1,
+    "loss": 475,
+    "win": 483
+  },
+  "failed": [
+    {
+      "actions": null,
+      "behavior_version": 42,
+      "decisions": 6000,
+      "deck_catalog": "hartford",
+      "decks": [
+        "jeskai-artifacts",
+        "jeskai-artifacts"
+      ],
+      "final_life": [
+        20,
+        18
+      ],
+      "game_inference_requests": 665,
+      "game_inference_seconds": 8.356983627090813,
+      "index": 42776,
+      "learner_deck": "jeskai-artifacts",
+      "learner_seat": 0,
+      "opponent_checkpoint_sha256": "8bb9813e87534294a72d22b2de686ef7dacda1566f1ef98b466689c58c36be75",
+      "opponent_deck": "jeskai-artifacts",
+      "opponent_game_inference_requests": 20,
+      "opponent_game_inference_seconds": 1.0270198390207952,
+      "opponent_inference_requests": 20,
+      "opponent_inference_seconds": 1.0270198390207952,
+      "opponent_kind": "frozen_neural",
+      "opponent_version": 39,
+      "pairing": [
+        "jeskai-artifacts",
+        "jeskai-artifacts"
+      ],
+      "partition": "training",
+      "playback_pipeline": "direct",
+      "reason": "decision_limit",
+      "seconds": 11.862582792993635,
+      "seed": 412610552776,
+      "starting_player": "P1",
+      "status": "cutoff",
+      "trajectories": [],
+      "turn": 9,
+      "worker_cpu_seconds": 0.005038841999999821,
+      "worker_inference_requests": 665,
+      "worker_inference_seconds": 8.356983627090813,
+      "worker_pid": 504034
+    }
+  ],
+  "files": [
+    "/home/altf4/benchmarks/hartford-identity-ppo-20261102/run-v1/rollouts/round-0043/trajectories/game-042776-p0.pkl.gz",
+    "/home/altf4/benchmarks/hartford-identity-ppo-20261102/run-v1/rollouts/round-0043/results/game-042776.json"
+  ]
+}

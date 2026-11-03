@@ -20,6 +20,24 @@ NATIVE = (ROOT/'target/release/librustmage.so').is_file()
 
 
 class DomainTests(unittest.TestCase):
+    def test_full_target_and_source_counter_domains(self):
+        raw = dict(actions=[{'kind': 'AllocateTargetAmount', 'amount': 1},
+                            {'kind': 'ChooseSourceCounterAmount', 'amount': 0}],
+                   target_amount=dict(target={'Player': 'P1'}, remaining=1000, minimum=1, maximum=1000),
+                   source_counter_choice=dict(source={'card': 1, 'generation': 1},
+                                              kind='PlusOne', maximum=2**64-1))
+        options = {o.id: o for o in action_options(raw)}
+        for field, kind, minimum, maximum, interior in (
+                ('target_amount', 'AllocateTargetAmount', 1, 1000, 333),
+                ('source_counter_choice', 'ChooseSourceCounterAmount', 0, 2**64-1, 2**63+1)):
+            option = options['domain:' + field]
+            for value in (minimum, interior, maximum):
+                with self.subTest(field=field, value=value):
+                    self.assertEqual(domain_action(option, value), {'kind': kind, 'amount': value})
+            for value in (minimum-1, maximum+1, True, 1.5):
+                with self.subTest(field=field, invalid=value), self.assertRaises(ValueError):
+                    domain_action(option, value)
+
     def test_full_numeric_domains_not_only_enumerated_representatives(self):
         raw = dict(actions=[{'kind': 'Pass'}],
             mana_payment=dict(available=[100]*6, required=[1, 0, 0, 0, 0, 0], generic=100),

@@ -61,7 +61,7 @@ def _play_standard_game_python(game, *, output=None, model=None, batcher=None,
                     policies[player] = RecordingExpert(writers[player], make_script(deck_id), StandardEncoder())
                 else:
                     policies[player] = make_script(deck_id)
-            with RustMageMatch(*(standard_deck(d) for d in game['decks']),
+            with RustMageMatch(*(standard_deck(d, catalog=game.get('deck_catalog', 'standard')) for d in game['decks']),
                     seed=game['seed'], starting_player=game['starting_player']) as match:
                 while True:
                     views = [learning_observation(match, f'P{p}') for p in range(2)]

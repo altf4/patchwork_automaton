@@ -12,6 +12,10 @@ games/minute comparison against XMage.
 The [mono-red RustMage trainer](docs/rustmage-training.md) runs batched CPU PPO
 in mirror matches and measures frozen checkpoints against a do-nothing opponent
 using turns to lethal and completion rate.
+The [ten-deck Hartford PPO experiment](docs/hartford-ppo.md) starts from random
+weights, mixes current and historical opponents, and evaluates every matchup
+against the previous three checkpoints. Its launch gate requires complete
+RustMage support for the selected mainboards.
 
 Version 0.4.0 adds an opt-in common game API, XMage backend and local self-play
 episode tools. See [XMage setup and usage](docs/xmage.md). The MTGO implementation builds on the authenticated connection and Legacy Burn

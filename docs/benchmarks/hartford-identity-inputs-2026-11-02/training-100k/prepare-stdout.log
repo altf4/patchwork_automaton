@@ -1,0 +1,2 @@
+Frozen source, parent checkpoint and runtime verified; no experiment started.
+{"status": "prepared_not_started", "root": "/home/altf4/benchmarks/hartford-identity-ppo-20261102", "output_exists": false, "guard_exists": false, "source_files": 387, "source_200k_unchanged": true}

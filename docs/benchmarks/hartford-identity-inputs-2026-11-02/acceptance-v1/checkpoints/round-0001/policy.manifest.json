@@ -1,0 +1,1706 @@
+{
+  "backend": "rustmage",
+  "feature_version": 6,
+  "observation_schema": 198,
+  "rustmage_revision": "e732a4bb42774fc20672dc2aad3952f9d1b57ae7",
+  "card_encoding": "shared_traits_without_identity_embeddings",
+  "card_traits": {
+    "schema": 1,
+    "rustmage_revision": "e732a4bb42774fc20672dc2aad3952f9d1b57ae7",
+    "catalogue_version": "5d1fdfcf3bdab0ad7a93236e71f03e233a35d865a26a2080190b631dfb69009a",
+    "observation_schema": 198,
+    "extractor_sha256": "037e2c63be5735d0d4c7819ff629fbfa706ed809cb968e9eeb26a5871f21f3ac",
+    "exporter_sha256": "e0d93435605f914811c6058fdf213082925a069e01209635076b9140656880c8",
+    "metadata_sha256": "faca75732122c6f8405ec76078923d7101a86a9db8cd7bd3d30e83754e98b894",
+    "printed_facts_sha256": "6d187ee001d6284af816d4da7ef1a811f6316572616c049f492b4a96a87351c0",
+    "feature_names_sha256": "520419d2bc60808c5e3e4c10169d39f315d3c7ce57ccd6da663eb2cc6c6f8e06",
+    "card_count": 5487,
+    "trait_width": 252,
+    "ambiguous_serialization_identities": [
+      ""
+    ],
+    "projection": "Typed rule summary; unknown branches and amounts explicit; never an exact rules replacement.",
+    "traits_sha256": "00efc77db9b98ac394957897f32c1bb820f19d74c82e789e8d2eac0b48ce2cf0"
+  },
+  "trait_features": [
+    "metadata_known",
+    "implemented",
+    "rules_known",
+    "projection_partial",
+    "legendary",
+    "basic",
+    "token",
+    "alternate_face",
+    "power_dynamic",
+    "toughness_dynamic",
+    "x_cost",
+    "hybrid_cost",
+    "phyrexian_cost",
+    "snow_cost",
+    "other_cost_symbol",
+    "conditional",
+    "modal",
+    "optional",
+    "once_per_turn",
+    "sorcery_activation",
+    "nonmana_additional_cost",
+    "cost_reduction",
+    "enters_tapped",
+    "conditional_entry",
+    "dynamic_amount",
+    "unknown_rules",
+    "type.creature",
+    "type.land",
+    "type.sorcery",
+    "type.instant",
+    "type.artifact",
+    "type.enchantment",
+    "type.planeswalker",
+    "type.kindred",
+    "type.battle",
+    "color.white",
+    "color.blue",
+    "color.black",
+    "color.red",
+    "color.green",
+    "color.colorless",
+    "keyword.flying",
+    "keyword.reach",
+    "keyword.haste",
+    "keyword.vigilance",
+    "keyword.defender",
+    "keyword.flash",
+    "keyword.lifelink",
+    "keyword.deathtouch",
+    "keyword.trample",
+    "keyword.first_strike",
+    "keyword.double_strike",
+    "keyword.cant_block",
+    "keyword.hexproof",
+    "keyword.indestructible",
+    "keyword.cant_be_blocked",
+    "keyword.menace",
+    "keyword.max_one_blocker",
+    "keyword.min_three_blockers",
+    "keyword.no_token_blockers",
+    "keyword.changeling",
+    "keyword.skulk",
+    "keyword.no_power_le_two_blockers",
+    "keyword.no_power_ge_three_blockers",
+    "keyword.no_greater_power_blockers",
+    "keyword.prevent_combat_to",
+    "keyword.prevent_combat_by",
+    "keyword.no_human_blockers",
+    "keyword.protection_everything",
+    "keyword.protection_instant_sorcery",
+    "keyword.only_haste_blockers",
+    "keyword.crew_saddle_plus_two",
+    "alternative.kicker",
+    "alternative.offspring",
+    "alternative.flashback",
+    "alternative.plot",
+    "alternative.warp",
+    "alternative.disguise",
+    "alternative.sneak",
+    "alternative.harmonize",
+    "alternative.tiered",
+    "alternative.additional",
+    "alternative.adventure",
+    "alternative.omen",
+    "alternative.prepared",
+    "alternative.back_face",
+    "alternative.hybrid_alternative",
+    "trigger.entry",
+    "trigger.death",
+    "trigger.attack",
+    "trigger.cast",
+    "trigger.noncreature_cast",
+    "trigger.instant_sorcery_cast",
+    "trigger.landfall",
+    "trigger.targeted",
+    "trigger.damage",
+    "trigger.lifegain",
+    "trigger.draw",
+    "trigger.discard",
+    "trigger.step",
+    "trigger.counter",
+    "trigger.ward",
+    "recipient.source",
+    "recipient.attached",
+    "recipient.target",
+    "recipient.self_player",
+    "recipient.opponent",
+    "recipient.each",
+    "recipient.creature",
+    "recipient.player",
+    "recipient.permanent",
+    "recipient.stack",
+    "recipient.graveyard",
+    "recipient.own",
+    "recipient.opposing",
+    "cost.tap",
+    "cost.sacrifice",
+    "cost.discard",
+    "cost.life",
+    "cost.exile",
+    "cost.remove_counter",
+    "cost.loyalty",
+    "cost.mana",
+    "effect.damage",
+    "effect.draw",
+    "effect.gain_life",
+    "effect.lose_life",
+    "effect.discard",
+    "effect.destroy",
+    "effect.exile",
+    "effect.bounce",
+    "effect.reanimate",
+    "effect.token",
+    "effect.counter",
+    "effect.mana",
+    "effect.buff",
+    "effect.grant_keyword",
+    "effect.counter_spell",
+    "effect.tap",
+    "effect.untap",
+    "effect.search",
+    "effect.scry",
+    "effect.surveil",
+    "effect.mill",
+    "effect.exile_play",
+    "effect.control",
+    "effect.copy",
+    "hybrid_option.white",
+    "hybrid_option.blue",
+    "hybrid_option.black",
+    "hybrid_option.red",
+    "hybrid_option.green",
+    "hybrid_option.colorless",
+    "phyrexian_option.white",
+    "phyrexian_option.blue",
+    "phyrexian_option.black",
+    "phyrexian_option.red",
+    "phyrexian_option.green",
+    "alternative_color.white",
+    "alternative_color.blue",
+    "alternative_color.black",
+    "alternative_color.red",
+    "alternative_color.green",
+    "alternative_color.colorless",
+    "produces.white",
+    "produces.blue",
+    "produces.black",
+    "produces.red",
+    "produces.green",
+    "produces.colorless",
+    "mana_value.log",
+    "mana_value.known",
+    "generic_cost.log",
+    "generic_cost.known",
+    "cost_white.log",
+    "cost_white.known",
+    "cost_blue.log",
+    "cost_blue.known",
+    "cost_black.log",
+    "cost_black.known",
+    "cost_red.log",
+    "cost_red.known",
+    "cost_green.log",
+    "cost_green.known",
+    "cost_colorless.log",
+    "cost_colorless.known",
+    "x_symbols.log",
+    "x_symbols.known",
+    "power.log",
+    "power.known",
+    "toughness.log",
+    "toughness.known",
+    "starting_loyalty.log",
+    "starting_loyalty.known",
+    "alt_mana_min.log",
+    "alt_mana_min.known",
+    "alt_mana_max.log",
+    "alt_mana_max.known",
+    "alt_generic_min.log",
+    "alt_generic_min.known",
+    "alt_generic_max.log",
+    "alt_generic_max.known",
+    "spell_abilities.log",
+    "spell_abilities.known",
+    "triggered_abilities.log",
+    "triggered_abilities.known",
+    "activated_abilities.log",
+    "activated_abilities.known",
+    "static_abilities.log",
+    "static_abilities.known",
+    "unknown_nodes.log",
+    "unknown_nodes.known",
+    "known_nodes.log",
+    "known_nodes.known",
+    "damage_min.log",
+    "damage_min.known",
+    "damage_max.log",
+    "damage_max.known",
+    "draw_min.log",
+    "draw_min.known",
+    "draw_max.log",
+    "draw_max.known",
+    "gain_life_max.log",
+    "gain_life_max.known",
+    "lose_life_max.log",
+    "lose_life_max.known",
+    "token_max.log",
+    "token_max.known",
+    "counter_max.log",
+    "counter_max.known",
+    "mana_max.log",
+    "mana_max.known",
+    "power_bonus_min.log",
+    "power_bonus_min.known",
+    "power_bonus_max.log",
+    "power_bonus_max.known",
+    "toughness_bonus_min.log",
+    "toughness_bonus_min.known",
+    "toughness_bonus_max.log",
+    "toughness_bonus_max.known",
+    "spell_damage_max.log",
+    "spell_damage_max.known",
+    "spell_draw_max.log",
+    "spell_draw_max.known",
+    "triggered_damage_max.log",
+    "triggered_damage_max.known",
+    "triggered_draw_max.log",
+    "triggered_draw_max.known",
+    "activated_damage_max.log",
+    "activated_damage_max.known",
+    "activated_draw_max.log",
+    "activated_draw_max.known"
+  ],
+  "actions": {
+    "AssignLibraryPile": [
+      "object",
+      "pile"
+    ],
+    "ChooseLibraryPile": [
+      "pile"
+    ],
+    "KeepPermanentType": [
+      "object"
+    ],
+    "ChooseZoneReplacement": [
+      "effect"
+    ],
+    "FinishStackTargets": [],
+    "FinishCraftMaterials": [],
+    "AllocateTargetAmount": [
+      "amount"
+    ],
+    "RestoreStackTarget": [
+      "index"
+    ],
+    "SetStackTarget": [
+      "index",
+      "target"
+    ],
+    "ChooseCollectEvidence": [
+      "collect"
+    ],
+    "ChooseEvidence": [
+      "object"
+    ],
+    "FinishEvidence": [],
+    "DeclineEvidence": [],
+    "ChooseReplacement": [
+      "source",
+      "ability"
+    ],
+    "ChooseDrawReplacement": [
+      "source"
+    ],
+    "ChooseSelfCounterReplacement": [
+      "effect"
+    ],
+    "ChooseDamagePrevention": [
+      "source",
+      "prevention"
+    ],
+    "ChooseDamageEvent": [
+      "index"
+    ],
+    "ChooseCreatedToken": [
+      "object"
+    ],
+    "ChooseEndure": [
+      "put_counters"
+    ],
+    "BeginConvoke": [],
+    "ChooseHarmonizer": [
+      "object"
+    ],
+    "BeginImprovise": [],
+    "BeginWaterbend": [],
+    "BeginOrderedCosts": [],
+    "ChooseImproviser": [
+      "object"
+    ],
+    "ChooseWaterbender": [
+      "object"
+    ],
+    "ChooseConvoker": [
+      "object",
+      "contribution"
+    ],
+    "ChooseMobilizeDefender": [
+      "defender"
+    ],
+    "ChooseToken": [
+      "token"
+    ],
+    "ChooseKeyword": [
+      "index"
+    ],
+    "PutHandCreature": [
+      "object"
+    ],
+    "PutHandPermanent": [
+      "object"
+    ],
+    "PutHandLand": [
+      "object"
+    ],
+    "SelectLand": [
+      "object"
+    ],
+    "SelectGraveyardReturn": [
+      "object"
+    ],
+    "FinishGraveyardReturn": [],
+    "AnnounceSourceGrant": [
+      "source",
+      "ability"
+    ],
+    "SelectResolutionExile": [
+      "object"
+    ],
+    "ProliferatePermanent": [
+      "object"
+    ],
+    "ProliferatePlayer": [
+      "player"
+    ],
+    "FinishProliferate": [],
+    "ChooseArmy": [
+      "object"
+    ],
+    "ChooseJace": [
+      "object"
+    ],
+    "FinishLandSelection": [],
+    "DeclineHandEntry": [],
+    "ChooseHandDefender": [
+      "defender"
+    ],
+    "ChooseBlight": [
+      "pay"
+    ],
+    "PayBlight": [
+      "object"
+    ],
+    "ChooseTeamwork": [
+      "pay"
+    ],
+    "ChooseTeammate": [
+      "object"
+    ],
+    "FinishTeamwork": [],
+    "ChooseSaddler": [
+      "object"
+    ],
+    "ChooseCrewer": [
+      "object"
+    ],
+    "FinishCrew": [],
+    "FinishSaddle": [],
+    "ChooseLibraryDestination": [
+      "object",
+      "destination"
+    ],
+    "ChooseManaValueParity": [
+      "parity"
+    ],
+    "ChooseLinkedExile": [
+      "object"
+    ],
+    "ChooseForageRoute": [
+      "route"
+    ],
+    "ChooseForage": [
+      "object"
+    ],
+    "DeclineForage": [],
+    "RevealMiracle": [],
+    "DeclineMiracle": [],
+    "AnnounceCounterGraveyard": [
+      "card"
+    ],
+    "ChooseCreatureCounterCost": [
+      "object",
+      "counter"
+    ],
+    "AnnounceAttachedAbility": [
+      "grantor",
+      "ability"
+    ],
+    "AnnouncePlaneswalkerGrant": [
+      "source",
+      "grantor",
+      "ability"
+    ],
+    "AnnounceSelfGrantedAbility": [
+      "source",
+      "grant_timestamp"
+    ],
+    "ChooseAdditionalCost": [
+      "object"
+    ],
+    "ChooseAdditionalLife": [],
+    "ChooseExplore": [
+      "object",
+      "graveyard"
+    ],
+    "ChooseManifest": [
+      "object"
+    ],
+    "ChooseCasualty": [
+      "pay"
+    ],
+    "ChooseCastCost": [
+      "clause"
+    ],
+    "PayCasualty": [
+      "object"
+    ],
+    "ChooseBargain": [
+      "sacrifice"
+    ],
+    "ChooseX": [
+      "value"
+    ],
+    "ChooseSourceCounterAmount": [
+      "amount"
+    ],
+    "ChooseKicker": [
+      "pay"
+    ],
+    "ChooseGift": [
+      "beneficiary"
+    ],
+    "ChooseOffspring": [
+      "pay"
+    ],
+    "ChooseSpellCost": [
+      "cost"
+    ],
+    "ChooseActivationCost": [
+      "cost"
+    ],
+    "ChooseConniver": [
+      "object"
+    ],
+    "PayResolutionMana": [
+      "payment"
+    ],
+    "DeclineResolutionMana": [],
+    "ChooseHandCard": [
+      "object"
+    ],
+    "ChooseRevealedDiscard": [
+      "object"
+    ],
+    "SelectTargetCounter": [
+      "counter"
+    ],
+    "FinishTargetCounterRemoval": [],
+    "RecoverMilled": [
+      "object"
+    ],
+    "SelectMilled": [
+      "object"
+    ],
+    "FinishMilledSelection": [],
+    "ChooseEntryTimestamp": [
+      "object"
+    ],
+    "ChooseEntryReplacement": [
+      "source",
+      "intrinsic"
+    ],
+    "ChooseEntryBehold": [
+      "object"
+    ],
+    "ChooseEntryValue": [
+      "value"
+    ],
+    "ChooseCreatureType": [
+      "creature_type"
+    ],
+    "ChooseEntryLife": [
+      "pay"
+    ],
+    "ChooseAuraAttachment": [
+      "object"
+    ],
+    "Keep": [],
+    "BeginOnBattlefield": [
+      "object"
+    ],
+    "FinishOpeningHand": [],
+    "CastExiledDuringResolution": [
+      "object",
+      "face"
+    ],
+    "FinishResolutionCasts": [],
+    "FinishGraveyardSymbolCost": [],
+    "Mulligan": [],
+    "Bottom": [
+      "card"
+    ],
+    "Pass": [],
+    "PlayLand": [
+      "card"
+    ],
+    "TapMana": [
+      "card"
+    ],
+    "TapGrantedMana": [
+      "card",
+      "grantor",
+      "production"
+    ],
+    "AnnounceCast": [
+      "card"
+    ],
+    "PlayGraveyardPermanent": [
+      "card",
+      "permission",
+      "permanent_type"
+    ],
+    "AnnounceFree": [
+      "card",
+      "face",
+      "flash_surcharge"
+    ],
+    "AnnounceFreeCounterGraveyard": [
+      "card",
+      "face",
+      "flash_surcharge"
+    ],
+    "AnnounceFreeGraveyardPermanent": [
+      "card",
+      "face",
+      "flash_surcharge",
+      "permission",
+      "permanent_type"
+    ],
+    "AnnounceExileFree": [
+      "card",
+      "face",
+      "flash_surcharge"
+    ],
+    "AnnounceFreeFromPermission": [
+      "card",
+      "face",
+      "flash_surcharge",
+      "permission"
+    ],
+    "AnnounceGrantedFlashback": [
+      "card",
+      "flash_surcharge"
+    ],
+    "PayResolutionLife": [],
+    "DeclineResolutionLife": [],
+    "AnnounceExile": [
+      "card"
+    ],
+    "AnnounceExileLife": [
+      "card",
+      "face",
+      "flash_surcharge"
+    ],
+    "AnnounceAirbend": [
+      "card",
+      "face",
+      "flash_surcharge"
+    ],
+    "AnnounceFlashSurcharge": [
+      "card"
+    ],
+    "AnnounceWarp": [
+      "card"
+    ],
+    "AnnounceDisguise": [
+      "card"
+    ],
+    "AnnounceDisguiseGraveyard": [
+      "card",
+      "permission",
+      "permanent_type"
+    ],
+    "AnnounceSneak": [
+      "card",
+      "permission"
+    ],
+    "AnnounceAdventure": [
+      "card"
+    ],
+    "AnnounceOmen": [
+      "card"
+    ],
+    "AnnounceBack": [
+      "card"
+    ],
+    "AnnouncePlot": [
+      "card"
+    ],
+    "PayPlot": [
+      "payment"
+    ],
+    "BeginFaceUp": [
+      "object",
+      "cost"
+    ],
+    "PayFaceUp": [
+      "payment"
+    ],
+    "AbortFaceUpPayment": [],
+    "AnnouncePlotted": [
+      "card"
+    ],
+    "AnnounceFlashback": [
+      "card"
+    ],
+    "AnnounceHarmonize": [
+      "card"
+    ],
+    "AnnounceMayhem": [
+      "card"
+    ],
+    "AnnounceGraveyardBorrowedAbility": [
+      "card",
+      "graveyard",
+      "ability",
+      "counter_payment"
+    ],
+    "AnnounceGraveyardBorrowedMana": [
+      "card",
+      "graveyard",
+      "ability",
+      "counter_payment",
+      "production"
+    ],
+    "ActivateGraveyardBorrowedMana": [
+      "card",
+      "graveyard",
+      "ability",
+      "counter_payment",
+      "payment",
+      "production"
+    ],
+    "AnnounceBorrowedAbility": [
+      "card",
+      "exiled",
+      "ability",
+      "counter_payment"
+    ],
+    "AnnounceBorrowedMana": [
+      "card",
+      "exiled",
+      "ability",
+      "counter_payment",
+      "production"
+    ],
+    "ActivateBorrowedMana": [
+      "card",
+      "exiled",
+      "ability",
+      "counter_payment",
+      "payment",
+      "production"
+    ],
+    "AnnounceActivate": [
+      "card",
+      "ability",
+      "counter_payment"
+    ],
+    "AnnounceMana": [
+      "card",
+      "ability",
+      "counter_payment",
+      "production"
+    ],
+    "PayCosts": [
+      "payment"
+    ],
+    "ChooseManaRollback": [
+      "keep"
+    ],
+    "Cast": [
+      "card",
+      "target",
+      "payment"
+    ],
+    "BeginCast": [
+      "card",
+      "payment"
+    ],
+    "Activate": [
+      "card",
+      "ability",
+      "target",
+      "payment",
+      "counter_payment"
+    ],
+    "ActivateMana": [
+      "card",
+      "ability",
+      "payment",
+      "counter_payment",
+      "production"
+    ],
+    "ChooseManaLotSpend": [
+      "amount"
+    ],
+    "ChooseMana": [
+      "production"
+    ],
+    "BeginActivate": [
+      "card",
+      "ability",
+      "payment",
+      "counter_payment"
+    ],
+    "ChooseMode": [
+      "mode"
+    ],
+    "ChooseTarget": [
+      "target"
+    ],
+    "ChooseTargetCardType": [
+      "target",
+      "type_mask"
+    ],
+    "FinishTargets": [],
+    "Attack": [
+      "card"
+    ],
+    "AttackPlaneswalker": [
+      "card",
+      "defender"
+    ],
+    "AttackBattle": [
+      "card",
+      "defender"
+    ],
+    "FinishAttackers": [],
+    "CancelAttackDeclaration": [],
+    "PayAttackCost": [
+      "payment"
+    ],
+    "AbortAttackPayment": [],
+    "Block": [
+      "blocker",
+      "attacker"
+    ],
+    "FinishBlockers": [],
+    "AssignDamage": [
+      "target",
+      "amount"
+    ],
+    "Discard": [
+      "card"
+    ],
+    "PutTrigger": [
+      "id"
+    ],
+    "ChooseOutsideCard": [
+      "index"
+    ],
+    "ChooseOutsideBasic": [
+      "card"
+    ],
+    "CancelOutsideCard": [],
+    "DeclineOutsideCards": [],
+    "ChooseOutsideRevealed": [
+      "index"
+    ],
+    "ChooseOutsideEntryReplacement": [
+      "source",
+      "ability"
+    ],
+    "ChooseOutsideSelfReplacement": [
+      "effect"
+    ],
+    "ChooseSearch": [
+      "card"
+    ],
+    "ChooseSearchZones": [
+      "library",
+      "graveyard"
+    ],
+    "ChooseHandLibrarySearchZones": [
+      "hand",
+      "library"
+    ],
+    "FinishSearch": [],
+    "ChooseSearchBattlefield": [
+      "card"
+    ],
+    "ChooseSearchDestination": [
+      "destination"
+    ],
+    "SelectLibrary": [
+      "card"
+    ],
+    "FinishLibrarySelection": [],
+    "ChooseEquipmentAttachment": [
+      "equipment"
+    ],
+    "OrderLibraryBottom": [
+      "card"
+    ],
+    "ArrangeLibrary": [
+      "card",
+      "destination"
+    ],
+    "ChooseOptional": [
+      "accept"
+    ],
+    "Sacrifice": [
+      "object"
+    ],
+    "DeclineEffectPayment": [],
+    "KeepRole": [
+      "object"
+    ],
+    "KeepLegend": [
+      "object"
+    ],
+    "Concede": []
+  },
+  "decisions": [
+    "attack_cost",
+    "draw_replacement",
+    "miracle_reveal",
+    "resolution_casts",
+    "mana_lot_spend",
+    "zone_replacement",
+    "replacement",
+    "created_token",
+    "resolution_mana",
+    "resolution_life",
+    "connive_order",
+    "opening_hand",
+    "mulligan",
+    "bottom",
+    "priority",
+    "plot_payment",
+    "face_up_payment",
+    "role_rule",
+    "legend_rule",
+    "retarget",
+    "target_amount",
+    "targets",
+    "offspring",
+    "casualty",
+    "mana_rollback",
+    "cast_costs",
+    "casualty_payment",
+    "bargain",
+    "kicker",
+    "gift",
+    "endure",
+    "harmonize",
+    "convoke",
+    "improvise",
+    "waterbend",
+    "mobilize",
+    "blight_intent",
+    "blight_payment",
+    "teamwork_intent",
+    "teamwork_payment",
+    "saddle",
+    "crew",
+    "explore",
+    "manifest",
+    "resolution_x",
+    "source_counter_amount",
+    "target_counter_removal",
+    "x",
+    "evidence_intent",
+    "evidence",
+    "spell_cost",
+    "activation_cost",
+    "spell_mode",
+    "additional_cost",
+    "pay_costs",
+    "order_triggers",
+    "optional_effect",
+    "target_library",
+    "mana_value_parity",
+    "linked_exile",
+    "forage_method",
+    "forage",
+    "mana_choice",
+    "library_choice",
+    "equipment_attachment",
+    "library_selection",
+    "hand_card_choice",
+    "revealed_discard",
+    "recover_milled",
+    "milled_selection",
+    "creature_type_choice",
+    "hand_library_search",
+    "library_graveyard_search",
+    "library_search_destination",
+    "library_search",
+    "effect_discard",
+    "outside_game_choice",
+    "outside_entry_replacement",
+    "hand_defender",
+    "token_choice",
+    "keyword_choice",
+    "proliferate",
+    "effect_choice",
+    "entry_timestamps",
+    "linked_choice",
+    "entry_value",
+    "land_card_name",
+    "entry_life",
+    "entry_behold",
+    "entry_replacement",
+    "aura_entry",
+    "attackers",
+    "blockers",
+    "damage",
+    "discard"
+  ],
+  "steps": [
+    "Pregame",
+    "Upkeep",
+    "Draw",
+    "Main1",
+    "BeginCombat",
+    "Attackers",
+    "Blockers",
+    "FirstStrikeDamage",
+    "CombatDamage",
+    "EndCombat",
+    "Main2",
+    "End",
+    "Cleanup"
+  ],
+  "zones": [
+    "player",
+    "hand",
+    "battlefield",
+    "graveyard",
+    "exile",
+    "stack",
+    "command",
+    "library"
+  ],
+  "counters": [
+    "plus_one",
+    "minus_one",
+    "stun",
+    "loyalty",
+    "lore"
+  ],
+  "flags": [
+    "tapped",
+    "summoning_sick",
+    "attacking",
+    "damaged_this_turn",
+    "dealt_damage_this_turn",
+    "modified"
+  ],
+  "player_stats": [
+    "life",
+    "hand_count",
+    "library_count",
+    "poison_counters",
+    "spells_cast_this_turn",
+    "cards_drawn_this_turn",
+    "life_lost_this_turn",
+    "extra_land_plays_remaining"
+  ],
+  "bit_widths": {
+    "kinds": 16,
+    "colors": 6,
+    "keywords": 64
+  },
+  "feature_spec": {
+    "entities": 268,
+    "semantics": 252,
+    "context": 409,
+    "candidates": 2672,
+    "history": 292
+  },
+  "allow_concede": false,
+  "scope": "Pinned Standard action schema including all ten Hartford main decks",
+  "decision_aliases": {
+    "optional_search": "optional_effect",
+    "attack_payment": "attack_cost"
+  },
+  "extra_action_fields": {
+    "production": 6,
+    "numbers": [
+      "mode",
+      "cost",
+      "clause",
+      "index",
+      "effect",
+      "type_mask",
+      "destination_count",
+      "replacement_ability",
+      "grant_timestamp"
+    ],
+    "booleans": [
+      "keep",
+      "graveyard",
+      "intrinsic",
+      "hand",
+      "library",
+      "flash_surcharge",
+      "collect",
+      "put_counters"
+    ],
+    "basics": [
+      "Plains",
+      "Island",
+      "Swamp",
+      "Mountain",
+      "Forest"
+    ],
+    "destinations": [
+      "Top",
+      "Bottom",
+      "Graveyard",
+      "Shuffle",
+      "SecondFromTop"
+    ],
+    "faces": [
+      "Normal",
+      "Adventure",
+      "Omen",
+      "Back"
+    ],
+    "categories": {
+      "pile": [
+        "FaceDown",
+        "FaceUp"
+      ],
+      "effect_kind": [
+        "RevealShuffle",
+        "Prevent",
+        "Exile",
+        "ExileReflexive",
+        "Battlefield"
+      ],
+      "prevention": [
+        "ShieldCounter",
+        "CombatBySource",
+        "CombatToRecipient",
+        "ProtectionEverything",
+        "ProtectionInstantSorcery",
+        "SourceLinkedDamage"
+      ],
+      "contribution": [
+        "Generic",
+        "White",
+        "Blue",
+        "Black",
+        "Red",
+        "Green"
+      ],
+      "parity": [
+        "Odd",
+        "Even"
+      ],
+      "route": [
+        "ExileThree",
+        "Food",
+        "Black"
+      ],
+      "counter": [
+        "Lore",
+        "PlusOne",
+        "MinusOne",
+        "Stun",
+        "Loyalty",
+        "Incubation",
+        "Bait",
+        "Page",
+        "Divinity",
+        "Revival",
+        "Soul",
+        "Fellowship",
+        "Wish",
+        "Stash",
+        "Charge",
+        "Growth",
+        "Plan",
+        "Invasion",
+        "Haste",
+        "Flying",
+        "FirstStrike",
+        "DoubleStrike",
+        "Deathtouch",
+        "Indestructible",
+        "Lifelink",
+        "Menace",
+        "Reach",
+        "Trample",
+        "Vigilance",
+        "Finality",
+        "Shield",
+        "Hone",
+        "Quest",
+        "Defense",
+        "Hexproof",
+        "Blight",
+        "Bloodstain",
+        "Bore",
+        "Chorus",
+        "Coin",
+        "Conqueror",
+        "Decayed",
+        "Dread",
+        "Dream",
+        "Film",
+        "Fire",
+        "Flood",
+        "Impostor",
+        "Ingenuity",
+        "Landmark",
+        "Loot",
+        "Nest",
+        "Net",
+        "Point",
+        "Possession",
+        "Rev",
+        "Skewer",
+        "Supply",
+        "Time",
+        "Unlock"
+      ],
+      "creature_type": [
+        "Advisor",
+        "Aetherborn",
+        "Alien",
+        "Ally",
+        "Angel",
+        "Antelope",
+        "Ape",
+        "Archer",
+        "Archon",
+        "Armadillo",
+        "Army",
+        "Artificer",
+        "Assassin",
+        "Assembly-Worker",
+        "Astartes",
+        "Atog",
+        "Aurochs",
+        "Avatar",
+        "Azra",
+        "Badger",
+        "Balloon",
+        "Barbarian",
+        "Bard",
+        "Basilisk",
+        "Bat",
+        "Bear",
+        "Beast",
+        "Beaver",
+        "Beeble",
+        "Beholder",
+        "Berserker",
+        "Bird",
+        "Bison",
+        "Blinkmoth",
+        "Boar",
+        "Bringer",
+        "Brushwagg",
+        "C'tan",
+        "Camarid",
+        "Camel",
+        "Capybara",
+        "Caribou",
+        "Carrier",
+        "Cat",
+        "Centaur",
+        "Child",
+        "Chimera",
+        "Citizen",
+        "Cleric",
+        "Clown",
+        "Cockatrice",
+        "Construct",
+        "Coward",
+        "Coyote",
+        "Crab",
+        "Crocodile",
+        "Custodes",
+        "Cyberman",
+        "Cyclops",
+        "Dalek",
+        "Dauthi",
+        "Demigod",
+        "Demon",
+        "Deserter",
+        "Detective",
+        "Devil",
+        "Dinosaur",
+        "Djinn",
+        "Doctor",
+        "Dog",
+        "Dragon",
+        "Drake",
+        "Dreadnought",
+        "Drix",
+        "Drone",
+        "Druid",
+        "Dryad",
+        "Dwarf",
+        "Echidna",
+        "Efreet",
+        "Egg",
+        "Elder",
+        "Eldrazi",
+        "Elemental",
+        "Elephant",
+        "Elf",
+        "Elk",
+        "Employee",
+        "Eternal",
+        "Eye",
+        "Faerie",
+        "Ferret",
+        "Fish",
+        "Flagbearer",
+        "Fox",
+        "Fractal",
+        "Frog",
+        "Fungus",
+        "Gamer",
+        "Gamma",
+        "Gargoyle",
+        "Germ",
+        "Giant",
+        "Giraffe",
+        "Gith",
+        "Glimmer",
+        "Gnoll",
+        "Gnome",
+        "Goat",
+        "Goblin",
+        "God",
+        "Golem",
+        "Gorgon",
+        "Graveborn",
+        "Gremlin",
+        "Griffin",
+        "Guest",
+        "Hag",
+        "Halfling",
+        "Hamster",
+        "Harpy",
+        "Hedgehog",
+        "Hellion",
+        "Hero",
+        "Hippo",
+        "Hippogriff",
+        "Homarid",
+        "Homunculus",
+        "Horror",
+        "Horse",
+        "Human",
+        "Hydra",
+        "Hyena",
+        "Illusion",
+        "Imp",
+        "Incarnation",
+        "Inhuman",
+        "Inkling",
+        "Inquisitor",
+        "Insect",
+        "Jackal",
+        "Jellyfish",
+        "Juggernaut",
+        "Kangaroo",
+        "Kavu",
+        "Kirin",
+        "Kithkin",
+        "Knight",
+        "Kobold",
+        "Kor",
+        "Kraken",
+        "Kree",
+        "Lamia",
+        "Lammasu",
+        "Leech",
+        "Lemur",
+        "Leviathan",
+        "Lhurgoyf",
+        "Licid",
+        "Lizard",
+        "Llama",
+        "Lobster",
+        "Manticore",
+        "Masticore",
+        "Mercenary",
+        "Merfolk",
+        "Metathran",
+        "Minion",
+        "Minotaur",
+        "Mite",
+        "Mole",
+        "Monger",
+        "Mongoose",
+        "Monk",
+        "Monkey",
+        "Moogle",
+        "Moonfolk",
+        "Mount",
+        "Mouse",
+        "Mutant",
+        "Myr",
+        "Mystic",
+        "Nautilus",
+        "Necron",
+        "Nephilim",
+        "Nightmare",
+        "Nightstalker",
+        "Ninja",
+        "Noble",
+        "Noggle",
+        "Nomad",
+        "Nymph",
+        "Octopus",
+        "Ogre",
+        "Ooze",
+        "Orb",
+        "Orc",
+        "Orgg",
+        "Otter",
+        "Ouphe",
+        "Ox",
+        "Oyster",
+        "Pangolin",
+        "Peasant",
+        "Pegasus",
+        "Pentavite",
+        "Performer",
+        "Pest",
+        "Phelddagrif",
+        "Phoenix",
+        "Phyrexian",
+        "Pilot",
+        "Pincher",
+        "Pirate",
+        "Plant",
+        "Platypus",
+        "Porcupine",
+        "Possum",
+        "Praetor",
+        "Primarch",
+        "Prism",
+        "Processor",
+        "Qu",
+        "Rabbit",
+        "Raccoon",
+        "Ranger",
+        "Rat",
+        "Rebel",
+        "Reflection",
+        "Rhino",
+        "Rigger",
+        "Robot",
+        "Rogue",
+        "Sable",
+        "Salamander",
+        "Samurai",
+        "Sand",
+        "Saproling",
+        "Satyr",
+        "Scarecrow",
+        "Scientist",
+        "Scion",
+        "Scorpion",
+        "Scout",
+        "Sculpture",
+        "Seal",
+        "Serf",
+        "Serpent",
+        "Servo",
+        "Shade",
+        "Shaman",
+        "Shapeshifter",
+        "Shark",
+        "Sheep",
+        "Shi'ar",
+        "Siren",
+        "Skeleton",
+        "Skrull",
+        "Skunk",
+        "Slith",
+        "Sliver",
+        "Sloth",
+        "Slug",
+        "Snail",
+        "Snake",
+        "Soldier",
+        "Soltari",
+        "Sorcerer",
+        "Spawn",
+        "Specter",
+        "Spellshaper",
+        "Sphinx",
+        "Spider",
+        "Spike",
+        "Spirit",
+        "Splinter",
+        "Sponge",
+        "Spy",
+        "Squid",
+        "Squirrel",
+        "Starfish",
+        "Surrakar",
+        "Survivor",
+        "Symbiote",
+        "Synth",
+        "Tentacle",
+        "Tetravite",
+        "Thalakos",
+        "Thopter",
+        "Thrull",
+        "Tiefling",
+        "Time Lord",
+        "Toy",
+        "Treefolk",
+        "Trilobite",
+        "Triskelavite",
+        "Troll",
+        "Turtle",
+        "Tyranid",
+        "Unicorn",
+        "Utrom",
+        "Vampire",
+        "Varmint",
+        "Vedalken",
+        "Villain",
+        "Volver",
+        "Wall",
+        "Walrus",
+        "Warlock",
+        "Warrior",
+        "Weasel",
+        "Weird",
+        "Werewolf",
+        "Whale",
+        "Wizard",
+        "Wolf",
+        "Wolverine",
+        "Wombat",
+        "Worm",
+        "Wraith",
+        "Wurm",
+        "Yeti",
+        "Zombie",
+        "Zubera"
+      ],
+      "defender_kind": [
+        "Player",
+        "Planeswalker",
+        "Battle"
+      ],
+      "entry_kind": [
+        "BasicLandType",
+        "Color",
+        "CreatureType",
+        "ManaValueParity",
+        "CardName"
+      ],
+      "entry_color": [
+        "White",
+        "Blue",
+        "Black",
+        "Red",
+        "Green"
+      ],
+      "entry_parity": [
+        "Odd",
+        "Even"
+      ],
+      "destination_kind": [
+        "Top",
+        "Bottom",
+        "Graveyard",
+        "Shuffle",
+        "SecondFromTop",
+        "HandOrGraveyard",
+        "LinkedExile",
+        "ExileFreeThisTurn",
+        "Hand",
+        "Battlefield",
+        "BattlefieldThenHand"
+      ]
+    },
+    "choice_card_traits": true,
+    "dynamic_cost": [
+      "colored",
+      "generic"
+    ],
+    "permanent_types": [
+      "Creature",
+      "Artifact",
+      "Enchantment",
+      "Planeswalker",
+      "Land",
+      "Battle"
+    ]
+  },
+  "live_entry_basic_types": [
+    "Plains",
+    "Island",
+    "Swamp",
+    "Mountain",
+    "Forest"
+  ],
+  "named_counter_state_and_payments": [
+    "Incubation",
+    "Bait",
+    "Page",
+    "Divinity",
+    "Revival",
+    "Soul",
+    "Fellowship",
+    "Wish",
+    "Stash",
+    "Charge",
+    "Growth",
+    "Plan",
+    "Invasion",
+    "Haste",
+    "Flying",
+    "FirstStrike",
+    "DoubleStrike",
+    "Deathtouch",
+    "Indestructible",
+    "Lifelink",
+    "Menace",
+    "Reach",
+    "Trample",
+    "Vigilance",
+    "Finality",
+    "Shield",
+    "Hone",
+    "Quest",
+    "Defense",
+    "Hexproof",
+    "Blight",
+    "Bloodstain",
+    "Bore",
+    "Chorus",
+    "Coin",
+    "Conqueror",
+    "Decayed",
+    "Dread",
+    "Dream",
+    "Film",
+    "Fire",
+    "Flood",
+    "Impostor",
+    "Ingenuity",
+    "Landmark",
+    "Loot",
+    "Nest",
+    "Net",
+    "Point",
+    "Possession",
+    "Rev",
+    "Skewer",
+    "Supply",
+    "Time",
+    "Unlock"
+  ],
+  "standard_player_stats": [
+    "speed",
+    "speed_triggered_this_turn"
+  ],
+  "legal_visible_choice_pools": [
+    "search_choice.cards",
+    "library_choice.remaining",
+    "library_selection.remaining"
+  ],
+  "observation_pipeline": "python",
+  "representation": "sparse-identity-standard-v2",
+  "identity": {
+    "vocabulary_sha256": "9b008b8431597989722b13180e246c20e9cabb37f24e21fa9a2d5429c2515015",
+    "cards": 5488,
+    "descriptor_sha256": "1bb33f325ad4ddbb67de7721dacd5c916e9b6259a11b4c7dce6dbb4a82e32db5",
+    "feature_names": [
+      "entry.never",
+      "entry.always",
+      "entry.land_count_at_most",
+      "entry.land_count_at_least",
+      "entry.pay_life",
+      "entry.controls_basic",
+      "entry.controls_subtype",
+      "entry.opponents_turn",
+      "entry.first_three_turns",
+      "entry.low_life",
+      "entry.controls_planeswalker",
+      "entry.behold_subtype",
+      "entry.chosen_x_at_most",
+      "entry.threshold",
+      "entry.life",
+      "entry.other_subtype",
+      "entry.subtype.Plains",
+      "entry.subtype.Island",
+      "entry.subtype.Swamp",
+      "entry.subtype.Mountain",
+      "entry.subtype.Forest",
+      "counter.simple_complete",
+      "counter.partial",
+      "counter.hard",
+      "counter.tax_fixed",
+      "counter.tax_dynamic",
+      "counter.tax_generic",
+      "counter.exile",
+      "target.spell",
+      "target.included_creature",
+      "target.excluded_creature",
+      "target.min_mana",
+      "target.max_mana",
+      "target.max_known",
+      "counter.tax_color.W",
+      "counter.tax_color.U",
+      "counter.tax_color.B",
+      "counter.tax_color.R",
+      "counter.tax_color.G",
+      "counter.tax_color.C",
+      "counter.multiple_or_modal"
+    ],
+    "descriptors": {
+      "catalogue_version": "06eece83874a61c9c389bddc8bd2e5c214eb026b3b997917da2fb0f7ddd23f03",
+      "extractor_sha256": "349427e912952d4fac4b0c3e3dc1c810b3691086d527afb7770b26f97e02eb98",
+      "feature_traits_sha256": "00efc77db9b98ac394957897f32c1bb820f19d74c82e789e8d2eac0b48ce2cf0",
+      "payload_sha256": "1bb33f325ad4ddbb67de7721dacd5c916e9b6259a11b4c7dce6dbb4a82e32db5",
+      "runtime_revision": "4bedacf19687e98345f26c7b7492cd2bc149fe38",
+      "scope": "Exact entry variants and narrow spell-counter descriptors; no runtime rules changes"
+    }
+  },
+  "fingerprint": "aebd057a92552e4769a38a53bef29678b9045cd2278256deaaf4f05a8c22a50b"
+}

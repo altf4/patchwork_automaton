@@ -1,0 +1,1 @@
+{"control": "/home/altf4/benchmarks/hartford-identity-ppo-20261102/run-trigger-recovery-v1-launch", "guard": "/home/altf4/benchmarks/hartford-identity-ppo-20261102/run-trigger-recovery-v1-guard", "session": "hartford-identity-trigger-recovery", "preserved_successful_games": 999, "only_failed_game_retried": 42776, "status": "resuming"}

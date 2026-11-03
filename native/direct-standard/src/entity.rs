@@ -1,8 +1,9 @@
-//! Standard v5 entity features from RustMage's already-redacted typed views.
-use rustmage::{BasicLandType, EntryChoiceValue, Keywords, ObjectView, PlayerView, Zone};
+//! Standard v6 entity features from RustMage's already-redacted typed views.
+use rustmage::{BasicLandType, EntryChoiceValue, Keywords, ObjectView, PlayerView, Zone, CounterKind};
 use std::collections::HashMap;
 
-pub const ENTITY_WIDTH: usize = 154;
+pub const ENTITY_WIDTH: usize = 268;
+pub const NAMED_COUNTERS: [CounterKind;55] = [CounterKind::Incubation, CounterKind::Bait, CounterKind::Page, CounterKind::Divinity, CounterKind::Revival, CounterKind::Soul, CounterKind::Fellowship, CounterKind::Wish, CounterKind::Stash, CounterKind::Charge, CounterKind::Growth, CounterKind::Plan, CounterKind::Invasion, CounterKind::Haste, CounterKind::Flying, CounterKind::FirstStrike, CounterKind::DoubleStrike, CounterKind::Deathtouch, CounterKind::Indestructible, CounterKind::Lifelink, CounterKind::Menace, CounterKind::Reach, CounterKind::Trample, CounterKind::Vigilance, CounterKind::Finality, CounterKind::Shield, CounterKind::Hone, CounterKind::Quest, CounterKind::Defense, CounterKind::Hexproof, CounterKind::Blight, CounterKind::Bloodstain, CounterKind::Bore, CounterKind::Chorus, CounterKind::Coin, CounterKind::Conqueror, CounterKind::Decayed, CounterKind::Dread, CounterKind::Dream, CounterKind::Film, CounterKind::Fire, CounterKind::Flood, CounterKind::Impostor, CounterKind::Ingenuity, CounterKind::Landmark, CounterKind::Loot, CounterKind::Nest, CounterKind::Net, CounterKind::Point, CounterKind::Possession, CounterKind::Rev, CounterKind::Skewer, CounterKind::Supply, CounterKind::Time, CounterKind::Unlock];
 #[derive(Default, PartialEq)]
 pub struct Catalogue { pub mana_values: HashMap<String, Option<f64>>, pub traits: HashMap<String, Vec<f32>>, pub identities: HashMap<String, String>, pub unknown_traits: Vec<f32> }
 
@@ -30,7 +31,7 @@ fn keywords(row: &mut Vec<f32>, value: Keywords) {
         Keywords::NO_POWER_GE_THREE_BLOCKERS, Keywords::NO_GREATER_POWER_BLOCKERS,
         Keywords::PREVENT_COMBAT_TO, Keywords::PREVENT_COMBAT_BY, Keywords::NO_HUMAN_BLOCKERS,
         Keywords::PROTECTION_EVERYTHING, Keywords::PROTECTION_INSTANT_SORCERY,
-        Keywords::ONLY_HASTE_BLOCKERS, Keywords::CREW_SADDLE_PLUS_TWO];
+        Keywords::ONLY_HASTE_BLOCKERS, Keywords::CREW_SADDLE_PLUS_TWO, Keywords::SPLIT_SECOND];
     for flag in flags { row.push(value.contains(flag) as u8 as f32); }
     row.extend(std::iter::repeat_n(0., 64 - flags.len()));
 }
@@ -52,6 +53,9 @@ pub fn player_row(player: &PlayerView, side: usize) -> Vec<f32> {
         player.extra_land_plays_remaining as f64] { number(&mut row, Some(x)); }
     mana(&mut row, player.mana);
     hot(&mut row, None, 5);
+    for _ in NAMED_COUNTERS { number(&mut row, Some(0.)); }
+    number(&mut row, Some(player.speed as f64));
+    number(&mut row, Some(player.speed_triggered_this_turn as u8 as f64));
     assert_eq!(row.len(), ENTITY_WIDTH);
     row
 }
@@ -73,6 +77,8 @@ pub fn object_row(object: &ObjectView, side: usize, catalogue: &Catalogue) -> Ve
         BasicLandType::Plains=>0, BasicLandType::Island=>1, BasicLandType::Swamp=>2,
         BasicLandType::Mountain=>3, BasicLandType::Forest=>4 }), _=>None };
     hot(&mut row, basic, 5);
+    for kind in NAMED_COUNTERS { number(&mut row, Some(object.counters.get(kind) as f64)); }
+    number(&mut row, None);number(&mut row, None);
     assert_eq!(row.len(), ENTITY_WIDTH);
     row
 }

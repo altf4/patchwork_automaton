@@ -1,0 +1,11 @@
+{
+  "examples/experiment_hartford_identity.py": "46e8092c2506607803c388ca16f3c2c7ec3b7a976e539cb1e056766e52a10fb0",
+  "scripts/export-hartford-input-descriptors.py": "dee1586b2614355031fe78b8670035f6ada562694e08c6b578cfd146a7650c09",
+  "scripts/hartford-input-descriptors.rs": "349427e912952d4fac4b0c3e3dc1c810b3691086d527afb7770b26f97e02eb98",
+  "src/patchwork_automaton/neural/compact_identity.py": "b320f6174330f8ba021708ffb9fb0dc47509eca9ef4a8a4716c6a2df91d7fe8b",
+  "src/patchwork_automaton/neural/compact_identity_model.py": "d52f4bf521367000349dfee696fd8fe9dfe8550ac2afb208eff1af3e18ee03b1",
+  "src/patchwork_automaton/neural/compact_dispatch.py": "100aac8417e42610b57d47d175e8d2d44f06242617eaa4ab481b945d84a07cee",
+  "src/patchwork_automaton/neural/identity_features.py": "011cdb5e1e1795c4b34d74b740148ca5e69ecd517b2e956dec128ad3047f65a8",
+  "src/patchwork_automaton/data/hartford-input-descriptors.json": "5eefacf5513d95002da3326d4cc095e31339078bdf22988e5d4798ab46fbb497",
+  "tests/test_compact_identity.py": "86da966b3ed4ee2aba43674b6b815408a0c0808a9a3978c9c89ced23260d6152"
+}

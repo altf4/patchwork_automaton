@@ -1,0 +1,8 @@
+Running as unit: rustmage-build-8044c448feb44624a0f89e23350f0486.service; invocation ID: d04e260605ab41e18257e6458ff39218
+Waiting for the shared build slot...
+Resource report: /home/altf4/.cache/rustmage-build-reports/1f3a3b95be4645afa402f9834f1e30fc.json
+          Finished with result: success
+Main processes terminated with: code=exited, status=0/SUCCESS
+               Service runtime: 3.042s
+             CPU time consumed: 3.025s
+                   Memory peak: 161.1M (swap: 0B)

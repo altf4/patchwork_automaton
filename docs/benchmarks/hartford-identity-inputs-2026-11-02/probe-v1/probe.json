@@ -1,0 +1,41 @@
+{
+  "task": "Choose untapped mana with minimum life payment among two specified lands",
+  "limitation": "Synthetic representation probe with hand-authored local labels; not game-strength evidence.",
+  "training_examples": 168,
+  "heldout_examples": 168,
+  "steps": 300,
+  "heldout": "Odd life totals and fresh object IDs/order; both action orders balanced in both splits.",
+  "unchanged_200k_accuracy": 0.5,
+  "arms": {
+    "capacity_control": {
+      "accuracy": 0.5,
+      "training_loss": 0.6931471824645996,
+      "seconds": 0.8756718980148435,
+      "parameters": 324644,
+      "per_land_pair": {
+        "Blooming Marsh": 0.5,
+        "Concealed Courtyard": 0.5
+      }
+    },
+    "identity_only": {
+      "accuracy": 1.0,
+      "training_loss": 7.612278750457335e-06,
+      "seconds": 0.8356046010158025,
+      "parameters": 324644,
+      "per_land_pair": {
+        "Blooming Marsh": 1.0,
+        "Concealed Courtyard": 1.0
+      }
+    },
+    "identity_plus_rules_ablation": {
+      "accuracy": 1.0,
+      "training_loss": 1.9981158402515575e-05,
+      "seconds": 0.8659284659952391,
+      "parameters": 324644,
+      "per_land_pair": {
+        "Blooming Marsh": 1.0,
+        "Concealed Courtyard": 1.0
+      }
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "source": "/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/hartford-identity-inputs/source-200k/policy.keras",
+  "source_sha256": "eb56f40c7e3519a9cbb69dbbc9d85129bec91a6bf600d13ce3d599c5ee64fef6",
+  "mode": "acceptance",
+  "default_rules_enabled": false,
+  "production_run_modified": false
+}

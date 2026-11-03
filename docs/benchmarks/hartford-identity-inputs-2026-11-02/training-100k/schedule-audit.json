@@ -1,0 +1,19 @@
+{
+  "passed": true,
+  "games": 100000,
+  "partitions": {
+    "training": 80000,
+    "validation": 20000
+  },
+  "seed_bounds": [
+    412610510000,
+    412610609999
+  ],
+  "startup_rounds": 3,
+  "steady_opponent_quotas": [
+    700,
+    100,
+    100,
+    100
+  ]
+}

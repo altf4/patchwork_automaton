@@ -1,0 +1,26 @@
+Running as unit: rustmage-build-a01cd0a22e53460f855e0dfee1c5eb79.service; invocation ID: d4fabf1c1350448bad0603394d2994c0
+Waiting for the shared build slot...
+   Compiling rustmage v0.1.0 (/home/altf4/Code/mtgo-bot/patchwork_automaton/.local/engine-trigger-loop-fix-v1)
+    Finished `test` profile [unoptimized] target(s) in 0.67s
+     Running tests/mandatory_loops.rs (target/debug/deps/mandatory_loops-7737af393b71303a)
+
+running 10 tests
+test available_damage_target_remains_a_real_choice ... ok
+test both_explicit_trigger_orders_draw_without_mutating_saved_branches ... ok
+test funded_instant_escape_stays_playable_with_observer ... ok
+test funded_sorcery_speed_craft_is_not_an_escape_during_the_cycle ... ok
+test funded_starcage_activation_escape_is_not_overridden_by_the_proof ... ok
+test mandatory_exile_loop_draws_raw_indexed_and_restored_branches ... ok
+test optional_instant_and_rejected_indices_preserve_the_game ... ok
+test optional_target_and_observer_never_force_a_draw ... ok
+test stale_unmapped_entry_history_declines_detection ... ok
+test unplaceable_entry_damage_order_does_not_hide_mandatory_cycle ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+
+Resource report: /home/altf4/.cache/rustmage-build-reports/3749db6cef984803b322dc07842d008f.json
+          Finished with result: success
+Main processes terminated with: code=exited, status=0/SUCCESS
+               Service runtime: 825ms
+             CPU time consumed: 879ms
+                   Memory peak: 187.9M (swap: 0B)

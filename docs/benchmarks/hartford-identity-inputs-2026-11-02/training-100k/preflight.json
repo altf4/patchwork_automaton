@@ -1,0 +1,80 @@
+{
+  "deck_catalog": "hartford",
+  "decklist_sha256": "347decea9859497cc54e6710d3635adfa692345ae615779197637a9b43560b92",
+  "decks": {
+    "bant-airbending": {
+      "mainboard_cards": 60,
+      "missing": [],
+      "supported_mainboard_cards": 60,
+      "unimplemented": []
+    },
+    "bw-lifegain": {
+      "mainboard_cards": 60,
+      "missing": [],
+      "supported_mainboard_cards": 60,
+      "unimplemented": []
+    },
+    "dimir-midrange": {
+      "mainboard_cards": 60,
+      "missing": [],
+      "supported_mainboard_cards": 60,
+      "unimplemented": []
+    },
+    "four-color-control": {
+      "mainboard_cards": 60,
+      "missing": [],
+      "supported_mainboard_cards": 60,
+      "unimplemented": []
+    },
+    "izzet-prowess": {
+      "mainboard_cards": 60,
+      "missing": [],
+      "supported_mainboard_cards": 60,
+      "unimplemented": []
+    },
+    "izzet-spellementals": {
+      "mainboard_cards": 60,
+      "missing": [],
+      "supported_mainboard_cards": 60,
+      "unimplemented": []
+    },
+    "jeskai-artifacts": {
+      "mainboard_cards": 60,
+      "missing": [],
+      "supported_mainboard_cards": 60,
+      "unimplemented": []
+    },
+    "jund-sacrifice": {
+      "mainboard_cards": 60,
+      "missing": [],
+      "supported_mainboard_cards": 60,
+      "unimplemented": []
+    },
+    "mardu-discard": {
+      "mainboard_cards": 60,
+      "missing": [],
+      "supported_mainboard_cards": 60,
+      "unimplemented": []
+    },
+    "mono-green-landfall": {
+      "mainboard_cards": 60,
+      "missing": [],
+      "supported_mainboard_cards": 60,
+      "unimplemented": []
+    }
+  },
+  "engine": {
+    "build_manifest": "/home/altf4/benchmarks/hartford-compact-ppo-20261101/project-loop-v2/.local/direct-standard/target-4bedacf19687-capped256/release/libpatchwork_direct_standard.build.json",
+    "checkout": "/home/altf4/benchmarks/hartford-compact-ppo-20261101/project-loop-v2/.local/direct-standard/rustmage-4bedacf19687",
+    "library": "/home/altf4/benchmarks/hartford-compact-ppo-20261101/project-loop-v2/.local/direct-standard/target-4bedacf19687-capped256/release/libpatchwork_direct_standard.so",
+    "library_sha256": "32e796ce227ff4b70fb5850e38e5803a3767c263d20d7cdf71a1d72f94c218b0",
+    "observation_schema": 198,
+    "revision": "4bedacf19687e98345f26c7b7492cd2bc149fe38"
+  },
+  "errors": [],
+  "missing_mainboard_cards": [],
+  "playback": "direct",
+  "ready": true,
+  "unimplemented_mainboard_cards": [],
+  "unique_mainboard_cards": 164
+}

@@ -70,7 +70,8 @@ class StandardSelfplayCollector:
             InferenceProcessGroup(self.connections[1], replicas=opponent_inference_processes, device='cpu'),
         )
         metadata = [dict(card_count=m.card_count, memory_size=m.memory_size,
-                         feature_spec=dict(m.feature_spec)) for m in (model, opponent_model)]
+                         feature_spec=dict(m.feature_spec),input_format=getattr(m,'input_format',None))
+                    for m in (model, opponent_model)]
         self.pool = ProcessPoolExecutor(max_workers=workers, mp_context=context,
             initializer=_initialize_worker,
             initargs=(self.worker_connections, context.Value('i', 0), metadata))
@@ -85,14 +86,15 @@ class StandardSelfplayCollector:
     def opponent_version(self):
         return self.replicas[1].version
 
-    async def start(self, *, version=0, opponent_version=0):
+    async def start(self, *, version=0, opponent_version=0, opponent_weights=None):
         if self.closed or self.broken or self.active:
             raise RuntimeError('Collector is unavailable or active')
         try:
             for group, model, expected in zip(self.replicas,
                     (self.model, self.opponent_model), (version, opponent_version)):
                 if not group.started:
-                    await group.start(model, version=expected)
+                    await group.start(model, version=expected,
+                        **({'version_weights': opponent_weights} if group is self.replicas[1] and opponent_weights is not None else {}))
                 elif group.version != expected:
                     raise ValueError('Use sync methods to change initialized policy versions')
             self.policy_digest = self.replicas[0].digest
@@ -131,12 +133,22 @@ class StandardSelfplayCollector:
         if not all(group.started for group in self.replicas):
             raise RuntimeError('Both inference groups must be started')
         options.setdefault('version', self.version)
-        options.setdefault('opponent_version', self.opponent_version)
-        if options['version'] != self.version or options['opponent_version'] != self.opponent_version:
+        bank = self.replicas[1].version_digests
+        if bank is None:options.setdefault('opponent_version', self.opponent_version)
+        if options['version'] != self.version or (bank is None and options['opponent_version'] != self.opponent_version):
             raise ValueError('Stale learner or opponent version')
+        if bank is not None:
+            for job in jobs:
+                game = job['game'];number = game['opponent_version']
+                if bank.get(number) != job.get('opponent_weights_sha256'):
+                    raise ValueError('Scheduled opponent weights do not match the frozen bank')
         loop = asyncio.get_running_loop()
         self.active = True
         async def one(job):
+            job = dict(job);job.pop('opponent_weights_sha256', None)
+            if bank is not None:
+                job.update(opponent_version=job['game']['opponent_version'],
+                    opponent_sha256=job['game']['opponent_checkpoint_sha256'])
             row = await loop.run_in_executor(self.pool, _run_game, dict(options, **job))
             if progress:
                 progress(row)

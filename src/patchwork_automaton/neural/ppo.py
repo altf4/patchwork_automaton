@@ -8,7 +8,7 @@ import numpy as np
 import tensorflow as tf
 import keras
 
-from .batching import example_batch, input_signature
+from .batching import example_batch, model_example_batch, input_signature
 
 
 def _assert_finite_gradients(gradients, message):
@@ -104,7 +104,7 @@ class PPOTrainer:
         if self.separate_value:
             self.critic_optimizer = keras.optimizers.Adam(self.value_learning_rate)
             self.critic_optimizer.build(model.critic.trainable_variables)
-        signature = [input_signature(example_batch(model.memory_size, getattr(model, 'feature_spec', None))),
+        signature = [input_signature(model_example_batch(model)),
                      tf.TensorSpec([None], tf.int32)] + [tf.TensorSpec([None], tf.float32)] * 3
         self.step = tf.function(self._step, input_signature=signature, autograph=False)
         if self.separate_value:
