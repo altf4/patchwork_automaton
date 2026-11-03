@@ -66,6 +66,120 @@ def pin_json(path, expected):
         atomic_json(path, expected)
 
 
+def checkpoint_bundle_sha256(path):
+    """Pin the policy, both optimizers, saved RNG and checkpoint metadata."""
+    value = checkpoint_hashes(Path(path))
+    return hashlib.sha256(json.dumps(value, sort_keys=True, separators=(',', ':')).encode()).hexdigest()
+
+
+def configure_fork(config, args):
+    """Admit the fixed 50-round comparison without resetting training state."""
+    from patchwork_automaton.rl.hartford_ab import EXTERNAL_BASE, PARENT_ROUND
+    parent = args.fork_from.resolve()
+    if args.architecture != 'compact-identity' or args.initialize_from is not None or args.initialize_from_sha256:
+        raise ValueError('Checkpoint continuation requires identity architecture without weight transfer')
+    if args.opponent_recipe not in ('current', 'diverse') or args.rounds != 50 or not args.skip_evaluations:
+        raise ValueError('A/B continuation requires one recipe, 50 rounds and --skip-evaluations')
+    if not args.fork_from_sha256 or checkpoint_bundle_sha256(parent) != args.fork_from_sha256:
+        raise ValueError('Continuation checkpoint bundle hash mismatch')
+    state = json.loads((parent / 'state.json').read_text())
+    previous = state['config']
+    parent_report_path = parent.parent.parent / 'report.json'
+    parent_report = json.loads(parent_report_path.read_text())
+    if (parent_report.get('status') != 'complete' or parent_report.get('completed_games') != 100000
+            or parent_report.get('checkpoints', {}).get('100') != checkpoint_hashes(parent)):
+        raise ValueError('Continuation parent has no matching completed 100K report')
+    if (state.get('round') != PARENT_ROUND or previous.get('architecture') != 'compact-identity-standard-v2'
+            or parent.name != 'round-0100' or not previous.get('use_identity') or previous.get('use_rules')
+            or not previous.get('skip_evaluations') or 'trainer_rng_state' not in state
+            or not state.get('optimizer_steps') or not state.get('critic_optimizer_steps')):
+        raise ValueError('Continuation requires the completed identity checkpoint 100 with optimizer and RNG state')
+    unchanged = ('learning_rate', 'value_learning_rate', 'train_batch', 'ppo_epochs', 'entropy_weight',
+        'target_kl', 'max_state_kl', 'advantage_scale_floor', 'ppo_clip', 'value_max_steps',
+        'critic_update_scope', 'critic_unroll', 'concurrent_updates', 'validation_fraction',
+        'game_timeout', 'max_turns', 'max_decisions', 'compact_input_mib', 'training_decks',
+        'workers', 'runners', 'inference_processes', 'opponent_inference_processes', 'playback')
+    if any(config[key] != previous[key] for key in unchanged):
+        raise ValueError('Continuation changed the inherited training recipe')
+    prior_low, prior_high = training_seed_bounds(rounds=previous['rounds'], seed=previous['seed'])
+    low, high = training_seed_bounds(rounds=args.rounds, seed=args.seed)
+    if not (high < prior_low or low > prior_high):
+        raise ValueError('Continuation reuses parent collection seeds')
+    external = (97, 98, 99) if args.opponent_recipe == 'current' else (25, 50, 75)
+    opponents = {}
+    for number in external:
+        path = parent.parent / f'round-{number:04d}'
+        saved = json.loads((path / 'state.json').read_text())
+        if (saved.get('round') != number or saved['config'].get('architecture') != previous['architecture']
+                or parent_report['checkpoints'].get(str(number)) != checkpoint_hashes(path)):
+            raise ValueError('External opponent is not an identity checkpoint from this lineage')
+        opponents[str(EXTERNAL_BASE + number)] = dict(path=str(path), hashes=checkpoint_hashes(path),
+            parent_checkpoint=number)
+    config.update(experiment='hartford-identity-opponent-ab-v1', architecture='compact-identity-standard-v2',
+        input_representation='sparse-identity-standard-v2', initialization='continue_full_identity_checkpoint',
+        identity_width=16, use_identity=True, use_rules=False, weight_seed=previous['weight_seed'],
+        opponent_recipe=args.opponent_recipe, opponent_mode='fork_' + args.opponent_recipe,
+        fork=dict(parent_checkpoint=str(parent), parent_hashes=checkpoint_hashes(parent),
+            parent_bundle_sha256=args.fork_from_sha256, parent_round=PARENT_ROUND,
+            parent_report=str(parent_report_path), parent_report_sha256=sha256(parent_report_path),
+            parent_new_collection_games=100000, parent_total_exposure_games=300000, external_opponents=opponents))
+    return config
+
+
+def prepare_fork_checkpoint(output, config):
+    """Caller holds the new run's lock. Copy artifacts; never modify the parent."""
+    output = Path(output)
+    fork = config['fork']
+    parent = Path(fork['parent_checkpoint'])
+    if checkpoint_hashes(parent) != fork['parent_hashes']:
+        raise ValueError('Parent checkpoint changed before continuation preparation')
+    if sha256(fork['parent_report']) != fork['parent_report_sha256']:
+        raise ValueError('Parent completion report changed')
+    original_state = json.loads((parent / 'state.json').read_text())
+    provenance = dict(schema=1, fork=fork, original_parent_state=original_state,
+        preserved='Policy and both optimizer files are byte-identical; optimizer steps and trainer RNG are retained',
+        local_checkpoint_zero_lineage_checkpoint=100, new_rounds=50)
+    pin_json(output / 'fork-provenance.json', provenance)
+    root = output / 'checkpoints'
+    destination = root / 'round-0000'
+    state = {key: value for key, value in original_state.items() if key != 'round_result'}
+    state.update(round=0, config=config, lineage_checkpoint=100,
+        parent_state_sha256=fork['parent_hashes']['state.json'])
+    if not destination.exists():
+        root.mkdir(exist_ok=True)
+        temporary = root / 'round-0000.tmp'
+        temporary.mkdir()
+        for name in CHECKPOINT_FILES:
+            if name != 'state.json':
+                shutil.copy2(parent / name, temporary / name)
+        atomic_json(temporary / 'state.json', state)
+        for path in temporary.iterdir():
+            with path.open('rb') as stream:
+                os.fsync(stream.fileno())
+        temporary.rename(destination)
+        atomic_json(root / 'latest.json', {'checkpoint': destination.name})
+    if json.loads((destination / 'state.json').read_text()) != state:
+        raise ValueError('Fork checkpoint-zero metadata changed')
+    for name, digest in fork['parent_hashes'].items():
+        if name != 'state.json' and sha256(destination / name) != digest:
+            raise ValueError('Fork checkpoint-zero model or optimizer changed')
+    report_path = output / 'report.json'
+    if not report_path.exists():
+        atomic_json(report_path, dict(status='prepared', config=config, rounds=[],
+            checkpoints={'0': checkpoint_hashes(destination)}, evaluations={}, completed_games=0,
+            lineage_checkpoint=100, parent_total_exposure_games=300000,
+            started_at=datetime.now(timezone.utc).isoformat()))
+    return json.loads(report_path.read_text())
+
+
+def planned_training(config, number):
+    if 'fork' in config:
+        from patchwork_automaton.rl.hartford_ab import training_schedule as fork_schedule
+        return fork_schedule(tuple(HARTFORD_DECKS), round_id=number, seed=config['seed'],
+            recipe=config['opponent_recipe'])
+    return training_schedule(tuple(HARTFORD_DECKS), round_id=number, seed=config['seed'])
+
+
 def source_manifest(root=None):
     root = Path(root or PROJECT)
     paths = [p for folder in ('src', 'examples') for p in (root / folder).rglob('*.py')]
@@ -280,7 +394,9 @@ def configuration(args):
             minimum_free_disk_gib=32)
     source=getattr(args,'initialize_from',None)
     digest=getattr(args,'initialize_from_sha256',None)
-    if args.architecture=='compact-identity':
+    if getattr(args, 'fork_from', None) is not None:
+        result = configure_fork(result, args)
+    elif args.architecture=='compact-identity':
         if source is None or digest is None:
             raise ValueError('Identity experiment requires --initialize-from and --initialize-from-sha256')
         if len(digest)!=64 or any(c not in '0123456789abcdef' for c in digest):
@@ -292,6 +408,9 @@ def configuration(args):
             identity_width=16,use_identity=True,use_rules=False)
     elif source is not None or digest is not None:
         raise ValueError('Initialization transfer requires --architecture compact-identity')
+    if getattr(args, 'fork_from', None) is None and (getattr(args, 'fork_from_sha256', None)
+            or getattr(args, 'opponent_recipe', None) or getattr(args, 'prepare_fork_only', False)):
+        raise ValueError('Continuation options require --fork-from')
     if getattr(args, 'skip_evaluations', False):
         result['skip_evaluations'] = True
     return result
@@ -562,7 +681,8 @@ async def collect_round(*, planned, number, directory, collectors, pin_opponent,
     if pin_opponents is not None:
         remaining = [g for g in planned if g['index'] not in rows]
         if remaining:
-            digests = await pin_opponents(sorted({g['opponent_version'] for g in remaining}))
+            digests = await pin_opponents(sorted({g['opponent_version'] for g in remaining
+                if g.get('opponent_kind', 'frozen_neural') == 'frozen_neural'}))
             expected = {g['index']:g for g in remaining}
             def persist_mixed(row):
                 row = dict(row, actions=None);index = row['index']
@@ -573,7 +693,8 @@ async def collect_round(*, planned, number, directory, collectors, pin_opponent,
                 if len(rows)%25==0 or len(rows)==len(planned):
                     progress('collection',completed=len(rows),total=len(planned),opponent='mixed')
             jobs=[dict(seed=g['seed'],index=g['index'],game=g,
-                opponent_weights_sha256=digests[g['opponent_version']]) for g in remaining]
+                **({'opponent_weights_sha256':digests[g['opponent_version']]}
+                    if g.get('opponent_kind', 'frozen_neural') == 'frozen_neural' else {})) for g in remaining]
             await settle_all(collector.run_schedule(jobs[i::len(collectors)],progress=persist_mixed,
                 game_runner='standard_ppo',output=directory/'trajectories',diagnostics=directory/'adjudications',
                 version=number-1,game_timeout=game_timeout,max_turns=50,max_decisions=6000,greedy=False)
@@ -663,6 +784,17 @@ async def run(args):
     disk_floor=config.get('minimum_free_disk_gib',200)
     if shutil.disk_usage(args.output.parent if args.output.parent.exists() else PROJECT).free < disk_floor * 1024**3:
         raise RuntimeError(f'At least {disk_floor} GiB free disk required for bounded update caches')
+    if getattr(args, 'prepare_fork_only', False):
+        args.output = args.output.resolve()
+        args.output.mkdir(parents=True, exist_ok=args.resume)
+        with (args.output / 'run.lock').open('a') as lock:
+            fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            pins = dict(source=source_manifest(), readiness=readiness)
+            pin_json(args.output / 'manifest.json', dict(config=config, pins=pins))
+            prepared = prepare_fork_checkpoint(args.output, config)
+        print(json.dumps(dict(status=prepared['status'], output=str(args.output),
+            checkpoint_zero=prepared['checkpoints']['0']), indent=2), flush=True)
+        return prepared
     os.environ.update(PATCHWORK_STANDARD_PLAYBACK=args.playback, PATCHWORK_ROLLOUT_STORAGE='pickle',
                       PATCHWORK_OBSERVATION_PIPELINE='python')
     if os.environ.get('KERAS_BACKEND', 'tensorflow') != 'tensorflow':
@@ -701,6 +833,8 @@ async def run(args):
         if args.adopt_collection_policy_from:
             adopt_collection_policy(args.output,args.adopt_collection_policy_from,args.previous_guard,config,pins)
         pin_json(args.output / 'manifest.json', dict(config=config, pins=pins))
+        if 'fork' in config:
+            prepare_fork_checkpoint(args.output, config)
         (args.output / 'cache').mkdir(exist_ok=True)
         tempfile.tempdir = str(args.output / 'cache')
         root = args.output / 'checkpoints'
@@ -764,6 +898,12 @@ async def run(args):
             print(json.dumps(payload), flush=True)
 
         def check_checkpoint(number):
+            external = config.get('fork', {}).get('external_opponents', {}).get(str(number))
+            if external is not None:
+                path = Path(external['path'])
+                if checkpoint_hashes(path) != external['hashes']:
+                    raise ValueError(f'External frozen opponent {number} changed')
+                return path / 'policy.keras'
             path = root / f'round-{number:04d}'
             if checkpoint_hashes(path) != report['checkpoints'][str(number)]:
                 raise ValueError(f'Frozen checkpoint {number} changed')
@@ -790,6 +930,9 @@ async def run(args):
         async def pin_opponents(numbers):
             before=training_state(model,trainer)
             await quiesce_collectors(collectors)
+            # A resumed remainder can contain only scripted games. Keep a
+            # valid idle opponent service so per-game reset handshakes work.
+            numbers = numbers or [active_version]
             weights={}
             for number in numbers:
                 with device_scope('cpu'):
@@ -846,10 +989,12 @@ async def run(args):
         for number in range(completed + 1, args.rounds + 1):
             active_version = number - 1
             assert_runtime_unchanged(pins)
-            planned = training_schedule(tuple(HARTFORD_DECKS), round_id=number, seed=args.seed)
-            opponent_hashes = {k: sha256(check_checkpoint(k)) for k in {g['opponent_version'] for g in planned}}
+            planned = planned_training(config, number)
+            opponent_hashes = {k: sha256(check_checkpoint(k)) for k in
+                {g['opponent_version'] for g in planned if g['opponent_kind'] == 'frozen_neural'}}
             for game in planned:
-                game['opponent_checkpoint_sha256'] = opponent_hashes[game['opponent_version']]
+                if game['opponent_kind'] == 'frozen_neural':
+                    game['opponent_checkpoint_sha256'] = opponent_hashes[game['opponent_version']]
             directory = args.output / 'rollouts' / f'round-{number:04d}'
             before = training_state(model, trainer)
             with Resources(args.output) as resources:
@@ -912,6 +1057,9 @@ async def run(args):
             report['checkpoints'][str(number)] = checkpoint_hashes(checkpoint)
             report['rounds'].append(row)
             report['completed_games'] = number * 1000
+            if 'fork' in config:
+                report['lineage_checkpoint'] = config['fork']['parent_round'] + number
+                report['total_exposure_games'] = config['fork']['parent_total_exposure_games'] + number * 1000
             atomic_json(report_path, report)
             atomic_json(directory / 'committed.json', dict(round=number, checkpoint=str(checkpoint)))
             cleanup_rollouts(args.output / 'rollouts', number)
@@ -947,6 +1095,10 @@ def parser():
     result.add_argument('--compact-input-mib',type=int,default=512,help='Maximum encoded sparse rollout payload in MiB')
     result.add_argument('--initialize-from',type=Path,help='Pinned v1 policy for a fresh identity experiment')
     result.add_argument('--initialize-from-sha256',help='Required SHA256 of the initialization policy')
+    result.add_argument('--fork-from', type=Path, help='Completed identity checkpoint directory; retain both optimizers and RNG')
+    result.add_argument('--fork-from-sha256', help='SHA256 of the canonical checkpoint-file hash mapping')
+    result.add_argument('--opponent-recipe', choices=('current', 'diverse'), help='Fixed 50-round continuation arm')
+    result.add_argument('--prepare-fork-only', action='store_true', help='Prepare and pin local checkpoint zero without training')
     result.add_argument('--game-timeout',type=float,help='Hard per-game deadline in seconds (compact: 20; legacy: 60)')
     result.add_argument('--adopt-memory-fix-from', type=Path)
     result.add_argument('--adopt-collection-policy-from',type=Path)

@@ -139,14 +139,19 @@ class StandardSelfplayCollector:
             raise ValueError('Stale learner or opponent version')
         if bank is not None:
             for job in jobs:
-                game = job['game'];number = game['opponent_version']
+                game = job['game']
+                if game.get('opponent_kind', 'frozen_neural') == 'scripted':
+                    if game.get('opponent_version') is not None or job.get('opponent_weights_sha256') is not None:
+                        raise ValueError('Scripted opponent must not claim neural weights')
+                    continue
+                number = game['opponent_version']
                 if bank.get(number) != job.get('opponent_weights_sha256'):
                     raise ValueError('Scheduled opponent weights do not match the frozen bank')
         loop = asyncio.get_running_loop()
         self.active = True
         async def one(job):
             job = dict(job);job.pop('opponent_weights_sha256', None)
-            if bank is not None:
+            if bank is not None and job['game'].get('opponent_kind', 'frozen_neural') == 'frozen_neural':
                 job.update(opponent_version=job['game']['opponent_version'],
                     opponent_sha256=job['game']['opponent_checkpoint_sha256'])
             row = await loop.run_in_executor(self.pool, _run_game, dict(options, **job))

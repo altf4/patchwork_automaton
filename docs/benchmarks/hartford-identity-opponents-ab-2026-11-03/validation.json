@@ -1,0 +1,31 @@
+{
+  "status": "unit_and_native_regressions_passed",
+  "hartford_suite": {
+    "tests": 120,
+    "passed": true,
+    "native_runtime": "e732a4bb4277 schema198 capped256"
+  },
+  "completion_audit_fixtures": {
+    "tests": 7,
+    "passed": true,
+    "synthetic_games": 50000,
+    "read_only_verified": true
+  },
+  "independent_reviews": [
+    "full-state fork and mixed collector",
+    "exact matched schedule and quotas",
+    "endpoint evaluation/resume/audit/graph",
+    "preparation/auditor/orchestration"
+  ],
+  "remote_acceptance": "pending; 48 disjoint plumbing games, zero optimizer updates or policy-strength scores",
+  "new_collection_seed_bounds": [
+    422611030000,
+    422611079999
+  ],
+  "endpoint_seed_bounds": [
+    432611030000,
+    432611039999
+  ],
+  "acceptance_seed_base": 442611030000,
+  "preserved_experiment_commit": "3861514"
+}
