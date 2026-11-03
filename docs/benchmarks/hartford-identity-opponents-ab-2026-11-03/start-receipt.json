@@ -1,0 +1,10 @@
+{
+  "status": "started",
+  "started_at": "2026-11-03T14:27:43.518782+00:00",
+  "session": "hartford-identity-opponents-ab",
+  "guard": "/home/altf4/benchmarks/hartford-identity-ab-20261103/run-guard-v1",
+  "launch": "/home/altf4/benchmarks/hartford-identity-ab-20261103/launch.json",
+  "collection_games": 100000,
+  "final_evaluation_games": 10000,
+  "acceptance_passed": true
+}

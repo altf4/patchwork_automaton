@@ -1,0 +1,98 @@
+{
+  "returncode": 0,
+  "guard": {
+    "attempts": 1,
+    "child_exit_code": 0,
+    "child_pid": 594078,
+    "cleanup": {
+      "child_exit_code": 0,
+      "kill_sent": false,
+      "process_group": 594078,
+      "term_sent": false
+    },
+    "command": [
+      "/home/altf4/benchmarks/mtgo-cpu-gpu-20261024/venv/bin/python",
+      "-u",
+      "/home/altf4/benchmarks/hartford-identity-ab-20261103/project-v1/scripts/hartford-ab/acceptance.py",
+      "--launch",
+      "/home/altf4/benchmarks/hartford-identity-ab-20261103/launch.json"
+    ],
+    "command_file": "/home/altf4/benchmarks/hartford-identity-ab-20261103/acceptance-launch-v1/command.json",
+    "command_sha256": "67ec3878410b8602a11563ab94f986954a79da87716c13c8b1592b307dbd3d98",
+    "cwd": "/home/altf4/benchmarks/hartford-identity-ab-20261103/project-v1",
+    "elapsed_seconds": 50.287631611994584,
+    "exit_code": 0,
+    "finished_at": "2026-11-03T14:26:55.076488+00:00",
+    "guard_exit_code": 0,
+    "last_sample": {
+      "available_memory_bytes": 14363119616,
+      "elapsed_seconds": 48.25558140499925,
+      "low_memory_seconds": 0.0,
+      "process_group_pids": [
+        594078,
+        594242
+      ],
+      "process_group_rss_bytes": 1549041664,
+      "timestamp": "2026-11-03T14:26:53.048378+00:00"
+    },
+    "limits": {
+      "check_seconds": 2,
+      "memory_grace_seconds": 5.0,
+      "min_available_mib": 1536.0,
+      "terminate_grace_seconds": 15
+    },
+    "process_group": 594078,
+    "reason": "child_exit",
+    "schema": 1,
+    "started_at": "2026-11-03T14:26:04.780290+00:00",
+    "status": "exited",
+    "supervisor_pid": 594075,
+    "supervisor_sha256": "bdb4510c1d8445dba58041873dfad881801c71d6157dce0dee83e73226e503df",
+    "windows_awake": {
+      "pid": 594076,
+      "ready": true,
+      "release": {
+        "exit_code": 0,
+        "graceful_release": true,
+        "ready": true
+      },
+      "requested": true
+    }
+  },
+  "result": {
+    "behavior_reproduction": {
+      "samples": 48
+    },
+    "games": 48,
+    "gpu_placement": true,
+    "initial_checkpoints": {
+      "control": {
+        "critic-optimizer.npz": "9cb121f198a86bf07e1331750cd2e7d4322bc785cc864c1ea1324598c46a97b7",
+        "optimizer.npz": "2b23210348b8c65f8def5dc105c3e4b4921ac8715ffe245294df2fc719b44964",
+        "policy.keras": "7c5290d0a6ea4ad2d5697087cb8bd1880a52e04c48b84f2c0d171541e709b845",
+        "policy.manifest.json": "b17e2ca879f83b5325ae088cc0618302a22355f417d9e04b07a188e9ff49204c",
+        "state.json": "d501ec926d9c97d8e3c889e0314d3522e91965af04565cca3a80aab38aadba9b"
+      },
+      "diverse": {
+        "critic-optimizer.npz": "9cb121f198a86bf07e1331750cd2e7d4322bc785cc864c1ea1324598c46a97b7",
+        "optimizer.npz": "2b23210348b8c65f8def5dc105c3e4b4921ac8715ffe245294df2fc719b44964",
+        "policy.keras": "7c5290d0a6ea4ad2d5697087cb8bd1880a52e04c48b84f2c0d171541e709b845",
+        "policy.manifest.json": "b17e2ca879f83b5325ae088cc0618302a22355f417d9e04b07a188e9ff49204c",
+        "state.json": "b74f9c336dc0212e59ca7cab52a4acf3c6a5f4056c513848ab70d8eac58e4988"
+      }
+    },
+    "matching_loaded_model_optimizer_rng": true,
+    "neural_games": 36,
+    "no_production_or_parent_artifacts_changed": true,
+    "optimizer_updates": 0,
+    "passed": true,
+    "policy_strength_evaluation": false,
+    "production_games": 0,
+    "scripted_games": 12
+  },
+  "log_tail": [
+    "{\"phase\": \"collection\", \"completed\": 25, \"total\": 48, \"opponent\": \"mixed\"}",
+    "{\"phase\": \"collection\", \"completed\": 48, \"total\": 48, \"opponent\": \"mixed\"}",
+    "{\"passed\": true, \"games\": 48, \"scripted_games\": 12, \"neural_games\": 36, \"production_games\": 0, \"optimizer_updates\": 0, \"policy_strength_evaluation\": false, \"matching_loaded_model_optimizer_rng\": true, \"gpu_placement\": true, \"initial_checkpoints\": {\"control\": {\"policy.keras\": \"7c5290d0a6ea4ad2d5697087cb8bd1880a52e04c48b84f2c0d171541e709b845\", \"policy.manifest.json\": \"b17e2ca879f83b5325ae088cc0618302a22355f417d9e04b07a188e9ff49204c\", \"optimizer.npz\": \"2b23210348b8c65f8def5dc105c3e4b4921ac8715ffe245294df2fc719b44964\", \"critic-optimizer.npz\": \"9cb121f198a86bf07e1331750cd2e7d4322bc785cc864c1ea1324598c46a97b7\", \"state.json\": \"d501ec926d9c97d8e3c889e0314d3522e91965af04565cca3a80aab38aadba9b\"}, \"diverse\": {\"policy.keras\": \"7c5290d0a6ea4ad2d5697087cb8bd1880a52e04c48b84f2c0d171541e709b845\", \"policy.manifest.json\": \"b17e2ca879f83b5325ae088cc0618302a22355f417d9e04b07a188e9ff49204c\", \"optimizer.npz\": \"2b23210348b8c65f8def5dc105c3e4b4921ac8715ffe245294df2fc719b44964\", \"critic-optimizer.npz\": \"9cb121f198a86bf07e1331750cd2e7d4322bc785cc864c1ea1324598c46a97b7\", \"state.json\": \"b74f9c336dc0212e59ca7cab52a4acf3c6a5f4056c513848ab70d8eac58e4988\"}}, \"behavior_reproduction\": {\"samples\": 48}, \"no_production_or_parent_artifacts_changed\": true}"
+  ]
+}

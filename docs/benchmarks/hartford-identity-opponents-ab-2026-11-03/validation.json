@@ -17,7 +17,14 @@
     "endpoint evaluation/resume/audit/graph",
     "preparation/auditor/orchestration"
   ],
-  "remote_acceptance": "pending; 48 disjoint plumbing games, zero optimizer updates or policy-strength scores",
+  "remote_acceptance": {
+    "passed": true,
+    "games": 48,
+    "optimizer_updates": 0,
+    "gpu_placement": true,
+    "exact_loaded_model_optimizer_rng": true,
+    "guard_exit_code": 0
+  },
   "new_collection_seed_bounds": [
     422611030000,
     422611079999

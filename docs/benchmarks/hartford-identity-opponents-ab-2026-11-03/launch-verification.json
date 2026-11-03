@@ -1,0 +1,13 @@
+{
+  "passed": true,
+  "observed_at": "2026-11-03T14:29:12.090399+00:00",
+  "control_running": true,
+  "control_durable_games": 549,
+  "diverse_prepared": true,
+  "source_engine_parent_checkpoint_integrity": true,
+  "physical_memavailable_gib": 4.043651580810547,
+  "minimum_physical_memavailable_gib": 3.9236679077148438,
+  "guard_status": "running",
+  "final_head_to_head_games": 10000,
+  "hourly_monitor": "check-hartford-identity-opponent-a-b"
+}

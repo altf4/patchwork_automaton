@@ -1,5 +1,11 @@
 # Identity PPO: current versus diverse opponents
 
+Status: **RUNNING**, launched 2026-11-03 14:27 UTC (07:27 MST).
+The control arm runs first, followed automatically by the diverse arm and the
+10,000-game endpoint. Hourly health checks are active. Guarded 48-game plumbing
+acceptance passed with identical restored model/optimizer/RNG states and no
+optimizer updates. See `validation.json`, `acceptance.json` and `launch.json`.
+
 User-authorized comparison: 100,000 additional collection games in two independent
 50K arms, followed by a 10,000-game head-to-head and a graph. No intermediate
 policy-strength evaluations or extra baseline panels are scheduled.
