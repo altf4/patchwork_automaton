@@ -224,9 +224,14 @@ def adjudicate_timeout(game, *, output=None, diagnostics, seconds=60, learner_se
     return row
 
 
-def _isolated_game(connection, game, options, trace_path):
+def _isolated_game(connection, game, options, trace_path, close_connections=()):
     import faulthandler
     import signal
+    from .inference_transport import send_message
+    # Fork copies descriptors, not ownership. The child must not retain either
+    # the reusable transport or the parent ends of its disposable transports.
+    for inherited in close_connections:
+        inherited.close()
     with open(trace_path, 'w') as trace:
         faulthandler.register(signal.SIGUSR1, file=trace, all_threads=True)
         try:
@@ -239,8 +244,41 @@ def _isolated_game(connection, game, options, trace_path):
             if game.get('opponent_kind') == 'frozen_neural' and opponent_batcher is not None:
                 row.update(opponent_game_inference_seconds=opponent_batcher.wait_seconds,
                            opponent_game_inference_requests=opponent_batcher.requests)
-            connection.send(row)
-        finally: connection.close()
+            send_message(connection, row)
+        finally:
+            connection.close()
+            for role in ('batcher', 'opponent_batcher'):
+                batcher = options.get(role)
+                if batcher is not None:
+                    batcher.connection.close()
+
+
+_game_worker_broken = False
+
+
+def _stop_game_child(process, *, terminate=False):
+    """Try every cleanup stage, even when an earlier stage failed."""
+    errors = []
+    if process.pid is None:
+        return errors
+    try:
+        if terminate and process.is_alive():
+            process.terminate()
+    except BaseException as error:
+        errors.append(error)
+    try:
+        process.join(1)
+    except BaseException as error:
+        errors.append(error)
+    try:
+        if process.is_alive():
+            process.kill()
+            process.join(1)
+        if process.is_alive():
+            errors.append(RuntimeError('Native game child did not stop'))
+    except BaseException as error:
+        errors.append(error)
+    return errors
 
 
 def timed_standard_game(game, *, diagnostics, game_timeout=60, **options):
@@ -254,8 +292,15 @@ def timed_standard_game(game, *, diagnostics, game_timeout=60, **options):
     import os
     import signal
     import sys
+    import threading
+    from .inference_transport import InferenceCleanupError, InferenceIsolation, recv_message
+    global _game_worker_broken
     if 'tensorflow' in sys.modules:
         raise RuntimeError('Native game isolation must run outside TensorFlow')
+    if _game_worker_broken:
+        raise RuntimeError('Native game worker is unusable after a cleanup failure')
+    if threading.active_count() != 1:
+        raise RuntimeError('Native game isolation requires a single-threaded worker before fork')
     if game_timeout <= 0: raise ValueError('Positive wall-clock limit required')
     if playback_mode() == 'direct':
         # Load and configure in the single-threaded worker before the game
@@ -267,40 +312,87 @@ def timed_standard_game(game, *, diagnostics, game_timeout=60, **options):
     progress = directory / 'progress.json'
     options = dict(options, progress_path=progress, game_timeout=float('inf'))
     context = mp.get_context('fork')
+    isolation = InferenceIsolation(context, options)
     parent, child = context.Pipe(duplex=False)
     process = context.Process(target=_isolated_game,
-        args=(child, game, options, directory / 'python-stack.txt'))
+        args=(child, game, isolation.options, directory / 'python-stack.txt',
+              (parent, *isolation.child_close_connections())))
     started = time.monotonic()
-    process.start()
-    child.close()
+    row = error = None
+    cleanup_errors = []
     try:
-        if parent.poll(max(0, game_timeout - (time.monotonic() - started))):
-            try: row = parent.recv()
-            except EOFError:
-                raise RuntimeError(f"Game child exited without a result: {game}")
-            process.join(1)
+        process.start()
+        child.close()
+        isolation.start()
+        try:
+            # Readiness of a frame header does not imply the complete result has
+            # arrived. The hard deadline covers the complete result frame.
+            row = recv_message(parent, timeout=max(0., game_timeout-(time.monotonic()-started)))
+        except TimeoutError:
+            try:
+                os.kill(process.pid, signal.SIGUSR1)
+            except ProcessLookupError:
+                pass
+            time.sleep(.02)
+            cleanup_errors.extend(_stop_game_child(process, terminate=True))
+            row = adjudicate_timeout(game, output=options.get('output'), diagnostics=diagnostics,
+                seconds=time.monotonic() - started, learner_seat=options.get('learner_seat'),
+                record_ppo=options.get('record_ppo',False))
+            row['playback_pipeline'] = playback_mode()
+            row['timeout_seconds'] = game_timeout
+            (directory / 'adjudication.json').write_text(json.dumps(row, indent=2)+'\n')
+        except EOFError as cause:
+            raise RuntimeError(f"Game child exited without a result: {game}") from cause
+        else:
+            cleanup_errors.extend(_stop_game_child(process))
             if row.get('adjudicated'):
                 row['diagnostics'] = str(directory.resolve())
                 (directory / 'adjudication.json').write_text(json.dumps(row, indent=2)+'\n')
-            else:
-                for path in directory.iterdir(): path.unlink()
-                directory.rmdir()
-            return row
-        os.kill(process.pid, signal.SIGUSR1)
-        time.sleep(.02)
-        process.terminate()
-        process.join(1)
-        if process.is_alive(): process.kill(); process.join(1)
-        row = adjudicate_timeout(game, output=options.get('output'), diagnostics=diagnostics,
-            seconds=time.monotonic() - started, learner_seat=options.get('learner_seat'),
-            record_ppo=options.get('record_ppo',False))
-        row['playback_pipeline'] = playback_mode()
-        row['timeout_seconds'] = game_timeout
-        (directory / 'adjudication.json').write_text(json.dumps(row, indent=2)+'\n')
-        return row
+    except BaseException as cause:
+        error = cause
     finally:
-        if process.is_alive(): process.kill(); process.join(1)
-        parent.close()
+        cleanup_errors.extend(_stop_game_child(process, terminate=True))
+        for connection in (parent, child):
+            try:
+                connection.close()
+            except BaseException as cause:
+                cleanup_errors.append(cause)
+        try:
+            isolation.close()
+        except BaseException as cause:
+            cleanup_errors.append(cause)
+        try:
+            process.close()
+        except BaseException as cause:
+            cleanup_errors.append(cause)
+    if cleanup_errors:
+        _game_worker_broken = True
+        isolation.invalidate()
+        message = '; '.join(repr(cause) for cause in cleanup_errors)
+        if error is None:
+            error = InferenceCleanupError(message, completed_row=row)
+        else:
+            error.add_note('Native game cleanup also failed: ' + message)
+    if error is None:
+        try:
+            if row.get('status') not in ('win', 'loss', 'draw'):
+                # A returned failure still needs its original diagnostics.
+                (directory / 'original-result.json').write_text(json.dumps(row, indent=2)+'\n')
+            elif not row.get('adjudicated'):
+                for path in directory.iterdir():
+                    path.unlink()
+                directory.rmdir()
+        except Exception as cause:
+            error = cause
+    if error is not None:
+        if row is not None:
+            error.completed_row = row
+            try:
+                (directory / 'completed-result.json').write_text(json.dumps(row, indent=2)+'\n')
+            except Exception as publication_error:
+                error.add_note('Completed-result diagnostic publication also failed: '+repr(publication_error))
+        raise error
+    return row
 
 
 def play_standard_evaluation(*, seed, index, learner_deck, opponent_deck,
@@ -312,13 +404,19 @@ def play_standard_evaluation(*, seed, index, learner_deck, opponent_deck,
     seat = decks.index(learner_deck) if learner_deck != opponent_deck else index % 2
     game = dict(index=index, seed=seed, pairing=pair, decks=decks,
                 starting_player=f'P{(index // 2) % 2}')
+    game_error = None
     try:
         return timed_standard_game(game, model=model, batcher=batcher, learner_seat=seat, **options)
+    except BaseException as error:
+        game_error = error
+        raise
     finally:
-        # Drain a request whose game may have died while inference was in flight.
-        # The bridge acknowledges only after preceding responses were sent.
-        batcher.connection.send(('reset', seed))
-        while True:
-            if not batcher.connection.poll(120): raise TimeoutError('Inference reset timed out')
-            response = batcher.connection.recv()
-            if response == ('reset', seed): break
+        # Disposable proxy traffic has drained; require an exact acknowledgement
+        # on the persistent connection before another game may use it.
+        if not batcher.broken:
+            try:
+                batcher.reset(seed)
+            except BaseException as reset_error:
+                if game_error is None:
+                    raise
+                game_error.add_note('Inference reset also failed: '+repr(reset_error))

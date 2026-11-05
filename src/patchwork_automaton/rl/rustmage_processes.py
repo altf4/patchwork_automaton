@@ -7,28 +7,89 @@ Only already-redacted numerical observations cross the inference boundary.
 import asyncio
 from concurrent.futures import ProcessPoolExecutor, ThreadPoolExecutor
 import multiprocessing as mp
+import math
 import os
-from threading import Event
+from threading import Event, Lock
 import time
 from types import SimpleNamespace
+import uuid
 from ..neural.inference_processes import InferenceProcessGroup, bridge_requests, weights_digest
 
 
+class InferenceProtocolError(RuntimeError):
+    """A reply cannot be attributed to the request that is awaiting it."""
+
+
 class _RemoteInference:
-    def __init__(self, connection):
+    def __init__(self, connection, *, timeout=120.):
+        if not math.isfinite(timeout) or timeout <= 0:
+            raise ValueError('Positive finite inference timeout required')
         self.connection = connection
+        self.timeout = timeout
         self.wait_seconds = 0.
         self.requests = 0
+        self.broken = False
+        self.invalidation_error = None
+        self._session = uuid.uuid4().hex
+        self._sequence = 0
+        self._exchange_lock = Lock()
+
+    def invalidate(self):
+        """Never reuse a channel after an incomplete or mismatched exchange."""
+        self.broken = True
+        try:
+            self.connection.close()
+        except OSError as error:
+            # Preserve the original protocol/transport exception. The client
+            # remains unusable even if closing an already damaged fd fails.
+            self.invalidation_error = repr(error)
+
+    def _request_id(self):
+        if self.broken:
+            raise InferenceProtocolError('Inference connection is unusable after a transport failure')
+        self._sequence += 1
+        return self._session, self._sequence
 
     def predict(self, batch, *, version, identity, unbatched=False):
+        from .inference_transport import send_message, recv_message
         started = time.perf_counter()
-        self.connection.send((batch, version, identity, unbatched))
-        if not self.connection.poll(120): raise TimeoutError('Process inference timed out')
-        ok, result = self.connection.recv()
-        self.wait_seconds += time.perf_counter() - started
-        self.requests += 1
+        with self._exchange_lock:
+            request_id = self._request_id()
+            expected = ('inference-v1', request_id, version, identity)
+            try:
+                deadline = time.monotonic() + self.timeout
+                send_message(self.connection, (*expected, unbatched, batch),
+                             timeout=max(0., deadline - time.monotonic()))
+                response = recv_message(self.connection,
+                                        timeout=max(0., deadline - time.monotonic()))
+                if (not isinstance(response, tuple) or len(response) != 6
+                        or response[:4] != expected or type(response[4]) is not bool):
+                    raise InferenceProtocolError('Inference response does not match its request')
+            except BaseException:
+                self.invalidate()
+                raise
+            ok, result = response[4:]
+            self.wait_seconds += time.perf_counter() - started
+            self.requests += 1
         if not ok: raise RuntimeError(result)
         return result
+
+    def reset(self, seed):
+        """Acknowledge a complete, identified exchange before the next game."""
+        from .inference_transport import send_message, recv_message
+        with self._exchange_lock:
+            expected = ('reset-v1', self._request_id(), seed)
+            try:
+                deadline = time.monotonic() + self.timeout
+                send_message(self.connection, expected,
+                             timeout=max(0., deadline - time.monotonic()))
+                response = recv_message(self.connection,
+                                        timeout=max(0., deadline - time.monotonic()))
+                if response != expected:
+                    raise InferenceProtocolError('Inference reset does not match its request')
+            except BaseException:
+                self.invalidate()
+                raise
 
 
 def _initialize_worker(connections, counter, metadata):
