@@ -8,6 +8,7 @@ from concurrent.futures import ThreadPoolExecutor
 import hashlib
 import multiprocessing as mp
 import os
+import pickle
 from threading import Event
 import time
 import traceback
@@ -69,22 +70,40 @@ def _versions_digest(digests):
 
 
 def bridge_requests(connection, batcher, stopping):
-    while not stopping.is_set():
-        try:
+    from ..rl.inference_transport import send_message, recv_message
+    session, sequence = None, 0
+    try:
+        while not stopping.is_set():
             if not connection.poll(.2): continue
-            request = connection.recv()
-            if len(request) == 2 and request[0] == 'reset':
-                connection.send(request)
+            request = recv_message(connection, timeout=120)
+            if (not isinstance(request, tuple) or len(request) not in (3, 6)
+                    or request[0] not in ('inference-v1', 'reset-v1')):
+                raise ValueError('Invalid inference request envelope')
+            request_id = request[1]
+            if (not isinstance(request_id, tuple) or len(request_id) != 2
+                    or not isinstance(request_id[0], str) or not request_id[0]
+                    or type(request_id[1]) is not int or request_id[1] != sequence + 1
+                    or session is not None and request_id[0] != session):
+                raise ValueError('Invalid inference request sequence')
+            session, sequence = request_id
+            if request[0] == 'reset-v1':
+                if len(request) != 3:
+                    raise ValueError('Invalid inference reset envelope')
+                send_message(connection, request, timeout=120)
                 continue
-            batch, version, identity, unbatched = request
+            if len(request) != 6:
+                raise ValueError('Invalid inference prediction envelope')
+            _, _, version, identity, unbatched, batch = request
             try:
                 result = batcher.predict(batch,version=version,identity=identity,unbatched=unbatched)
-                message = (True,result)
+                message = (*request[:4], True, result)
             except Exception as error:
-                message = (False,f'{type(error).__name__}: {error}')
-            connection.send(message)
-        except (EOFError,BrokenPipeError,OSError):
-            return
+                message = (*request[:4], False, f'{type(error).__name__}: {error}')
+            send_message(connection, message, timeout=120)
+    except (EOFError, OSError, TimeoutError, ValueError, pickle.UnpicklingError):
+        return
+    finally:
+        connection.close()
 
 
 class _VersionBatchers:

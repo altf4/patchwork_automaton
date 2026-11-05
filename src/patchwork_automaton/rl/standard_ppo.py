@@ -62,12 +62,10 @@ def schedule(games=1000, *, seed=402610300000, round_id=1):
 
 
 def _reset_inference(batcher, seed):
-    # A timed-out game may leave an inference response in flight. The bridge
-    # acknowledges reset only after draining responses from that game.
-    batcher.connection.send(('reset', seed))
-    while True:
-        if not batcher.connection.poll(120): raise TimeoutError('Inference reset timed out')
-        if batcher.connection.recv() == ('reset', seed): break
+    # Game children use disposable pipes. Reset never attempts to resynchronize
+    # a damaged stream; poisoned connections fail closed instead of being reused.
+    if not batcher.broken:
+        batcher.reset(seed)
 
 
 def play_ppo_game(*, seed, index, game, model, batcher, version,
@@ -92,24 +90,47 @@ def play_ppo_game(*, seed, index, game, model, batcher, version,
                       if completed_directory is not None else None)
     if completed_path is not None and completed_path.exists():
         raise FileExistsError('Game already has a completed result handoff')
-    try:
-        row = timed_standard_game(game, model=model,batcher=batcher,version=version,
-            learner_seat=game['learner_seat'],record_ppo=True,
-            opponent_model=opponent_model,opponent_batcher=opponent_batcher,
-            opponent_version=opponent_version,opponent_sha256=opponent_sha256,**options)
+    def publish(row):
         if completed_path is not None:
             import hashlib
             import json
             from .hartford_evaluation import atomic_json
             payload = json.dumps(row, sort_keys=True, separators=(',', ':'), allow_nan=False).encode()
             atomic_json(completed_path, dict(row=row, sha256=hashlib.sha256(payload).hexdigest()))
+    game_error = None
+    try:
+        row = timed_standard_game(game, model=model,batcher=batcher,version=version,
+            learner_seat=game['learner_seat'],record_ppo=True,
+            opponent_model=opponent_model,opponent_batcher=opponent_batcher,
+            opponent_version=opponent_version,opponent_sha256=opponent_sha256,**options)
+        publish(row)
         return row
+    except BaseException as error:
+        game_error = error
+        # The full game result can precede a failed proxy shutdown. Retain
+        # that original result before propagating the transport failure.
+        completed = getattr(error, 'completed_row', None)
+        if completed is not None:
+            try:
+                publish(completed)
+            except Exception as publication_error:
+                error.add_note('Completed-result publication also failed: '+repr(publication_error))
+        raise
     finally:
-        try:
-            _reset_inference(batcher,seed)
-        finally:
-            if opponent_batcher is not None and opponent_batcher is not batcher:
-                _reset_inference(opponent_batcher,seed)
+        failures = []
+        for client in (batcher, opponent_batcher if opponent_batcher is not batcher else None):
+            if client is not None:
+                try:
+                    _reset_inference(client,seed)
+                except BaseException as reset_error:
+                    failures.append(reset_error)
+        if failures:
+            if game_error is not None:
+                game_error.add_note('Inference reset also failed: '+repr(failures))
+            else:
+                for other in failures[1:]:
+                    failures[0].add_note('Other inference reset failed: '+repr(other))
+                raise failures[0]
 
 
 def normalization(games):

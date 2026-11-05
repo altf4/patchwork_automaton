@@ -176,11 +176,23 @@ class StandardSelfplayCollector:
         if self.closed:
             return
         self.closed = True
+        errors = []
         try:
             await asyncio.to_thread(self.pool.shutdown, wait=True, cancel_futures=True)
-        finally:
-            for group in self.replicas:
+        except BaseException as error:
+            errors.append(error)
+        for group in self.replicas:
+            try:
                 await group.close()
-            for role in self.connections + self.worker_connections:
-                for connection in role:
+            except BaseException as error:
+                errors.append(error)
+        for role in self.connections + self.worker_connections:
+            for connection in role:
+                try:
                     connection.close()
+                except BaseException as error:
+                    errors.append(error)
+        if len(errors) == 1:
+            raise errors[0]
+        if errors:
+            raise BaseExceptionGroup('Standard self-play cleanup failed', errors)

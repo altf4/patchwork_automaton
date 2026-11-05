@@ -96,17 +96,16 @@ class StandardPPOTests(unittest.TestCase):
             validate_collection(rows,planned,200)
 
     def test_frozen_opponent_game_resets_both_inference_pipes(self):
-        class Connection:
-            def __init__(self): self.sent=[]
-            def send(self,value): self.sent.append(value)
-            def poll(self,seconds): return True
-            def recv(self): return self.sent[-1]
+        class Remote:
+            broken = False
+            def __init__(self): self.resets=[]
+            def reset(self,seed): self.resets.append(seed)
         game=schedule(240)[0]
         digest='a'*64
         game.update(opponent_kind='frozen_neural',opponent_checkpoint_sha256=digest,
             opponent_version=200)
-        learner=SimpleNamespace(connection=Connection())
-        opponent=SimpleNamespace(connection=Connection())
+        learner=Remote()
+        opponent=Remote()
         with patch('patchwork_automaton.rl.standard_imitation.timed_standard_game',
                    return_value={'status':'win'}) as run:
             result=play_ppo_game(seed=game['seed'],index=game['index'],game=game,
@@ -114,8 +113,8 @@ class StandardPPOTests(unittest.TestCase):
                 opponent_model=object(),opponent_batcher=opponent,
                 opponent_version=200,opponent_sha256=digest)
         self.assertEqual(result['status'],'win')
-        self.assertEqual(learner.connection.sent,[('reset',game['seed'])])
-        self.assertEqual(opponent.connection.sent,[('reset',game['seed'])])
+        self.assertEqual(learner.resets,[game['seed']])
+        self.assertEqual(opponent.resets,[game['seed']])
         self.assertEqual(run.call_args.kwargs['opponent_sha256'],digest)
         with patch('patchwork_automaton.rl.standard_imitation.timed_standard_game',
                    side_effect=RuntimeError('game failure')):
@@ -124,8 +123,8 @@ class StandardPPOTests(unittest.TestCase):
                     model=object(),batcher=learner,version=200,
                     opponent_model=object(),opponent_batcher=opponent,
                     opponent_version=200,opponent_sha256=digest)
-        self.assertEqual(learner.connection.sent,[('reset',game['seed'])]*2)
-        self.assertEqual(opponent.connection.sent,[('reset',game['seed'])]*2)
+        self.assertEqual(learner.resets,[game['seed']]*2)
+        self.assertEqual(opponent.resets,[game['seed']]*2)
         with self.assertRaisesRegex(ValueError,'hash mismatch'):
             play_ppo_game(seed=game['seed'],index=game['index'],game=game,
                 model=object(),batcher=learner,version=200,
